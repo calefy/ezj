@@ -1,13 +1,11 @@
 // 用户信息
 import { reducerRequest, getRequestTypes } from '../libs/utils';
-import NoticeAction from '../actions/NoticeAction';
 
 export function user(state, action) {
     const loginTypes = getRequestTypes('login');
     const logoutTypes = getRequestTypes('logout');
     const changePwdTypes = getRequestTypes('changePwd');
     const avatarTypes = getRequestTypes('avatar');
-    const messageTypes = getRequestTypes(NoticeAction.LOAD_UNREAD_MESSAGE_NUMBER);
 
     let ret = state;
 
@@ -50,14 +48,6 @@ export function user(state, action) {
             let au = Object.assign({}, state);
             au.data.avatar = action.avatar;
             return au;
-        // 消息未读数
-        case messageTypes.success:
-            return Object.assign({}, state, { unread_number: action.response.data.unread_number });
-        case NoticeAction.CLEAR_UNREAD_MESSAGE_NUMBER:
-            if (state.unread_number) {
-                return Object.assign({}, state, {unread_number: 0});
-            }
-            break;
         default:
             ret = reducerRequest('user', state, action);
     }

@@ -8,7 +8,6 @@ class Home extends Component {
 
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
-        const noticeAction = new NoticeAction({ apiClient: apiClient });
         return Promise.all([
             // 默认首页取5个
             //dispatch( noticeAction.loadNotices({pageSize: 5}, getOwnRequestIdentity(location)) )
@@ -22,8 +21,7 @@ class Home extends Component {
         return (
             <div className='container mar20'>
                 <h1 className="h1-title">
-                    最新动态
-                    <Link to="/notices" className="fr">查看全部</Link>
+                    这里是首页
                 </h1>
 
             </div>

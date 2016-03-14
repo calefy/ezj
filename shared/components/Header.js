@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDom from 'react-dom'
 import { Link } from 'react-router'
-import { AppBar, Avatar, ListItem, Badge, RaisedButton, Dialog, FlatButton, TextField, Checkbox, Popover, Menu, MenuItem } from 'material-ui'
-import LoginDialog from './LoginDialog.jsx';
 
 class Header extends Component {
     static propTypes = {
@@ -85,75 +83,9 @@ class Header extends Component {
     }
 
     render() {
-        const user = this.props.user.data || {}
-        const styles = Header.styles;
-        const menus = Header.menus;
-        let unreadMsg = this.props.user.unread_number;
-        unreadMsg = unreadMsg <= 0 ? '' : unreadMsg > 99 ? '99+' : unreadMsg;
-        const headRight = (
-            <div className="head-info fr clearfix">
-                <div className={ `head-log fl ${user.id ? 'hide' : '' }` }>
-                    <RaisedButton 
-                        style={ styles.loginBtnStyle } 
-                        primary={ true } 
-                        label="登录" 
-                        backgroundColor="#a22645" 
-                        onClick={this.openLoginDialog} />
-                </div>
-                <div className={ `head-user fr ${user.id ? '' : 'hide'}` }>
-                    <Avatar
-                        ref="head_avatar"
-                        title={user.real_name}
-                        src={user.avatar || '/static/images/user.jpg'}
-                        style={{ zIndex:10000, left:0, top: 0 }}
-                        onClick={this.showToggle}
-                        className="head-avatar" />
-                    <Link to='/messages'>
-                        <Badge
-                            badgeContent={unreadMsg || 0}
-                            primary={true}
-                            badgeStyle={{top: -2, right: 0, textAlign: "center", lineHeight: "24px", display: unreadMsg ? 'block' : 'none'}}
-                        >
-                            <Avatar src="/static/images/head-message.png" alt="消息" />
-                        </Badge>
-                    </Link>
-                </div>
-            </div>
-        );
         return (
             <div className="header clearfix">
-                <AppBar
-                    title={<Link to="/" style={ styles.headTitleStyle }>紫荆教育mba在线学习系统</Link>}
-                    zDepth={1}
-                    showMenuIconButton={false}
-                    iconElementRight={ headRight }
-                    iconStyleRight={{ marginRight: 0, position: "absolute", right: 0, top: 10 }}
-                    style={ styles.headStyle } />
-                <Popover open={this.state.show}
-                    style={styles.menuStyle}
-                    className="head-list"
-                    anchorEl={this.state.anchorEl}
-                    onRequestClose={this.showToggle} >
-                    <Menu>
-                        {menus.map( (item, index) => {
-                            return  <MenuItem
-                                        key={index}
-                                        primaryText={
-                                            <Link
-                                                to={item.path}>{item.name}</Link>
-                                        }
-                                        style={{ textAlign: 'center' }}
-                                        onClick={this.showToggle} />
-                        })}
-                        <MenuItem primaryText="退出" style={{ textAlign: 'center' }} onClick={this.onClickLogout} />
-                    </Menu>
-                </Popover>
-
-                <LoginDialog
-                    ref="loginDialog"
-                    error={this.props.user.loginError}
-                    onSubmit={this.props.handleLoginSubmit}
-                />
+                Header
             </div>
         );
     }

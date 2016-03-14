@@ -104,7 +104,7 @@ function renderHtml({ componentHtml, initState, req }) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <title>MBA在线学习系统 - 紫荆教育</title>
+    <title>紫荆教育</title>
     <link rel="shortcut icon" href="//www.ezijing.com/favicon.ico">
     <link rel="stylesheet" href="${publicPath}${assets[1]}">
     <!--[if lt IE 9]>

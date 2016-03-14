@@ -1,19 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 
-import UserAction from '../actions/UserAction'
-import OperateAction from '../actions/OperateAction';
-import NoticeAction from '../actions/NoticeAction';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Snackbar from '../components/Snackbar.jsx';
 import { getRequestTypes } from '../libs/utils';
 
 
 if (process.env.BROWSER) {
-    require('css/reset.css')
-    require('css/common.css')
-    require('css/com.css')
+//    require('css/reset.css')
 }
 
 let actionTimer = null;
@@ -22,19 +16,13 @@ class App extends Component {
 
     // 初始加载数据
     static fetchData({dispatch, apiClient}) {
-        const userAction = new UserAction({ apiClient: apiClient });
-        const noticeAction = new NoticeAction({ apiClient: apiClient });
         return Promise.all([
-            dispatch(userAction.loadAccount()),
-            dispatch(noticeAction.loadMessageNumber())
+            //dispatch(userAction.loadAccount()),
+            //dispatch(noticeAction.loadMessageNumber())
         ]);
     }
 
     componentDidMount() {
-        this.userAction = new UserAction();
-        if (this.props.user.isFetching) {
-            App.fetchData(this.props);
-        }
     }
     componentWillReceiveProps(nextProps) {
         const loginType = getRequestTypes(UserAction.LOGIN);
@@ -42,8 +30,8 @@ class App extends Component {
         if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
             this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
         } else if (nextProps.action.type === loginType.success) {
-            const noticeAction = new NoticeAction();
-            nextProps.dispatch( noticeAction.loadMessageNumber() );
+            //const noticeAction = new NoticeAction();
+            //nextProps.dispatch( noticeAction.loadMessageNumber() );
         }
 
         // 清理action，防止路由变更，但是action数据没变更，二次展示问题
@@ -84,7 +72,6 @@ class App extends Component {
                     {this.props.children}
                 </div>
                 <Footer/>
-                <Snackbar ref="snackbar"/>
             </div>
         );
     }
