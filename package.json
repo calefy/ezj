@@ -1,0 +1,77 @@
+{
+  "name": "node-ezijing",
+  "version": "0.0.1",
+  "description": "新版ezijing",
+  "main": "server/runner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "node": "node server/runner.js",
+    "nodemon": "nodemon server/runner.js",
+    "publish": "NODE_ENV=production webpack --json > ./webpack.version.json",
+    "deployTest": "cp /var/www/html/mba_x/config.test.js /var/www/html/mba_x/config.js && NODE_ENV=production PORT=3100 pm2 start /var/www/html/mba_x/server/runner.js -i 2 -n node-mba-platform -o /var/log/pm2/node-mba-platform.stdout.log -e /var/log/pm2/node-mba-platform.stderr.log --log-date-format 'YYYY-MM-DD HH:mm Z'",
+    "reloadTest": "cp /var/www/html/mba_x/config.test.js /var/www/html/mba_x/config.js && pm2 reload node-mba-platform",
+
+    "deploy": "cp /var/www/node-mba-platform/config.prod.js /var/www/node-mba-platform/config.js && NODE_ENV=production PORT=3100 pm2 start /var/www/node-mba-platform/server/runner.js -i 2 -n node-mba-platform -o /var/log/node/pm2_node-mba-platform.stdout.log -e /var/log/node/pm2_node-mba-platform.stderr.log --log-date-format 'YYYY-MM-DD HH:mm Z'",
+    "reload": "cp /var/www/node-mba-platform/config.prod.js /var/www/node-mba-platform/config.js && pm2 reload node-mba-platform"
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@git.ezijing.com:ezijingwebapp/node-mba-platform.git"
+  },
+  "babel": {
+    "presets": [
+      "es2015-loose-ie8",
+      "stage-1",
+      "react"
+    ]
+  },
+  "dependencies": {
+    "babel-core": "^6.6.0",
+    "babel-plugin-transform-es2015-ie8-classes": "^0.1.8",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-es2015-loose-ie8": "0.0.4",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-1": "^6.5.0",
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.0",
+    "express": "^4.13.3",
+    "form-data": "^0.2.0",
+    "formsy-react": "^0.17.0",
+    "history": "^1.17.0",
+    "lodash": "^4.6.0",
+    "moment": "^2.11.2",
+    "morgan": "^1.7.0",
+    "multer": "^1.1.0",
+    "node-fetch": "^1.3.3",
+    "normalizr": "^2.0.0",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-redux": "^4.4.0",
+    "react-router": "^1.0.3",
+    "react-tap-event-plugin": "^0.2.1",
+    "redux": "^3.3.1",
+    "redux-thunk": "^1.0.2",
+    "serve-static": "^1.10.2"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.2.0",
+    "ckeditor": "^4.5.7",
+    "css-loader": "^0.23.1",
+    "echarts": "^2.2.8",
+    "es3ify-loader": "^0.1.0",
+    "es6-promise": "^3.1.2",
+    "extract-text-webpack-plugin": "^0.9.1",
+    "fetch-ie8": "^1.4.1",
+    "file-loader": "^0.8.5",
+    "image-loader": "0.0.1",
+    "img-loader": "^1.2.2",
+    "jquery": "^1.12.0",
+    "style-loader": "^0.13.0",
+    "tb-webuploader": "^0.1.5-0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.9",
+    "webpack-dev-middleware": "^1.4.0"
+  }
+}
