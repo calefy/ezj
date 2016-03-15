@@ -7,7 +7,9 @@ import { getRequestTypes } from '../libs/utils';
 
 
 if (process.env.BROWSER) {
-//    require('css/reset.css')
+    require('css/reset.css')
+    require('css/style.css')
+    require('css/index.css')
 }
 
 let actionTimer = null;
