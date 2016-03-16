@@ -21,7 +21,8 @@ nav li{float:left;}
 
 .header-search{border:1px solid #ddd7d9; border-radius: 3px; width: 322px;padding: 4px 0px 4px 10px;margin: 14px 0;}
 .header-search input{border:0px;font-size: 0.75em;height: 22px; background: none;width: 290px;line-height: 22px;outline: none;}
-.header-search a{text-indent: -9999em; outline: none; background: url(../img/headersearch.png) no-repeat; background-size:20px; border: 0px;padding: 2px 10px;display: inline-block;width: 0px;}
+.header-search a{outline: none; border: 0px;padding: 2px 10px;display: inline-block;width: 0px;}
+.header-search .iconfont{ color: #8e8e8e}
 
 .header-user{ /*display:none; */line-height: 58px; font-size: 0.875em}
 .header-user a{ padding: 0 13px;border-top: 2px solid #fff; display: inline-block;}
@@ -47,6 +48,7 @@ nav li{float:left;}
 .footer address a{ color: #f5f5f5;}
 .footer-top-menu{ margin: 0 158px 0 150px;}
 .footer-top-menu a{line-height: 2.4; font-size: 0.875em; color: #f5f5f5; display: block; margin: 0 0 0 18px;}
+.footer-top-menu .iconfont{ font-size: 0.75em; margin: 0 10px 0 0;}
 
 .footer-top-app img,.footer-top-ew img{ width: 90px; height:90px; margin: 30px 0 0 18px;}
 .footer-top-app{ margin: 0 150px 0 0;}

@@ -56,12 +56,12 @@ class Header extends Component {
             <div className="header cl">
                 <div className="container">
                     <div className="logo fl">
-                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1bb87d41d15fe27b500a4bfcde01bb0e.png" alt="" />
+                        <a href="/"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1bb87d41d15fe27b500a4bfcde01bb0e.png" alt="" /></a>
                     </div>
                     <nav className="header-nav fl mar-r22">
                         <ul>
                             <li className="cur">
-                                <a href="index.html">首页</a>
+                                <a href="/">首页</a>
                             </li>
                             <li>
                                 <a href="study.html">课程中心</a>
@@ -75,7 +75,7 @@ class Header extends Component {
                         </ul>
                     </nav>
                     <div className="header-search fl">
-                        <input type="text" name="" placeholder="请输入您要搜索的关键词" /><a href="#">search</a>
+                        <input type="text" name="" placeholder="请输入您要搜索的关键词" /><a href="#"><i className="iconfont icon-search"></i></a>
                     </div>
                     <div className="header-user fr">
                         <a href="#" id="login" className="curr">登录</a>

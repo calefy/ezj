@@ -35,7 +35,7 @@ module.exports = {
             { test: /\.jsx?$/, loader: 'es3ify!babel', exclude: /node_modules/},
             { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader')},
             { test: /\.(png|gif|jpe?g)$/, loader: 'url?limit=8192'},
-            { test: /\.swf$/, loader: 'file'}
+            { test: /\.(swf|eot|svg|ttf|woff)$/, loader: 'file'}
         ],
         noParse: [ /ckeditor/, /video/ ]
     },

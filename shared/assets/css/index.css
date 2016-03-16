@@ -1,20 +1,23 @@
 .content-module1{ padding: 40px 0; background: #fff}
-.content-module1 a{ display: block; float: left; width: 366px; text-align: center; padding:140px 0 0;}
-.module div,.module p{ width: 100%}
+.content-module1 a{ display: block; float: left; width: 366px; text-align: center;}
+.module-title,.module p{ width: 100%}
 .content-module1 .module,.module h4{-webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;}
 .module h4{ width: 96px; border-bottom: 1px solid #3f3b3a; line-height: 1.5; font-size: 1.125em; margin: 0 auto;}
-.module div{ font-size: 1.5em; line-height: 1.4; margin: 30px 0 40px; height: 60px;}
+.module-title{ font-size: 1.5em; line-height: 1.4; margin: 30px 0 40px; height: 60px;}
 .module p{ font-size: 1em;}
-.module1{ background: url(../img/index-pic1.png) no-repeat top center;}
-.module1:hover{ background: url(../img/index-pic1-red.png) no-repeat top center;}
-.module2{ background: url(../img/index-pic2.png) no-repeat top center;}
-.module2:hover{ background: url(../img/index-pic2-red.png) no-repeat top center;}
-.module3{ background: url(../img/index-pic3.png) no-repeat top center;}
-.module3:hover{ background: url(../img/index-pic3-red.png) no-repeat top center;}
-.content-module1 .module:hover h4{ color: #af1b40; border-bottom: 1px solid #af1b40;}
+.module .iconfont,.module-icon{-webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;}
+.module-icon{ margin: 0 0 30px;}
+.module .iconfont{ font-size: 3.75em; line-height: 108px;}
+.module:hover .iconfont{ color: #fff}
+.module-icon{ width: 108px; height:108px; border-radius: 54px; display:inline-block; border:1px solid #3a3a3a; background: #fff}
+.module:hover .module-icon{border:1px solid #b01c40; background: #b01c40}
+.module:hover h4{ color: #af1b40; border-bottom: 1px solid #af1b40;}
 
 .index-title{ font-size: 1.625em; text-align: center; border-bottom: 1px solid #808080; line-height: 94px; position: relative; margin: 0 0 60px;}
 .index-title:after{ content:""; display: block; position: absolute; bottom: 0px; left:50%; height:3px; width: 120px; background: #b01c40; margin:0 0 0 -60px;}
@@ -63,10 +66,9 @@
 }
 .index-course h6{
 	font-weight: normal;
-  	margin:24px 0 12px;
-  	padding: 0 0 0 15px;
-  	background: url(../img/icon-user.jpg) no-repeat center left;
+  margin:24px 0 12px;
 }
+.index-course .iconfont{ font-size: 0.875em; margin: 0 4px 0 0;}
 .index-course p{ color: #b01c40; font-size: 1.25em;}
 
 .index-teacher li { height:300px;}

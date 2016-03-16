@@ -9,17 +9,17 @@ module.exports = () => {
 					<div className="footer-top-logo fl">
 						<img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/19ba9ee4caf1db27febc0f852e29aa3a.png" alt="" />
 						<address>
-							<p>北京市海淀区成府路43号2号楼234室</p>
-							<p>电话：4008-363-463</p>
-							<p>邮箱：<a href="mailto:service@ezijing.com">service@ezijing.com</a></p>
+							北京市海淀区成府路43号2号楼234室<br />
+							电话：4008-363-463<br />
+							邮箱：<a href="mailto:service@ezijing.com">service@ezijing.com</a>
 						</address>
 					</div>
 					<div className="footer-top-menu fl">
 						<h4>关于我们</h4>
-						<a href="" title="">>&emsp;网站首页</a>
-						<a href="" title="">>&emsp;关于我们</a>
-						<a href="" title="">>&emsp;联系我们</a>
-						<a href="" title="">>&emsp;问题反馈</a>
+						<a href="" title=""><i className="iconfont icon-arrowwhite"></i>网站首页</a>
+						<a href="" title=""><i className="iconfont icon-arrowwhite"></i>关于我们</a>
+						<a href="" title=""><i className="iconfont icon-arrowwhite"></i>联系我们</a>
+						<a href="" title=""><i className="iconfont icon-arrowwhite"></i>问题反馈</a>
 					</div>
 					<div className="footer-top-app fl">
 						<h4>APP下载（安卓&IOS）</h4>

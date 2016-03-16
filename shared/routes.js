@@ -30,231 +30,32 @@ module.exports = {
         }
     },
     childRoutes: [
-        // 动态页
+        // 课程分类页
         {
-            path: 'notices',
+            path: 'classify',
             getComponent(location, cb) {
                 require.ensure([], require => {
-                    cb(null, require('./containers/Notices'));
+                    cb(null, require('./containers/Classify'));
                 });
             }
         },
-        // 消息通知页
+        // 课程分类－资产证券化页
         {
-            path: 'messages',
-            onEnter: needLogin,
+            path: 'security',
             getComponent(location, cb) {
                 require.ensure([], require => {
-                    cb(null, require('./containers/Messages'));
+                    cb(null, require('./containers/Security'));
                 });
             }
         },
-        // 修改头像
+        // 课程分类－资产证券化页
         {
-            path: 'avatar',
-            onEnter: needLogin,
+            path: 'course',
             getComponent(location, cb) {
                 require.ensure([], require => {
-                    cb(null, require('./containers/Avatar'));
+                    cb(null, require('./containers/Course'));
                 });
             }
         },
-        // 修改密码页
-        {
-            path: 'changepass',
-            onEnter: needLogin,
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/ChangePwd'));
-                });
-            }
-        },
-        // 重置密码页
-        {
-            path: 'pwd',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/pwd/index'));
-                });
-            },
-            childRoutes: [
-                {
-                    path: 'set',
-                    getComponent(location, cb) {
-                        require.ensure([], require => {
-                            cb(null, require('./containers/pwd/Set'));
-                        });
-                    }
-                },
-                {
-                    path: 'reset',
-                    getComponent(location, cb) {
-                        require.ensure([], require => {
-                            cb(null, require('./containers/pwd/Reset'));
-                        });
-                    }
-                }
-            ]
-        },
-        // 课程页
-        {
-            path: 'courses',
-            onEnter: needLogin,
-            indexRoute: {
-                getComponent(location, cb) {
-                    require.ensure([], require => {
-                        cb(null, require('./containers/courses/List.jsx'));
-                    });
-                }
-            },
-            childRoutes: [
-                {
-                    path: 'mine',
-                    getComponent(location, cb) {
-                        require.ensure([], require => {
-                            cb(null, require('./containers/courses/List.jsx'));
-                        });
-                    }
-                },
-                {
-                    path: 'all',
-                    getComponent(location, cb) {
-                        require.ensure([], require => {
-                            cb(null, require('./containers/courses/List.jsx'));
-                        });
-                    }
-                },
-                {
-                    path: ':courseId',
-                    indexRoute:{
-                        getComponent(location, cb) {
-                            require.ensure([], require => {
-                                cb(null, require('./containers/courses/Detail.jsx'));
-                            });
-                        }
-                    },
-                    childRoutes: [
-                        {
-                            path: 'discuss',
-                            childRoutes: [
-                                {
-                                    getComponent(location, cb) {
-                                        require.ensure([], require => {
-                                            cb(null, require('./containers/courses/Discuss.jsx'));
-                                        });
-                                    },
-                                    childRoutes: [
-                                        {
-                                            path: 'list',
-                                            getComponent(location, cb) {
-                                                require.ensure([], require => {
-                                                    cb(null, require('./containers/courses/DiscussList.jsx'));
-                                                });
-                                            }
-                                        },
-                                        {
-                                            path: 'noAnswer',
-                                            getComponent(location, cb) {
-                                                require.ensure([], require => {
-                                                    cb(null, require('./containers/courses/DiscussNoAnswer.jsx'));
-                                                });
-                                            }
-                                        },
-                                        {
-                                            path: 'propose',
-                                            getComponent(location, cb) {
-                                                require.ensure([], require => {
-                                                    cb(null, require('./containers/courses/DiscussPropose.jsx'));
-                                                });
-                                            }
-                                        },
-                                        {
-                                            path: 'answer',
-                                            getComponent(location, cb) {
-                                                require.ensure([], require => {
-                                                    cb(null, require('./containers/courses/DiscussAnswer.jsx'));
-                                                });
-                                            }
-                                        },
-                                        {
-                                            path: 'comment',
-                                            getComponent(location, cb) {
-                                                require.ensure([], require => {
-                                                    cb(null, require('./containers/courses/DiscussComment.jsx'));
-                                                });
-                                            }
-                                        }
-                                    ]
-                                },
-                                {
-                                    path: 'add',
-                                    getComponent(location, cb) {
-                                        require.ensure([], require => {
-                                            cb(null, require('./containers/courses/AddDiscuss.jsx'));
-                                        });
-                                    }
-                                },
-                                {
-                                    path: ':questionId',
-                                    indexRoute: {
-                                        getComponent(location, cb) {
-                                            require.ensure([], require => {
-                                                cb(null, require('./containers/courses/DiscussDetail.jsx'));
-                                            });
-                                        }
-                                    },
-                                    childRoutes: [
-                                        {
-                                            path: 'edit',
-                                            indexRoute: {
-                                                getComponent(location, cb) {
-                                                    require.ensure([], require => {
-                                                        cb(null, require('./containers/courses/AddDiscuss.jsx'));
-                                                    });
-                                                }
-                                            },
-                                            childRoutes: [
-                                                {
-                                                    path: ':answerId',
-                                                    getComponent(location, cb) {
-                                                        require.ensure([], require => {
-                                                            cb(null, require('./containers/courses/AddDiscuss.jsx'));
-                                                        });
-                                                    }
-                                                }
-                                            ]
-                                        },
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            path: 'statistics',
-                            getComponent(location, cb) {
-                                require.ensure([], require => {
-                                    cb(null, require('./containers/courses/Statistics.jsx'));
-                                });
-                            }
-                        },
-                        {
-                            path: 'chapters(/:chapterId)',
-                            getComponent(location, cb) {
-                                require.ensure([], require => {
-                                    cb(null, require('./containers/courses/Chapter.jsx'));
-                                });
-                            }
-                        },
-                        {
-                            path: 'paper',
-                            getComponent(location, cb) {
-                                require.ensure([], require => {
-                                    cb(null, require('./containers/courses/Chapter.jsx'));
-                                });
-                            }
-                        }
-                    ]
-                }
-            ]
-        }
     ]
 };
