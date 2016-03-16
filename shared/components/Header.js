@@ -61,7 +61,7 @@ class Header extends Component {
                     <nav className="header-nav fl mar-r22">
                         <ul>
                             <li className="cur">
-                                <a href="index.html">首页</a>
+                                <a href="/">首页</a>
                             </li>
                             <li>
                                 <a href="study.html">课程中心</a>
@@ -75,7 +75,7 @@ class Header extends Component {
                         </ul>
                     </nav>
                     <div className="header-search fl">
-                        <input type="text" name="" placeholder="请输入您要搜索的关键词" /><a href="#">search</a>
+                        <input type="text" name="" placeholder="请输入您要搜索的关键词" /><a href="#"><i className="icon iconfont">&#xe60c;</i></a>
                     </div>
                     <div className="header-user fr">
                         <a href="#" id="login" className="curr">登录</a>

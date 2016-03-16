@@ -1,13 +1,14 @@
 .classify{ background: url(../img/course-classify.jpg) no-repeat center top; height:684px;}
 .classify-left{ width: 240px; background: #fff; border:1px solid #959595;}
 .classify-left h4,.classify-left a{ padding: 0 20px; line-height: 56px; border-bottom: 1px solid #959595; display: block; font-weight: normal;}
-.classify-left a{ padding: 0 36px; background: url(../img/classify-icon-arrow.png) no-repeat 220px center;
+.classify-left a{ padding: 0 14px 0 36px;
                   transition: 0.3s;
                   -moz-transition: 0.3s;
                   -webkit-transition: 0.3s;
                   -o-transition: 0.3s;}
-.classify-left a:hover{ background: url(../img/classify-icon-arrow-red.png) no-repeat 220px center #dddddd; color: #b01c40; }
-.classify-left h5 a{ padding:0 20px;}
+.classify-left a:hover{ background: #dddddd; color: #b01c40; }
+.classify-left .iconfont{ font-size: 0.75em;}
+.classify-left h5 a{ padding:0 14px 0 20px;}
 .classify-left h5:last-child a{ border-bottom: 0px;}
 
 .classify-right{ margin: 50px 0 0 50px;}
@@ -40,10 +41,8 @@
 .online-course dd,.online-course dd a{ font-size: 0.75em; color: #505050;}
 .online-course span{ display: inline-block;}
 .online-title{ width: 396px;}
-.online-time,.online-price,.online-num{ padding:0 0 0 18px; width: 82px;}
-.online-time{ background: url(../img/icon-time.png) no-repeat left center; background-size: 14px;}
-.online-price{ background: url(../img/icon-price.png) no-repeat left center; background-size: 14px;}
-.online-num,.open-num{ background: url(../img/icon-num.png) no-repeat left center; background-size: 14px;}
+.online-time,.online-price,.online-num{ width: 82px;}
+.online-course .iconfont,.open-course .iconfont{ font-size: 0.875em; margin:0 4px 0 0;}
 .online-course dd a{ margin:0 0 0 32px; color: #b01c40}
 
 .open-course{ padding: 0 0 40px;}
@@ -57,6 +56,5 @@
 .open-course-list a{ width: 82px;height:27px;line-height: 27px; color: #fff; text-align: center; background: #b01c40; border-radius: 10px;}
 .open-course-list a.disabled{ background: #888888}
 .open-title{ width: 382px;}
-.open-address,.open-num{ padding:0 0 0 18px;}
-.open-address{ background: url(../img/icon-open-address.png) no-repeat left center; background-size: 14px; width: 156px;}
+.open-address{ width: 156px;}
 .open-num{ width: 122px;}
