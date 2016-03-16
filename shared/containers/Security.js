@@ -23,12 +23,12 @@ class Security extends Component {
             <div className="container cl">
                 <div className="classify-left fl">
                     <h4>金融专业实务精品课</h4>
-                    <a href="" title="">财富管理<i className="icon iconfont fr">&#xe60e;</i></a>
-                    <a href="" title="">企业理财顾问师<i className="icon iconfont fr">&#xe60e;</i></a>
-                    <a href="Security" title="">资产证券化<i className="icon iconfont fr">&#xe60e;</i></a>
-                    <a href="" title="">互联网金融<i className="icon iconfont fr">&#xe60e;</i></a>
-                    <h5><a href="" title="">金融领导力<i className="icon iconfont fr">&#xe60e;</i></a></h5>
-                    <h5><a href="" title="">学位教育<i className="icon iconfont fr">&#xe60e;</i></a></h5>
+                    <a href="" title="">财富管理<i className="iconfont icon-arrow fr"></i></a>
+                    <a href="" title="">企业理财顾问师<i className="iconfont icon-arrow fr"></i></a>
+                    <a href="Security" title="">资产证券化<i className="iconfont icon-arrow fr"></i></a>
+                    <a href="" title="">互联网金融<i className="iconfont icon-arrow fr"></i></a>
+                    <h5><a href="" title="">金融领导力<i className="iconfont icon-arrow fr"></i></a></h5>
+                    <h5><a href="" title="">学位教育<i className="iconfont icon-arrow fr"></i></a></h5>
                 </div>
                 <div className="classify-right fl">
                     <div className="classify-title">
@@ -74,57 +74,57 @@ class Security extends Component {
                             <dt>模块一：产品设计</dt>
                             <dd>
                                 <span className="online-title">1.资产证券化解析</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>266 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>266 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">2.信用卡资产证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>55 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>2380</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>46 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>55 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>2380</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>46 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">3.银行贷款资产证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>10 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>33 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>10 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>33 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">4.商业地产贷款证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">5.房地产信托基金REITs</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">6.住房按揭资产证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">7.汽车贷款资产证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
@@ -133,33 +133,33 @@ class Security extends Component {
                             <dt>模块二：运营技术</dt>
                             <dd>
                                 <span className="online-title">1.资产证券化解析</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">2.信用卡资产证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">3.银行贷款资产证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">4.商业地产贷款证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
@@ -168,33 +168,33 @@ class Security extends Component {
                             <dt>模块三：参与主体</dt>
                             <dd>
                                 <span className="online-title">1.资产证券化解析</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>10 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>10 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">2.信用卡资产证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">3.银行贷款资产证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">4.商业地产贷款证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
@@ -203,33 +203,33 @@ class Security extends Component {
                             <dt>模块四：衍生模块</dt>
                             <dd>
                                 <span className="online-title">1.资产证券化解析</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">2.信用卡资产证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">3.银行贷款资产证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
                             <dd>
                                 <span className="online-title">4.商业地产贷款证券化</span>
-                                <span className="online-time"><i className="icon iconfont">&#xe601;</i>3 课时</span>
-                                <span className="online-price"><i className="icon iconfont">&#xe603;</i>238</span>
-                                <span className="online-num"><i className="icon iconfont">&#xe600;</i>365 人</span>
+                                <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
+                                <span className="online-price"><i className="iconfont icon-time"></i>238</span>
+                                <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
                                 <a href="" title="" className="online-content">详情</a>
                                 <a href="" title="" className="online-buy">购买</a>
                             </dd>
@@ -246,50 +246,50 @@ class Security extends Component {
                         <ul className="open-course-list">
                             <li>
                                 <span className="open-title">第1期：&emsp;北京&emsp;2015年11月17日－11月28日</span>
-                                <span className="open-address"><i className="icon iconfont">&#xe60d;</i>五道口金融学院</span>
-                                <span className="open-num"><i className="icon iconfont">&#xe600;</i>125 人</span>
+                                <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
+                                <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                 <a href="" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第2期：&emsp;北京&emsp;2015年11月17日－11月28日</span>
-                                <span className="open-address"><i className="icon iconfont">&#xe60d;</i>博林诺富特酒店</span>
-                                <span className="open-num"><i className="icon iconfont">&#xe600;</i>125 人</span>
+                                <span className="open-address"><i className="iconfont icon-address"></i>博林诺富特酒店</span>
+                                <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                 <a href="" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第3期：&emsp;北京&emsp;2015年11月17日－11月28日</span>
-                                <span className="open-address"><i className="icon iconfont">&#xe60d;</i>待定</span>
-                                <span className="open-num"><i className="icon iconfont">&#xe600;</i>125 人</span>
+                                <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
+                                <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                 <a href="">立即报名</a>
                             </li>
                             <li>
                                 <span className="open-title">第4期：&emsp;北京&emsp;2015年11月17日－11月28日</span>
-                                <span className="open-address"><i className="icon iconfont">&#xe60d;</i>五道口金融学院</span>
-                                <span className="open-num"><i className="icon iconfont">&#xe600;</i>125 人</span>
+                                <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
+                                <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                 <a href="">立即报名</a>
                             </li>
                             <li>
                                 <span className="open-title">第1期：&emsp;北京&emsp;2015年11月17日－11月28日</span>
-                                <span className="open-address"><i className="icon iconfont">&#xe60d;</i>五道口金融学院</span>
-                                <span className="open-num"><i className="icon iconfont">&#xe600;</i>125 人</span>
+                                <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
+                                <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                 <a href="" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第2期：&emsp;北京&emsp;2015年11月17日－11月28日</span>
-                                <span className="open-address"><i className="icon iconfont">&#xe60d;</i>五道口金融学院</span>
-                                <span className="open-num"><i className="icon iconfont">&#xe600;</i>125 人</span>
+                                <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
+                                <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                 <a href="" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第3期：&emsp;北京&emsp;2015年11月17日－11月28日</span>
-                                <span className="open-address"><i className="icon iconfont">&#xe60d;</i>五道口金融学院</span>
-                                <span className="open-num"><i className="icon iconfont">&#xe600;</i>125 人</span>
+                                <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
+                                <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                 <a href="">立即报名</a>
                             </li>
                             <li>
                                 <span className="open-title">第4期：&emsp;北京&emsp;2015年11月17日－11月28日</span>
-                                <span className="open-address"><i className="icon iconfont">&#xe60d;</i>五道口金融学院</span>
-                                <span className="open-num"><i className="icon iconfont">&#xe600;</i>125 人</span>
+                                <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
+                                <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                 <a href="">立即报名</a>
                             </li>
                         </ul>

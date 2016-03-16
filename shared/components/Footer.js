@@ -16,10 +16,10 @@ module.exports = () => {
 					</div>
 					<div className="footer-top-menu fl">
 						<h4>关于我们</h4>
-						<a href="" title=""><i className="icon iconfont">&#xe646;</i>网站首页</a>
-						<a href="" title=""><i className="icon iconfont">&#xe646;</i>关于我们</a>
-						<a href="" title=""><i className="icon iconfont">&#xe646;</i>联系我们</a>
-						<a href="" title=""><i className="icon iconfont">&#xe646;</i>问题反馈</a>
+						<a href="" title=""><i className="iconfont icon-arrowwhite"></i>网站首页</a>
+						<a href="" title=""><i className="iconfont icon-arrowwhite"></i>关于我们</a>
+						<a href="" title=""><i className="iconfont icon-arrowwhite"></i>联系我们</a>
+						<a href="" title=""><i className="iconfont icon-arrowwhite"></i>问题反馈</a>
 					</div>
 					<div className="footer-top-app fl">
 						<h4>APP下载（安卓&IOS）</h4>

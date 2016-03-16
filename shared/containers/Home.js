@@ -43,7 +43,7 @@ class Home extends Component {
                         <div className="container cl">
                             <a href="" title="" className="module module1">
                                 <div className="module-icon">
-                                    <i className="icon iconfont">&#xe61a;</i>
+                                    <i className="iconfont icon-module11"></i>
                                 </div>
                                 <h4>CFC</h4>
                                 <div className="module-title">企业理财师（CFC）认证</div>
@@ -51,7 +51,7 @@ class Home extends Component {
                             </a>
                             <a href="" title="" className="module module2">
                                 <div className="module-icon">
-                                    <i className="icon iconfont">&#xe61b;</i>
+                                    <i className="iconfont icon-module21"></i>
                                 </div>
                                 <h4>公开课</h4>
                                 <div className="module-title">全球互联网金融商业模式及案例 深度解析公开课</div>
@@ -59,7 +59,7 @@ class Home extends Component {
                             </a>
                             <a href="" title="" className="module module3">
                                 <div className="module-icon">
-                                    <i className="icon iconfont">&#xe61c;</i>
+                                    <i className="iconfont icon-module31"></i>
                                 </div>
                                 <h4>公开课</h4>
                                 <div className="module-title">《资产证券化创新》公开课</div>
@@ -76,7 +76,7 @@ class Home extends Component {
                                         <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                     </div>
                                     <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                    <h6><i className="iconfont icon-user"></i>127</h6>
                                     <p>¥ 199.00</p>
                                 </a>
                             </li>
@@ -86,7 +86,7 @@ class Home extends Component {
                                         <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                     </div>
                                     <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                    <h6><i className="iconfont icon-user"></i>127</h6>
                                     <p>¥ 199.00</p>
                                 </a>
                             </li>
@@ -96,7 +96,7 @@ class Home extends Component {
                                         <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                     </div>
                                     <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                    <h6><i className="iconfont icon-user"></i>127</h6>
                                     <p>¥ 199.00</p>
                                 </a>
                             </li>
@@ -106,7 +106,7 @@ class Home extends Component {
                                         <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                     </div>
                                     <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                    <h6><i className="iconfont icon-user"></i>127</h6>
                                     <p>¥ 199.00</p>
                                 </a>
                             </li>
@@ -116,7 +116,7 @@ class Home extends Component {
                                         <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                     </div>
                                     <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                    <h6><i className="iconfont icon-user"></i>127</h6>
                                     <p>¥ 199.00</p>
                                 </a>
                             </li>
@@ -135,7 +135,7 @@ class Home extends Component {
                                             <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                         </div>
                                         <h5>企业理财与公司金融综合服务业务</h5>
-                                        <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                        <h6><i className="iconfont icon-user"></i>127</h6>
                                         <p>¥ 199.00</p>
                                     </a>
                                 </li>
@@ -145,7 +145,7 @@ class Home extends Component {
                                             <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                         </div>
                                         <h5>企业理财与公司金融综合服务业务</h5>
-                                        <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                        <h6><i className="iconfont icon-user"></i>127</h6>
                                         <p>¥ 199.00</p>
                                     </a>
                                 </li>
@@ -155,7 +155,7 @@ class Home extends Component {
                                             <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                         </div>
                                         <h5>企业理财与公司金融综合服务业务</h5>
-                                        <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                        <h6><i className="iconfont icon-user"></i>127</h6>
                                         <p>¥ 199.00</p>
                                     </a>
                                 </li>
@@ -165,7 +165,7 @@ class Home extends Component {
                                             <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                         </div>
                                         <h5>企业理财与公司金融综合服务业务</h5>
-                                        <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                        <h6><i className="iconfont icon-user"></i>127</h6>
                                         <p>¥ 199.00</p>
                                     </a>
                                 </li>
@@ -175,7 +175,7 @@ class Home extends Component {
                                             <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                         </div>
                                         <h5>企业理财与公司金融综合服务业务</h5>
-                                        <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                        <h6><i className="iconfont icon-user"></i>127</h6>
                                         <p>¥ 199.00</p>
                                     </a>
                                 </li>
@@ -185,7 +185,7 @@ class Home extends Component {
                                             <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                         </div>
                                         <h5>企业理财与公司金融综合服务业务</h5>
-                                        <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                        <h6><i className="iconfont icon-user"></i>127</h6>
                                         <p>¥ 199.00</p>
                                     </a>
                                 </li>
@@ -195,7 +195,7 @@ class Home extends Component {
                                             <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                         </div>
                                         <h5>企业理财与公司金融综合服务业务</h5>
-                                        <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                        <h6><i className="iconfont icon-user"></i>127</h6>
                                         <p>¥ 199.00</p>
                                     </a>
                                 </li>
@@ -205,7 +205,7 @@ class Home extends Component {
                                             <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                         </div>
                                         <h5>企业理财与公司金融综合服务业务</h5>
-                                        <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                        <h6><i className="iconfont icon-user"></i>127</h6>
                                         <p>¥ 199.00</p>
                                     </a>
                                 </li>
@@ -221,7 +221,7 @@ class Home extends Component {
                                         <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                     </div>
                                     <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                    <h6><i className="iconfont icon-user"></i>127</h6>
                                     <p>¥ 199.00</p>
                                 </a>
                             </li>
@@ -231,7 +231,7 @@ class Home extends Component {
                                         <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                     </div>
                                     <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                    <h6><i className="iconfont icon-user"></i>127</h6>
                                     <p>¥ 199.00</p>
                                 </a>
                             </li>
@@ -241,7 +241,7 @@ class Home extends Component {
                                         <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                     </div>
                                     <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                    <h6><i className="iconfont icon-user"></i>127</h6>
                                     <p>¥ 199.00</p>
                                 </a>
                             </li>
@@ -251,7 +251,7 @@ class Home extends Component {
                                         <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                     </div>
                                     <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                    <h6><i className="iconfont icon-user"></i>127</h6>
                                     <p>¥ 199.00</p>
                                 </a>
                             </li>
@@ -261,7 +261,7 @@ class Home extends Component {
                                         <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
                                     </div>
                                     <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="icon iconfont">&#xe600;</i>127</h6>
+                                    <h6><i className="iconfont icon-user"></i>127</h6>
                                     <p>¥ 199.00</p>
                                 </a>
                             </li>
