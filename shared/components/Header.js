@@ -8,37 +8,6 @@ class Header extends Component {
         handleLoginSubmit: PropTypes.func.isRequired,
         handleLogout: PropTypes.func.isRequired
     };
-    static menus = [
-        { path: '/courses/mine', name: '我的课程' },
-        { path: '/courses/all', name: '选课广场' },
-        { path: '/changepass', name: '修改密码' },
-        { path: '/avatar', name: '修改头像' },
-    ];
-
-    static styles = {
-        headStyle: {
-            width: '100%',
-            maxWidth: '1000px',
-            margin: '19px auto',
-            backgroundColor: '#fff',
-            boxShadow: '0 0 0 #fff',
-            padding: 0
-        },
-        headTitleStyle: {
-            color: '#a32646',
-            backgroundImage: 'url(/static/images/logo.png)',
-            backgroundSize: '100%',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'left center',
-            textIndent: '-99em',
-            display: 'inline-block',
-            width: '100%',
-            maxWidth: 600,
-        },
-        menuStyle: {
-            top: 70
-        }
-    };
 
     state = {
         show: false,  // 头像下来菜单显示与否
@@ -84,8 +53,35 @@ class Header extends Component {
 
     render() {
         return (
-            <div className="header clearfix">
-                Header
+            <div className="header cl">
+                <div className="container">
+                    <div className="logo fl">
+                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1bb87d41d15fe27b500a4bfcde01bb0e.png" alt="" />
+                    </div>
+                    <nav className="header-nav fl mar-r22">
+                        <ul>
+                            <li className="cur">
+                                <a href="index.html">首页</a>
+                            </li>
+                            <li>
+                                <a href="study.html">课程中心</a>
+                            </li>
+                            <li>
+                                <a href="service.html">学习中心</a>
+                            </li>
+                            <li>
+                                <a href="service.html">创业学院</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div className="header-search fl">
+                        <input type="text" name="" placeholder="请输入您要搜索的关键词" /><a href="#">search</a>
+                    </div>
+                    <div className="header-user fr">
+                        <a href="#" id="login" className="curr">登录</a>
+                        <a href="#" id="register">注册</a>
+                    </div>
+                </div>
             </div>
         );
     }

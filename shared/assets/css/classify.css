@@ -1,0 +1,62 @@
+.classify{ background: url(../img/course-classify.jpg) no-repeat center top; height:684px;}
+.classify-left{ width: 240px; background: #fff; border:1px solid #959595;}
+.classify-left h4,.classify-left a{ padding: 0 20px; line-height: 56px; border-bottom: 1px solid #959595; display: block; font-weight: normal;}
+.classify-left a{ padding: 0 36px; background: url(../img/classify-icon-arrow.png) no-repeat 220px center;
+                  transition: 0.3s;
+                  -moz-transition: 0.3s;
+                  -webkit-transition: 0.3s;
+                  -o-transition: 0.3s;}
+.classify-left a:hover{ background: url(../img/classify-icon-arrow-red.png) no-repeat 220px center #dddddd; color: #b01c40; }
+.classify-left h5 a{ padding:0 20px;}
+.classify-left h5:last-child a{ border-bottom: 0px;}
+
+.classify-right{ margin: 50px 0 0 50px;}
+
+.classify-course{ border:1px solid #959595; padding: 40px 20px 60px; background: rgba(255,255,255,0.49); font-size: 1.5em; line-height: 1.3; margin:0;}
+.classify-course a{ color: #b01c40;}
+.classify-course a:last-child{ margin:0 0 0 24px;}
+
+/* 课程分类详情 */
+.classify-security{ background: url(../img/security-bg.jpg) no-repeat top center;}
+.classify-security .classify-right{ margin: 40px 0 0 20px; width: 938px;}
+.classify-title{ border:1px solid #959595; margin: 0 0 32px; padding: 22px 20px 20px; background: rgba(255,255,255,0.49);}
+.classify-title h4{ font-size: 1.5em;}
+.classify-title p{ line-height: 2.2; font-size: 0.875em; margin: 20px 0 0 20px;}
+
+.classify-h4{ padding:0 20px; line-height: 40px; border-bottom: 1px solid #d74468; font-weight: normal;}
+.classify-teacher-list{ padding:10px 40px 6px;}
+.classify-teacher-list li{ margin: 0 0 10px; float: left}
+.classify-teacher-list li:after{content:""; clear: both; display: block;}
+.classify-teacher-list img{ width: 74px; max-height: 74px;}
+.classify-teacher-list div.fl{ width: 335px; margin: 0 0 0 20px;}
+.classify-teacher-list h4{ font-weight: normal; font-size: 0.875em; color: #505050;}
+.classify-teacher-list p{ color: #202020; font-size: 0.75em; margin: 26px 0 0;}
+
+.online-course{ margin: 32px 0; padding: 0 0 40px;}
+.online-course h4{ margin: 0 0 30px;}
+.online-course dl{ margin: 0 40px; line-height: 40px;}
+.online-course dt,.online-course dd{ padding:0 0 0 30px; border-bottom: 2px solid #e5e6e6;}
+.online-course dt{ background: url(../img/online-bg.png) no-repeat top left; font-size: 0.875em; color: #fff;}
+.online-course dd,.online-course dd a{ font-size: 0.75em; color: #505050;}
+.online-course span{ display: inline-block;}
+.online-title{ width: 396px;}
+.online-time,.online-price,.online-num{ padding:0 0 0 18px; width: 82px;}
+.online-time{ background: url(../img/icon-time.png) no-repeat left center; background-size: 14px;}
+.online-price{ background: url(../img/icon-price.png) no-repeat left center; background-size: 14px;}
+.online-num,.open-num{ background: url(../img/icon-num.png) no-repeat left center; background-size: 14px;}
+.online-course dd a{ margin:0 0 0 32px; color: #b01c40}
+
+.open-course{ padding: 0 0 40px;}
+.open-summary{ border: 1px solid #d74468; background: #eee; padding: 24px 16px; margin: 30px 40px; border-radius: 10px;}
+.open-summary h5{ font-size: 0.875em; margin: 0 0 20px;}
+.open-summary p{ font-size: 0.75em; line-height: 1.6}
+
+.open-course-list{ margin: 30px 40px; font-size: 0.75em; color: #505050;}
+.open-course-list li{ line-height: 50px; background: #eeeeee; border-radius: 12px; padding: 0 30px 0 40px; margin: 0 0 14px;}
+.open-course-list span,.open-course-list a{ display: inline-block;}
+.open-course-list a{ width: 82px;height:27px;line-height: 27px; color: #fff; text-align: center; background: #b01c40; border-radius: 10px;}
+.open-course-list a.disabled{ background: #888888}
+.open-title{ width: 382px;}
+.open-address,.open-num{ padding:0 0 0 18px;}
+.open-address{ background: url(../img/icon-open-address.png) no-repeat left center; background-size: 14px; width: 156px;}
+.open-num{ width: 122px;}
