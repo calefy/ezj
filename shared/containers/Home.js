@@ -26,7 +26,7 @@ class Home extends Component {
                             在这里学习全中国最好的金融课程
                         </div>
                         <div className="banner-center">
-                            <a href="Classify" title="" className="banner-all-course">查看全部课程</a>
+                            <a href="classify" title="" className="banner-all-course">查看全部课程</a>
                         </div>
                         <div className="banner-bottom">
                             <a href="" title="">财富管理</a>
