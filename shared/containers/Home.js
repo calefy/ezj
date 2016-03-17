@@ -2,22 +2,30 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
-import { getOwnRequestIdentity, isOwnRequest } from '../libs/utils';
+import CoursesAction from '../actions/CoursesAction';
 
 class Home extends Component {
 
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
+        const coursesAction = new CoursesAction({ apiClient: apiClient });
         return Promise.all([
             // 默认首页取5个
-            //dispatch( noticeAction.loadNotices({pageSize: 5}, getOwnRequestIdentity(location)) )
+            dispatch( coursesAction.loadCourses({limit: 5}) )
         ]);
     }
 
     componentDidMount() {
+        const { courses, location } = this.props;
+        if (courses.isFetching) {
+            Home.fetchData(this.props);
+        }
     }
 
     render() {
+        const { courses } = this.props;
+        const hotcourses = courses && courses.data && courses.data.list || [];
+
         return (
             <div>
                 <div className="banner">
@@ -26,7 +34,7 @@ class Home extends Component {
                             在这里学习全中国最好的金融课程
                         </div>
                         <div className="banner-center">
-                            <a href="Classify" title="" className="banner-all-course">查看全部课程</a>
+                            <a href="classify" title="" className="banner-all-course">查看全部课程</a>
                         </div>
                         <div className="banner-bottom">
                             <a href="" title="">财富管理</a>
@@ -69,58 +77,28 @@ class Home extends Component {
                     </div>
                     <div className="content-module2">
                         <h3 className="index-title">免费课程</h3>
-                        <ul className="index-course container cl">
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
-                                    </div>
-                                    <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="iconfont icon-user"></i>127</h6>
-                                    <p>¥ 199.00</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
-                                    </div>
-                                    <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="iconfont icon-user"></i>127</h6>
-                                    <p>¥ 199.00</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
-                                    </div>
-                                    <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="iconfont icon-user"></i>127</h6>
-                                    <p>¥ 199.00</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
-                                    </div>
-                                    <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="iconfont icon-user"></i>127</h6>
-                                    <p>¥ 199.00</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
-                                    </div>
-                                    <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="iconfont icon-user"></i>127</h6>
-                                    <p>¥ 199.00</p>
-                                </a>
-                            </li>
-                        </ul>
+                        
+                        {courses.isFetching ?
+                            <div style={{position:'relative'}}>
+                                loading
+                            </div>
+                            :
+                            <ul className="index-course container cl">
+                                {hotcourses.map((item, key) => {
+                                    return  <li key={key}>
+                                                <a href={`/courses/${item.id}`}>
+                                                    <div className="course-list-img">
+                                                        <img src={item.course_picture} alt="" />
+                                                    </div>
+                                                    <h5>{item.course_name}</h5>
+                                                    <h6><i className="iconfont icon-user"></i>{item.student_count}</h6>
+                                                    <p>{ item.course_price == 0 ? "免费" : "¥ " + item.course_price }</p>
+                                                </a>
+                                            </li>
+                                })}
+                            </ul>
+                        }
+                        
                     </div>
                     <div className="content-module3">
                         <h3 className="index-title">最热课程</h3>
@@ -324,5 +302,5 @@ class Home extends Component {
 }
 
 
-module.exports = connect( state => ({ notices: state.notices }) )(Home);
+module.exports = connect( state => ({ courses: state.courses }) )(Home);
 

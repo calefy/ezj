@@ -16,7 +16,7 @@ class ApiClient {
     constructor(config) {
         config = config || {};
         config = Object.assign({
-            prefix: '/api/v1'
+            prefix: '/api/v3'
         }, config || {});
         this.prefix = config.prefix;
     }

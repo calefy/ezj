@@ -25,7 +25,7 @@ class Security extends Component {
                     <h4>金融专业实务精品课</h4>
                     <a href="" title="">财富管理<i className="iconfont icon-arrow fr"></i></a>
                     <a href="" title="">企业理财顾问师<i className="iconfont icon-arrow fr"></i></a>
-                    <a href="Security" title="">资产证券化<i className="iconfont icon-arrow fr"></i></a>
+                    <a href="security" title="">资产证券化<i className="iconfont icon-arrow fr"></i></a>
                     <a href="" title="">互联网金融<i className="iconfont icon-arrow fr"></i></a>
                     <h5><a href="" title="">金融领导力<i className="iconfont icon-arrow fr"></i></a></h5>
                     <h5><a href="" title="">学位教育<i className="iconfont icon-arrow fr"></i></a></h5>
