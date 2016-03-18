@@ -1,13 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDom from 'react-dom'
 import { Link } from 'react-router'
+import LoginDialog from './LoginDialog.jsx';
 
 class Header extends Component {
+
     static propTypes = {
         user: PropTypes.object.isRequired,
         handleLoginSubmit: PropTypes.func.isRequired,
         handleLogout: PropTypes.func.isRequired
     };
+    static menus = [
+        { path: '/courses/mine', name: '我的课程' },
+        { path: '/courses/all', name: '选课广场' },
+        { path: '/changepass', name: '修改密码' },
+        { path: '/avatar', name: '修改头像' },
+    ];
 
     state = {
         show: false,  // 头像下来菜单显示与否
@@ -53,7 +61,7 @@ class Header extends Component {
 
     render() {
         return (
-            <div className="header cl">
+            <div className="header cl" open={this.state.show}>
                 <div className="container">
                     <div className="logo fl">
                         <a href="/"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1bb87d41d15fe27b500a4bfcde01bb0e.png" alt="" /></a>
@@ -61,16 +69,16 @@ class Header extends Component {
                     <nav className="header-nav fl mar-r22">
                         <ul>
                             <li className="cur">
-                                <a href="/">首页</a>
+                                <Link to="/">首页</Link>
                             </li>
                             <li>
-                                <a href="study.html">课程中心</a>
+                                <Link to="study.html">课程中心</Link>
                             </li>
                             <li>
-                                <a href="service.html">学习中心</a>
+                                <Link to="service.html">学习中心</Link>
                             </li>
                             <li>
-                                <a href="service.html">创业学院</a>
+                                <Link to="service.html">创业学院</Link>
                             </li>
                         </ul>
                     </nav>
@@ -78,10 +86,15 @@ class Header extends Component {
                         <input type="text" name="" placeholder="请输入您要搜索的关键词" /><a href="#"><i className="iconfont icon-search"></i></a>
                     </div>
                     <div className="header-user fr">
-                        <a href="#" id="login" className="curr">登录</a>
-                        <a href="#" id="register">注册</a>
+                        <button onClick={this.openLoginDialog} className="curr">登录</button>
+                        <button>注册</button>
                     </div>
                 </div>
+                <LoginDialog
+                    ref="loginDialog"
+                    error={this.props.user.loginError}
+                    onSubmit={this.props.handleLoginSubmit}
+                />
             </div>
         );
     }

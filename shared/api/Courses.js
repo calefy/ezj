@@ -6,10 +6,15 @@ class Courses extends Base {
     /**
      * 免费课程列表
      */
-    courses(params = {}) {
+    freecourses(params = {}) {
         params = paramify(params);
         params = params ? '?' + params : '';
-        return this.apiClient.get(`courses/free`);
+        return this.apiClient.get(`els/courses/free${params}`);
+    }
+    hotcourses(params = {}) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get(`els/courses/hot${params}`);
     }
 
 }

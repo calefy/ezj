@@ -9,8 +9,13 @@ module.exports = class CoursesAction extends BaseAction {
         this.api = this.getApi(CoursesApi);
     }
 
-    loadCourses(query = {}) {
-        return BaseAction.dispatchRequest( 'courses', this.api.courses(query) );
+    loadfreeCourses(query = {}) {
+        return BaseAction.dispatchRequest( 'freecourses', this.api.freecourses(query) );
+    }
+
+
+    loadhotCourses(query = {}) {
+        return BaseAction.dispatchRequest( 'hotcourses', this.api.hotcourses(query) );
     }
 
 }

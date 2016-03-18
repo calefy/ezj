@@ -1,7 +1,7 @@
 
 @font-face {font-family: "iconfont";
   src: url('iconfont.eot'); /* IE9*/
-  src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  src: url('iconfont.eot#iefix') format('embedded-opentype'), /* IE6-IE8 */
   url('iconfont.woff') format('woff'), /* chrome, firefox */
   url('iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
   url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
@@ -29,3 +29,7 @@
 .icon-arrow:before { content: "\e60e"; }
 .icon-arrowwhite:before { content: "\e646"; }
 .icon-loading:before { content: "\e648"; }
+.icon-username:before { content: "\e64c"; }
+.icon-pass:before { content: "\e64b"; }
+.icon-name:before { content: "\e64a"; }
+.icon-close:before { content: "\e649"; }
