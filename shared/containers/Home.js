@@ -9,6 +9,7 @@ class Home extends Component {
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
         const coursesAction = new CoursesAction({ apiClient: apiClient });
+        // console.log("...");
         return Promise.all([
             // 默认首页取5个
             dispatch( coursesAction.loadCourses({limit: 5}) )
@@ -16,15 +17,19 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        const { courses, location } = this.props;
+        const { courses, location, dispatch } = this.props;
+
         if (courses.isFetching) {
             Home.fetchData(this.props);
+            // const coursesAction = new CoursesAction();
+            // dispatch( coursesAction.loadCourses({limit: 5}) )
         }
     }
 
     render() {
         const { courses } = this.props;
         const hotcourses = courses && courses.data && courses.data.list || [];
+        console.log(courses);
 
         return (
             <div>
@@ -79,24 +84,32 @@ class Home extends Component {
                         <h3 className="index-title">免费课程</h3>
                         
                         {courses.isFetching ?
-                            <div style={{position:'relative'}}>
-                                loading
+                            <div className="loading">
+                                <i className="iconfont icon-loading fa-spin"></i>
                             </div>
                             :
-                            <ul className="index-course container cl">
-                                {hotcourses.map((item, key) => {
-                                    return  <li key={key}>
-                                                <a href={`/courses/${item.id}`}>
-                                                    <div className="course-list-img">
-                                                        <img src={item.course_picture} alt="" />
-                                                    </div>
-                                                    <h5>{item.course_name}</h5>
-                                                    <h6><i className="iconfont icon-user"></i>{item.student_count}</h6>
-                                                    <p>{ item.course_price == 0 ? "免费" : "¥ " + item.course_price }</p>
-                                                </a>
-                                            </li>
-                                })}
-                            </ul>
+                            <div className="free-course-list">
+                                { courses.error ?
+                                    <div className="loading">
+                                <i className="iconfont icon-loading fa-spin"></i>
+                            </div>
+                                    :
+                                    <ul className="index-course container cl">
+                                        {hotcourses.map((item, key) => {
+                                            return  <li key={key}>
+                                                        <a href={`/courses/${item.id}`}>
+                                                            <div className="course-list-img">
+                                                                <img src={item.course_picture} alt="" />
+                                                            </div>
+                                                            <h5>{item.course_name}</h5>
+                                                            <h6><i className="iconfont icon-user"></i>{item.student_count}</h6>
+                                                            <p>{ item.course_price == 0 ? "免费" : "¥ " + item.course_price }</p>
+                                                        </a>
+                                                    </li>
+                                        })}
+                                    </ul>
+                                }
+                            </div>
                         }
                         
                     </div>

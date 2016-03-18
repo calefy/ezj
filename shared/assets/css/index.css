@@ -22,6 +22,8 @@
 .index-title{ font-size: 1.625em; text-align: center; border-bottom: 1px solid #808080; line-height: 94px; position: relative; margin: 0 0 60px;}
 .index-title:after{ content:""; display: block; position: absolute; bottom: 0px; left:50%; height:3px; width: 120px; background: #b01c40; margin:0 0 0 -60px;}
 
+.free-course-list{ min-height:96px; position: relative;}
+
 .index-course li,.index-teacher li {float: left;margin: 0 15px 8px 0;width: 228px;height: 250px;position: relative;overflow: hidden;font-size: 0.875em;
 	transition: 0.3s;
 	-moz-transition: 0.3s;
