@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Dialog, TextField, Checkbox, FlatButton, RaisedButton } from 'material-ui';
-import { FormsyText } from 'formsy-material-ui'
 
 
 module.exports = class LoginDialog extends Component {
@@ -9,31 +7,6 @@ module.exports = class LoginDialog extends Component {
     static propTypes = {
         onSubmit: PropTypes.func.isRequired,
         error: PropTypes.object // 返回的错误信息
-    };
-
-    static styles = {
-        body: {
-            width: '400px',
-            padding: '0 30px 15px',
-            margin: '0 auto'
-        },
-        checkbox: {
-            width: '50%',
-        },
-        textStyle: {
-            width: '100%'
-        },
-        password: {
-            margin: '-10px 0 15px'
-        },
-        error: {
-            position: 'static',
-            marginTop: '-15px',
-        },
-        titleStyle: {
-            // color: '#fff',
-            padding: 24
-        }
     };
 
     state = {
@@ -97,70 +70,28 @@ module.exports = class LoginDialog extends Component {
     };
 
     render() {
-        const styles = LoginDialog.styles;
 
-        const actions = [
-            <FlatButton
-                label="登录"
-                primary={true}
-                keyboardFocused={true}
-                onTouchTap={this.onEnter}
-            />,
-            <FlatButton
-                label="取消"
-                secondary={true}
-                onClick={this.close}
-            />
-        ];
 
         return (
-            <Dialog
-                open={this.state.open}
-                title="用户登录"
-                actions={actions}
-                actionsContainerStyle={{ marginBottom: 0 }}
-                autoDetectWindowHeight={false}
-                titleStyle={ styles.titleStyle }
-                titleClassName="login-title"
-                contentClassName="login-content"
-                bodyClassName="login-body"
-                bodyStyle={ styles.body }
-                {...this.props}>
-                <div>
-                    <TextField
-                        ref="username"
-                        floatingLabelText="邮箱/ID："
-                        hintText="请输入邮箱或ID"
-                        type="text"
-                        errorStyle={ styles.error }
-                        fullWidth={true}
-                        errorText={this.state.errorUsername}
-                        onChange={this._validUsername}
-                        onEnterKeyDown={this.onEnter} />
+            <div style={{ display: "none" }}>
+                <div className="pop login-pop" open={this.state.open}>
+                    <i className="iconfont icon-close"></i>
+                    <div className="login-pop-content">
+                        <div className="login-pop-top">
+                            紫荆教育
+                        </div>
+                        <div className="login-text">
+                            <dl>
+                                <dt><i className="iconfont icon-"></i></dt>
+                                <dd>
+                                    <input type="text" placeholder="" />
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <TextField
-                        ref="password"
-                        floatingLabelText="密码："
-                        hintText="请输入密码"
-                        type="password"
-                        style={ styles.password }
-                        errorStyle={ styles.error }
-                        fullWidth={true}
-                        errorText={this.state.errorPassword || (!this.state.modified && this.props.error && (this.props.error.message || '登录失败'))}
-                        onChange={this._validPassword}
-                        onEnterKeyDown={this.onEnter} />
-                </div>
-                <div className="clearfix" style={{ marginTop: 10 }}>
-                    <Checkbox
-                        ref="remember"
-                        label="记住登录状态"
-                        className="fl"
-                        style={ styles.checkbox }
-                        defaultChecked={true} />
-                    <Link to="/pwd/set" className="fr" onClick={this.close}>忘记密码？</Link>
-                </div>
-            </Dialog>
+                <div className="screen-bg"></div>
+            </div>
         );
     }
 };
