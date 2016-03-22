@@ -16,13 +16,19 @@ class User extends Base {
     /**
      * 登录
      */
-    login({username, password, remember = true}) {
-        return this.apiClient.post('account/login', {
-            username,
-            pass: password,
-            remember
+    login({name, pass}) {
+        return this.apiClient.post('sso/login', {
+            login_name:name,
+            password: pass
         });
     }
+    // login({username, password, remember = true}) {
+    //     return this.apiClient.post('http://101.6.244.29:8004/v1/account/login', {
+    //         username,
+    //         pass: password,
+    //         remember
+    //     });
+    // }
 
     /**
      * 退出登录

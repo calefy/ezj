@@ -42,7 +42,7 @@ class ApiClientNode extends ApiClient {
             credentials: 'same-origin', // 同源cookie传递
             headers: Object.assign({
                 //'Content-Type': 'application/x-www-form-urlencoded', // 因提交文件时，类型会带上boundary，因此默认不加该类型，改到下面判断
-                'Accept': 'application/json',
+                // 'Accept': 'application/json',
                 'X-Requested-With': 'fetch'
             }, this.headers || {}, headers || {})
         }
