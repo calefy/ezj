@@ -16,6 +16,11 @@ class Courses extends Base {
         params = params ? '?' + params : '';
         return this.apiClient.get(`els/courses/hot${params}`);
     }
+    latestCourses(params = {}) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get(`els/courses/latest${params}`);
+    }
 
 }
 
