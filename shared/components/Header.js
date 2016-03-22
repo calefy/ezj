@@ -10,13 +10,7 @@ class Header extends Component {
         handleLoginSubmit: PropTypes.func.isRequired,
         handleLogout: PropTypes.func.isRequired
     };
-    static menus = [
-        { path: '/courses/mine', name: '我的课程' },
-        { path: '/courses/all', name: '选课广场' },
-        { path: '/changepass', name: '修改密码' },
-        { path: '/avatar', name: '修改头像' },
-    ];
-
+    
     state = {
         show: false,  // 头像下来菜单显示与否
         anchorEl: null // 头像对象

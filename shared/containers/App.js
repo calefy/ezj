@@ -13,6 +13,7 @@ if (process.env.BROWSER) {
     require('css/reset.css')
     require('css/style.css')
     require('css/index.css')
+    require('css/pwd.css')
     require('css/classify.css')
     require('css/iconfont/iconfont.css')
 }
@@ -23,6 +24,7 @@ class App extends Component {
 
     // 初始加载数据
     static fetchData({dispatch, apiClient}) {
+        const userAction = new UserAction({ apiClient: apiClient });
         return Promise.all([
             //dispatch(userAction.loadAccount()),
             //dispatch(noticeAction.loadMessageNumber())
@@ -30,6 +32,10 @@ class App extends Component {
     }
 
     componentDidMount() {
+        this.userAction = new UserAction();
+        if (this.props.user.isFetching) {
+            App.fetchData(this.props);
+        }
     }
     componentWillReceiveProps(nextProps) {
         const loginType = getRequestTypes(UserAction.LOGIN);
@@ -88,4 +94,3 @@ module.exports = connect( state => ({
     action: state.action,
     user: state.user
 }) )(App);
-

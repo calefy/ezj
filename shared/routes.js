@@ -57,5 +57,40 @@ module.exports = {
                 });
             }
         },
+        // 重置密码页
+        {
+            path: 'pwd',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/pwd/index'));
+                });
+            },
+            childRoutes: [
+                {
+                    path: 'index',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/pwd/Write'));
+                        });
+                    }
+                },
+                {
+                    path: 'set',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/pwd/Set'));
+                        });
+                    }
+                },
+                {
+                    path: 'validate',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/pwd/Validate'));
+                        });
+                    }
+                }
+            ]
+        },
     ]
 };

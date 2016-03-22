@@ -1,0 +1,72 @@
+.pwd{ width:890px; margin: 0 auto; padding: 40px 0 60px;}
+
+.stepflex {
+  display: inline-block;
+  display: block;
+  background: url(../img/pwd-bg.png) no-repeat 0 0;
+  text-align: center;
+  margin: 30px 0 0;
+  padding:6px 0 0;
+}
+
+.stepflex:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden
+}
+
+* html .stepflex {
+  height: 1%
+}
+
+*+html .stepflex {
+  min-height: 1%
+}
+
+.stepflex dl {
+  float: left;
+  position: relative;
+  width:513px;
+}
+
+.stepflex dl.first,.stepflex dl.last{
+  width: 186px;
+}
+
+.stepflex dl.doing .s-num {
+  background:#b01c40;
+}
+
+.stepflex .s-num {
+  position: relative;
+  margin: 0 auto 24px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.625em;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  line-height: 50px;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+  background:red; /* 一些不支持背景渐变的浏览器 */  
+  background:-moz-linear-gradient(top, #a6a7a8, #818182);  
+  background:-webkit-gradient(linear, 0 0, 0 bottom, from(#a6a7a8), to(#818182));  
+  background:-o-linear-gradient(top, #a6a7a8, #818182);
+}
+
+.stepflex .s-text {
+  color: #848484;
+  font-weight: normal;
+  font-size: 0.875em;
+}
+
+.pwd-form{ width: 678px; margin: 40px auto 0;}
+.pwd-form label,.pwd-form .formsy-input{ float: left; margin:0; line-height: 48px;}
+.pwd-form label{ margin:0 20px 0 0; color: #3a3a3a}
+.pwd-form .formsy-input{ width: 315px;}
+.pwd-write-form{ margin-top: 90px !important;}
+.pwd-write-form .formsy-list{ margin: 0 0 48px;}
+.pwd-btn{ margin: 0 0 0 168px; width:341px;}
+.pwd-btn a{ color: #fff; font-size: 0.875em; display: block;}
