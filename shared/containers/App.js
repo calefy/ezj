@@ -13,7 +13,6 @@ if (process.env.BROWSER) {
     require('css/reset.css')
     require('css/style.css')
     require('css/index.css')
-    require('css/pwd.css')
     require('css/classify.css')
     require('css/iconfont/iconfont.css')
 }
@@ -63,6 +62,7 @@ class App extends Component {
     handleLoginSubmit = data => {
         this.props.dispatch(this.userAction.login(data));
     };
+
     /**
      * 退出登录
      */
@@ -73,11 +73,19 @@ class App extends Component {
             });
     };
 
+    /**
+     * 执行登录
+     */
+    handleSendSubmit = data => {
+        this.props.dispatch(this.userAction.send(data));
+    };
+
     render() {
         return (
             <div>
                 <Header
                     user={this.props.user}
+                    handleSendSubmit={this.handleSendSubmit}
                     handleLoginSubmit={this.handleLoginSubmit}
                     handleLogout={this.handleLogout}
                 />

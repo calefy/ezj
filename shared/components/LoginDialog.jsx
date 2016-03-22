@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
 import FormsyText from './formsy/FormsyText.jsx';
-import FormsyRadio from './formsy/FormsyRadio.jsx';
+import FormsyValid from './formsy/FormsyValid.jsx';
 
 module.exports = class LoginDialog extends Component {
 
@@ -27,14 +27,17 @@ module.exports = class LoginDialog extends Component {
     };
 
     open = () => {
+        console.log('1');
         this._setState({ open: true, logOpen: true, regOpen: false });
     };
 
     logOpen = () => {
+        console.log('4');
         this._setState({ logOpen: true, regOpen: false });
     };
 
     regOpen = () => {
+        console.log('3');
         this._setState({ regOpen: true, logOpen: false });
     };
 
@@ -53,13 +56,23 @@ module.exports = class LoginDialog extends Component {
     };
 
     onEnter = () => {
+
         this.props.onSubmit({
             name: this.refs.username.getValue().trim(),
             pass: this.refs.password.getValue()
         });
     };
 
+    sendEmail = () => {
+        
+        this.props.onClick({
+            name: this.refs.regusername.getValue().trim()
+        });
+
+    };
+
     close = () => {
+        console.log('4fff');
         this._setState({ open: false });
     };
 
@@ -68,7 +81,7 @@ module.exports = class LoginDialog extends Component {
     };
 
     render() {
-
+        
 
         return (
             <div className={ this.state.open ? "show" : "hide" }>
@@ -109,7 +122,7 @@ module.exports = class LoginDialog extends Component {
                                         <input type="checkbox" ref="remember" defaultChecked={true} />记住我
                                     </dt>
                                     <dd className="fr text-error">
-                                        {this.state.errorPassword || (!this.state.modified && this.props.error && (this.props.error.message || '登录失败'))}
+                                        {this.props.error && (this.props.error.message || '登录失败')}
                                     </dd>
                                 </dl>
                                 <div className="pop-btn">
@@ -124,7 +137,7 @@ module.exports = class LoginDialog extends Component {
                     </div>
                     :
                     <div className="pop register-pop">
-                        <i className="iconfont icon-close"></i>
+                        <i className="iconfont icon-close" onClick={this.close}></i>
                         <div className="pop-content">
                             <div className="pop-logo">
                                 紫荆教育
@@ -133,28 +146,32 @@ module.exports = class LoginDialog extends Component {
                                 onValid={this.enableButton}
                                 onInvalid={this.disableButton}
                                 className="pop-text">
-                                <FormsyText 
-                                    name="regusername" 
+                                <FormsyText
+                                    ref="regusername"
+                                    name="regusername"
                                     title={
                                         <div>
                                             <i className="iconfont icon-username"></i>手机号/邮箱
-                                            <em className="fr text-error">该账号未验证</em>
-                                            <em className="fr text-success">可注册</em>
+                                            { this.props.senderror ? 
+                                                <em className="fr text-error">{this.props.senderror && (this.props.senderror.message || '该账号未验证')}</em>
+                                                :
+                                                <em className="fr text-success">可注册</em>
+                                            }
                                         </div>
                                     }
-                                    type="text"
                                     required />
-                                <FormsyText 
-                                    name="regvalidate" 
+                                <FormsyValid 
+                                    name="regvalid" 
                                     title={
                                         <div>
                                             <i className="iconfont icon-yz"></i>验证码
                                             <em className="fr text-error">验证码错误</em>
                                             <em className="fr text-success">验证短信已发到您的手机</em>
                                         </div>
-                                    } 
-                                    type="text" 
-                                    required />
+                                    }
+                                    valid="发送验证码"
+                                    required
+                                    validClick={this.sendEmail} />
                                 <FormsyText 
                                     name="regname" 
                                     title={
@@ -162,8 +179,7 @@ module.exports = class LoginDialog extends Component {
                                             <i className="iconfont icon-name"></i>昵称
                                             <em className="fr text-error">用户名为1-16个字符</em>
                                         </div>
-                                    } 
-                                    type="text" 
+                                    }
                                     required />
                                 <FormsyText 
                                     name="regpass" 
@@ -173,7 +189,7 @@ module.exports = class LoginDialog extends Component {
                                             <em className="fr text-error">密码格式错误</em>
                                         </div>
                                     } 
-                                    type="text" 
+                                    type="password" 
                                     required />
                                 <dl className="formsy-list cl">
                                     <dt className="fl"><input type="radio" />表示同意<Link to="">隐私政策</Link></dt>

@@ -15,7 +15,6 @@ import * as user        from './user'
  */
 module.exports = combineReducers(assign({},
     other,
-
     courses,
     user
 ));

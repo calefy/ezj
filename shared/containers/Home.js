@@ -123,11 +123,11 @@ class Home extends Component {
                                     <i className="iconfont icon-loading fa-spin"></i>
                                 </div>
                                 :
-                                <div className="course-list">
+                                <div className="course-list fr">
                                     { hotcourseslist.error ?
                                         <p className="no-course">暂无课程</p>
                                         :
-                                        <ul className="index-course fr" style={{ width: 958}}>
+                                        <ul className="index-course" style={{ width: 958}}>
                                             {hotcourseslist.map((item, key) => {
                                                 return  <li key={key}>
                                                             <a href={`/courses/${item.id}`}>

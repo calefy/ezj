@@ -35,6 +35,7 @@ class Course extends Component {
         });
     };
 
+
     render() {
         return (
             <div className="content">
@@ -42,12 +43,12 @@ class Course extends Component {
                     onValid={this.enableButton}
                     onInvalid={this.disableButton}
                     className="pwd-form pwd-write-form">
-                    <div className="formsy-list">
-                        验证码已发送至您的手机&emsp;&emsp;&emsp;&emsp;&emsp;15200001234&emsp;&emsp;&emsp;&emsp;<button className=" yz-btn">60s后重发</button>
+                    <div className="formsy-list pwd-valid">
+                        验证码已发送至您的手机<em>15200001234</em><button className="valid-btn yz-btn">60s后重发</button>
                     </div>
                     <FormsyText 
                         name="name" 
-                        title="输入注册手机号/邮箱"
+                        title="短信验证码"
                         type="text"
                         required />
                     <div className="pop-btn pwd-btn">

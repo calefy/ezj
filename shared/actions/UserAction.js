@@ -22,6 +22,11 @@ module.exports = class UserAction extends BaseAction {
     login(opts) {
         return BaseAction.dispatchRequest( UserAction.LOGIN, this.api.login(opts) );
     }
+
+    send(opts) {
+        return BaseAction.dispatchRequest( "send", this.api.send(opts) );
+    }
+
     logout() {
         return BaseAction.dispatchRequest( 'logout', this.api.logout() );
     }

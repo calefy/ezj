@@ -88,6 +88,8 @@ class Header extends Component {
                     ref="loginDialog"
                     error={this.props.user.loginError}
                     onSubmit={this.props.handleLoginSubmit}
+                    onClick={this.props.handleSendSubmit}
+                    senderror={this.props.user.sendError}
                 />
             </div>
         );
