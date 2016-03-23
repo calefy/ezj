@@ -68,6 +68,6 @@
 .pwd-form .formsy-input{ width: 315px;}
 .pwd-write-form{ margin-top: 90px !important;}
 .pwd-write-form .formsy-list{ margin: 0 0 48px;}
-.pwd-btn{ margin: 0 0 0 168px; width:341px;}
+.pwd-btn button{ margin: 0 0 0 170px; width:341px;}
 .pwd-btn a{ color: #fff; font-size: 0.875em; display: block;}
 .pwd-valid em{ margin: 0 56px; display: inline-block; width:130px;}
