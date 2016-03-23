@@ -1,24 +1,78 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
+import UserAction from '../actions/UserAction'
 import FormsyText from './formsy/FormsyText.jsx';
 import FormsyValid from './formsy/FormsyValid.jsx';
+
+import { getRequestTypes } from '../libs/utils';
 
 module.exports = class LoginDialog extends Component {
 
     static propTypes = {
         onSubmit: PropTypes.func.isRequired,
-        error: PropTypes.object // 返回的错误信息
+        error: PropTypes.object, // 返回的错误信息
+        dispatch: PropTypes.func.isRequired
     };
+
 
     state = {
         open: false,
         logOpen: false,
         regOpen: false,
-        errorUsername: null,
-        errorPassword: null
+        errorValidMoblie: null,
+        validText: '发送验证码',
+        errorValid: null
     };
 
+    componentDidMount() {
+        this.userAction = new UserAction();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.state.regOpen){
+            this.setState({
+                likesIncreasing: nextProps.likeCount > this.props.likeCount
+            });
+            const sendType = getRequestTypes("send");
+
+            if (nextProps.action.type === UserAction.SEND) {
+                alert("aaa");
+                // this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
+            } else if (nextProps.action.type === sendType.success) {
+                const userAction = new UserAction();
+                const name = this.refs.regusername.getValue().trim();
+                nextProps.dispatch( userAction.send() );
+                this._setState({ errorValidMoblie: nextProps.action.error.message || '账号可注册', errorValid: false });
+            }
+            else if (nextProps.action.type === sendType.failure) {
+                this._setState({ errorValidMoblie: nextProps.action.error.message || '该账号未验证', errorValid: true });
+            }
+            else{
+                this._setState({ validText: '60s后发送', errorValid: false });
+            }
+        }
+        else{
+            const loginType = getRequestTypes(UserAction.LOGIN);
+
+            if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
+                this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
+            } else if (nextProps.action.type === loginType.success) {
+                //const noticeAction = new NoticeAction();
+                //nextProps.dispatch( noticeAction.loadMessageNumber() );
+            }
+
+            // 清理action，防止路由变更，但是action数据没变更，二次展示问题
+            clearTimeout(actionTimer);
+            if (nextProps.action.type && nextProps.action.type !== OperateAction.CLEAR_ACTION) {
+                actionTimer = setTimeout(function() {
+                    const operateAction = new OperateAction();
+                    nextProps.dispatch( operateAction.clearAction() );
+                }, 300);
+            }
+        }
+        
+    }
     /**
      * 处理注册框与登录框显示与否
      */
@@ -32,7 +86,7 @@ module.exports = class LoginDialog extends Component {
     };
 
     logOpen = () => {
-        console.log('4');
+        console.log('2');
         this._setState({ logOpen: true, regOpen: false });
     };
 
@@ -64,11 +118,17 @@ module.exports = class LoginDialog extends Component {
     };
 
     sendEmail = () => {
-        
-        this.props.onClick({
-            name: this.refs.regusername.getValue().trim()
-        });
+        // 检查输入
+        if (this._validRegusername()) {
+            const name = this.refs.regusername.getValue().trim();
+            this.props.dispatch(this.userAction.send(name));
+        }
+    };
 
+    _validRegusername = () => {
+        const val = this.refs.regusername.getValue();
+        this._setState({ errorRegusername: val ? null : '请输入手机号或邮箱' });
+        return !!val;
     };
 
     close = () => {
@@ -81,7 +141,7 @@ module.exports = class LoginDialog extends Component {
     };
 
     render() {
-        
+        const { action } = this.props;
 
         return (
             <div className={ this.state.open ? "show" : "hide" }>
@@ -152,8 +212,10 @@ module.exports = class LoginDialog extends Component {
                                     title={
                                         <div>
                                             <i className="iconfont icon-username"></i>手机号/邮箱
-                                            { this.props.senderror ? 
-                                                <em className="fr text-error">{this.props.senderror && (this.props.senderror.message || '该账号未验证')}</em>
+                                            { action.type ?
+                                                <em className="fr text-error">
+                                                    {this.state.errorValidMoblie}
+                                                </em> 
                                                 :
                                                 <em className="fr text-success">可注册</em>
                                             }
@@ -169,7 +231,7 @@ module.exports = class LoginDialog extends Component {
                                             <em className="fr text-success">验证短信已发到您的手机</em>
                                         </div>
                                     }
-                                    valid="发送验证码"
+                                    valid={this.state.validText}
                                     required
                                     validClick={this.sendEmail} />
                                 <FormsyText 

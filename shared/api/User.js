@@ -31,9 +31,9 @@ class User extends Base {
     // }
 
     /**
-     * 注册
+     * 注册发送验证码
      */
-    send({name}) {
+    send(name) {
         return this.apiClient.post('sso/send_register_code', { contact: name });
     }
 

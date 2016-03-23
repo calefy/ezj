@@ -5,6 +5,7 @@ import Schemas from '../libs/schemas';
 module.exports = class UserAction extends BaseAction {
 
     static LOGIN = 'login';
+    static SEND = 'send';
 
     constructor(config = {}) {
         super(config);
@@ -23,8 +24,11 @@ module.exports = class UserAction extends BaseAction {
         return BaseAction.dispatchRequest( UserAction.LOGIN, this.api.login(opts) );
     }
 
+    /**
+     * 注册发送验证码
+     */
     send(opts) {
-        return BaseAction.dispatchRequest( "send", this.api.send(opts) );
+        return BaseAction.dispatchRequest( UserAction.SEND, this.api.send(opts) );
     }
 
     logout() {

@@ -37,23 +37,23 @@ class App extends Component {
         }
     }
     componentWillReceiveProps(nextProps) {
-        const loginType = getRequestTypes(UserAction.LOGIN);
+        // const loginType = getRequestTypes(UserAction.LOGIN);
 
-        if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
-            this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
-        } else if (nextProps.action.type === loginType.success) {
-            //const noticeAction = new NoticeAction();
-            //nextProps.dispatch( noticeAction.loadMessageNumber() );
-        }
+        // if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
+        //     this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
+        // } else if (nextProps.action.type === loginType.success) {
+        //     //const noticeAction = new NoticeAction();
+        //     //nextProps.dispatch( noticeAction.loadMessageNumber() );
+        // }
 
-        // 清理action，防止路由变更，但是action数据没变更，二次展示问题
-        clearTimeout(actionTimer);
-        if (nextProps.action.type && nextProps.action.type !== OperateAction.CLEAR_ACTION) {
-            actionTimer = setTimeout(function() {
-                const operateAction = new OperateAction();
-                nextProps.dispatch( operateAction.clearAction() );
-            }, 300);
-        }
+        // // 清理action，防止路由变更，但是action数据没变更，二次展示问题
+        // clearTimeout(actionTimer);
+        // if (nextProps.action.type && nextProps.action.type !== OperateAction.CLEAR_ACTION) {
+        //     actionTimer = setTimeout(function() {
+        //         const operateAction = new OperateAction();
+        //         nextProps.dispatch( operateAction.clearAction() );
+        //     }, 300);
+        // }
     }
 
     /**
@@ -73,21 +73,15 @@ class App extends Component {
             });
     };
 
-    /**
-     * 执行登录
-     */
-    handleSendSubmit = data => {
-        this.props.dispatch(this.userAction.send(data));
-    };
-
     render() {
         return (
             <div>
                 <Header
                     user={this.props.user}
-                    handleSendSubmit={this.handleSendSubmit}
                     handleLoginSubmit={this.handleLoginSubmit}
                     handleLogout={this.handleLogout}
+                    dispatch={this.props.dispatch}
+                    action={this.props.action}
                 />
                 <div className="body">
                     {this.props.children}

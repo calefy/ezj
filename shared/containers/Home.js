@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import CoursesAction from '../actions/CoursesAction';
 
 class Home extends Component {
-
+    
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
         const coursesAction = new CoursesAction({ apiClient: apiClient });

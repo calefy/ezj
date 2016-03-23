@@ -7,8 +7,10 @@ class Header extends Component {
 
     static propTypes = {
         user: PropTypes.object.isRequired,
+        action: PropTypes.object.isRequired,
         handleLoginSubmit: PropTypes.func.isRequired,
-        handleLogout: PropTypes.func.isRequired
+        handleLogout: PropTypes.func.isRequired,
+        dispatch: PropTypes.func.isRequired
     };
     
     state = {
@@ -88,8 +90,8 @@ class Header extends Component {
                     ref="loginDialog"
                     error={this.props.user.loginError}
                     onSubmit={this.props.handleLoginSubmit}
-                    onClick={this.props.handleSendSubmit}
-                    senderror={this.props.user.sendError}
+                    dispatch={this.props.dispatch}
+                    action={this.props.action}
                 />
             </div>
         );

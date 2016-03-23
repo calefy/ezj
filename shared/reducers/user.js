@@ -55,7 +55,4 @@ export function user(state, action) {
     return ret;
 }
 
-export function send(state, action) {
-    return reducerRequest('send', state, action);
-}
 
