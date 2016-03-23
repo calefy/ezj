@@ -31,6 +31,24 @@ class User extends Base {
     // }
 
     /**
+     * 注册发送验证码
+     */
+    send(name) {
+        return this.apiClient.post('sso/send_register_code', { contact: name });
+    }
+    /**
+     * 注册
+     */
+    reg({nickname,password,contact,code}) {
+        return this.apiClient.post('sso/register', { 
+            nickname: nickname,
+            password: password,
+            contact: contact,
+            code: code
+        });
+    }
+
+    /**
      * 退出登录
      */
     logout() {
