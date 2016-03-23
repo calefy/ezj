@@ -54,5 +54,8 @@ export function user(state, action) {
 
     return ret;
 }
+export function reg(state, action) {
+    return reducerRequest('reg', state, action);
+}
 
 

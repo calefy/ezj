@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-import UserAction from '../actions/UserAction'
+import UserAction from '../actions/UserAction';
+import OperateAction from '../actions/OperateAction';
 import FormsyText from './formsy/FormsyText.jsx';
 import FormsyValid from './formsy/FormsyValid.jsx';
 
 import { getRequestTypes } from '../libs/utils';
+
+let actionTimer = null;
 
 module.exports = class LoginDialog extends Component {
 
@@ -15,14 +18,16 @@ module.exports = class LoginDialog extends Component {
         dispatch: PropTypes.func.isRequired
     };
 
-
     state = {
         open: false,
         logOpen: false,
         regOpen: false,
-        errorValidMoblie: null,
-        validText: '发送验证码',
-        errorValid: null
+        sendSubmit: true,//是否点击验证码按钮
+        errorValidMoblie: null,//手机号码验证信息
+        sendText: '发送验证码',
+        errorSend: null,//是否发送失败
+        sendMsg: null,//发送邮件返回信息
+        errorCode: null//验证码是否错误
     };
 
     componentDidMount() {
@@ -31,28 +36,62 @@ module.exports = class LoginDialog extends Component {
 
     componentWillReceiveProps(nextProps) {
         if(this.state.regOpen){
-            this.setState({
-                likesIncreasing: nextProps.likeCount > this.props.likeCount
-            });
-            const sendType = getRequestTypes("send");
+        //注册框显示
 
-            if (nextProps.action.type === UserAction.SEND) {
-                alert("aaa");
-                // this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
-            } else if (nextProps.action.type === sendType.success) {
-                const userAction = new UserAction();
-                const name = this.refs.regusername.getValue().trim();
-                nextProps.dispatch( userAction.send() );
-                this._setState({ errorValidMoblie: nextProps.action.error.message || '账号可注册', errorValid: false });
+            if(this.state.sendSubmit){
+            //点击验证码按钮
+                const sendType = getRequestTypes("send");
+                
+                if (nextProps.action.type === UserAction.SEND) {
+                    // this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
+                } else if (nextProps.action.type === sendType.success) {
+                    const userAction = new UserAction();
+                    const name = this.refs.contact.getValue().trim();
+
+                    // nextProps.dispatch( userAction.send() );
+                    this._setState({ 
+                        errorValidMoblie: nextProps.action.response ? '可注册' : '', 
+                        errorSend: false, 
+                        sendMsg: '验证短信已发到您的手机', 
+                        sendText: "60s后重发",
+                        sendSubmit: false
+                    });
+                }
+                else if (nextProps.action.type === sendType.failure) {
+                    this._setState({ 
+                        errorValidMoblie: nextProps.action.error.message || '该账号未验证', 
+                        errorSend: true, 
+                        sendMsg: null, 
+                        sendText: '发送验证码'
+                    });
+                }
             }
-            else if (nextProps.action.type === sendType.failure) {
-                this._setState({ errorValidMoblie: nextProps.action.error.message || '该账号未验证', errorValid: true });
-            }
+
             else{
-                this._setState({ validText: '60s后发送', errorValid: false });
+            //点击注册按钮
+                const regType = getRequestTypes("reg");
+
+                if (nextProps.action.type === UserAction.REG) {
+                    // this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
+                } else if (nextProps.action.type === regType.success) {
+                    const userAction = new UserAction();
+                    this._setState({
+                        sendMsg: nextProps.action.response,
+                        errorCode: false
+                    });
+                    document.location = '/';
+                }
+                else if (nextProps.action.type === regType.failure) {
+                    this._setState({ 
+                        sendMsg: nextProps.action.error.message || '验证码错误',
+                        errorCode: true
+                    });
+                }
             }
+            
         }
         else{
+
             const loginType = getRequestTypes(UserAction.LOGIN);
 
             if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
@@ -81,17 +120,14 @@ module.exports = class LoginDialog extends Component {
     };
 
     open = () => {
-        console.log('1');
         this._setState({ open: true, logOpen: true, regOpen: false });
     };
 
     logOpen = () => {
-        console.log('2');
         this._setState({ logOpen: true, regOpen: false });
     };
 
     regOpen = () => {
-        console.log('3');
         this._setState({ regOpen: true, logOpen: false });
     };
 
@@ -120,13 +156,14 @@ module.exports = class LoginDialog extends Component {
     sendEmail = () => {
         // 检查输入
         if (this._validRegusername()) {
-            const name = this.refs.regusername.getValue().trim();
+            const name = this.refs.contact.getValue().trim();
             this.props.dispatch(this.userAction.send(name));
         }
+        
     };
 
     _validRegusername = () => {
-        const val = this.refs.regusername.getValue();
+        const val = this.refs.contact.getValue();
         this._setState({ errorRegusername: val ? null : '请输入手机号或邮箱' });
         return !!val;
     };
@@ -138,6 +175,15 @@ module.exports = class LoginDialog extends Component {
 
     _setState = obj => {
         this.setState(Object.assign({}, this.state, obj || {}));
+    };
+
+    regSubmit = () => {
+        this._setState({ sendSubmit: false });
+        const nickname = this.refs.nickname.getValue();
+        const pass = this.refs.regpass.getValue();
+        const code = this.refs.code.getValue();
+        const contact = this.refs.contact.getValue();
+        this.props.dispatch(this.userAction.reg({nickname,pass,code,contact}));
     };
 
     render() {
@@ -205,56 +251,76 @@ module.exports = class LoginDialog extends Component {
                             <Formsy.Form
                                 onValid={this.enableButton}
                                 onInvalid={this.disableButton}
+                                onValidSubmit={this.regSubmit}
                                 className="pop-text">
                                 <FormsyText
-                                    ref="regusername"
-                                    name="regusername"
+                                    ref="contact"
+                                    name="contact"
                                     title={
                                         <div>
                                             <i className="iconfont icon-username"></i>手机号/邮箱
-                                            { action.type ?
-                                                <em className="fr text-error">
-                                                    {this.state.errorValidMoblie}
-                                                </em> 
-                                                :
-                                                <em className="fr text-success">可注册</em>
-                                            }
+                                            <em className={`fr ${this.state.errorSend ? "text-error" :  "text-success" }`}>
+                                                {this.state.errorValidMoblie}
+                                            </em> 
                                         </div>
                                     }
                                     required />
                                 <FormsyValid 
-                                    name="regvalid" 
+                                    name="code"
+                                    ref="code"
                                     title={
                                         <div>
                                             <i className="iconfont icon-yz"></i>验证码
-                                            <em className="fr text-error">验证码错误</em>
-                                            <em className="fr text-success">验证短信已发到您的手机</em>
+                                            <em className={`fr ${this.state.errorCode ? "text-error" :  "text-success" }`}>
+                                                {this.state.sendMsg}
+                                            </em>
                                         </div>
                                     }
-                                    valid={this.state.validText}
+                                    sendButton={this.state.sendSubmit ? "" : "yz-btn" }
+                                    valid={this.state.sendText}
                                     required
                                     validClick={this.sendEmail} />
                                 <FormsyText 
-                                    name="regname" 
+                                    ref="nickname"
+                                    name="nickname" 
                                     title={
                                         <div>
                                             <i className="iconfont icon-name"></i>昵称
-                                            <em className="fr text-error">用户名为1-16个字符</em>
+                                            <em className="fr text-error"></em>
                                         </div>
                                     }
+                                    validations={{
+                                        minLength: 4,
+                                        maxLength: 30
+                                    }}
+                                    validationErrors={{
+                                        minLength: "昵称为4-30个字符",
+                                        maxLength: "昵称为4-30个字符"
+                                    }}
                                     required />
                                 <FormsyText 
+                                    ref="regpass"
                                     name="regpass" 
                                     title={
                                         <div>
                                             <i className="iconfont icon-pass"></i>密码
-                                            <em className="fr text-error">密码格式错误</em>
+                                            <em className="fr text-error"></em>
                                         </div>
-                                    } 
+                                    }
+                                    validations={{
+                                        minLength: 6,
+                                        maxLength: 20
+                                    }}
+                                    validationErrors={{
+                                        minLength: "密码为6-20个字符",
+                                        maxLength: "密码为6-20个字符"
+                                    }}
                                     type="password" 
                                     required />
                                 <dl className="formsy-list cl">
-                                    <dt className="fl"><input type="radio" />表示同意<Link to="">隐私政策</Link></dt>
+                                    <dt className="fl">
+                                        <input type="checkbox" ref="secret" defaultChecked={true} /><Link to="">隐私政策</Link>
+                                    </dt>
                                 </dl>
                                 <div className="pop-btn">
                                   <button type="submit" disabled={!this.state.canSubmit} 

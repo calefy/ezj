@@ -110,7 +110,7 @@ button{ cursor: pointer; outline: none; border: 0;}
 .pop-logo{ background: url(../img/logo.png) no-repeat top center; background-size: 130px; padding: 0 0 20px; width: 328px; height:48px;
   text-indent: -999em; border-bottom: 1px solid #e4e4e4; margin:0 auto 22px;}
 .pop-text{ width: 328px; margin: 0 auto; color: #808080; font-size: 0.875em;}
-.formsy-list{ margin: 0 0 22px;}
+.formsy-list{ margin: 0 0 22px; position: relative;}
 .pop-text .formsy-list.cl{ font-size: 0.875em;}
 .pop-text .formsy-list.cl a,.text-error,.pop-other .fl button{ color: #b01c40; background: none}
 .formsy-input{width: 304px; line-height: 46px; padding:0 12px; border-radius: 4px; 
@@ -134,5 +134,7 @@ button{ cursor: pointer; outline: none; border: 0;}
             background:-webkit-gradient(linear, 0 0, 0 bottom, from(#c6c6c6), to(#787878));  
             background:-o-linear-gradient(top, #c6c6c6, #787878);}
 .formsy-valid input{ width:219px !important;}
+
+.validation-error{ color: #b01c40; font-size: 12px; position: absolute; top: 0; right: 0;}
 
 

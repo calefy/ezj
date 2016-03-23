@@ -37,7 +37,7 @@ let FormsyValid = React.createClass({
                         value={this.getValue()}
                         checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
                     />
-                    <button type="button" className="valid-btn" ref={this.props.name} onClick={this.props.validClick}>{this.props.valid}</button>
+                    <button type="button" className={`valid-btn ${this.props.sendButton}`} disabled={this.props.sendButton ? "disabled" : ""} ref={this.props.name} onClick={this.props.validClick}>{this.props.valid}</button>
                 </div>
                 <span className='validation-error'>{errorMessage}</span>
             </div>

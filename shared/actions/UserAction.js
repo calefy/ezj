@@ -30,6 +30,10 @@ module.exports = class UserAction extends BaseAction {
     send(opts) {
         return BaseAction.dispatchRequest( UserAction.SEND, this.api.send(opts) );
     }
+    // 注册
+    reg(opts) {
+        return BaseAction.dispatchRequest( 'reg', this.api.reg(opts) );
+    }
 
     logout() {
         return BaseAction.dispatchRequest( 'logout', this.api.logout() );
