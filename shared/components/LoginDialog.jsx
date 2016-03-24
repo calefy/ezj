@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import md5 from 'blueimp-md5'
 
 import UserAction from '../actions/UserAction';
 import OperateAction from '../actions/OperateAction';
@@ -76,10 +77,10 @@ module.exports = class LoginDialog extends Component {
                 } else if (nextProps.action.type === regType.success) {
                     const userAction = new UserAction();
                     this._setState({
-                        sendMsg: nextProps.action.response,
+                        // sendMsg: nextProps.action.response,
                         errorCode: false
                     });
-                    document.location = '/';
+                    setTimeout("window.location.reload()",2000)
                 }
                 else if (nextProps.action.type === regType.failure) {
                     this._setState({ 
@@ -124,11 +125,11 @@ module.exports = class LoginDialog extends Component {
     };
 
     logOpen = () => {
-        this._setState({ logOpen: true, regOpen: false });
+        this._setState({ open: true, logOpen: true, regOpen: false });
     };
 
     regOpen = () => {
-        this._setState({ regOpen: true, logOpen: false });
+        this._setState({ open: true, regOpen: true, logOpen: false });
     };
 
     enableButton = () => {
@@ -146,10 +147,11 @@ module.exports = class LoginDialog extends Component {
     };
 
     onEnter = () => {
-
+        const pass=this.refs.password.getValue();
+        const fpass=pass.split("").reverse().join("");
         this.props.onSubmit({
             name: this.refs.username.getValue().trim(),
-            pass: this.refs.password.getValue()
+            pass: md5("uokoaduw"+fpass+"auhgniq")
         });
     };
 
@@ -169,7 +171,6 @@ module.exports = class LoginDialog extends Component {
     };
 
     close = () => {
-        console.log('4fff');
         this._setState({ open: false });
     };
 
@@ -180,10 +181,10 @@ module.exports = class LoginDialog extends Component {
     regSubmit = () => {
         this._setState({ sendSubmit: false });
         const nickname = this.refs.nickname.getValue();
-        const pass = this.refs.regpass.getValue();
+        const password = this.refs.regpass.getValue();
         const code = this.refs.code.getValue();
         const contact = this.refs.contact.getValue();
-        this.props.dispatch(this.userAction.reg({nickname,pass,code,contact}));
+        this.props.dispatch(this.userAction.reg({nickname,password,code,contact}));
     };
 
     render() {
@@ -202,7 +203,8 @@ module.exports = class LoginDialog extends Component {
                                 onValid={this.enableButton}
                                 onInvalid={this.disableButton}
                                 onValidSubmit={this.onEnter}
-                                className="pop-text">
+                                className="pop-text"
+                                ref="regform">
                                 <FormsyText
                                     ref="username"
                                     name="username"
@@ -321,6 +323,9 @@ module.exports = class LoginDialog extends Component {
                                     <dt className="fl">
                                         <input type="checkbox" ref="secret" defaultChecked={true} /><Link to="">隐私政策</Link>
                                     </dt>
+                                    <dd className="fr text-error">
+                                        {this.props.error && (this.props.error.message || '注册失败')}
+                                    </dd>
                                 </dl>
                                 <div className="pop-btn">
                                   <button type="submit" disabled={!this.state.canSubmit} 

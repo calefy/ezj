@@ -10,7 +10,6 @@
     "publish": "NODE_ENV=production webpack --json > ./webpack.version.json",
     "deployTest": "cp /var/www/html/mba_x/config.test.js /var/www/html/mba_x/config.js && NODE_ENV=production PORT=3100 pm2 start /var/www/html/mba_x/server/runner.js -i 2 -n node-mba-platform -o /var/log/pm2/node-mba-platform.stdout.log -e /var/log/pm2/node-mba-platform.stderr.log --log-date-format 'YYYY-MM-DD HH:mm Z'",
     "reloadTest": "cp /var/www/html/mba_x/config.test.js /var/www/html/mba_x/config.js && pm2 reload node-mba-platform",
-
     "deploy": "cp /var/www/node-mba-platform/config.prod.js /var/www/node-mba-platform/config.js && NODE_ENV=production PORT=3100 pm2 start /var/www/node-mba-platform/server/runner.js -i 2 -n node-mba-platform -o /var/log/node/pm2_node-mba-platform.stdout.log -e /var/log/node/pm2_node-mba-platform.stderr.log --log-date-format 'YYYY-MM-DD HH:mm Z'",
     "reload": "cp /var/www/node-mba-platform/config.prod.js /var/www/node-mba-platform/config.js && pm2 reload node-mba-platform"
   },
@@ -34,6 +33,7 @@
     "babel-preset-es2015-loose-ie8": "0.0.4",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-1": "^6.5.0",
+    "blueimp-md5": "^2.3.0",
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
