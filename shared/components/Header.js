@@ -7,8 +7,10 @@ class Header extends Component {
 
     static propTypes = {
         user: PropTypes.object.isRequired,
+        action: PropTypes.object.isRequired,
         handleLoginSubmit: PropTypes.func.isRequired,
-        handleLogout: PropTypes.func.isRequired
+        handleLogout: PropTypes.func.isRequired,
+        dispatch: PropTypes.func.isRequired
     };
     
     state = {
@@ -29,6 +31,9 @@ class Header extends Component {
     openLoginDialog = () => {
         this.refs.loginDialog.open();
     };
+    openReg = () => {
+        this.refs.loginDialog.regOpen();
+    }
 
     /**
      * 用户菜单显示与否
@@ -54,6 +59,7 @@ class Header extends Component {
     }
 
     render() {
+        const user = this.props.user.data || {}
         return (
             <div className="header cl" open={this.state.show}>
                 <div className="container">
@@ -79,15 +85,42 @@ class Header extends Component {
                     <div className="header-search fl">
                         <input type="text" name="" placeholder="请输入您要搜索的关键词" /><a href="#"><i className="iconfont icon-search"></i></a>
                     </div>
-                    <div className="header-user fr">
+                    <div className={ `header-user fr ${user.uid ? 'hide' : '' }` }>
                         <button onClick={this.openLoginDialog} className="curr">登录</button>
-                        <button>注册</button>
+                        <button onClick={this.openReg}>注册</button>
+                    </div>
+                    <div className={ `header-user fr ${user.uid ? '' : 'hide'}` }>
+                        <div id="headerAccount" className="">
+                            <div className="head-account" onClick={this.showToggle} ref="head_avatar">
+                                <div className="user-picture" uid={user.uid}>
+                                    <a href="javascript:;">
+                                        <img src="/assets/images/user.jpg" />
+                                    </a>
+                                </div>
+                                <a href={`/users/ ${user.uid}`} className="username">{user.nickname}</a>
+                            </div>
+                            <ul className={` menu nav ${this.state.show ? '' : 'hide' }` }
+                                anchorEl={this.state.anchorEl}
+                                onRequestClose={this.showToggle}>
+                                <li className="first leaf">
+                                    <a href="/users.shtml?14679">我的账号</a>
+                                </li>
+                                <li className="last leaf">
+                                    <a href="javascript:;" id="logout">退出</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="unreadCount">
+                            <div className="unread_count"><i className="iconfont icon-username"></i><span>5</span></div>
+                        </div>
                     </div>
                 </div>
                 <LoginDialog
                     ref="loginDialog"
                     error={this.props.user.loginError}
                     onSubmit={this.props.handleLoginSubmit}
+                    dispatch={this.props.dispatch}
+                    action={this.props.action}
                 />
             </div>
         );

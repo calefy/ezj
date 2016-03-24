@@ -64,9 +64,10 @@
 
 .pwd-form{ width: 678px; margin: 40px auto 0;}
 .pwd-form label,.pwd-form .formsy-input{ float: left; margin:0; line-height: 48px;}
-.pwd-form label{ margin:0 20px 0 0; color: #3a3a3a}
+.pwd-form label{ margin:0 20px 0 0; color: #3a3a3a; width: 150px;}
 .pwd-form .formsy-input{ width: 315px;}
 .pwd-write-form{ margin-top: 90px !important;}
 .pwd-write-form .formsy-list{ margin: 0 0 48px;}
-.pwd-btn{ margin: 0 0 0 168px; width:341px;}
+.pwd-btn button{ margin: 0 0 0 170px; width:341px;}
 .pwd-btn a{ color: #fff; font-size: 0.875em; display: block;}
+.pwd-valid em{ margin: 0 56px; display: inline-block; width:130px;}

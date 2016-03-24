@@ -13,7 +13,6 @@ if (process.env.BROWSER) {
     require('css/reset.css')
     require('css/style.css')
     require('css/index.css')
-    require('css/pwd.css')
     require('css/classify.css')
     require('css/iconfont/iconfont.css')
 }
@@ -37,25 +36,25 @@ class App extends Component {
             App.fetchData(this.props);
         }
     }
-    componentWillReceiveProps(nextProps) {
-        const loginType = getRequestTypes(UserAction.LOGIN);
+    // componentWillReceiveProps(nextProps) {
+    //     const loginType = getRequestTypes(UserAction.LOGIN);
 
-        if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
-            this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
-        } else if (nextProps.action.type === loginType.success) {
-            //const noticeAction = new NoticeAction();
-            //nextProps.dispatch( noticeAction.loadMessageNumber() );
-        }
+    //     if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
+    //         this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
+    //     } else if (nextProps.action.type === loginType.success) {
+    //         //const noticeAction = new NoticeAction();
+    //         //nextProps.dispatch( noticeAction.loadMessageNumber() );
+    //     }
 
-        // 清理action，防止路由变更，但是action数据没变更，二次展示问题
-        clearTimeout(actionTimer);
-        if (nextProps.action.type && nextProps.action.type !== OperateAction.CLEAR_ACTION) {
-            actionTimer = setTimeout(function() {
-                const operateAction = new OperateAction();
-                nextProps.dispatch( operateAction.clearAction() );
-            }, 300);
-        }
-    }
+    //     // 清理action，防止路由变更，但是action数据没变更，二次展示问题
+    //     clearTimeout(actionTimer);
+    //     if (nextProps.action.type && nextProps.action.type !== OperateAction.CLEAR_ACTION) {
+    //         actionTimer = setTimeout(function() {
+    //             const operateAction = new OperateAction();
+    //             nextProps.dispatch( operateAction.clearAction() );
+    //         }, 300);
+    //     }
+    // }
 
     /**
      * 执行登录
@@ -63,6 +62,7 @@ class App extends Component {
     handleLoginSubmit = data => {
         this.props.dispatch(this.userAction.login(data));
     };
+
     /**
      * 退出登录
      */
@@ -80,6 +80,8 @@ class App extends Component {
                     user={this.props.user}
                     handleLoginSubmit={this.handleLoginSubmit}
                     handleLogout={this.handleLogout}
+                    dispatch={this.props.dispatch}
+                    action={this.props.action}
                 />
                 <div className="body">
                     {this.props.children}

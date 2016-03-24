@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 import FormsyText from '../../components/formsy/FormsyText.jsx';
 
-class Course extends Component {
+class Pwd extends Component {
 
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
@@ -35,6 +35,7 @@ class Course extends Component {
         });
     };
 
+
     render() {
         return (
             <div className="content">
@@ -42,14 +43,17 @@ class Course extends Component {
                     onValid={this.enableButton}
                     onInvalid={this.disableButton}
                     className="pwd-form pwd-write-form">
+                    <div className="formsy-list pwd-valid">
+                        验证码已发送至您的手机<em>15200001234</em><button className="valid-btn yz-btn">60s后重发</button>
+                    </div>
                     <FormsyText 
                         name="name" 
-                        title="输入注册手机号/邮箱"
+                        title="短信验证码"
                         type="text"
                         required />
                     <div className="pop-btn pwd-btn">
                         <button type="submit" disabled={!this.state.canSubmit} 
-                            className={ this.state.canSubmit ? "" : "disabled"} ><Link to="/pwd/validate">发送验证码</Link></button>
+                            className={ this.state.canSubmit ? "" : "disabled"} ><Link to="/pwd/set">下一步</Link></button>
                     </div>
                 </Formsy.Form>
             </div>
@@ -58,5 +62,5 @@ class Course extends Component {
 }
 
 
-module.exports = connect( state => ({ notices: state.notices }) )(Course);
+module.exports = connect( state => ({ notices: state.notices }) )(Pwd);
 

@@ -70,7 +70,7 @@ module.exports = {
                     path: 'index',
                     getComponent(location, cb) {
                         require.ensure([], require => {
-                            cb(null, require('./containers/pwd/Write'));
+                            cb(null, require('./containers/pwd/Send'));
                         });
                     }
                 },
@@ -83,10 +83,10 @@ module.exports = {
                     }
                 },
                 {
-                    path: 'validate',
+                    path: 'code',
                     getComponent(location, cb) {
                         require.ensure([], require => {
-                            cb(null, require('./containers/pwd/Validate'));
+                            cb(null, require('./containers/pwd/Code'));
                         });
                     }
                 }
