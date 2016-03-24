@@ -321,7 +321,7 @@ module.exports = class LoginDialog extends Component {
                                     required />
                                 <dl className="formsy-list cl">
                                     <dt className="fl">
-                                        <input type="checkbox" ref="secret" defaultChecked={true} /><Link to="">隐私政策</Link>
+                                        <input type="checkbox" ref="secret" defaultChecked={true} />表示同意<Link to="">隐私政策</Link>
                                     </dt>
                                     <dd className="fr text-error">
                                         {this.props.error && (this.props.error.message || '注册失败')}
