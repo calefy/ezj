@@ -27,6 +27,9 @@ let Home = React.createClass({
         }
     },
 
+    /**
+     * 渲染单个课程项
+     */
     renderCourseItems: function(list) {
         return list.map((item, key) => {
             return  <li key={key}>
