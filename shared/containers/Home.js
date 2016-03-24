@@ -130,24 +130,8 @@ let Home = React.createClass({
                                     { hotcourseslist.error ?
                                         <p className="no-course">暂无课程</p>
                                         :
-<<<<<<< HEAD
                                         <ul className="index-course fr" style={{ width: 958}}>
                                             {this.renderCourseItems(hotcourseslist)}
-=======
-                                        <ul className="index-course" style={{ width: 958}}>
-                                            {hotcourseslist.map((item, key) => {
-                                                return  <li key={key}>
-                                                            <a href={`/courses/${item.id}`}>
-                                                                <div className="course-list-img">
-                                                                    <img src={item.course_picture} alt="" />
-                                                                </div>
-                                                                <h5>{item.course_name}</h5>
-                                                                <h6><i className="iconfont icon-user"></i>{item.student_count}</h6>
-                                                                <p>{ item.course_price == 0 ? "免费" : "¥ " + item.course_price }</p>
-                                                            </a>
-                                                        </li>
-                                            })}
->>>>>>> master
                                         </ul>
                                     }
                                 </div>
