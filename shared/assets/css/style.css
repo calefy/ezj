@@ -29,14 +29,30 @@ button{ cursor: pointer; outline: none; border: 0;}
 .header-nav li a{display:block;padding:0 40px;}
 .header-nav li.cur,.header-nav li:hover{border-top: 2px solid #b01c40;}
 
-.header-search{border:1px solid #ddd7d9; border-radius: 3px; width: 322px;padding: 4px 0px 4px 10px;margin: 14px 0;}
-.header-search input{border:0px;font-size: 0.75em;height: 22px; background: none;width: 290px;line-height: 22px;outline: none;}
+.header-search{border:1px solid #ddd7d9; border-radius: 3px; width: 306px;padding: 4px 0px 4px 10px;margin: 14px 0;}
+.header-search input{border:0px;font-size: 0.75em;height: 22px; background: none;width: 272px;line-height: 22px;outline: none;}
 .header-search a{outline: none; border: 0px;padding: 2px 10px;display: inline-block;width: 0px;}
 .header-search .iconfont{ color: #8e8e8e}
 
 .header-user{ /*display:none; */line-height: 58px; font-size: 0.875em}
 .header-user button{ padding: 0 13px;border-top: 2px solid #fff; display: inline-block; background: none; border: 0px; line-height: 58px;}
 .header-user .curr{border-top: 2px solid #b01c40;}
+
+#headerAccount{ width: 120px; float: right; position: relative;}
+#unreadCount{float: right;width:70px;}
+.head-account { white-space: nowrap;  width: 120px; overflow: hidden; text-overflow: ellipsis; text-align: center;  position: relative;  border: 1px solid transparent;  }
+.head-account .user-picture { float: right; margin: -2px 4px 0 0;  }
+.head-account .user-picture img { vertical-align: middle; width: 27px; height:27px;}
+.head-account>a.username {  float: right;  margin: 0 8px 0 0;  max-width: 76px;  overflow: hidden;  text-overflow: ellipsis;  }
+.headerUser:after{display:block;content:"";clear:both;}
+.head-account:hover,.head-account.hover,.unread_count:hover,.unread_count.hover{border:1px solid #e3e3e3; background-color:#fff;}
+.menu,.unread_messages{position:absolute;top:54px;background: #fff; border: 1px solid #e3e3e3;border-top: 0px;border-collapse: collapse; line-height: 1.5em; text-align: center;font-size:1em;z-index:999}
+.menu{right:-2px; width: 120px;}
+.menu li a{ color: #818080; padding: 6px 15px;display:block;}
+.menu li a:hover{color:#fff;background:#a6284b}
+.unread_count {  width: 70px; margin: 0; text-align: center;  position: relative;  border: 1px solid transparent; }
+.unread_count>span {  background: #a6294a;  color: #ffffff;  font-size: 12px;  padding: 0 4px; text-align: center; }
+.unread_count.messages_empty>span { background: #6d6c6d;}
 
 /* banner */
 .banner{ background: url(../img/banner-bg.jpg) no-repeat top center; height:480px; text-align: center;}
