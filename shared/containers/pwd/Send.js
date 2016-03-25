@@ -2,17 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
+import OperateAction from '../../actions/OperateAction';
 import FormsyText from '../../components/formsy/FormsyText.jsx';
 
 class Pwd extends Component {
 
-    // 初始加载数据
-    static fetchData({dispatch, params={}, location={}, apiClient}) {
-        return Promise.all([
-            // 默认首页取5个
-            //dispatch( noticeAction.loadNotices({pageSize: 5}, getOwnRequestIdentity(location)) )
-        ]);
-    }
+    static propTypes = {
+        dispatch: PropTypes.func.isRequired
+    };
 
     state = {
         errorMsg: null
@@ -20,27 +17,6 @@ class Pwd extends Component {
 
     componentDidMount() {
     }
-
-    onEnter = () => {
-        // 检查输入
-        if (this._validName()) {
-            // this.props.onSubmit({
-            //     username: this.refs.username.getValue().trim(),
-            //     password: this.refs.password.getValue(),
-            //     remember: this.refs.remember.isChecked() ? 1 : 0
-            // });
-            // this._setState({ modified: false }); // 登录请求发出后，重置modified
-            console.log(errorMsg);
-        }
-    };
-    _validName = () => {
-        const val = this.refs.name.getValue().trim();
-        const email = "/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*(\.[a-zA-Z0-9_-]{2,4}){1,2}$/";
-        const mobile = "/^1[3-9]\d{9}$/";
-        this._setState({ errorMsg : val.match(email) || val.match(mobile) ? '' : '账号格式错误' });
-
-        return !!val;
-    };
 
     enableButton = () => {
         this.setState({
@@ -59,17 +35,46 @@ class Pwd extends Component {
         this.setState(Object.assign({}, this.state, obj || {}));
     };
 
+    handleRequestClose = () => {
+        this.setState({ snackbarOpen: false });
+    };
+
+    componentDidMount() {
+        this.operateAction = new OperateAction();
+    }
+    componentWillReceiveProps(nextProps) {
+        this.handleActionProps(this.props, nextProps, OperateAction.ACTION_SUBMIT_EMAIL);
+    }
+
+    handleActionProps = (thisProps, nextProps, action) => {
+        const thisAction = thisProps.action && thisProps.action[action];
+        const nextAction = nextProps.action && nextProps.action[action];
+        if (thisAction && thisAction.isFetching &&
+                thisAction.isFetching !== nextAction.isFetching) {
+            if (nextAction.error) {
+                this.showSnackbar(nextAction.error.message || '发送失败', 'ERROR');
+            } else {
+                this.showSnackbar('发送成功', 'SUCCESS');
+            }
+        }
+    };
+
+    handleSubmit = () => {
+        let contact = this.refs.contact.getValue();
+        this.props.dispatch(this.operateAction.sendPwd(contact));
+    };
+
     render() {
         return (
             <div className="content">
                 <Formsy.Form
                     onValid={this.enableButton}
                     onInvalid={this.disableButton}
-                    onValidSubmit={this.onEnter}
+                    onValidSubmit={this.handleSubmit}
                     className="pwd-form pwd-write-form">
                     <FormsyText 
-                        name="name" 
-                        ref="name"
+                        name="contact" 
+                        ref="contact"
                         title="输入注册手机号/邮箱"
                         type="text"
                         required />

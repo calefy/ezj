@@ -68,8 +68,8 @@ class User extends Base {
     /**
      * 重置密码发邮件
      */
-    sendPwd(email) {
-        return this.apiClient.post('account/pass-mail',  { email: email });
+    sendPwd(contact) {
+        return this.apiClient.post('sso/send_reset_password_code',  { contact: contact });
     }
 
     /**
