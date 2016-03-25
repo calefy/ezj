@@ -50,7 +50,7 @@
   border-radius: 50px;
   line-height: 50px;
   text-shadow: 0 1px 0 rgba(0,0,0,0.3);
-  background:red; /* 一些不支持背景渐变的浏览器 */  
+  background:#a6a7a8; /* 一些不支持背景渐变的浏览器 */  
   background:-moz-linear-gradient(top, #a6a7a8, #818182);  
   background:-webkit-gradient(linear, 0 0, 0 bottom, from(#a6a7a8), to(#818182));  
   background:-o-linear-gradient(top, #a6a7a8, #818182);

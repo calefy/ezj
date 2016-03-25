@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 import FormsyText from '../../components/formsy/FormsyText.jsx';
 
-class Pwd extends Component {
+class ResetPwd extends Component {
 
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
@@ -65,5 +65,5 @@ class Pwd extends Component {
 }
 
 
-module.exports = connect( state => ({ notices: state.notices }) )(Pwd);
+module.exports = connect( state => ({ notices: state.notices }) )(ResetPwd);
 

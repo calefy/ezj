@@ -83,10 +83,10 @@ module.exports = {
                     }
                 },
                 {
-                    path: 'code',
+                    path: 'valid',
                     getComponent(location, cb) {
                         require.ensure([], require => {
-                            cb(null, require('./containers/pwd/Code'));
+                            cb(null, require('./containers/pwd/Valid'));
                         });
                     }
                 }

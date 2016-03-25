@@ -37,6 +37,7 @@ let FormsyText = React.createClass({
                         value={this.getValue()}
                         checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
                     />
+                    <em className="error-msg">{this.props.error}</em>
                 </div>
                 <span className='validation-error'>{errorMessage}</span>
             </div>

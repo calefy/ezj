@@ -40,11 +40,12 @@
 .index-course .course-list-img {width: 228px;height: 153px;overflow: hidden;position: relative;}
 .course-list-img img {display: block;min-width: 227px;height:152px;
   transition: 1s;
-  -moz-transition: 1s;
   -webkit-transition: 1s;
+  -moz-transition: 1s; 
+  -ms-transition: 1s; 
   -o-transition: 1s;
 }
-.index-course li:hover .course-list-img img,.index-teacher li:hover .course-list-img img{ /*Ã¨Â§â€žÃ¦Â¨Â¡Ã¥ÂËœÃ¥Â¤Â§Ã¤Â¸Âº1.2Ã¥â‚¬Â*/  
+.index-course li:hover .course-list-img img,.index-teacher li:hover .course-list-img img{ 
   -webkit-transform: scale(1.2);     /* for Chrome || Safari */
   -moz-transform: scale(1.2);        /* for Firefox */
   -ms-transform: scale(1.2);         /* for IE */
@@ -60,3 +61,4 @@
 .index-teacher h5{ font-size: 1em;}
 .index-teacher h6{ font-size: 0.875em; margin: 10px 0 0;}
 .index-teacher li:hover h5,.index-teacher li:hover h6{ color: #b01c40;}
+.index-teacher .course-list-img img{height:228px;}
