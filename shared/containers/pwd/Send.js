@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import OperateAction from '../../actions/OperateAction';
 import FormsyText from '../../components/formsy/FormsyText.jsx';
 
-class Pwd extends Component {
+class ResetPwd extends Component {
 
     static propTypes = {
         dispatch: PropTypes.func.isRequired
@@ -14,9 +14,6 @@ class Pwd extends Component {
     state = {
         errorMsg: null
     };
-
-    componentDidMount() {
-    }
 
     enableButton = () => {
         this.setState({
@@ -31,12 +28,9 @@ class Pwd extends Component {
             bgColor: 'rgb(229,229,229)'
         });
     };
+
     _setState = obj => {
         this.setState(Object.assign({}, this.state, obj || {}));
-    };
-
-    handleRequestClose = () => {
-        this.setState({ snackbarOpen: false });
     };
 
     componentDidMount() {
@@ -47,15 +41,19 @@ class Pwd extends Component {
     }
 
     handleActionProps = (thisProps, nextProps, action) => {
-        const thisAction = thisProps.action && thisProps.action[action];
-        const nextAction = nextProps.action && nextProps.action[action];
-        if (thisAction && thisAction.isFetching &&
-                thisAction.isFetching !== nextAction.isFetching) {
-            if (nextAction.error) {
-                this.showSnackbar(nextAction.error.message || '发送失败', 'ERROR');
-            } else {
-                this.showSnackbar('发送成功', 'SUCCESS');
-            }
+        // const thisAction = thisProps.action && thisProps.action[action];
+        const nextAction = nextProps.action;
+        if (nextAction.error) {
+            this.setState({
+                errorMsg: nextAction.error.message || '发送失败'
+            });
+            // this.showSnackbar(nextAction.error.message || '发送失败', 'ERROR');
+        } else {
+            this.setState({
+                errorMsg: '发送成功'
+            });
+            // this.showSnackbar('发送成功', 'SUCCESS');
+            document.location = 'valid';
         }
     };
 
@@ -77,7 +75,9 @@ class Pwd extends Component {
                         ref="contact"
                         title="输入注册手机号/邮箱"
                         type="text"
+                        error={this.props.errorMsg}
                         required />
+                    <p>{this.props.errorMsg}</p>
                     <div className="pop-btn pwd-btn">
                         <button type="submit" disabled={!this.state.canSubmit} 
                             className={ this.state.canSubmit ? "" : "disabled"} >发送验证码</button>
@@ -89,5 +89,5 @@ class Pwd extends Component {
 }
 
 
-module.exports = connect( state => ({ notices: state.notices }) )(Pwd);
+module.exports = connect( state => ({ action: state.action }) )(ResetPwd);
 

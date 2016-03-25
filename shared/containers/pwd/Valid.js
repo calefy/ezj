@@ -2,24 +2,18 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
+import OperateAction from '../../actions/OperateAction';
 import FormsyText from '../../components/formsy/FormsyText.jsx';
 
-class Pwd extends Component {
+class ResetPwd extends Component {
 
-    // 初始加载数据
-    static fetchData({dispatch, params={}, location={}, apiClient}) {
-        return Promise.all([
-            // 默认首页取5个
-            //dispatch( noticeAction.loadNotices({pageSize: 5}, getOwnRequestIdentity(location)) )
-        ]);
-    }
+    static propTypes = {
+        dispatch: PropTypes.func.isRequired
+    };
 
     state = {
         
     };
-
-    componentDidMount() {
-    }
 
     enableButton = () => {
         this.setState({
@@ -35,6 +29,14 @@ class Pwd extends Component {
         });
     };
 
+    componentDidMount() {
+        this.operateAction = new OperateAction();
+    };
+
+    handleSubmit = () => {
+        let contact = this.refs.contact.reset();
+        this.props.dispatch(this.operateAction.sendPwd(contact));
+    };
 
     render() {
         return (
@@ -42,9 +44,10 @@ class Pwd extends Component {
                 <Formsy.Form
                     onValid={this.enableButton}
                     onInvalid={this.disableButton}
+                    onValidSubmit={this.handleSubmit}
                     className="pwd-form pwd-write-form">
                     <div className="formsy-list pwd-valid">
-                        验证码已发送至您的手机<em>15200001234</em><button className="valid-btn yz-btn">60s后重发</button>
+                        验证码已发送至您的手机<em ref="contact">15200001234</em><button className="valid-btn" onClick={this.handleSubmit}>60s后重发</button>
                     </div>
                     <FormsyText 
                         name="name" 
@@ -62,5 +65,5 @@ class Pwd extends Component {
 }
 
 
-module.exports = connect( state => ({ notices: state.notices }) )(Pwd);
+module.exports = connect( state => ({ notices: state.notices }) )(ResetPwd);
 
