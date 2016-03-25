@@ -4,33 +4,52 @@ import { Link } from 'react-router';
 
 import CoursesAction from '../actions/CoursesAction';
 
-class Home extends Component {
-    
-    // 初始加载数据
-    static fetchData({dispatch, params={}, location={}, apiClient}) {
-        const coursesAction = new CoursesAction({ apiClient: apiClient });
-        // console.log("...");
-        return Promise.all([
+let Home = React.createClass({
+    statics: {
+        // 初始加载数据
+        fetchData: function({dispatch, params={}, location={}, apiClient}) {
+            const coursesAction = new CoursesAction({ apiClient: apiClient });
+            return Promise.all([
+                dispatch( coursesAction.loadFreeCourses({limit: 5}) ), // 免费课程默认首页取5个
+                dispatch( coursesAction.loadHotCourses({limit: 8}) ), // 热门课程默认首页取8个
+                dispatch( coursesAction.loadLatestCourses({limit: 5}) ), // 最新课程默认首页取8个
+            ]);
+        }
+    },
 
-            dispatch( coursesAction.loadfreeCourses({limit: 5}) ),// 免费课程默认首页取5个
-            dispatch( coursesAction.loadhotCourses({limit: 8}) )// 热门课程默认首页取8个
+    componentDidMount: function() {
+        const { freecourses, hotcourses, latestCourses, location, dispatch } = this.props;
 
-        ]);
-    }
-
-    componentDidMount() {
-        const { freecourses, hotcourses, location, dispatch } = this.props;
-
-        if ( freecourses.isFetching || 
-                hotcourses.isFetching ) {
+        if ( freecourses.isFetching ||
+                hotcourses.isFetching ||
+                latestCourses.isFetching ) {
             Home.fetchData(this.props);
         }
-    }
+    },
 
-    render() {
-        const { freecourses, hotcourses } = this.props;
+    /**
+     * 渲染单个课程项
+     */
+    renderCourseItems: function(list) {
+        return list.map((item, key) => {
+            return  <li key={key}>
+                        <a href={`/courses/${item.id}`}>
+                            <div className="course-list-img">
+                                <img src={item.course_picture} alt="" />
+                            </div>
+                            <h5>{item.course_name}</h5>
+                            <h6><i className="iconfont icon-user"></i>{item.student_count}</h6>
+                            <p>{ item.course_price == 0 ? "免费" : "¥ " + item.course_price }</p>
+                        </a>
+                    </li>
+        });
+    },
+
+    render: function() {
+        const { freecourses, hotcourses, latestCourses } = this.props;
         const freecourseslist = freecourses && freecourses.data && freecourses.data.list || [];
         const hotcourseslist = hotcourses && hotcourses.data && hotcourses.data.list || [];
+        const latestCourseList = latestCourses && latestCourses.data && latestCourses.data.list || [];
 
         return (
             <div>
@@ -83,7 +102,6 @@ class Home extends Component {
                     </div>
                     <div className="content-module2">
                         <h3 className="index-title">免费课程</h3>
-                        
                         {freecourseslist.isFetching ?
                             <div className="loading">
                                 <i className="iconfont icon-loading fa-spin"></i>
@@ -94,23 +112,11 @@ class Home extends Component {
                                     <p className="no-course">暂无课程</p>
                                     :
                                     <ul className="index-course container cl">
-                                        {freecourseslist.map((item, key) => {
-                                            return  <li key={key}>
-                                                        <a href={`/courses/${item.id}`}>
-                                                            <div className="course-list-img">
-                                                                <img src={item.course_picture} alt="" />
-                                                            </div>
-                                                            <h5>{item.course_name}</h5>
-                                                            <h6><i className="iconfont icon-user"></i>{item.student_count}</h6>
-                                                            <p>{ item.course_price == 0 ? "免费" : "¥ " + item.course_price }</p>
-                                                        </a>
-                                                    </li>
-                                        })}
+                                        {this.renderCourseItems(freecourseslist)}
                                     </ul>
                                 }
                             </div>
                         }
-                        
                     </div>
                     <div className="content-module3">
                         <h3 className="index-title">最热课程</h3>
@@ -127,19 +133,8 @@ class Home extends Component {
                                     { hotcourseslist.error ?
                                         <p className="no-course">暂无课程</p>
                                         :
-                                        <ul className="index-course" style={{ width: 958}}>
-                                            {hotcourseslist.map((item, key) => {
-                                                return  <li key={key}>
-                                                            <a href={`/courses/${item.id}`}>
-                                                                <div className="course-list-img">
-                                                                    <img src={item.course_picture} alt="" />
-                                                                </div>
-                                                                <h5>{item.course_name}</h5>
-                                                                <h6><i className="iconfont icon-user"></i>{item.student_count}</h6>
-                                                                <p>{ item.course_price == 0 ? "免费" : "¥ " + item.course_price }</p>
-                                                            </a>
-                                                        </li>
-                                            })}
+                                        <ul className="index-course fr" style={{ width: 958}}>
+                                            {this.renderCourseItems(hotcourseslist)}
                                         </ul>
                                     }
                                 </div>
@@ -148,58 +143,21 @@ class Home extends Component {
                     </div>
                     <div className="content-module4">
                         <h3 className="index-title">最新课程</h3>
-                        <ul className="index-course container cl">
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
-                                    </div>
-                                    <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="iconfont icon-user"></i>127</h6>
-                                    <p>¥ 199.00</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
-                                    </div>
-                                    <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="iconfont icon-user"></i>127</h6>
-                                    <p>¥ 199.00</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
-                                    </div>
-                                    <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="iconfont icon-user"></i>127</h6>
-                                    <p>¥ 199.00</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
-                                    </div>
-                                    <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="iconfont icon-user"></i>127</h6>
-                                    <p>¥ 199.00</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/c2a5230ddbc0d95bfa3436530692df89.jpg" alt="" />
-                                    </div>
-                                    <h5>企业理财与公司金融综合服务业务</h5>
-                                    <h6><i className="iconfont icon-user"></i>127</h6>
-                                    <p>¥ 199.00</p>
-                                </a>
-                            </li>
-                        </ul>
+                        {latestCourses.isFetching ?
+                            <div className="loading">
+                                <i className="iconfont icon-loading fa-spin"></i>
+                            </div>
+                            :
+                            <div className="course-list">
+                                { latestCourseList.error ?
+                                    <p className="no-course">暂无课程</p>
+                                    :
+                                    <ul className="index-course container cl">
+                                        {this.renderCourseItems(latestCourseList)}
+                                    </ul>
+                                }
+                            </div>
+                        }
                     </div>
                     <div className="content-module5">
                         <h3 className="index-title">名师大咖</h3>
@@ -255,8 +213,8 @@ class Home extends Component {
             </div>
         );
     }
-}
+});
 
 
-module.exports = connect( state => ({ freecourses: state.freecourses, hotcourses: state.hotcourses }) )(Home);
+module.exports = connect( state => ({ freecourses: state.freecourses, hotcourses: state.hotcourses, latestCourses: state.latestCourses }) )(Home);
 

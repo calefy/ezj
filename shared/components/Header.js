@@ -1,3 +1,10 @@
+/**
+ * 页面header
+ *
+ * - 用户登录后下拉菜单
+ * - 登录、注册弹框
+ * - 退出
+ */
 import React, { Component, PropTypes } from 'react';
 import ReactDom from 'react-dom'
 import { Link } from 'react-router'
@@ -15,7 +22,6 @@ class Header extends Component {
     
     state = {
         show: false,  // 头像下来菜单显示与否
-        anchorEl: null // 头像对象
     };
 
     /**
@@ -40,9 +46,6 @@ class Header extends Component {
      */
     showToggle = () => {
         let obj = { show: !this.state.show };
-        if (!this.state.anchorEl) {
-            obj.anchorEl = ReactDom.findDOMNode(this.refs.head_avatar);
-        }
         this._setState(obj);
     };
 
@@ -99,9 +102,7 @@ class Header extends Component {
                                 </div>
                                 <a href={`/users/ ${user.uid}`} className="username">{user.nickname}</a>
                             </div>
-                            <ul className={` menu nav ${this.state.show ? '' : 'hide' }` }
-                                anchorEl={this.state.anchorEl}
-                                onRequestClose={this.showToggle}>
+                            <ul className={` menu nav ${this.state.show ? '' : 'hide' }` } >
                                 <li className="first leaf">
                                     <a href="/users.shtml?14679">我的账号</a>
                                 </li>
