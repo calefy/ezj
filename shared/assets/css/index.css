@@ -1,13 +1,8 @@
-.content-module1{ padding: 40px 0; background: #fff}
-.content-module1 a{ display: block; float: left; width: 366px; text-align: center;}
-.module-title,.module p{ width: 100%}
-.content-module1 .module,.module h4{-webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;}
+
+/* 推荐微专业 - item */
 .module h4{ width: 96px; border-bottom: 1px solid #3f3b3a; line-height: 1.5; font-size: 1.125em; margin: 0 auto;}
-.module-title{ font-size: 1.5em; line-height: 1.4; margin: 30px 0 40px; height: 60px;}
-.module p{ font-size: 1em;}
+.module p{ font-size: 1em;width: 100%}
+.module .module-title{ font-size: 1.5em; line-height: 1.4; margin: 30px 0 40px; height: 60px; width: 100%;}
 .module .iconfont,.module-icon{-webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
@@ -19,10 +14,20 @@
 .module:hover .module-icon{border:1px solid #b01c40; background: #b01c40}
 .module:hover h4{ color: #af1b40; border-bottom: 1px solid #af1b40;}
 
+
+/* 推荐微专业 - wrap */
+.content-module1{ padding: 40px 0; background: #fff}
+.content-module1 a{ display: block; float: left; width: 366px; text-align: center;}
+.content-module1 .module,
+.content-module1 .module h4{-webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;}
+
 .index-title{ font-size: 1.625em; text-align: center; border-bottom: 1px solid #808080; line-height: 94px; position: relative; margin: 0 0 60px;}
 .index-title:after{ content:""; display: block; position: absolute; bottom: 0px; left:50%; height:3px; width: 120px; background: #b01c40; margin:0 0 0 -60px;}
 
-course-list{ min-height:96px; position: relative;}
+.course-list{ min-height:96px; position: relative;}
 
 .index-course li,.index-teacher li {float: left;margin: 0 15px 8px 0;width: 228px;height: 250px;position: relative;overflow: hidden;font-size: 0.875em;
 	transition: 0.3s;
