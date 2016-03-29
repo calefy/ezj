@@ -12,15 +12,21 @@ module.exports = class OperateAction extends BaseAction {
     }
 
     // 重置密码发邮件
-    static ACTION_SUBMIT_EMAIL = 'action_submit_email';
+    static SEND = 'send';
     sendPwd(data) {
-        return BaseAction.dispatchRequest(OperateAction.ACTION_SUBMIT_EMAIL, this.userApi.sendPwd(data));
+        return BaseAction.dispatchRequest(OperateAction.SEND, this.userApi.sendPwd(data));
+    }
+
+    // 重置密码校验验证码
+    static CODE = 'code';
+    pwdCode(contact,code) {
+        return BaseAction.dispatchRequest(OperateAction.CODE, this.userApi.pwdCode(contact,code));
     }
 
     // 重置密码
-    static ACTION_SUBMIT_RESET = 'action_submit_reset';
-    resetPwd(token,pass) {
-        return BaseAction.dispatchRequest(OperateAction.ACTION_SUBMIT_RESET, this.userApi.resetPwd(token,pass));
+    static SET = 'set';
+    setPwd(contact,code,new_password) {
+        return BaseAction.dispatchRequest(OperateAction.SET, this.userApi.resetPwd(contact,code,new_password));
     }
 
     // 修改密码

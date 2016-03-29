@@ -89,6 +89,14 @@ module.exports = {
                             cb(null, require('./containers/pwd/Valid'));
                         });
                     }
+                },
+                {
+                    path: 'success',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/pwd/Success'));
+                        });
+                    }
                 }
             ]
         },
