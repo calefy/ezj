@@ -33,8 +33,8 @@ class User extends Base {
     /**
      * 注册发送验证码
      */
-    send(name) {
-        return this.apiClient.post('sso/send_register_code', { contact: name });
+    send(contact) {
+        return this.apiClient.post('sso/send_register_code', { contact: contact });
     }
     /**
      * 注册
@@ -73,12 +73,20 @@ class User extends Base {
     }
 
     /**
+     * 重置密码校验密码
+     */
+    pwdCode(contact,code) {
+        return this.apiClient.post('sso/validate_code',  { contact: contact, code: code });
+    }
+
+    /**
      * 重置密码
      */
-    resetPwd(token,pass) {
-        return this.apiClient.post('account/pass-reset',  {
-            token: token,
-            pass: pass
+    resetPwd(contact,code,new_password) {
+        return this.apiClient.post('sso/reset_password',  {
+            contact: contact,
+            code: code,
+            new_password: new_password
         });
     }
 

@@ -158,8 +158,8 @@ module.exports = class LoginDialog extends Component {
     sendEmail = () => {
         // 检查输入
         if (this._validRegusername()) {
-            const name = this.refs.contact.getValue().trim();
-            this.props.dispatch(this.userAction.send(name));
+            const contact = this.refs.contact.getValue().trim();
+            this.props.dispatch(this.userAction.send(contact));
         }
         
     };
