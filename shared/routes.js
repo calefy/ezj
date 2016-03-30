@@ -100,5 +100,82 @@ module.exports = {
                 }
             ]
         },
+        // 个人中心页
+        {
+            path: 'account',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/account/index'));
+                });
+            },
+            childRoutes: [
+                {
+                    path: 'index',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/account/Info'));
+                        });
+                    }
+                },
+                {
+                    path: 'pwd',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/account/Pwd'));
+                        });
+                    }
+                },
+                {
+                    path: 'pay',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/account/Pay'));
+                        });
+                    }
+                },
+                {
+                    path: 'recharge',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/account/Recharge'));
+                        });
+                    }
+                }
+            ]
+        },
+        {
+            path: 'account',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/account/left'));
+                });
+            },
+            childRoutes: [
+                {
+                    path: 'mobile',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/account/Mobile'));
+                        });
+                    }
+                },
+                {
+                    path: 'email',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/account/Email'));
+                        });
+                    }
+                },
+                {
+                    path: 'user',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/account/User'));
+                        });
+                    }
+                }
+            ]
+        },
     ]
 };

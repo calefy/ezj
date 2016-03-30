@@ -1,0 +1,34 @@
+.shadow{ box-shadow: 4px 6px 6px rgba(0,0,0,0.2);}
+
+.account{ color: #505050; font-size: 0.875em;}
+.account a{ color: #505050;}
+.account-tabs{ border-bottom: 1px solid #e8e8e8; text-align: center; padding: 0 9px;}
+.account-tabs li{ float: left; width: 110px; line-height: 28px; padding: 9px 0; position: relative;}
+.account-tabs li a{ display: block; border-right: 1px solid #e8e8e8;}
+.account-tabs li:last-child a{ border-right: 0;}
+.account-tabs li.current:after{ content: ""; display: block; background: #b01c40; position: absolute; width: 56px; height:2px; left:50%; bottom:0; margin: 0 0 0 -28px;}
+
+.account-left{ width: 230px; background: #fff; color: #505050; text-align: center; padding: 30px 0;}
+.account-left img{ width: 150px;height:150px; border-radius: 50%; border: 5px solid #eff0ef; margin: 0 0 20px;}
+
+.account-right{ background: #fff; margin:0 0 0 22px; width: 756px;}
+.account-right dl:after{ content: ""; display: block; clear: both;}
+
+.account-info{ padding: 20px 36px 30px; line-height: 60px;}
+.account-info a{ color: #b01c40;}
+.account-info dl{}
+.account-info dt,.account-info dd{ float: left;}
+.account-info dt{ width: 108px;}
+
+.account-pwd { width: 500px; margin: 50px auto;}
+.account-pwd dl { line-height: 48px; margin: 0 0 12px;}
+.account-pwd dt { display: inline-block; width: 70px; text-align: right; float: left; font-weight: normal; margin-right: 10px;}
+.account-pwd dd { display: inline-block; float: left; margin:0;}
+.account-pwd .formsy-input{ width: 254px;}
+.account-pwd button { width: 120px; margin: 20px auto; display: block; padding: 14px 20px; background: #b01c40; border-radius: 4px; color: #fff}
+
+.password-strength { width: 120px; float: right; line-height: 28px; margin: 0 0 0 20px;}
+.password-strength-text { float: right; font-weight: bold;}
+.password-strength-title { display: inline;}
+.password-indicator { margin-top: 5px; background: #eff0ef; border-radius: 3px; height: 2px; width: 100%; border: 1px solid #cfd0cf; position: relative;}
+
