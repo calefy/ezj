@@ -29,6 +29,7 @@ class ResetPwd extends Component {
                         <button className="btn btn-send-code" name="" value="发送验证码" type="submit">发送验证码</button>
                     </dd>
                 </dl>
+                <br />
                 <dl>
                     <dt>验证：</dt>
                     <dd className="formsy-input input-error">
