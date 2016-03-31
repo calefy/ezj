@@ -1,4 +1,6 @@
 .shadow{ box-shadow: 4px 6px 6px rgba(0,0,0,0.2);}
+.form-red {color: red;}
+.formsy-input input[type="text"]{ outline: none; height:38px; width:100%; border:0;}
 
 .account{ color: #505050; font-size: 0.875em;}
 .account a{ color: #505050;}
@@ -12,23 +14,76 @@
 .account-left img{ width: 150px;height:150px; border-radius: 50%; border: 5px solid #eff0ef; margin: 0 0 20px;}
 
 .account-right{ background: #fff; margin:0 0 0 22px; width: 756px;}
-.account-right dl:after{ content: ""; display: block; clear: both;}
+.account-right dl:after,.change-account-right dl:after{ content: ""; display: block; clear: both;}
 
+/*用户资料*/
 .account-info{ padding: 20px 36px 30px; line-height: 60px;}
 .account-info a{ color: #b01c40;}
 .account-info dl{}
 .account-info dt,.account-info dd{ float: left;}
 .account-info dt{ width: 108px;}
 
+/*修改密码*/
 .account-pwd { width: 500px; margin: 50px auto;}
-.account-pwd dl { line-height: 48px; margin: 0 0 12px;}
-.account-pwd dt { display: inline-block; width: 70px; text-align: right; float: left; font-weight: normal; margin-right: 10px;}
-.account-pwd dd { display: inline-block; float: left; margin:0;}
+.account-pwd dl{ line-height: 48px; margin: 0 0 12px;}
+.account-pwd dt{ display: inline-block; width: 70px; text-align: right; float: left; font-weight: normal; margin-right: 10px;}
+.account-pwd dd{ display: inline-block; float: left; margin:0;}
 .account-pwd .formsy-input{ width: 254px;}
-.account-pwd button { width: 120px; margin: 20px auto; display: block; padding: 14px 20px; background: #b01c40; border-radius: 4px; color: #fff}
+.account-pwd button { width: 120px; margin: 20px auto; display: block; padding: 14px 20px; border-radius: 4px; color: #fff}
 
 .password-strength { width: 120px; float: right; line-height: 28px; margin: 0 0 0 20px;}
 .password-strength-text { float: right; font-weight: bold;}
 .password-strength-title { display: inline;}
 .password-indicator { margin-top: 5px; background: #eff0ef; border-radius: 3px; height: 2px; width: 100%; border: 1px solid #cfd0cf; position: relative;}
+
+/*充值记录*/
+.account-pay,.account-recharge{ padding: 40px 36px 40px;}
+.account-pay .btn-red { background: #b01c40; border-radius: 4px; font-size: 0.75em; width: 44px; height: 24px; text-align: center; line-height: 24px; color: #fff; display: inline-block; cursor: pointer; border: 0px; padding: 0px;}
+
+.balance{ line-height: 32px; margin: 0 0 40px;}
+
+/*消费记录*/
+.recharge dt{ display: inline-block; width: 110px; text-align: right; float: left; font-weight: normal; margin-right: 10px;}
+.recharge dd{ display: inline-block; float: left;}
+.recharge dd.formsy-input{ width: 170px; line-height: 30px; margin: 0 10px 0 0;}
+.recharge dd.formsy-input  input{ outline: none; height:20px; width:100%; border:0;}
+.recharge .btn-red{ margin: 0 2px;}
+
+.recharge-record h4{ font-size: 1.125em; margin: 0 0 20px;}
+.recharge-record th:first-child, .recharge-record td:first-child,.payment-record td:nth-child(3){ text-align: right;}
+.recharge-record .chargeMore{ margin: 20px 0;}
+
+.account-recharge p{ margin: 0 0 14px; font-size: 0.75em; color: #707070;}
+
+
+/* 修改资料 */
+.change-account{ margin: 26px 0 0;}
+.change-account-left{ width:230px;}
+.change-account-right{ width:880px; padding:28px 34px; font-size: 0.875em;}
+.change-account-right .formsy-input{ line-height: 40px; margin: 0;}
+.change-account-right .text-success,.change-account-right .text-error{ margin-left: 10px;}
+.change-account-right dl{ margin: 0 0 20px;}
+.change-account-right dt,.change-account-right dd{ float: left;}
+.change-account-right dt{ width: 100px;}
+.change-account-right .btn-send-code{ padding: 8px 6px; font-size: 12px; border-radius: 2px;background:red; /* 一些不支持背景渐变的浏览器 */  
+    background:-moz-linear-gradient(top, #d0275a, #a81939);  
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#d0275a), to(#a81939));  
+    background:-o-linear-gradient(top, #d0275a, #a81939);}
+
+.change-account-tabs{ line-height: 48px; text-align: center}
+.change-account-tabs li{ border-bottom: 2px solid #c4c4c4; font-size: 0.875em;}
+.change-account-tabs li.current{ background: #b01c40;}
+.change-account-tabs li a{ display: block;}
+.change-account-tabs li.current a{ color: #fff;}
+
+.account-user,.account-email{ line-height: 40px;}
+.account-user .radio-inline{ margin: 0 10px 0 0;}
+.account-user input[type="radio"]{ margin: 0 4px 0 0;}
+.account-user .account-birth-select,.account-user .account-address-select{ float: left; margin: 0 10px 0 0;}
+.account-user .btn{ padding: 10px 36px;}
+
+
+
+
+
 

@@ -7,9 +7,9 @@ if (process.env.BROWSER) {
 
 class Account extends Component {
 
-	static propTypes = {
-        location: PropTypes.object.isRequired
-    };
+	// static propTypes = {
+ //        location: PropTypes.object.isRequired
+ //    };
 
 	static menus = [
         { path: 'index', name: '基本信息' },
