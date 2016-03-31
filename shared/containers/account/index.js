@@ -7,7 +7,22 @@ if (process.env.BROWSER) {
 
 class Account extends Component {
 
+	static propTypes = {
+        location: PropTypes.object.isRequired
+    };
+
+	static menus = [
+        { path: 'index', name: '基本信息' },
+        { path: 'pwd', name: '密码修改' },
+        { path: 'pay', name: '充值记录' },
+        { path: 'recharge', name: '消费记录' }
+    ];
+
     render() {
+
+    	const { menus } = Account;
+		const locationPath = this.props.location.pathname;
+
         return (
             <div className="account mar40 cl container">
             	<div className="account-left fl shadow">
@@ -16,10 +31,12 @@ class Account extends Component {
             	</div>
             	<div className="account-right fl shadow">
 		            <ul className="account-tabs cl">
-		                <li className=""><Link to="index">基本信息</Link></li>
-		                <li className="current"><Link to="pwd">密码修改</Link></li>
-		                <li className=""><Link to="pay">充值记录</Link></li>
-		                <li className=""><Link to="recharge">消费记录</Link></li>
+			            {menus.map( (item, index) => {
+	                        return  <li className={locationPath === item.path ? 'current' : null} key={index}>
+	                        			<Link to={item.path}>{item.name}</Link>
+	                        		</li>
+	                        		
+	                    })}
 		            </ul>
             		{this.props.children}
             	</div>
