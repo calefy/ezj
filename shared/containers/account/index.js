@@ -30,7 +30,7 @@ class Account extends Component {
             		<p>紫荆教育</p>
             	</div>
             	<div className="account-right fl shadow">
-		            <ul className="account-tabs cl">
+		            <ul className="nav-tabs cl">
 			            {menus.map( (item, index) => {
 	                        return  <li className={locationPath === item.path ? 'current' : null} key={index}>
 	                        			<Link to={item.path}>{item.name}</Link>

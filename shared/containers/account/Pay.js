@@ -1,10 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
 
-if (process.env.BROWSER) {
-    require('css/account.css')
-}
-
 class Account extends Component {
 
     render() {

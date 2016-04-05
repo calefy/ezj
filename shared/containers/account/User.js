@@ -1,11 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
 
-if (process.env.BROWSER) {
-    require('css/pwd.css')
-}
-
-class ResetPwd extends Component {
+class Account extends Component {
 
     render() {
         return (
@@ -116,4 +112,4 @@ class ResetPwd extends Component {
     }
 }
 
-module.exports = ResetPwd;
+module.exports = Account;

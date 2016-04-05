@@ -177,3 +177,21 @@ button{ cursor: pointer; outline: none; border: 0;}
   transition: all 0.5s ease-in-out;}
 .btn:hover { background: #971737;}
 
+.content-left{ width:230px;}
+.content-tabs{ line-height: 48px; text-align: center}
+.content-tabs li{ border-bottom: 2px solid #c4c4c4; font-size: 0.875em;}
+.content-tabs li.current{ background: #b01c40;}
+.content-tabs li a{ display: block;}
+.content-tabs li.current a{ color: #fff;}
+
+.nav-tabs{ border-bottom: 1px solid #e8e8e8; text-align: center; padding: 0 9px;}
+.nav-tabs li{ float: left; width: 110px; line-height: 28px; padding: 9px 0; position: relative;}
+.nav-tabs li a{ display: block; border-right: 1px solid #e8e8e8;}
+.nav-tabs li:last-child a{ border-right: 0;}
+.nav-tabs li.current:after{ content: ""; display: block; background: #b01c40; position: absolute; width: 56px; height:2px; left:50%; bottom:0; margin: 0 0 0 -28px;}
+
+
+.shadow{ box-shadow: 4px 6px 6px rgba(0,0,0,0.2);}
+.form-red {color: red;}
+.formsy-input input[type="text"]{ outline: none; height:38px; width:100%; border:0;}
+

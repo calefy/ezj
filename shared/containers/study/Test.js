@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
 
-class Account extends Component {
+class Study extends Component {
 
     render() {
         return (
-            <div className="account-recharge">
+            <div className="Study-recharge">
                 <div className="recharge-record">
                     <h4>消费记录</h4>
                     <p>线上支付订单请在24小时内完成支付，逾期系统会自动取消订单</p>
@@ -262,4 +262,4 @@ class Account extends Component {
     }
 }
 
-module.exports = Account;
+module.exports = Study;

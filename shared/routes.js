@@ -177,5 +177,66 @@ module.exports = {
                 }
             ]
         },
+        // 学习中心页面
+        {
+            path: 'study',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/study/index'));
+                });
+            },
+            childRoutes: [
+                {
+                    path: 'mine',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/study/left'));
+                        });
+                    },
+                    childRoutes: [
+                        {
+                            path: 'all',
+                            getComponent(location, cb) {
+                                require.ensure([], require => {
+                                    cb(null, require('./containers/study/All'));
+                                });
+                            }
+                        },
+                        {
+                            path: 'study',
+                            getComponent(location, cb) {
+                                require.ensure([], require => {
+                                    cb(null, require('./containers/study/Study'));
+                                });
+                            }
+                        },
+                        {
+                            path: 'buy',
+                            getComponent(location, cb) {
+                                require.ensure([], require => {
+                                    cb(null, require('./containers/study/buy'));
+                                });
+                            }
+                        }
+                    ]
+                },
+                {
+                    path: 'collect',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/study/Collect'));
+                        });
+                    }
+                },
+                {
+                    path: 'test',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/study/Test'));
+                        });
+                    }
+                }
+            ]
+        },
     ]
 };

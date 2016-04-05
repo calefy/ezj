@@ -1,13 +1,31 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
+import { connect } from 'react-redux'
 
-if (process.env.BROWSER) {
-    require('css/account.css')
-}
+import UserAction from '../../actions/UserAction';
 
 class Account extends Component {
 
+    // 初始加载数据
+    static fetchData({dispatch, apiClient}) {
+        const userAction = new UserAction({ apiClient: apiClient });
+        return Promise.all([
+            dispatch(userAction.loadAccount())
+        ]);
+    }
+
+    componentDidMount() {
+        this.userAction = new UserAction();
+        if (this.props.user.isFetching) {
+            Account.fetchData(this.props);
+        }
+    }
+
     render() {
+
+        const { user } = this.props;
+        const info = this.props.user.data || {};
+
         return (
             <div className="account-info">
             	<dl>
@@ -44,4 +62,4 @@ class Account extends Component {
     }
 }
 
-module.exports = Account;
+module.exports = connect( state => ({ user: state.user }) )(Account);
