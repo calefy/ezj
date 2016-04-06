@@ -97,7 +97,7 @@ class Header extends Component {
                             <div className="head-account" onClick={this.showToggle} ref="head_avatar">
                                 <div className="user-picture" uid={user.uid}>
                                     <a href="javascript:;">
-                                        <img src="/assets/images/user.jpg" />
+                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/a462f8c334e328ba8f572ca0a51c4861.jpg" />
                                     </a>
                                 </div>
                                 <a href={`/users/ ${user.uid}`} className="username">{user.nickname}</a>
