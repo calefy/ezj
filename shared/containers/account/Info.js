@@ -56,7 +56,7 @@ class Account extends Component {
                     <dt>所在地区：</dt>
                     <dd>北京</dd>
                 </dl>
-                <Link to="user">修改我的资料></Link>
+                <Link to="/account/user">修改我的资料></Link>
             </div>
         );
     }

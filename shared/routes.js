@@ -235,6 +235,14 @@ module.exports = {
                             cb(null, require('./containers/study/Test'));
                         });
                     }
+                },
+                {
+                    path: 'result',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/study/Result'));
+                        });
+                    }
                 }
             ]
         },

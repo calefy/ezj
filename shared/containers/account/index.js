@@ -12,10 +12,10 @@ class Account extends Component {
  //    };
 
 	static menus = [
-        { path: 'index', name: '基本信息' },
-        { path: 'pwd', name: '密码修改' },
-        { path: 'pay', name: '充值记录' },
-        { path: 'recharge', name: '消费记录' }
+        { path: '/account/index', name: '基本信息' },
+        { path: '/account/pwd', name: '密码修改' },
+        { path: '/account/pay', name: '充值记录' },
+        { path: '/account/recharge', name: '消费记录' }
     ];
 
     render() {
