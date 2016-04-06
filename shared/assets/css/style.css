@@ -160,10 +160,15 @@ button{ cursor: pointer; outline: none; border: 0;}
 
 
 /* table */
-.table { background: #fff; font-size: 12px;}
+.table { border: 1px solid #a0a0a0; background: #fff; color: #505050; font-size: 12px; overflow: hidden;}
+.table table{ text-align: center; width: 100%; line-height: 22px;}
+.table th { background: #eff0ef; border-right: 1px solid #a0a0a0; vertical-align: middle; padding: 8px;}
+.table td { padding: 8px; border-right: 1px solid #a0a0a0; border-top: 1px solid #a0a0a0; vertical-align: middle; text-align: center;}
+.table th:last-child,.table td:last-child{ border-right:0;}
+/*.table { background: #fff; font-size: 12px;}
 .table table{ text-align: center; width: 100%; line-height: 22px;}
 .table th { border-width: 1px; padding: 8px; border-style: solid; border-color: #a0a0a0; background-color: #eff0ef;}
-.table td { border-width: 1px; padding: 8px; border-style: solid; border-color: #a0a0a0; background-color: #ffffff;}
+.table td { border-width: 1px; padding: 8px; border-style: solid; border-color: #a0a0a0; background-color: #ffffff;}*/
 
 .btn{ border: 1px solid #b01c40;border-radius:4px; color: #fff !important;resize:none; outline: none; font-size: 14px;
   background:red; /* 一些不支持背景渐变的浏览器 */  

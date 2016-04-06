@@ -9,9 +9,9 @@ if (process.env.BROWSER) {
 class Account extends Component {
 
 	static menus = [
-        { path: 'user', name: '基本资料' },
-        { path: 'email', name: '邮箱' },
-        { path: 'mobile', name: '手机' }
+        { path: '/account/user', name: '基本资料' },
+        { path: '/account/email', name: '邮箱' },
+        { path: '/account/mobile', name: '手机' }
     ];
 
     render() {
@@ -22,7 +22,7 @@ class Account extends Component {
         return (
 
             <div className="container mar40">
-                <h1 className="h1-title">修改资料<Link to="index" className="fr">返回我的资料</Link></h1>
+                <h1 className="h1-title">修改资料<Link to="/account/index" className="fr">返回我的资料</Link></h1>
                 <div className="change-account cl">
                 	<div className="content-left shadow bg-white fl">
                 		<ul className="content-tabs cl">
