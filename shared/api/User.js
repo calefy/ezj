@@ -6,8 +6,8 @@ class User extends Base {
     /**
      * 当前登录用户
      */
-    info() {
-        return this.apiClient.get('account/info');
+    info(ticket) {
+        return this.apiClient.post('sso/get_user_info',{ ticket: ticket });
     }
     show() {
         return this.info();
