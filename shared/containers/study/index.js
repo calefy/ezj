@@ -33,9 +33,7 @@ class Study extends Component {
 		                    })}
 			            </ul>
                 	</div>
-                	<div className="study-center-right shadow bg-white fr">
                 		{this.props.children}
-                	</div>
                 </div>
             </div>
         );
