@@ -67,10 +67,7 @@ class App extends Component {
      * 退出登录
      */
     handleLogout = () => {
-        this.props.dispatch(this.userAction.logout())
-            .then(() => {
-                document.location = '/';
-            });
+        this.props.dispatch(this.userAction.logout());
     };
 
     render() {

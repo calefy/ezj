@@ -52,7 +52,7 @@ class User extends Base {
      * 退出登录
      */
     logout() {
-        return this.apiClient.post('account/logout');
+        return this.apiClient.post('sso/logout');
     }
 
     /**
