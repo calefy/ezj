@@ -19,7 +19,7 @@ class Header extends Component {
         handleLogout: PropTypes.func.isRequired,
         dispatch: PropTypes.func.isRequired
     };
-    
+
     state = {
         show: false,  // 头像下来菜单显示与否
     };
@@ -44,10 +44,18 @@ class Header extends Component {
     /**
      * 用户菜单显示与否
      */
-    showToggle = () => {
+    toggleMenu = () => {
         let obj = { show: !this.state.show };
         this._setState(obj);
     };
+    showMenu = () => {
+        this._setState({show: true});
+    };
+    hideMenu = () => {
+        this._setState({show: false});
+    };
+
+
 
     onClickLogout = () => {
         this._setState({ show: false });
@@ -93,27 +101,21 @@ class Header extends Component {
                         <button onClick={this.openReg}>注册</button>
                     </div>
                     <div className={ `header-user fr ${user.uid ? '' : 'hide'}` }>
-                        <div id="headerAccount" className="">
-                            <div className="head-account" onClick={this.showToggle} ref="head_avatar">
-                                <div className="user-picture" uid={user.uid}>
-                                    <a href="javascript:;">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/a462f8c334e328ba8f572ca0a51c4861.jpg" />
-                                    </a>
-                                </div>
-                                <a href={`/users/ ${user.uid}`} className="username">{user.nickname}</a>
+                        <div className="head-account fr" onClick={this.toggleMenu} onMouseEnter={this.showMenu} onMouseLeave={this.hideMenu}>
+                            <div className="user-picture fr">
+                                <img src={user.avatar || 'http://xplat-avatar.oss-cn-beijing.aliyuncs.com/a462f8c334e328ba8f572ca0a51c4861.jpg'}/>
                             </div>
-                            <ul className={` menu nav ${this.state.show ? '' : 'hide' }` } >
+                            <span className="user-name fr">{user.nickname}</span>
+                            <ul className={`menu nav ${this.state.show ? '' : 'hide' }` } >
                                 <li className="first leaf">
-                                    <a href="/users.shtml?14679">我的账号</a>
+                                    <Link to="/account/index">我的账号</Link>
                                 </li>
                                 <li className="last leaf">
-                                    <a href="javascript:;" id="logout">退出</a>
+                                    <Link to="/" onClick={this.onClickLogout} >退出</Link>
                                 </li>
                             </ul>
                         </div>
-                        <div id="unreadCount">
-                            <div className="unread_count"><i className="iconfont icon-username"></i><span>5</span></div>
-                        </div>
+                        <div className="unread_count fr"><i className="iconfont icon-username"></i><span>5</span></div>
                     </div>
                 </div>
                 <LoginDialog

@@ -19,7 +19,7 @@ button{ cursor: pointer; outline: none; border: 0;}
 .h1-title a{ font-size: 0.875em;}
 
 /* head */
-.header{ height:60px; background: #fff;overflow: hidden;}
+.header{ height:60px; background: #fff;}
 .logo{ width: 120px; margin:6px 24px 6px 0;}
 .logo img{ width: 100%;}
 
@@ -38,20 +38,18 @@ button{ cursor: pointer; outline: none; border: 0;}
 .header-user{ /*display:none; */line-height: 60px; font-size: 0.875em}
 .header-user button{ padding: 0 13px; display: inline-block; background: none; border: 0px; line-height: 58px;}
 
-#headerAccount{ width: 120px; float: right; position: relative;}
-#unreadCount{float: right;width:70px;}
-.head-account { white-space: nowrap;  width: 120px; overflow: hidden; text-overflow: ellipsis; text-align: center;  position: relative;  border: 1px solid transparent;  }
-.head-account .user-picture { float: right; margin: -2px 4px 0 0;  }
+.head-account { width: 120px; line-height: 58px; text-align: center;  position: relative;  border: 1px solid transparent;  }
+.head-account .user-picture { margin: -2px 4px 0 0;  }
 .head-account .user-picture img { vertical-align: middle; width: 27px; height:27px;}
-.head-account>a.username {  float: right;  margin: 0 8px 0 0;  max-width: 76px;  overflow: hidden;  text-overflow: ellipsis;  }
+.head-account .user-name { margin: 0 8px 0 0;  white-space: nowrap;max-width: 76px;  overflow: hidden;  text-overflow: ellipsis;  }
 .headerUser:after{display:block;content:"";clear:both;}
 .head-account:hover,.head-account.hover,.unread_count:hover,.unread_count.hover{border:1px solid #e3e3e3; background-color:#fff;}
 .menu,.unread_messages{position:absolute;top:54px;background: #fff; border: 1px solid #e3e3e3;border-top: 0px;border-collapse: collapse; line-height: 1.5em; text-align: center;font-size:1em;z-index:999}
-.menu{right:-2px; width: 120px;}
+.menu{right:-1px; top:58px; width: 120px;}
 .menu li a{ color: #818080; padding: 6px 15px;display:block;}
 .menu li a:hover{color:#fff;background:#a6284b}
-.unread_count {  width: 70px; margin: 0; text-align: center;  position: relative;  border: 1px solid transparent; }
-.unread_count>span {  background: #a6294a;  color: #ffffff;  font-size: 12px;  padding: 0 4px; text-align: center; }
+.unread_count {  width: 70px; line-height: 58px; margin: 0; text-align: center;  position: relative;  border: 1px solid transparent; }
+.unread_count>span { position:absolute; top:10px;line-height:14px; background: #a6294a;  color: #ffffff;  font-size: 12px;  padding: 0 4px; text-align: center; }
 .unread_count.messages_empty>span { background: #6d6c6d;}
 
 /* banner */
