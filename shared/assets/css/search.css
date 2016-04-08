@@ -1,0 +1,4 @@
+.search-course li{ width: 214px; margin:0 14px 8px 0;}
+.search-course li:nth-child(4n){ margin:0 0 8px;}
+.search-course .course-list-img{ width: 214px; height:120px;}
+.search-course .course-list-img img{ min-width: 214px; height:120px;}

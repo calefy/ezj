@@ -87,7 +87,7 @@ class Header extends Component {
                         </ul>
                     </nav>
                     <div className="header-search fl">
-                        <input type="text" name="" placeholder="请输入您要搜索的关键词" /><a href="#"><i className="iconfont icon-search"></i></a>
+                        <input type="text" name="" placeholder="请输入您要搜索的关键词" /><a href="search"><i className="iconfont icon-search"></i></a>
                     </div>
                     <div className={ `header-user fr ${user.uid ? 'hide' : '' }` }>
                         <button onClick={this.openLoginDialog} className="curr">登录</button>
