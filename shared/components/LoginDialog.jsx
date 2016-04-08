@@ -36,13 +36,19 @@ module.exports = class LoginDialog extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        // 登录成功关闭对话框
+        const loginType = getRequestTypes('login');
+        if (nextProps.action.type === loginType.success) {
+            this._setState({ open: false });
+        }
+
         if(this.state.regOpen){
         //注册框显示
 
             if(this.state.sendSubmit){
             //点击验证码按钮
                 const sendType = getRequestTypes("send");
-                
+
                 if (nextProps.action.type === UserAction.SEND) {
                     // this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
                 } else if (nextProps.action.type === sendType.success) {
@@ -72,54 +78,24 @@ module.exports = class LoginDialog extends Component {
             //点击注册按钮
                 const regType = getRequestTypes("reg");
 
-                if (nextProps.action.type === UserAction.REG) {
-                    // this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
-                } else if (nextProps.action.type === regType.success) {
-                    const userAction = new UserAction();
+                if (nextProps.action.type === regType.success) {
                     this._setState({
-                        // sendMsg: nextProps.action.response,
-                        errorCode: false
+                        errorCode: false,
+                        open: false
                     });
-                    setTimeout("window.location.reload()",2000)
-                }
-                else if (nextProps.action.type === regType.failure) {
-                    this._setState({ 
+                } else if (nextProps.action.type === regType.failure) {
+                    this._setState({
                         sendMsg: nextProps.action.error.message || '验证码错误',
                         errorCode: true
                     });
                 }
             }
-            
+
         }
-        else{
-
-            const loginType = getRequestTypes(UserAction.LOGIN);
-
-            if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
-                this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
-            } else if (nextProps.action.type === loginType.success) {
-                //const noticeAction = new NoticeAction();
-                //nextProps.dispatch( noticeAction.loadMessageNumber() );
-            }
-
-            // 清理action，防止路由变更，但是action数据没变更，二次展示问题
-            clearTimeout(actionTimer);
-            if (nextProps.action.type && nextProps.action.type !== OperateAction.CLEAR_ACTION) {
-                actionTimer = setTimeout(function() {
-                    const operateAction = new OperateAction();
-                    nextProps.dispatch( operateAction.clearAction() );
-                }, 300);
-            }
-        }
-        
     }
     /**
      * 处理注册框与登录框显示与否
      */
-    openLogDialog = () => {
-        this.refs.loginDialog.logOpen();
-    };
-
     open = () => {
         this._setState({ open: true, logOpen: true, regOpen: false });
     };
