@@ -126,7 +126,7 @@ router.all('*', function(req, res, next) {
             if (/v\d+\/sso\/login$/.test(req.path) && result.data.ticket) {
                 const salt = '0ZSGxuBkSJS5';
                 let expires = 'expires=' + (new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)).toGMTString() + ';';
-                let sup = result.data.ticket.split('').reverse();
+                let sup = result.data.ticket.split('').reverse().join('');
                 sup = new Buffer(salt + sup + Math.random()).toString('base64');
                 sup = '_SUP=' + sup + ';path=/;' + ( req.query.remember ? expires : '');
                 res.set('Set-Cookie', sup + (res.get('Set-Cookie') || ''));
