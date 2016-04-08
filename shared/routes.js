@@ -246,5 +246,49 @@ module.exports = {
                 }
             ]
         },
+        //404页面
+        {
+            path: '404',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/404'));
+                });
+            }
+        },
+        //其他页面
+        {
+            path: 'other',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/other/index'));
+                });
+            },
+            childRoutes: [
+                {
+                    path: 'about',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/other/About'));
+                        });
+                    }
+                },
+                {
+                    path: 'contact',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/other/Contact'));
+                        });
+                    }
+                },
+                {
+                    path: 'opinion',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/other/Opinion'));
+                        });
+                    }
+                }
+            ]
+        },
     ]
 };
