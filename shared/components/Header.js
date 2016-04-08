@@ -62,13 +62,6 @@ class Header extends Component {
         this.props.handleLogout();
     };
 
-    componentWillReceiveProps(nextProps) {
-        // 只要有了user数据，就不显示登录框
-        if (nextProps.user.data) {
-            this.refs.loginDialog.close();
-        }
-    }
-
     render() {
         const user = this.props.user.data || {}
         return (

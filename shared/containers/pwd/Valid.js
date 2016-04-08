@@ -17,7 +17,7 @@ class ResetPwd extends Component {
 
     state = {
         errorSendMsg: null,
-        sendText: '发送验证码',
+        sendText: '再次发送验证码',
         errorCodeMsg: null
     };
 
@@ -85,7 +85,7 @@ class ResetPwd extends Component {
                     errorCodeMsg: nextProps.action.response ? '验证成功' : '',
                 });
                 this.refs.submit.innerText="下一步"
-                setTimeout(this.props.history.push('set?contact='+contact+'&code='+code),2000);
+                setTimeout(this.props.history.push('/pwd/set?contact='+contact+'&code='+code),2000);
             }
             else if (nextProps.action.type === codeType.failure) {
                 this._setState({ 

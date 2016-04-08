@@ -34,7 +34,7 @@ class ResetPwd extends Component {
             // ss
         } 
         else if (nextProps.action.type === setType.success) {
-            this.props.history.push('success');
+            this.props.history.push('/pwd/success');
             
         }
         else if (nextProps.action.type === setType.failure) {

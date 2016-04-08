@@ -36,6 +36,12 @@ module.exports = class LoginDialog extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        // 登录成功关闭对话框
+        const loginType = getRequestTypes('login');
+        if (nextProps.action.type === loginType.success) {
+            this._setState({ open: false });
+        }
+
         if(this.state.regOpen){
         //注册框显示
 
@@ -86,35 +92,10 @@ module.exports = class LoginDialog extends Component {
             }
 
         }
-        else{
-
-            const loginType = getRequestTypes(UserAction.LOGIN);
-
-            if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
-                this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
-            } else if (nextProps.action.type === loginType.success) {
-                //const noticeAction = new NoticeAction();
-                //nextProps.dispatch( noticeAction.loadMessageNumber() );
-            }
-
-            // 清理action，防止路由变更，但是action数据没变更，二次展示问题
-            clearTimeout(actionTimer);
-            if (nextProps.action.type && nextProps.action.type !== OperateAction.CLEAR_ACTION) {
-                actionTimer = setTimeout(function() {
-                    const operateAction = new OperateAction();
-                    nextProps.dispatch( operateAction.clearAction() );
-                }, 300);
-            }
-        }
-        
     }
     /**
      * 处理注册框与登录框显示与否
      */
-    openLogDialog = () => {
-        this.refs.loginDialog.logOpen();
-    };
-
     open = () => {
         this._setState({ open: true, logOpen: true, regOpen: false });
     };
