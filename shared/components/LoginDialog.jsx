@@ -42,7 +42,7 @@ module.exports = class LoginDialog extends Component {
             if(this.state.sendSubmit){
             //点击验证码按钮
                 const sendType = getRequestTypes("send");
-                
+
                 if (nextProps.action.type === UserAction.SEND) {
                     // this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
                 } else if (nextProps.action.type === sendType.success) {
@@ -72,24 +72,19 @@ module.exports = class LoginDialog extends Component {
             //点击注册按钮
                 const regType = getRequestTypes("reg");
 
-                if (nextProps.action.type === UserAction.REG) {
-                    // this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
-                } else if (nextProps.action.type === regType.success) {
-                    const userAction = new UserAction();
+                if (nextProps.action.type === regType.success) {
                     this._setState({
-                        // sendMsg: nextProps.action.response,
-                        errorCode: false
+                        errorCode: false,
+                        open: false
                     });
-                    setTimeout("window.location.reload()",2000)
-                }
-                else if (nextProps.action.type === regType.failure) {
-                    this._setState({ 
+                } else if (nextProps.action.type === regType.failure) {
+                    this._setState({
                         sendMsg: nextProps.action.error.message || '验证码错误',
                         errorCode: true
                     });
                 }
             }
-            
+
         }
         else{
 
