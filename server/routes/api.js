@@ -122,6 +122,15 @@ router.all('*', function(req, res, next) {
             if (authToken) {
                 res.set( 'Set-Cookie', authToken+ ';' + res.get('Set-Cookie') );
             }
+            // 检查如果是登录接口调用，需要写cookie
+            if (/v\d+\/sso\/(?:login|register)$/.test(req.path) && result.data.ticket) {
+                const salt = '0ZSGxuBkSJS5';
+                let expires = 'expires=' + (new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)).toGMTString() + ';';
+                let sup = result.data.ticket.split('').reverse().join('');
+                sup = new Buffer(salt + sup + Math.random()).toString('base64');
+                sup = '_SUP=' + sup + ';path=/;' + ( req.query.remember ? expires : '');
+                res.set('Set-Cookie', sup + (res.get('Set-Cookie') || ''));
+            }
             res.json(result);
         }, function(err) {
             res.json({

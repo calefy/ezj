@@ -60,7 +60,7 @@ class ResetPwd extends Component {
             this.setState({
                 errorMsg: '发送成功'
             });
-            this.props.history.push('valid?contact='+contact);
+            this.props.history.push('/pwd/valid?contact='+contact);
         }
     };
 
