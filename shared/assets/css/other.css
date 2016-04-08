@@ -1,0 +1,11 @@
+.other-right{ width: 948px; font-size: 0.875em;}
+
+.other-about{padding: 0 0 40px;}
+.other-about p,.other-contact{ margin:26px 32px; font-size: 12px; line-height: 2; color: #505050;}
+
+.other-contact-left{ width: 318px; margin:0 70px 0 0; border-right:1px solid #e8e8e8;}
+
+.other-opinion{ padding: 26px 32px;}
+.other-opinion input,.other-opinion textarea{ border:1px solid #a0a0a0; color: #aaaaaa; outline: none}
+.other-opinion input{ width: 292px; height:22px; padding: 4px; margin: 0 50px 20px 0;}
+.other-opinion textarea{ width: 644px; height:192px; padding:4px; margin: 0 0 20px; resize:none;}
