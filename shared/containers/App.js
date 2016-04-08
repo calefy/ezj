@@ -25,7 +25,7 @@ class App extends Component {
     static fetchData({dispatch, apiClient}) {
         const userAction = new UserAction({ apiClient: apiClient });
         return Promise.all([
-            //dispatch(userAction.loadAccount()),
+            dispatch(userAction.loadAccount()),
             //dispatch(noticeAction.loadMessageNumber())
         ]);
     }

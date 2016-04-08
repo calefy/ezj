@@ -1,6 +1,6 @@
 import { Schema, arrayOf, valuesOf } from 'normalizr';
 
-const user = new Schema('users');
+const user = new Schema('users', {idAttribute: 'uid'});
 const notice = new Schema('notices');
 const message = new Schema('messages');
 
