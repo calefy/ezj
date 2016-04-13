@@ -1,13 +1,9 @@
 /**
- * 富文本编辑器封装，基于ckeditor
- * @author chenlinfei<chenlinfei@ezijing.com>
- * @since 2016-02-29
+ * formsy text
  */
 
 import React from 'react';
 import Formsy from 'formsy-react';
-
-let countor = 0;
 
 let FormsyText = React.createClass({
     mixins: [ Formsy.Mixin ],
@@ -17,7 +13,7 @@ let FormsyText = React.createClass({
     },
 
     changeValue(event) {
-        this.setValue(event.currentTarget[this.props.type === 'checkbox' ? 'checked' : 'value']);
+        this.setValue(event.currentTarget.value);
     },
 
 
@@ -35,9 +31,7 @@ let FormsyText = React.createClass({
                         name={this.props.name}
                         onChange={this.changeValue}
                         value={this.getValue()}
-                        checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
                     />
-                    <em className="error-msg">{this.props.error}</em>
                 </div>
                 <span className='validation-error'>{errorMessage}</span>
             </div>

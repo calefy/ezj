@@ -1,12 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 
-import UserAction from '../actions/UserAction'
 import OperateAction from '../actions/OperateAction';
-import CoursesAction from '../actions/CoursesAction'
-import Header from '../components/Header';
+import Header from './Header.jsx';
 import Footer from '../components/Footer';
-import { getRequestTypes } from '../libs/utils';
 
 
 if (process.env.BROWSER) {
@@ -21,29 +18,9 @@ let actionTimer = null;
 
 class App extends Component {
 
-    // 初始加载数据
-    static fetchData({dispatch, apiClient}) {
-        const userAction = new UserAction({ apiClient: apiClient });
-        return Promise.all([
-            dispatch(userAction.loadAccount()),
-            //dispatch(noticeAction.loadMessageNumber())
-        ]);
-    }
-
-    componentDidMount() {
-        this.userAction = new UserAction();
-        if (this.props.user.isFetching) {
-            App.fetchData(this.props);
-        }
-    }
     componentWillReceiveProps(nextProps) {
-        const loginType = getRequestTypes(UserAction.LOGIN);
-
         if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
-            this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
-        } else if (nextProps.action.type === loginType.success) {
-            //const noticeAction = new NoticeAction();
-            //nextProps.dispatch( noticeAction.loadMessageNumber() );
+            //this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
         }
 
         // 清理action，防止路由变更，但是action数据没变更，二次展示问题
@@ -56,30 +33,10 @@ class App extends Component {
         }
     }
 
-    /**
-     * 执行登录
-     */
-    handleLoginSubmit = data => {
-        this.props.dispatch(this.userAction.login(data));
-    };
-
-    /**
-     * 退出登录
-     */
-    handleLogout = () => {
-        this.props.dispatch(this.userAction.logout());
-    };
-
     render() {
         return (
             <div>
-                <Header
-                    user={this.props.user}
-                    handleLoginSubmit={this.handleLoginSubmit}
-                    handleLogout={this.handleLogout}
-                    dispatch={this.props.dispatch}
-                    action={this.props.action}
-                />
+                <Header />
                 <div className="body">
                     {this.props.children}
                 </div>
@@ -90,6 +47,6 @@ class App extends Component {
 }
 
 module.exports = connect( state => ({
-    action: state.action,
-    user: state.user
+    action: state.action
 }) )(App);
+

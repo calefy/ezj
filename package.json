@@ -8,10 +8,10 @@
     "node": "node server/runner.js",
     "nodemon": "nodemon server/runner.js",
     "publish": "NODE_ENV=production webpack --json > ./webpack.version.json",
-    "deployTest": "cp /var/www/html/mba_x/config.test.js /var/www/html/mba_x/config.js && NODE_ENV=production PORT=3100 pm2 start /var/www/html/mba_x/server/runner.js -i 2 -n node-mba-platform -o /var/log/pm2/node-mba-platform.stdout.log -e /var/log/pm2/node-mba-platform.stderr.log --log-date-format 'YYYY-MM-DD HH:mm Z'",
-    "reloadTest": "cp /var/www/html/mba_x/config.test.js /var/www/html/mba_x/config.js && pm2 reload node-mba-platform",
-    "deploy": "cp /var/www/node-mba-platform/config.prod.js /var/www/node-mba-platform/config.js && NODE_ENV=production PORT=3100 pm2 start /var/www/node-mba-platform/server/runner.js -i 2 -n node-mba-platform -o /var/log/node/pm2_node-mba-platform.stdout.log -e /var/log/node/pm2_node-mba-platform.stderr.log --log-date-format 'YYYY-MM-DD HH:mm Z'",
-    "reload": "cp /var/www/node-mba-platform/config.prod.js /var/www/node-mba-platform/config.js && pm2 reload node-mba-platform"
+    "deployTest": "cp /var/www/html/node-ezijing/config.test.js /var/www/html/node-ezijing/config.js && NODE_ENV=production PORT=3100 pm2 start /var/www/html/node-ezijing/server/runner.js -i 2 -n node-ezijing -o /var/log/pm2/node-ezijing.stdout.log -e /var/log/pm2/node-ezijing.stderr.log --log-date-format 'YYYY-MM-DD HH:mm Z'",
+    "reloadTest": "cp /var/www/html/node-ezijing/config.test.js /var/www/html/node-ezijing/config.js && pm2 reload node-ezijing",
+    "deploy": "cp /var/www/node-ezijing/config.prod.js /var/www/node-ezijing/config.js && NODE_ENV=production PORT=3100 pm2 start /var/www/node-ezijing/server/runner.js -i 2 -n node-ezijing -o /var/log/node/pm2_node-ezijing.stdout.log -e /var/log/node/pm2_node-ezijing.stderr.log --log-date-format 'YYYY-MM-DD HH:mm Z'",
+    "reload": "cp /var/www/node-ezijing/config.prod.js /var/www/node-ezijing/config.js && pm2 reload node-ezijing"
   },
   "author": "",
   "license": "MIT",
@@ -53,6 +53,7 @@
     "react-tap-event-plugin": "^0.2.1",
     "redux": "^3.3.1",
     "redux-thunk": "^1.0.2",
+    "reselect": "^2.3.0",
     "serve-static": "^1.10.2"
   },
   "devDependencies": {

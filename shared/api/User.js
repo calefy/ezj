@@ -16,11 +16,8 @@ class User extends Base {
     /**
      * 登录
      */
-    login({name, pass}) {
-        return this.apiClient.post('sso/login', {
-            login_name:name,
-            password: pass
-        });
+    login(data) {
+        return this.apiClient.post('sso/login', data);
     }
     // login({username, password, remember = true}) {
     //     return this.apiClient.post('http://101.6.244.29:8004/v1/account/login', {
@@ -39,13 +36,8 @@ class User extends Base {
     /**
      * 注册
      */
-    reg({nickname,password,contact,code}) {
-        return this.apiClient.post('sso/register', { 
-            nickname: nickname,
-            password: password,
-            contact: contact,
-            code: code
-        });
+    reg(data) {
+        return this.apiClient.post('sso/register', data);
     }
 
     /**
