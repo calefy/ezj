@@ -12,19 +12,19 @@ module.exports = class OperateAction extends BaseAction {
     }
 
     // 重置密码发邮件
-    static SEND = 'send';
+    static SEND = 'send_passwd';
     sendPwd(data) {
         return BaseAction.dispatchRequest(OperateAction.SEND, this.userApi.sendPwd(data));
     }
 
     // 重置密码校验验证码
-    static CODE = 'code';
+    static CODE = 'code_passwd';
     pwdCode(contact,code) {
         return BaseAction.dispatchRequest(OperateAction.CODE, this.userApi.pwdCode(contact,code));
     }
 
     // 重置密码
-    static SET = 'set';
+    static SET = 'set_passwd';
     setPwd(contact,code,new_password) {
         return BaseAction.dispatchRequest(OperateAction.SET, this.userApi.resetPwd(contact,code,new_password));
     }
@@ -33,6 +33,12 @@ module.exports = class OperateAction extends BaseAction {
     static ACTION_SUBMIT_CHANGE = 'action_submit_change';
     changePwd(oldPass,newPass) {
         return BaseAction.dispatchRequest(OperateAction.ACTION_SUBMIT_CHANGE, this.userApi.changePwd(oldPass,newPass));
+    }
+
+    static OPEN_LOGIN_DIALOG = 'openLoginDialog';
+    // 打开登录框
+    openLoginDialog() {
+        return { type: OperateAction.OPEN_LOGIN_DIALOG };
     }
 
     // 显示错误消息

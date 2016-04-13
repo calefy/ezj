@@ -12,7 +12,6 @@ class ResetPwd extends Component {
             <div className="container mar40 bg-white">
                 <h1 className="h1-title">找回密码</h1>
                 {this.props.children}
-                
             </div>
         );
     }

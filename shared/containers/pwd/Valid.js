@@ -1,107 +1,73 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
+import Formsy from 'formsy-react';
 
-import UserAction from '../../actions/UserAction';
 import OperateAction from '../../actions/OperateAction';
+
+import formsySubmitButtonMixin from '../../mixins/formsySubmitButtonMixin';
 import FormsyText from '../../components/formsy/FormsyText.jsx';
+import CountDown from '../../components/CountDown.jsx';
 
 import { getRequestTypes } from '../../libs/utils';
 
-class ResetPwd extends Component {
+let PwdValid = React.createClass({
+    mixins: [ formsySubmitButtonMixin ],
 
-    static propTypes = {
-        dispatch: PropTypes.func.isRequired,
-        location: PropTypes.object.isRequired
-    };
+    getInitialState: function() {
+        return {
+            errorSendMsg: null,
+            errorCodeMsg: null,
+            countDown: false
+        };
+    },
 
-    state = {
-        errorSendMsg: null,
-        sendText: '再次发送验证码',
-        errorCodeMsg: null
-    };
-
-    enableButton = () => {
-        this.setState({
-            canSubmit: true,
-            bgColor: '#a22645'
-        });
-    };
-
-    disableButton = () => {
-        this.setState({
-            canSubmit: false,
-            bgColor: 'rgb(229,229,229)'
-        });
-    };
-
-    componentDidMount() {
-        this.userAction = new UserAction();
+    componentDidMount: function() {
         this.operateAction = new OperateAction();
-    };
+    },
 
-    handleSubmit = () => {
-        const contact = this.refs.contact.innerText.trim();
-        const code = this.refs.code.getValue().trim();
+    handleSubmit: function(model) {
+        let contact = this.props.location.query.contact;
+        let code = model.code;
         this.props.dispatch(this.operateAction.pwdCode( contact, code ));
-    };
+        this.loadingSubmitButton();
+    },
 
-    sendEmail = () => {
-        // 检查输入
-        const contact = this.refs.contact.innerText.trim();
+    sendEmail: function() {
+        if (this.state.countDown) return;
+
+        const contact = this.props.location.query.contact;
         this.props.dispatch(this.operateAction.sendPwd(contact));
-        
-    };
+        this._setState({ countDown: true });
+    },
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.action.type.indexOf("SEND")>-1){
-            const sendType = getRequestTypes("send");
-                    
-            if (nextProps.action.type === UserAction.SEND) {
-                // this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
-            } else if (nextProps.action.type === sendType.success) {
-                this._setState({ 
-                    errorSendMsg: nextProps.action.response ? '发送成功' : '',
-                    sendText: '60s后重发',
-                    submit: false
-                });
-                // this._setState({ submit: false });
-            }
-            else if (nextProps.action.type === sendType.failure) {
-                this._setState({ 
-                    errorSendMsg: nextProps.action.error.message || '发送失败',
-                    sendText: '发送验证码'
-                });
-            }
+    componentWillReceiveProps: function(nextProps) {
+        const sendType = getRequestTypes(OperateAction.SEND);
+        const codeType = getRequestTypes(OperateAction.CODE);
+        switch(nextProps.action.type) {
+            case sendType.failure:
+                this.setState({ errorSendMsg: nextProps.action.error.message || '发送验证码失败' });
+                break;
+            case codeType.failure:
+                this.enableSubmitButton(); // 由下行代码代替生效
+                this.setState({ errorCodeMsg: nextProps.action.error.message || '验证账号失败', countDown: true });
+                break;
+            case codeType.success:
+                let contact = this.props.location.query.contact;
+                let code = this.refs.code.getValue();
+                this.props.history.push('/pwd/set?contact='+contact+'&code='+code);
+                break;
         }
-        else{
-            const codeType = getRequestTypes("code");
-            const contact = this.refs.contact.innerText.trim();
-            const code = this.refs.code.getValue();
-            if (nextProps.action.type === UserAction.SEND) {
-                // this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
-            } else if (nextProps.action.type === codeType.success) {
-                this._setState({ 
-                    errorCodeMsg: nextProps.action.response ? '验证成功' : '',
-                });
-                this.refs.submit.innerText="下一步"
-                setTimeout(this.props.history.push('/pwd/set?contact='+contact+'&code='+code),2000);
-            }
-            else if (nextProps.action.type === codeType.failure) {
-                this._setState({ 
-                    errorCodeMsg: nextProps.action.error.message || '验证失败',
-                });
-                this.refs.submit.innerText="下一步"
-            }
-            else if (nextProps.action.type === codeType.request){
-                this.refs.submit.innerText="验证中……"
-            }
-        }
-        
-    }
-    _setState = obj => {
+    },
+    _setState: function(obj) {
         this.setState(Object.assign({}, this.state, obj || {}));
-    };
+    },
+    onFinishedCountDown: function() {
+        this._setState({ countDown: false });
+    },
+    onFormChange: function() {
+        this._setState({ errorSendMsg: '', errorCodeMsg: '' });
+    },
 
     render() {
         const { action } = this.props;
@@ -127,15 +93,16 @@ class ResetPwd extends Component {
                 </div>
                 <div className="content">
                     <Formsy.Form
-                        onValid={this.enableButton}
-                        onInvalid={this.disableButton}
+                        onValid={this.enableSubmitButton}
+                        onInvalid={this.disableSubmitButton}
                         onValidSubmit={this.handleSubmit}
+                        onChange = {this.onFormChange}
                         className="pwd-form pwd-write-form">
                         <div className="formsy-list pwd-valid">
                             验证码已发送至您的
-                            {locationPath.match(/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*(\.[a-zA-Z0-9_-]{2,4}){1,2}$/) ? "邮箱" : "手机"}
+                            {/@/.test(locationPath) ? "邮箱" : "手机"}
                             <em ref="contact">{locationPath}</em>
-                            <button className="valid-btn" onClick={this.sendEmail}>{this.state.sendText}</button>
+                            <button className={`valid-btn ${this.state.countDown ? 'yz-btn' : ''}`} onClick={this.sendEmail}>{this.state.countDown ? <span><CountDown onFinished={this.onFinishedCountDown} />s后重新发送</span> : '再次发送验证码'}</button>
                             <p className="send-msg">{this.state.errorSendMsg}</p>
                         </div>
                         <FormsyText 
@@ -145,9 +112,9 @@ class ResetPwd extends Component {
                             type="text"
                             required />
                         <div className="pop-btn pwd-btn">
-                            <Link to=""> 《 返回</Link>
-                            <button type="submit" ref="submit" disabled={!this.state.canSubmit} 
-                                className={ this.state.canSubmit ? "" : "disabled"} >下一步</button>
+                            <Link to="/pwd/index" className="pwd-return"> 《 返回</Link>
+                            <button type="submit" ref="submit" disabled={!this.canSubmit()}
+                                className={ this.canSubmit() ? '' : 'disabled'} >{this.isSubmitLoading() ? '验证中...' : '下一步'}</button>
                             <p className="valid-msg">{this.state.errorCodeMsg}</p>
                         </div>
                     </Formsy.Form>
@@ -155,8 +122,8 @@ class ResetPwd extends Component {
             </div>
         );
     }
-}
+});
 
 
-module.exports = connect( state => ({ action: state.action }) )(ResetPwd);
+module.exports = connect( state => ({ action: state.action }) )(PwdValid);
 
