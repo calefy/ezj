@@ -84,6 +84,10 @@ let RegistForm = React.createClass({
         this.props.onTurnToLogin();
     },
 
+    onFinishedCountDown: function() {
+        this.setState(Object.assign({}, this.state, {countDown: false}));
+    },
+
     render: function() {
         return (
             <Formsy.Form
@@ -112,7 +116,7 @@ let RegistForm = React.createClass({
                         </span>
                     }
                     sendButton={(this.refs.contact && this.refs.contact.isValid() && !this.state.countDown) ? '' : 'yz-btn' }
-                    valid={this.state.countDown ? <span><CountDown/>s后重新发送</span> : '发送验证码'}
+                    valid={this.state.countDown ? <span><CountDown onFinished={this.onFinishedCountDown}/>s后重新发送</span> : '发送验证码'}
                     required
                     validClick={this.onSendValidCode}
                 />

@@ -5,6 +5,7 @@ import React from 'react';
 
 let CountDown = React.createClass({
     propTypes: {
+        onFinished: React.PropTypes.func.isRequired,
         number: React.PropTypes.number
     },
     getInitialState: function() {
@@ -19,6 +20,10 @@ let CountDown = React.createClass({
     },
 
     count: function() {
+        if (this.state.number <= 0) {
+            this.props.onFinished();
+            return;
+        }
         this.setState({ number: this.state.number - 1 });
         this.timer = setTimeout(this.count, 1000);
     },
