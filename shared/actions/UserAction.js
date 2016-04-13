@@ -6,6 +6,7 @@ module.exports = class UserAction extends BaseAction {
 
     static LOGIN = 'login';
     static SEND = 'send';
+    static REGIST = 'reg';
 
     constructor(config = {}) {
         super(config);
@@ -32,7 +33,7 @@ module.exports = class UserAction extends BaseAction {
     }
     // 注册
     reg(opts) {
-        return BaseAction.dispatchRequest( 'reg', this.api.reg(opts) );
+        return BaseAction.dispatchRequest( UserAction.REGIST, this.api.reg(opts) );
     }
 
     logout() {

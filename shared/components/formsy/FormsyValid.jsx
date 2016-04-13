@@ -1,7 +1,5 @@
 /**
- * 富文本编辑器封装，基于ckeditor
- * @author chenlinfei<chenlinfei@ezijing.com>
- * @since 2016-02-29
+ * formsy valid
  */
 
 import React from 'react';

@@ -1,34 +1,26 @@
 // 用户信息
+import UserAction from '../actions/UserAction';
 import { reducerRequest, getRequestTypes } from '../libs/utils';
 
 export function user(state, action) {
-    const loginTypes = getRequestTypes('login');
+    const loginTypes = getRequestTypes(UserAction.LOGIN);
     const logoutTypes = getRequestTypes('logout');
-    const regTypes = getRequestTypes('reg');
+    const regTypes = getRequestTypes(UserAction.REGIST);
     const changePwdTypes = getRequestTypes('changePwd');
     const avatarTypes = getRequestTypes('avatar');
 
     let ret = state;
 
     switch (action.type) {
-        case loginTypes.request:
         case loginTypes.success:
-        case loginTypes.failure:
-            ret = reducerRequest('login', state, action);
-            if (ret.error) {
-                ret.loginError = ret.error;
-                delete ret.error;
-            } else {
-                // 登录时同步更新全局属性__INITIAL_STATE__，以便onEnter中的登录验证可用
-                window.__INITIAL_STATE__.user = ret;
-            }
+            ret = reducerRequest(UserAction.LOGIN, state, action);
+            // 登录时同步更新全局属性__INITIAL_STATE__，以便onEnter中的登录验证可用
+            window.__INITIAL_STATE__.user = ret;
             break;
         case regTypes.success:
-            ret = reducerRequest('reg', state, action);
-            if (!ret.error) {
-                // 登录时同步更新全局属性__INITIAL_STATE__，以便onEnter中的登录验证可用
-                window.__INITIAL_STATE__.user = ret;
-            }
+            ret = reducerRequest(UserAction.REGIST, state, action);
+            // 登录时同步更新全局属性__INITIAL_STATE__，以便onEnter中的登录验证可用
+            window.__INITIAL_STATE__.user = ret;
             break;
         case logoutTypes.request:
         case logoutTypes.success:
