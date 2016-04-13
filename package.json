@@ -8,9 +8,9 @@
     "node": "node server/runner.js",
     "nodemon": "nodemon server/runner.js",
     "publish": "NODE_ENV=production webpack --json > ./webpack.version.json",
-    "deployTest": "cp /var/www/html/node-ezijing/config.test.js /var/www/html/node-ezijing/config.js && NODE_ENV=production PORT=3100 pm2 start /var/www/html/node-ezijing/server/runner.js -i 2 -n node-ezijing -o /var/log/pm2/node-ezijing.stdout.log -e /var/log/pm2/node-ezijing.stderr.log --log-date-format 'YYYY-MM-DD HH:mm Z'",
+    "deployTest": "cp /var/www/html/node-ezijing/config.test.js /var/www/html/node-ezijing/config.js && NODE_ENV=production PORT=3200 pm2 start /var/www/html/node-ezijing/server/runner.js -i 2 -n node-ezijing -o /var/log/pm2/node-ezijing.stdout.log -e /var/log/pm2/node-ezijing.stderr.log --log-date-format 'YYYY-MM-DD HH:mm Z'",
     "reloadTest": "cp /var/www/html/node-ezijing/config.test.js /var/www/html/node-ezijing/config.js && pm2 reload node-ezijing",
-    "deploy": "cp /var/www/node-ezijing/config.prod.js /var/www/node-ezijing/config.js && NODE_ENV=production PORT=3100 pm2 start /var/www/node-ezijing/server/runner.js -i 2 -n node-ezijing -o /var/log/node/pm2_node-ezijing.stdout.log -e /var/log/node/pm2_node-ezijing.stderr.log --log-date-format 'YYYY-MM-DD HH:mm Z'",
+    "deploy": "cp /var/www/node-ezijing/config.prod.js /var/www/node-ezijing/config.js && NODE_ENV=production PORT=3200 pm2 start /var/www/node-ezijing/server/runner.js -i 2 -n node-ezijing -o /var/log/node/pm2_node-ezijing.stdout.log -e /var/log/node/pm2_node-ezijing.stderr.log --log-date-format 'YYYY-MM-DD HH:mm Z'",
     "reload": "cp /var/www/node-ezijing/config.prod.js /var/www/node-ezijing/config.js && pm2 reload node-ezijing"
   },
   "author": "",

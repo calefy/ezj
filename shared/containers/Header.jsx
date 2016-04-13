@@ -10,7 +10,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
 import { getRequestTypes } from '../libs/utils';
-import UserAction from '../actions/UserAction'
+import UserAction from '../actions/UserAction';
+import OperateAction from '../actions/OperateAction';
 import Dialog     from '../components/Dialog.jsx';
 import RegistForm from '../components/RegistForm.jsx';
 import LoginForm  from '../components/LoginForm.jsx';
@@ -56,6 +57,10 @@ class Header extends Component {
                 break;
             case registType.failure:
                 this.refs.registForm.handleResponse(RegistForm.RESPONSE_REGIST, nextProps.action.error);
+                break;
+
+            case OperateAction.OPEN_LOGIN_DIALOG:
+                this._setState({ showDialog: true, dialogType: 'login' });
                 break;
         }
     }
