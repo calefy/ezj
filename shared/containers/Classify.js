@@ -3,36 +3,69 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
 import { baseCourseCategories } from '../libs/const';
-
 import CoursesAction from '../actions/CoursesAction';
+
+import CourseCategoryDetail from '../components/CourseCategoryDetail.jsx';
 
 if (process.env.BROWSER) {
     require('css/classify.css');
 }
+
+// 是否某个通过ID获取的分类
+function isCategory(location) {
+    return /\d+/.test(location.query.category);
+}
+// 是否是特别定义的分类
+function isSpecial(location) {
+    return location.query.category && !isCategory(location);
+}
+// 是否是搜索
+function isSearch(location) {
+    return !!location.query.q;
+}
+
 class Classify extends Component {
 
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
         const coursesAction = new CoursesAction({ apiClient: apiClient });
-        return Promise.all([
-            dispatch( coursesAction.loadCourseCategories() ), // 分类
-        ]);
+        let arr = [
+            dispatch( coursesAction.loadCourseCategories() ) // 所有分类信息
+        ];
+        // 如果请求的是具体的某个分类，则加载分类详情
+        if (isCategory(location)) {
+            arr.push(
+                dispatch( coursesAction.loadCourseCategory(location.query.category) )
+            );
+        }
+        return Promise.all( arr );
     }
 
     componentDidMount() {
-        const { course_categories } = this.props;
-        if ( course_categories.isFetching ) {
+        const { course_categories, course_category, location } = this.props;
+        if ( course_categories.isFetching ||
+                (isCategory(location) && course_category.isFetching)) {
             Classify.fetchData(this.props);
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        let prevPath = this.props.location.pathname + this.props.location.search;
+        let nextPath = nextProps.location.pathname + nextProps.location.search;
+        if (prevPath !== nextPath) {
+            const coursesAction = new CoursesAction();
+            if (isCategory(nextProps.location)) {
+                nextProps.dispatch( coursesAction.loadCourseCategory(nextProps.location.query.category) );
+            }
         }
     }
 
     render() {
-        const { course_categories, location } = this.props;
+        const { course_categories, course_category, location } = this.props;
         const categories = course_categories.data || [];
         const query = location.query;
 
         return (
-            <div className="content classify">
+            <div className={`content classify${isCategory(location) ? '-category' : ''}`}>
                 <div className="container cl">
                     <div className="classify-left fl">
                         {baseCourseCategories.map((item, key) => {
@@ -51,13 +84,17 @@ class Classify extends Component {
                         })}
                     </div>
                     <div className="classify-right fl">
-                        <p className="classify-course">
-                            查看关于
-                            <Link to="/courses" query={{category: 784}}>互联网金融商业模式</Link> <br/>
-                            <Link to="/courses" query={{category: 785}}>资产证券化</Link> &emsp;
-                            <Link to="/courses" query={{category: 662}}>企业理财</Link>
-                            的精品课程
-                        </p>
+                        {!isCategory(location) && !isSearch(location) ?
+                            <p className="classify-course">
+                                查看关于
+                                <Link to="/courses" query={{category: 784}}>互联网金融商业模式</Link> <br/>
+                                <Link to="/courses" query={{category: 785}}>资产证券化</Link> &emsp;
+                                <Link to="/courses" query={{category: 662}}>企业理财</Link>
+                                的精品课程
+                            </p>
+                            : null
+                        }
+                        {isCategory(location) && course_category.data ? <CourseCategoryDetail category={course_category.data}/> : null}
                     </div>
                 </div>
             </div>
@@ -67,6 +104,7 @@ class Classify extends Component {
 
 
 module.exports = connect( state => ({
+    course_category: state.course_category,
     course_categories: state.course_categories,
 }) )(Classify);
 

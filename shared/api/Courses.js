@@ -25,6 +25,9 @@ class Courses extends Base {
     courseCategories() {
         return this.apiClient.get('els/course-categories');
     }
+    courseCategory(categoryId) {
+        return this.apiClient.get('els/course-categories/' + categoryId);
+    }
 
 }
 

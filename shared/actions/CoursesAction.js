@@ -20,9 +20,17 @@ module.exports = class CoursesAction extends BaseAction {
     //loadLatestCourses(query = {}) {
     //    return BaseAction.dispatchRequest( 'latestCourses', this.api.latestCourses(query) );
     //}
+
+    // 加载所有分类
     static LOAD_COURSE_CATEGORIES = 'course_categories';
     loadCourseCategories() {
         return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_CATEGORIES, this.api.courseCategories() );
+    }
+
+    // 加载某一条分类详情
+    static LOAD_COURSE_CATEGORY = 'course_category';
+    loadCourseCategory(categoryId) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_CATEGORY, this.api.courseCategory(categoryId) );
     }
 
 }

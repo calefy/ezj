@@ -16,3 +16,7 @@ export function courses_hot(state, action) {
 export function course_categories(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_CATEGORIES, state, action);
 }
+
+export function course_category(state, action) {
+    return reducerRequest(CoursesAction.LOAD_COURSE_CATEGORY, state, action);
+}
