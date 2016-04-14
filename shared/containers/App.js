@@ -36,7 +36,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header location={this.props.location} />
                 <div className="body">
                     {this.props.children}
                 </div>

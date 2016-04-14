@@ -16,8 +16,8 @@ module.exports = () => {
 					</div>
 					<div className="footer-top-menu fl">
 						<h4>关于我们</h4>
-						<a href="" title=""><i className="iconfont icon-arrowwhite"></i>网站首页</a>
-						<a href="" title=""><i className="iconfont icon-arrowwhite"></i>关于我们</a>
+                        <Link to="/"><i className="iconfont icon-arrowwhite"></i>网站首页</Link>
+						<Link to="/help/about"><i className="iconfont icon-arrowwhite"></i>关于我们</Link>
 						<a href="" title=""><i className="iconfont icon-arrowwhite"></i>联系我们</a>
 						<a href="" title=""><i className="iconfont icon-arrowwhite"></i>问题反馈</a>
 					</div>

@@ -3,24 +3,29 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
 import CoursesAction from '../actions/CoursesAction';
+import OtherAction from '../actions/OtherAction';
+import { adsType } from '../libs/const';
 
 let Home = React.createClass({
     statics: {
         // 初始加载数据
         fetchData: function({dispatch, params={}, location={}, apiClient}) {
             const coursesAction = new CoursesAction({ apiClient: apiClient });
+            const otherAction = new OtherAction({ apiClient: apiClient });
             return Promise.all([
                 dispatch( coursesAction.loadHotCourses({limit: 8}) ), // 热门课程默认首页取8个
                 dispatch( coursesAction.loadFreeCourses({limit: 5}) ), // 免费课程默认首页取5个
+                dispatch( otherAction.loadIndexAds() ), // 加载首页广告
             ]);
         }
     },
 
     componentDidMount: function() {
-        const { freecourses, hotcourses, latestCourses, location, dispatch } = this.props;
+        const { courses_free, courses_hot, ads_index } = this.props;
 
-        if ( freecourses.isFetching ||
-                hotcourses.isFetching) {
+        if ( courses_free.isFetching ||
+                courses_hot.isFetching ||
+                ads_index.isFetching) {
             Home.fetchData(this.props);
         }
     },
@@ -44,10 +49,21 @@ let Home = React.createClass({
     },
 
     render: function() {
-        const { freecourses, hotcourses, latestCourses } = this.props;
-        const freecourseslist = freecourses && freecourses.data && freecourses.data.list || [];
-        const hotcourseslist = hotcourses && hotcourses.data && hotcourses.data.list || [];
-        const latestCourseList = latestCourses && latestCourses.data && latestCourses.data.list || [];
+        const { courses_hot, courses_free, ads_index } = this.props;
+        const freeList = courses_free.data && courses_free.data.list || [];
+        const hotList = courses_hot.data && courses_hot.data.list || [];
+
+        // 从广告数据中抽离热门广告与讲师
+        let hotAd = {};
+        let lecturers = [];
+        (ads_index.data || []).forEach(item => {
+            if (item.ad_type === adsType.CONTENT) {
+                hotAd = item;
+            } else if (item.ad_type === adsType.LECTURER) {
+                lecturers.push(item);
+            }
+        });
+
 
         return (
             <div>
@@ -61,7 +77,7 @@ let Home = React.createClass({
                         </div>
                         <div className="banner-bottom">
                             <Link to="/">财富管理</Link>
-                            <Link to="/" className="curr">企业理财</Link>
+                            <Link to="/">企业理财</Link>
                             <Link to="/">资产证券化</Link>
                             <Link to="/">互联网金融</Link>
                             <Link to="/">金融领导力</Link>
@@ -102,20 +118,20 @@ let Home = React.createClass({
                         <h3 className="index-title">大家都在学</h3>
                         <div className="hot-course container cl">
                             <div className="fl hot-course-left">
-                                <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/fb735a0af45e4588932bbd2495df2519.jpg" alt="" />
+                                <a target="_blank" href={hotAd.action}><img src={hotAd.image} alt={hotAd.title} /></a>
                             </div>
-                            {hotcourseslist.isFetching ?
+                            {courses_hot.isFetching ?
                                 <div className="loading">
                                     <i className="iconfont icon-loading fa-spin"></i>
                                 </div>
                                 :
                                 <div className="course-list fr">
-                                    { hotcourseslist.error ?
-                                        <p className="no-course">暂无课程</p>
-                                        :
+                                    { hotList.length ?
                                         <ul className="index-course fr" style={{ width: 958}}>
-                                            {this.renderCourseItems(hotcourseslist)}
+                                            {this.renderCourseItems(hotList)}
                                         </ul>
+                                        :
+                                        <p className="no-course">暂无热门课程</p>
                                     }
                                 </div>
                             }
@@ -123,71 +139,51 @@ let Home = React.createClass({
                     </div>
                     <div className="content-module2">
                         <h3 className="index-title">免费课程</h3>
-                        {freecourseslist.isFetching ?
+                        {courses_free.isFetching ?
                             <div className="loading">
                                 <i className="iconfont icon-loading fa-spin"></i>
                             </div>
                             :
                             <div className="course-list">
-                                { freecourseslist.error ?
-                                    <p className="no-course">暂无课程</p>
-                                    :
+                                { freeList.length ?
                                     <ul className="index-course container cl">
-                                        {this.renderCourseItems(freecourseslist)}
+                                        {this.renderCourseItems(freeList)}
                                     </ul>
+                                    :
+                                    <p className="no-course">暂无免费课程</p>
                                 }
                             </div>
                         }
                     </div>
                     <div className="content-module5">
                         <h3 className="index-title">名师大咖</h3>
-                        <ul className="index-teacher container cl">
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/159f0c367a6e2634bf9e17d3815cd6c1.jpg" alt="" />
-                                    </div>
-                                    <h5>王岳澎</h5>
-                                    <h6>中国人民大学教授</h6>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/159f0c367a6e2634bf9e17d3815cd6c1.jpg" alt="" />
-                                    </div>
-                                    <h5>王岳澎</h5>
-                                    <h6>中国人民大学教授</h6>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/159f0c367a6e2634bf9e17d3815cd6c1.jpg" alt="" />
-                                    </div>
-                                    <h5>王岳澎</h5>
-                                    <h6>中国人民大学教授</h6>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/159f0c367a6e2634bf9e17d3815cd6c1.jpg" alt="" />
-                                    </div>
-                                    <h5>王岳澎</h5>
-                                    <h6>中国人民大学教授</h6>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/node/756.shtml">
-                                    <div className="course-list-img">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/159f0c367a6e2634bf9e17d3815cd6c1.jpg" alt="" />
-                                    </div>
-                                    <h5>王岳澎</h5>
-                                    <h6>中国人民大学教授</h6>
-                                </a>
-                            </li>
-                        </ul>
+                        {ads_index.isFetching ?
+                            <div className="loading">
+                                <i className="iconfont icon-loading fa-spin"></i>
+                            </div>
+                            :
+                            <div className="index-teacher container">
+                                {lecturers.length ?
+                                    <ul className="cl">
+                                        {lecturers.map((item, index) => {
+                                            return (
+                                                <li key={index}>
+                                                    <Link to={item.action}>
+                                                        <div className="course-list-img">
+                                                            <img src={item.image} alt={item.lecture_name} />
+                                                        </div>
+                                                        <h5>{item.lecture_name}</h5>
+                                                        <p>{item.lecture_title}</p>
+                                                    </Link>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                    :
+                                    <p className="no-course">暂无名师大咖信息</p>
+                                }
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -196,5 +192,9 @@ let Home = React.createClass({
 });
 
 
-module.exports = connect( state => ({ freecourses: state.freecourses, hotcourses: state.hotcourses, latestCourses: state.latestCourses }) )(Home);
+module.exports = connect( state => ({
+    courses_hot: state.courses_hot,
+    courses_free: state.courses_free,
+    ads_index: state.ads_index,
+}) )(Home);
 

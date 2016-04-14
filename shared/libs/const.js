@@ -33,3 +33,12 @@ export const targetType = {
     QUESTION: 2, // 问题
     ANSWER: 3 // 回答
 };
+
+// 广告类型
+export const adsType = {
+    BANNER: 0,
+    TOP: 1,
+    CONTENT: 2,
+    SIDE: 3,
+    LECTURER: 4
+}
