@@ -83,7 +83,7 @@ let Home = React.createClass({
                         </div>
                         <div className="banner-bottom">
                             {categories.map((item, index) => {
-                                return <Link to={`/courses?category=${item.id}`} key={index}>{item.name}</Link>
+                                return <Link to="/courses" query={{category: item.id}} key={index}>{item.name}</Link>
                             })}
                         </div>
                     </div>
@@ -176,7 +176,7 @@ let Home = React.createClass({
                                                             <img src={item.image} alt={item.lecture_name} />
                                                         </div>
                                                         <h5>{item.lecture_name}</h5>
-                                                        <h6>{item.lecture_title}</h6>
+                                                        <h6>{item.lecture_org + ' ' + item.lecture_title}</h6>
                                                     </Link>
                                                 </li>
                                             );
