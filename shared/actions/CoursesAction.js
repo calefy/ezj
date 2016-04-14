@@ -17,9 +17,9 @@ module.exports = class CoursesAction extends BaseAction {
     loadHotCourses(query = {}) {
         return BaseAction.dispatchRequest( 'hotcourses', this.api.hotcourses(query) );
     }
-    loadLatestCourses(query = {}) {
-        return BaseAction.dispatchRequest( 'latestCourses', this.api.latestCourses(query) );
-    }
+    //loadLatestCourses(query = {}) {
+    //    return BaseAction.dispatchRequest( 'latestCourses', this.api.latestCourses(query) );
+    //}
 
 }
 

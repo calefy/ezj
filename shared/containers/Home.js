@@ -10,9 +10,8 @@ let Home = React.createClass({
         fetchData: function({dispatch, params={}, location={}, apiClient}) {
             const coursesAction = new CoursesAction({ apiClient: apiClient });
             return Promise.all([
-                dispatch( coursesAction.loadFreeCourses({limit: 5}) ), // 免费课程默认首页取5个
                 dispatch( coursesAction.loadHotCourses({limit: 8}) ), // 热门课程默认首页取8个
-                dispatch( coursesAction.loadLatestCourses({limit: 5}) ), // 最新课程默认首页取8个
+                dispatch( coursesAction.loadFreeCourses({limit: 5}) ), // 免费课程默认首页取5个
             ]);
         }
     },
@@ -21,8 +20,7 @@ let Home = React.createClass({
         const { freecourses, hotcourses, latestCourses, location, dispatch } = this.props;
 
         if ( freecourses.isFetching ||
-                hotcourses.isFetching ||
-                latestCourses.isFetching ) {
+                hotcourses.isFetching) {
             Home.fetchData(this.props);
         }
     },
@@ -100,26 +98,8 @@ let Home = React.createClass({
                             </a>
                         </div>
                     </div>
-                    <div className="content-module2">
-                        <h3 className="index-title">免费课程</h3>
-                        {freecourseslist.isFetching ?
-                            <div className="loading">
-                                <i className="iconfont icon-loading fa-spin"></i>
-                            </div>
-                            :
-                            <div className="course-list">
-                                { freecourseslist.error ?
-                                    <p className="no-course">暂无课程</p>
-                                    :
-                                    <ul className="index-course container cl">
-                                        {this.renderCourseItems(freecourseslist)}
-                                    </ul>
-                                }
-                            </div>
-                        }
-                    </div>
                     <div className="content-module3">
-                        <h3 className="index-title">最热课程</h3>
+                        <h3 className="index-title">大家都在学</h3>
                         <div className="hot-course container cl">
                             <div className="fl hot-course-left">
                                 <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/fb735a0af45e4588932bbd2495df2519.jpg" alt="" />
@@ -141,19 +121,19 @@ let Home = React.createClass({
                             }
                         </div>
                     </div>
-                    <div className="content-module4">
-                        <h3 className="index-title">最新课程</h3>
-                        {latestCourses.isFetching ?
+                    <div className="content-module2">
+                        <h3 className="index-title">免费课程</h3>
+                        {freecourseslist.isFetching ?
                             <div className="loading">
                                 <i className="iconfont icon-loading fa-spin"></i>
                             </div>
                             :
                             <div className="course-list">
-                                { latestCourseList.error ?
+                                { freecourseslist.error ?
                                     <p className="no-course">暂无课程</p>
                                     :
                                     <ul className="index-course container cl">
-                                        {this.renderCourseItems(latestCourseList)}
+                                        {this.renderCourseItems(freecourseslist)}
                                     </ul>
                                 }
                             </div>

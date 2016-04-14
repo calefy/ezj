@@ -9,6 +9,6 @@ export function freecourses(state, action) {
 export function hotcourses(state, action) {
     return reducerRequest('hotcourses', state, action);
 }
-export function latestCourses(state, action) {
-    return reducerRequest('latestCourses', state, action);
-}
+//export function latestCourses(state, action) {
+//    return reducerRequest('latestCourses', state, action);
+//}
