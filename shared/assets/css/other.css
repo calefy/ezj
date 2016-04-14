@@ -3,7 +3,7 @@
 .other-about{padding: 0 0 40px;}
 .other-about p,.other-contact{ margin:26px 32px; font-size: 12px; line-height: 2; color: #505050;}
 
-.other-contact-left{ width: 318px; margin:0 70px 0 0; border-right:1px solid #e8e8e8;}
+.other-contact-left{ width: 318px; margin-right:65px; border-right:1px solid #e8e8e8;}
 
 .other-opinion{ padding: 26px 32px;}
 .other-opinion input,.other-opinion textarea{ border:1px solid #a0a0a0; color: #aaaaaa; outline: none}
