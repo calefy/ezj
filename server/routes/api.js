@@ -134,9 +134,9 @@ router.all('*', function(req, res, next) {
                 let serialize = `a:2:{i:0;s:4:"_SUP";i:1;s:${sup.length}:"${sup}";}`;
                 let hamc = crypto.createHmac('sha256', 'VzpR5JMDNqUsOZ0IFQARNLU9_0KLr9UC');
                 hamc.update(serialize);
-                sup = hamc.digest('hex');
+                sup = hamc.digest('hex') + encodeURIComponent(serialize);
                 // 设置到cookie
-                sup = '_SUP=' + sup + ';path=/;domain=.ezijing.com;' + ( req.query.remember ? expires : '');
+                sup = '_SUP=' + sup + ';path=/;domain=.ezijing.com;' + ( req.body.remember ? expires : '');
                 res.set('Set-Cookie', sup + (res.get('Set-Cookie') || ''));
             }
             res.json(result);
