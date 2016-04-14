@@ -22,6 +22,10 @@ class Courses extends Base {
     //    return this.apiClient.get(`els/courses/latest${params}`);
     //}
 
+    courseCategories() {
+        return this.apiClient.get('els/course-categories');
+    }
+
 }
 
 module.exports = Courses;

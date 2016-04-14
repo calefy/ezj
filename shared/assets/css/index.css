@@ -58,7 +58,7 @@
 
 .index-teacher li { height:300px;}
 .index-teacher .course-list-img{width: 228px;height: 228px;overflow: hidden;position: relative;}
-.index-teacher h5{ font-size: 1em;}
-.index-teacher h6{ font-size: 0.875em; margin: 10px 0 0;}
+.index-teacher h5{ font-size: 1.2em;}
+.index-teacher h6{ font-size: 1em; margin: 10px 0 0;}
 .index-teacher li:hover h5,.index-teacher li:hover h6{ color: #b01c40;}
 .index-teacher .course-list-img img{height:228px;}

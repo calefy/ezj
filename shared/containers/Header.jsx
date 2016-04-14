@@ -8,6 +8,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { IndexLink, Link } from 'react-router'
+import trim from 'lodash/trim';
 
 import { getRequestTypes } from '../libs/utils';
 import UserAction from '../actions/UserAction';
@@ -130,6 +131,16 @@ class Header extends Component {
         this.props.dispatch(this.userAction.logout());
     };
 
+    // 搜索
+    onSearchSubmit = e => {
+        e.preventDefault();
+        e.nativeEvent.returnValue = false;
+        let v = trim(this.refs.q.value);
+        if (v) {
+            this.props.history.push({ pathname: '/search', query: { q: v } });
+        }
+    };
+
     render() {
         const user = this.props.user.data || {}
         const pathname = this.props.location.pathname;
@@ -142,19 +153,20 @@ class Header extends Component {
                     <nav className="header-nav fl mar-r22">
                         <ul>
                             <li>
-                                <Link to="/" activeClassName={pathname === '/' ? 'cur' : null}>首页</Link>
+                                <Link to="/" className={pathname === '/' ? 'cur' : null}>首页</Link>
                             </li>
                             <li>
-                                <Link to="study.html">课程中心</Link>
+                                <Link to="/courses" className={pathname === '/courses' ? 'cur' : null}>全部课程</Link>
                             </li>
                             <li>
-                                <Link to="service.html">学习中心</Link>
+                                <Link to="/study" className={pathname === '/study' ? 'cur' : null}>学习中心</Link>
                             </li>
                         </ul>
                     </nav>
-                    <div className="header-search fl">
-                        <input type="text" name="" placeholder="请输入您要搜索的关键词" /><a href="search"><i className="iconfont icon-search"></i></a>
-                    </div>
+                    <form className="header-search fl" action="/search" method="GET" onSubmit={this.onSearchSubmit}>
+                        <input type="text" ref="q" name="q" placeholder="请输入您要搜索的关键词" />
+                        <button type="submit"><i className="iconfont icon-search"></i></button>
+                    </form>
                     {user.uid ?
                         <div className="header-user fr">
                             <div className="head-account fr" onClick={this.toggleMenu} onMouseEnter={this.showMenu} onMouseLeave={this.hideMenu}>
@@ -164,10 +176,10 @@ class Header extends Component {
                                 <span className="user-name fr">{user.nickname}</span>
                                 <ul className={`menu nav ${this.state.showMenu ? '' : 'hide' }` } >
                                     <li className="first leaf">
-                                        <Link to="/account/index">我的账号</Link>
+                                        <Link to="/account/index">个人中心</Link>
                                     </li>
                                     <li className="last leaf">
-                                        <Link to="/" onClick={this.handleLogout} >退出</Link>
+                                        <Link to="/" onClick={this.handleLogout} >退出登录</Link>
                                     </li>
                                 </ul>
                             </div>

@@ -23,7 +23,7 @@ class Account extends Component {
                         </address>
                     </div>
                     <div className="other-contact-right fl">
-                        <img src="/assets/img/map.jpg" />
+                        <img src={require('../../assets/img/map.jpg')} />
                     </div>
                 </div>
             </div>

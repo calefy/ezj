@@ -2,36 +2,62 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
-import { getOwnRequestIdentity, isOwnRequest } from '../libs/utils';
+import { baseCourseCategories } from '../libs/const';
 
+import CoursesAction from '../actions/CoursesAction';
+
+if (process.env.BROWSER) {
+    require('css/classify.css');
+}
 class Classify extends Component {
 
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
+        const coursesAction = new CoursesAction({ apiClient: apiClient });
         return Promise.all([
-            // 默认首页取5个
-            //dispatch( noticeAction.loadNotices({pageSize: 5}, getOwnRequestIdentity(location)) )
+            dispatch( coursesAction.loadCourseCategories() ), // 分类
         ]);
     }
 
     componentDidMount() {
+        const { course_categories } = this.props;
+        if ( course_categories.isFetching ) {
+            Classify.fetchData(this.props);
+        }
     }
 
     render() {
+        const { course_categories, location } = this.props;
+        const categories = course_categories.data || [];
+        const query = location.query;
+
         return (
             <div className="content classify">
                 <div className="container cl">
                     <div className="classify-left fl">
-                        <h4>金融专业实务精品课</h4>
-                        <a href="" title="">财富管理<i className="iconfont icon-arrow fr"></i></a>
-                        <a href="" title="">企业理财顾问师<i className="iconfont icon-arrow fr"></i></a>
-                        <a href="security" title="">资产证券化<i className="iconfont icon-arrow fr"></i></a>
-                        <a href="" title="">互联网金融<i className="iconfont icon-arrow fr"></i></a>
-                        <h5><a href="" title="">金融领导力<i className="iconfont icon-arrow fr"></i></a></h5>
-                        <h5><a href="" title="">学位教育<i className="iconfont icon-arrow fr"></i></a></h5>
+                        {baseCourseCategories.map((item, key) => {
+                            if (key === 0) {
+                                return (
+                                    <div key={key}>
+                                        <h4>{item.name}</h4>
+                                        {categories.map((c, i) => {
+                                            return <Link to="/courses" query={{category: c.id}} key={i} className={query.category == c.id ? 'cur' : null}>{c.name}<i className="iconfont icon-arrow fr"></i></Link>
+                                        })}
+                                    </div>
+                                );
+                            } else {
+                                return <h5 key={key}><Link to="/courses" query={{category: item.id}} className={query.category == item.id ? 'cur' : null}>{item.name}<i className="iconfont icon-arrow fr"></i></Link></h5>
+                            }
+                        })}
                     </div>
                     <div className="classify-right fl">
-                        <p className="classify-course">查看关于<a href="">互联网金融商业模式</a><br /><a href="" title="">资产证券化</a><a href="" title="">企业理财</a>的精品课程</p>
+                        <p className="classify-course">
+                            查看关于
+                            <Link to="/courses" query={{category: 784}}>互联网金融商业模式</Link> <br/>
+                            <Link to="/courses" query={{category: 785}}>资产证券化</Link> &emsp;
+                            <Link to="/courses" query={{category: 662}}>企业理财</Link>
+                            的精品课程
+                        </p>
                     </div>
                 </div>
             </div>
@@ -40,5 +66,7 @@ class Classify extends Component {
 }
 
 
-module.exports = connect( state => ({ notices: state.notices }) )(Classify);
+module.exports = connect( state => ({
+    course_categories: state.course_categories,
+}) )(Classify);
 
