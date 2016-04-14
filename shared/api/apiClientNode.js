@@ -105,10 +105,13 @@ class ApiClientNode extends ApiClient {
                 } else {
                     return Promise.reject(json);
                 }
-            }).bind(this)).catch( error => {
+            }).bind(this)).catch( (error => {
+                if (fetchOptions.method.toLowerCase() === 'get') {
+                    this._cache[cacheKey] = error; // 缓存数据
+                }
                 console.log('[fetch] end fail: ', fetchOptions.method, url, error, error.stack);
                 return Promise.reject(error);
-            });
+            }).bind(this));
     }
 
 }

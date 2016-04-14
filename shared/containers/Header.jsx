@@ -18,25 +18,12 @@ import RegistForm from '../components/RegistForm.jsx';
 import LoginForm  from '../components/LoginForm.jsx';
 
 class Header extends Component {
-    // 初始加载数据
-    static fetchData({dispatch, apiClient}) {
-        const userAction = new UserAction({ apiClient: apiClient });
-        return Promise.all([
-            dispatch(userAction.loadAccount()),
-        ]);
-    }
     state = {
         showMenu: false,  // 头像下来菜单显示与否
         showDialog: false,  // 显示登录注册框
         dialogType: 'login', // 对话框类型
     };
 
-    componentDidMount() {
-        this.userAction = new UserAction();
-        if (this.props.user.isFetching) {
-            Header.fetchData(this.props);
-        }
-    }
     componentWillReceiveProps(nextProps) {
         const loginType = getRequestTypes(UserAction.LOGIN);
         const sendType = getRequestTypes(UserAction.SEND);

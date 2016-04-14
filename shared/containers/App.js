@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 
 import OperateAction from '../actions/OperateAction';
+import UserAction from '../actions/UserAction';
 import Header from './Header.jsx';
 import Footer from '../components/Footer';
 
@@ -15,6 +16,20 @@ if (process.env.BROWSER) {
 let actionTimer = null;
 
 class App extends Component {
+    // 初始加载数据
+    static fetchData({dispatch, apiClient}) {
+        const userAction = new UserAction({ apiClient: apiClient });
+        return Promise.all([
+            dispatch(userAction.loadAccount()),
+        ]);
+    }
+
+    componentDidMount() {
+        this.userAction = new UserAction();
+        if (this.props.user.isFetching) {
+            App.fetchData(this.props);
+        }
+    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
@@ -45,6 +60,7 @@ class App extends Component {
 }
 
 module.exports = connect( state => ({
-    action: state.action
+    action: state.action,
+    user: state.user
 }) )(App);
 
