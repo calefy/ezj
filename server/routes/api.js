@@ -5,6 +5,7 @@ import { Router } from 'express';
 import multer from 'multer';
 import fs from 'fs';
 import Url from 'url';
+import crypto from 'crypto';
 import FormData from 'form-data';
 import forEach from 'lodash/forEach';
 
@@ -35,7 +36,6 @@ router.post(/^\/v1\/(account\/avatar|els\/storage\/upload)/,
         return;
     }
 
-    //console.log(".... uploaded file: ", req.file)
     // 设置FormData
     const form = new FormData();
     form.maxDataSize = 1024 * 1024 * 60; // 设置最大文件大小60M
@@ -124,11 +124,19 @@ router.all('*', function(req, res, next) {
             }
             // 检查如果是登录接口调用，需要写cookie
             if (/v\d+\/sso\/(?:login|register)$/.test(req.path) && result.data.ticket) {
+                // 翻转、加盐、base64
                 const salt = '0ZSGxuBkSJS5';
                 let expires = 'expires=' + (new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)).toGMTString() + ';';
                 let sup = result.data.ticket.split('').reverse().join('');
-                sup = new Buffer(salt + sup + Math.random()).toString('base64');
-                sup = '_SUP=' + sup + ';path=/;' + ( req.query.remember ? expires : '');
+                let token = salt + sup + Math.random();
+                sup = new Buffer(token).toString('base64');
+                // yii格式加密 hmac sha256
+                let serialize = `a:2:{i:0;s:4:"_SUP";i:1;s:${sup.length}:"${sup}";}`;
+                let hamc = crypto.createHmac('sha256', 'VzpR5JMDNqUsOZ0IFQARNLU9_0KLr9UC');
+                hamc.update(serialize);
+                sup = hamc.digest('hex');
+                // 设置到cookie
+                sup = '_SUP=' + sup + ';path=/;domain=.ezijing.com;' + ( req.query.remember ? expires : '');
                 res.set('Set-Cookie', sup + (res.get('Set-Cookie') || ''));
             }
             res.json(result);
