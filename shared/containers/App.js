@@ -32,11 +32,13 @@ class App extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
-            //this.refs.snackbar.show(nextProps.action.message, nextProps.action.label);
+        let prevPath = this.props.location.pathname + this.props.location.search;
+        let nextPath = nextProps.location.pathname + nextProps.location.search;
+        if (prevPath !== nextPath) {
+            window.scrollTo(0, 0);
         }
 
-        // 清理action，防止路由变更，但是action数据没变更，二次展示问题
+        // 清理action，防止路由变更时，action数据没变更，导致二次处理问题
         clearTimeout(actionTimer);
         if (nextProps.action.type && nextProps.action.type !== OperateAction.CLEAR_ACTION) {
             actionTimer = setTimeout(function() {
