@@ -32,7 +32,7 @@ module.exports = {
     childRoutes: [
         // 课程分类页
         {
-            path: 'classify',
+            path: 'courses',
             getComponent(location, cb) {
                 require.ensure([], require => {
                     cb(null, require('./containers/Classify'));
@@ -50,7 +50,7 @@ module.exports = {
         },
         // 课程分类－资产证券化页
         {
-            path: 'course',
+            path: 'courses/:courseId',
             getComponent(location, cb) {
                 require.ensure([], require => {
                     cb(null, require('./containers/Course'));
@@ -299,5 +299,14 @@ module.exports = {
                 });
             }
         },
+        // 专题页
+        {
+            path: 'topic',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/topic'));
+                });
+            }
+        }
     ]
 };

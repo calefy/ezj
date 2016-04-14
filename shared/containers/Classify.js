@@ -4,6 +4,9 @@ import { Link } from 'react-router';
 
 import { getOwnRequestIdentity, isOwnRequest } from '../libs/utils';
 
+if (process.env.BROWSER) {
+    require('css/classify.css');
+}
 class Classify extends Component {
 
     // 初始加载数据

@@ -5,6 +5,8 @@ import { Link } from 'react-router';
 import { getOwnRequestIdentity, isOwnRequest } from '../libs/utils';
 
 if (process.env.BROWSER) {
+    require('css/classify.css')
+    require('css/index.css')
     require('css/search.css')
 }
 

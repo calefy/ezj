@@ -42,3 +42,9 @@ export const adsType = {
     SIDE: 3,
     LECTURER: 4
 }
+
+export const baseCourseCategories = [
+    { id: 'great', name: '金融专业实务精品课' },
+    { id: 'financial', name: '金融领导力' },
+    { id: 'competitive', name: '学位项目' },
+];

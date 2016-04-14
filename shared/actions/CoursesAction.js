@@ -20,6 +20,10 @@ module.exports = class CoursesAction extends BaseAction {
     //loadLatestCourses(query = {}) {
     //    return BaseAction.dispatchRequest( 'latestCourses', this.api.latestCourses(query) );
     //}
+    static LOAD_COURSE_CATEGORIES = 'course_categories';
+    loadCourseCategories() {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_CATEGORIES, this.api.courseCategories() );
+    }
 
 }
 

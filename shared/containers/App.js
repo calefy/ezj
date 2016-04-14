@@ -9,8 +9,6 @@ import Footer from '../components/Footer';
 if (process.env.BROWSER) {
     require('css/reset.css')
     require('css/style.css')
-    require('css/index.css')
-    require('css/classify.css')
     require('css/iconfont/iconfont.css')
 }
 
@@ -36,7 +34,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Header location={this.props.location} />
+                <Header location={this.props.location} history={this.props.history} />
                 <div className="body">
                     {this.props.children}
                 </div>
