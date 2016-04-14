@@ -4,6 +4,7 @@
 import merge from 'lodash/merge';
 import { reducerRequest, getRequestTypes } from '../libs/utils';
 import { targetType } from '../libs/const';
+import OtherAction from '../actions/OtherAction';
 
 /**
  * normalizr处理后存储实体对象
@@ -24,4 +25,11 @@ export function entities(state = {}, action) {
  */
 export function action(state, action) {
     return action;
+}
+
+/**
+ * 首页广告
+ */
+export function ads_index(state, action) {
+    return reducerRequest(OtherAction.ADS_INDEX, state, action);
 }

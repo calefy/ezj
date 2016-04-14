@@ -90,7 +90,7 @@ let LoginForm = React.createClass({
 
                 <dl className="formsy-list cl">
                     <dt className="fl">
-                        <FormsyCheckbox name="remeber" value="1" defaultChecked={true} />记住我
+                        <FormsyCheckbox name="remember" value="1" defaultChecked={true} />记住我
                     </dt>
                     <dd className="fr text-error">
                         {this.state.error}

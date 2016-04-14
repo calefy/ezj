@@ -7,7 +7,7 @@
  */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import { IndexLink, Link } from 'react-router'
 
 import { getRequestTypes } from '../libs/utils';
 import UserAction from '../actions/UserAction';
@@ -96,7 +96,7 @@ class Header extends Component {
     };
 
     /**
-     * 切换不同
+     * 切换不同表单
      */
     handleTurnToLogin = () => {
         this._setState({dialogType: 'login'});
@@ -108,6 +108,9 @@ class Header extends Component {
         this._setState({ showDialog: false });
     };
 
+    /**
+     * 执行注册
+     */
     handleSendValidCode = (contact) => {
         this.props.dispatch(this.userAction.send(contact));
     };
@@ -129,25 +132,23 @@ class Header extends Component {
 
     render() {
         const user = this.props.user.data || {}
+        const pathname = this.props.location.pathname;
         return (
             <div className="header cl">
                 <div className="container">
                     <div className="logo fl">
-                        <a href="/"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1bb87d41d15fe27b500a4bfcde01bb0e.png" alt="" /></a>
+                        <Link to="/"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1bb87d41d15fe27b500a4bfcde01bb0e.png" alt="" /></Link>
                     </div>
                     <nav className="header-nav fl mar-r22">
                         <ul>
-                            <li className="cur">
-                                <Link to="/">首页</Link>
+                            <li>
+                                <Link to="/" activeClassName={pathname === '/' ? 'cur' : null}>首页</Link>
                             </li>
                             <li>
                                 <Link to="study.html">课程中心</Link>
                             </li>
                             <li>
                                 <Link to="service.html">学习中心</Link>
-                            </li>
-                            <li>
-                                <Link to="service.html">创业学院</Link>
                             </li>
                         </ul>
                     </nav>
