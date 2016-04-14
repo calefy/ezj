@@ -34,9 +34,10 @@ class Classify extends Component {
         ];
         // 如果请求的是具体的某个分类，则加载分类详情
         if (isCategory(location)) {
-            arr.push(
-                dispatch( coursesAction.loadCourseCategory(location.query.category) )
-            );
+            arr = arr.concat([
+                dispatch( coursesAction.loadCourseCategory(location.query.category) ),
+                dispatch( coursesAction.loadCourseCategoryCourses(location.query.category) )
+            ]);
         }
         return Promise.all( arr );
     }
@@ -55,12 +56,13 @@ class Classify extends Component {
             const coursesAction = new CoursesAction();
             if (isCategory(nextProps.location)) {
                 nextProps.dispatch( coursesAction.loadCourseCategory(nextProps.location.query.category) );
+                nextProps.dispatch( coursesAction.loadCourseCategoryCourses(nextProps.location.query.category) );
             }
         }
     }
 
     render() {
-        const { course_categories, course_category, location } = this.props;
+        const { course_categories, course_category, category_courses, location } = this.props;
         const categories = course_categories.data || [];
         const query = location.query;
 
@@ -94,7 +96,11 @@ class Classify extends Component {
                             </p>
                             : null
                         }
-                        {isCategory(location) && course_category.data ? <CourseCategoryDetail category={course_category.data}/> : null}
+                        {isCategory(location) && course_category.data && category_courses.data ?
+                            <CourseCategoryDetail
+                                category={course_category.data}
+                                courses={category_courses.data.list}
+                            /> : null}
                     </div>
                 </div>
             </div>
@@ -106,5 +112,6 @@ class Classify extends Component {
 module.exports = connect( state => ({
     course_category: state.course_category,
     course_categories: state.course_categories,
+    category_courses: state.category_courses,
 }) )(Classify);
 

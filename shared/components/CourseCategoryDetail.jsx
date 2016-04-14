@@ -8,11 +8,37 @@ import { Link } from 'react-router';
 class CourseCategoryDetail extends Component {
     static propTypes = {
         category: PropTypes.object.isRequired, // 单个分类详情
+        courses: PropTypes.array.isRequired, // 包含的课程
     };
 
+    renderCourses = list => {
+        return list.map((item, index) => {
+            return (
+                <dd key={index}>
+                    <span className="online-title">{index + 1}.{item.course_name}</span>
+                    <span className="online-time"><i className="iconfont icon-time"></i>3 课时</span>
+                    <span className="online-price"><i className="iconfont icon-price"></i>{item.course_price}</span>
+                    <span className="online-num"><i className="iconfont icon-user"></i>{item.student_count} 人</span>
+                    <Link to={`/courses/${item.id}`} className="online-content">详情</Link>
+                    <Link to={`/courses/${item.id}`} className="online-buy">购买</Link>
+                </dd>
+            );
+        });
+    };
 
     render() {
-        const category = this.props.category;
+        const {category, courses}= this.props;
+
+        let chars = '一二三四五六七八九十'.split('');
+
+        let categoryMap = {};
+        if (category.items) {
+            (courses || []).forEach(item => {
+                let c = item.course_category_id;
+                categoryMap[c] = categoryMap[c] || [];
+                categoryMap[c].push(item);
+            })
+        }
 
         return (
             <div>
@@ -43,168 +69,17 @@ class CourseCategoryDetail extends Component {
                 <div className="online-course bg-white">
                     <h4 className="classify-h4">在线课程</h4>
                     <dl>
-                        <dt>模块一：产品设计</dt>
-                        <dd>
-                            <span className="online-title">1.资产证券化解析</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>266 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">2.信用卡资产证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>55 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>2380</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>46 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">3.银行贷款资产证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>10 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>33 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">4.商业地产贷款证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">5.房地产信托基金REITs</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">6.住房按揭资产证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">7.汽车贷款资产证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>模块二：运营技术</dt>
-                        <dd>
-                            <span className="online-title">1.资产证券化解析</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">2.信用卡资产证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">3.银行贷款资产证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">4.商业地产贷款证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>模块三：参与主体</dt>
-                        <dd>
-                            <span className="online-title">1.资产证券化解析</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>10 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">2.信用卡资产证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">3.银行贷款资产证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">4.商业地产贷款证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>模块四：衍生模块</dt>
-                        <dd>
-                            <span className="online-title">1.资产证券化解析</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">2.信用卡资产证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">3.银行贷款资产证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
-                        <dd>
-                            <span className="online-title">4.商业地产贷款证券化</span>
-                            <span className="online-time"><i className="iconfont icon-price"></i>3 课时</span>
-                            <span className="online-price"><i className="iconfont icon-time"></i>238</span>
-                            <span className="online-num"><i className="iconfont icon-user"></i>365 人</span>
-                            <a href="" title="" className="online-content">详情</a>
-                            <a href="" title="" className="online-buy">购买</a>
-                        </dd>
+                        {category.items && category.items.length ?
+                            category.items.map(((c,i) => {
+                                let ret = [<dt>模块{chars[i]}：{c.name}</dt>];
+                                if (categoryMap[c.id]) {
+                                    ret = ret.concat(this.renderCourses(categoryMap[c.id]));
+                                }
+                                return ret;
+                            }).bind(this))
+                            :
+                            this.renderCourses(courses)
+                        }
                     </dl>
                 </div>
                 <div className="open-course bg-white hide">

@@ -33,5 +33,11 @@ module.exports = class CoursesAction extends BaseAction {
         return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_CATEGORY, this.api.courseCategory(categoryId) );
     }
 
+    // 加载某一条分类的课程列表
+    static LOAD_COURSE_CATEGORY_COURSES = 'course_category_courses';
+    loadCourseCategoryCourses(categoryId) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_CATEGORY_COURSES, this.api.courseCategoryCourses(categoryId) );
+    }
+
 }
 

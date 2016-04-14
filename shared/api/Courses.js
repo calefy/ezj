@@ -22,11 +22,17 @@ class Courses extends Base {
     //    return this.apiClient.get(`els/courses/latest${params}`);
     //}
 
+    // 所有课程分类
     courseCategories() {
         return this.apiClient.get('els/course-categories');
     }
+    // 某个课程分类详情
     courseCategory(categoryId) {
         return this.apiClient.get('els/course-categories/' + categoryId);
+    }
+    // 某个课程分类下的课程
+    courseCategoryCourses(categoryId) {
+        return this.apiClient.get('els/course-categories/' + categoryId + '/courses?per-page=100');
     }
 
 }
