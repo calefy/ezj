@@ -257,7 +257,7 @@ module.exports = {
         },
         //其他页面
         {
-            path: 'other',
+            path: 'help',
             getComponent(location, cb) {
                 require.ensure([], require => {
                     cb(null, require('./containers/other/index'));
