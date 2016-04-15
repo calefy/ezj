@@ -76,7 +76,6 @@ class ApiClientNode extends ApiClient {
         let httpStatus, headerPage, headerTotal, headerCookie;
         console.log('[fetch] begin: ', fetchOptions.method, url, fetchOptions.body);
         const t = Date.now();
-        console.log('.....request options: ', url, fetchOptions)
         return fetch(url, fetchOptions).then( (res => {
                 httpStatus = res.status;
                 headerPage = res.headers.get('X-Pagination-Current-Page');
