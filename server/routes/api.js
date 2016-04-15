@@ -99,14 +99,7 @@ router.all('*', function(req, res, next) {
     const apiClient = new ApiClientNode({ prefix: config.apiPrefix });
     const url = getNoPrefixUrl(req.path, req.query);
     const headerType = req.get(ApiClientNode.HEADER_CONTENT_TYPE);
-    // 如果是form-url-encoded，需要原样转发，因此需要编码
-    let formBody = Object.assign({}, req.body);
-    if (headerType === ApiClientNode.CONTENT_TYPE_FORM) {
-        forEach(formBody, (item, key) => {
-            formBody[key] = encodeURIComponent(item);
-        });
-    }
-    const body = res.locals.body || formBody;
+    const body = res.locals.body || req.body;
     const headers = {
         'Content-Type': body instanceof FormData ?
                             ApiClientNode.CONTENT_TYPE_MULTI :

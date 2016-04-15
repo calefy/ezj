@@ -62,7 +62,7 @@ class ApiClientNode extends ApiClient {
                 // api Yii要求不能是application/json类型
                 fetchOptions.headers[contentType] = ApiClient.CONTENT_TYPE_FORM;
             } else {
-                fetchOptions.body = (body instanceof FormData) ? body : paramify(body);
+                fetchOptions.body = (body instanceof FormData) ? body : paramify(body); // paramify中会做urlencode
             }
         }
         // 客户端patch一直失败，用put替换才行，单服务器端向api发送时，修正为patch
