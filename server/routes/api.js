@@ -79,6 +79,7 @@ router.post('/editor/upload', uploader.single('upload'), function(req, res, next
     const headers = {
         'Content-Type': ApiClientNode.CONTENT_TYPE_MULTI,
         'Cookie': req.get('cookie'),
+        'User-Agent': req.get('User-Agent'),
         'X-Real-Ip': req.ip
     };
 
@@ -105,6 +106,7 @@ router.all('*', function(req, res, next) {
                             ApiClientNode.CONTENT_TYPE_MULTI :
                             req.get(ApiClientNode.HEADER_CONTENT_TYPE),
         'Cookie': req.get('cookie'),
+        'User-Agent': req.get('User-Agent'),
         'X-Real-Ip': req.ip
     };
 
