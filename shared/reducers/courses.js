@@ -24,3 +24,6 @@ export function course_category(state, action) {
 export function category_courses(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_CATEGORY_COURSES, state, action);
 }
+export function courses_search(state, action) {
+    return reducerRequest(CoursesAction.LOAD_SEARCH, state, action);
+}

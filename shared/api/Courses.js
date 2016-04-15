@@ -35,6 +35,12 @@ class Courses extends Base {
         return this.apiClient.get('els/course-categories/' + categoryId + '/courses?per-page=100');
     }
 
+    search(params) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get(`els/search/courses${params}`);
+    }
+
 }
 
 module.exports = Courses;

@@ -39,5 +39,14 @@ module.exports = class CoursesAction extends BaseAction {
         return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_CATEGORY_COURSES, this.api.courseCategoryCourses(categoryId) );
     }
 
+    // 搜索
+    static LOAD_SEARCH = 'search';
+    loadSearch(params) {
+        if (!params.keyword) {
+            params.keyword = params.q;
+        }
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_SEARCH, this.api.search(params), params );
+    }
+
 }
 
