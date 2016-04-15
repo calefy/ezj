@@ -27,3 +27,12 @@ export function category_courses(state, action) {
 export function courses_search(state, action) {
     return reducerRequest(CoursesAction.LOAD_SEARCH, state, action);
 }
+export function course(state, action) {
+    return reducerRequest(CoursesAction.LOAD_COURSE_DETAIL, state, action);
+}
+export function course_private(state, action) {
+    return reducerRequest(CoursesAction.LOAD_COURSE_PRIVATE, state, action);
+}
+export function chapters(state, action) {
+    return reducerRequest(CoursesAction.LOAD_COURSE_CHAPTER, state, action);
+}

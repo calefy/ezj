@@ -180,3 +180,20 @@ export function getApiRequestHeader(req, contentType) {
     return ret;
 }
 
+/**
+ * 转换秒到时分秒计时
+ * @param int second 总秒数
+ * @param string format 格式化，如'h:m:s'
+ */
+export function toTimeString(second, format) {
+    let m = Math.floor(second / 60);
+    let h = Math.floor(m / 60);
+    let s = second % 60;
+    m = m % 60;
+
+    s = s < 10 ? '0' + s : s;
+    m = m < 10 ? '0' + m : m;
+    h = h < 10 ? '0' + h : h;
+
+    return format.replace('h', h).replace('m', m).replace('s', s);
+}

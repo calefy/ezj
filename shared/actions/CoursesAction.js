@@ -48,5 +48,21 @@ module.exports = class CoursesAction extends BaseAction {
         return BaseAction.dispatchRequest( CoursesAction.LOAD_SEARCH, this.api.search(params), params );
     }
 
+    // 课程详情
+    static LOAD_COURSE_DETAIL = 'course_detail';
+    loadCourseDetail(courseId) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_DETAIL, this.api.courseDetail(courseId) );
+    }
+    // 课程私密信息
+    static LOAD_COURSE_PRIVATE = 'course_private';
+    loadCoursePrivate(courseId) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_PRIVATE, this.api.coursePrivate(courseId) );
+    }
+
+    // 课程章节
+    static LOAD_COURSE_CHAPTER = 'course_chapters';
+    loadCourseChapters(courseId) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_CHAPTER, this.api.courseChapters(courseId) );
+    }
 }
 
