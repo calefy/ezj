@@ -29,7 +29,9 @@ function serverRendering(req, res) {
     // 设置api请求需要的通用头
     apiClient.headers = {
         'User-Agent': req.get('User-Agent'),
-        'X-Real-Ip' : req.ip,
+        'X-Real-Ip': req.ip,
+        'X-Forwarded-For': req.ip,
+        'X-Node-Test': 'node-test '+req.ip,
         'Cookie' : req.get('cookie')
     };
 
