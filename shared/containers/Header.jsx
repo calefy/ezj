@@ -24,6 +24,8 @@ class Header extends Component {
         dialogType: 'login', // 对话框类型
     };
 
+    userAction = new UserAction();
+
     componentWillReceiveProps(nextProps) {
         const loginType = getRequestTypes(UserAction.LOGIN);
         const sendType = getRequestTypes(UserAction.SEND);
