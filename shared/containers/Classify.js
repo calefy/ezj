@@ -55,7 +55,7 @@ class Classify extends Component {
                 // 单一分类时，需要检查是否已有数据与请求categoryId一致
                 (isCategory(location) && (this.props.course_category.isFetching || this.props.course_category.data.id != location.query.category)) ||
                 // 搜索时，要检查已有数据搜索key是否与当前请求关键字一致
-                (isSearch(location) && (this.props.courses_search.isFetching || (this.props.courses_search._data && (this.props.courses_search._data.keyword != location.query.q || this.props.courses_search._data.page != location.query.page))))
+                (isSearch(location) && (this.props.courses_search.isFetching || (this.props.courses_search._req && (this.props.courses_search._req.keyword != location.query.q || this.props.courses_search._req.page != location.query.page))))
             ) {
             Classify.fetchData(this.props);
         }

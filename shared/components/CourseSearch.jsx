@@ -54,7 +54,7 @@ class CourseSearch extends Component {
                 </div>
 
                 <Pagination
-                    page={location.query.page || 0}
+                    page={(location.query.page || 0) - 0}
                     pageSize={12}
                     total={total}
                     link={location.pathname}
