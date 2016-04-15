@@ -2,6 +2,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { match, RoutingContext } from 'react-router'
+import { getApiRequestHeader } from '../../shared/libs/utils';
 
 import config           from '../../config';
 import routes           from '../../shared/routes';
@@ -27,13 +28,7 @@ if (process.env.NODE_ENV === 'production') {
 function serverRendering(req, res) {
     let apiClient = new ApiClient({ prefix: config.apiPrefix });
     // 设置api请求需要的通用头
-    apiClient.headers = {
-        'User-Agent': req.get('User-Agent'),
-        'X-Real-Ip': req.ip,
-        'X-Forwarded-For': req.ip,
-        'X-Node-Test': 'node-test '+req.ip,
-        'Cookie' : req.get('cookie')
-    };
+    apiClient.headers = getApiRequestHeader(req);
 
     // 优先获取登录数据
     const userApi = new UserApi({ apiClient });

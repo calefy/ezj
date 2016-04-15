@@ -11,7 +11,7 @@ import forEach from 'lodash/forEach';
 
 import config from '../../config';
 import ApiClientNode from '../../shared/api/apiClientNode';
-import { paramify } from '../../shared/libs/utils';
+import { paramify, getApiRequestHeader } from '../../shared/libs/utils';
 
 const router = require('express').Router();
 const uploader = multer({ dest: '/tmp' });
@@ -76,14 +76,7 @@ router.post('/editor/upload', uploader.single('upload'), function(req, res, next
     // 发送
     const apiClient = new ApiClientNode({ prefix: config.apiPrefix });
     const url = getNoPrefixUrl('/v1/els/storage/upload-pic', req.query);
-    const headers = {
-        'Content-Type': ApiClientNode.CONTENT_TYPE_MULTI,
-        'Cookie': req.get('cookie'),
-        'User-Agent': req.get('User-Agent'),
-        'X-Real-Ip': req.ip,
-        'X-Forwarded-For': req.ip,
-        'X-Node-Test': 'node-test '+req.ip
-    };
+    const headers = getApiRequestHeader(req, ApiClientNode.CONTENT_TYPE_MULTI);
 
     // 发起请求
     apiClient.request(req.method, url, form, headers)
@@ -103,16 +96,12 @@ router.all('*', function(req, res, next) {
     const url = getNoPrefixUrl(req.path, req.query);
     const headerType = req.get(ApiClientNode.HEADER_CONTENT_TYPE);
     const body = res.locals.body || req.body;
-    const headers = {
-        'Content-Type': body instanceof FormData ?
-                            ApiClientNode.CONTENT_TYPE_MULTI :
-                            req.get(ApiClientNode.HEADER_CONTENT_TYPE),
-        'Cookie': req.get('cookie'),
-        'User-Agent': req.get('User-Agent'),
-        'X-Real-Ip': req.ip,
-        'X-Forwarded-For': req.ip,
-        'X-Node-Test': 'node-test '+req.ip
-    };
+    const ip = req.ip.replace(/[^\d]*(\d+(\.\d+){3})[^\d]*/, '$1');
+    const headers = getApiRequestHeader(req,
+                body instanceof FormData ?
+                    ApiClientNode.CONTENT_TYPE_MULTI :
+                    req.get(ApiClientNode.HEADER_CONTENT_TYPE)
+            );
 
     // 发起请求
     apiClient.request(req.method, url, body, headers)
