@@ -28,7 +28,7 @@ function serverRendering(req, res) {
     let apiClient = new ApiClient({ prefix: config.apiPrefix });
     // 设置api请求需要的通用头
     apiClient.headers = {
-        'X-Real-Ip' : req.get('x-real-ip'),
+        'X-Real-Ip' : req.ip,
         'Cookie' : req.get('cookie')
     };
 

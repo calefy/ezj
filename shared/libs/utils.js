@@ -111,7 +111,8 @@ export function isOwnRequest(data = {}, location) {
 export function paramify(params) {
     let ret = [];
     for (var key in params) {
-        ret.push(`${key}=${params[key]}`);
+        let p = encodeURIComponent(params[key]);
+        ret.push(`${key}=${p}`);
     }
     return ret.join('&');
 }
