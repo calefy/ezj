@@ -6,6 +6,7 @@ import { baseCourseCategories } from '../libs/const';
 import CoursesAction from '../actions/CoursesAction';
 
 import CourseCategoryDetail from '../components/CourseCategoryDetail.jsx';
+import CourseSearch from '../components/CourseSearch.jsx';
 
 if (process.env.BROWSER) {
     require('css/classify.css');
@@ -39,13 +40,23 @@ class Classify extends Component {
                 dispatch( coursesAction.loadCourseCategoryCourses(location.query.category) )
             ]);
         }
+        // 如果请求的是搜索，则加载搜索信息
+        else if (isSearch(location)) {
+            arr = arr.concat([
+                dispatch( coursesAction.loadSearch( location.query ) )
+            ]);
+        }
         return Promise.all( arr );
     }
 
     componentDidMount() {
-        const { course_categories, course_category, location } = this.props;
+        const { course_categories, location } = this.props;
         if ( course_categories.isFetching ||
-                (isCategory(location) && course_category.isFetching)) {
+                // 单一分类时，需要检查是否已有数据与请求categoryId一致
+                (isCategory(location) && (this.props.course_category.isFetching || this.props.course_category.data.id != location.query.category)) ||
+                // 搜索时，要检查已有数据搜索key是否与当前请求关键字一致
+                (isSearch(location) && (this.props.courses_search.isFetching || (this.props.courses_search._req && (this.props.courses_search._req.keyword != location.query.q || this.props.courses_search._req.page != location.query.page))))
+            ) {
             Classify.fetchData(this.props);
         }
     }
@@ -54,20 +65,25 @@ class Classify extends Component {
         let nextPath = nextProps.location.pathname + nextProps.location.search;
         if (prevPath !== nextPath) {
             const coursesAction = new CoursesAction();
+            // url变更后加载分类数据
             if (isCategory(nextProps.location)) {
                 nextProps.dispatch( coursesAction.loadCourseCategory(nextProps.location.query.category) );
                 nextProps.dispatch( coursesAction.loadCourseCategoryCourses(nextProps.location.query.category) );
+            }
+            // url变更后加载搜索数据
+            else if (isSearch(nextProps.location)) {
+                nextProps.dispatch( coursesAction.loadSearch(nextProps.location.query) );
             }
         }
     }
 
     render() {
-        const { course_categories, course_category, category_courses, location } = this.props;
+        const { course_categories, location } = this.props;
         const categories = course_categories.data || [];
         const query = location.query;
 
         return (
-            <div className={`content classify${isCategory(location) ? '-category' : ''}`}>
+            <div className={`content classify${isCategory(location) || isSearch(location) ? '-category' : ''}`}>
                 <div className="container cl">
                     <div className="classify-left fl">
                         {baseCourseCategories.map((item, key) => {
@@ -96,11 +112,21 @@ class Classify extends Component {
                             </p>
                             : null
                         }
-                        {isCategory(location) && course_category.data && category_courses.data ?
+                        {isCategory(location) && this.props.course_category.data && this.props.category_courses.data ?
                             <CourseCategoryDetail
-                                category={course_category.data}
-                                courses={category_courses.data.list}
-                            /> : null}
+                                category={this.props.course_category.data}
+                                courses={this.props.category_courses.data.list}
+                            />
+                            : null
+                        }
+                        {isSearch(location) && this.props.courses_search.data ?
+                            <CourseSearch
+                                courses={this.props.courses_search.data.courses}
+                                total = {this.props.courses_search.data.total}
+                                location = {location}
+                            />
+                            : null
+                        }
                     </div>
                 </div>
             </div>
@@ -112,6 +138,7 @@ class Classify extends Component {
 module.exports = connect( state => ({
     course_category: state.course_category,
     course_categories: state.course_categories,
+    courses_search: state.courses_search,
     category_courses: state.category_courses,
 }) )(Classify);
 

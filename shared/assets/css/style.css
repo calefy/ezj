@@ -201,3 +201,80 @@ button{ cursor: pointer; outline: none; border: 0;}
 .form-red {color: red;}
 .formsy-input input[type="text"]{ outline: none; height:38px; width:100%; border:0;}
 
+/* 分页 */
+.pagination li a:hover{
+  color:#000;
+}
+.pagination li.selected{
+  color:white; 
+}
+.pagination a,
+.pagination a:visited{
+  color:#555;
+}
+.pagination li.selected{
+  color:white;
+  padding:5px;
+  width:18px;
+  line-height:20px;
+  background: rgb(162,38,69); 
+  background: -moz-radial-gradient(center, ellipse cover,  rgba(162,38,69,1) 0%, rgba(162,38,69,1) 91%, rgba(146,33,61,1) 100%); 
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(162,38,69,1)), color-stop(91%,rgba(162,38,69,1)), color-stop(100%,rgba(146,33,61,1))); 
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(162,38,69,1) 0%,rgba(162,38,69,1) 91%,rgba(146,33,61,1) 100%); 
+  background: -o-radial-gradient(center, ellipse cover,  rgba(162,38,69,1) 0%,rgba(162,38,69,1) 91%,rgba(146,33,61,1) 100%); 
+  background: -ms-radial-gradient(center, ellipse cover,  rgba(162,38,69,1) 0%,rgba(162,38,69,1) 91%,rgba(146,33,61,1) 100%); 
+  background: radial-gradient(ellipse at center,  rgba(162,38,69,1) 0%,rgba(162,38,69,1) 91%,rgba(146,33,61,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3579d6', endColorstr='#1b559d',GradientType=1 ); 
+}
+.pagination li a{
+  cursor:pointer; 
+  line-height:20px;
+  display:block;
+  padding:5px;
+  float:left;
+  width:18px;
+  text-aling:center;
+}
+.pagination{
+  diaply:block;
+  /*background-color:#f4f4f4;*/
+  text-align: center;
+  float:left;
+  padding:0px;
+  margin:10px 0px;
+  width: 100%;
+  font-size:.8em;
+}
+.pagination ul{
+  /*float:left;*/
+  margin:0px;
+  padding:10px 0;
+  list-style:none;
+}
+.pagination li{
+  float:left;
+  font-weight:700;
+  margin:0 4px;
+  text-align:center;
+  border-radius: 3px; 
+  -moz-border-radius: 3px; 
+  -webkit-border-radius: 3px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  background: #fff
+}
+.pagination a{
+  text-decoration:none; 
+}
+.pagination .next a:after,.pagination .next span:after{
+  content:"  »";
+}
+.pagination .previous a:before,.pagination .previous span:before{
+  content:'« '
+}
+.pagination .previous{ margin:0 2px 0 0;}
+.pagination .next{ margin:0 0 0 2px;}
+.pagination .previous a,.pagination .previous span,.pagination .next a,.pagination .next span{
+  width: 70px; display: inline-block;line-height: 20px; height:20px; padding: 5px; color: #555
+}
+.pagination .disabled{ background: #ddd;}
+

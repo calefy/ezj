@@ -128,7 +128,7 @@ class Header extends Component {
         e.nativeEvent.returnValue = false;
         let v = trim(this.refs.q.value);
         if (v) {
-            this.props.history.push({ pathname: '/search', query: { q: v } });
+            this.props.history.push({ pathname: '/courses', query: { q: v } });
         }
     };
 
@@ -154,7 +154,7 @@ class Header extends Component {
                             </li>
                         </ul>
                     </nav>
-                    <form className="header-search fl" action="/search" method="GET" onSubmit={this.onSearchSubmit}>
+                    <form className="header-search fl" action="/courses" method="GET" onSubmit={this.onSearchSubmit}>
                         <input type="text" ref="q" name="q" placeholder="请输入您要搜索的关键词" />
                         <button type="submit"><i className="iconfont icon-search"></i></button>
                     </form>

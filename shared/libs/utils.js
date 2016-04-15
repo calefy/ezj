@@ -45,7 +45,7 @@ export function dispatchRequest(key, apiPromise, other = {}) {
     return dispatch => {
         dispatch({
             type: types.request,
-            _data: other
+            _req: other
         });
 
         return apiPromise.then( res => {
@@ -54,14 +54,14 @@ export function dispatchRequest(key, apiPromise, other = {}) {
                 response: res,
                 normalized: other.schema ? normalize(res.data, other.schema) : null,
                 _identity: other.identity || '', // 请求标识，用来区分不同请求数据，会被放置到store中
-                _data: other // 仅为reducer使用，提供请求参数
+                _req: other // 仅为reducer使用，提供请求参数
             });
             return res; // 返回结果，方便一些数据依赖处理
         }).catch( error => {
             dispatch({
                 type: types.failure,
                 error,
-                _data: other
+                _req: other
             });
         });
     };
@@ -75,7 +75,7 @@ export function reducerRequest(key, state = {isFetching: true}, action) {
 
     switch(action.type) {
         case types.request:
-            return { isFetching: true }
+            return { isFetching: true, _req: action._req}
         case types.success:
             // normalizr结果定义：id/ids
             let nlResult = action.normalized && action.normalized.result;
@@ -86,7 +86,7 @@ export function reducerRequest(key, state = {isFetching: true}, action) {
             // 如场景：同时获取问题与问题的答案，答案先返回，如果没有合并state，返回的答案会被冲掉
             return Object.assign({}, state, { isFetching: false, _identity: action._identity }, action.response, nl);
         case types.failure:
-            return { isFetching: false, error: action.error }
+            return { isFetching: false, error: action.error, _req: action._req }
         default:
             return state
     }
@@ -111,7 +111,8 @@ export function isOwnRequest(data = {}, location) {
 export function paramify(params) {
     let ret = [];
     for (var key in params) {
-        ret.push(`${key}=${params[key]}`);
+        let p = encodeURIComponent(params[key]);
+        ret.push(`${key}=${p}`);
     }
     return ret.join('&');
 }

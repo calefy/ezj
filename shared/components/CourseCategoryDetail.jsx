@@ -4,7 +4,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-
 class CourseCategoryDetail extends Component {
     static propTypes = {
         category: PropTypes.object.isRequired, // 单个分类详情
@@ -19,8 +18,8 @@ class CourseCategoryDetail extends Component {
                     <span className="online-time"><i className="iconfont icon-time"></i>-- 课时</span>
                     <span className="online-price"><i className="iconfont icon-price"></i>{item.course_price}</span>
                     <span className="online-num"><i className="iconfont icon-user"></i>{item.student_count} 人</span>
-                    <Link to={`/courses/${item.id}`} className="online-content">详情</Link>
-                    <Link to={`/courses/${item.id}`} className="online-buy">购买</Link>
+                    <a href={`/courses/${item.id}`} className="online-content" target="_blank">详情</a>
+                    <a href={`/courses/${item.id}`} className="online-buy" target="_blank">购买</a>
                 </dd>
             );
         });
@@ -53,11 +52,13 @@ class CourseCategoryDetail extends Component {
                             {category.lecturers.map((item, index) => {
                                 return (
                                     <li key={index}>
-                                        <img src={item.lecturer_avatar} alt={item.lecturer_name} className="fl" />
-                                        <div className="fl">
-                                            <h4>{item.lecturer_name}</h4>
-                                            <p>{item.lecturer_org} {item.lecturer_title}</p>
-                                        </div>
+                                        <a href={`/lecturers/${item.id}`} target="_blank">
+                                            <img src={item.lecturer_avatar} alt={item.lecturer_name} className="fl" />
+                                            <div className="fl">
+                                                <h4>{item.lecturer_name}</h4>
+                                                <p>{item.lecturer_org} {item.lecturer_title}</p>
+                                            </div>
+                                        </a>
                                     </li>
                                 );
                             })}
@@ -71,7 +72,7 @@ class CourseCategoryDetail extends Component {
                     <dl>
                         {category.items && category.items.length ?
                             category.items.map(((c,i) => {
-                                let ret = [<dt>模块{chars[i]}：{c.name}</dt>];
+                                let ret = [<dt><span>模块{chars[i]}：{c.name}</span></dt>];
                                 if (categoryMap[c.id]) {
                                     ret = ret.concat(this.renderCourses(categoryMap[c.id]));
                                 }
