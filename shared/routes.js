@@ -39,16 +39,7 @@ module.exports = {
                 });
             }
         },
-        // 课程分类－资产证券化页
-        {
-            path: 'security',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/Security'));
-                });
-            }
-        },
-        // 课程分类－资产证券化页
+        // 课程详情
         {
             path: 'courses/:courseId',
             getComponent(location, cb) {

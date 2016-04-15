@@ -34,12 +34,15 @@ function serverRendering(req, res) {
 
     // 优先获取登录数据
     const userApi = new UserApi({ apiClient });
+    let cacheKey = apiClient._getCacheKey('post', 'sso/get_user_info'); // 因apiClient仅针对get缓存，这个接口是post，因此特别处理
     userApi.info()
         .then( info => {
+            apiClient._cache[cacheKey] = info;
             doRendering(req, res, apiClient, info);
         })
         .catch( error => {
-            doRendering(req, res, apiClient);
+            apiClient._cache[cacheKey] = error;
+            doRendering(req, res, apiClient, error);
         });
 
 }

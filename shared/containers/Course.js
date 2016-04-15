@@ -21,7 +21,7 @@ class Course extends Component {
         return (
             <div className="content classify">
                 <h1 className="h1-title">
-                    这里是课程中心
+                    课程详情....
                 </h1>
             </div>
         );
