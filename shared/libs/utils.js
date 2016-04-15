@@ -163,3 +163,20 @@ export function timeFromNow(start) {
     return moment(start).from(process.env.BROWSER ? window._g_server_time : Date.now());
 }
 
+/**
+ * 获取api需要的头
+ */
+export function getApiRequestHeader(req, contentType) {
+    let ip = req.ip.replace(/[^\d]*(\d+(\.\d+){3})[^\d]*/, '$1');
+    let ret = {
+        'Cookie': req.get('cookie'),
+        'User-Agent': req.get('user-agent'),
+        'X-Forwarded-For': ip,
+        'X-Real-Ip': ip
+    };
+    if (contentType) {
+        ret['Content-Type'] = contentType;
+    }
+    return ret;
+}
+
