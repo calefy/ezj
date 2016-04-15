@@ -16,7 +16,7 @@ class CourseCategoryDetail extends Component {
             return (
                 <dd key={index}>
                     <span className="online-title">{index + 1}.{item.course_name}</span>
-                    <span className="online-time"><i className="iconfont icon-time"></i>3 课时</span>
+                    <span className="online-time"><i className="iconfont icon-time"></i>-- 课时</span>
                     <span className="online-price"><i className="iconfont icon-price"></i>{item.course_price}</span>
                     <span className="online-num"><i className="iconfont icon-user"></i>{item.student_count} 人</span>
                     <Link to={`/courses/${item.id}`} className="online-content">详情</Link>

@@ -49,7 +49,7 @@ class Header extends Component {
                 this.refs.registForm.handleResponse(RegistForm.RESPONSE_REGIST, nextProps.action.error);
                 break;
 
-            case OperateAction.OPEN_LOGIN_DIALOG:
+            case OperateAction.OPEN_LOGIN_DIALOG: // 从其他组件调用打开登录对话框
                 this._setState({ showDialog: true, dialogType: 'login' });
                 break;
         }
@@ -118,6 +118,8 @@ class Header extends Component {
     handleLogout = () => {
         this._setState({ showMenu: false });
         this.props.dispatch(this.userAction.logout());
+        // 清除本地cookie
+        document.cookie = '_SUP=;domain=.ezijing.com;expires='+(new Date()).toGMTString()+';';
     };
 
     // 搜索
