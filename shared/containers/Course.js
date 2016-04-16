@@ -62,29 +62,43 @@ class Course extends Component {
 
                 <p>------</p>
 
-                <h2>课程简介</h2>
-                <p>{course.course_outlines}</p>
+                <h2>【课程简介】</h2>
+                <div dangerouslySetInnerHTML={{__html: course.course_outlines}}></div>
+                <div>
+                    {chapters.map((item, index) => {
+                        let isRoot = item.rgt - item.lft > 1;
+                        return isRoot ? <p key={index}>{item.chapter_name}</p> : null;
+                    })}
+                </div>
 
                 <p>------</p>
 
-                <h2>讲师</h2>
+                <h3>【推荐受众】</h3>
+                <p>{course.recommends_audience}</p>
+
+                <p>------</p>
+
+                <h2>【讲师】</h2>
                 {course.lecturers.map((item, index) => {
                     return (
-                        <p key={index}>
-                            <img src={item.lecturer_avatar} alt="" width="50"/>
-                            {item.lecturer_name}
-                            {item.lecturer_org} {item.lecturer_title}
-                        </p>
+                        <div key={index}>
+                            <p>
+                                <img src={item.lecturer_avatar} alt="" width="50"/>
+                                {item.lecturer_name}
+                                {item.lecturer_org} {item.lecturer_title}
+                            </p>
+                            <div dangerouslySetInnerHTML={{__html: item.lecturer_introduction}}></div>
+                        </div>
                     );
                 })}
 
                 <p>------</p>
 
-                <h3>学员</h3>
+                <h3>【学员】</h3>
 
                 <p>------</p>
 
-                <h3>章节</h3>
+                <h3>【章节】</h3>
                 <dl>
                 {chapters.map((item, index) => {
                     let isRoot = item.rgt - item.lft > 1;
