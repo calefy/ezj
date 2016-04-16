@@ -41,6 +41,32 @@ class Courses extends Base {
         return this.apiClient.get(`els/search/courses${params}`);
     }
 
+    // 课程详情
+    courseDetail(courseId) {
+        return this.apiClient.get('els/courses/' + courseId + '?expand=lecturers');
+    }
+    // 课程的私人信息
+    coursePrivate(courseId) {
+        return this.apiClient.get('analysis/courses/' + courseId);
+    }
+
+    // 章节
+    courseChapters(courseId) {
+        return this.apiClient.get(`els/courses/${courseId}/chapters?expand=video`);
+    }
+    courseStudents(courseId) {
+        return this.apiClient.get(`els/courses/${courseId}/students`);
+    }
+
+    examination(examId) {
+        return this.apiClient.get(`els/examinations/${examId}`);
+    }
+
+
+    lecturer(lecturerId) {
+        return this.apiClient.get('els/lecturers/' + lecturerId);
+    }
+
 }
 
 module.exports = Courses;
