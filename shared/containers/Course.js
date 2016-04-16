@@ -14,12 +14,13 @@ class Course extends Component {
             dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
             dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
             dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
+            dispatch( courseAction.loadCourseStudents(params.courseId) ), // 课程学员
         ]);
     }
 
     componentDidMount() {
         const { course, course_private, params } = this.props;
-        if (course.isFetching || course_private.isFetching ||
+        if (course.isFetching ||// course_private.isFetching ||
                 (course.data && course.data.id != params.courseId)) {
             Course.fetchData(this.props);
         }
@@ -30,6 +31,7 @@ class Course extends Component {
             nextProps.dispatch( courseAction.loadCourseDetail(nextProps.params.courseId) ); // 课程详情,包含讲师
             nextProps.dispatch( courseAction.loadCoursePrivate(nextProps.params.courseId) ); // 课程私密信息
             nextProps.dispatch( courseAction.loadCourseChapters(nextProps.params.courseId) ); // 课程章节
+            nextProps.dispatch( courseAction.loadCourseStudents(nextProps.params.courseId) );
         }
     }
 
@@ -37,6 +39,7 @@ class Course extends Component {
         let course = this.props.course.data || {};
         let priv = this.props.course_private.data || {};
         let chapters = this.props.chapters.data && this.props.chapters.data.list || [];
+        let students = this.props.students.data || [];
 
         // 计算总时长
         let tminute = course.duration / 60;
@@ -94,9 +97,11 @@ class Course extends Component {
                     return (
                         <div key={index}>
                             <p>
-                                <img src={item.lecturer_avatar} alt="" width="50"/>
-                                {item.lecturer_name}
-                                {item.lecturer_org} {item.lecturer_title}
+                                <Link to={`/lecturers/${item.id}`}>
+                                    <img src={item.lecturer_avatar} alt="" width="80"/>
+                                    {item.lecturer_name}
+                                    {item.lecturer_org} {item.lecturer_title}
+                                </Link>
                             </p>
                             <div dangerouslySetInnerHTML={{__html: item.lecturer_introduction}}></div>
                         </div>
@@ -106,6 +111,13 @@ class Course extends Component {
                 <p>------</p>
 
                 <h3>【学员】</h3>
+                <div>
+                {students.map((item, index) => {
+                    return (
+                        <p key={index}><Link to={`/students/${item.student_id}`}><img src={item.avatar || 'http://xplat-avatar.oss-cn-beijing.aliyuncs.com/a462f8c334e328ba8f572ca0a51c4861.jpg' } alt="" height="50"/> {item.nickname}</Link></p>
+                    );
+                })}
+                </div>
 
                 <p>------</p>
 
@@ -130,5 +142,6 @@ module.exports = connect( state => ({
     course: state.course,
     course_private: state.course_private,
     chapters: state.chapters,
+    students: state.students,
 }) )(Course);
 
