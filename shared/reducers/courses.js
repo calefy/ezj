@@ -36,3 +36,6 @@ export function course_private(state, action) {
 export function chapters(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_CHAPTER, state, action);
 }
+export function lecturer(state, action) {
+    return reducerRequest(CoursesAction.LOAD_LECTURER, state, action);
+}

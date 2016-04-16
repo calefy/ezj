@@ -289,6 +289,14 @@ module.exports = {
                     cb(null, require('./containers/topic'));
                 });
             }
+        },
+        {
+            path: 'lecturers/:lecturerId',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/Lecturer.jsx'));
+                });
+            }
         }
     ]
 };
