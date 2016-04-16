@@ -47,7 +47,17 @@ class Course extends Component {
         return (
             <div className="content course-detail">
                 <h1>《{course.course_name}》</h1>
-                <p>分类：{course.category_info}</p>
+                <p>
+                    分类：
+                    {course.category_info.map((item, index) => {
+                        return  <span key={index}>
+                                    {item.id == course.course_category_id ?
+                                        '/' + item.name :
+                                        <Link to="/courses" query={{category: item.id}}>{item.name}</Link>
+                                    }
+                                </span>
+                    })}
+                </p>
                 <p>
                     时长：{timeStr},
                     学员：{course.student_count}人,
@@ -59,6 +69,7 @@ class Course extends Component {
                     是否已过期: {priv.is_expired ? 'Yes' : 'No'} (过期时间 {priv.expiring_date}),
                     是否已学习: {priv.is_learned ? 'Yes' : 'No'} (学习进度 {priv.progress}%)
                 </p>
+                <p>预计开课时间：{course.scheduled_open_date}</p>
 
                 <p>------</p>
 
