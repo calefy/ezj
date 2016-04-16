@@ -86,6 +86,10 @@ class User extends Base {
         return this.apiClient.post('account/avatar', formData, {'Content-Type': ApiClient.CONTENT_TYPE_MULTI});
     }
 
+    persons(uids) {
+        return this.apiClient.post('sso/server/get_users_info', { user_ids: uids.join(',') });
+    }
+
 }
 
 module.exports = User;

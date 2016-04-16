@@ -291,6 +291,14 @@ module.exports = {
             }
         },
         {
+            path: 'students/:studentId',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/Student.jsx'));
+                });
+            }
+        },
+        {
             path: 'lecturers/:lecturerId',
             getComponent(location, cb) {
                 require.ensure([], require => {

@@ -2,45 +2,47 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
-import CoursesAction from '../actions/CoursesAction';
+import UserAction from '../actions/UserAction';
 
 class Student extends Component {
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
-        const courseAction = new CoursesAction({ apiClient });
+        const userAction = new UserAction({ apiClient });
         return Promise.all([
-            dispatch( courseAction.loadStudent(params.lecturerId) ),
+            dispatch( userAction.loadPersons([params.studentId]) ),
         ]);
     }
 
     componentDidMount() {
-        const { lecturer, params } = this.props;
-        if (lecturer.isFetching ||
-                (lecturer.data && lecturer.data.id != params.lecturerId)) {
+        const { persons, params } = this.props;
+        if (persons.isFetching ||
+                (persons.data && !persons.data[params.studentId])) {
             Student.fetchData(this.props);
         }
     }
     componentWillReceiveProps(nextProps) {
-        if (this.props.params.lecturerId != nextProps.params.lecturerId) {
-            const courseAction = new CoursesAction();
-            nextProps.dispatch( courseAction.loadStudent(nextProps.params.courseId) );
+        if (this.props.params.studentId != nextProps.params.studentId) {
+            const userAction = new UserAction();
+            nextProps.dispatch( userAction.loadPersons([nextProps.params.studentId]) );
         }
     }
 
     render() {
-        let lecturer = this.props.lecturer.data || {};
+        let persons = this.props.persons.data || {};
+        let uid = this.props.params.studentId;
+        let student = persons[uid] || {};
         return (
             <div>
-                <h1>{lecturer.lecturer_name}</h1>
-                <p>{lecturer.lecturer_org} {lecturer.lecturer_title}</p>
-                <p><img src={lecturer.lecturer_avatar} alt=""/></p>
-                <div dangerouslySetInnerHTML={{__html: lecturer.lecturer_introduction}}></div>
+                <h1>学生信息</h1>
+                <p>{student.nickname}</p>
+                <p><img src={student.avatar || 'http://xplat-avatar.oss-cn-beijing.aliyuncs.com/a462f8c334e328ba8f572ca0a51c4861.jpg' } alt=""/></p>
+                <p>学习的课程列表： 等待接口中...</p>
             </div>
         );
     }
 }
 
 module.exports = connect( state => ({
-    student: state.student,
+    persons: state.persons,
 }) )(Student);
 

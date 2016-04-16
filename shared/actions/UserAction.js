@@ -52,4 +52,9 @@ module.exports = class UserAction extends BaseAction {
         };
     }
 
+    static LOAD_PERSONS = 'load_persons'
+    loadPersons(uids) {
+        return BaseAction.dispatchRequest( UserAction.LOAD_PERSONS, this.api.persons(uids) );
+    }
+
 }
