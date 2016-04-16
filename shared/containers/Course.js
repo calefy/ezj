@@ -38,6 +38,7 @@ class Course extends Component {
     render() {
         let course = this.props.course.data || {};
         let priv = this.props.course_private.data || {};
+        let progress = priv.chapters_progress || {};
         let chapters = this.props.chapters.data && this.props.chapters.data.list || [];
         let students = this.props.students.data || [];
 
@@ -110,7 +111,7 @@ class Course extends Component {
 
                 <p>------</p>
 
-                <h3>【学员】</h3>
+                <h3>【学员】({course.student_count})</h3>
                 <div>
                 {students.map((item, index) => {
                     return (
@@ -125,7 +126,12 @@ class Course extends Component {
                 <dl>
                 {chapters.map((item, index) => {
                     let isRoot = item.rgt - item.lft > 1;
-                    let inner = <p> {item.chapter_name} {item.free_trial_status ? '[试听]' : ''}  {isRoot ? '' : `时长: ${toTimeString(item.video.video_duration, 'm:s')}`}</p>
+                    let inner = <p>
+                        {item.chapter_name}
+                        {item.free_trial_status ? '[试听]' : ''}
+                        {isRoot ? '' : `时长: ${toTimeString(item.video.video_duration, 'm:s')}`}
+                        {isRoot ? '' : progress[item.id] ? '学习进度:' + progress[item.id].chapter_progress + '%' : ''}
+                    </p>;
                     return isRoot ?
                         <dt key={index}>{inner}</dt>
                         :
