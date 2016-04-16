@@ -35,12 +35,24 @@ class Course extends Component {
         }
     }
 
+    /**
+     * 点击显示测验内容
+     */
+    onClickExam = e => {
+        const examId = this.props.course.data.course_examination_id;
+        const courseAction = new CoursesAction();
+        this.props.dispatch( courseAction.loadCourseExamination(examId) );
+    };
+
     render() {
         let course = this.props.course.data || {};
         let priv = this.props.course_private.data || {};
         let progress = priv.chapters_progress || {};
         let chapters = this.props.chapters.data && this.props.chapters.data.list || [];
         let students = this.props.students.data || [];
+        let examination = this.props.examination.data || {};
+        let questions = examination.questions || [];
+        examination = examination.examination || {};
 
         // 计算总时长
         let tminute = course.duration / 60;
@@ -90,6 +102,32 @@ class Course extends Component {
 
                 <h3>【推荐受众】</h3>
                 <p>{course.recommends_audience}</p>
+
+                <p>------</p>
+
+                <h2>【测验】{course.course_examination_id > 0 ? <button type="button" onClick={this.onClickExam}>点击展示</button> : '无'}</h2>
+                {course.course_examination_id <= 0 ?
+                    null :
+                    <div>
+                        <h4>{examination.examination_title}</h4>
+                        <dl>
+                            {questions.map((item, index) => {
+                                let q = item.question;
+                                let os = item.options;
+                                return [
+                                    <dt key={index}>
+                                        {index + 1}.
+                                        <div className="dib vat" dangerouslySetInnerHTML={{__html: q.examination_question_content}} />
+                                    </dt>,
+                                    os.map((o, i) => {
+                                        return <dd key={i}>{String.fromCharCode(65 + i)}. {o.option_text}</dd>
+                                    })
+                                ];
+                            })}
+                        </dl>
+                    </div>
+                }
+
 
                 <p>------</p>
 
@@ -149,5 +187,6 @@ module.exports = connect( state => ({
     course_private: state.course_private,
     chapters: state.chapters,
     students: state.students,
+    examination: state.examination,
 }) )(Course);
 

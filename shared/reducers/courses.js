@@ -42,3 +42,6 @@ export function lecturer(state, action) {
 export function students(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_STUDENT, state, action);
 }
+export function examination(state, action) {
+    return reducerRequest(CoursesAction.LOAD_COURSE_EXAM, state, action);
+}

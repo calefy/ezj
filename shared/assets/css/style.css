@@ -3,6 +3,12 @@ nav li{float:left;}
 .fl{ float: left;}
 .fr{ float: right;}
 .cl:after{ content:""; display:block; clear:both;}
+.rel{position: relative;}
+.abs{display: absolute;}
+.dib{display:inline-block;}
+.tac{text-align: center;}
+.vat{vertical-align: top;}
+.vam{vertical-align: middle;}
 .bg-white{ background: #fff}
 .show{ display: block;}
 .hide{ display: none}
