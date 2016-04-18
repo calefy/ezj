@@ -20,7 +20,7 @@ module.exports = class CommerceAction extends BaseAction {
 
     static LOAD_ORDERS = 'ec_orders';
     loadOrders() {
-        return BaseAction.dispatchRequest(CommerceAction.LOAD_CHARGES, this.api.charges());
+        return BaseAction.dispatchRequest(CommerceAction.LOAD_ORDERS, this.api.orders());
     }
 }
 

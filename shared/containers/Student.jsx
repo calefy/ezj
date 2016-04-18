@@ -27,8 +27,7 @@ class Student extends Component {
     }
     componentWillReceiveProps(nextProps) {
         if (this.props.location.search != nextProps.location.search) {
-            const userAction = new UserAction();
-            nextProps.dispatch( userAction.loadStudent(nextProps.params.studentId, Object.assign({}, nextProps.location.query, cparams)) );
+            Student.fetchData(nextProps);
         }
     }
 

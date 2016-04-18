@@ -13,7 +13,7 @@ class Commerce extends Base {
     /**
      * 充值记录查询
      */
-    chargeList(params = {}) {
+    charges(params = {}) {
         params.txn_type = 2; // 充值类型记录
         params = paramify(params);
         params = params ? '?' + params : '';
