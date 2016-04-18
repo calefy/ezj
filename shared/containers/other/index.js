@@ -11,7 +11,7 @@ class HelpIndex extends Component {
     static menus = [
         { path: '/help/about', name: '关于我们' },
         { path: '/help/contact', name: '联系我们' },
-        { path: '/help/opinion', name: '意见反馈' }
+        //{ path: '/help/opinion', name: '意见反馈' }
     ];
 
     render() {
