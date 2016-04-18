@@ -35,7 +35,7 @@ class Student extends Component {
         let data = this.props.student.data || {};
         let student = data.student_brief || {};
         let courseData = data.joined_courses || {};
-        let courses = courseData.items_on_the_current_page || [];
+        let courses = courseData.items || [];
 
         return (
             <div>
@@ -51,6 +51,7 @@ class Student extends Component {
                             <img src={item.picture} alt="" height="150"/>
                             <p>价格：&yen;{item.price}  学员数：{item.joined_count}</p>
                             <p>分类：{item.course_category_info}</p>
+                            <p>更新时间：{item.updated_time}</p>
                             <p><Link to={`/courses/${item.id}`}>课程详情 &gt;</Link></p>
                         </div>
                     );
