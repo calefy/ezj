@@ -19,7 +19,7 @@ module.exports = () => {
                         <Link to="/"><i className="iconfont icon-arrowwhite"></i>网站首页</Link>
                         <Link to="/help/about"><i className="iconfont icon-arrowwhite"></i>关于我们</Link>
                         <Link to="/help/contact"><i className="iconfont icon-arrowwhite"></i>联系我们</Link>
-                        <Link to="/help/opinion"><i className="iconfont icon-arrowwhite"></i>意见反馈</Link>
+                        {true ? null : <Link to="/help/opinion"><i className="iconfont icon-arrowwhite"></i>意见反馈</Link>}
                     </div>
                     <div className="footer-top-app fl">
                         <h4>APP下载（安卓&IOS）</h4>

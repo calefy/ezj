@@ -1,5 +1,6 @@
 import Base from './Base';
 import ApiClient from './apiClient';
+import { paramify } from '../libs/utils';
 
 class User extends Base {
 
@@ -50,11 +51,8 @@ class User extends Base {
     /**
      * 修改密码
      */
-    changePwd(oldPassword, newPassword) {
-        return this.apiClient.post('account/pass-new', {
-            pass:oldPassword,
-            newpass: newPassword
-        });
+    changePasswd(data) {
+        return this.apiClient.post('sso/change_password', data);
     }
 
     /**
@@ -84,6 +82,12 @@ class User extends Base {
 
     avatar(formData) {
         return this.apiClient.post('account/avatar', formData, {'Content-Type': ApiClient.CONTENT_TYPE_MULTI});
+    }
+
+    student(uid, params = {}) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get('els/students/' + uid + params);
     }
 
 }

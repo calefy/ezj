@@ -6,9 +6,9 @@ if (process.env.BROWSER) {
     require('css/study.css')
 }
 
-class Study extends Component {
+class Index extends Component {
 
-	static menus = [
+    static menus = [
         { path: '/study/mine/all', name: '我的课程' },
         { path: '/study/collect', name: '收藏的课程' },
         { path: '/study/test', name: '我的测验' }
@@ -16,28 +16,27 @@ class Study extends Component {
 
     render() {
 
-        const { menus } = Study;
-		const locationPath = this.props.location.pathname;
+        const { menus } = Index;
+        const locationPath = this.props.location.pathname;
 
         return (
 
             <div className="container mar40">
                 <div className="study-center cl">
-                	<div className="content-left shadow bg-white fl">
-                		<ul className="content-tabs cl">
-                			{menus.map( (item, index) => {
-		                        return  <li className={locationPath === item.path ? 'current' : null} key={index}>
-		                        			<Link to={item.path}>{item.name}</Link>
-		                        		</li>
-		                        		
-		                    })}
-			            </ul>
-                	</div>
-                		{this.props.children}
+                    <div className="content-left shadow bg-white fl">
+                        <ul className="content-tabs cl">
+                            {menus.map( (item, index) => {
+                                return  <li className={locationPath === item.path ? 'current' : null} key={index}>
+                                            <Link to={item.path}>{item.name}</Link>
+                                        </li>
+                            })}
+                        </ul>
+                    </div>
+                        {this.props.children}
                 </div>
             </div>
         );
     }
 }
 
-module.exports = connect( state => ({ user: state.user }) )(Study);
+module.exports = Index;

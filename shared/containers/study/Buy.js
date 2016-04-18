@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
 
-class Study extends Component {
+class Buyed extends Component {
 
     render() {
 
@@ -63,4 +63,4 @@ class Study extends Component {
     }
 }
 
-module.exports = Study;
+module.exports = Buyed;

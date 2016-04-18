@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
 
-class Study extends Component {
+class Left extends Component {
 
     static menus = [
         { path: 'all', name: '全部课程' },
@@ -11,7 +11,7 @@ class Study extends Component {
 
     render() {
 
-        const { menus } = Study;
+        const { menus } = Left;
         const locationPath = this.props.location.pathname;
 
         return (
@@ -30,4 +30,4 @@ class Study extends Component {
     }
 }
 
-module.exports = Study;
+module.exports = Left;

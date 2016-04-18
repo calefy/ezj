@@ -55,3 +55,7 @@ export function user(state, action) {
     return ret;
 }
 
+export function student(state, action) {
+    return reducerRequest(UserAction.LOAD_STUDENT, state, action);
+}
+

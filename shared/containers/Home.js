@@ -2,9 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
+import { adsType, baseCourseCategories } from '../libs/const';
+import { avatar } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
 import OtherAction from '../actions/OtherAction';
-import { adsType, baseCourseCategories } from '../libs/const';
 
 if (process.env.BROWSER) {
     require('css/index.css');
@@ -173,7 +174,7 @@ let Home = React.createClass({
                                                 <li key={index}>
                                                     <Link to={item.action} target="_blank">
                                                         <div className="course-list-img">
-                                                            <img src={item.image} alt={item.lecture_name} />
+                                                            <img src={avatar(item.image)} alt={item.lecture_name} />
                                                         </div>
                                                         <h5>{item.lecture_name}</h5>
                                                         <h6>{item.lecture_org + ' ' + item.lecture_title}</h6>

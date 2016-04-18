@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
-import { toTimeString } from '../libs/utils';
+import { toTimeString, avatar } from '../libs/utils';
 
 import CoursesAction from '../actions/CoursesAction';
 
@@ -137,7 +137,7 @@ class Course extends Component {
                         <div key={index}>
                             <p>
                                 <Link to={`/lecturers/${item.id}`}>
-                                    <img src={item.lecturer_avatar} alt="" width="80"/>
+                                    <img src={avatar(item.lecturer_avatar)} alt="" width="80"/>
                                     {item.lecturer_name}
                                     {item.lecturer_org} {item.lecturer_title}
                                 </Link>
@@ -153,7 +153,7 @@ class Course extends Component {
                 <div>
                 {students.map((item, index) => {
                     return (
-                        <p key={index}><Link to={`/students/${item.student_id}`}><img src={item.avatar || 'http://xplat-avatar.oss-cn-beijing.aliyuncs.com/a462f8c334e328ba8f572ca0a51c4861.jpg' } alt="" height="50"/> {item.nickname}</Link></p>
+                        <p key={index}><Link to={`/students/${item.student_id}`}><img src={avatar(item.avatar)} alt="" height="50"/> {item.nickname}</Link></p>
                     );
                 })}
                 </div>

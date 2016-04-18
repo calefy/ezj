@@ -48,3 +48,12 @@ export const baseCourseCategories = [
     { id: 'financial', name: '金融领导力' },
     { id: 'competitive', name: '学位项目' },
 ];
+
+export const orderStatus = {
+    '00': '已创建',
+    '10': '待支付',
+    '20': '支付完成',
+    '30': '已取消',
+    '40': '自动取消',
+    '50': '支付失败'
+};

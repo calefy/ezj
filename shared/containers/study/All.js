@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
 
-class Study extends Component {
+class All extends Component {
 
     render() {
 
@@ -81,4 +81,4 @@ class Study extends Component {
     }
 }
 
-module.exports = Study;
+module.exports = All;

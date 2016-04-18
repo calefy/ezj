@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import { IndexLink, Link } from 'react-router'
 import trim from 'lodash/trim';
 
-import { getRequestTypes } from '../libs/utils';
+import { getRequestTypes, avatar } from '../libs/utils';
 import UserAction from '../actions/UserAction';
 import OperateAction from '../actions/OperateAction';
 import Dialog     from '../components/Dialog.jsx';
@@ -162,7 +162,7 @@ class Header extends Component {
                         <div className="header-user fr">
                             <div className="head-account fr" onClick={this.toggleMenu} onMouseEnter={this.showMenu} onMouseLeave={this.hideMenu}>
                                 <div className="user-picture fr">
-                                    <img src={user.avatar || 'http://xplat-avatar.oss-cn-beijing.aliyuncs.com/a462f8c334e328ba8f572ca0a51c4861.jpg'}/>
+                                    <img src={avatar(user.avatar)}/>
                                 </div>
                                 <span className="user-name fr">{user.nickname}</span>
                                 <ul className={`menu nav ${this.state.showMenu ? '' : 'hide' }` } >

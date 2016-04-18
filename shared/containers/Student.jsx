@@ -1,40 +1,69 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
+import map from 'lodash/map';
 
-import CoursesAction from '../actions/CoursesAction';
+import { avatar } from '../libs/utils';
+import UserAction from '../actions/UserAction';
+import Pagination from '../components/Pagination.jsx';
+
+let cparams = { 'per-page': 10 };
 
 class Student extends Component {
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
-        const courseAction = new CoursesAction({ apiClient });
+        const userAction = new UserAction({ apiClient });
         return Promise.all([
-            dispatch( courseAction.loadStudent(params.lecturerId) ),
+            dispatch( userAction.loadStudent(params.studentId, Object.assign({}, location.query, cparams)) ),
         ]);
     }
 
     componentDidMount() {
-        const { lecturer, params } = this.props;
-        if (lecturer.isFetching ||
-                (lecturer.data && lecturer.data.id != params.lecturerId)) {
+        const { student, params } = this.props;
+        if (student.isFetching ||
+                (student.data && student.data.student_brief.student_id != params.studentId)) {
             Student.fetchData(this.props);
         }
     }
     componentWillReceiveProps(nextProps) {
-        if (this.props.params.lecturerId != nextProps.params.lecturerId) {
-            const courseAction = new CoursesAction();
-            nextProps.dispatch( courseAction.loadStudent(nextProps.params.courseId) );
+        if (this.props.location.search != nextProps.location.search) {
+            Student.fetchData(nextProps);
         }
     }
 
     render() {
-        let lecturer = this.props.lecturer.data || {};
+        let data = this.props.student.data || {};
+        let student = data.student_brief || {};
+        let courseData = data.joined_courses || {};
+        let courses = courseData.items || [];
+
         return (
             <div>
-                <h1>{lecturer.lecturer_name}</h1>
-                <p>{lecturer.lecturer_org} {lecturer.lecturer_title}</p>
-                <p><img src={lecturer.lecturer_avatar} alt=""/></p>
-                <div dangerouslySetInnerHTML={{__html: lecturer.lecturer_introduction}}></div>
+                <h1>学生信息</h1>
+                <p>{student.nickname}</p>
+                <p><img src={avatar(student.avatar)} alt=""/></p>
+
+                <h2>课程列表</h2>
+                {map(courses, (item, index) => {
+                    return (
+                        <div key={index}>
+                            <h3>{item.title}</h3>
+                            <img src={item.picture} alt="" height="150"/>
+                            <p>价格：&yen;{item.price}  学员数：{item.joined_count}</p>
+                            <p>分类：{item.course_category_info}</p>
+                            <p>更新时间：{item.updated_time}</p>
+                            <p><Link to={`/courses/${item.id}`}>课程详情 &gt;</Link></p>
+                        </div>
+                    );
+                })}
+
+                <Pagination
+                    total={courseData.total || 0}
+                    pageSize={cparams['per-page']}
+                    page={this.props.location.query.page || 0}
+                    link={this.props.location.pathname}
+                    search={this.props.location.search}
+                />
             </div>
         );
     }
