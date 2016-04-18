@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
 
-class Account extends Component {
+class Order extends Component {
 
     render() {
         return (
@@ -22,11 +22,7 @@ class Account extends Component {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>13498</td>
-                                    <td>全球互联网金融商业模式及案例深度解析线上课程包</td>
-                                    <td>4000紫荆币</td>
-                                    <td>2016-01-26 </td>
-                                    <td>订单已取消</td>
+                                    <td colSpan={5}><p className="no-data">全球互联网金融商业模式及案例深度解析线上课程包</p></td>
                                 </tr>
                                 <tr>
                                     <td>13497</td>
@@ -262,4 +258,4 @@ class Account extends Component {
     }
 }
 
-module.exports = Account;
+module.exports = Order;

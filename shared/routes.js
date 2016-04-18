@@ -117,18 +117,18 @@ module.exports = {
                     }
                 },
                 {
-                    path: 'pay',
+                    path: 'recharge',
                     getComponent(location, cb) {
                         require.ensure([], require => {
-                            cb(null, require('./containers/account/Pay'));
+                            cb(null, require('./containers/account/Recharge.jsx'));
                         });
                     }
                 },
                 {
-                    path: 'recharge',
+                    path: 'orders',
                     getComponent(location, cb) {
                         require.ensure([], require => {
-                            cb(null, require('./containers/account/Recharge'));
+                            cb(null, require('./containers/account/Order.jsx'));
                         });
                     }
                 }
