@@ -1,5 +1,6 @@
 import { normalize } from 'normalizr';
 import moment from 'moment';
+import md5 from 'blueimp-md5'
 moment.locale('zh-cn', {
     relativeTime : {
         future : '%s内',
@@ -203,4 +204,13 @@ export function toTimeString(second, format) {
  */
 export function avatar(a) {
     return a || 'http://xplat-avatar.oss-cn-beijing.aliyuncs.com/a462f8c334e328ba8f572ca0a51c4861.jpg';
+}
+
+/**
+ * 加密密码
+ */
+export function cryptoPasswd(pwd) {
+    let password = pwd.split('').reverse().join('');
+    password = md5('uokoaduw' + password + 'auhgniq');
+    return password;
 }

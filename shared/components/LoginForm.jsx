@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import md5 from 'blueimp-md5'
 
 import formsySubmitButtonMixin from '../mixins/formsySubmitButtonMixin';
 import FormsyText from './formsy/FormsyText.jsx';
 import FormsyCheckbox from './formsy/FormsyCheckbox.jsx';
+import { cryptoPasswd } from '../libs/utils';
 
 let actionTimer = null;
 
@@ -36,9 +36,7 @@ let LoginForm = React.createClass({
      * 提交登录
      */
     onSubmit: function(model) {
-        // 加密密码值
-        let password = model.password.split('').reverse().join('');
-        password = md5('uokoaduw' + password + 'auhgniq');
+        let password = cryptoPasswd(model.password);
         this.loadingSubmitButton();
         this.props.onLogin( Object.assign({}, model, { password }) );
     },

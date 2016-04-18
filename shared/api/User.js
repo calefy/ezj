@@ -50,11 +50,8 @@ class User extends Base {
     /**
      * 修改密码
      */
-    changePwd(oldPassword, newPassword) {
-        return this.apiClient.post('account/pass-new', {
-            pass:oldPassword,
-            newpass: newPassword
-        });
+    changePasswd(data) {
+        return this.apiClient.post('sso/change_password', data);
     }
 
     /**

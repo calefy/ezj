@@ -20,11 +20,12 @@
 
 /*修改密码*/
 .account-pwd { width: 500px; margin: 50px auto;}
-.account-pwd dl{ line-height: 48px; margin: 0 0 12px;}
-.account-pwd dt{ display: inline-block; width: 70px; text-align: right; float: left; font-weight: normal; margin-right: 10px;}
-.account-pwd dd{ display: inline-block; float: left; margin:0;}
+.account-pwd .formsy-list{ line-height: 48px; margin: 0 0 12px;}
+.account-pwd .formsy-list label{ display: inline-block; width: 70px; text-align: right; float: left; font-weight: normal; margin-right: 10px;}
+.account-pwd .formsy-input{ display: inline-block; float: left; margin:0;}
 .account-pwd .formsy-input{ width: 254px;}
-.account-pwd button { width: 120px; margin: 20px auto; display: block; padding: 14px 20px; border-radius: 4px; color: #fff}
+.account-pwd .validation-error{position:static;padding-left:15px;}
+.account-pwd button { width: 120px; margin: 20px 0; padding: 14px 20px; border-radius: 4px; color: #fff}
 
 .password-strength { width: 120px; float: right; line-height: 28px; margin: 0 0 0 20px;}
 .password-strength-text { float: right; font-weight: bold;}

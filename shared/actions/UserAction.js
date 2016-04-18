@@ -39,8 +39,10 @@ module.exports = class UserAction extends BaseAction {
     logout() {
         return BaseAction.dispatchRequest( 'logout', this.api.logout() );
     }
-    changePwd(opts) {
-        return BaseAction.dispatchRequest( 'changePwd', this.api.changePwd(opts) );
+
+    static CHANGE_PASSWD = 'change_password';
+    changePasswd(opts) {
+        return BaseAction.dispatchRequest( UserAction.CHANGE_PASSWD, this.api.changePasswd(opts) );
     }
     //uploadAvatar(formData) {
     //    return BaseAction.dispatchRequest( 'changePwd', this.api.avatar(formData) );

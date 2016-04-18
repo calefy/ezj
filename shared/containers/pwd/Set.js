@@ -79,11 +79,11 @@ let PwdSet = React.createClass({
                             type="password"
                             validations={{
                                 minLength: 6,
-                                maxLength: 10
+                                maxLength: 20
                             }}
                             validationErrors={{
-                                minLength: '请输入6-10个字符',
-                                maxLength: '请输入6-10个字符'
+                                minLength: '请输入6-20个字符',
+                                maxLength: '请输入6-20个字符'
                             }}
                             required />
                         <FormsyText

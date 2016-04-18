@@ -1,26 +1,114 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
+import { connect } from 'react-redux';
+import Formsy from 'formsy-react';
 
-class Account extends Component {
+import formsySubmitButtonMixin from '../../mixins/formsySubmitButtonMixin';
+import FormsyText from '../../components/formsy/FormsyText.jsx';
+import UserAction from '../../actions/UserAction';
+import { getRequestTypes, cryptoPasswd } from '../../libs/utils';
 
-    render() {
+let Passwd = React.createClass({
+    mixins: [ formsySubmitButtonMixin ],
+
+    getInitialState: function() {
+        return { error: null };
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        let changeType = getRequestTypes(UserAction.CHANGE_PASSWD);
+        switch (nextProps.action.type) {
+            case changeType.success:
+                this.refs.form.reset();
+                alert('修改密码成功');
+                break;
+            case changeType.failure:
+                this.enableSubmitButton();
+                this.setState({ error: nextProps.action.error.message || '修改密码失败' });
+                break;
+        }
+    },
+
+    onFormChange: function() {
+        this.setState({ error: null });
+    },
+    onSubmit: function(model) {
+        const userAction = new UserAction();
+        this.props.dispatch( userAction.changePasswd({
+            old_password: cryptoPasswd(model.old_password),
+            new_password: model.new_password
+        }) );
+        this.loadingSubmitButton();
+    },
+
+
+    render: function() {
+        const user = this.props.user.data || {};
+
         return (
-            <div className="account-pwd">
-                <dl>
-                    <dt>用户名：</dt>
-                    <dd>xmn</dd>
-                </dl>
-                <dl>
-                    <dt>当前密码：</dt>
-                    <dd className="formsy-input">
-                        <input type="password" ref="pass" name="pass" value="" />
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>新密码：</dt>
-                    <dd className="formsy-input">
-                        <input type="password" ref="newpass" name="pass" value="" />
-                    </dd>
+            <Formsy.Form
+                ref="form"
+                className="account-pwd"
+                onValid={this.enableSubmitButton}
+                onInvalid={this.disableSubmitButton}
+                onValidSubmit={this.onSubmit}
+                onChange={this.onFormChange}
+            >
+                <div className="formsy-list">
+                    <label>用户名</label>
+                    <div>{user.username}</div>
+                </div>
+
+                <FormsyText
+                    name="old_password"
+                    type="password"
+                    title="当前密码"
+                    required
+                />
+                <FormsyText
+                    name="new_password"
+                    type="password"
+                    title="新密码"
+                    required
+                    validations={{
+                        minLength: 6,
+                        maxLength: 20
+                    }}
+                    validationErrors={{
+                        minLength: '请输入6-20个字符',
+                        maxLength: '请输入6-20个字符'
+                    }}
+                />
+                <FormsyText
+                    name="repeat_password"
+                    type="password"
+                    title="确认密码"
+                    required
+                    validations="equalsField:new_password"
+                    validationErrors={{ equalsField: '两次输入密码不一致' }}
+                />
+
+                <div className="formsy-list">
+                    <label>&nbsp;</label>
+                    <button
+                        className={this.canSubmit() ? 'btn' : 'yz-btn'}
+                        disabled={!this.canSubmit()}
+                        type="submit">{this.isSubmitLoading() ? '保存中...' : '保存'}</button>
+
+                    &emsp;
+                    <span className="text-error">{this.state.error}</span>
+                </div>
+            </Formsy.Form>
+        );
+    }
+});
+
+module.exports = connect( state => ({
+    user: state.user,
+    action: state.action,
+}) )(Passwd);
+
+/*
                     <dd>
                         <div className="password-strength">
                             <div className="password-strength-text" aria-live="assertive"></div>
@@ -30,22 +118,4 @@ class Account extends Component {
                             </div>
                         </div>
                     </dd>
-                </dl>
-                <dl>
-                    <dt>确认密码：</dt>
-                    <dd className="formsy-input">
-                        <input type="password" ref="repass" name="pass" value="" />
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>&nbsp;</dt>
-                    <dd>
-                        <button className="btn" ref="submit">保存</button>
-                    </dd>
-                </dl>
-            </div>
-        );
-    }
-}
-
-module.exports = Account;
+ */

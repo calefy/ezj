@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import UserAction from '../../actions/UserAction';
 
-class Account extends Component {
+class Info extends Component {
 
     // 初始加载数据
     static fetchData({dispatch, apiClient}) {
@@ -17,44 +17,42 @@ class Account extends Component {
     componentDidMount() {
         this.userAction = new UserAction();
         if (this.props.user.isFetching) {
-            Account.fetchData(this.props);
+            Info.fetchData(this.props);
         }
     }
 
     render() {
-
-        const { user } = this.props;
-        const info = this.props.user.data || {};
+        const user = this.props.user.data || {};
 
         return (
             <div className="account-info">
-            	<dl>
+                <dl>
                     <dt>昵称：</dt>
-                    <dd>紫荆教育用户</dd>
+                    <dd>{user.nickname}</dd>
                 </dl>
                 <dl>
                     <dt>注册邮箱：</dt>
-                    <dd>testing@ezijing.com</dd>
+                    <dd>{user.email || '暂无'}</dd>
                 </dl>
                 <dl>
                     <dt>手机号码：</dt>
-                    <dd>暂无</dd>
+                    <dd>{user.mobile || '暂无'}</dd>
                 </dl>
                 <dl>
                     <dt>用户名：</dt>
-                    <dd>testing_01</dd>
+                    <dd>{user.username}</dd>
                 </dl>
                 <dl>
                     <dt>性别：</dt>
-                    <dd>男</dd>
+                    <dd>{user.gender == 1 ? '男' : user.gender == 2 ? '女' : '未知'}</dd>
                 </dl>
                 <dl>
                     <dt>出生日期：</dt>
-                    <dd>1900-01-01</dd>
+                    <dd>{user.birthday || '暂无'}</dd>
                 </dl>
                 <dl>
                     <dt>所在地区：</dt>
-                    <dd>北京</dd>
+                    <dd>{user.city || '暂无'}</dd>
                 </dl>
                 <Link to="/account/user">修改我的资料></Link>
             </div>
@@ -62,4 +60,4 @@ class Account extends Component {
     }
 }
 
-module.exports = connect( state => ({ user: state.user }) )(Account);
+module.exports = connect( state => ({ user: state.user }) )(Info);
