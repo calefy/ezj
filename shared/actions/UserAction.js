@@ -54,9 +54,9 @@ module.exports = class UserAction extends BaseAction {
         };
     }
 
-    static LOAD_PERSONS = 'load_persons'
-    loadPersons(uids) {
-        return BaseAction.dispatchRequest( UserAction.LOAD_PERSONS, this.api.persons(uids) );
+    static LOAD_STUDENT = 'load_student'
+    loadStudent(uid, params) {
+        return BaseAction.dispatchRequest( UserAction.LOAD_STUDENT, this.api.student(uid, params) );
     }
 
 }
