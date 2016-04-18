@@ -79,5 +79,23 @@ module.exports = class CoursesAction extends BaseAction {
     loadLecturer(lecturerId) {
         return BaseAction.dispatchRequest( CoursesAction.LOAD_LECTURER, this.api.lecturer(lecturerId) );
     }
+
+
+    static LOAD_MY_COURSES = 'my_courses';
+    loadMyCourses(params) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES, this.api.myCourses(params) );
+    }
+    static LOAD_MY_COURSES_LEARNED = 'my_courses_learned';
+    loadMyLearnedCourses(params) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES_LEARNED, this.api.myLearnedCourses(params) );
+    }
+    static LOAD_MY_COURSES_BUYED = 'my_courses_buyed';
+    loadMyBuyedCourses(params) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES_BUYED, this.api.myBuyedCourses(params) );
+    }
+    static LOAD_MY_COURSES_COLLECTED = 'my_courses_collected';
+    loadMyCollectedCourses(params) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES_COLLECTED, this.api.myCollectedCourses(params) );
+    }
 }
 

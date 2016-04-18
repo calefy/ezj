@@ -45,3 +45,16 @@ export function students(state, action) {
 export function examination(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_EXAM, state, action);
 }
+
+export function courses_mine(state, action) {
+    return reducerRequest(CoursesAction.LOAD_MY_COURSES, state, action);
+}
+export function courses_mine_learned(state, action) {
+    return reducerRequest(CoursesAction.LOAD_MY_COURSES_LEARNED, state, action);
+}
+export function courses_mine_buyed(state, action) {
+    return reducerRequest(CoursesAction.LOAD_MY_COURSES_BUYED, state, action);
+}
+export function courses_mine_collected(state, action) {
+    return reducerRequest(CoursesAction.LOAD_MY_COURSES_COLLECTED, state, action);
+}

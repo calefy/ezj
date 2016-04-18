@@ -67,6 +67,33 @@ class Courses extends Base {
         return this.apiClient.get('els/lecturers/' + lecturerId);
     }
 
+    /**
+     * 我的课程
+     * 我学习的课程
+     * 我购买的课程
+     * 我收藏的课程
+     */
+    myCourses(params = {}) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get('analysis/my-courses' + params);
+    }
+    myLearnedCourses(params = {}) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get('analysis/my-courses/learning-list' + params);
+    }
+    myBuyedCourses(params = {}) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get('analysis/my-courses/purchased-list' + params);
+    }
+    myCollectedCourses(params = {}) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get('analysis/my-courses/collection-list' + params);
+    }
+
 }
 
 module.exports = Courses;
