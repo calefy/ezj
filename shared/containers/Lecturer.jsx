@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
+import { avatar } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
 
 class Lecturer extends Component {
@@ -33,7 +34,7 @@ class Lecturer extends Component {
             <div>
                 <h1>{lecturer.lecturer_name}</h1>
                 <p>{lecturer.lecturer_org} {lecturer.lecturer_title}</p>
-                <p><img src={lecturer.lecturer_avatar} alt=""/></p>
+                <p><img src={avatar(lecturer.lecturer_avatar)} alt=""/></p>
                 <div dangerouslySetInnerHTML={{__html: lecturer.lecturer_introduction}}></div>
             </div>
         );

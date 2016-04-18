@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
+import { avatar } from '../libs/utils';
 import UserAction from '../actions/UserAction';
 
 class Student extends Component {
@@ -35,7 +36,7 @@ class Student extends Component {
             <div>
                 <h1>学生信息</h1>
                 <p>{student.nickname}</p>
-                <p><img src={student.avatar || 'http://xplat-avatar.oss-cn-beijing.aliyuncs.com/a462f8c334e328ba8f572ca0a51c4861.jpg' } alt=""/></p>
+                <p><img src={avatar(student.avatar)} alt=""/></p>
                 <p>学习的课程列表： 等待接口中...</p>
             </div>
         );
