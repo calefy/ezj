@@ -13,9 +13,9 @@ module.exports = class CommerceAction extends BaseAction {
         return BaseAction.dispatchRequest(CommerceAction.LOAD_ACCOUNT, this.api.account());
     }
 
-    static LOAD_CHARGES = 'ec_charges';
-    loadCharges() {
-        return BaseAction.dispatchRequest(CommerceAction.LOAD_CHARGES, this.api.charges());
+    static LOAD_RECHARGES = 'ec_recharges';
+    loadRecharges() {
+        return BaseAction.dispatchRequest(CommerceAction.LOAD_RECHARGES, this.api.recharges());
     }
 
     static LOAD_ORDERS = 'ec_orders';

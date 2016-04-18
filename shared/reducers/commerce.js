@@ -14,8 +14,8 @@ export function account(state, action) {
 /**
  * 充值列表
  */
-export function charges(state, action) {
-    return reducerRequest(CommerceAction.LOAD_CHARGES, state, action);
+export function recharges(state, action) {
+    return reducerRequest(CommerceAction.LOAD_RECHARGES, state, action);
 }
 
 /**
