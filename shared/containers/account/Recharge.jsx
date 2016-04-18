@@ -45,7 +45,7 @@ class Recharge extends Component {
                             <span>冻结金额：{account.frozen_amount}</span>
                             : null
                         }
-                        <span className="btn-red">充值</span>
+                        <span className="btn-red" style={{display:'none'}}>充值</span>
                     </div>
                     <dl className="recharge fr hide">
                         <dt>输入充值卡号 <span className="form-red" title="此项必填。">*</span></dt>
