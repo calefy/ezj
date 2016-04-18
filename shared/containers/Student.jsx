@@ -21,7 +21,7 @@ class Student extends Component {
     componentDidMount() {
         const { student, params } = this.props;
         if (student.isFetching ||
-                (student.data && student.data.brief.student_id != params.studentId)) {
+                (student.data && student.data.student_brief.student_id != params.studentId)) {
             Student.fetchData(this.props);
         }
     }
@@ -34,8 +34,9 @@ class Student extends Component {
 
     render() {
         let data = this.props.student.data || {};
-        let student = data.brief || {};
-        let courses = data.courses || [];
+        let student = data.student_brief || {};
+        let courseData = data.joined_courses || {};
+        let courses = courseData.items_on_the_current_page || [];
 
         return (
             <div>
@@ -57,7 +58,7 @@ class Student extends Component {
                 })}
 
                 <Pagination
-                    total={data.total || 0}
+                    total={courseData.total || 0}
                     pageSize={cparams['per-page']}
                     page={this.props.location.query.page || 0}
                     link={this.props.location.pathname}
