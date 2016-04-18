@@ -2,8 +2,9 @@ import { combineReducers } from 'redux';
 import assign from 'lodash/assign';
 
 import * as other       from './other'
-import * as courses        from './courses'
+import * as courses     from './courses'
 import * as user        from './user'
+import * as commerce    from './commerce'
 
 /**
  * 全局store对象说明：
@@ -15,6 +16,7 @@ import * as user        from './user'
 module.exports = combineReducers(assign({},
     other,
     courses,
-    user
+    user,
+    commerce
 ));
 
