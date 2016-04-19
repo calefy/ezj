@@ -81,21 +81,33 @@ module.exports = class CoursesAction extends BaseAction {
     }
 
 
+    /**
+     * 用一个方法表示我的课程全部、学习的、购买的
+     */
     static LOAD_MY_COURSES = 'my_courses';
     loadMyCourses(params) {
-        return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES, this.api.myCourses(params) );
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES, this.api.myCourses(params), params );
     }
-    static LOAD_MY_COURSES_LEARNED = 'my_courses_learned';
-    loadMyLearnedCourses(params) {
-        return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES_LEARNED, this.api.myLearnedCourses(params) );
-    }
-    static LOAD_MY_COURSES_BUYED = 'my_courses_buyed';
-    loadMyBuyedCourses(params) {
-        return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES_BUYED, this.api.myBuyedCourses(params) );
-    }
+    //static LOAD_MY_COURSES_LEARNED = 'my_courses_learned';
+    //static LOAD_MY_COURSES_BUYED = 'my_courses_buyed';
+    //loadMyLearnedCourses(params) {
+    //    return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES_LEARNED, this.api.myLearnedCourses(params) );
+    //}
+    //loadMyBuyedCourses(params) {
+    //    return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES_BUYED, this.api.myBuyedCourses(params) );
+    //}
     static LOAD_MY_COURSES_COLLECTED = 'my_courses_collected';
     loadMyCollectedCourses(params) {
-        return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES_COLLECTED, this.api.myCollectedCourses(params) );
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES_COLLECTED, this.api.myCollectedCourses(params), params );
+    }
+
+    static COLLECT_COURSE = 'collect_course';
+    collect(courseId) {
+        return BaseAction.dispatchRequest( CoursesAction.COLLECT_COURSE, this.api.collect(courseId), {courseId} );
+    }
+    static CANCEL_COLLECT_COURSE = 'cancel_collect_course';
+    cancelCollect(courseId) {
+        return BaseAction.dispatchRequest( CoursesAction.CANCEL_COLLECT_COURSE, this.api.cancelCollect(courseId), {courseId} );
     }
 }
 

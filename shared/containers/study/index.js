@@ -9,7 +9,7 @@ if (process.env.BROWSER) {
 class Index extends Component {
 
     static menus = [
-        { path: '/study/mine/all', name: '我的课程' },
+        { path: '/study/all', name: '我的课程' },
         { path: '/study/collect', name: '收藏的课程' },
         { path: '/study/test', name: '我的测验' }
     ];
