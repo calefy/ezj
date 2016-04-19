@@ -279,6 +279,15 @@ module.exports = {
                     cb(null, require('./containers/Lecturer.jsx'));
                 });
             }
-        }
+        },
+        // 视频播放页
+        {
+            path: 'video',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/Play'));
+                });
+            }
+        },
     ]
 };
