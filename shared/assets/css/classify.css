@@ -13,7 +13,7 @@
 .classify-left h5:last-child a{ border-bottom: 0px;}
 
 .classify-right{ margin: 50px 0 0 290px;}
-.classify-right>div{ box-shadow: 0 1px 2px rgba(0,0,0,0.2);}
+.classify-right>div>div{ box-shadow: 0 1px 2px rgba(0,0,0,0.2);}
 
 .classify-course{ box-shadow: 0 1px 2px rgba(0,0,0,0.2); padding: 40px 20px 60px; background: rgba(255,255,255,0.49); font-size: 1.5em; line-height: 1.3; margin:0;}
 .classify-course a{ color: #b01c40;}
@@ -38,8 +38,10 @@
 .online-course{ margin: 32px 0; padding: 0 0 40px;}
 .online-course h4{ margin: 0 0 30px;}
 .online-course dl{ margin: 0 40px; line-height: 40px;}
-.online-course dt,.online-course dd{ padding:0 0 0 30px; border-bottom: 2px solid #e5e6e6;}
-.online-course dt{ background: url(../img/online-bg.png) no-repeat top left; font-size: 0.875em; color: #fff;}
+.online-course dt,.online-course dd{ border-bottom: 2px solid #e5e6e6;}
+.online-course dt>span{  background: #b01c40; padding:0 30px;}
+.online-course dt{ background: url(../img/online-bg.png) no-repeat top right; color: #fff; display: inline-block; padding:0 55px 0 0; font-size: 0.875em;}
+.online-course dd{ padding:0 0 0 30px;}
 .online-course dd,.online-course dd a{ font-size: 0.75em; color: #505050;}
 .online-course span{ display: inline-block;}
 .online-title{ width: 396px;}
