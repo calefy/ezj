@@ -16,7 +16,7 @@ class Pagination extends Component {
         search: PropTypes.string.isRequired
     };
     static defaultProps = {
-        page: 0,
+        page: 1,
         pageSize: 10
     };
 
@@ -30,14 +30,14 @@ class Pagination extends Component {
             return null;
         }
 
-        const prevQuery = Object.assign({}, query, {page: Math.max(0, page-1)});
+        const prevQuery = Object.assign({}, query, {page: Math.max(1, page-1)});
         const nextQuery = Object.assign({}, query, {page: Math.min(pageTotal, page + 1)});
 
         return (
             <section className="pagination">
                 <ul className="clearfix">
                     <li className="previous">
-                        { page == 0 ? 
+                        { page == 1 ? 
                             <span className="disabled">上一页</span> : 
                             <Link to={link} query={prevQuery}>上一页</Link>
                         }
@@ -46,10 +46,10 @@ class Pagination extends Component {
                         let i, q, list = [];
                         for (i = 0; i < pageTotal; i++) {
                             // TODO: 考虑页数过多问题
-                            q = Object.assign({}, query, {page: i});
+                            q = Object.assign({}, query, {page: i + 1});
                             list.push(
-                                <li key={i} className={i == page ? 'selected' : null}>
-                                    {i == page ?
+                                <li key={i} className={i + 1 == page ? 'selected' : null}>
+                                    {i + 1 == page ?
                                         i + 1 :
                                         <Link to={link} query={q}>{i + 1}</Link>
                                     }
@@ -59,7 +59,7 @@ class Pagination extends Component {
                         return list;
                     })()}
                     <li className="next">
-                        { page == Math.ceil(total/10)-1 ? 
+                        { page == Math.ceil(total/pageSize) ? 
                             <span className="disabled">下一页</span> : 
                             <Link to={link} query={nextQuery}>下一页</Link>
                         }
