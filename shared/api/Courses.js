@@ -95,6 +95,13 @@ class Courses extends Base {
         return this.apiClient.get('analysis/my-courses/collection-list' + params);
     }
 
+    collect(courseId) {
+        return this.apiClient.post(`els/rel-courses-students/${courseId}/collection`);
+    }
+    cancelCollect(courseId) {
+        return this.apiClient.delete(`els/rel-courses-students/${courseId}/collection`);
+    }
+
 }
 
 module.exports = Courses;

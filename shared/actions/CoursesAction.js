@@ -100,5 +100,14 @@ module.exports = class CoursesAction extends BaseAction {
     loadMyCollectedCourses(params) {
         return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES_COLLECTED, this.api.myCollectedCourses(params), params );
     }
+
+    static COLLECT_COURSE = 'collect_course';
+    collect(courseId) {
+        return BaseAction.dispatchRequest( CoursesAction.COLLECT_COURSE, this.api.collect(courseId), {courseId} );
+    }
+    static CANCEL_COLLECT_COURSE = 'cancel_collect_course';
+    cancelCollect(courseId) {
+        return BaseAction.dispatchRequest( CoursesAction.CANCEL_COLLECT_COURSE, this.api.cancelCollect(courseId), {courseId} );
+    }
 }
 

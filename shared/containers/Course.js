@@ -44,6 +44,15 @@ class Course extends Component {
         this.props.dispatch( courseAction.loadCourseExamination(examId) );
     };
 
+    onCollect = e => {
+        const courseAction = new CoursesAction();
+        this.props.dispatch( courseAction.collect(this.props.params.courseId) );
+    };
+    onCancelCollect = e => {
+        const courseAction = new CoursesAction();
+        this.props.dispatch( courseAction.cancelCollect(this.props.params.courseId) );
+    };
+
     render() {
         let course = this.props.course.data || {};
         let priv = this.props.course_private.data || {};
@@ -64,8 +73,15 @@ class Course extends Component {
             <div className="content course-detail">
                 <h1>《{course.course_name}》</h1>
                 <p>
+                    {priv.is_collected ?
+                        <button type="btn" onClick={this.onCancelCollect}>取消收藏</button>
+                        :
+                        <button type="btn" onClick={this.onCollect}>收藏</button>
+                    }
+                </p>
+                <p>
                     分类：
-                    {course.category_info.map((item, index) => {
+                    {(course.category_info || []).map((item, index) => {
                         return  <span key={index}>
                                     {item.id == course.course_category_id ?
                                         '/' + item.name :
