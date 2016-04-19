@@ -2,13 +2,42 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
+import { getRequestTypes } from '../libs/utils';
+import CoursesAction from '../actions/CoursesAction';
+
 if (process.env.BROWSER) {
     require('css/play.css')
 }
 
-let Play = React.createClass({
+class Play extends Component {
+    // 初始加载数据
+    static fetchData({dispatch, params={}, location={}, apiClient}) {
+        const courseAction = new CoursesAction({ apiClient });
+        return Promise.all([
+            dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
+            dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
+        ]);
+    }
 
-    render: function() {
+    componentDidMount() {
+        const { course, params } = this.props;
+        if (course.isFetching ||
+                (course.data && course.data.id != params.courseId)) {
+            Play.fetchData(this.props);
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        if (this.props.params.courseId != nextProps.params.courseId ||
+                this.props.params.chapterId != nextProps.params.chapterId) {
+            const courseAction = new CoursesAction();
+            nextProps.dispatch( courseAction.loadCourseDetail(nextProps.params.courseId) ); // 课程详情,包含讲师
+            nextProps.dispatch( courseAction.loadCourseChapters(nextProps.params.courseId) ); // 课程章节
+        }
+    }
+
+
+    render() {
+        let course = this.props.course.data || {};
 
         return (
             <div className="play">
@@ -166,8 +195,12 @@ let Play = React.createClass({
         );
 
     }
-});
+}
 
 
-module.exports = Play;
+module.exports = connect( state => ({
+    action: state.action,
+    course : state.course,
+    chapters: state.chapters,
+}) )(Play);
 
