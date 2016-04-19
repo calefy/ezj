@@ -1,12 +1,50 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux'
 import {Link} from 'react-router';
 
+import CoursesAction from '../../actions/CoursesAction';
+import Pagination from '../../components/Pagination.jsx';
+
 class All extends Component {
+    // 初始加载数据
+    static fetchData({dispatch, params={}, location={}, apiClient}) {
+        const courseAction = new CoursesAction({ apiClient });
+        return Promise.all([
+            dispatch( courseAction.loadMyCourses(location.query) ),
+        ]);
+    }
+
+    componentDidMount() {
+        const { courses_mine, location } = this.props;
+        if (courses_mine.isFetching ||
+                (courses_mine._req && (courses_mine._req.type != location.query.type || courses_mine._req.page != location.query.page))) {
+            All.fetchData(this.props);
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        if (this.props.location.search != nextProps.location.search) {
+            All.fetchData(nextProps);
+        }
+    }
 
     render() {
+        const {courses_mine, location} = this.props;
+        let query = location.query;
+        let courses = courses_mine.data && courses_mine.data.list || [];
 
         return (
             <div className="study-center-right shadow bg-white fr">
+                <ul className="nav-tabs cl">
+                    <li className={!query.type ? 'current' : ''}>
+                        <Link to="/study/all">全部课程</Link>
+                    </li>
+                    <li className={query.type === 'learning-list' ? 'current' : ''}>
+                        <Link to="/study/all" query={{type: 'learning-list'}}>只看学习</Link>
+                    </li>
+                    <li className={query.type === 'purchased-list' ? 'current' : ''}>
+                        <Link to="/study/all" query={{type: 'purchased-list'}}>只看购买</Link>
+                    </li>
+                </ul>
                 <ul className="my-all-courses">
                     <li className="cl">
                         <div className="my-all-courses-left fl">
@@ -81,4 +119,6 @@ class All extends Component {
     }
 }
 
-module.exports = All;
+module.exports = connect( state => ({
+    courses_mine : state.courses_mine,
+}) )(All);
