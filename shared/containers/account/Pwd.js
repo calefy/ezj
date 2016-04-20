@@ -54,7 +54,7 @@ let Passwd = React.createClass({
                 onValidSubmit={this.onSubmit}
                 onChange={this.onFormChange}
             >
-                <div className="formsy-list">
+                <div className="formsy-list cl">
                     <label>用户名</label>
                     <div>{user.username}</div>
                 </div>

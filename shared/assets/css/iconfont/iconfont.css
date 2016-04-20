@@ -41,3 +41,5 @@
 .icon-play:before { content: "\e659"; }
 .icon-big:before { content: "\e658"; }
 .icon-del:before { content: "\e65a"; }
+.icon-share:before { content: "\e65c"; }
+.icon-clock:before { content: "\e65e"; }

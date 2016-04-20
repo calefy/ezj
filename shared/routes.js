@@ -44,9 +44,35 @@ module.exports = {
             path: 'courses/:courseId',
             getComponent(location, cb) {
                 require.ensure([], require => {
-                    cb(null, require('./containers/Course'));
+                    cb(null, require('./containers/courses/index'));
                 });
-            }
+            },
+            childRoutes: [
+                {
+                    path: 'introduce',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/courses/Introduce'));
+                        });
+                    }
+                },
+                {
+                    path: 'content',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/courses/Content'));
+                        });
+                    }
+                },
+                {
+                    path: 'test',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/courses/Test'));
+                        });
+                    }
+                }
+            ]
         },
         {
             path: 'courses/:courseId/chapters/:chapterId',
