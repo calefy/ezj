@@ -47,6 +47,13 @@ module.exports = {
                     cb(null, require('./containers/courses/index'));
                 });
             },
+            indexRoute: {
+                getComponent(location, cb) {
+                    require.ensure([], require => {
+                        cb(null, require('./containers/courses/Introduce'));
+                    });
+                }
+            },
             childRoutes: [
                 {
                     path: 'introduce',
