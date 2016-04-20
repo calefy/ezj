@@ -55,3 +55,20 @@
 .course-user-list div > div{ position: absolute; left:38px; top:25px; z-index: 999; display: none; text-align: center; background: #fff; padding:12px; border: 1px solid #bdbfbf; box-shadow: 0 5px 5px rgba(164,164,164,0.75);}
 .course-user-list div p{ font-size: 0.75em; color: #60686c; line-height: 20px;}
 .course-user-list i{background: url(../img/course-user-arrow.png) no-repeat; position: absolute; left:6px; top:-6px; display: block; width: 10px; height:6px;}
+
+.course-chapter{ padding: 20px 24px;}
+.course-chapter dt { line-height: 36px; color: #000000; font-size: 0.875em; padding: 0 10px; position: relative; background: #eeeeee;}
+.course-chapter dd { line-height: 50px; padding: 0px 16px 0px 16px; font-size: 0.75em; color: #505050; position: relative;}
+.course-chapter dd div{ padding: 0 0 0 23px; border-left: 2px solid #ebebeb;}
+.course-chapter dd div:before { width: 18px; height: 18px; border-radius: 20px; border:2px solid #999999; background: #fff; position: absolute; left: 6px; top: 14px; content: ""; display: block; z-index: 99;}
+
+.icon-pro { position: absolute; width: 18px; height: 18px; top: 16px; left: 17px; border-radius: 9px; z-index: 999;}
+.one-four:before,.two-four:before,.three-four:before,.four-four:before{ top:16px;}
+.one-four .icon-pro{ border-radius: 0px 9px 0 0; width: 9px; height: 9px; background: #ebebeb;}
+.two-four .icon-pro{ width:9px; height: 18px; border-radius: 0px 18px 18px 0px; background: #ebebeb;}
+.three-four .icon-pro{ width: 9px; height: 18px; border-radius: 0px 18px 18px 0px; background: #ebebeb;}
+.three-four .icon-pro:before{ content: ""; display: block; border-radius: 0 0 0px 9px; width: 9px; height: 9px; margin: 9px 0 0 -9px; background: #ebebeb;}
+.four-four .icon-pro{ width: 18px; height: 18px; border-radius: 18px; background: #ebebeb; left: 8px; top: 16px;}
+
+.course-audition{ color: #008000; margin: 0 20px;}
+.course-time i{ margin: 0 6px 0 0; font-size: 0.875em;}

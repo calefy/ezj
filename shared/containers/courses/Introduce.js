@@ -87,46 +87,6 @@ class Course extends Component {
 
                     </div>
                 </div>
-
-                <h2>【测验】{course.course_examination_id > 0 ? <button type="button" onClick={this.onClickExam}>点击展示</button> : '无'}</h2>
-                {course.course_examination_id <= 0 ?
-                    null :
-                    <div>
-                        <h4>{examination.examination_title}</h4>
-                        <dl>
-                            {questions.map((item, index) => {
-                                let q = item.question;
-                                let os = item.options;
-                                return [
-                                    <dt key={index}>
-                                        {index + 1}.
-                                        <div className="dib vat" dangerouslySetInnerHTML={{__html: q.examination_question_content}} />
-                                    </dt>,
-                                    os.map((o, i) => {
-                                        return <dd key={i}>{String.fromCharCode(65 + i)}. {o.option_text}</dd>
-                                    })
-                                ];
-                            })}
-                        </dl>
-                    </div>
-                }
-
-                <h3>【章节】</h3>
-                <dl>
-                {chapters.map((item, index) => {
-                    let isRoot = item.rgt - item.lft > 1;
-                    let inner = <p>
-                        {item.chapter_name}
-                        {item.free_trial_status ? '[试听]' : ''}
-                        {isRoot ? '' : `时长: ${toTimeString(item.video.video_duration, 'm:s')}`}
-                        {isRoot ? '' : progress[item.id] ? '学习进度:' + progress[item.id].chapter_progress + '%' : ''}
-                    </p>;
-                    return isRoot ?
-                        <dt key={index}>{inner}</dt>
-                        :
-                        <dd key={index}>{inner}</dd>
-                })}
-                </dl>
             </div>
         );
     }

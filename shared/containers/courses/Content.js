@@ -70,89 +70,26 @@ class Course extends Component {
         let timeStr = (thour ? thour + '小时' : '') + tminute + '分';
 
         return (
-            <div className="content course-detail">
-                内容
-                <h2>【课程简介】</h2>
-                <div dangerouslySetInnerHTML={{__html: course.course_outlines}}></div>
-                <div>
-                    {chapters.map((item, index) => {
-                        let isRoot = item.rgt - item.lft > 1;
-                        return isRoot ? <p key={index}>{item.chapter_name}</p> : null;
-                    })}
-                </div>
-
-                <p>------</p>
-
-                <h3>【推荐受众】</h3>
-                <p>{course.recommends_audience}</p>
-
-                <p>------</p>
-
-                <h2>【测验】{course.course_examination_id > 0 ? <button type="button" onClick={this.onClickExam}>点击展示</button> : '无'}</h2>
-                {course.course_examination_id <= 0 ?
-                    null :
-                    <div>
-                        <h4>{examination.examination_title}</h4>
-                        <dl>
-                            {questions.map((item, index) => {
-                                let q = item.question;
-                                let os = item.options;
-                                return [
-                                    <dt key={index}>
-                                        {index + 1}.
-                                        <div className="dib vat" dangerouslySetInnerHTML={{__html: q.examination_question_content}} />
-                                    </dt>,
-                                    os.map((o, i) => {
-                                        return <dd key={i}>{String.fromCharCode(65 + i)}. {o.option_text}</dd>
-                                    })
-                                ];
-                            })}
-                        </dl>
-                    </div>
-                }
-
-
-                <p>------</p>
-
-                <h2>【讲师】</h2>
-                {course.lecturers.map((item, index) => {
-                    return (
-                        <div key={index}>
-                            <p>
-                                <Link to={`/lecturers/${item.id}`}>
-                                    <img src={avatar(item.lecturer_avatar)} alt="" width="80"/>
-                                    {item.lecturer_name}
-                                    {item.lecturer_org} {item.lecturer_title}
-                                </Link>
-                            </p>
-                            <div dangerouslySetInnerHTML={{__html: item.lecturer_introduction}}></div>
-                        </div>
-                    );
-                })}
-
-                <p>------</p>
-
-                <h3>【学员】({course.student_count})</h3>
-                <div>
-                {students.map((item, index) => {
-                    return (
-                        <p key={index}><Link to={`/students/${item.student_id}`}><img src={avatar(item.avatar)} alt="" height="50"/> {item.nickname}</Link></p>
-                    );
-                })}
-                </div>
-
-                <p>------</p>
-
-                <h3>【章节】</h3>
+            <div className="content course-chapter">
                 <dl>
                 {chapters.map((item, index) => {
                     let isRoot = item.rgt - item.lft > 1;
-                    let inner = <p>
+                    // let schedule = progress[item.id].chapter_progress;
+                    let inner = <div 
+                        className={`cl ${ progress[item.id] ? 
+                            progress[item.id].chapter_progress > 0 && progress[item.id].chapter_progress < 50 ?
+                            'one-four' :
+                            progress[item.id].chapter_progress >= 50 && progress[item.id].chapter_progress < 70 ? 
+                            'two-four' : 
+                            progress[item.id].chapter_progress >= 70 && progress[item.id].chapter_progress < 100 ?
+                            'three-four' : 'four-four'
+                            : 
+                            '' }`}>
+                        <i className="icon icon-pro"></i>
                         {item.chapter_name}
-                        {item.free_trial_status ? '[试听]' : ''}
-                        {isRoot ? '' : `时长: ${toTimeString(item.video.video_duration, 'm:s')}`}
-                        {isRoot ? '' : progress[item.id] ? '学习进度:' + progress[item.id].chapter_progress + '%' : ''}
-                    </p>;
+                        <span className="course-audition">{item.free_trial_status ? '[试听]' : ''}</span>
+                        {isRoot ? '' : <span className="fr course-time"><i className="iconfont icon-time"></i>{toTimeString(item.video.video_duration, 'm:s')}</span>}
+                    </div>;
                     return isRoot ?
                         <dt key={index}>{inner}</dt>
                         :
