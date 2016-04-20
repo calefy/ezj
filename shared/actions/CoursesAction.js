@@ -51,18 +51,23 @@ module.exports = class CoursesAction extends BaseAction {
     // 课程详情
     static LOAD_COURSE_DETAIL = 'course_detail';
     loadCourseDetail(courseId) {
-        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_DETAIL, this.api.courseDetail(courseId) );
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_DETAIL, this.api.courseDetail(courseId), {courseId} );
     }
     // 课程私密信息
     static LOAD_COURSE_PRIVATE = 'course_private';
     loadCoursePrivate(courseId) {
-        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_PRIVATE, this.api.coursePrivate(courseId) );
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_PRIVATE, this.api.coursePrivate(courseId), {courseId} );
     }
 
     // 课程章节
     static LOAD_COURSE_CHAPTER = 'course_chapters';
     loadCourseChapters(courseId) {
-        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_CHAPTER, this.api.courseChapters(courseId) );
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_CHAPTER, this.api.courseChapters(courseId), {courseId} );
+    }
+
+    static LOAD_CHAPTER_PPTS = 'chapter_ppts';
+    loadChapterPpts(chapterId) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_CHAPTER_PPTS, this.api.chapterPpts(chapterId), {chapterId} );
     }
 
     static LOAD_COURSE_STUDENT = 'course_students';

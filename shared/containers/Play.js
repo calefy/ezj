@@ -9,43 +9,130 @@ if (process.env.BROWSER) {
     require('css/play.css')
 }
 
+const SIDEBAR_CHAPTER = 'sidebar_chapter';
+const SIDEBAR_PPT = 'sidebar_ppt';
+
 class Play extends Component {
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
         const courseAction = new CoursesAction({ apiClient });
         return Promise.all([
             dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
+            dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
             dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
+            dispatch( courseAction.loadChapterPpts(params.chapterId) ), // 章节PPT
         ]);
     }
 
+    state = {
+        sidebar: SIDEBAR_CHAPTER, // 控制侧边栏显示与否，及显示chapter还是ppt
+    };
+
     componentDidMount() {
-        const { course, params } = this.props;
-        if (course.isFetching ||
-                (course.data && course.data.id != params.courseId)) {
-            Play.fetchData(this.props);
-        }
+        this.loadNeededData(this.props);
     }
     componentWillReceiveProps(nextProps) {
-        if (this.props.params.courseId != nextProps.params.courseId ||
-                this.props.params.chapterId != nextProps.params.chapterId) {
-            const courseAction = new CoursesAction();
-            nextProps.dispatch( courseAction.loadCourseDetail(nextProps.params.courseId) ); // 课程详情,包含讲师
-            nextProps.dispatch( courseAction.loadCourseChapters(nextProps.params.courseId) ); // 课程章节
-        }
+        this.loadNeededData(nextProps);
     }
+    /**
+     * 加载需要的数据：已有数据与props中参数不一致时，加载对应的数据
+     */
+    loadNeededData = props => {
+        const {params, course, course_private, chapters, ppts} = props;
+        const courseAction = new CoursesAction();
+        // 课程详情
+        if (params.courseId != (course._req && course._req.courseId)) {
+            props.dispatch( courseAction.loadCourseDetail(params.courseId) );
+        }
+        // 课程详情-个人私密信息
+        if (params.courseId != (course_private._req && course_private._req.courseId)) {
+            props.dispatch( courseAction.loadCoursePrivate(params.courseId) );
+        }
+        // 课程章节
+        if (params.courseId != (chapters._req && chapters._req.courseId)) {
+            props.dispatch( courseAction.loadCourseChapters(params.courseId) );
+        }
+        // 章节ppt
+        if (params.chapterId != (ppts._req && ppts._req.chapterId)) {
+            props.dispatch( courseAction.loadChapterPpts(params.chapterId) );
+        }
+    };
+    /**
+     * 设置state
+     */
+    _setState = obj => {
+        this.setState(Object.assign({}, this.state, obj || {}));
+    };
+
+
+    // 用户点击按钮操作
+    handlePrev = e => { // 上一节
+        e.preventDefault();
+        e.nativeEvent.returnValue = false;
+
+    };
+    handleNext = e => { // 下一节
+        e.preventDefault();
+        e.nativeEvent.returnValue = false;
+
+    };
+    handleOver = e => { // 标记完成toggle
+        e.preventDefault();
+
+    };
+    handlePlayPpt = e => { // 播放ppt toggle
+        e.preventDefault();
+    };
+    handleSkipBegin = e => { // 跳过片头 toggle
+        e.preventDefault();
+    };
+    handleHideSidebar = e => { // 隐藏侧边栏
+        e.preventDefault();
+        this._setState({ sidebar: false });
+    };
+    handleShowSidebarChapter = e => { // 显示侧边章节
+        e.preventDefault();
+        this._setState({ sidebar: SIDEBAR_CHAPTER });
+    };
+    handleShowSidebarPpt = e => { // 显示侧边ppt
+        e.preventDefault();
+        this._setState({ sidebar: SIDEBAR_PPT });
+    };
 
 
     render() {
-        let course = this.props.course.data || {};
+        let {course, course_private, chapters, ppts, params} = this.props;
+        let progress = course_private.data && course_private.data.chapters_progress || {};
+        course = course.data || {};
+        chapters = chapters.data && chapters.data.list || [];
+        ppts = ppts.data && ppts.data.list || [];
+
+        // 构造chapterMap，方便查找；顺便在同一个遍历中创建层级结构
+        let chapterMap = {};
+        let chapterLevel = [];
+        let lastRoot = null;
+        let lastLeaves = [];
+        chapters.forEach(item => {
+            chapterMap[item.id] = item;
+            if (item.rgt - item.lft > 1) {
+                if (lastRoot) chapterLevel.push({root: lastRoot, leaves: lastLeaves});
+                lastRoot = item.id;
+                lastLeaves = [];
+            } else {
+                lastLeaves.push(item.id);
+            }
+        });
+        if (lastRoot) chapterLevel.push({ root: lastRoot, leaves: lastLeaves });
+        // 当前章节
+        let chapter = chapterMap[params.chapterId] || {};
 
         return (
             <div className="play">
                 <div className="left-content">
                     <div className="play-top cl">
-                        <div className="play-back fl"><i className="iconfont icon-arrowvideo"></i>&emsp;返回详情</div>
-                        <p>消费金融与消费网贷的发展与实践与...</p>
-                        <p>1.1消费金融的起源、类别及我国消费金融的发展</p>
+                        <Link className="play-back fl" to={`/courses/${params.courseId}`}><i className="iconfont icon-arrowvideo"></i>&emsp;返回详情</Link>
+                        <p>{course.course_name}</p>
+                        <p>{chapter.chapter_name}</p>
                     </div>
                     <div className="play-center" style={{ display: "none" }}>
                         <div className="play-video">视频</div>
@@ -73,109 +160,54 @@ class Play extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="switch">
-                        <Link to="" className="switch-chapter"><i className="iconfont icon-chapter"></i><br />章节</Link>
-                        <Link to="" className="switch-handout"><i className="iconfont icon-handout"></i><br />讲义</Link>
-                    </div>
                 </div>
-                <div className="right-content" style={{ width: 372 }}>
-                    <p>&gt;</p>
-                    <div className="control-panle">
+
+                <div className="right-content" style={{ right: this.state.sidebar ? 0 : -388 }}>
+                    <p className="right-arrow" onClick={this.handleHideSidebar}><span>&gt;</span></p>
+                    <div className="control-panel">
                         <ul className="nav-tabs play-nav cl">
-                            <li className="videoChapter current"><Link to="">章节</Link></li>
-                            <li className="videoJy"><Link to="">讲义</Link></li>
+                            <li className={`videoChapter ${this.state.sidebar === SIDEBAR_CHAPTER ? 'current' : ''}`}><a href="#sidebar_chapter" onClick={this.handleShowSidebarChapter}>章节</a></li>
+                            <li className={`videoJy ${this.state.sidebar === SIDEBAR_PPT ? 'current' : ''}`}><a href="#sidebar_ppt" onClick={this.handleShowSidebarPpt}>讲义</a></li>
                         </ul>
                         <div className="tab-content">
-                            <div className="tab-pane current">
+                            <div className={`tab-pane ${this.state.sidebar === SIDEBAR_CHAPTER ? 'current' : ''}`}>
                                 <ul className="under-control chapter-list current">
-                                    <div className="chapter-list">
-                                        <li className="chapter-item">
-                                            <span className="cpt">第一章：宏观经济形势分析</span>
-                                            <div className="knob-list-wrap">
-                                                <ul className="knob-list">
-                                                    <li className="knob-item current one-four" id="2947">
-                                                        <i className="icon icon-pro"></i>
-                                                        <a className="knob-name">黄晓捷：五句话塑造基本世界观</a>
-                                                    </li>
-                                                    <li className="knob-item two-four" id="1775">
-                                                        <i className="icon icon-pro"></i>
-                                                        <a className="knob-name">黄晓捷：值得精读的五本宏观经济学著作</a>
-                                                    </li>
-                                                    <li className="knob-item three-four" id="1776">
-                                                        <i className="icon icon-pro"></i>
-                                                        <a className="knob-name">黄晓捷：Dalio的宏观经济分析框架</a>
-                                                    </li>
-                                                    <li className="knob-item four-four" id="1781">
-                                                        <i className="icon icon-pro"></i>
-                                                        <a className="knob-name">黄晓捷：中国宏观经济现状</a>
-                                                    </li>
-                                                    <li className="knob-item" id="1783">
-                                                        <i className="icon icon-pro"></i>
-                                                        <a className="knob-name">黄晓捷：中国政府资产负债表解读</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li className="chapter-item">
-                                            <span className="cpt">第二章：宏观经济的增长影响因素</span>
-                                            <div className="knob-list-wrap">
-                                                <ul className="knob-list">
-                                                    <li className="knob-item" id="1784">
-                                                        <i className="icon icon-pro"></i>
-                                                        <a className="knob-name">黄晓捷：影响宏观经济增长的三大要素</a>
-                                                    </li>
-                                                    <li className="knob-item" id="1785">
-                                                        <i className="icon icon-pro"></i>
-                                                        <a className="knob-name">黄晓捷：99%的经济增长是欲望推动的</a>
-                                                    </li>
-                                                    <li className="knob-item" id="1786">
-                                                        <i className="icon icon-pro"></i>
-                                                        <a className="knob-name">黄晓捷：决定国家经济增长率的关键因素</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li className="chapter-item">
-                                            <span className="cpt">第三章：未来展望与行业机会</span>
-                                            <div className="knob-list-wrap">
-                                                <ul className="knob-list">
-                                                    <li className="knob-item" id="1787">
-                                                        <i className="icon icon-pro"></i>
-                                                    <a className="knob-name">黄晓捷：目前在国内做中期投资更稳妥</a>
-                                                    </li>
-                                                    <li className="knob-item" id="1789">
-                                                        <i className="icon icon-pro"></i>
-                                                        <a className="knob-name">黄晓捷：能赚大钱的行业方向</a>
-                                                    </li>
-                                                    <li className="knob-item" id="1791">
-                                                        <i className="icon icon-pro"></i>
-                                                        <a className="knob-name">黄晓捷：未来行业机会分析</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </div>
+                                    {chapterLevel.map((item, index) => {
+                                        return (
+                                            <li className="chapter-item" key={index}>
+                                                <span className="cpt">{chapterMap[item.root].chapter_name}</span>
+                                                <div className="knob-list-wrap">
+                                                    <ul className="knob-list">
+                                                        {item.leaves.map((id, i) => {
+                                                            let prog = progress[id] && progress[id].chapter_progress || 0;
+                                                            let part = Math.max(Math.round(prog / 25) - 1, 0);
+
+                                                            return (
+                                                                <li className={`knob-item ${chapter.id == id ? 'current' : ''} ${part ? ['one', 'two', 'three', 'four'][part] + '-four' : ''}`} key={i}>
+                                                                    <i className="icon icon-pro" title={`学习进度 ${prog}%`}></i>
+                                                                    <a className="knob-name">{chapterMap[id].chapter_name}</a>
+                                                                </li>
+                                                            );
+                                                        })}
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
                             </div>
-                            <div className="tab-pane" style={{ display: "none" }}>
+                            <div className={`tab-pane ${this.state.sidebar === SIDEBAR_PPT ? 'current' : ''}`}>
                                 <ul className="jiangyi-list">
                                     <div className="jy-list">
 
-                                        <div className="">
-                                            <img src="http://www.ezijing.com/sites/default/files/oos/ppt/song/SXH0313 (1).jpg" />
-                                        </div>
+                                        {ppts.length ?
+                                            ppts.map((item, index) => {
+                                                return <div key={index} className={index === 0 ? 'current' : ''}><img src={item.ppt_url} alt=""/></div>
+                                            })
+                                            :
+                                            <div className="no-data">暂无讲义</div>
+                                        }
 
-                                        <div className="">
-                                            <img src="http://www.ezijing.com/sites/default/files/oos/ppt/song/SXH0313 (2).jpg" />
-                                        </div>
-
-                                        <div className="current">
-                                            <img src="http://www.ezijing.com/sites/default/files/oos/ppt/song/SXH0313 (3).jpg" />
-                                        </div>
-
-                                        <div>
-                                            <img src="http://www.ezijing.com/sites/default/files/oos/ppt/song/SXH0313 (4).jpg" />
-                                        </div>
                                     </div>
                                 </ul>
                             </div>
@@ -191,6 +223,12 @@ class Play extends Component {
                         <em className="play-state fr">同步显示PPT</em>
                     </div>
                 </div>
+                {this.state.sidebar ? null :
+                    <div className="switch">
+                        <a href="#sidebar_chapter" className="switch-chapter" onClick={this.handleShowSidebarChapter}><i className="iconfont icon-chapter"></i><br />章节</a>
+                        <a href="#sidebar_ppt" className="switch-handout" onClick={this.handleShowSidebarPpt}><i className="iconfont icon-handout"></i><br />讲义</a>
+                    </div>
+                }
             </div>
         );
 
@@ -201,6 +239,8 @@ class Play extends Component {
 module.exports = connect( state => ({
     action: state.action,
     course : state.course,
+    course_private : state.course_private,
     chapters: state.chapters,
+    ppts: state.ppts,
 }) )(Play);
 
