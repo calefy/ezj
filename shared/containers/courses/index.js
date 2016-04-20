@@ -85,6 +85,7 @@ class Course extends Component {
                 <div className="container">
                     <div className="course-top course-shadow bg-white cl" style={{ marginTop: 20 }}>
                         <div className="course-img fl">
+                            <p>预计开课时间{course.scheduled_open_date}</p>
                             <img src={course.course_picture} />{course.course_picture}
                         </div>
                         <div className="course-top-info">
@@ -119,7 +120,6 @@ class Course extends Component {
                                 是否已过期: {priv.is_expired ? 'Yes' : 'No'} (过期时间 {priv.expiring_date}),
                                 是否已学习: {priv.is_learned ? 'Yes' : 'No'} (学习进度 {priv.progress}%)
                             </p>
-                            <p>预计开课时间：{course.scheduled_open_date}</p>
                         </div>
                     </div>
                     <div className="course-bottom cl">
