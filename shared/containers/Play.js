@@ -6,8 +6,10 @@ import { getRequestTypes } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
 import Video from '../components/Video.jsx';
 
+let isSkipBegin = false;
 if (process.env.BROWSER) {
-    require('css/play.css')
+    require('css/play.css');
+    isSkipBegin = /skip=true/.test(document.cookie); // 浏览器下根据cookie判断是否跳过片头
 }
 
 const SIDEBAR_CHAPTER = 'sidebar_chapter';
@@ -28,6 +30,7 @@ class Play extends Component {
     state = {
         sidebar: SIDEBAR_CHAPTER, // 控制侧边栏显示与否，及显示chapter还是ppt
         pptIndex: 0, // ppt当前序号
+        skipBegin: isSkipBegin,
     };
 
     componentDidMount() {
@@ -87,6 +90,14 @@ class Play extends Component {
     };
     handleSkipBegin = e => { // 跳过片头 toggle
         e.preventDefault();
+        let skip = !this.state.skipBegin;
+        let d = new Date();
+        d.setMonth(d.getMonth() + 1);
+        document.cookie = 'skip=' + skip + ';path=/;domain=.ezijing.com;expires=' + d.toGMTString();
+        if (skip) {
+            this.refs.video.skipBegin();
+        }
+        this._setState({ skipBegin: skip });
     };
     handleHideSidebar = e => { // 隐藏侧边栏
         e.preventDefault();
@@ -100,11 +111,15 @@ class Play extends Component {
         e.preventDefault();
         this._setState({ sidebar: SIDEBAR_PPT });
     };
-    handlePlayTime = e => { // 点击ppt跳转对应的播放时间
+    handlePptTime = e => { // 点击ppt跳转对应的播放时间
         e.preventDefault();
         this._setState({ pptIndex: e.currentTarget.getAttribute('data-index') - 0 });
         let time = e.currentTarget.getAttribute('data-point') - 0;
-        // TODO 设置播放时间
+        this.refs.video.setTimeTo(time);
+    };
+    handlePlayTime = (e, data) => { // 视频播放时间变更调用此方法
+        //console.log('player change: ', data.time);
+        // TODO: 设置ppt
     };
 
 
@@ -154,9 +169,11 @@ class Play extends Component {
                     <div className="play-center cl">
                         <div className="play-video fl">
                             <Video
+                                ref="video"
                                 videoId = {chapter.video.video_origional_ID}
                                 width = {550}
                                 height = {360}
+                                handlePlayTime = {this.handlePlayTime}
                             />
                         </div>
                         <div className="play-jiangyi fl hide">
@@ -223,7 +240,7 @@ class Play extends Component {
                                         {ppts.length ?
                                             ppts.map((item, index) => {
                                                 return (
-                                                    <div key={index} onClick={this.handlePlayTime} data-index={index} data-point={item.ppt_point} className={index === this.state.pptIndex ? 'current' : ''}>
+                                                    <div key={index} onClick={this.handlePptTime} data-index={index} data-point={item.ppt_point} className={index === this.state.pptIndex ? 'current' : ''}>
                                                         <img src={item.ppt_url} alt=""/>
                                                     </div>
                                                 );
@@ -242,9 +259,9 @@ class Play extends Component {
                     <div className="container">
                         <Link to={`/courses/${params.courseId}/chapters/${prevChapterId || params.chapterId}`} className="fl">上一节</Link>
                         <Link to={`/courses/${params.courseId}/chapters/${nextChapterId || params.chapterId}`} className="fl">下一节</Link>
-                        <em className="play-state play-checked fl">已学完</em>
-                        <em className="play-state fr">始终跳过片头</em>
-                        <em className="play-state fr">同步显示PPT</em>
+                        <em className="play-state fl" onClick={this.handleOver}>已学完</em>
+                        <em className={`play-state fr ${this.state.skipBegin ? 'play-checked' : ''}`} onClick={this.handleSkipBegin}>始终跳过片头</em>
+                        <em className="play-state fr" onClick={this.handlePlayPpt}>同步显示PPT</em>
                     </div>
                 </div>
                 {this.state.sidebar ? null :
