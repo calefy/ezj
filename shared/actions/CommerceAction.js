@@ -14,13 +14,13 @@ module.exports = class CommerceAction extends BaseAction {
     }
 
     static LOAD_RECHARGES = 'ec_recharges';
-    loadRecharges() {
-        return BaseAction.dispatchRequest(CommerceAction.LOAD_RECHARGES, this.api.recharges());
+    loadRecharges(params) {
+        return BaseAction.dispatchRequest(CommerceAction.LOAD_RECHARGES, this.api.recharges(params), params);
     }
 
     static LOAD_ORDERS = 'ec_orders';
-    loadOrders() {
-        return BaseAction.dispatchRequest(CommerceAction.LOAD_ORDERS, this.api.orders());
+    loadOrders(params) {
+        return BaseAction.dispatchRequest(CommerceAction.LOAD_ORDERS, this.api.orders(params), params);
     }
 }
 

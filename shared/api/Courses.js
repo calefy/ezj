@@ -74,24 +74,32 @@ class Courses extends Base {
      * 我收藏的课程
      */
     myCourses(params = {}) {
+        let type = params.type ? '/' + params.type : '';
         params = paramify(params);
         params = params ? '?' + params : '';
-        return this.apiClient.get('analysis/my-courses' + params);
+        return this.apiClient.get('analysis/my-courses' + type + params);
     }
-    myLearnedCourses(params = {}) {
-        params = paramify(params);
-        params = params ? '?' + params : '';
-        return this.apiClient.get('analysis/my-courses/learning-list' + params);
-    }
-    myBuyedCourses(params = {}) {
-        params = paramify(params);
-        params = params ? '?' + params : '';
-        return this.apiClient.get('analysis/my-courses/purchased-list' + params);
-    }
+    //myLearnedCourses(params = {}) {
+    //    params = paramify(params);
+    //    params = params ? '?' + params : '';
+    //    return this.apiClient.get('analysis/my-courses/learning-list' + params);
+    //}
+    //myBuyedCourses(params = {}) {
+    //    params = paramify(params);
+    //    params = params ? '?' + params : '';
+    //    return this.apiClient.get('analysis/my-courses/purchased-list' + params);
+    //}
     myCollectedCourses(params = {}) {
         params = paramify(params);
         params = params ? '?' + params : '';
         return this.apiClient.get('analysis/my-courses/collection-list' + params);
+    }
+
+    collect(courseId) {
+        return this.apiClient.post(`els/rel-courses-students/${courseId}/collection`);
+    }
+    cancelCollect(courseId) {
+        return this.apiClient.delete(`els/rel-courses-students/${courseId}/collection`);
     }
 
 }

@@ -28,8 +28,6 @@ class CourseCategoryDetail extends Component {
     render() {
         const {category, courses}= this.props;
 
-        let chars = '一二三四五六七八九十'.split('');
-
         let categoryMap = {};
         if (category.items) {
             (courses || []).forEach(item => {
@@ -72,7 +70,7 @@ class CourseCategoryDetail extends Component {
                     <dl>
                         {category.items && category.items.length ?
                             category.items.map(((c,i) => {
-                                let ret = [<dt><span>模块{chars[i]}：{c.name}</span></dt>];
+                                let ret = [<dt><span>{c.name}</span></dt>];
                                 if (categoryMap[c.id]) {
                                     ret = ret.concat(this.renderCourses(categoryMap[c.id]));
                                 }

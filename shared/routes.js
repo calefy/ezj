@@ -44,9 +44,35 @@ module.exports = {
             path: 'courses/:courseId',
             getComponent(location, cb) {
                 require.ensure([], require => {
-                    cb(null, require('./containers/Course'));
+                    cb(null, require('./containers/courses/index'));
                 });
-            }
+            },
+            childRoutes: [
+                {
+                    path: 'introduce',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/courses/Introduce'));
+                        });
+                    }
+                },
+                {
+                    path: 'content',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/courses/Content'));
+                        });
+                    }
+                },
+                {
+                    path: 'test',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/courses/Test'));
+                        });
+                    }
+                }
+            ]
         },
         // 重置密码页
         {
@@ -178,38 +204,12 @@ module.exports = {
             },
             childRoutes: [
                 {
-                    path: 'mine',
+                    path: 'all',
                     getComponent(location, cb) {
                         require.ensure([], require => {
-                            cb(null, require('./containers/study/left'));
+                            cb(null, require('./containers/study/All'));
                         });
-                    },
-                    childRoutes: [
-                        {
-                            path: 'all',
-                            getComponent(location, cb) {
-                                require.ensure([], require => {
-                                    cb(null, require('./containers/study/All'));
-                                });
-                            }
-                        },
-                        {
-                            path: 'study',
-                            getComponent(location, cb) {
-                                require.ensure([], require => {
-                                    cb(null, require('./containers/study/Study'));
-                                });
-                            }
-                        },
-                        {
-                            path: 'buy',
-                            getComponent(location, cb) {
-                                require.ensure([], require => {
-                                    cb(null, require('./containers/study/buy'));
-                                });
-                            }
-                        }
-                    ]
+                    }
                 },
                 {
                     path: 'collect',
