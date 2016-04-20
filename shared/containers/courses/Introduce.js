@@ -12,9 +12,7 @@ class Course extends Component {
         const courseAction = new CoursesAction({ apiClient });
         return Promise.all([
             dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
-            dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
             dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
-            dispatch( courseAction.loadCourseStudents(params.courseId) ), // 课程学员
         ]);
     }
 
@@ -29,45 +27,13 @@ class Course extends Component {
         if (this.props.params.courseId != nextProps.params.courseId) {
             const courseAction = new CoursesAction();
             nextProps.dispatch( courseAction.loadCourseDetail(nextProps.params.courseId) ); // 课程详情,包含讲师
-            nextProps.dispatch( courseAction.loadCoursePrivate(nextProps.params.courseId) ); // 课程私密信息
             nextProps.dispatch( courseAction.loadCourseChapters(nextProps.params.courseId) ); // 课程章节
-            nextProps.dispatch( courseAction.loadCourseStudents(nextProps.params.courseId) );
         }
     }
 
-    /**
-     * 点击显示测验内容
-     */
-    onClickExam = e => {
-        const examId = this.props.course.data.course_examination_id;
-        const courseAction = new CoursesAction();
-        this.props.dispatch( courseAction.loadCourseExamination(examId) );
-    };
-
-    onCollect = e => {
-        const courseAction = new CoursesAction();
-        this.props.dispatch( courseAction.collect(this.props.params.courseId) );
-    };
-    onCancelCollect = e => {
-        const courseAction = new CoursesAction();
-        this.props.dispatch( courseAction.cancelCollect(this.props.params.courseId) );
-    };
-
     render() {
         let course = this.props.course.data || {};
-        let priv = this.props.course_private.data || {};
-        let progress = priv.chapters_progress || {};
         let chapters = this.props.chapters.data && this.props.chapters.data.list || [];
-        let students = this.props.students.data || [];
-        let examination = this.props.examination.data || {};
-        let questions = examination.questions || [];
-        examination = examination.examination || {};
-
-        // 计算总时长
-        let tminute = course.duration / 60;
-        let thour = Math.floor(tminute / 60);
-        tminute = Math.ceil(tminute) % 60;
-        let timeStr = (thour ? thour + '小时' : '') + tminute + '分';
 
         return (
             <div className="course-bottom-info">
