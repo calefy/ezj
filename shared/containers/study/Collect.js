@@ -47,7 +47,6 @@ class Collect extends Component {
     render() {
         const { courses_mine_collected } = this.props;
         let courses = courses_mine_collected.data && courses_mine_collected.data.list || [];
-        courses = courses_mine_collected.data || [];
 
         return (
             <div className="study-center-right shadow bg-white fr">

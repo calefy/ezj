@@ -43,6 +43,7 @@ class Course extends Component {
                     let isRoot = item.rgt - item.lft > 1;
                     // let schedule = progress[item.id].chapter_progress;
                     let inner = <div 
+                        key ={index}
                         className={`cl ${ progress[item.id] ? 
                             progress[item.id].chapter_progress > 0 && progress[item.id].chapter_progress < 50 ?
                             'one-four' :
@@ -54,7 +55,7 @@ class Course extends Component {
                             '' }`}>
                         <i className="icon icon-pro"></i>
                         {item.chapter_name}
-                        <span className="course-audition">{item.free_trial_status ? '[试听]' : ''}</span>
+                        <span className="course-audition">{item.free_trial_status ? <Link to={`/courses/${item.course_id}/chapters/${item.id}`}>[试听]</Link> : ''}</span>
                         {isRoot ? '' : <span className="fr course-time"><i className="iconfont icon-time"></i>{toTimeString(item.video.video_duration, 'm:s')}</span>}
                     </div>;
                     return isRoot ?

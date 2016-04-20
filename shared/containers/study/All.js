@@ -70,16 +70,11 @@ class All extends Component {
         let now = new Date();
         let ret = [];
 
-        // 排序对象
-        let arr = keys(list).sort().reverse();
-
-        each(arr, (item, index) => {
-            let time = item;
-            item = list[item];
+        each(list, (item, index) => {
             let isPackage = item.type == 2;
             let isLearning = !!item.latest_play;
 
-            let timeStr = this.getTimeString(new Date(time * 1000), now, ret);
+            let timeStr = this.getTimeString(new Date((item.last_study_time || item.purchase_time) * 1000), now, ret);
 
             ret.push(
                 <li className="cl" key={index}>
@@ -129,11 +124,7 @@ class All extends Component {
     render() {
         const {courses_mine, location} = this.props;
         let query = location.query;
-        let courses = courses_mine.data || [];
-        if (courses_mine.data && courses_mine.data.list) {
-            courses = courses_mine.data.list;
-        }
-        //let courses = courses_mine.data && courses_mine.data.list || [];
+        let courses = courses_mine.data && courses_mine.data.list || [];
 
         return (
             <div className="study-center-right shadow bg-white fr">

@@ -58,6 +58,10 @@ class Courses extends Base {
         return this.apiClient.get(`els/courses/${courseId}/students`);
     }
 
+    chapterPpts(chapterId) {
+        return this.apiClient.get('els/ppts?chapter_id=' + chapterId);
+    }
+
     examination(examId) {
         return this.apiClient.get(`els/examinations/${examId}`);
     }

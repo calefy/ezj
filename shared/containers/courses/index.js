@@ -156,7 +156,7 @@ class Course extends Component {
                                 <div className="course-user-list cl">
                                     {students.map((item, index) => {
                                         return (
-                                            <div>
+                                            <div key={index}>
 
                                                 <Link key={index} to={`/students/${item.student_id}`}>
                                                     <img src={avatar(item.avatar)} alt="" width="50" height="50"/>
