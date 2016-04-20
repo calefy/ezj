@@ -182,7 +182,7 @@ class Course extends Component {
                     let isRoot = item.rgt - item.lft > 1;
                     let inner = <p>
                         {item.chapter_name}
-                        {item.free_trial_status ? <a href={`/courses/${course.id}/chapters/${item.id}`} target="_blank">[试听]</a> : ''}
+                        {item.free_trial_status ? <a href={`/courses/${course.id}/chapters/${item.id}`}>[试听]</a> : ''}
                         {isRoot ? '' : `时长: ${toTimeString(item.video.video_duration, 'm:s')}`}
                         {isRoot ? '' : progress[item.id] ? '学习进度:' + progress[item.id].chapter_progress + '%' : ''}
                     </p>;

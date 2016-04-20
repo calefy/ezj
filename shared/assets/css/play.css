@@ -6,7 +6,7 @@
 .play-top p{ display: inline-block; margin:0 34px;}
 
 .play-center{}
-.play-video{ width:100px; height:202px;}
+.play-video{}
 .play-ppt { position: relative;width: 550px; height: 363.375px;}
 .play-ppt-img { width: 100%; height: 100%;}
 .play-controls { background: #000; height: 44px; line-height: 42px; padding: 0 14px;}

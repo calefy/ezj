@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 
 import { getRequestTypes } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
+import Video from '../components/Video.jsx';
 
 if (process.env.BROWSER) {
     require('css/play.css')
@@ -26,6 +27,7 @@ class Play extends Component {
 
     state = {
         sidebar: SIDEBAR_CHAPTER, // 控制侧边栏显示与否，及显示chapter还是ppt
+        pptIndex: 0, // ppt当前序号
     };
 
     componentDidMount() {
@@ -98,6 +100,12 @@ class Play extends Component {
         e.preventDefault();
         this._setState({ sidebar: SIDEBAR_PPT });
     };
+    handlePlayTime = e => { // 点击ppt跳转对应的播放时间
+        e.preventDefault();
+        this._setState({ pptIndex: e.currentTarget.getAttribute('data-index') - 0 });
+        let time = e.currentTarget.getAttribute('data-point') - 0;
+        // TODO 设置播放时间
+    };
 
 
     render() {
@@ -108,10 +116,11 @@ class Play extends Component {
         ppts = ppts.data && ppts.data.list || [];
 
         // 构造chapterMap，方便查找；顺便在同一个遍历中创建层级结构
-        let chapterMap = {};
-        let chapterLevel = [];
+        let chapterMap = {};  // map
+        let chapterLevel = []; // 层级结构
         let lastRoot = null;
         let lastLeaves = [];
+        let leafIds = [];
         chapters.forEach(item => {
             chapterMap[item.id] = item;
             if (item.rgt - item.lft > 1) {
@@ -119,12 +128,20 @@ class Play extends Component {
                 lastRoot = item.id;
                 lastLeaves = [];
             } else {
+                leafIds.push(item.id);
                 lastLeaves.push(item.id);
             }
         });
         if (lastRoot) chapterLevel.push({ root: lastRoot, leaves: lastLeaves });
         // 当前章节
         let chapter = chapterMap[params.chapterId] || {};
+
+        // 前一个后一页
+        let prevChapterId = null;
+        let nextChapterId = null;
+        let curIndex = leafIds.indexOf(params.chapterId);
+        prevChapterId = curIndex > 0 ? leafIds[curIndex - 1] : null;
+        nextChapterId = curIndex < leafIds.length - 1 ? leafIds[curIndex + 1] : null;
 
         return (
             <div className="play">
@@ -134,12 +151,15 @@ class Play extends Component {
                         <p>{course.course_name}</p>
                         <p>{chapter.chapter_name}</p>
                     </div>
-                    <div className="play-center" style={{ display: "none" }}>
-                        <div className="play-video">视频</div>
-                    </div>
                     <div className="play-center cl">
-                        <div className="play-video fl">视频</div>
-                        <div className="play-jiangyi fl">
+                        <div className="play-video fl">
+                            <Video
+                                videoId = {chapter.video.video_origional_ID}
+                                width = {550}
+                                height = {360}
+                            />
+                        </div>
+                        <div className="play-jiangyi fl hide">
                             <div className="play-ppt">
                                 <div className="play-preview">
                                     <img src="http://www.ezijing.com/sites/default/files/oos/ppt/song/SXH0313 (1).jpg" className="play-ppt-img" />
@@ -185,7 +205,7 @@ class Play extends Component {
                                                             return (
                                                                 <li className={`knob-item ${chapter.id == id ? 'current' : ''} ${part ? ['one', 'two', 'three', 'four'][part] + '-four' : ''}`} key={i}>
                                                                     <i className="icon icon-pro" title={`学习进度 ${prog}%`}></i>
-                                                                    <a className="knob-name">{chapterMap[id].chapter_name}</a>
+                                                                    <Link to={`/courses/${params.courseId}/chapters/${id}`} className="knob-name">{chapterMap[id].chapter_name}</Link>
                                                                 </li>
                                                             );
                                                         })}
@@ -202,7 +222,11 @@ class Play extends Component {
 
                                         {ppts.length ?
                                             ppts.map((item, index) => {
-                                                return <div key={index} className={index === 0 ? 'current' : ''}><img src={item.ppt_url} alt=""/></div>
+                                                return (
+                                                    <div key={index} onClick={this.handlePlayTime} data-index={index} data-point={item.ppt_point} className={index === this.state.pptIndex ? 'current' : ''}>
+                                                        <img src={item.ppt_url} alt=""/>
+                                                    </div>
+                                                );
                                             })
                                             :
                                             <div className="no-data">暂无讲义</div>
@@ -216,8 +240,8 @@ class Play extends Component {
                 </div>
                 <div className="play-footer">
                     <div className="container">
-                        <Link to="" className="fl">上一节</Link>
-                        <Link to="" className="fl">下一节</Link>
+                        <Link to={`/courses/${params.courseId}/chapters/${prevChapterId || params.chapterId}`} className="fl">上一节</Link>
+                        <Link to={`/courses/${params.courseId}/chapters/${nextChapterId || params.chapterId}`} className="fl">下一节</Link>
                         <em className="play-state play-checked fl">已学完</em>
                         <em className="play-state fr">始终跳过片头</em>
                         <em className="play-state fr">同步显示PPT</em>
