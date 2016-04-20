@@ -2,3 +2,9 @@
 .search-course li:nth-child(4n){ margin:0 0 8px;}
 .search-course .course-list-img{ width: 214px; height:120px;}
 .search-course .course-list-img img{ min-width: 214px; height:120px;}
+
+.course-top{ padding: 20px;}
+.course-img { width:397px; height:223px; overflow: hidden}
+.course-img img{ width:100%;}
+
+.course-info{ margin:0 0 0 410px;}

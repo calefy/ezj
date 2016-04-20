@@ -5,6 +5,10 @@ import { toTimeString, avatar } from '../libs/utils';
 
 import CoursesAction from '../actions/CoursesAction';
 
+if (process.env.BROWSER) {
+    require('css/course.css')
+}
+
 class Course extends Component {
 
     // 初始加载数据
@@ -62,23 +66,30 @@ class Course extends Component {
 
         return (
             <div className="content course-detail">
-                <h1>《{course.course_name}》</h1>
-                <p>
-                    分类：
-                    {course.category_info.map((item, index) => {
-                        return  <span key={index}>
-                                    {item.id == course.course_category_id ?
-                                        '/' + item.name :
-                                        <Link to="/courses" query={{category: item.id}}>{item.name}</Link>
-                                    }
-                                </span>
-                    })}
-                </p>
-                <p>
-                    时长：{timeStr},
-                    学员：{course.student_count}人,
-                    价格：&yen;{course.course_price}
-                </p>
+                <div className="container">
+                    <div className="course-top bg-white cl" style={{ marginTop: 20 }}>
+                        <div className="course-img fl">
+                            <img src={course.course_picture} />{course.course_picture}
+                        </div>
+                        <div className="course-info">
+                            <h1>{course.course_name}</h1>
+                            <p>
+                                {course.category_info.map((item, index) => {
+                                    return  <span key={index}>
+                                                {item.id == course.course_category_id ?
+                                                    '/' + item.name :
+                                                    <Link to="/courses" query={{category: item.id}}>{item.name}</Link>
+                                                }
+                                            </span>
+                                })}
+                            </p>
+                            <p>
+                                <em><i className="iconfont icon-clock"></i>{timeStr}</em>&emsp;<em><i className="iconfont icon-user"></i>{course.student_count}人</em>&emsp;<em><i className="iconfont icon-share"></i>分享</em>
+                            </p>
+                            <p className="course-price">&yen;{course.course_price}</p>
+                        </div>
+                    </div>
+                </div>
                 <p>
                     是否已收藏: {priv.is_collected ? 'Yes' : 'No'},
                     是否已购买: {priv.is_purchased ? 'Yes' : 'No'},
