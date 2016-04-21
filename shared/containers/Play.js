@@ -166,12 +166,20 @@ class Play extends Component {
         // 当前章节
         let chapter = chapterMap[params.chapterId] || {};
 
-        // 前一个后一页
+        // 前一节、后一节
         let prevChapterId = null;
         let nextChapterId = null;
         let curIndex = leafIds.indexOf(params.chapterId);
         prevChapterId = curIndex > 0 ? leafIds[curIndex - 1] : null;
         nextChapterId = curIndex < leafIds.length - 1 ? leafIds[curIndex + 1] : null;
+
+        // 如果仅显示ppt，设置video的样式
+        let videoWrapStyle = {};
+        if (this.state.pptBoxOnly) {
+            videoWrapStyle.visible = 'hidden';
+            videoWrapStyle.overflow = 'hidden';
+            videoWrapStyle.width = 0;
+        }
 
         return (
             <div className="play">
@@ -182,7 +190,7 @@ class Play extends Component {
                         <p>{chapter.chapter_name}</p>
                     </div>
                     <div className="play-center cl">
-                        <div className={`play-video fl ${this.state.pptBoxOnly ? 'hide' : ''}`}>
+                        <div className="play-video fl" style={videoWrapStyle}>
                             <Video
                                 ref="video"
                                 videoId = {chapter.video.video_origional_ID}

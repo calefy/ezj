@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 // 播放器ID
 const PLAYER_WRAP_ID = 'playerWrap';
 const PLAYER_ID = 'player';
-const SKIP_BEGIN_TIME = 8; // 跳过片头设置片头时间
+const SKIP_BEGIN_TIME = 10; // 跳过片头设置片头时间
 
 let getPlayer = function() {};
 // 定义全局监听函数
@@ -116,7 +116,7 @@ class Video extends Component {
     setTimeTo = time => {
         let player = getPlayer();
         if (player) {
-            player.setCurrentTime(time);
+            player.setCurrentTime(time + 2); // flash实际播放值会大概小个一两秒，因此添加偏移
         }
     };
     // 执行“跳过片头”操作
