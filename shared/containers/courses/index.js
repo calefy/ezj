@@ -50,6 +50,30 @@ class Course extends Component {
         this.props.dispatch( courseAction.cancelCollect(this.props.params.courseId) );
     };
 
+    // 学员列表换一换
+    onChangeStudents = e => {
+        e.preventDefault();
+        const { students, course } = this.props;
+        if (!students.data || !course.data) return;
+
+        let page = students._req.page || 1;
+        let total = course.data.student_count || 0;
+        let totalPage = Math.ceil(total / 9); // 每页9个
+        page = (page+totalPage) % totalPage + 1;
+
+        const courseAction = new CoursesAction();
+        this.props.dispatch( courseAction.loadCourseStudents(this.props.params.courseId, { page: page }) );
+    };
+
+    onStudentHover = e => {
+        let key = e.currentTarget.getAttribute('data-key');
+        this.refs['student_' + key].style.display = 'block';
+    };
+    onStudentLeave = e => {
+        let key = e.currentTarget.getAttribute('data-key');
+        this.refs['student_' + key].style.display = 'none';
+    };
+
     render() {
         const { menus } = Course;
         const locationPath = this.props.location.pathname;
@@ -138,24 +162,25 @@ class Course extends Component {
                                 })}
                             </div>
                             <div className="course-bottom-user course-shadow bg-white">
-                                <h4 className="course-title">117人参加该课程<Link to="" className="fr">换一换</Link></h4>
+                                <h4 className="course-title">{course.student_count}人参加该课程<a href="#" className="fr" onClick={this.onChangeStudents}>换一换</a></h4>
                                 <div className="course-user-list cl">
                                     {students.map((item, index) => {
                                         return (
-                                            <div key={index}>
-
-                                                <Link key={index} to={`/students/${item.student_id}`}>
+                                            <div key={index} data-key={index} onMouseEnter={this.onStudentHover} onMouseLeave={this.onStudentLeave}>
+                                                <Link to={`/students/${item.student_id}`}>
                                                     <img src={avatar(item.avatar)} alt="" width="50" height="50"/>
                                                 </Link>
-                                                <div>
-                                                    <i></i>
-                                                    <img src={avatar(item.avatar)} alt="" width="50" height="50" /><p>{item.nickname}</p>
+                                                <div ref={`student_${index}`}>
+                                                    <Link to={`/students/${item.student_id}`}>
+                                                        <i></i>
+                                                        <img src={avatar(item.avatar)} alt="" width="50" height="50" />
+                                                        <p>{item.nickname}</p>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         );
-                                    })} 
+                                    })}
                                 </div>
-                                
                             </div>
                         </div>
                     </div>

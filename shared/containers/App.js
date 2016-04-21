@@ -11,10 +11,6 @@ if (process.env.BROWSER) {
     require('css/reset.css')
     require('css/style.css')
     require('css/iconfont/iconfont.css')
-
-    require('css/index.css')
-    require('css/classify.css')
-    require('css/search.css')
 }
 
 let actionTimer = null;

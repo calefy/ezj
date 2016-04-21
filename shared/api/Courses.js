@@ -54,8 +54,10 @@ class Courses extends Base {
     courseChapters(courseId) {
         return this.apiClient.get(`els/courses/${courseId}/chapters?expand=video`);
     }
-    courseStudents(courseId) {
-        return this.apiClient.get(`els/courses/${courseId}/students`);
+    courseStudents(courseId, params = {}) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get(`els/courses/${courseId}/students${params}`);
     }
 
     chapterPpts(chapterId) {

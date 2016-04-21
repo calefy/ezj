@@ -71,8 +71,8 @@ module.exports = class CoursesAction extends BaseAction {
     }
 
     static LOAD_COURSE_STUDENT = 'course_students';
-    loadCourseStudents(courseId) {
-        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_STUDENT, this.api.courseStudents(courseId) );
+    loadCourseStudents(courseId, params) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_STUDENT, this.api.courseStudents(courseId, params), Object.assign({courseId}, params || {}) );
     }
 
     static LOAD_COURSE_EXAM = 'course_exam';
