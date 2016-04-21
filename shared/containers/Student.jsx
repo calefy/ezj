@@ -78,7 +78,7 @@ class Student extends Component {
                     <Pagination
                         total={courseData.total || 0}
                         pageSize={cparams['per-page']}
-                        page={this.props.location.query.page || 0}
+                        page={(this.props.location.query.page || 0) - 0}
                         link={this.props.location.pathname}
                         search={this.props.location.search}
                     />

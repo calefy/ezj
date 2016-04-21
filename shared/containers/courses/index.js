@@ -114,7 +114,7 @@ class Course extends Component {
                         </div>
                         <div className="course-top-info">
                             <p className="course-classify">
-                                {course.category_info.map((item, index) => {
+                                {(course.category_info || []).map((item, index) => {
                                     return  <span key={index}>
                                                 {item.id == course.course_category_id ?
                                                     '/' + item.name :
