@@ -90,13 +90,27 @@ class Course extends Component {
         tminute = Math.ceil(tminute) % 60;
         let timeStr = (thour ? thour + '小时' : '') + tminute + '分';
 
+        // 如果购买了,又没有学习，需要获取第一个章节ID
+        let firstChapter;
+        if (priv.is_purchased && priv.is_learned) {
+            for (let i=0,len=chapters.length; i < len; i++) {
+                if (chapters[i].rgt - chapters[i].lft === 1) {
+                    firstChapter = chapters[i];
+                    break;
+                }
+            }
+        }
+
         return (
             <div className="content course-detail">
                 <div className="container">
                     <div className="course-top course-shadow bg-white cl" style={{ marginTop: 20 }}>
                         <div className="course-img fl">
-                            <p>预计开课时间{course.scheduled_open_date}</p>
-                            <img src={course.course_picture} />{course.course_picture}
+                            {course.scheduled_open_date ?
+                                <p>预计开课时间{course.scheduled_open_date}</p>
+                                : null
+                            }
+                            <img src={course.course_picture} alt="" />
                         </div>
                         <div className="course-top-info">
                             <p className="course-classify">
@@ -111,13 +125,28 @@ class Course extends Component {
                             </p>
                             <h1>{course.course_name}</h1>
                             <p className="course-status">
-                                <em><i className="iconfont icon-clock"></i>{timeStr}</em><em><i className="iconfont icon-user"></i>{course.student_count}人</em><em><i className="iconfont icon-share"></i>分享</em>
+                                <em><i className="iconfont icon-clock"></i>{timeStr}</em>
+                                <em><i className="iconfont icon-user"></i>{course.student_count}人</em>
+                                <em className="hide"><i className="iconfont icon-share"></i>分享</em>
                             </p>
                             <p className="course-price">&yen;{course.course_price}</p>
-                            <p className="course-state">付款后90天内有效/课程已到期，请续费/支付待确认</p>
+                            <p className="course-state">
+                                {priv.is_purchased ?
+                                    (priv.is_expired ? '课程已到期，请续费' : '有效期至' + priv.expiring_date)
+                                    :
+                                    '付款后90天内有效'
+                                }
+                            </p>
                             <div className="course-buy cl">
-                                <button type="btn" className="btn fl">刷新</button>
-                                <button type="btn" className="btn fl">立即购买</button>
+                                <button type="btn" className="btn fl hide">刷新</button>
+                                {priv.is_purchased ?
+                                    priv.is_learned ?
+                                        <Link to={`/courses/${course.id}/chapters/${priv.latest_play && priv.latest_play.chapter_id}`} className="btn fl">继续学习</Link>
+                                        :
+                                        <Link to={`/courses/${course.id}/chapters/${firstChapter.id}`} className="btn fl">立即学习</Link>
+                                    :
+                                    <button type="button" className="btn fl" onClick={function(){ alert('comming soon ....'); }}>立即购买</button>
+                                }
                                 {priv.is_collected ?
                                     <button type="btn" className="fl course-collected" onClick={this.onCancelCollect}><i className="iconfont icon-heart"></i>取消收藏</button>
                                     :
