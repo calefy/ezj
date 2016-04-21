@@ -107,9 +107,9 @@ class Course extends Component {
                 <div className="container">
                     <div className="course-top course-shadow bg-white cl" style={{ marginTop: 20 }}>
                         <div className="course-img fl">
-                            {course.scheduled_open_date ?
+                            {course.course_open_status ?
+                                null :
                                 <p>预计开课时间{course.scheduled_open_date}</p>
-                                : null
                             }
                             <img src={course.course_picture} alt="" />
                         </div>
@@ -143,14 +143,14 @@ class Course extends Component {
                                     (priv.is_expired ?
                                         <button type="button" className="btn fl" onClick={function(){ alert('comming soon ....'); }}>立即续费</button>
                                         :
-                                        (course.scheduled_open_date ?
-                                            <button className="btn disabled fl" type="button" disabled="disabled">暂未开课</button>
-                                            :
+                                        (course.course_open_status ?
                                             (priv.is_learned ?
                                                 <Link to={`/courses/${course.id}/chapters/${priv.latest_play && priv.latest_play.chapter_id}`} className="btn fl">继续学习</Link>
                                                 :
                                                 <Link to={`/courses/${course.id}/chapters/${firstChapter.id}`} className="btn fl">立即学习</Link>
                                             )
+                                            :
+                                            <button className="btn disabled fl" type="button" disabled="disabled">暂未开课</button>
                                         )
                                     )
                                     :
