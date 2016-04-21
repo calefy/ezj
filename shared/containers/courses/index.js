@@ -20,6 +20,7 @@ class Course extends Component {
         const courseAction = new CoursesAction({ apiClient });
         return Promise.all([
             dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
+            dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
             dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
             dispatch( courseAction.loadCourseStudents(params.courseId) ), // 课程学员
             dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
