@@ -177,7 +177,7 @@ button{ cursor: pointer; outline: none; border: 0;}
 .table th { border-width: 1px; padding: 8px; border-style: solid; border-color: #a0a0a0; background-color: #eff0ef;}
 .table td { border-width: 1px; padding: 8px; border-style: solid; border-color: #a0a0a0; background-color: #ffffff;}*/
 
-.btn{ border: 1px solid #b01c40;border-radius:4px; color: #fff !important;resize:none; outline: none; font-size: 14px;
+.btn{ border: 1px solid #b01c40;border-radius:4px; color: #fff !important;resize:none; outline: none; font-size: 14px; line-height:14px;
   background:red; /* 一些不支持背景渐变的浏览器 */  
   background:-moz-linear-gradient(top, #d0275a, #a81939);  
   background:-webkit-gradient(linear, 0 0, 0 bottom, from(#d0275a), to(#a81939));  

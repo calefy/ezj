@@ -8,7 +8,7 @@ module.exports = {
     output: {
         path: __dirname + '/public/static/build', // webpack-dev-middleware 不允许该项使用相对地址，否则 memory-fs 会报错
         filename: 'entry' + (isProd ? '.[chunkhash:6]' : '') +'.js',
-        chunkFilename: '[id]' + (isProd ? '.[chunkhash:base64:6]' : '') + '.js',
+        chunkFilename: '[id]' + (isProd ? '.[chunkhash:6]' : '') + '.js',
         publicPath: '/static/build/' // webpack-dev-middleware 要求该项开头必须是 `/`
     },
     externals: [ 'fs', 'node-fetch', 'form-data' ], // 因node调用的apiClient也放到了shared中，需要过滤打包
