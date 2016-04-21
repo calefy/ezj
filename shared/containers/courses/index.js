@@ -175,7 +175,7 @@ class Course extends Component {
                         <div className="course-bottom-right fr">
                             <div className="course-bottom-teacher course-shadow bg-white">
                                 <h4 className="course-title">课程讲师</h4>
-                                {course.lecturers.map((item, index) => {
+                                {(course.lecturers || []).map((item, index) => {
                                     return (
                                         <dl key={index}>
                                             <dt>

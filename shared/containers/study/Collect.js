@@ -79,7 +79,7 @@ class Collect extends Component {
 
                     <Pagination
                         total={courses_mine_collected.data && courses_mine_collected.data.total || 0}
-                        page = {this.props.location.query.page}
+                        page = {(this.props.location.query.page || 1) - 0}
                         link = {this.props.location.pathname}
                         search = {this.props.location.search}
                     />
