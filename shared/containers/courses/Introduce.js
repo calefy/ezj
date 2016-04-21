@@ -63,7 +63,5 @@ module.exports = connect( state => ({
     course: state.course,
     course_private: state.course_private,
     chapters: state.chapters,
-    students: state.students,
-    examination: state.examination,
 }) )(Course);
 

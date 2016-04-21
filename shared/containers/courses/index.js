@@ -20,7 +20,6 @@ class Course extends Component {
         const courseAction = new CoursesAction({ apiClient });
         return Promise.all([
             dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
-            dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
             dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
             dispatch( courseAction.loadCourseStudents(params.courseId) ), // 课程学员
         ]);
@@ -37,20 +36,10 @@ class Course extends Component {
         if (this.props.params.courseId != nextProps.params.courseId) {
             const courseAction = new CoursesAction();
             nextProps.dispatch( courseAction.loadCourseDetail(nextProps.params.courseId) ); // 课程详情,包含讲师
-            nextProps.dispatch( courseAction.loadCoursePrivate(nextProps.params.courseId) ); // 课程私密信息
             nextProps.dispatch( courseAction.loadCourseChapters(nextProps.params.courseId) ); // 课程章节
             nextProps.dispatch( courseAction.loadCourseStudents(nextProps.params.courseId) );
         }
     }
-
-    /**
-     * 点击显示测验内容
-     */
-    onClickExam = e => {
-        const examId = this.props.course.data.course_examination_id;
-        const courseAction = new CoursesAction();
-        this.props.dispatch( courseAction.loadCourseExamination(examId) );
-    };
 
     onCollect = e => {
         const courseAction = new CoursesAction();
@@ -70,9 +59,6 @@ class Course extends Component {
         let progress = priv.chapters_progress || {};
         let chapters = this.props.chapters.data && this.props.chapters.data.list || [];
         let students = this.props.students.data || [];
-        let examination = this.props.examination.data || {};
-        let questions = examination.questions || [];
-        examination = examination.examination || {};
 
         // 计算总时长
         let tminute = course.duration / 60;
