@@ -49,32 +49,34 @@ class Student extends Component {
                         <p>{student.nickname}</p>
                     </div>
                     <div className="student-course-num bg-white shadow">
-                        课程：<em>6</em>
+                        课程：<em>{courseData.total}</em>
                     </div>
                 </div>
-                <div className="student-right fl shadow">
-                    {map(courses, (item, index) => {
-                        return (
-                            <div key={index} className="student-courses cl">
-                                <img src={item.picture} alt="" width="160" height="90" className="fl" />
-                                <div className="student-courses-info fl">
-                                    <h3>{item.title}
-                                        <button type="btn" className="fr course-collect course-collected" style={{ display:"none" }}><i className="iconfont icon-heart"></i>收藏</button>
-                                    </h3>
-                                    <p>&emsp;</p>
-                                    <p style={{ display:"none" }}>
-                                        <em>【讲师】</em> 
-                                        <Link to="">周星</Link> <Link to="">周星驰</Link></p>
-                                    <p><em>【分类】</em> {item.course_category_info}</p>
-                                    <p><i className="iconfont icon-rotate"></i>{item.updated_time} 更新&emsp;<i className="iconfont icon-user"></i>{item.joined_count} 学员</p>
+                <div className="student-right fl">
+                    <div className="student-courses-list bg-white shadow">
+                        {map(courses, (item, index) => {
+                            return (
+                                <div key={index} className="student-courses cl">
+                                    <img src={item.picture} alt="" width="160" height="90" className="fl" />
+                                    <div className="student-courses-info fl">
+                                        <h3>{item.title}
+                                            <button type="btn" className="fr course-collect course-collected" style={{ display:"none" }}><i className="iconfont icon-heart"></i>收藏</button>
+                                        </h3>
+                                        <p>&emsp;</p>
+                                        <p style={{ display:"none" }}>
+                                            <em>【讲师】</em> 
+                                            <Link to="">周星</Link> <Link to="">周星驰</Link></p>
+                                        <p><em>【分类】</em> {item.course_category_info}</p>
+                                        <p><i className="iconfont icon-rotate"></i>{item.updated_time} 更新&emsp;<i className="iconfont icon-user"></i>{item.joined_count} 学员</p>
+                                    </div>
+                                    <div className="student-courses-other">
+                                        <p>&yen;{item.price}</p>
+                                        <Link to={`/courses/${item.id}/introduce`} className="btn">课程详情</Link>
+                                    </div>
                                 </div>
-                                <div className="student-courses-other">
-                                    <p>&yen;{item.price}</p>
-                                    <Link to={`/courses/${item.id}/introduce`} className="btn">课程详情</Link>
-                                </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
+                    </div>
                     <Pagination
                         total={courseData.total || 0}
                         pageSize={cparams['per-page']}
