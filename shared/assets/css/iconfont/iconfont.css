@@ -43,3 +43,5 @@
 .icon-del:before { content: "\e65a"; }
 .icon-share:before { content: "\e65c"; }
 .icon-clock:before { content: "\e65e"; }
+.icon-collect:before { content: "\e660"; }
+.icon-rotate:before { content: "\e661"; }

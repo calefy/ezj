@@ -27,9 +27,7 @@
 
 .course-buy{ position: absolute; bottom:0; left: 0}
 .course-buy button{ margin: 0 20px 0 0;}
-.course-collect,.course-collected{ background: none; font-size: 0.75em; color: #818181; margin: 9px 0 0 4px !important;}
-.course-collect i,.course-collected i{ margin:0 6px 0 0; font-size: 14px;}
-.course-collected i{ color: #af1b40;}
+
 
 .course-bottom{ margin:20px 0 0;}
 .course-bottom-left{ width: 912px;}
