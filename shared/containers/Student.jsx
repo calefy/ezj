@@ -9,6 +9,10 @@ import Pagination from '../components/Pagination.jsx';
 
 let cparams = { 'per-page': 10 };
 
+if (process.env.BROWSER) {
+    require('css/student.css')
+}
+
 class Student extends Component {
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
@@ -38,32 +42,47 @@ class Student extends Component {
         let courses = courseData.items || [];
 
         return (
-            <div>
-                <h1>学生信息</h1>
-                <p>{student.nickname}</p>
-                <p><img src={avatar(student.avatar)} alt=""/></p>
-
-                <h2>课程列表</h2>
-                {map(courses, (item, index) => {
-                    return (
-                        <div key={index}>
-                            <h3>{item.title}</h3>
-                            <img src={item.picture} alt="" height="150"/>
-                            <p>价格：&yen;{item.price}  学员数：{item.joined_count}</p>
-                            <p>分类：{item.course_category_info}</p>
-                            <p>更新时间：{item.updated_time}</p>
-                            <p><Link to={`/courses/${item.id}`}>课程详情 &gt;</Link></p>
-                        </div>
-                    );
-                })}
-
-                <Pagination
-                    total={courseData.total || 0}
-                    pageSize={cparams['per-page']}
-                    page={this.props.location.query.page || 0}
-                    link={this.props.location.pathname}
-                    search={this.props.location.search}
-                />
+            <div className="student mar40 cl container">
+                <div className="student-left fl">
+                    <div className="student-info bg-white shadow">
+                        <img src={avatar(student.avatar)} alt={student.nickname} />
+                        <p>{student.nickname}</p>
+                    </div>
+                    <div className="student-course-num bg-white shadow">
+                        课程：<em>6</em>
+                    </div>
+                </div>
+                <div className="student-right fl shadow">
+                    {map(courses, (item, index) => {
+                        return (
+                            <div key={index} className="student-courses cl">
+                                <img src={item.picture} alt="" width="160" height="90" className="fl" />
+                                <div className="student-courses-info fl">
+                                    <h3>{item.title}
+                                        <button type="btn" className="fr course-collect course-collected" style={{ display:"none" }}><i className="iconfont icon-heart"></i>收藏</button>
+                                    </h3>
+                                    <p>&emsp;</p>
+                                    <p style={{ display:"none" }}>
+                                        <em>【讲师】</em> 
+                                        <Link to="">周星</Link> <Link to="">周星驰</Link></p>
+                                    <p><em>【分类】</em> {item.course_category_info}</p>
+                                    <p><i className="iconfont icon-rotate"></i>{item.updated_time} 更新&emsp;<i className="iconfont icon-user"></i>{item.joined_count} 学员</p>
+                                </div>
+                                <div className="student-courses-other">
+                                    <p>&yen;{item.price}</p>
+                                    <Link to={`/courses/${item.id}/introduce`} className="btn">课程详情</Link>
+                                </div>
+                            </div>
+                        );
+                    })}
+                    <Pagination
+                        total={courseData.total || 0}
+                        pageSize={cparams['per-page']}
+                        page={this.props.location.query.page || 0}
+                        link={this.props.location.pathname}
+                        search={this.props.location.search}
+                    />
+                </div>
             </div>
         );
     }

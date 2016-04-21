@@ -1,0 +1,21 @@
+.shadow{ box-shadow: 4px 6px 6px rgba(0,0,0,0.2);}
+
+.student, .student a{ color: #505050;}
+
+.student-left{ width: 230px; color: #505050; text-align: center;}
+.student-left img{ width: 150px;height:150px; border-radius: 50%; border: 5px solid #eff0ef; margin: 0 0 20px;}
+.student-info{ padding:30px 0;}
+.student-course-num{ padding:20px 0; margin: 18px 0 0;}
+.student-course-num em{ color: #b01c40}
+
+.student-right{ background: #fff; margin:0 0 0 22px; width: 716px; padding:20px; min-height: 400px;}
+.student-courses{ margin: 0 0 30px; color: #505050; position: relative;}
+.student-courses-info{ margin: 0 0 0 10px; width: 546px; font-size: 0.75em; line-height: 1.8}
+.student-courses-info h3{ font-size: 1.125em;}
+.student-courses-info .course-collect, .student-courses-info .course-collected{ margin:0 !important;}
+.student-courses-info em,.student-courses-info i{ color: #bebebe;}
+.student-courses-info i{ font-size: 0.75em; margin: 0 4px 0 0;}
+
+.student-courses-other{ position: absolute; right:0; bottom:0; text-align: right;}
+.student-courses-other p{ font-size: 0.875em; color: #b01c40;}
+.student-courses-other a{ font-size: 0.75em; padding: 6px 20px; margin: 10px 0 0;}
