@@ -59,10 +59,12 @@ class Student extends Component {
                                 <img src={item.picture} alt="" width="160" height="90" className="fl" />
                                 <div className="student-courses-info fl">
                                     <h3>{item.title}
-                                        <button type="btn" className="fr course-collect course-collected"><i className="iconfont icon-heart"></i>收藏</button>
+                                        <button type="btn" className="fr course-collect course-collected" style={{ display:"none" }}><i className="iconfont icon-heart"></i>收藏</button>
                                     </h3>
-                                    <p><em>【讲师】</em> <Link to="">周星</Link> <Link to="">周星驰</Link></p>
-                                    
+                                    <p>&emsp;</p>
+                                    <p style={{ display:"none" }}>
+                                        <em>【讲师】</em> 
+                                        <Link to="">周星</Link> <Link to="">周星驰</Link></p>
                                     <p><em>【分类】</em> {item.course_category_info}</p>
                                     <p><i className="iconfont icon-rotate"></i>{item.updated_time} 更新&emsp;<i className="iconfont icon-user"></i>{item.joined_count} 学员</p>
                                 </div>
