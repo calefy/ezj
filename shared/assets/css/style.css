@@ -187,9 +187,9 @@ button{ cursor: pointer; outline: none; border: 0;}
   -moz-transition: all 0.1s ease-in-out; 
   -o-transition: all 0.1s ease-in-out; 
   transition: all 0.1s ease-in-out;*/}
-.btn-gray{ background: #808080; border:1px solid #808080;}
 .btn:hover { background: #971737;}
-.btn-gray:hover{ background: #808080;}
+.btn-disabled{ background: #808080; border:1px solid #808080;}
+.btn-disabled:hover{ background: #808080;}
 
 .content-left{ width:230px;}
 .content-tabs{ line-height: 48px; text-align: center}
