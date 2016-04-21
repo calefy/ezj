@@ -10,11 +10,13 @@
 .play-ppt { position: relative;width: 550px; height: 363.375px;}
 .play-ppt-img { width: 100%; height: 100%;}
 .play-controls { background: #000; height: 44px; line-height: 42px; padding: 0 14px;}
+.play-controls .fl i{ color: #8c8c8b}
 .play-page{ position: absolute; left: 50%; margin-left: -75px; color: #fff; width: 150px; text-align: center; font-size: 0.875em;}
 .play-page .play-now { color: #d29f29;}
 .play-amazing i{ color: #fff; margin: 0 10px;}
 .play-amazing i.active,
 .play-amazing i:hover{ color: #d29f29;}
+.play-amazing .icon-rotate{ font-size: 1.125em;}
 
 
 .play-nav{ border-bottom: 0;}
@@ -38,7 +40,7 @@
 .right-content .right-arrow>span{position:absolute;top: 50%;left:0;width:16px;margin-top:-10px;text-align:center}
 
 .control-panel { width: 372px; height: 100%; position: relative;}
-.control-panel ul { margin: 0px; padding: 0px;}
+.control-panel ul { margin: 0px; padding: 0px; line-height: 1.6; overflow: hidden;}
 
 .chapter-item:last-child { border-bottom: 1px solid #696478;}
 
@@ -55,9 +57,9 @@
 
 .control-panel .knob-item.current { background: #000;}
 .control-panel .knob-item:before,
-.control-panel .knob-item .icon-pro{ position: absolute; width: 14px; height: 14px; top: 16px; left: 16px; border-radius: 7px;}
+.control-panel .knob-item .icon-pro{ position: absolute; width: 14px; height: 14px; top: 20px; left: 16px; border-radius: 7px;}
 .control-panel .knob-item:before {content: ""; background: #323232; z-index: 10; }
-.control-panel .knob-item:after { content: ""; position: absolute; left: 22px; top: 0px; height: 46px; width: 1px; background: #616161; z-index: 5;}
+.control-panel .knob-item:after { content: ""; position: absolute; left: 22px; top: 0; width: 1px; height: 100px; background: #616161; z-index: 5;}
 .control-panel .knob-item .icon-pro {z-index: 20;}
 .control-panel .one-four .icon-pro { width: 7px; height: 7px; left: 23px; border-radius: 0px 7px 0 0;  background: #af1b40;}
 .control-panel .two-four .icon-pro { width: 7px; height: 14px; left: 23px; border-radius: 0px 14px 14px 0px; background: #af1b40;}

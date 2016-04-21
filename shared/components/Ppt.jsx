@@ -79,8 +79,8 @@ class Ppt extends Component {
                 </div>
                 <div className="play-controls cl">
                     <div className="fl">
-                        {index > 0 ? <a href="#" onClick={this.prev}>&lt;</a> : null }
-                        {index + 1 < len ? <a href="#" onClick={this.next}>&gt;</a> : null }
+                        {index > 0 ? <a href="#" onClick={this.prev} style={{ margin: "0 20px 0 0" }}><i className="iconfont icon-left"></i></a> : null }
+                        {index + 1 < len ? <a href="#" onClick={this.next}><i className="iconfont icon-arrow"></i></a> : null }
                     </div>
                     <div className="play-page">
                         <span className="play-now">{index + 1}</span>
@@ -88,7 +88,7 @@ class Ppt extends Component {
                         <span className="play-total">{len}</span>页
                     </div>
                     <div className="play-amazing fr">
-                        <i className={`iconfont icon-loading ${sync ? 'active' : ''}`} onClick={this.onToggleSync}></i>
+                        <i className={`iconfont icon-rotate ${sync ? 'active' : ''}`} onClick={this.onToggleSync}></i>
                         <i className="iconfont icon-big" onClick={this.props.onPptOnly}></i>
                         <i className="iconfont icon-play" onClick={this.onSetVideoTime}></i>
                         <i className="iconfont icon-del" onClick={this.props.onClose}></i>

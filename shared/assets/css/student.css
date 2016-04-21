@@ -8,7 +8,8 @@
 .student-course-num{ padding:20px 0; margin: 18px 0 0;}
 .student-course-num em{ color: #b01c40}
 
-.student-right{ background: #fff; margin:0 0 0 22px; width: 716px; padding:20px; min-height: 400px;}
+.student-right{ margin:0 0 0 22px; width: 756px; min-height: 400px;}
+.student-courses-list{ padding:20px; margin:0 0 40px;}
 .student-courses{ margin: 0 0 30px; color: #505050; position: relative;}
 .student-courses-info{ margin: 0 0 0 10px; width: 546px; font-size: 0.75em; line-height: 1.8}
 .student-courses-info h3{ font-size: 1.125em;}
