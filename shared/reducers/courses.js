@@ -1,7 +1,7 @@
 /********************************
  * 课程
  *******************************/
-import { reducerRequest } from '../libs/utils';
+import { reducerRequest, getRequestTypes } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
 
 export function courses_free(state, action) {
@@ -31,7 +31,23 @@ export function course(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_DETAIL, state, action);
 }
 export function course_private(state, action) {
-    return reducerRequest(CoursesAction.LOAD_COURSE_PRIVATE, state, action);
+    let collectType = getRequestTypes(CoursesAction.COLLECT_COURSE);
+    let cancelType = getRequestTypes(CoursesAction.CANCEL_COLLECT_COURSE);
+    let data;
+    switch(action.type) {
+        case collectType.success:
+            data = Object.assign({}, state.data);
+            data.is_collected = true;
+            return Object.assign({}, state, {data: data});
+            break;
+        case cancelType.success:
+            data = Object.assign({}, state.data);
+            data.is_collected = false;
+            return Object.assign({}, state, {data: data});
+            break;
+        default:
+            return reducerRequest(CoursesAction.LOAD_COURSE_PRIVATE, state, action);
+    }
 }
 export function chapters(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_CHAPTER, state, action);

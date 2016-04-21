@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
-import { toTimeString, avatar } from '../../libs/utils';
+import { toTimeString, avatar, getRequestTypes } from '../../libs/utils';
 
 import CoursesAction from '../../actions/CoursesAction';
 
@@ -22,29 +22,30 @@ class Course extends Component {
             dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
             dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
             dispatch( courseAction.loadCourseStudents(params.courseId) ), // 课程学员
+            dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
         ]);
     }
 
     componentDidMount() {
         const { course, course_private, params } = this.props;
-        if (course.isFetching ||// course_private.isFetching ||
+        if (course.isFetching ||
                 (course.data && course.data.id != params.courseId)) {
             Course.fetchData(this.props);
         }
     }
     componentWillReceiveProps(nextProps) {
         if (this.props.params.courseId != nextProps.params.courseId) {
-            const courseAction = new CoursesAction();
-            nextProps.dispatch( courseAction.loadCourseDetail(nextProps.params.courseId) ); // 课程详情,包含讲师
-            nextProps.dispatch( courseAction.loadCourseChapters(nextProps.params.courseId) ); // 课程章节
-            nextProps.dispatch( courseAction.loadCourseStudents(nextProps.params.courseId) );
+            Course.fetchData(nextProps);
+            return;
         }
     }
 
+    // 收藏
     onCollect = e => {
         const courseAction = new CoursesAction();
         this.props.dispatch( courseAction.collect(this.props.params.courseId) );
     };
+    // 取消收藏
     onCancelCollect = e => {
         const courseAction = new CoursesAction();
         this.props.dispatch( courseAction.cancelCollect(this.props.params.courseId) );
@@ -138,12 +139,20 @@ class Course extends Component {
                                 }
                             </p>
                             <div className="course-buy cl">
-                                <button type="btn" className="btn fl hide">刷新</button>
                                 {priv.is_purchased ?
-                                    priv.is_learned ?
-                                        <Link to={`/courses/${course.id}/chapters/${priv.latest_play && priv.latest_play.chapter_id}`} className="btn fl">继续学习</Link>
+                                    (priv.is_expired ?
+                                        <button type="button" className="btn fl" onClick={function(){ alert('comming soon ....'); }}>立即续费</button>
                                         :
-                                        <Link to={`/courses/${course.id}/chapters/${firstChapter.id}`} className="btn fl">立即学习</Link>
+                                        (course.scheduled_open_date ?
+                                            <button className="btn disabled fl" type="button" disabled="disabled">暂未开课</button>
+                                            :
+                                            (priv.is_learned ?
+                                                <Link to={`/courses/${course.id}/chapters/${priv.latest_play && priv.latest_play.chapter_id}`} className="btn fl">继续学习</Link>
+                                                :
+                                                <Link to={`/courses/${course.id}/chapters/${firstChapter.id}`} className="btn fl">立即学习</Link>
+                                            )
+                                        )
+                                    )
                                     :
                                     <button type="button" className="btn fl" onClick={function(){ alert('comming soon ....'); }}>立即购买</button>
                                 }
@@ -153,12 +162,6 @@ class Course extends Component {
                                     <button type="btn" className="fl course-collect" onClick={this.onCollect}><i className="iconfont icon-heart"></i>收藏</button>
                                 }
                             </div>
-                            <p>
-                                是否已收藏: {priv.is_collected ? 'Yes' : 'No'},
-                                是否已购买: {priv.is_purchased ? 'Yes' : 'No'},
-                                是否已过期: {priv.is_expired ? 'Yes' : 'No'} (过期时间 {priv.expiring_date}),
-                                是否已学习: {priv.is_learned ? 'Yes' : 'No'} (学习进度 {priv.progress}%)
-                            </p>
                         </div>
                     </div>
                     <div className="course-bottom cl">
@@ -221,6 +224,7 @@ class Course extends Component {
 
 
 module.exports = connect( state => ({
+    action: state.action,
     course: state.course,
     course_private: state.course_private,
     chapters: state.chapters,
