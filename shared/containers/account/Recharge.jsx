@@ -97,7 +97,7 @@ class Recharge extends Component {
 
                     <Pagination
                         total={data.total || 0}
-                        page={this.props.location.query.page || 0}
+                        page={(this.props.location.query.page || 1) - 0}
                         link={this.props.location.pathname}
                         search={this.props.location.search}
                     />
