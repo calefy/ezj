@@ -50,6 +50,30 @@ class Course extends Component {
         this.props.dispatch( courseAction.cancelCollect(this.props.params.courseId) );
     };
 
+    // 学员列表换一换
+    onChangeStudents = e => {
+        e.preventDefault();
+        const { students, course } = this.props;
+        if (!students.data || !course.data) return;
+
+        let page = students._req.page || 1;
+        let total = course.data.student_count || 0;
+        let totalPage = Math.ceil(total / 9); // 每页9个
+        page = (page+totalPage) % totalPage + 1;
+
+        const courseAction = new CoursesAction();
+        this.props.dispatch( courseAction.loadCourseStudents(this.props.params.courseId, { page: page }) );
+    };
+
+    onStudentHover = e => {
+        let key = e.currentTarget.getAttribute('data-key');
+        this.refs['student_' + key].style.display = 'block';
+    };
+    onStudentLeave = e => {
+        let key = e.currentTarget.getAttribute('data-key');
+        this.refs['student_' + key].style.display = 'none';
+    };
+
     render() {
         const { menus } = Course;
         const locationPath = this.props.location.pathname;
@@ -66,17 +90,31 @@ class Course extends Component {
         tminute = Math.ceil(tminute) % 60;
         let timeStr = (thour ? thour + '小时' : '') + tminute + '分';
 
+        // 如果购买了,又没有学习，需要获取第一个章节ID
+        let firstChapter;
+        if (priv.is_purchased && priv.is_learned) {
+            for (let i=0,len=chapters.length; i < len; i++) {
+                if (chapters[i].rgt - chapters[i].lft === 1) {
+                    firstChapter = chapters[i];
+                    break;
+                }
+            }
+        }
+
         return (
             <div className="content course-detail">
                 <div className="container">
                     <div className="course-top course-shadow bg-white cl" style={{ marginTop: 20 }}>
                         <div className="course-img fl">
-                            <p>预计开课时间{course.scheduled_open_date}</p>
-                            <img src={course.course_picture} />{course.course_picture}
+                            {course.scheduled_open_date ?
+                                <p>预计开课时间{course.scheduled_open_date}</p>
+                                : null
+                            }
+                            <img src={course.course_picture} alt="" />
                         </div>
                         <div className="course-top-info">
                             <p className="course-classify">
-                                {course.category_info.map((item, index) => {
+                                {(course.category_info || []).map((item, index) => {
                                     return  <span key={index}>
                                                 {item.id == course.course_category_id ?
                                                     '/' + item.name :
@@ -87,13 +125,28 @@ class Course extends Component {
                             </p>
                             <h1>{course.course_name}</h1>
                             <p className="course-status">
-                                <em><i className="iconfont icon-clock"></i>{timeStr}</em><em><i className="iconfont icon-user"></i>{course.student_count}人</em><em><i className="iconfont icon-share"></i>分享</em>
+                                <em><i className="iconfont icon-clock"></i>{timeStr}</em>
+                                <em><i className="iconfont icon-user"></i>{course.student_count}人</em>
+                                <em className="hide"><i className="iconfont icon-share"></i>分享</em>
                             </p>
                             <p className="course-price">&yen;{course.course_price}</p>
-                            <p className="course-state">付款后90天内有效/课程已到期，请续费/支付待确认</p>
+                            <p className="course-state">
+                                {priv.is_purchased ?
+                                    (priv.is_expired ? '课程已到期，请续费' : '有效期至' + priv.expiring_date)
+                                    :
+                                    '付款后90天内有效'
+                                }
+                            </p>
                             <div className="course-buy cl">
-                                <button type="btn" className="btn fl">刷新</button>
-                                <button type="btn" className="btn fl">立即购买</button>
+                                <button type="btn" className="btn fl hide">刷新</button>
+                                {priv.is_purchased ?
+                                    priv.is_learned ?
+                                        <Link to={`/courses/${course.id}/chapters/${priv.latest_play && priv.latest_play.chapter_id}`} className="btn fl">继续学习</Link>
+                                        :
+                                        <Link to={`/courses/${course.id}/chapters/${firstChapter.id}`} className="btn fl">立即学习</Link>
+                                    :
+                                    <button type="button" className="btn fl" onClick={function(){ alert('comming soon ....'); }}>立即购买</button>
+                                }
                                 {priv.is_collected ?
                                     <button type="btn" className="fl course-collected" onClick={this.onCancelCollect}><i className="iconfont icon-heart"></i>取消收藏</button>
                                     :
@@ -138,24 +191,25 @@ class Course extends Component {
                                 })}
                             </div>
                             <div className="course-bottom-user course-shadow bg-white">
-                                <h4 className="course-title">117人参加该课程<Link to="" className="fr">换一换</Link></h4>
+                                <h4 className="course-title">{course.student_count}人参加该课程<a href="#" className="fr" onClick={this.onChangeStudents}>换一换</a></h4>
                                 <div className="course-user-list cl">
                                     {students.map((item, index) => {
                                         return (
-                                            <div key={index}>
-
-                                                <Link key={index} to={`/students/${item.student_id}`}>
+                                            <div key={index} data-key={index} onMouseEnter={this.onStudentHover} onMouseLeave={this.onStudentLeave}>
+                                                <Link to={`/students/${item.student_id}`}>
                                                     <img src={avatar(item.avatar)} alt="" width="50" height="50"/>
                                                 </Link>
-                                                <div>
-                                                    <i></i>
-                                                    <img src={avatar(item.avatar)} alt="" width="50" height="50" /><p>{item.nickname}</p>
+                                                <div ref={`student_${index}`}>
+                                                    <Link to={`/students/${item.student_id}`}>
+                                                        <i></i>
+                                                        <img src={avatar(item.avatar)} alt="" width="50" height="50" />
+                                                        <p>{item.nickname}</p>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         );
-                                    })} 
+                                    })}
                                 </div>
-                                
                             </div>
                         </div>
                     </div>

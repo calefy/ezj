@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { getRequestTypes } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
 import Video from '../components/Video.jsx';
+import Ppt from '../components/Ppt.jsx';
 
 let isSkipBegin = false;
 if (process.env.BROWSER) {
@@ -30,7 +31,9 @@ class Play extends Component {
     state = {
         sidebar: SIDEBAR_CHAPTER, // 控制侧边栏显示与否，及显示chapter还是ppt
         pptIndex: 0, // ppt当前序号
-        skipBegin: isSkipBegin,
+        pptBoxOnly: false, // 仅展示ppt框
+        pptBoxShow: false, // 展示ppt框
+        skipBegin: isSkipBegin, // 跳过片头
     };
 
     componentDidMount() {
@@ -70,23 +73,25 @@ class Play extends Component {
     };
 
 
-    // 用户点击按钮操作
-    handlePrev = e => { // 上一节
-        e.preventDefault();
-        e.nativeEvent.returnValue = false;
-
+    setVideoTime = time => {
+        this.refs.video.setTimeTo(time);
     };
-    handleNext = e => { // 下一节
-        e.preventDefault();
-        e.nativeEvent.returnValue = false;
 
+    // 用户点击按钮操作
+    handleChangeChapter = e => {
+        this._setState({ pptIndex: 0 });
     };
     handleOver = e => { // 标记完成toggle
         e.preventDefault();
-
+        alert('comming soon ...');
     };
-    handlePlayPpt = e => { // 播放ppt toggle
+    handlePptBoxShow = e => { // 播放ppt toggle
         e.preventDefault();
+        this._setState({ pptBoxShow: !this.state.pptBoxShow });
+    };
+    handlePptBoxOnly = e => { // 仅展示ppt框
+        e.preventDefault();
+        this._setState({ pptBoxOnly: !this.state.pptBoxOnly });
     };
     handleSkipBegin = e => { // 跳过片头 toggle
         e.preventDefault();
@@ -111,17 +116,27 @@ class Play extends Component {
         e.preventDefault();
         this._setState({ sidebar: SIDEBAR_PPT });
     };
-    handlePptTime = e => { // 点击ppt跳转对应的播放时间
+    handleSyncVideoTime = e => { // 点击ppt跳转对应的播放时间
         e.preventDefault();
         this._setState({ pptIndex: e.currentTarget.getAttribute('data-index') - 0 });
         let time = e.currentTarget.getAttribute('data-point') - 0;
-        this.refs.video.setTimeTo(time);
+        this.setVideoTime(time);
     };
     handlePlayTime = (e, data) => { // 视频播放时间变更调用此方法
-        //console.log('player change: ', data.time);
-        // TODO: 设置ppt
+        let time = parseFloat(data.time);
+        let ppts = this.props.ppts.data || {};
+        ppts = ppts.list || [];
+        let len = ppts.length;
+        let i = 0;
+        for(; i < len; i++) {
+            if (time < ppts[i].ppt_point) {
+                break;
+            }
+        }
+        if (this.state.pptIndex !== i - 1) {
+            this._setState({ pptIndex: i - 1 });
+        }
     };
-
 
     render() {
         let {course, course_private, chapters, ppts, params} = this.props;
@@ -151,12 +166,20 @@ class Play extends Component {
         // 当前章节
         let chapter = chapterMap[params.chapterId] || {};
 
-        // 前一个后一页
+        // 前一节、后一节
         let prevChapterId = null;
         let nextChapterId = null;
         let curIndex = leafIds.indexOf(params.chapterId);
         prevChapterId = curIndex > 0 ? leafIds[curIndex - 1] : null;
         nextChapterId = curIndex < leafIds.length - 1 ? leafIds[curIndex + 1] : null;
+
+        // 如果仅显示ppt，设置video的样式
+        let videoWrapStyle = {};
+        if (this.state.pptBoxOnly) {
+            videoWrapStyle.visible = 'hidden';
+            videoWrapStyle.overflow = 'hidden';
+            videoWrapStyle.width = 0;
+        }
 
         return (
             <div className="play">
@@ -167,7 +190,7 @@ class Play extends Component {
                         <p>{chapter.chapter_name}</p>
                     </div>
                     <div className="play-center cl">
-                        <div className="play-video fl">
+                        <div className="play-video fl" style={videoWrapStyle}>
                             <Video
                                 ref="video"
                                 videoId = {chapter.video.video_origional_ID}
@@ -176,25 +199,14 @@ class Play extends Component {
                                 handlePlayTime = {this.handlePlayTime}
                             />
                         </div>
-                        <div className="play-jiangyi fl hide">
-                            <div className="play-ppt">
-                                <div className="play-preview">
-                                    <img src="http://www.ezijing.com/sites/default/files/oos/ppt/song/SXH0313 (1).jpg" className="play-ppt-img" />
-                                </div>
-                                <div className="play-controls cl">
-                                    <div className="play-page">
-                                        <span className="play-now">1</span>
-                                        &nbsp;/&nbsp;
-                                        <span className="play-total">4</span>&nbsp;
-                                        页
-                                    </div>
-                                    <div className="play-amazing fr">
-                                        <i className="iconfont icon-big"></i>
-                                        <i className="iconfont icon-play"></i>
-                                        <i className="iconfont icon-del"></i>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className={`play-jiangyi fl ${this.state.pptBoxShow ? '' : 'hide'}`}>
+                            <Ppt
+                                ppts = {ppts}
+                                currentIndex = {this.state.pptIndex}
+                                onVideoSyncTime = {this.setVideoTime}
+                                onPptOnly = {this.handlePptBoxOnly}
+                                onClose = {this.handlePptBoxShow}
+                            />
                         </div>
                     </div>
                 </div>
@@ -240,7 +252,7 @@ class Play extends Component {
                                         {ppts.length ?
                                             ppts.map((item, index) => {
                                                 return (
-                                                    <div key={index} onClick={this.handlePptTime} data-index={index} data-point={item.ppt_point} className={index === this.state.pptIndex ? 'current' : ''}>
+                                                    <div key={index} onClick={this.handleSyncVideoTime} data-index={index} data-point={item.ppt_point} className={index === this.state.pptIndex ? 'current' : ''}>
                                                         <img src={item.ppt_url} alt=""/>
                                                     </div>
                                                 );
@@ -257,11 +269,11 @@ class Play extends Component {
                 </div>
                 <div className="play-footer">
                     <div className="container">
-                        <Link to={`/courses/${params.courseId}/chapters/${prevChapterId || params.chapterId}`} className="fl">上一节</Link>
-                        <Link to={`/courses/${params.courseId}/chapters/${nextChapterId || params.chapterId}`} className="fl">下一节</Link>
+                        <Link to={`/courses/${params.courseId}/chapters/${prevChapterId || params.chapterId}`} className="fl" onClick={this.handleChangeChapter}>上一节</Link>
+                        <Link to={`/courses/${params.courseId}/chapters/${nextChapterId || params.chapterId}`} className="fl" onClick={this.handleChangeChapter}>下一节</Link>
                         <em className="play-state fl" onClick={this.handleOver}>已学完</em>
                         <em className={`play-state fr ${this.state.skipBegin ? 'play-checked' : ''}`} onClick={this.handleSkipBegin}>始终跳过片头</em>
-                        <em className="play-state fr" onClick={this.handlePlayPpt}>同步显示PPT</em>
+                        <em className={`play-state fr ${this.state.pptBoxShow ? 'play-checked' : ''}`} onClick={this.handlePptBoxShow}>同步显示PPT</em>
                     </div>
                 </div>
                 {this.state.sidebar ? null :
