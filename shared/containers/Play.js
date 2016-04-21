@@ -78,15 +78,8 @@ class Play extends Component {
     };
 
     // 用户点击按钮操作
-    handlePrev = e => { // 上一节
-        e.preventDefault();
-        e.nativeEvent.returnValue = false;
-
-    };
-    handleNext = e => { // 下一节
-        e.preventDefault();
-        e.nativeEvent.returnValue = false;
-
+    handleChangeChapter = e => {
+        this._setState({ pptIndex: 0 });
     };
     handleOver = e => { // 标记完成toggle
         e.preventDefault();
@@ -268,8 +261,8 @@ class Play extends Component {
                 </div>
                 <div className="play-footer">
                     <div className="container">
-                        <Link to={`/courses/${params.courseId}/chapters/${prevChapterId || params.chapterId}`} className="fl">上一节</Link>
-                        <Link to={`/courses/${params.courseId}/chapters/${nextChapterId || params.chapterId}`} className="fl">下一节</Link>
+                        <Link to={`/courses/${params.courseId}/chapters/${prevChapterId || params.chapterId}`} className="fl" onClick={this.handleChangeChapter}>上一节</Link>
+                        <Link to={`/courses/${params.courseId}/chapters/${nextChapterId || params.chapterId}`} className="fl" onClick={this.handleChangeChapter}>下一节</Link>
                         <em className="play-state fl" onClick={this.handleOver}>已学完</em>
                         <em className={`play-state fr ${this.state.skipBegin ? 'play-checked' : ''}`} onClick={this.handleSkipBegin}>始终跳过片头</em>
                         <em className={`play-state fr ${this.state.pptBoxShow ? 'play-checked' : ''}`} onClick={this.handlePptBoxShow}>同步显示PPT</em>

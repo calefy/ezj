@@ -67,7 +67,8 @@ class Ppt extends Component {
     render() {
         const { ppts } = this.props;
         const len = ppts.length
-        const { index, sync } = this.state;
+        let { index, sync } = this.state;
+        index = this.getIndex(index);
 
         if (!len) return null;
 
