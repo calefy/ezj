@@ -88,7 +88,7 @@ class Course extends Component {
                         <dd><input type="radio" />D. 伊恩·里德</dd>
                     </dl>
                     <div className="course-test-question-btn">
-                        <Link to="" className="btn btn-gray">上一题</Link>
+                        <Link to="" className="btn btn-disabled">上一题</Link>
                         <Link to="" className="btn">下一题</Link>
                         <Link to="" className="btn">跳过</Link>
                         <Link to="" className="btn">提交答卷</Link>
