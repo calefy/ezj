@@ -46,7 +46,7 @@
 .course-bottom-teacher dl { color: #60686c; padding: 24px 14px;}
 .course-bottom-teacher dl a{ color: #60686c; font-size: 0.875em;}
 .course-bottom-teacher dt span { margin: 0 0 0 76px; display: block; line-height: 1.4;}
-.course-bottom-teacher dd{ font-size: 0.75em; line-height: 2;margin: 20px 0 0;}
+.course-bottom-teacher dd{ font-size: 0.75em; line-height: 2;margin: 20px 0 0; max-height: 116px; overflow: hidden;}
 
 .course-bottom-user .course-title{ padding: 12px 13px;}
 .course-bottom-user .course-title .fr{ font-size: 0.75em; color: #af1b40}
@@ -77,11 +77,11 @@
 .course-test-info{ text-align: center; padding: 30px 0;}
 .course-test-info i{ color: #b01c40; margin: 0 6px 0 0;}
 .course-test-info h2{ color: #000; font-size: 0.875em; }
-.course-test-num{ width: 200px; border-collapse: separate; border: 0px; padding: 0px; margin: 20px auto; color: #60686c; font-size: 0.875em;}
+.course-test-num{ width: 160px; border-collapse: separate; border: 0px; padding: 0px; margin: 20px auto; color: #60686c; font-size: 0.875em;}
 .course-test-num dl{ padding:10px 0;}
-.course-test-num dt{ width:76px; float: left; text-align: left;}
+.course-test-num dt{ width:60px; float: left; text-align: left;}
 .course-test-num dd{ text-align: right;}
-.course-test-num dd em{ width: 45px; display: inline-block; margin:0 20px 0 10px;}
+.course-test-num dd em{ width: 45px; display: inline-block; margin:0 10px; text-align: center;}
 
 .course-test-question{ padding:30px 40px; color: #818181;}
 .course-test-question h3{padding:10px 0 20px; font-size: 0.875em; font-weight: normal;}

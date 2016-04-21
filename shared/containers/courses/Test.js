@@ -7,31 +7,11 @@ import CoursesAction from '../../actions/CoursesAction';
 
 class Course extends Component {
 
-    // 初始加载数据
-    static fetchData({dispatch, params={}, location={}, apiClient}) {
-        const courseAction = new CoursesAction({ apiClient });
-        return Promise.all([
-            dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
-            dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
-            dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
-            dispatch( courseAction.loadCourseStudents(params.courseId) ), // 课程学员
-        ]);
-    }
-
     componentDidMount() {
         const { course, course_private, params } = this.props;
         if (course.isFetching ||// course_private.isFetching ||
                 (course.data && course.data.id != params.courseId)) {
             Course.fetchData(this.props);
-        }
-    }
-    componentWillReceiveProps(nextProps) {
-        if (this.props.params.courseId != nextProps.params.courseId) {
-            const courseAction = new CoursesAction();
-            nextProps.dispatch( courseAction.loadCourseDetail(nextProps.params.courseId) ); // 课程详情,包含讲师
-            nextProps.dispatch( courseAction.loadCoursePrivate(nextProps.params.courseId) ); // 课程私密信息
-            nextProps.dispatch( courseAction.loadCourseChapters(nextProps.params.courseId) ); // 课程章节
-            nextProps.dispatch( courseAction.loadCourseStudents(nextProps.params.courseId) );
         }
     }
 
@@ -40,7 +20,6 @@ class Course extends Component {
      */
     onClickExam = e => {
         const examId = this.props.course.data.course_examination_id;
-        console.log(examId);
         const courseAction = new CoursesAction();
         this.props.dispatch( courseAction.loadCourseExamination(examId) );
     };
@@ -97,7 +76,7 @@ class Course extends Component {
                 <div className="course-test-question">
                     <h3>
                         <p>单项选择题</p>
-                        <p>已做<em className="course-test-already">1</em>题 / 共<em class="course-test-all">6</em>题</p>
+                        <p>已做<em className="course-test-already">1</em>题 / 共<em className="course-test-all">6</em>题</p>
                     </h3>
                     <dl className="course-test-question-info">
                         <dt>
@@ -191,9 +170,6 @@ class Course extends Component {
 
 module.exports = connect( state => ({
     course: state.course,
-    course_private: state.course_private,
-    chapters: state.chapters,
-    students: state.students,
     examination: state.examination,
 }) )(Course);
 
