@@ -32,10 +32,7 @@
 .study-test .table td a{ color: #b01c40;}
 .study-test .table td:last-child a{ margin: 0 14px;}
 
-.study-result{ margin: 24px 0 0; line-height: 30px; color: #505050}
+.study-result{ margin: 24px 0 0; line-height: 30px; color: #505050; text-align: left}
 .study-result-title{ padding: 10px 20px; border-bottom: 1px solid #e8e8e8;}
 .study-result-title em{ font-size: 12px; margin: 0 20px 0 0;}
 
-.study-result-content{ padding: 0 20px; font-size: 12px;}
-.study-result-content dl{ padding:20px 0; border-bottom: 1px solid #e8e8e8;}
-.study-result-content input{ margin:0 6px 0 0;}
