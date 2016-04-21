@@ -13,6 +13,8 @@
 .play-page{ position: absolute; left: 50%; margin-left: -75px; color: #fff; width: 150px; text-align: center; font-size: 0.875em;}
 .play-page .play-now { color: #d29f29;}
 .play-amazing i{ color: #fff; margin: 0 10px;}
+.play-amazing i.active,
+.play-amazing i:hover{ color: #d29f29;}
 
 
 .play-nav{ border-bottom: 0;}
