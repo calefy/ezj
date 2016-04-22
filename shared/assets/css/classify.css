@@ -52,13 +52,14 @@
 .open-course{ padding: 0 0 40px;}
 .open-summary{ border: 1px solid #d74468; background: #eee; padding: 24px 16px; margin: 30px 40px; border-radius: 10px;}
 .open-summary h5{ font-size: 0.875em; margin: 0 0 20px;}
-.open-summary p{ font-size: 0.75em; line-height: 1.6}
+.open-summary p{ font-size: 0.75em; line-height: 1.6; margin: 0 0 14px;}
+.open-summary p:last-child{ margin: 0;}
 
 .open-course-list{ margin: 30px 40px; font-size: 0.75em; color: #505050;}
 .open-course-list li{ line-height: 50px; background: #eeeeee; border-radius: 12px; padding: 0 30px 0 40px; margin: 0 0 14px;}
 .open-course-list span,.open-course-list a{ display: inline-block;}
-.open-course-list a{ width: 100px;height:27px;line-height: 27px; color: #fff; text-align: center; background: #b01c40; border-radius: 10px;}
+.open-course-list a{ float: right; margin: 12px 0; width: 100px;height:27px;line-height: 27px; color: #fff; text-align: center; background: #b01c40; border-radius: 10px;}
 .open-course-list a.disabled{ background: #888888}
 .open-title{ width: 382px;}
 .open-address{ width: 156px;}
-.open-num{ width: 122px;}
+.open-num{ width: 122px; display: none !important;}
