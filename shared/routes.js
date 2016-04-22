@@ -332,5 +332,14 @@ module.exports = {
                 });
             }
         },
+        // 支付页
+        {
+            path: 'pay',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/Pay'));
+                });
+            }
+        },
     ]
 };
