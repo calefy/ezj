@@ -148,9 +148,10 @@ class Course extends Component {
                             <p className="course-classify">
                                 {(course.category_info || []).map((item, index) => {
                                     return  <span key={index}>
-                                                {index === course.category_info.length - 1 && index !== 0 ? // || item.id == course.course_category_id ?
-                                                    '/' + item.name :
+                                                {index === 0 ? // 仅一级分类可点击
                                                     <Link to="/courses" query={{category: item.id}}>{item.name}</Link>
+                                                    :
+                                                    '/' + item.name
                                                 }
                                             </span>
                                 })}
