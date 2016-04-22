@@ -156,7 +156,7 @@ module.exports = class LoginDialog extends Component {
 
     regSubmit = () => {
         this._setState({ sendSubmit: false });
-        const nickname = this.refs.nickname.getValue();
+        const nickname = this.refs.nickname.getValue().trim();
         const password = this.refs.regpass.getValue();
         const code = this.refs.code.getValue();
         const contact = this.refs.contact.getValue();
