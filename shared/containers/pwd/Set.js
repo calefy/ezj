@@ -76,6 +76,7 @@ let PwdSet = React.createClass({
                         <FormsyText
                             name="newpass"
                             title="新密码"
+                            placeholder="6-10个字符，只能包含字母、数字及标点符号"
                             type="password"
                             validations={{
                                 minLength: 6,
@@ -89,6 +90,7 @@ let PwdSet = React.createClass({
                         <FormsyText
                             name="repass"
                             title="重复密码"
+                            placeholder="重复输入密码"
                             type="password"
                             validations="equalsField:newpass"
                             validationErrors={{ equalsField: '两次输入密码不一致' }}

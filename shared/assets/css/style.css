@@ -142,14 +142,14 @@ button{ cursor: pointer; outline: none; border: 0;}
 .pop-text .formsy-list.cl a,.text-error,.pop-other .fl button{ color: #b01c40; background: none}
 .pop-text .formsy-list.cl dd{ width: auto; line-height: 12px; border: 0; box-shadow: 0 0 0 #fff; margin:0;padding:0;}
 
-.formsy-list input[type="text"],input[type="password"]{ outline: none; height:38px; width:100%; border:0;}
+.formsy-list input[type="text"],input[type="password"]{ outline: none; height:38px; width:100%; border:0;font-size: 0.875em;}
 .formsy-list input[type="checkbox"]{ margin: 0 4px 0 0;}
 .formsy-list .iconfont{ font-size: 1.125em; margin:0 6px 0 0;}
 
 .pop-btn button{ display:block; width:100%;line-height: 44px;
    text-align: center; font-size:1.125em;}
 .pop-btn button,.valid-btn{ border-radius: 4px; border: 1px solid #b01c40; color: #fff; text-shadow:0 1px 0 #9f9f9f;
-            background:red; /* 一些不支持背景渐变的浏览器 */  
+            background:#b01c40; /* 一些不支持背景渐变的浏览器 */  
             background:-moz-linear-gradient(top, #d0275a, #a81939);  
             background:-webkit-gradient(linear, 0 0, 0 bottom, from(#d0275a), to(#a81939));  
             background:-o-linear-gradient(top, #d0275a, #a81939); }

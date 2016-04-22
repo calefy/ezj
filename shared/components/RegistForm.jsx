@@ -100,6 +100,7 @@ let RegistForm = React.createClass({
                 <FormsyText
                     ref="contact"
                     name="contact"
+                    placeholder="请输入您的手机号码或邮箱"
                     title={
                         <span>
                             <i className="iconfont icon-username"></i>手机号/邮箱
@@ -110,6 +111,7 @@ let RegistForm = React.createClass({
 
                 <FormsyValid
                     name="code"
+                    placeholder="请输入4位验证码"
                     title={
                         <span>
                             <i className="iconfont icon-yz"></i>验证码
@@ -123,6 +125,7 @@ let RegistForm = React.createClass({
 
                 <FormsyText
                     name="nickname"
+                    placeholder="4-30个字符，支持中英文、数字、“_”或减号"
                     title={
                         <span>
                             <i className="iconfont icon-name"></i>昵称
@@ -141,6 +144,7 @@ let RegistForm = React.createClass({
 
                 <FormsyText
                     name="password"
+                    placeholder="6-20个字符，包含字母、数字及标点符号"
                     title={
                         <span>
                             <i className="iconfont icon-pass"></i>密码

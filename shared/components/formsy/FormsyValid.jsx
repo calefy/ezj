@@ -31,6 +31,7 @@ let FormsyValid = React.createClass({
                     <input
                         type={this.props.type || 'text'}
                         name={this.props.name}
+                        placeholder={this.props.placeholder}
                         onChange={this.changeValue}
                         value={this.getValue()}
                         checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
