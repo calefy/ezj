@@ -42,7 +42,8 @@
 .online-course dt>span{  background: #b01c40; padding:0 30px;}
 .online-course dt{ background: url(../img/online-bg.png) no-repeat top right; color: #fff; display: inline-block; padding:0 55px 0 0; font-size: 0.875em;}
 .online-course dd{ padding:0 0 0 30px;}
-.online-course dd,.online-course dd a{ font-size: 0.75em; color: #505050;}
+.online-course dd{ font-size: 0.75em; color: #505050;}
+.online-course dd a{ color: #505050;}
 .online-course span{ display: inline-block;}
 .online-title{ width: 396px;}
 .online-time,.online-price,.online-num{ width: 100px;}
