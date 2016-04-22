@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
 class CourseExam extends Component {
     static propTypes = {
@@ -6,9 +7,9 @@ class CourseExam extends Component {
     };
 
     render() {
-        let examination = this.props.examination;
-        let questions = examination.questions;
-        examination = examination.examination;
+        let examination = this.props.examination.data || {};
+        let questions = examination.questions || [];
+        examination = examination.examination || {};
 
         return (
             <div className="content course-test">
