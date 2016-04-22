@@ -148,7 +148,7 @@ class Course extends Component {
                             <p className="course-classify">
                                 {(course.category_info || []).map((item, index) => {
                                     return  <span key={index}>
-                                                {item.id == course.course_category_id ?
+                                                {index === course.category_info.length - 1 && index !== 0 ? // || item.id == course.course_category_id ?
                                                     '/' + item.name :
                                                     <Link to="/courses" query={{category: item.id}}>{item.name}</Link>
                                                 }
