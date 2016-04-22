@@ -185,7 +185,7 @@ class Play extends Component {
             <div className="play">
                 <div className="left-content">
                     <div className="play-top cl">
-                        <Link className="play-back fl" to={`/courses/${params.courseId}/introduce`}><i className="iconfont icon-arrowvideo"></i>&emsp;返回详情</Link>
+                        <Link className="play-back fl" to={`/courses/${params.courseId}`}><i className="iconfont icon-arrowvideo"></i>&emsp;返回详情</Link>
                         <p>{course.course_name}</p>
                         <p>{chapter.chapter_name}</p>
                     </div>
