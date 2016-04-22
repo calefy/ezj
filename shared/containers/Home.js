@@ -41,7 +41,7 @@ let Home = React.createClass({
      */
     renderCourseItems: function(list) {
         return list.map((item, key) => {
-            return  <li key={key}>
+            return  <li key={key} className={ list.length == 8 ? (key+1)%4==0 ? "last-child" : null : (key+1)%5==0 ? "last-child" : null}>
                         <Link to={`/courses/${item.id}`} target="_blank">
                             <div className="course-list-img">
                                 <img src={item.course_picture} alt="" />
@@ -73,7 +73,7 @@ let Home = React.createClass({
         });
 
         return (
-            <div>
+            <div className="home">
                 <div className="banner">
                     <div className="container">
                         <div className="banner-top">
@@ -92,7 +92,7 @@ let Home = React.createClass({
                 <div className="content">
                     <div className="content-module1">
                         <div className="container cl">
-                            <Link to="/topic" title="" className="module module1">
+                            <Link to="/topic" title="" target="_blank" className="module module1">
                                 <div className="module-icon">
                                     <i className="iconfont icon-module11"></i>
                                 </div>
@@ -100,7 +100,7 @@ let Home = React.createClass({
                                 <div className="module-title">企业理财师（CFC）认证</div>
                                 <p>一张通行国内、国际金融界的专业资质</p>
                             </Link>
-                            <Link to="/topic" title="" className="module module2">
+                            <Link to="/topic" title="" target="_blank" className="module module2">
                                 <div className="module-icon">
                                     <i className="iconfont icon-module21"></i>
                                 </div>
@@ -108,7 +108,7 @@ let Home = React.createClass({
                                 <div className="module-title">全球互联网金融商业模式及案例 深度解析公开课</div>
                                 <p>权威、全面、深入、前沿、实战、超值</p>
                             </Link>
-                            <Link to="/topic" title="" className="module module3">
+                            <Link to="/topic" title="" target="_blank" className="module module3">
                                 <div className="module-icon">
                                     <i className="iconfont icon-module31"></i>
                                 </div>
@@ -171,7 +171,7 @@ let Home = React.createClass({
                                     <ul className="cl">
                                         {lecturers.map((item, index) => {
                                             return (
-                                                <li key={index}>
+                                                <li key={index} className={ (index+1)%5==0 ? "last-child" : null }>
                                                     <Link to={item.action} target="_blank">
                                                         <div className="course-list-img">
                                                             <img src={avatar(item.image)} alt={item.lecture_name} />

@@ -15,14 +15,14 @@
 .classify-right{ margin: 50px 0 0 290px;}
 .classify-right>div>div{ box-shadow: 0 1px 2px rgba(0,0,0,0.2);}
 
-.classify-course{ box-shadow: 0 1px 2px rgba(0,0,0,0.2); padding: 40px 20px 60px; background: rgba(255,255,255,0.49); font-size: 1.5em; line-height: 1.3; margin:0;}
+.classify-course{ box-shadow: 0 1px 2px rgba(0,0,0,0.2); padding: 40px 20px 60px; background: rgba(255,255,255,0.49); background: #fff \0; font-size: 1.5em; line-height: 1.3; margin:0;}
 .classify-course a{ color: #b01c40;}
 .classify-course a:last-child{ margin:0 0 0 24px;}
 
 /* 课程分类详情 */
 .classify-category{min-height: 500px; background: url(../img/security-bg.jpg) no-repeat top center;}
 .classify-category .classify-right{ margin: 40px 0 0 260px; width: 938px;}
-.classify-title{ margin: 0 0 32px; padding: 22px 20px 20px; background: rgba(255,255,255,0.49);}
+.classify-title{ margin: 0 0 32px; padding: 22px 20px 20px; background: rgba(255,255,255,0.49); background: #fff \0;}
 .classify-title h4{ font-size: 1.5em;}
 .classify-title p{ line-height: 2.2; font-size: 0.875em; margin: 20px 0 0 20px;}
 
@@ -42,7 +42,8 @@
 .online-course dt>span{  background: #b01c40; padding:0 30px;}
 .online-course dt{ background: url(../img/online-bg.png) no-repeat top right; color: #fff; display: inline-block; padding:0 55px 0 0; font-size: 0.875em;}
 .online-course dd{ padding:0 0 0 30px;}
-.online-course dd,.online-course dd a{ font-size: 0.75em; color: #505050;}
+.online-course dd{ font-size: 0.75em; color: #505050;}
+.online-course dd a{ color: #505050;}
 .online-course span{ display: inline-block;}
 .online-title{ width: 396px;}
 .online-time,.online-price,.online-num{ width: 100px;}
