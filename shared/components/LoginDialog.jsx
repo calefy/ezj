@@ -156,7 +156,7 @@ module.exports = class LoginDialog extends Component {
 
     regSubmit = () => {
         this._setState({ sendSubmit: false });
-        const nickname = this.refs.nickname.getValue();
+        const nickname = this.refs.nickname.getValue().trim();
         const password = this.refs.regpass.getValue();
         const code = this.refs.code.getValue();
         const contact = this.refs.contact.getValue();
@@ -173,7 +173,7 @@ module.exports = class LoginDialog extends Component {
                         <i className="iconfont icon-close" onClick={this.close}></i>
                         <div className="pop-content">
                             <div className="pop-logo">
-                                紫荆教育
+                                <em>紫荆教育</em>
                             </div>
                             <Formsy.Form
                                 onValid={this.enableButton}
@@ -224,7 +224,7 @@ module.exports = class LoginDialog extends Component {
                         <i className="iconfont icon-close" onClick={this.close}></i>
                         <div className="pop-content">
                             <div className="pop-logo">
-                                紫荆教育
+                                <em>紫荆教育</em>
                             </div>
                             <Formsy.Form
                                 onValid={this.enableButton}

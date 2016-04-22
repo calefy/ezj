@@ -27,15 +27,17 @@ let FormsyValid = React.createClass({
         return (
             <div className={`formsy-list cl ${className}`}>
                 <label htmlFor={this.props.name}>{this.props.title}</label>
-                <div className="formsy-input formsy-valid">
+                <div className="formsy-input formsy-valid cl">
                     <input
+                        className="fl"
                         type={this.props.type || 'text'}
                         name={this.props.name}
+                        placeholder={this.props.placeholder}
                         onChange={this.changeValue}
                         value={this.getValue()}
                         checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
                     />
-                    <button type="button" className={`valid-btn ${this.props.sendButton}`} disabled={this.props.sendButton ? "disabled" : ""} ref={this.props.name} onClick={this.props.validClick}>{this.props.valid}</button>
+                    <button type="button" className={`valid-btn fl ${this.props.sendButton}`} disabled={this.props.sendButton ? "disabled" : ""} ref={this.props.name} onClick={this.props.validClick}>{this.props.valid}</button>
                 </div>
                 <span className='validation-error'>{errorMessage}</span>
             </div>

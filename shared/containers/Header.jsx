@@ -190,7 +190,7 @@ class Header extends Component {
                     open={this.state.showDialog}
                     onRequestClose={this.hideDialog}
                 >
-                    <div className="pop-logo">紫荆教育</div>
+                    <div className="pop-logo"><em>紫荆教育</em></div>
                     {this.state.dialogType === 'login' ?
                         <LoginForm
                             ref="loginForm"

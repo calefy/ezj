@@ -92,6 +92,7 @@ module.exports = class RegDialog extends Component {
                                         <em className="fr text-success">可注册</em>
                                     </div>
                                 }
+                                place="aa"
                                 type="text"
                                 required />
                             <FormsyText 

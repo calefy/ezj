@@ -36,9 +36,10 @@ let LoginForm = React.createClass({
      * 提交登录
      */
     onSubmit: function(model) {
+        let login_name=this.refs.login_name.getValue().trim();
         let password = cryptoPasswd(model.password);
         this.loadingSubmitButton();
-        this.props.onLogin( Object.assign({}, model, { password }) );
+        this.props.onLogin( Object.assign({}, model, { login_name , password }) );
     },
 
     /**
@@ -65,6 +66,7 @@ let LoginForm = React.createClass({
                 onChange={this.onFormChange}
             >
                 <FormsyText
+                    ref="login_name"
                     name="login_name"
                     type="text"
                     title={

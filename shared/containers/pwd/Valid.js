@@ -109,6 +109,7 @@ let PwdValid = React.createClass({
                             name="code"
                             ref="code"
                             title="短信验证码"
+                            placeholder="请输入4位验证码"
                             type="text"
                             required />
                         <div className="pop-btn pwd-btn">
