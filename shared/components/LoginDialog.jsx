@@ -173,7 +173,7 @@ module.exports = class LoginDialog extends Component {
                         <i className="iconfont icon-close" onClick={this.close}></i>
                         <div className="pop-content">
                             <div className="pop-logo">
-                                紫荆教育
+                                <em>紫荆教育</em>
                             </div>
                             <Formsy.Form
                                 onValid={this.enableButton}
@@ -224,7 +224,7 @@ module.exports = class LoginDialog extends Component {
                         <i className="iconfont icon-close" onClick={this.close}></i>
                         <div className="pop-content">
                             <div className="pop-logo">
-                                紫荆教育
+                                <em>紫荆教育</em>
                             </div>
                             <Formsy.Form
                                 onValid={this.enableButton}
