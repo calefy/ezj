@@ -16,7 +16,8 @@ let PwdSet = React.createClass({
 
     getInitialState: function() {
         return {
-            errorMsg: null
+            errorMsg: null,
+            passerrorMsg: null
         };
     },
 
@@ -40,11 +41,24 @@ let PwdSet = React.createClass({
     handleSubmit: function(model) {
         const contact = this.props.location.query.contact;
         const code = this.props.location.query.code;
-        this.props.dispatch(this.operateAction.setPwd( contact, code, model.newpass));
-        this.loadingSubmitButton();
+        let passregex=/^[a-zA-Z0-9,.'"]*$/;
+        let newpass=model.newpass;
+        if(/^\d+$/.test(newpass)){
+            this.setState({ passerrorMsg: '密码不能为纯数字' });
+        }
+        else{
+            if(!newpass.match(passregex)){
+                this.setState({ passerrorMsg: '密码只能包含字母、数字及标点符号' });
+            }
+            else{
+                this.props.dispatch(this.operateAction.setPwd( contact, code, model.newpass));
+                this.loadingSubmitButton();
+            }
+        }
+        
     },
     onFormChange: function() {
-        this.setState({ errorMsg: '' });
+        this.setState({ errorMsg: '', passerrorMsg: '' });
     },
 
     render() {
@@ -95,6 +109,7 @@ let PwdSet = React.createClass({
                             validations="equalsField:newpass"
                             validationErrors={{ equalsField: '两次输入密码不一致' }}
                         />
+                        <p className="pass-msg">{this.state.passerrorMsg}</p>
                         <div className="pop-btn pwd-btn">
                             <button type="submit" disabled={!this.canSubmit()}
                                 className={ this.canSubmit() ? '' : 'disabled'} >{this.isSubmitLoading() ? '修改中...' : '完成'}</button>
