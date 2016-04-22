@@ -35,7 +35,7 @@
 	-webkit-transition: 0.3s;
 	-o-transition: 0.3s;
 }
-.index-course li:last-child,.index-teacher li:last-child,.hot-course li:nth-child(4n){ margin: 0 0 8px;}
+.home li.last-child{ margin: 0 0 8px;}
 .index-course a{ color: #737c85;}
 .index-course .course-list-img {width: 228px;height: 153px;overflow: hidden;position: relative;}
 .course-list-img img {display: block;min-width: 227px;height:152px;

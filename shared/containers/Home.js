@@ -41,7 +41,7 @@ let Home = React.createClass({
      */
     renderCourseItems: function(list) {
         return list.map((item, key) => {
-            return  <li key={key}>
+            return  <li key={key} className={ list.length == 8 ? (key+1)%4==0 ? "last-child" : null : (key+1)%5==0 ? "last-child" : null}>
                         <Link to={`/courses/${item.id}`} target="_blank">
                             <div className="course-list-img">
                                 <img src={item.course_picture} alt="" />
@@ -73,7 +73,7 @@ let Home = React.createClass({
         });
 
         return (
-            <div>
+            <div className="home">
                 <div className="banner">
                     <div className="container">
                         <div className="banner-top">
@@ -171,7 +171,7 @@ let Home = React.createClass({
                                     <ul className="cl">
                                         {lecturers.map((item, index) => {
                                             return (
-                                                <li key={index}>
+                                                <li key={index} className={ (index+1)%5==0 ? "last-child" : null }>
                                                     <Link to={item.action} target="_blank">
                                                         <div className="course-list-img">
                                                             <img src={avatar(item.image)} alt={item.lecture_name} />
