@@ -71,7 +71,7 @@ class Student extends Component {
                                     </div>
                                     <div className="student-courses-other">
                                         <p>&yen;{item.price}</p>
-                                        <Link to={`/courses/${item.id}/introduce`} className="btn">课程详情</Link>
+                                        <Link to={`/courses/${item.id}`} className="btn">课程详情</Link>
                                     </div>
                                 </div>
                             );

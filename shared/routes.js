@@ -47,6 +47,7 @@ module.exports = {
                     cb(null, require('./containers/courses/index'));
                 });
             },
+            /*
             indexRoute: {
                 getComponent(location, cb) {
                     require.ensure([], require => {
@@ -80,6 +81,7 @@ module.exports = {
                     }
                 }
             ]
+            */
         },
         {
             path: 'courses/:courseId/chapters/:chapterId',

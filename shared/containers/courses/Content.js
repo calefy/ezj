@@ -25,9 +25,7 @@ class Course extends Component {
     }
     componentWillReceiveProps(nextProps) {
         if (this.props.params.courseId != nextProps.params.courseId) {
-            const courseAction = new CoursesAction();
-            nextProps.dispatch( courseAction.loadCoursePrivate(nextProps.params.courseId) ); // 课程私密信息
-            nextProps.dispatch( courseAction.loadCourseChapters(nextProps.params.courseId) ); // 课程章节
+            Course.fetchData(this.props);
         }
     }
 

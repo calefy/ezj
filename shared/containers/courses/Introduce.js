@@ -26,8 +26,7 @@ class Course extends Component {
     componentWillReceiveProps(nextProps) {
         if (this.props.params.courseId != nextProps.params.courseId) {
             const courseAction = new CoursesAction();
-            nextProps.dispatch( courseAction.loadCourseDetail(nextProps.params.courseId) ); // 课程详情,包含讲师
-            nextProps.dispatch( courseAction.loadCourseChapters(nextProps.params.courseId) ); // 课程章节
+            Course.fetchData(this.props);
         }
     }
 

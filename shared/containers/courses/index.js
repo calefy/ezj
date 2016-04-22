@@ -4,26 +4,29 @@ import { Link } from 'react-router';
 import { toTimeString, avatar, getRequestTypes } from '../../libs/utils';
 
 import CoursesAction from '../../actions/CoursesAction';
+import CourseExam from '../../components/CourseExam.jsx';
 
 if (process.env.BROWSER) {
     require('css/course.css')
 }
 
 class Course extends Component {
-    static menus = [
-        { path: 'introduce', name: '介绍' },
-        { path: 'content', name: '内容' },
-        { path: 'test', name: '测验' }
-    ];
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
         const courseAction = new CoursesAction({ apiClient });
         return Promise.all([
-            dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
+            dispatch( courseAction.loadCourseDetail(params.courseId) ) // 课程详情,包含讲师
+                .then(res => {
+                    // 如果当前要显示测验，并且课程有测验，则加载测验信息
+                    let examId = res.data && res.data.course_examination_id;
+                    if (location.hash === '#exam' && examId && examId !== '0') {
+                        return dispatch( courseAction.loadCourseExamination(res.data.course_examination_id) );
+                    }
+                    return res;
+                }),
             dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
             dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
             dispatch( courseAction.loadCourseStudents(params.courseId) ), // 课程学员
-            dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
         ]);
     }
 
@@ -35,9 +38,20 @@ class Course extends Component {
         }
     }
     componentWillReceiveProps(nextProps) {
+        // courseID变化，所有相关数据重新加载
         if (this.props.params.courseId != nextProps.params.courseId) {
             Course.fetchData(nextProps);
             return;
+        }
+        // 切换到测验，如果数据不是当前课程的，需要重新加载测验数据
+        if (nextProps.location.hash === '#exam') {
+            let exam = nextProps.examination;
+            let eid = nextProps.course && nextProps.course.data && nextProps.course.data.course_examination_id;
+            eid = eid && eid !== '0' ? eid : '';
+            if (!exam._req || (eid && exam._req.examId != eid)) {
+                const courseAction = new CoursesAction();
+                nextProps.dispatch( courseAction.loadCourseExamination(eid) );
+            }
         }
     }
 
@@ -76,6 +90,16 @@ class Course extends Component {
         this.refs['student_' + key].style.display = 'none';
     };
 
+    // 点击章节，跳转到视频播放
+    onToVideo = e => {
+        let priv = this.props.course_private.data || {};
+        if (!priv.is_purchased || priv.is_expired) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+            alert('购买课程后才可继续观看');
+        }
+    };
+
     render() {
         const { menus } = Course;
         const locationPath = this.props.location.pathname;
@@ -85,6 +109,12 @@ class Course extends Component {
         let progress = priv.chapters_progress || {};
         let chapters = this.props.chapters.data && this.props.chapters.data.list || [];
         let students = this.props.students.data || [];
+        let hasExam = course.course_examination_id;
+        hasExam = hasExam && hasExam !== '0';
+        let hash = this.props.location.hash || '#intro'; // 如果没有课程测验，则仅显示intro
+        if (hash === '#exam' && !hasExam) {
+            hash = '#intro';
+        }
 
         // 计算总时长
         let tminute = course.duration / 60;
@@ -93,15 +123,16 @@ class Course extends Component {
         let timeStr = (thour ? thour + '小时' : '') + tminute + '分';
 
         // 如果购买了,又没有学习，需要获取第一个章节ID
-        let firstChapter;
+        let firstChapterId;
         if (priv.is_purchased && priv.is_learned) {
             for (let i=0,len=chapters.length; i < len; i++) {
                 if (chapters[i].rgt - chapters[i].lft === 1) {
-                    firstChapter = chapters[i];
+                    firstChapterId = chapters[i].id;
                     break;
                 }
             }
         }
+
 
         return (
             <div className="content course-detail">
@@ -118,9 +149,10 @@ class Course extends Component {
                             <p className="course-classify">
                                 {(course.category_info || []).map((item, index) => {
                                     return  <span key={index}>
-                                                {item.id == course.course_category_id ?
-                                                    '/' + item.name :
+                                                {index === 0 ? // 仅一级分类可点击
                                                     <Link to="/courses" query={{category: item.id}}>{item.name}</Link>
+                                                    :
+                                                    '/' + item.name
                                                 }
                                             </span>
                                 })}
@@ -148,7 +180,7 @@ class Course extends Component {
                                             (priv.is_learned ?
                                                 <Link to={`/courses/${course.id}/chapters/${priv.latest_play && priv.latest_play.chapter_id}`} className="btn fl">继续学习</Link>
                                                 :
-                                                <Link to={`/courses/${course.id}/chapters/${firstChapter.id}`} className="btn fl">立即学习</Link>
+                                                <Link to={`/courses/${course.id}/chapters/${firstChapterId}`} className="btn fl">立即学习</Link>
                                             )
                                             :
                                             <button className="btn disabled fl" type="button" disabled="disabled">暂未开课</button>
@@ -168,13 +200,69 @@ class Course extends Component {
                     <div className="course-bottom cl">
                         <div className="course-bottom-left course-shadow fl bg-white">
                             <ul className="nav-tabs course-tabs cl">
-                                {menus.map( (item, index) => {
-                                    return  <li className={locationPath.indexOf(item.path) >-1 ? 'current' : null} key={index}>
-                                                <Link to={`/courses/${course.id}/${item.path}`}>{item.name}</Link>
-                                            </li>
-                                })}
+                                <li className={hash === '#intro' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#intro">介绍</Link></li>
+                                <li className={hash === '#cont' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#cont">内容</Link></li>
+                                {hasExam && priv.is_purchased ?
+                                    <li className={hash === '#exam' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#exam">测验</Link></li>
+                                    : null
+                                }
                             </ul>
-                            {this.props.children}
+                            {hash === '#intro' ?
+                                <div className="course-bottom-info">
+                                    <div className="course-bottom-about">
+                                        <h4 className="course-title">课程简介</h4>
+                                        <div dangerouslySetInnerHTML={{__html: course.course_outlines}}></div>
+                                        <div>
+                                            {chapters.map((item, index) => {
+                                                let isRoot = item.rgt - item.lft > 1;
+                                                return isRoot ? <p key={index}>{item.chapter_name}</p> : null;
+                                            })}
+                                        </div>
+                                    </div>
+                                    <div className="course-bottom-recommend">
+                                        <h4 className="course-title">推荐受众</h4>
+                                        <div dangerouslySetInnerHTML={{__html: course.recommends_audience}}>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                : hash === '#cont' ?
+                                    <div className="content course-chapter">
+                                        <dl>
+                                        {chapters.map((item, index) => {
+                                            let isRoot = item.rgt - item.lft > 1;
+                                            let prog = progress[item.id] || {};
+                                            prog = prog.chapter_progress || 0;
+                                            if (prog) {
+                                                prog = Math.max(Math.round(prog / 25) - 1, 0);
+                                                prog = ['one', 'two', 'three', 'four'][prog] + '-four';
+                                            } else {
+                                                prog = '';
+                                            }
+
+                                            return isRoot ?
+                                                <dt key={index}>
+                                                    {item.chapter_name}
+                                                </dt>
+                                                :
+                                                <dd key={index}>
+                                                    <div className={`cl ${prog}`}>
+                                                        <i className="icon icon-pro"></i>
+                                                        <Link to={`/courses/${item.course_id}/chapters/${item.id}`} onClick={this.onToVideo}>{item.chapter_name}</Link>
+                                                        <span className="course-audition">{item.free_trial_status ? <Link to={`/courses/${item.course_id}/chapters/${item.id}`}>[试听]</Link> : ''}</span>
+                                                        <span className="fr course-time"><i className="iconfont icon-time"></i>{toTimeString(item.video.video_duration, 'm:s')}</span>
+                                                    </div>
+                                                </dd>
+                                        })}
+                                        </dl>
+                                    </div>
+                                    : hash === '#exam' ?
+                                        <CourseExam
+                                            examination = {this.props.examination.data || {}}
+                                        />
+                                        : null
+                            }
+
                         </div>
                         <div className="course-bottom-right fr">
                             <div className="course-bottom-teacher course-shadow bg-white">
@@ -215,6 +303,7 @@ class Course extends Component {
                                     })}
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

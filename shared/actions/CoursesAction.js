@@ -77,7 +77,7 @@ module.exports = class CoursesAction extends BaseAction {
 
     static LOAD_COURSE_EXAM = 'course_exam';
     loadCourseExamination(examId) {
-        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_EXAM, this.api.examination(examId) );
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_EXAM, this.api.examination(examId), {examId} );
     }
 
     static LOAD_LECTURER = 'lecturer';

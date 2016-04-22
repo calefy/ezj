@@ -37,9 +37,12 @@ class Pagination extends Component {
 
         return (
             <section className="pagination">
-                <Link to={link} query={firstQuery} className="first">第一页</Link>
-                { page == 1 ? 
-                    <span className="disabled previous"></span> : 
+                { page == 1 ?
+                    <span className="first disabled">第一页</span> :
+                    <Link to={link} query={firstQuery} className="first">第一页</Link>
+                }
+                { page == 1 ?
+                    <span className="previous disabled"></span> :
                     <Link to={link} query={prevQuery} className="previous"></Link>
                 }
                 {(() => {
@@ -58,11 +61,14 @@ class Pagination extends Component {
                     }
                     return list;
                 })()}
-                { page == Math.ceil(total/pageSize) ? 
-                    <span className="disabled next"></span> : 
+                { page == pageTotal ?
+                    <span className="next disabled"></span> :
                     <Link to={link} query={nextQuery} className="next"></Link>
                 }
-                <Link to={link} query={lastQuery} className="last">最后页</Link>
+                { page == pageTotal ?
+                    <span className="last disabled">最后页</span> :
+                    <Link to={link} query={lastQuery} className="last">最后页</Link>
+                }
             </section>
         );
     }

@@ -17,7 +17,7 @@ class Commerce extends Base {
         params.txn_type = 2; // 充值类型记录
         params = paramify(params);
         params = params ? '?' + params : '';
-        return this.apiClient.get('commerce/coins/records' + params)
+        return this.apiClient.get('commerce/coins/records' + params);
     }
     /**
      * 订单
@@ -25,7 +25,11 @@ class Commerce extends Base {
     orders(params={}) {
         params = paramify(params);
         params = params ? '?' + params : '';
-        return this.apiClient.get('commerce/orders' + params)
+        return this.apiClient.get('commerce/orders' + params);
+    }
+
+    pay(params={}) {
+        return this.apiClient.post('commerce/orders', params);
     }
 
 }

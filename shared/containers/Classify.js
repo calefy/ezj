@@ -121,7 +121,7 @@ class Classify extends Component {
                         }
                         {isSearch(location) && this.props.courses_search.data ?
                             <CourseSearch
-                                courses={this.props.courses_search.data.courses}
+                                courses={this.props.courses_search.data.list}
                                 total = {this.props.courses_search.data.total}
                                 location = {location}
                             />

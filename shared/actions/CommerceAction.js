@@ -22,6 +22,10 @@ module.exports = class CommerceAction extends BaseAction {
     loadOrders(params) {
         return BaseAction.dispatchRequest(CommerceAction.LOAD_ORDERS, this.api.orders(params), params);
     }
+    static PAY = 'ec_pay';
+    pay(params) {
+        return BaseAction.dispatchRequest(CommerceAction.PAY, this.api.pay(params), params);
+    }
 }
 
 
