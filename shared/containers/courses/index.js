@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { toTimeString, avatar, getRequestTypes } from '../../libs/utils';
 
 import CoursesAction from '../../actions/CoursesAction';
+import CourseExam from '../../components/CourseExam.jsx';
 
 if (process.env.BROWSER) {
     require('css/course.css')
@@ -14,11 +15,18 @@ class Course extends Component {
     static fetchData({dispatch, params={}, location={}, apiClient}) {
         const courseAction = new CoursesAction({ apiClient });
         return Promise.all([
-            dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
+            dispatch( courseAction.loadCourseDetail(params.courseId) ) // 课程详情,包含讲师
+                .then(res => {
+                    // 如果当前要显示测验，并且课程有测验，则加载测验信息
+                    let examId = res.data && res.data.course_examination_id;
+                    if (location.hash === '#exam' && examId && examId !== '0') {
+                        return dispatch( courseAction.loadCourseExamination(res.data.course_examination_id) );
+                    }
+                    return res;
+                }),
             dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
             dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
             dispatch( courseAction.loadCourseStudents(params.courseId) ), // 课程学员
-            dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
         ]);
     }
 
@@ -30,9 +38,20 @@ class Course extends Component {
         }
     }
     componentWillReceiveProps(nextProps) {
+        // courseID变化，所有相关数据重新加载
         if (this.props.params.courseId != nextProps.params.courseId) {
             Course.fetchData(nextProps);
             return;
+        }
+        // 切换到测验，如果数据不是当前课程的，需要重新加载测验数据
+        if (nextProps.location.hash === '#exam') {
+            let exam = nextProps.examination;
+            let eid = nextProps.course && nextProps.course.data && nextProps.course.data.course_examination_id;
+            eid = eid && eid !== '0' ? eid : '';
+            if (exam.isFetching || (exam._req && eid && exam._req.examId != eid)) {
+                const courseAction = new CoursesAction();
+                nextProps.dispatch( courseAction.loadCourseExamination(eid) );
+            }
         }
     }
 
@@ -90,7 +109,12 @@ class Course extends Component {
         let progress = priv.chapters_progress || {};
         let chapters = this.props.chapters.data && this.props.chapters.data.list || [];
         let students = this.props.students.data || [];
-        let hash = this.props.location.hash || '#intro';
+        let hasExam = course.course_examination_id;
+        hasExam = hasExam && hasExam !== '0';
+        let hash = this.props.location.hash || '#intro'; // 如果没有课程测验，则仅显示intro
+        if (hash === '#exam' && !hasExam) {
+            hash = '#intro';
+        }
 
         // 计算总时长
         let tminute = course.duration / 60;
@@ -176,7 +200,7 @@ class Course extends Component {
                             <ul className="nav-tabs course-tabs cl">
                                 <li className={hash === '#intro' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#intro">介绍</Link></li>
                                 <li className={hash === '#cont' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#cont">内容</Link></li>
-                                {priv.is_purchased ?
+                                {hasExam && priv.is_purchased ?
                                     <li className={hash === '#exam' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#exam">测验</Link></li>
                                     : null
                                 }
@@ -230,8 +254,11 @@ class Course extends Component {
                                         })}
                                         </dl>
                                     </div>
-                                    :
-                                    <p>测验</p>
+                                    : hash === '#exam' ?
+                                        <CourseExam
+                                            examination = {this.props.examination.data || {}}
+                                        />
+                                        : null
                             }
 
                         </div>
