@@ -76,7 +76,7 @@ class Recharge extends Component {
                                 {recharges.length ?
                                     recharges.map((item, index) => {
                                         return (
-                                            <tr>
+                                            <tr key={index}>
                                                 <td>{item.id}</td>
                                                 <td>{item.created_time}</td>
                                                 <td>{item.amount}</td>

@@ -48,7 +48,7 @@ class Course extends Component {
             let exam = nextProps.examination;
             let eid = nextProps.course && nextProps.course.data && nextProps.course.data.course_examination_id;
             eid = eid && eid !== '0' ? eid : '';
-            if (exam.isFetching || (exam._req && eid && exam._req.examId != eid)) {
+            if (!exam._req || (eid && exam._req.examId != eid)) {
                 const courseAction = new CoursesAction();
                 nextProps.dispatch( courseAction.loadCourseExamination(eid) );
             }
@@ -123,15 +123,16 @@ class Course extends Component {
         let timeStr = (thour ? thour + '小时' : '') + tminute + '分';
 
         // 如果购买了,又没有学习，需要获取第一个章节ID
-        let firstChapter;
+        let firstChapterId;
         if (priv.is_purchased && priv.is_learned) {
             for (let i=0,len=chapters.length; i < len; i++) {
                 if (chapters[i].rgt - chapters[i].lft === 1) {
-                    firstChapter = chapters[i];
+                    firstChapterId = chapters[i].id;
                     break;
                 }
             }
         }
+
 
         return (
             <div className="content course-detail">
@@ -179,7 +180,7 @@ class Course extends Component {
                                             (priv.is_learned ?
                                                 <Link to={`/courses/${course.id}/chapters/${priv.latest_play && priv.latest_play.chapter_id}`} className="btn fl">继续学习</Link>
                                                 :
-                                                <Link to={`/courses/${course.id}/chapters/${firstChapter.id}`} className="btn fl">立即学习</Link>
+                                                <Link to={`/courses/${course.id}/chapters/${firstChapterId}`} className="btn fl">立即学习</Link>
                                             )
                                             :
                                             <button className="btn disabled fl" type="button" disabled="disabled">暂未开课</button>
