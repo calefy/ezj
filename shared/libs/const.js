@@ -57,3 +57,8 @@ export const orderStatus = {
     '40': '自动取消',
     '50': '支付失败'
 };
+
+export const payType = {
+    COURSE: 1,
+    PACKAGE: 2,
+}
