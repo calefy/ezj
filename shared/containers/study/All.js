@@ -6,6 +6,7 @@ import each from 'lodash/each';
 import isEmpty from 'lodash/isEmpty';
 import keys from 'lodash/keys';
 
+import { getRequestTypes } from '../../libs/utils';
 import CoursesAction from '../../actions/CoursesAction';
 import Pagination from '../../components/Pagination.jsx';
 
@@ -20,6 +21,10 @@ class All extends Component {
         ]);
     }
 
+    state = {
+        loading: false, // 加载更多
+    };
+
     componentDidMount() {
         const { courses_mine, location } = this.props;
         if (courses_mine.isFetching ||
@@ -31,6 +36,18 @@ class All extends Component {
         if (this.props.location.search != nextProps.location.search) {
             cacheYear = null; // 页面变化时，清空缓存的年份
             All.fetchData(nextProps);
+            return;
+        }
+        // 加载更多时
+        let type = getRequestTypes(CoursesAction.LOAD_MY_COURSES_MORE);
+        switch(nextProps.action.type) {
+            case type.request:
+                this.setState({ loading: true });
+                break;
+            case type.success:
+            case type.failure:
+                this.setState({ loading: false });
+                break;
         }
     }
 
@@ -63,6 +80,14 @@ class All extends Component {
         tn = tn < 10 ? '0' + tn : tn;
         s = (s ? s : tm + '/' + td) + ' ' + th + ':' + tn;
         return s;
+    };
+
+    loadMore = e => {
+        e.preventDefault();
+        const query = this.props.location.query;
+
+        const courseAction = new CoursesAction();
+        this.props.dispatch( courseAction.loadMyCoursesMore(Object.assign({}, query, {page: (query.page || 1) + 1})) );
     };
 
     // 渲染时间轴列表数据
@@ -125,6 +150,7 @@ class All extends Component {
         const {courses_mine, location} = this.props;
         let query = location.query;
         let courses = courses_mine.data && courses_mine.data.list || [];
+        let total = courses_mine.data && courses_mine.data.total || 0;
 
         return (
             <div className="study-center-right shadow bg-white fr">
@@ -144,11 +170,25 @@ class All extends Component {
                 <ul className="my-all-courses">
                     {this.renderList(courses)}
                 </ul>
+
+                {total > courses.length ?
+                    this.state.loading ?
+                        <div className="loading">加载中...</div>
+                        :
+                        <div className="tac">
+                            <Link className="btn" to="/study/all" query={Object.assign({}, query, {page: (query.page || 1) + 1})} onClick={this.loadMore}>加载更多</Link>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </div>
+                    : null
+                }
             </div>
         );
     }
 }
 
 module.exports = connect( state => ({
+    action: state.action,
     courses_mine : state.courses_mine,
 }) )(All);

@@ -450,6 +450,7 @@ let TopicIndex = React.createClass({
 				            </div>
 				        </div>
 				    </div>
+                    {
 					// <div className="container">
 				 //        <div className="special-finance-course-certificate bg-white">
 				 //            <h3>我要报名</h3>
@@ -601,6 +602,7 @@ let TopicIndex = React.createClass({
 				 //            </div>
 				 //        </div>
 				 //    </div>
+                 }
 			    </div>
             </div>
         );

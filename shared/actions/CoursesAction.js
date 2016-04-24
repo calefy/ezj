@@ -107,6 +107,10 @@ module.exports = class CoursesAction extends BaseAction {
     loadMyCourses(params) {
         return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES, this.api.myCourses(params), params );
     }
+    static LOAD_MY_COURSES_MORE = 'my_courses_more';
+    loadMyCoursesMore(params) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES_MORE, this.api.myCourses(params), params );
+    }
     //static LOAD_MY_COURSES_LEARNED = 'my_courses_learned';
     //static LOAD_MY_COURSES_BUYED = 'my_courses_buyed';
     //loadMyLearnedCourses(params) {
