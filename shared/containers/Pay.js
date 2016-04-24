@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
+import Formsy from 'formsy-react';
+import FormsyCheckbox from '../components/formsy/FormsyCheckbox.jsx';
 
 import { payType } from '../libs/const';
 import { getRequestTypes } from '../libs/utils';
@@ -29,6 +31,12 @@ let Pay = React.createClass({
         }
     },
 
+    getInitialState: function() {
+        return {
+            pay: 'pointpay', // 支付方式： pointpay、alipay、unipay
+        };
+    },
+
     componentDidMount: function() {
         const { account, course, location } = this.props;
         let type = location.query.type;
@@ -49,6 +57,11 @@ let Pay = React.createClass({
         let types = getRequestTypes(CommerceAction.PAY);
         switch (nextProps.action.type) {
             case types.success:
+                let res = nextProps.action.response.data;
+                if (res.url) {
+                    this.refs.payForm.action = res.url;
+                    this.refs.payForm.submit();
+                }
                 alert('购买成功');
                 break;
             case types.failure:
@@ -57,21 +70,38 @@ let Pay = React.createClass({
         }
     },
 
-    onPay: function(e) {
+    // 紫荆币支付选项切换
+    onChangePay: function(e) {
+        this.setState(Object.assign({}, this.state, {pay: this.refs.pointpay.checked ? 'pointpay' : 'alipay'}));
+    },
+    // 点击具体的支付方式
+    onClickPayMehtod: function(e) {
         e.preventDefault();
-        e.nativeEvent.returnValue = false;
+        if (this.refs.pointpay.checked) return;
 
+        let method = e.currentTarget.getAttribute('data-pay');
+        this.setState(Object.assign({}, this.state, {pay: this.state.pay === method ? '' : method}));
+    },
+
+    onPay: function(model) {
         const { location } = this.props;
         let id = location.query.id;
         let type = location.query.type;
+        let pay = this.state.pay;
         const commerceAction = new CommerceAction();
-        this.dispatch(commerceAction.pay({
+        this.props.dispatch(commerceAction.pay({
             items: id,
-            item_type: 0, // 课程ID
-            payment_method: 10, // 紫荆币支付
+            item_type: type, // 购买类型
+            payment_method: pay === 'pointpay' ? 10 : pay === 'alipay' ? 20 : pay === 'unipay' ? 30 : '' // 紫荆币支付
         }));
     },
 
+    // 表单变更时，取消掉全局错误消息
+    onFormChange: function() {
+        if (this.state.error) {
+            this.setState(Object.assign({}, this.state, { error: '' }));
+        }
+    },
 
     render: function() {
         let type = this.props.location.query.type;
@@ -83,6 +113,12 @@ let Pay = React.createClass({
 
         return (
             <div className="container">
+                <Formsy.Form
+                    onValid={this.enableSubmitButton}
+                    onInvalid={this.disableSubmitButton}
+                    onValidSubmit={this.onPay}
+                    onChange={this.onFormChange}
+                >
                 <div className="pay bg-white">
                     <h4>参加课程《{course.course_name}》</h4>
                     <div className="pay-course-info">
@@ -122,28 +158,30 @@ let Pay = React.createClass({
                     <div className="pay-balance">
                         <h3>结算信息</h3>
                         <h4 className="pay-balance-price cl">
-                            <span className="fl"><input type="checkbox" name="" value="" defaultChecked={true} /> 使用紫荆币支付</span>
-                            <em className="fr">-{Math.min(price, accountAmount)}</em>
+                            <span className="fl"><input type="checkbox" ref="pointpay" defaultChecked={true} onChange={this.onChangePay} /> 使用紫荆币支付</span>
+                            <em className="fr">-{this.state.pay === 'pointpay' ? Math.min(price, accountAmount) : 0}</em>
                         </h4>
                         <h5 className="cl">
                             <span className="fl">还需支付</span>
-                            <em className="fr">&yen;{price > accountAmount ? price - accountAmount : 0}</em>
+                            <em className="fr">&yen;{this.state.pay === 'pointpay' ? (price > accountAmount ? price - accountAmount : 0) : price}</em>
                         </h5>
                     </div>
                     <div className="pay-method">
                         <dl>
                             <dt>支付方式</dt>
-                            <dd className="pay-alipay"><Link to="">&nbsp;</Link></dd>
-                            <dd className="pay-unipay"><Link to="">银联</Link></dd>
+                            <dd className="pay-alipay" data-pay="alipay" style={{borderColor: this.state.pay === 'alipay' ? '#f00' : '#e5e5e5'}} onClick={this.onClickPayMehtod}>&nbsp;</dd>
+                            <dd className="pay-unipay" data-pay="unipay" style={{borderColor: this.state.pay === 'unipay' ? '#f00' : '#e5e5e5'}} onClick={this.onClickPayMehtod}>银联</dd>
                         </dl>
                         <div>
-                            <input type="checkbox" defaultChecked={true} /> 我已经阅读并同意
+                            <FormsyCheckbox name="agree" value="1" defaultChecked={true} required /> 我已经阅读并同意
                             <Link to="">紫荆教育用户付费协议</Link>
                         </div>
-                        <Link to="" className="btn" onClick={this.onPay}>去结算</Link>
+                        <button type="submit" className={`btn ${this.canSubmit() ? '' : 'disabled'}`} disabled={!this.canSubmit()}>{this.isSubmitLoading() ? '结算中...' : '去结算'}</button>
                         <p className="pay-valid-date">付款后{type == payType.COURSE ? 90 : 180}天内有效</p>
                     </div>
                 </div>
+                </Formsy.Form>
+                <form action="" className="hide" ref="payForm" method="GET" target="_blank"></form>
             </div>
         );
 

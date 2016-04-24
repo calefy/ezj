@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
+import { payType } from '../../libs/const';
 import { toTimeString, avatar, getRequestTypes } from '../../libs/utils';
 
 import CoursesAction from '../../actions/CoursesAction';
@@ -199,7 +200,7 @@ class Course extends Component {
                             <div className="course-buy cl">
                                 {priv.is_purchased ?
                                     (priv.is_expired ?
-                                        <button type="button" className="btn fl" onClick={function(){ alert('comming soon ....'); }}>立即续费</button>
+                                        <Link to="/pay" query={{type: payType.COURSE, id: course.id}} className="btn fl">立即续费</Link>
                                         :
                                         (course.course_open_status ?
                                             (priv.is_learned ?
@@ -212,7 +213,7 @@ class Course extends Component {
                                         )
                                     )
                                     :
-                                    <button type="button" className="btn fl" onClick={function(){ alert('comming soon ....'); }}>立即购买</button>
+                                    <Link to="/pay" query={{type: payType.COURSE, id: course.id}} className="btn fl">立即购买</Link>
                                 }
                                 {priv.is_collected ?
                                     <button type="btn" className="fl course-collected" onClick={this.onCancelCollect}><i className="iconfont icon-heart"></i>取消收藏</button>
