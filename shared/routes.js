@@ -307,6 +307,33 @@ module.exports = {
                 });
             }
         },
+        // cfc
+        {
+            path: 'topic/cfc',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/topic/Cfc'));
+                });
+            }
+        },
+        // 互联网金融
+        {
+            path: 'topic/finance',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/topic/Finance'));
+                });
+            }
+        },
+        // 证券投资
+        {
+            path: 'topic/security',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/topic/Security'));
+                });
+            }
+        },
         {
             path: 'students/:studentId',
             getComponent(location, cb) {
