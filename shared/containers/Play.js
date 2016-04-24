@@ -38,6 +38,18 @@ class Play extends Component {
 
     componentDidMount() {
         this.loadNeededData(this.props);
+        // 因flash初始化之前无法获取对象，因此需要延迟执行
+        setTimeout(this.jdugeSize.bind(this), 300);
+
+        let $ = require('jquery');
+        let timer = null;
+        $(window).on('resize', (function() {
+            clearTimeout(timer);
+            setTimeout(this.jdugeSize.bind(this), 200);
+        }).bind(this))
+    }
+    componentDidUpdate() {
+        this.jdugeSize();
     }
     componentWillReceiveProps(nextProps) {
         this.loadNeededData(nextProps);
@@ -66,6 +78,55 @@ class Play extends Component {
         }
     };
     /**
+     * 判断并设置尺寸位置
+     */
+    jdugeSize = () => {
+        const $ = require('jquery');
+        let winH = $(window).height();
+        let winW = $(window).width();
+        let box = $(this.refs.box);
+        let wSpace = 15, hSpace = 10;
+        let h = winH - 64 - 60 - hSpace * 2; // 上下分别64px、60px，再加上留出一定的距离
+        let w = winW - (this.state.sidebar ? 388 : 0) - wSpace * 2; // 侧边栏为388px
+        let videoRatio = 550 / 363;
+        let pptRatio = 336 / 236;
+        //pptBoxOnly: false, // 仅展示ppt框
+        //pptBoxShow: false, // 展示ppt框
+        if (!this.state.pptBoxShow) { // 只展示视频时
+            let vw = w < h * videoRatio ? w : h * videoRatio;
+            let vh = h < w / videoRatio ? h : w / videoRatio;
+            this.refs.video.setSize(vw, vh);
+            box.css({
+                top: hSpace + (h - vh) / 2,
+                left: wSpace + (w - vw) / 2
+            });
+        } else if (!this.state.pptBoxOnly) { // 同时显示video与ppt
+            let halfW = w / 2;
+
+            let vw = halfW < h * videoRatio ? halfW : h * videoRatio;
+            let vh = h < halfW / videoRatio ? h : halfW / videoRatio;
+            let ph = vh;
+            let pw = ph * pptRatio;
+            this.refs.ppt.setSize(pw, ph);
+
+            this.refs.video.setSize(vw, vh);
+
+            box.css({
+                top: hSpace + (h - vh) / 2,
+                left: wSpace + (w - pw - vw) / 2
+            });
+        } else { // 仅显示ppt
+            let pw = w < h * pptRatio ? w : h * pptRatio;
+            let ph = h < w / pptRatio ? h : w / pptRatio;
+            this.refs.ppt.setSize(pw, ph);
+            box.css({
+                top: hSpace + (h - ph) / 2,
+                left: wSpace + (w - pw) / 2
+            });
+        }
+
+    };
+    /**
      * 设置state
      */
     _setState = obj => {
@@ -87,7 +148,7 @@ class Play extends Component {
     };
     handlePptBoxShow = e => { // 播放ppt toggle
         e.preventDefault();
-        this._setState({ pptBoxShow: !this.state.pptBoxShow });
+        this._setState({ pptBoxShow: !this.state.pptBoxShow, pptBoxOnly: false });
     };
     handlePptBoxOnly = e => { // 仅展示ppt框
         e.preventDefault();
@@ -189,7 +250,7 @@ class Play extends Component {
                         <p>{course.course_name}</p>
                         <p>{chapter.chapter_name}</p>
                     </div>
-                    <div className="play-center cl">
+                    <div className="play-center cl rel" ref="box">
                         <div className="play-video fl" style={videoWrapStyle}>
                             <Video
                                 ref="video"
@@ -201,6 +262,7 @@ class Play extends Component {
                         </div>
                         <div className={`play-jiangyi fl ${this.state.pptBoxShow ? '' : 'hide'}`}>
                             <Ppt
+                                ref="ppt"
                                 ppts = {ppts}
                                 currentIndex = {this.state.pptIndex}
                                 onVideoSyncTime = {this.setVideoTime}
@@ -273,7 +335,10 @@ class Play extends Component {
                         <Link to={`/courses/${params.courseId}/chapters/${nextChapterId || params.chapterId}`} className="fl" onClick={this.handleChangeChapter}>下一节</Link>
                         <em className="play-state fl" onClick={this.handleOver}>已学完</em>
                         <em className={`play-state fr ${this.state.skipBegin ? 'play-checked' : ''}`} onClick={this.handleSkipBegin}>始终跳过片头</em>
-                        <em className={`play-state fr ${this.state.pptBoxShow ? 'play-checked' : ''}`} onClick={this.handlePptBoxShow}>同步显示PPT</em>
+                        {ppts.length ?
+                            <em className={`play-state fr ${this.state.pptBoxShow ? 'play-checked' : ''}`} onClick={this.handlePptBoxShow}>同步显示PPT</em>
+                            : null
+                        }
                     </div>
                 </div>
                 {this.state.sidebar ? null :
