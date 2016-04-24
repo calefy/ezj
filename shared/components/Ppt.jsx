@@ -63,6 +63,10 @@ class Ppt extends Component {
         let point = ppts[index].ppt_point;
         this.props.onVideoSyncTime(point);
     };
+    setSize = (w, h) => {
+        this.refs.wrap.style.width = w + 'px';
+        this.refs.wrap.style.height = h + 'px';
+    };
 
     render() {
         const { ppts } = this.props;
@@ -73,7 +77,7 @@ class Ppt extends Component {
         if (!len) return null;
 
         return (
-            <div className="play-ppt">
+            <div className="play-ppt" ref="wrap">
                 <div className="play-preview">
                     <img src={ppts[index].ppt_url} className="play-ppt-img" />
                 </div>

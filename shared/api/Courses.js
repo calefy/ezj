@@ -1,4 +1,5 @@
 import Base from './Base';
+import ApiClient from './apiClient';
 import { paramify } from '../libs/utils';
 
 class Courses extends Base {
@@ -66,6 +67,17 @@ class Courses extends Base {
 
     examination(examId) {
         return this.apiClient.get(`els/examinations/${examId}`);
+    }
+    courseSheet(courseId) {
+        return this.apiClient.get(`els/examination-sheets?course_id=${courseId}`);
+    }
+    sheets(params = {}) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get(`els/examination-sheets${params}`);
+    }
+    submitSheet(model = {}) {
+        return this.apiClient.post('els/examination-sheets', model, {'Content-Type' : ApiClient.CONTENT_TYPE_JSON});
     }
 
 
