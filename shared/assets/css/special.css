@@ -1,0 +1,223 @@
+h2.h2-title{position: absolute;top:20px;left: -8px;background: url(../img/cfc-bg-right.png) no-repeat right top;padding: 0px 18px 0px 0;color: #fff;}
+h2.h2-title span{background: url(../img/cfc-bg-left.png) no-repeat left top;padding: 14px 16px 17px 34px;display: block;}
+h5.h5-title{background: url(../img/cfc-h5.png) no-repeat left center;text-align: center;font-size: 16px;color: #fff;padding: 6px 40px 7px 26px;display: inline-block;}
+
+.special-banner{ background: url(../img/special_bg.png) no-repeat top center #3ea8d4; height:400px;}
+.special-banner .container{ width:1000px;}
+
+.special-text{ margin:96px 0 0;}
+.special-price{ position: relative; margin: 20px 0 0;}
+.special-price span { font-size: 1.5em; color: #fff; margin: 0 0 10px;}
+.special-state { position: absolute; left: 0px; bottom: -25px; color: #fff; font-size: 0.875em;}
+.special-banner-join{ border-radius: 10px; text-align: center; line-height: 44px; color: #fff; box-shadow: 0 0 0 #fff; width: 140px; font-size: 1.125em; background: #00baff; border: 3px solid #00fcff; right: 0; bottom: -28px; position: absolute;}
+
+.special-menu { /*position: absolute; display: none;*/ width: 100%; height: 70px;}
+.special-menu-nav{ /*position: fixed; top: 0px;*/ z-index: 9999; width: 100%; color: #fff; background: #3ea8d4;}
+.special-menu ul{ position: relative;}
+.special-menu li{ text-align: center; float: left; line-height: 70px;}
+.special-menu li a{ color: #fff; display: block; font-size: 1.125em; padding:0 21px;}
+.special-menu li.special-buy { float: right; /*display: none;*/}
+.special-buy-state{ float: left; line-height: 20px; margin: 14px 50px 0 0;}
+.special-join{ background: #00fcff; width: 100px; height: 35px; line-height: 35px; margin-top: 16px; float: right;border-radius: 22px;}
+
+.special-content{ margin: 20px 0 0;}
+.special-content h3 { background: #3ea7d4; border-bottom: 0px; color: #fff; font-size: 1.125em; padding: 0 26px; line-height: 42px;}
+.special-cfc-about{ margin: 20px 0 44px;}
+.special-about-cfc>div { width: 540px; height: 216px; position: relative; padding: 80px 20px 0;}
+.special-about-cfc p { line-height: 36px; color: #0075a8; font-size: 14px;}
+.special-about-cfc ul span { background: #3ea7d4; border-radius: 50%; color: #fff; font-size: 14px; float: left; width: 33px; height: 33px; text-align: center; line-height: 33px; margin: 6px 0 0;}
+.special-about-cfc ul p { float: left; margin: 0 0 0 10px; line-height: 44px;}
+.special-about-cfc li:after { content: ""; display: block; clear: both;}
+
+.special-why-cfc { border-bottom: 1px dashed #c9c9c9; position: relative; padding: 56px 0 0; margin: 2px 0 0;}
+.special-why-cfc h2.h2-title {top: 0px;}
+.special-why-cfc p { font-size: 14px; color: #707070; line-height: 18px; margin: 0 0 20px;}
+.special-why-cfc .cl >div { padding: 16px 26px; width: 506px;}
+.special-why-cfc li { padding: 20px 0; border-top: 1px dashed #c9c9c9;}
+.special-why-cfc li img{ float: left;}
+.special-why-cfc li p{ margin:0 0 0 164px;}
+
+.special-leader-cfc{padding:0 0 30px;}
+.special-leader-cfc p{color: #0075a8;font-size: 14px;line-height: 30px;}
+.special-leader-cfc>p,.special-leader-cfc>div{padding:6px 0;margin:0 60px 0 26px;}
+.special-leader-cfc div p{color: #707070;}
+.special-cfc-course h4.h4-title { top: 15px;}
+.special-cfc-course>ul>li { position: relative; background: #005e89; margin: 0 0 4px;}
+.special-cfc-title { height: 72px; border-bottom: 1px solid #005e89;}
+.special-cfc-title p { color: #ff9100; font-size: 24px; font-weight: bold; float: right; line-height: 72px; width: 260px; position: relative;}
+.special-cfc-title a{ background: #ff9100; font-size: 16px; width: 140px; color: #fff; margin: 14px; display: block; border-radius: 10px; text-align: center; line-height: 44px;}
+
+.special-cfc-tabs { padding: 0 24px 15px;}
+.special-cfc-tabs:after{content: "";display:block;clear:both;}
+.special-cfc-tabs li{ float:left;width: 252px;height:295px;margin:0 10px;padding:0 8px;background: #3ea7d4;border-radius:0 0 10px 10px; color: #fff;text-align: center;}
+.special-cfc-tabs li h4{ line-height: 54px; background: url(../img/cfc-circle.png) no-repeat bottom left;}
+.special-cfc-tabs li a{ display: inline-block; color: #fff; border-radius:6px; padding: 0 40px 0 20px; line-height: 30px; background: url(../img/cfc-arrow.png) no-repeat 94px 7px #00baff;}
+.special-cfc-tabs .active{ background: #ff9100; position: relative;border-radius:0;}
+.special-cfc-tabs .active:after{ content: "";display: block;position: absolute; bottom: -15px; left: -8px; width: 280px; height: 15px; background: url(../img/cfc-active-bg.png) no-repeat;}
+.special-cfc-tabs .active a{ background: url(../img/cfc-arrow.png) no-repeat 90px -16px #ffbc52;}
+.special-cfc-tabs .special-course-top,.special-cfc-tabs .special-course-bottom{ line-height: 40px; font-size: 14px;}
+.special-cfc-tabs .special-course-top{ margin:20px 0 40px; }
+.special-cfc-tabs .special-course-bottom span{ font-size: 16px; color: #b01b40;}
+.special-cfc-tabs .cfc-qj a{padding:0; background: none; text-decoration: underline; color: #00ffee;}
+.special-cfc-tabs .cfc-qj .special-course-top{padding-bottom:15px;margin-bottom:15px;border-bottom:1px dashed rgba(255,255,255,0.36);}
+
+.special-cfc-content{ border-top: 2px solid #ff9100;}
+.special-course-arrange ul{ padding: 0 0 30px;}
+.special-course-arrange ul>li{margin:0px 20px;}
+
+.special-arrange-course{ width: 100%; float: none; border-top: 0px dashed #fff; padding: 6px 0 0;}
+.special-arrange-course dt:after { content: ""; display: block; clear: both;}
+.special-arrange-course>dl { position: relative;}
+.special-arrange-course>dl>dt { border-radius:10px; padding: 0 22px; margin: 4px 0 0; background: #eeeeee; color: #505050; line-height: 58px;}
+.special-arrange-course>dl>dd {margin:0 10px; border:1px solid #3ea7d4; border-radius: 0 0 10px 10px; padding: 20px; background: #e5e6e6; color: #505050;}
+.special-arrange-course dt >div{ float: left}
+.special-arrange-course>dl.on> dt,
+.special-arrange-course>dl:hover> dt { background: #3ea7d4; color: #fff;}
+.special-arrange-course .special-arrange-icon{ display: block; position: absolute; top: 20px;  right: 20px; width: 17px; height: 17px; background: url(../img/cfc_icon.png) no-repeat top left;}
+.special-arrange-course>dl.on .special-arrange-icon,.special-arrange-course>dl:hover .special-arrange-icon{ background: url(../img/cfc_icon.png) no-repeat bottom left;}
+.special-arrange-course .btn{ background: #3ea7d4; border:1px solid #3ea7d4;}
+.special-arrange-course .btn:hover{ background: #2897c6; border:1px solid #3ea7d2897c64;}
+
+.special-arrange-title{ width: 466px;}
+.special-arrange-course-teacher,.special-arrange-user{ font-size: 0.75em;}
+.special-arrange-course-teacher{ width: 215px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+.special-arrange-user{ position: relative; padding: 0 28px 0 0;}
+
+.special-course-left{ width: 200px;}
+.special-course-left>img{ width: 200px; height:111px;}
+.special-course-left ul{ margin:30px 0 0;}
+.special-course-left li{ margin:14px 0;}
+
+.special-course-right{ width: 864px;}
+.special-course-right h4,.special-course-right p,.special-arrange-teacher h5{ color: #505050;}
+.special-course-right h4,.special-arrange-teacher h5{ font-size: 0.875em;}
+.special-course-right>div.cl{ margin:30px 0 0; position: relative;}
+.special-course-right p{ font-size: 0.75em; line-height: 24px; height: 92px; margin:0 0 30px;}
+.special-course-right a{ float: right; font-size: 0.75em; padding: 8px 0px; border-radius: 6px; width: 112px; text-align: center;}
+.special-course-right .price{ color: #b01c40; font-size: 1.5em;}
+
+.special-arrange-teacher img{ float: left; margin:0 10px 0 0; width: 74px; height: 74px;}
+.special-arrange-teacher p{ font-size: 0.75em; line-height: 20px; color: #202020;}
+
+.special-course-content-list{ /*max-height: 300px;*/ min-height: 408px; overflow: auto; /*margin:30px 0;*/}
+.special-course-content-list dt,.special-course-content-list dd{ padding:10px; line-height: 20px;}
+.special-course-content-list dt{ background: #808080; color: #fff; font-size: 0.875em;}
+.special-course-content-list dd{ background: #fff; color: #505050; font-size: 0.75em; border-bottom: 1px solid #e5e6e6;}
+.special-course-content-list dd a{ float: right; color: #b01c40; text-decoration: underline;}
+
+.special-cfc-course .cfc-course-bottom { padding: 0 0 30px;}
+.special-cfc-course .cfc-course-bottom p { width: 90px;}
+.special-cfc-tel { background: url(../img/icon-cfc-tel.png) no-repeat left center; width: 400px; color: #fff; font-size: 0.875em; padding: 14px 0 14px 60px; margin: 10px auto 0;}
+
+.special-cfc-try{ margin:40px 0;}
+.special-cfc-try dl{width:540px;height:360px;font-weight:bold;color:#fff;border-right:4px solid #ffd800;background-color:#3ea7d4;}
+.special-cfc-try dt{line-height:49px;padding-left:37px;background-color:#005e89;}
+.special-cfc-try dd{font-size:0.875em;line-height:20px;padding-left:60px;margin:10px 0;}
+.special-cfc-try a{color:#fff;}
+.special-cfc-try a.active{display:block;color:#ffd800;background:url(../img/icon_arrow_yellow_left.png) no-repeat 100% 50%;}
+.special-cfc-try .player{width:656px;height:360px;background-color:#000;}
+.special-cfc-try .player p{color:#999;font-size:0.875em;text-align:center;line-height:300px;}
+
+.special-cfc-feedback { font-size: 0.875em; background-color: #fff;}
+.special-cfc-feedback .special-tab-menu{height:42px;line-height:42px;margin:6px 1px 0 0;border-bottom:6px solid #3ea7d4;background:#d9d9d9 url(../img/cfc-tab-gray.png) no-repeat 0 0;}
+.special-cfc-feedback .special-tab-menu div{background:url(../img/cfc-tab-gray.png) no-repeat 100% -50px;}
+.special-cfc-feedback .special-tab-menu a{float:left;color:#005e89;padding-left:23px;}
+.special-cfc-feedback .special-tab-menu a span{display:block;padding-right:23px;}
+.special-cfc-feedback .special-tab-menu a b{display:block;font-weight:normal;width:250px;text-align:center;}
+.special-cfc-feedback .special-tab-menu a.active{color:#fff;background: url(../img/cfc-tab-menu.png) no-repeat 0 0;}
+.special-cfc-feedback .special-tab-menu a.active span{background: url(../img/cfc-tab-menu.png) no-repeat 100% -50px;}
+.special-cfc-feedback .special-tab-menu a.active b{background-color:#3ea7d4;}
+
+.special-cfc-feedback .special-tab-cnt-item{color:#005e89;line-height:30px;padding:35px 60px 40px 300px;background:url(../img/cfc-feedback-icon.png) no-repeat 45px 35px;}
+.special-cfc-feedback .special-tab-cnt-item .author{font-weight:bold;margin-top:25px;}
+
+.special-cfc-certify{ margin:40px 0 0;}
+.special-cfc-certify .special-cnt { padding: 30px 0 30px 35px;}
+.special-cfc-certify .fr{width:700px;padding:20px 80px 20px 30px;}
+
+.special-cfc-certify .special-certitem{padding: 0 5px 12px;margin-bottom:10px;border-bottom:1px dashed #cacaca;}
+.special-cfc-certify .special-certitem h4{font-weight:bold;color:#3ea7d4;margin:-3px 0 15px;}
+.special-cfc-certify .special-certitem p{font-size:0.75em;line-height:16px;color:#707070;margin-bottom:25px;}
+
+.special-cfc-certify .special-contact{font-weight:bold;color:#3ea7d4;}
+
+/***************** 常见问题 ****************/
+.special-cfc-question{ margin:40px 0;}
+.special-cfc-question .special-tab-menu{width:320px;background-color:#005f87;border-right:4px solid #ff9100;}
+.special-cfc-question .special-tab-menu a{display:block;color:#fff;line-height:43px;font-size:0.875em;font-weight:bold;padding-left:25px;border-bottom:1px solid #3681a0;}
+.special-cfc-question .special-tab-menu a:last-child{border:none;}
+.special-cfc-question .special-tab-menu a.active{border-color:#ff9100;background-color:#ff9100;}
+.special-cfc-question .special-tab-cnt{width:820px;padding-left:30px;font-size:0.75em;line-height:14px;color:#000;}
+.special-cfc-question .special-tab-cnt{padding-top:30px; line-height: 20px;}
+.special-cfc-question .special-tab-cnt p{margin-bottom:12px;}
+.special-cfc-question .special-tab-cnt dl{margin-top:-30px;}
+.special-cfc-question .special-tab-cnt dt{font-weight:bold;color:#005f87;line-height:43px; font-size: 14px;}
+
+/*continue*/
+.special-cfc-continue{ margin: 0 0 40px;}
+.special-cfc-continue div{background: #005f87;padding: 30px 0; color: #fff; font-size: 18px;line-height: 50px;text-align: center;}
+.special-cfc-continue a{ color: #fff; padding: 12px 44px; border-radius: 10px; background: #ff9100;}
+
+/*table*/
+table.gridtable { font-size:0.875em; border-width: 1px; border-color: #bebebe; border-collapse: collapse; width: 100%}
+table.gridtable th { border-width: 1px; padding: 12px 10px; border-style: solid; background-color: #e1e1e1; border-color: #d2d2d2;}
+table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid; border-color: #e5e5e5; background-color: #ffffff; font-size: 0.875em;}
+
+/*finance互联网金融*/
+.special-finance-banner { background: url(../img/special_bg.png) no-repeat top center #d64166;}
+.special-finance-info{height:380px;background:url(../img/ifc-head.png) no-repeat 51px 130px;}
+.special-finance-info h1{text-indent:-9999px;overflow:hidden;margin-bottom:150px;height:145px;background:url(../img/ifc-title.png) no-repeat center bottom;}
+.special-finance-info p{font-size:18px;color:#fee202;line-height:45px;margin:16px 60px 16px 440px}
+.special-finance-info b{ margin: 0 0 0 10px;}
+.special-finance-info i{font-style:normal;margin:0 10px;}
+.special-finance-info a{text-align:center;color:#fff;font-weight:bold;line-height:41px;width:126px;height:41px; background:url(../img/ifc-btnbg.png) no-repeat;}
+
+.special-content h3{ font-size: 1.125em; color: #303030; border-bottom: 1px solid #dfa4b3; background: #fff; line-height: 42px; padding: 0 20px;}
+.special-content .container{ margin: 0 auto 20px;}
+.special-finance-desc{padding:10px 27px 15px;}
+.special-finance-desc p{line-height:19px;margin:15px 0;font-size:0.875em;}
+
+.special-finance-student{padding:20px 0 20px 24px;}
+.special-finance-student p{float:left;width: 278px;height:87px;line-height:87px;text-align:center;color:#fff;margin-right: 16px;background-color:#b01c40;}
+
+.special-finance-special{padding:18px 0;}
+.special-finance-special dt,
+.special-finance-special dd{float:left;margin:8px 0;line-height:34px;}
+.special-finance-special dt{clear:both;width:86px;color:#fff;font-size:20px;text-align:center;margin-right:8px;background-color:#b01c40;border-radius:0 50px 50px 0;}
+.special-finance-special dd{font-size:0.75em;width:895px;}
+.special-finance-special .special-finance-multi{line-height:17px;}
+
+.special-finance-teacher{padding:20px 0 30px 30px;margin-right:-35px;}
+.special-finance-teacher li{float:left;width:338px;margin-right:62px;}
+.special-finance-teacher li div{height:270px;font-size:0.875em;line-height:30px;background-color:#dedede;}
+.special-finance-teacher li p{padding:20px 9px 0;}
+
+.special-finance-title-red{text-align: center; background: #b01c40; color: #fff; line-height: 40px;}
+
+.special-finance-courses{width:557px;}
+.special-finance-courses td{ text-align: center;}
+
+.special-finance-tabs li{ float: none}
+.special-finance-tabs{border-bottom: 0px;}
+.special-finance-tabs a .gridtable td{ border-bottom: 0px !important; background: none}
+.special-finance-tabs li a { background: url(../img/ifc-arrow.png) no-repeat 516px 20px #fff; display: block;-webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;}
+.special-finance-tabs li a:hover,.special-finance-tabs .current a{ background: url(../img/ifc-arrow-white.png) no-repeat 516px 20px #b01c40;}
+.special-finance-tabs li a:hover td,.special-finance-tabs .current td{ color: #fff}
+.special-finance-tabs th,.special-finance-tabs td{padding: 12px 10px;line-height: 17px;}
+.special-finance-tabs td:last-child{ text-align: left;}
+
+.special-finance-cases{ height:627px; background: #fff; border-bottom: 1px solid #e5e5e5; overflow: hidden;}
+.special-finance-cases td a{ display: block; margin: 0px auto; width: 202px; height:28px; line-height: 28px; text-align: center; color: #fff;
+ background: #b01c40; border:2px solid #b01c40; border-radius: 10px;}
+.special-finance-cases .special-finance-jump{ background: #fff !important; color: #b01c40 !important;}
+
+.special-finance-cases div td{ padding: 51px 6px; line-height: 20px; text-align: center}
+.special-finance-cases #tab2 td{ padding: 38px 6px;}
+.special-finance-cases #tab3 td{ padding:52px 6px;}
+.special-finance-cases #tab4 td,.special-finance-cases #tab5 td{padding: 69px 6px; line-height: 27px;}
+.special-finance-cases #tab6 td,.special-finance-cases #tab8 td{ padding:121px 6px;}
+.special-finance-cases #tab7 td{ padding: 77px 6px;}
+.special-finance-cases tr:last-child td{ padding:16px 6px !important;}
