@@ -76,8 +76,22 @@ module.exports = class CoursesAction extends BaseAction {
     }
 
     static LOAD_COURSE_EXAM = 'course_exam';
-    loadCourseExamination(examId) {
+    loadExamination(examId) {
         return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_EXAM, this.api.examination(examId), {examId} );
+    }
+
+    static LOAD_COURSE_SHEET = 'course_sheet';
+    loadCourseSheet(courseId) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_SHEET, this.api.courseSheet(courseId), {courseId} );
+    }
+    static LOAD_SHEETS = 'course_sheets';
+    loadSheets(params) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_SHEETS, this.api.sheets(params), params );
+    }
+
+    static SUBMIT_SHEET = 'submit_sheet';
+    submitSheet(model) {
+        return BaseAction.dispatchRequest( CoursesAction.SUBMIT_SHEET, this.api.submitSheet(model) );
     }
 
     static LOAD_LECTURER = 'lecturer';

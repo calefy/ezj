@@ -15,15 +15,19 @@ class Course extends Component {
     static fetchData({dispatch, params={}, location={}, apiClient}) {
         const courseAction = new CoursesAction({ apiClient });
         return Promise.all([
-            dispatch( courseAction.loadCourseDetail(params.courseId) ) // 课程详情,包含讲师
-                .then(res => {
-                    // 如果当前要显示测验，并且课程有测验，则加载测验信息
-                    let examId = res.data && res.data.course_examination_id;
-                    if (location.hash === '#exam' && examId && examId !== '0') {
-                        return dispatch( courseAction.loadCourseExamination(res.data.course_examination_id) );
-                    }
-                    return res;
-                }),
+            dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
+                // node服务器端获取不到url中的hash，因此无法用在这里识别exam; 先暴力获取exam
+                //.then(res => {
+                //    // 如果当前要显示测验，并且课程有测验，则加载测验信息
+                //    let examId = res.data && res.data.course_examination_id;
+                //    if (/*location.hash === '#exam' &&*/ examId && examId !== '0') {
+                //        return [
+                //            dispatch( courseAction.loadExamination(res.data.course_examination_id) ),
+                //            dispatch( courseAction.loadCourseSheet(res.data.id) ),
+                //        ];
+                //    }
+                //    return res;
+                //}),
             dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
             dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
             dispatch( courseAction.loadCourseStudents(params.courseId) ), // 课程学员
@@ -31,11 +35,17 @@ class Course extends Component {
     }
 
     componentDidMount() {
-        const { course, course_private, params } = this.props;
+        const { course, course_sheet, params } = this.props;
+        // 因课程sheet不会在其他页面出现，因此用该变量与课程标识是否该课程的数据完整
+        // TODO: 判断加载数据应该逐条判断，以防止其他页面部分数据替换问题
         if (course.isFetching ||
                 (course.data && course.data.id != params.courseId)) {
             Course.fetchData(this.props);
+            return;
         }
+
+        // 判断是否需要展示测验
+        this.loadExamData(this.props);
     }
     componentWillReceiveProps(nextProps) {
         // courseID变化，所有相关数据重新加载
@@ -43,17 +53,27 @@ class Course extends Component {
             Course.fetchData(nextProps);
             return;
         }
+
+        this.loadExamData(nextProps);
+    }
+
+    loadExamData = (props) => {
         // 切换到测验，如果数据不是当前课程的，需要重新加载测验数据
-        if (nextProps.location.hash === '#exam') {
-            let exam = nextProps.examination;
-            let eid = nextProps.course && nextProps.course.data && nextProps.course.data.course_examination_id;
+        if (props.location.hash === '#exam') {
+            let exam = props.examination;
+            let sheet = props.course_sheet;
+            let eid = props.course.data && props.course.data.course_examination_id;
             eid = eid && eid !== '0' ? eid : '';
+
+            const courseAction = new CoursesAction();
             if (!exam._req || (eid && exam._req.examId != eid)) {
-                const courseAction = new CoursesAction();
-                nextProps.dispatch( courseAction.loadCourseExamination(eid) );
+                props.dispatch( courseAction.loadExamination(eid) );
+            }
+            if (!sheet._req || sheet._req.courseId != props.params.courseId) {
+                props.dispatch( courseAction.loadCourseSheet(props.params.courseId) );
             }
         }
-    }
+    };
 
     // 收藏
     onCollect = e => {
@@ -100,6 +120,11 @@ class Course extends Component {
         }
     };
 
+    handleExamSubmit = model => {
+        const courseAction = new CoursesAction();
+        this.props.dispatch(courseAction.submitSheet(model));
+    };
+
     render() {
         const { menus } = Course;
         const locationPath = this.props.location.pathname;
@@ -112,7 +137,7 @@ class Course extends Component {
         let hasExam = course.course_examination_id;
         hasExam = hasExam && hasExam !== '0';
         let hash = this.props.location.hash || '#intro'; // 如果没有课程测验，则仅显示intro
-        if (hash === '#exam' && !hasExam) {
+        if (hash === '#exam' && (!hasExam || !priv.is_purchased)) {
             hash = '#intro';
         }
 
@@ -258,7 +283,11 @@ class Course extends Component {
                                     </div>
                                     : hash === '#exam' ?
                                         <CourseExam
+                                            course = {course}
                                             examination = {this.props.examination.data || {}}
+                                            sheet = {this.props.course_sheet.data || {}}
+                                            action = {this.props.action}
+                                            onSubmit = {this.handleExamSubmit}
                                         />
                                         : null
                             }
@@ -317,6 +346,7 @@ module.exports = connect( state => ({
     action: state.action,
     course: state.course,
     course_private: state.course_private,
+    course_sheet: state.course_sheet,
     chapters: state.chapters,
     students: state.students,
     examination: state.examination,

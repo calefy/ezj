@@ -64,6 +64,12 @@ export function students(state, action) {
 export function examination(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_EXAM, state, action);
 }
+export function sheets(state, action) {
+    return reducerRequest(CoursesAction.LOAD_SHEETS, state, action);
+}
+export function course_sheet(state, action) {
+    return reducerRequest(CoursesAction.LOAD_COURSE_SHEET, state, action);
+}
 
 export function courses_mine(state, action) {
     return reducerRequest(CoursesAction.LOAD_MY_COURSES, state, action);
