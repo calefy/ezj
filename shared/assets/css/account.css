@@ -17,8 +17,8 @@
 
 /*修改密码*/
 .account-pwd { width: 500px; margin: 50px auto;}
-.account-pwd .formsy-list{ line-height: 48px; margin: 0 0 12px;}
-.account-pwd .formsy-list label{ display: inline-block; width: 70px; text-align: right; float: left; font-weight: normal; margin-right: 10px;}
+.account-pwd .formsy-list{ margin: 0 0 12px;}
+.account-pwd .formsy-list label{ line-height: 44px; display: inline-block; width: 70px; text-align: right; float: left; font-weight: normal; margin-right: 10px;}
 .account-pwd .formsy-input{ display: inline-block; float: left; margin:0;}
 .account-pwd .formsy-input{ width: 254px;}
 .account-pwd .validation-error{position:static;padding-left:15px;}
@@ -53,7 +53,7 @@
 .change-account{ margin: 26px 0 0;}
 
 .change-account-right{ width:880px; padding:28px 34px; font-size: 0.875em;}
-.change-account-right .formsy-input{ line-height: 40px; margin: 0;}
+.change-account-right .formsy-input{ line-height: 36px; margin: 0;}
 .change-account-right .text-success,.change-account-right .text-error{ margin-left: 10px;}
 .change-account-right dl{ margin: 0 0 20px;}
 .change-account-right dt,.change-account-right dd{ float: left;}

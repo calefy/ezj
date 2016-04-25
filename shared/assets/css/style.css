@@ -144,9 +144,10 @@ button{ cursor: pointer; outline: none; border: 0;}
 .pop-text .formsy-list.cl a,.text-error,.pop-other .fl button{ color: #b01c40; background: none}
 .pop-text .formsy-list.cl dd{ width: auto; line-height: 12px; border: 0; box-shadow: 0 0 0 #fff; margin:0;padding:0;}
 
-.formsy-list input[type="text"],input[type="password"]{ outline: none; height:36px; line-height: 36px; width:100%; border:0;font-size: 0.875em; margin: 0;}
+.formsy-list input[type="text"],.formsy-input input[type="text"],input[type="password"]{ outline: none; height:36px; line-height: 36px; width:100%; border:0;font-size: 0.875em; margin: 0;}
 .formsy-list input[type="checkbox"]{ margin: 0 4px 0 0;}
 .formsy-list .iconfont{ font-size: 1.125em; margin:0 6px 0 0;}
+
 
 .pop-btn button{ display:block; width:100%;line-height: 44px;
    text-align: center; font-size:1.125em;}
