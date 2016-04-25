@@ -348,7 +348,7 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 
 
 /*cfc持续教育*/
-.special-continue .special-banner{ background: #5fbcf5; height:308px; padding:35px 0 0;}
+.special-continue .special-banner, .special-continue-test .special-banner{ background: #5fbcf5; height:308px; padding:35px 0 0;}
 
 .special-summary, .special-courses, .special-test{ padding:54px 0;}
 .special-summary, .special-test{ background: #fff}
