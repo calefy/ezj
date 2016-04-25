@@ -70,6 +70,19 @@ class User extends Base {
     }
 
     /**
+     * 修改手机、邮箱验证码发送
+     */
+    sendCodeForContact(contact) {
+        return this.apiClient.post('sso/send_change_contact_code', {contact});
+    }
+    /**
+     * 修改手机、邮箱
+     */
+    updateContact(params = { password, contact, code }) {
+        return this.apiClient.post('sso/update_user_contact', params);
+    }
+
+    /**
      * 重置密码
      */
     resetPwd(contact,code,new_password) {
