@@ -20,8 +20,3 @@
 .pay-method div a { color: #b01c40; text-decoration: underline; margin: 0 0 0 20px;}
 .pay-valid-date { display: inline-block; margin-left: 22px; color: #3f3b3a; font-size: 18px;}
 
-.pay-pop { width: 538px; height: 270px; margin: -135px 0 0 -269px; text-align: center; overflow: hidden}
-.pay-pop h4{ background:#eff0ef; text-align:center;padding:14px 20px; font-size: 16px;}
-.pay-pop .buy-info{ font-size:14px; height: 174px; line-height: 174px;}
-.pay-pop .buy-btn{ padding:10px; background: #eff0ef;}
-.pay-pop .buy-btn a{ margin: 0 10px;}

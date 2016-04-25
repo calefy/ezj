@@ -182,12 +182,12 @@ let Pay = React.createClass({
                 </div>
                 </Formsy.Form>
                 <form action="" className="hide" ref="payForm" method="GET" target="_blank"></form>
-                <div className="pay-pop pop">
+                <div className="popover pop">
                     <h4>确认支付结果</h4>
-                    <div className="buy-info">
+                    <div className="popover-info">
                         请于24小时内完成支付，逾期系统将自动取消订单。
                     </div>
-                    <div className="buy-btn">
+                    <div className="popover-btn">
                         <Link to="" className="btn">支付完成</Link>
                         <Link to="" className="btn disabled">支付遇到问题</Link>
                     </div>
