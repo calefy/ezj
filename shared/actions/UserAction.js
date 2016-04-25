@@ -59,4 +59,15 @@ module.exports = class UserAction extends BaseAction {
         return BaseAction.dispatchRequest( UserAction.LOAD_STUDENT, this.api.student(uid, params) );
     }
 
+    // 修改手机或邮箱
+    static SEND_CODE_FOR_CONTACT = 'send_code_for_contact';
+    sendCodeForContact(contact) {
+        return BaseAction.dispatchRequest( UserAction.SEND_CODE_FOR_CONTACT, this.api.sendCodeForContact(contact) );
+    }
+    // 更新联系方式
+    static UPDATE_CONTACT = 'update_contact';
+    updateContact(params = { password, contact, code }) {
+        return BaseAction.dispatchRequest( UserAction.UPDATE_CONTACT, this.api.updateContact(params) );
+    }
+
 }
