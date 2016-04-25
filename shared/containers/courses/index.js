@@ -121,6 +121,10 @@ class Course extends Component {
         }
     };
 
+    handleLoadSheetAnswer = sheetId => {
+        const courseAction = new CoursesAction();
+        this.props.dispatch(courseAction.loadSheet(sheetId));
+    };
     handleExamSubmit = model => {
         const courseAction = new CoursesAction();
         this.props.dispatch(courseAction.submitSheet(model));
@@ -288,6 +292,7 @@ class Course extends Component {
                                             examination = {this.props.examination.data || {}}
                                             sheet = {this.props.course_sheet.data || {}}
                                             action = {this.props.action}
+                                            onLoadSheet = {this.handleLoadSheetAnswer}
                                             onSubmit = {this.handleExamSubmit}
                                         />
                                         : null
