@@ -144,9 +144,10 @@ button{ cursor: pointer; outline: none; border: 0;}
 .pop-text .formsy-list.cl a,.text-error,.pop-other .fl button{ color: #b01c40; background: none}
 .pop-text .formsy-list.cl dd{ width: auto; line-height: 12px; border: 0; box-shadow: 0 0 0 #fff; margin:0;padding:0;}
 
-.formsy-list input[type="text"],input[type="password"]{ outline: none; height:36px; line-height: 36px; width:100%; border:0;font-size: 0.875em; margin: 0;}
+.formsy-list input[type="text"],.formsy-input input[type="text"],input[type="password"]{ outline: none; height:36px; line-height: 36px; width:100%; border:0;font-size: 0.875em; margin: 0;}
 .formsy-list input[type="checkbox"]{ margin: 0 4px 0 0;}
 .formsy-list .iconfont{ font-size: 1.125em; margin:0 6px 0 0;}
+
 
 .pop-btn button{ display:block; width:100%;line-height: 44px;
    text-align: center; font-size:1.125em;}
@@ -280,3 +281,20 @@ button{ cursor: pointer; outline: none; border: 0;}
 .course-collect,.course-collected{ background: none; font-size: 0.75em; color: #818181; margin: 9px 0 0 4px !important;}
 .course-collect i,.course-collected i{ margin:0 6px 0 0; font-size: 14px;}
 .course-collected i{ color: #af1b40;}
+
+
+.popover { width: 538px; height: 270px; margin: -135px 0 0 -269px; text-align: center; overflow: hidden}
+.popover h4{ background:#eff0ef; text-align:center;padding:14px 20px; font-size: 16px;}
+.popover .popover-info{ font-size:14px; height: 174px; line-height: 174px;}
+.popover .popover-btn{ padding:10px; background: #eff0ef;}
+.popover .popover-btn a{ margin: 0 10px; border-radius:30px; padding: 8px 40px;}
+
+.agreement-pop{ width: 634px; height: 540px; background: #fff; border-radius: 5px; margin: -265px 0 0 -317px; z-index: 999;}
+.agreement-pop h4{ font-size: 1.125em; text-align: center; padding: 20px 20px;}
+.agreement-pop >div { height: 456px; overflow: auto; margin: 10px 0 20px 20px;}
+.agreement-pop p{font-size:0.875em;line-height:2;}
+.agreement-pop h5{margin:10px 0 6px;}
+.agreement-pop p b{color: #000;}
+
+.reg-pop p{ text-indent: 2em;}
+.reg-pop em{ margin: 16px 0; display: block; font-size: 0.875em;}
