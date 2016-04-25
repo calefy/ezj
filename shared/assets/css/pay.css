@@ -12,10 +12,16 @@
 .pay-method dd { height: 48px; border: 1px solid #e5e5e5; border-radius: 4px; line-height: 48px; margin: 0 70px 10px 0; display: inline-block;}
 .pay-method dd.on{ background: url(../img/choosed.png) no-repeat right top; border: 1px solid #b01c40;}
 .pay-method dt { margin: 0 0 14px; color: #3f3b3a; font-size: 1.125em;}
-.pay-alipay a{ padding: 0px; width: 180px; background: url(../img/icon-alipay.png) no-repeat center center; display: block;}
-.pay-unipay a{ padding: 0 0 0 100px; width: 80px; background: url(../img/icon-unipay.png) no-repeat 26px center; display: block;}
-.pay-method dd.pay-alipay.on a { background: url(../img/icon-pay-pic1-red.png) no-repeat center center;}
+.pay-alipay em{ padding: 0px; width: 180px; background: url(../img/icon-alipay.png) no-repeat center center; display: block;}
+.pay-unipay em{ padding: 0 0 0 100px; width: 80px; background: url(../img/icon-unipay.png) no-repeat 26px center; display: block;}
+.pay-method dd.pay-alipay.on em { background: url(../img/icon-pay-pic1-red.png) no-repeat center center;}
 
 .pay-method div { padding: 20px 0 0; border-top: 1px solid #dcdcdc; margin:10px 0 ; font-size: 0.875em;}
 .pay-method div a { color: #b01c40; text-decoration: underline; margin: 0 0 0 20px;}
 .pay-valid-date { display: inline-block; margin-left: 22px; color: #3f3b3a; font-size: 18px;}
+
+.pay-pop { width: 538px; height: 270px; margin: -135px 0 0 -269px; text-align: center; overflow: hidden}
+.pay-pop h4{ background:#eff0ef; text-align:center;padding:14px 20px; font-size: 16px;}
+.pay-pop .buy-info{ font-size:14px; height: 174px; line-height: 174px;}
+.pay-pop .buy-btn{ padding:10px; background: #eff0ef;}
+.pay-pop .buy-btn a{ margin: 0 10px;}
