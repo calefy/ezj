@@ -54,10 +54,14 @@ class Order extends Component {
                             <tbody>
                                 {orders.length ?
                                     orders.map((item, index) => {
+                                        let arr = [];
+                                        item.item_list.split(',').forEach(one => {
+                                            if (one) arr.push(one.replace(/\d+:/, ''));
+                                        });
                                         return (
                                             <tr>
                                                 <td>{item.id}</td>
-                                                <td>{item.item_list}</td>
+                                                <td>{arr.join(', ')}</td>
                                                 <td>{item.total_amount}</td>
                                                 <td>{item.created_time}</td>
                                                 <td>{orderStatus[item.order_status]}</td>

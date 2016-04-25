@@ -25,7 +25,7 @@ let FormsyText = React.createClass({
         return (
             <div className={`formsy-list cl ${className}`}>
                 <label htmlFor={this.props.name}>{this.props.title}</label>
-                <div className="formsy-input">
+                <div className={`formsy-input ${this.showError() ? 'input-error' : ''}`}>
                     <input
                         type={this.props.type || 'text'}
                         name={this.props.name}

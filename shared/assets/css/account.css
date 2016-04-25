@@ -53,21 +53,20 @@
 .change-account{ margin: 26px 0 0;}
 
 .change-account-right{ width:880px; padding:28px 34px; font-size: 0.875em;}
-.change-account-right .formsy-input{ line-height: 36px; margin: 0;}
-.change-account-right .text-success,.change-account-right .text-error{ margin-left: 10px;}
-.change-account-right dl{ margin: 0 0 20px;}
-.change-account-right dt,.change-account-right dd{ float: left;}
-.change-account-right dt{ width: 100px;}
-.change-account-right .btn-send-code{ padding: 8px 6px; font-size: 12px; border-radius: 2px;background:red; /* 一些不支持背景渐变的浏览器 */  
-    background:-moz-linear-gradient(top, #d0275a, #a81939);  
-    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#d0275a), to(#a81939));  
-    background:-o-linear-gradient(top, #d0275a, #a81939);}
+.change-account-right .formsy-list{ margin: 0 0 20px;}
+.change-account-right .formsy-input{ line-height: 40px; margin: 0;}
+.change-account-right .formsy-input,.change-account-right label{ float: left;}
+.change-account-right .validation-error{float:left;padding-left: 15px;position:static;}
+.change-account-right label{ width: 100px;}
+.change-account-right .indent{margin-left:100px;}
+.change-account-right .btn-send-code{ padding: 4px 6px; font-size: 12px;}
+
 
 .account-user,.account-email,.account-mobile{ line-height: 40px;}
 .account-user .radio-inline{ margin: 0 10px 0 0;}
 .account-user input[type="radio"]{ margin: 0 4px 0 0;}
 .account-user .account-birth-select,.account-user .account-address-select{ float: left; margin: 0 10px 0 0;}
-.account-user .btn{ padding: 10px 36px;}
+.account-user .btn{ padding: 10px 36px;margin-left:100px;}
 
 
 

@@ -15,13 +15,19 @@ var formsySubmitButtonMixin = {
     },
 
     enableSubmitButton: function() {
-        this.setState(Object.assign({}, this.state, { _canSubmit: true, _submitLoading: false }));
+        let r = Object.assign({}, this.state, { _canSubmit: true, _submitLoading: false });
+        this.setState(r);
+        return r;
     },
     disableSubmitButton: function() {
-        this.setState(Object.assign({}, this.state, { _canSubmit: false, _submitLoading: false }));
+        let r = Object.assign({}, this.state, { _canSubmit: false, _submitLoading: false });
+        this.setState(r);
+        return r;
     },
     loadingSubmitButton: function() {
-        this.setState(Object.assign({}, this.state, { _canSubmit: false, _submitLoading: true }));
+        let r = Object.assign({}, this.state, { _canSubmit: false, _submitLoading: true });
+        this.setState(r);
+        return r;
     }
 };
 
