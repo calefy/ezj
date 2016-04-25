@@ -80,7 +80,7 @@ let TopicIndex = React.createClass({
 				        </div>
 				    </div>
 				    <div className="container cl">
-				        <h3 className="bg-white">超级课程表</h3>
+				        <h3>超级课程表</h3>
 				        <div className="special-finance-courses fl">
 				            <table className="gridtable">
 				                <thead>
@@ -242,8 +242,8 @@ let TopicIndex = React.createClass({
 				                                <td>民生银行直销银行高级专家   翟南宾</td>
 				                            </tr>
 				                            <tr>
-				                                <td><a href="#join" title="">报名现场面授班</a></td>
-				                                <td><a href="/node/9593.shtml" target="_blank" title="" className="special-finance-jump">购买视频点播班</a></td>
+				                                <td><Link to="" title="">报名现场面授班</Link></td>
+				                                <td><Link to="" target="_blank" title="" className="special-finance-jump">购买视频点播班</Link></td>
 				                            </tr>
 				                        </tbody>
 				                    </table>
@@ -278,8 +278,8 @@ let TopicIndex = React.createClass({
 				                                <td>银监会/央行/网贷协会等监管机构领导</td>
 				                            </tr>
 				                            <tr>
-				                                <td><a href="#join" title="">报名现场面授班</a></td>
-				                                <td><a href="/node/9705.shtml" target="_blank" title="" className="special-finance-jump">购买视频点播班</a></td>
+				                                <td><Link to="" title="">报名现场面授班</Link></td>
+				                                <td><Link to="" target="_blank" title="" className="special-finance-jump">购买视频点播班</Link></td>
 				                            </tr>
 				                        </tbody>
 				                    </table>
@@ -310,8 +310,8 @@ let TopicIndex = React.createClass({
 				                                <td>百融金服集团CEO 张韶峰</td>
 				                            </tr>
 				                            <tr>
-				                                <td><a href="#join" title="">报名现场面授班</a></td>
-				                                <td><a href="/node/9706.shtml" target="_blank" title="" className="special-finance-jump">购买视频点播班</a></td>
+				                                <td><Link to="" title="">报名现场面授班</Link></td>
+				                                <td><Link to="" target="_blank" title="" className="special-finance-jump">购买视频点播班</Link></td>
 				                            </tr>
 				                        </tbody>
 				                    </table>
@@ -338,8 +338,8 @@ let TopicIndex = React.createClass({
 				                                <td>知名银行及券商高管</td>
 				                            </tr>
 				                            <tr>
-				                                <td><a href="#join" title="">报名现场面授班</a></td>
-				                                <td><a href="/node/9707.shtml" target="_blank" title="" className="special-finance-jump">购买视频点播班</a></td>
+				                                <td><Link to="" title="">报名现场面授班</Link></td>
+				                                <td><Link to="" target="_blank" title="" className="special-finance-jump">购买视频点播班</Link></td>
 				                            </tr>
 				                        </tbody>
 				                    </table>
@@ -366,8 +366,8 @@ let TopicIndex = React.createClass({
 				                                <td>知名互联网保险公司平台高管</td>
 				                            </tr>
 				                            <tr>
-				                                <td><a href="#join" title="">报名现场面授班</a></td>
-				                                <td><a href="/node/9708.shtml" target="_blank" title="" className="special-finance-jump">购买视频点播班</a></td>
+				                                <td><Link to="" title="">报名现场面授班</Link></td>
+				                                <td><Link to="" target="_blank" title="" className="special-finance-jump">购买视频点播班</Link></td>
 				                            </tr>
 				                        </tbody>
 				                    </table>
@@ -389,8 +389,8 @@ let TopicIndex = React.createClass({
 				                                <td>金融产品如何进行社会化媒体营销</td>
 				                            </tr>
 				                            <tr>
-				                                <td><a href="#join" title="">报名现场面授班</a></td>
-				                                <td><a href="/node/9710.shtml" target="_blank" title="" className="special-finance-jump">购买视频点播班</a></td>
+				                                <td><Link to="" title="">报名现场面授班</Link></td>
+				                                <td><Link to="" target="_blank" title="" className="special-finance-jump">购买视频点播班</Link></td>
 				                            </tr>
 				                        </tbody>
 				                    </table>
@@ -417,8 +417,8 @@ let TopicIndex = React.createClass({
 				                                <td>李林 火币网创始人兼CEO</td>
 				                            </tr>
 				                            <tr>
-				                                <td><a href="#join" title="">报名现场面授班</a></td>
-				                                <td><a href="/node/9712.shtml" target="_blank" title="" className="special-finance-jump">购买视频点播班</a></td>
+				                                <td><Link to="" title="">报名现场面授班</Link></td>
+				                                <td><Link to="" target="_blank" title="" className="special-finance-jump">购买视频点播班</Link></td>
 				                            </tr>
 				                        </tbody>
 				                    </table>
@@ -441,8 +441,8 @@ let TopicIndex = React.createClass({
 				                                <td>黄国平 社科院研究员</td>
 				                            </tr>
 				                            <tr>
-				                                <td><a href="#join" title="">报名现场面授班</a></td>
-				                                <td><a href="/node/9711.shtml" target="_blank" title="" className="special-finance-jump">购买视频点播班</a></td>
+				                                <td><Link to="" title="">报名现场面授班</Link></td>
+				                                <td><Link to="" target="_blank" title="" className="special-finance-jump">购买视频点播班</Link></td>
 				                            </tr>
 				                        </tbody>
 				                    </table>
@@ -450,159 +450,138 @@ let TopicIndex = React.createClass({
 				            </div>
 				        </div>
 				    </div>
-                    {
-					// <div className="container">
-				 //        <div className="special-finance-course-certificate bg-white">
-				 //            <h3>我要报名</h3>
-				 //            <div className="special-finance-phone-sign">
-				 //                <h4 className="type-phone-title">方式一：手机报名<small>如有疑问，请咨询课程负责人刘老师，电话或微信：</small>13811997720</h4>
-				 //                <div className="erweima">
-				 //                    <div className="erwei-phone">
-				 //                        <p>手机扫描二维码，即可报名并支付课程</p>
-				 //                        <img src="/assets/images/ifc-rcode.png">
-				 //                    </div>
-				 //                    <div className="saoma ifc-saoma">
-				 //                        <h5>拿出手机，通过微信完成购买</h5>
-				 //                        <p>1、打开微信点击“发现” &gt; “扫一扫”</p>
-				 //                        <p>2、对准左侧二维码扫码</p>
-				 //                        <p>3、点击底部“我想要”</p>
-				 //                        <p>4、通过微信支付就能购买成功</p>
-				 //                    </div>
-				 //                </div>
-				 //            </div>
-				 //            <div className="web-sign">
-				 //                <h4 className="type-phone-title">方式二：官网报名</h4>
-				 //                <div className="websign">
-				 //                    <div className=" sign-info">
-				 //                        <form className="step-1">
-				 //                            <div className="info-title">
-				 //                                <h4 className="step-title">填写信息</h4>
-				 //                                <span>（为确保报名成功，请您输入正确的个人信息）</span>
-				 //                            </div>
-				 //                            <div className="input-box">
-				 //                                <dl>
-				 //                                    <dt>姓名：</dt>
-				 //                                    <dd><input type="text" className="sign-name" name="sign-name" placeholder="请输入您的姓名"></dd>
-				 //                                    <dd className="warn-msg name-null" style="display: none;">请输入正确的姓名</dd>
-				 //                                </dl>
-				 //                                <dl>
-				 //                                    <dt>邮箱：</dt>
-				 //                                    <dd><input type="text" className="sign-email" name="sign-email" placeholder="请输入您的常用邮箱"></dd>
-				 //                                    <dd className="right-msg email-already" style="display: none;">紫荆教育已注册用户</dd>
-				 //                                    <dd className="right-msg email-not-already" style="display: none;">报名后可凭邮箱登录紫荆教育</dd>
-				 //                                    <dd className="warn-msg email-not-right" style="display: none;">请输入正确邮箱</dd>
-				 //                                </dl>
-				 //                                <dl>
-				 //                                    <dt>手机：</dt>
-				 //                                    <dd><input type="text" className="sign-phone" name="sign-phone" placeholder="请输入您的联系方式"></dd>
-				 //                                    <dd className="warn-msg phone-not-right" style="display: none;">请输入正确的手机</dd>
-				 //                                </dl>
-				 //                                <dl>
-				 //                                    <dt>发票</dt>
-				 //                                    <dd><input type="checkbox" className="fapiao-check"></dd>
-				 //                                </dl>
-				 //                                <dl className="fapiao-box">
-				 //                                    <input type="text" className="fapiao" name="fapiao" placeholder="请输入发票抬头">
-				 //                                    <dd className="warn-msg fapiao-not-right" style="display: none;">请输入发票抬头</dd>
-				 //                                </dl>
-				 //                                <div className="buy-type clearfix">
-				 //                                    <dl className="fl">
-				 //                                        <dt>是我本人购买</dt>
-				 //                                        <dd><input type="radio" id="mine-radio" checked="" name="buy-type" value="0"></dd>
-				 //                                    </dl>
-				 //                                    <dl className="fl">
-				 //                                        <dt>替其他人购买</dt>
-				 //                                        <dd><input type="radio" id="other-radio" name="buy-type" value="1"></dd>
-				 //                                    </dl>
-				 //                                </div>
-				 //                            </div>
-				 //                        </form>
-				 //                    </div>
-				 //                    <div className="train-place ifc-class">
-				 //                        <div className="step-2">
-				 //                            <h4 className="step-title">选择课程类型</h4>
-				 //                        </div>
-				 //                        <div className="input-box">
-				 //                            <p style="margin-top:0px">请选择您要参与的现场面授班，视频点播班请在上方超级课程表中购买</p>
-				 //                            <div className="ifc-selcourse clearfix">
-				 //                                <!-- <a href="#" className="ifc-menu-offline on" data-id="" data-price="">购买现场面授班   &yen;／1天</a>
-				 //                                <a href="#" className="ifc-menu-online" data-id="9594" data-price="580">购买视频点播班  &yen;580／1天</a> -->
-				 //                                <a href="#" className="ifc-menu-offline on" data-id="9904" data-price="2580">第六讲     2016-04-15<br>地点：五道口金融学院</a>
-				 //                                <a href="#" className="ifc-menu-online" data-id="9905" data-price="2580">第七讲     2016-04-16<br>地点：五道口金融学院</a>
-				 //                                <a href="#" className="ifc-menu-online" data-id="9906" data-price="2580">第八讲     2016-04-17<br>地点：五道口金融学院</a>
-				 //                            </div>
-				 //                            <dl>
-				 //                                <dt>课程信息：</dt>
-				 //                                <dd>
-				 //                                    <div className="ifc-gift">
-				 //                                        <div className="ifc-offline">
-				 //                                            <h4 className="ifc-title-red">学员福利   <span>价格：¥ 2580</span></h4>
-				 //                                            <p>1) 可参加线下面授，第一时间学到报告精髓</p>
-				 //                                            <p>2) 与讲师现场互动、个案现场咨询服务</p>
-				 //                                            <p>3) 可参加视频点播学习（有效期180天）</p>
-				 //                                            <p>4) 获得授课 PPT 教材纸质版 1 份</p>
-				 //                                            <p>5) 价值 188 元《全球互联网金融商业模式报告（2015）》1 本</p>
-				 //                                            <p>6) 有机会到互联网金融优秀企业参观，与创始人及高管团队面对面交流</p>
-				 //                                        </div>
-				 //                                        <div className="ifc-online">
-				 //                                            <h4 className="ifc-title-red">学员福利   <span>价格：¥ 2580</span></h4>
-				 //                                            <!-- <p>1) 可参加视频点播学习（有效期180天）</p>
-				 //                                            <p>2) 获得授课 PPT 电子教材 1 份</p>
-				 //                                            <p>3) 价值 188 元《全球互联网金融商业模式报告（2015）》1 本</p>
-				 //                                            <p>4) 现场面授课程结束后两周内上线学习，学习地址：www.ezijing.com（也可在首页扫描二维码下载移动 APP 学习）</p> -->
-				 //                                            <p>1) 可参加线下面授，第一时间学到报告精髓</p>
-				 //                                            <p>2) 与讲师现场互动、个案现场咨询服务</p>
-				 //                                            <p>3) 可参加视频点播学习（有效期180天）</p>
-				 //                                            <p>4) 获得授课 PPT 教材纸质版 1 份</p>
-				 //                                            <p>5) 价值 188 元《全球互联网金融商业模式报告（2015）》1 本</p>
-				 //                                            <p>6) 有机会到互联网金融优秀企业参观，与创始人及高管团队面对面交流</p>
-				 //                                        </div>
-				 //                                    </div>
-				 //                                    <div className="ifc online"></div>
-				 //                                </dd>
-				 //                            </dl>
-				 //                        </div>
-				 //                    </div>
-				 //                    <div className="pay-choose">
-				 //                        <div className="step-4">
-				 //                            <h4 className="step-title">选择支付方式   <small>客服电话：13811997720 刘老师</small></h4>
-				 //                        </div>
-				 //                        <div className="pay-box">
-				 //                            <ul className="pay-type">
-				 //                                <li className="fl online-pay type-choosed">在线支付</li>
-				 //                                <li className="fl remit-pay">线下汇款支付</li>
-				 //                            </ul>
-				 //                            <div className="pay-content">
-				 //                                <div className="online">
-				 //                                    <ul className="online-content-item ">
-				 //                                        <li className="fl alipay duigouImg"><img className="alipay-img on-pay" src="/assets/images/ali-pay.png"></li>
-				 //                                        <li className="fl unipay"><img className="unipay-img" src="/assets/images/uni-pay.png"></li>
-				 //                                    </ul>
-				 //                                </div>
-				 //                                <div className="offline-content-item remit">
-				 //                                    <h4>线下汇款报名说明：</h4>
-				 //                                    <ul>
-				 //                                        <li>步骤一：根据页面上方提示，提交报名信息</li>
-				 //                                        <li>步骤二：汇款支付</li>
-				 //                                        <li>请你根据下方账号信息汇款，汇款时<label className="warn-remit">务必在备注中写明报名课程、姓名、手机号</label>，我们的工作人员会在收到汇款后与您确认报名成功。</li>
-				 //                                        <li>户名：清控紫荆（北京）科技股份有限公司</li>
-				 //                                        <li>开户行：中国民生银行股份有限公司北京魏公村支行</li>
-				 //                                        <li>账号：694485289</li>
-				 //                                        <li>客服电话：13811997720 刘老师</li>
-				 //                                    </ul>
-				 //                                    <p style="color:#b01b40; margin: 10px 0 0 20px;">备注：线上课程在付款后，课程全部上线之日起180天内有效</p>
-				 //                                </div>
-				 //                            </div>
-				 //                        </div>
-				 //                        <div className="submit-btn">
-				 //                            <button className="submit-pay">确认</button>
-				 //                        </div>
-				 //                    </div>
-				 //                </div>
-				 //            </div>
-				 //        </div>
-				 //    </div>
-                 }
+				    <div className="container special-finance-join bg-white">
+				    	<h3>我要报名</h3>
+				    	<div className="join-phone">
+				    		<h4>方式一：手机报名<em>如有疑问，请咨询课程负责人刘老师，电话或微信：13811997720</em></h4>
+				    		<div className="join-erwei cl">
+			                    <div className="join-erwei-phone fl">
+			                        <p>手机扫描二维码，即可报名并支付课程</p>
+			                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1b0283371b4fc9a33d7947f9ebdaf3ef.png" />
+			                    </div>
+			                    <div className="join-saoma fr">
+			                        <h5>拿出手机，通过微信完成购买</h5>
+			                        <p>1、打开微信点击“发现” &gt; “扫一扫”</p>
+			                        <p>2、对准左侧二维码扫码</p>
+			                        <p>3、点击底部“我想要”</p>
+			                        <p>4、通过微信支付就能购买成功</p>
+			                    </div>
+			                </div>
+				    	</div>
+				    	<div className="join-web">
+				    		<h4>方式二：官网报名</h4>
+				    		<div className="join-web-sign">
+			                    <div className="join-web-info">
+			                        <h5 className="cl">填写信息<em className="fr">（为确保报名成功，请您输入正确的个人信息）</em></h5>
+			                        <div>
+		                                <dl>
+		                                    <dt>姓名：</dt>
+		                                    <dd><input type="text" placeholder="请输入您的姓名" /></dd>
+		                                    <dd className="text-error">请输入正确的姓名</dd>
+		                                </dl>
+		                                <dl>
+		                                    <dt>邮箱：</dt>
+		                                    <dd><input type="text" placeholder="请输入您的常用邮箱" /></dd>
+		                                    <dd className="text-success">紫荆教育已注册用户</dd>
+		                                    <dd className="text-success">报名后可凭邮箱登录紫荆教育</dd>
+		                                    <dd className="text-error">请输入正确邮箱</dd>
+		                                </dl>
+		                                <dl>
+		                                    <dt>手机：</dt>
+		                                    <dd><input type="text" placeholder="请输入您的联系方式" /></dd>
+		                                    <dd className="text-error">请输入正确的手机</dd>
+		                                </dl>
+		                                <dl>
+		                                    <dt>发票</dt>
+		                                    <dd><input type="checkbox" /></dd>
+		                                </dl>
+		                                <dl className="join-invoice">
+		                                    <input type="text" placeholder="请输入发票抬头" />
+		                                    <dd className="text-error">请输入发票抬头</dd>
+		                                </dl>
+		                                <div className="join-buy cl">
+		                                    <dl className="fl">
+		                                        <dt>是我本人购买</dt>
+		                                        <dd><input type="radio" checked="" /></dd>
+		                                    </dl>
+		                                    <dl className="fl">
+		                                        <dt>替其他人购买</dt>
+		                                        <dd><input type="radio" /></dd>
+		                                    </dl>
+		                                </div>
+		                            </div>
+			                    </div>
+			                    <div className="join-web-choose">
+			                    	<h5>选择课程类型</h5>
+			                    	<div>
+			                            <p>请选择您要参与的现场面授班，视频点播班请在上方超级课程表中购买</p>
+			                            <div className="join-web-selcourse cl">
+			                                <Link to="#" className="on">第六讲     2016-04-15<br />地点：五道口金融学院</Link>
+			                                <Link to="#" className="">第七讲     2016-04-16<br />地点：五道口金融学院</Link>
+			                                <Link to="#" className="">第八讲     2016-04-17<br />地点：五道口金融学院</Link>
+			                            </div>
+			                            <dl className="cl">
+			                                <dt>课程信息：</dt>
+			                                <dd>
+			                                    <div className="join-web-gift">
+			                                        <div className="join-web-offline">
+			                                            <h4 className="join-web-title-red">学员福利   <em>价格：¥ 2580</em></h4>
+			                                            <p>1) 可参加线下面授，第一时间学到报告精髓</p>
+			                                            <p>2) 与讲师现场互动、个案现场咨询服务</p>
+			                                            <p>3) 可参加视频点播学习（有效期180天）</p>
+			                                            <p>4) 获得授课 PPT 教材纸质版 1 份</p>
+			                                            <p>5) 价值 188 元《全球互联网金融商业模式报告（2015）》1 本</p>
+			                                            <p>6) 有机会到互联网金融优秀企业参观，与创始人及高管团队面对面交流</p>
+			                                        </div>
+			                                        <div className="join-web-online">
+			                                            <h4 className="join-web-title-red">学员福利   <em>价格：¥ 2580</em></h4>
+			                                            <p>1) 可参加线下面授，第一时间学到报告精髓</p>
+			                                            <p>2) 与讲师现场互动、个案现场咨询服务</p>
+			                                            <p>3) 可参加视频点播学习（有效期180天）</p>
+			                                            <p>4) 获得授课 PPT 教材纸质版 1 份</p>
+			                                            <p>5) 价值 188 元《全球互联网金融商业模式报告（2015）》1 本</p>
+			                                            <p>6) 有机会到互联网金融优秀企业参观，与创始人及高管团队面对面交流</p>
+			                                        </div>
+			                                    </div>
+			                                    <div className="ifc online"></div>
+			                                </dd>
+			                            </dl>
+			                        </div>
+			                    </div>
+			                    <div className="join-web-pay">
+			                    	<h5>选择支付方式<em>客服电话：13811997720 刘老师</em></h5>
+			                    	<div className="join-web-pay-info">
+			                            <ul className="join-web-pay-type cl">
+			                                <li className="fl on">在线支付</li>
+			                                <li className="fl">线下汇款支付</li>
+			                            </ul>
+			                            <div className="join-web-pay-content">
+			                                <ul className="join-web-pay-online cl">
+		                                        <li className="fl on"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1181bf80cd08ff6b35f58a9e6ceb1589.png" /></li>
+		                                        <li className="fl"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/069c882368b67fe9812018db3b5cdd39.png" /></li>
+		                                    </ul>
+			                                <div className="join-web-pay-offline">
+			                                    <h5>线下汇款报名说明：</h5>
+			                                    <ul>
+			                                        <li>步骤一：根据页面上方提示，提交报名信息</li>
+			                                        <li>步骤二：汇款支付</li>
+			                                        <li>请你根据下方账号信息汇款，汇款时<label className="warn-remit">务必在备注中写明报名课程、姓名、手机号</label>，我们的工作人员会在收到汇款后与您确认报名成功。</li>
+			                                        <li>户名：清控紫荆（北京）科技股份有限公司</li>
+			                                        <li>开户行：中国民生银行股份有限公司北京魏公村支行</li>
+			                                        <li>账号：694485289</li>
+			                                        <li>客服电话：13811997720 刘老师</li>
+			                                    </ul>
+			                                    <p>备注：线上课程在付款后，课程全部上线之日起180天内有效</p>
+			                                </div>
+			                            </div>
+			                        </div>
+			                        <div className="join-web-btn">
+			                            <button>确认</button>
+			                        </div>
+			                    </div>
+			                </div>
+				    	</div>
+				    </div>
 			    </div>
             </div>
         );

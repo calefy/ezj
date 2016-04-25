@@ -1,61 +1,20 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux'
+import React from 'react';
 import { Link } from 'react-router';
-import { toTimeString, avatar } from '../../libs/utils';
 
-import CoursesAction from '../../actions/CoursesAction';
+if (process.env.BROWSER) {
+    require('css/special.css');
+}
 
-class Course extends Component {
-
-    componentDidMount() {
-        const { course, course_private, params } = this.props;
-        if (course.isFetching ||// course_private.isFetching ||
-                (course.data && course.data.id != params.courseId)) {
-            Course.fetchData(this.props);
-        }
-    }
-
-    /**
-     * 点击显示测验内容
-     */
-    onClickExam = e => {
-        const examId = this.props.course.data.course_examination_id;
-        const courseAction = new CoursesAction();
-        this.props.dispatch( courseAction.loadCourseExamination(examId) );
-    };
-
-    render() {
-        let course = this.props.course.data || {};
-        let examination = this.props.examination.data || {};
-        let questions = examination.questions || [];
-        examination = examination.examination || {};
-        console.log(examination);
-
+let TopicIndex = React.createClass({
+    render: function() {
         return (
-            <div className="content course-test">
-                <h2>【测验】{course.course_examination_id > 0 ? <button type="button" onClick={this.onClickExam}>点击展示</button> : '无'}</h2>
-                {course.course_examination_id <= 0 ?
-                    null :
-                    <div className="course-test-info">
-                        <h4>{examination.examination_title}</h4>
-                        <dl>
-                            {questions.map((item, index) => {
-                                let q = item.question;
-                                let os = item.options;
-                                return [
-                                    <dt key={index}>
-                                        {index + 1}.
-                                        <div className="dib vat" dangerouslySetInnerHTML={{__html: q.examination_question_content}} />
-                                    </dt>,
-                                    os.map((o, i) => {
-                                        return <dd key={i}>{String.fromCharCode(65 + i)}. {o.option_text}</dd>
-                                    })
-                                ];
-                            })}
-                        </dl>
-                    </div>
-                }
-                <div className="course-test-info">
+            <div className="special-continue-test">
+            	<div className="special-banner cl">
+				    <div className="container">
+				        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/0d79a42d379bb1666e7b48d6747f9971.png" />
+				    </div>
+				</div>
+            	<div className="course-test-info">
                     <h2><i className="iconfont icon-chapter"></i>BCG战略调色板对中国金融机构的启示和应用</h2>
                     <div className="course-test-num">
                         <dl className="cl">
@@ -162,11 +121,6 @@ class Course extends Component {
             </div>
         );
     }
-}
+});
 
-
-module.exports = connect( state => ({
-    course: state.course,
-    examination: state.examination,
-}) )(Course);
-
+module.exports = TopicIndex;

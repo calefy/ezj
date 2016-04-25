@@ -342,6 +342,17 @@ class Course extends Component {
                         </div>
                     </div>
                 </div>
+                <div className="popover pop">
+                    <h4>提示<i className="iconfont icon-guanbi2 fr" style={{ fontSize: 20, cursor: "pointer" }}></i></h4>
+                    <div className="popover-info">
+                        购买课程后才可继续观看，现在购买吗？
+                    </div>
+                    <div className="popover-btn">
+                        <Link to="" className="btn">确认</Link>
+                        <Link to="" className="btn disabled">取消</Link>
+                    </div>
+                </div>
+                <div className="screen-bg"></div>
             </div>
         );
     }

@@ -316,6 +316,24 @@ module.exports = {
                 });
             }
         },
+        // cfc持续教育
+        {
+            path: 'topic/continue',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/topic/Continue'));
+                });
+            }
+        },
+        // cfc持续教育test
+        {
+            path: 'topic/continue/test',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/topic/Test'));
+                });
+            }
+        },
         // 互联网金融
         {
             path: 'topic/finance',

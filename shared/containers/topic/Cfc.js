@@ -24,7 +24,7 @@ let TopicIndex = React.createClass({
 				        </div>
 				    </div>
 				</div>
-				<div className="special-content">
+				<div className="special-cfc-content">
 					<div className="special-menu">
 					    <div className="special-menu-nav">
 					        <ul className="container cl">
@@ -372,7 +372,7 @@ let TopicIndex = React.createClass({
 					        <h3>持续教育</h3>
 					        <div>
 					            <p>CFC持续教育学习平台</p>
-					            <Link to="" title="" target="_blank">点击进入</Link>
+					            <Link to="/topic/continue" title="" target="_blank">点击进入</Link>
 					        </div>
 					    </div>
 				    </div>
