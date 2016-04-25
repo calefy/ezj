@@ -88,6 +88,10 @@ module.exports = class CoursesAction extends BaseAction {
     loadSheets(params) {
         return BaseAction.dispatchRequest( CoursesAction.LOAD_SHEETS, this.api.sheets(params), params );
     }
+    static LOAD_SHEET = 'sheet';
+    loadSheet(sheetId) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_SHEET, this.api.sheet(sheetId) );
+    }
 
     static SUBMIT_SHEET = 'submit_sheet';
     submitSheet(model) {

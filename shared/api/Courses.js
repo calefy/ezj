@@ -76,8 +76,11 @@ class Courses extends Base {
         params = params ? '?' + params : '';
         return this.apiClient.get(`els/examination-sheets${params}`);
     }
+    sheet(sheetId) {
+        return this.apiClient.get(`els/examination-sheets/${sheetId}`);
+    }
     submitSheet(model = {}) {
-        return this.apiClient.post('els/examination-sheets', model, {'Content-Type' : ApiClient.CONTENT_TYPE_JSON});
+        return this.apiClient.post('els/examination-sheets', model);
     }
 
 

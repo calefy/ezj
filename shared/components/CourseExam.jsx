@@ -9,12 +9,15 @@ class CourseExam extends Component {
         course: PropTypes.object.isRequired,
         examination: PropTypes.object.isRequired,
         sheet: PropTypes.object.isRequired,
+        onLoadSheet: PropTypes.func.isRequired,
         onSubmit: PropTypes.func.isRequired,
     };
 
     state = {
-        start: false,
-        index: 0,
+        reexam: false, // 重新测验
+        start: false, // 开始测验
+        viewAnswer: false, // 查看答案
+        index: 0, // 当前测验序号
     };
     answers = {};
     time = 0;
@@ -23,8 +26,7 @@ class CourseExam extends Component {
         const type = getRequestTypes(CoursesAction.SUBMIT_SHEET);
         switch(nextProps.action.type) {
             case type.success:
-                console.log('submit sheet return: ', nextProps.action.response);
-                alert('提交测验成功');
+                this.setState({ reexam: false, start: false })
                 break;
             case type.failure:
                 alert(nextProps.action.error && nextProps.action.error.message || '提交测验失败');
@@ -83,8 +85,6 @@ class CourseExam extends Component {
         let exam = examination.examination;
         let model = {
             course_id: course.id,
-            course_name: course.course_name,
-            organization_id: '',
             examination_id: exam.id,
             sheet_cost_time: Math.ceil(((new Date()).getTime() - this.time) / 1000),
             answers: [],
@@ -96,8 +96,32 @@ class CourseExam extends Component {
             });
         }
 
-        console.log(model);
+        if (model.answers.length < examination.questions.length) {
+            alert('还有问题未回答，请全部答完后再提交');
+            return;
+        }
+
+        model.answers = JSON.stringify(model.answers);
         this.props.onSubmit(model);
+    };
+
+    // 重新测验
+    onReExam = e => {
+        this.time = (new Date()).getTime();
+        this.setState({ index: 0, start: true, reexam: true });
+    };
+    // 查看答案
+    onViewAnswers = e => {
+        e.preventDefault();
+        this.setState({viewAnswer: !this.state.viewAnswer});
+        // 如果查看答案，需要检测是否有答案
+        if (!this.state.viewAnswer) {
+            if (!this.props.sheet.answers) {
+                let sheet = this.props.sheet.list;
+                sheet = sheet && sheet[0];
+                this.props.onLoadSheet(sheet.sheet_id || sheet.id);
+            }
+        }
     };
 
     render() {
@@ -105,8 +129,14 @@ class CourseExam extends Component {
         let questions = this.props.examination.questions || [];
         let curQuestion = questions.length > this.state.index ? questions[this.state.index] : {};
 
-        let sheet = this.props.sheet.data && this.props.sheet.data.list || [];
-        sheet = sheet.length ? sheet[0] : null;
+        let sheetData = this.props.sheet;
+        let sheetList = sheetData.list || [];
+        let sheet = sheetList.length ? sheetList[0] : sheetData.sheet ? sheetData.sheet : null;
+
+        let answerMap = {};
+        (sheetData.answers || []).map(item => {
+            answerMap[item.examination_question_id] = item;
+        });
 
         // 遍历问题，统计单选、多选数量
         let singleNumber = 0, multiNumber = 0;
@@ -118,10 +148,13 @@ class CourseExam extends Component {
             }
         });
 
+        let firstIndex = this.state.index === 0;
+        let lastIndex = this.state.index + 1 === questions.length;
+
         return (
             <div className="content course-test">
 
-                {!sheet ?
+                {!sheet || this.state.reexam ?
                     <div>
                         {!this.state.start ?
                             <div className="course-test-info">
@@ -146,7 +179,7 @@ class CourseExam extends Component {
                             <div className="course-test-question">
                                 <h3>
                                     <p>{curQuestion.question && curQuestion.question.examination_question_is_multi ? '多' : '单'}项选择题</p>
-                                    <p>已做<em className="course-test-already">{this.state.index }</em>题 / 共<em className="course-test-all">{questions.length}</em>题</p>
+                                    <p>已做<em className="course-test-already">{this.state.index}</em>题 / 共<em className="course-test-all">{questions.length}</em>题</p>
                                 </h3>
                                 <dl className="course-test-question-info">
                                     <dt>
@@ -165,9 +198,9 @@ class CourseExam extends Component {
                                     })}
                                 </dl>
                                 <div className="course-test-question-btn">
-                                    <button type="button" className={`btn ${this.state.index === 0 ? 'disabled' : ''}`} disabled={this.state.index === 0} onClick={this.onPrev}>上一题</button>
-                                    <button type="button" className={`btn ${this.state.index + 1 === questions.length ? 'disabled' : ''}`} disabled={this.state.index + 1 === questions.length} onClick={this.onNext}>下一题</button>
-                                    <button type="button" className="btn" onClick={this.onSubmit}>提交答卷</button>
+                                    <button type="button" className={`btn ${firstIndex ? 'disabled' : ''}`} disabled={firstIndex} onClick={this.onPrev}>上一题</button>
+                                    <button type="button" className={`btn ${lastIndex ? 'disabled' : ''}`} disabled={lastIndex} onClick={this.onNext}>下一题</button>
+                                    <button type="button" className={`btn ${lastIndex ? '' : 'disabled'}`} disabled={!lastIndex} onClick={this.onSubmit}>提交答卷</button>
                                 </div>
                             </div>
                         }
@@ -176,55 +209,67 @@ class CourseExam extends Component {
                     <div>
                         <div className="course-test-result">
                             <h2><i className="iconfont icon-chapter"></i>课程测验结果</h2>
-                            <h4>BCG战略调色板对中国金融机构的启示和应用【课程测试】</h4>
+                            <h4>{examination.examination_title}</h4>
                             <div className="course-test-num">
                                 <dl className="cl">
                                     <dt>题目数量</dt>
-                                    <dd>8道题</dd>
+                                    <dd>{questions.length}道题</dd>
                                 </dl>
                                 <dl className="cl">
                                     <dt>正确率</dt>
-                                    <dd>38%</dd>
+                                    <dd>{sheet.sheet_score}%</dd>
                                 </dl>
                                 <dl className="cl">
                                     <dt>答题日期</dt>
-                                    <dd>2014.12.04</dd>
+                                    <dd>{sheet.submitted_time || sheet.sheet_submitted_time}</dd>
                                 </dl>
                             </div>
                             <div style={{ position: "relative"}}>
-                                <button className="btn" type="button" onClick={this.onClickExam}>重新测验</button>
-                                <Link to="" className="course-test-see">查看答案</Link>
+                                <button className="btn" type="button" onClick={this.onReExam}>重新测验</button>
+                                <a href="#" className="course-test-see" onClick={this.onViewAnswers}>{this.state.viewAnswer ? '收起' : '查看'}答案</a>
                             </div>
                         </div>
 
-                        <div className="result-content course-result-content">
-                            {questions.map((item, index) => {
-                                let correctText = [];
-                                item.options.forEach((o, i) => {
-                                    if (o.is_correct) correctText.push(String.fromCharCode(65 + i));
-                                });
-                                return (
-                                    <dl key={index}>
-                                        <dt>
-                                            {index + 1}.
-                                            <div className="dib vat" dangerouslySetInnerHTML={{__html: item.question.examination_question_content}} />
-                                        </dt>
-                                        {item.options.map((o, i) => {
-                                            return (
-                                                <dd key={i}>
-                                                    <input type={item.question.examination_question_is_multi ? 'checkbox' : 'radio'} value={o.id} />
-                                                    <span>{String.fromCharCode(65 + i)}.{o.option_text}</span>
-                                                    {i === 0 ?
-                                                        <em className="true fr">正确答案：{correctText.join(',')}</em>
-                                                        : null
-                                                    }
-                                                </dd>
-                                            );
-                                        })}
-                                    </dl>
-                                );
-                            })}
-                        </div>
+                        {this.state.viewAnswer && sheetData.answers ? // 要查看结果时，还要保证有答案
+                            <div className="result-content course-result-content">
+                                {questions.map((item, index) => {
+                                    let correctText = [];
+                                    let correctIds = [];
+                                    item.options.forEach((o, i) => {
+                                        if (o.is_correct) {
+                                            correctIds.push(o.id);
+                                            correctText.push(String.fromCharCode(65 + i));
+                                        }
+                                    });
+                                    let answer = answerMap[item.question.id];
+                                    answer = answer && answer.answer_content.split(',') || [];
+
+                                    return (
+                                        <dl key={index}>
+                                            <dt>
+                                                {index + 1}.
+                                                <div className="dib vat" dangerouslySetInnerHTML={{__html: item.question.examination_question_content}} />
+                                            </dt>
+                                            {item.options.map((o, i) => {
+                                                let isChecked = answer.indexOf(o.id) >= 0; // 用户是否选择
+                                                let isAnswer = correctIds.indexOf(o.id) >= 0; // 是否是正确答案
+                                                return (
+                                                    <dd key={i}>
+                                                        <input type={item.question.examination_question_is_multi ? 'checkbox' : 'radio'} defaultChecked={isChecked} readOnly={true} />
+                                                        <span className={isAnswer ? 'text-success' : isChecked ? 'text-error' : ''}>{String.fromCharCode(65 + i)}.{o.option_text}</span>
+                                                        {i === 0 ?
+                                                            <em className="true fr">正确答案：{correctText.join(',')}</em>
+                                                            : null
+                                                        }
+                                                    </dd>
+                                                );
+                                            })}
+                                        </dl>
+                                    );
+                                })}
+                            </div>
+                            : null
+                        }
                     </div>
                 }
 
