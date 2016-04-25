@@ -24,7 +24,7 @@ let TopicIndex = React.createClass({
 				        </div>
 				    </div>
 				</div>
-				<div className="special-content">
+				<div className="special-cfc-content">
 					<div className="special-menu">
 					    <div className="special-menu-nav">
 					        <ul className="container cl">

@@ -20,8 +20,8 @@ h5.h5-title{background: url(../img/cfc-h5.png) no-repeat left center;text-align:
 .special-buy-state{ float: left; line-height: 20px; margin: 14px 50px 0 0;}
 .special-join{ background: #00fcff; width: 100px; height: 35px; line-height: 35px; margin-top: 16px; float: right;border-radius: 22px;}
 
-.special-content{ margin: 20px 0 0;}
-.special-content h3 { background: #3ea7d4; border-bottom: 0px; color: #fff; font-size: 1.125em; padding: 0 26px; line-height: 42px;}
+.special-cfc-content{ margin: 20px 0 0;}
+.special-cfc-content h3 { background: #3ea7d4; border-bottom: 0px; color: #fff; font-size: 1.125em; padding: 0 26px; line-height: 42px;}
 .special-cfc-about{ margin: 20px 0 44px;}
 .special-about-cfc>div { width: 540px; height: 216px; position: relative; padding: 80px 20px 0;}
 .special-about-cfc p { line-height: 36px; color: #0075a8; font-size: 14px;}
@@ -221,3 +221,71 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .special-finance-cases #tab6 td,.special-finance-cases #tab8 td{ padding:121px 6px;}
 .special-finance-cases #tab7 td{ padding: 77px 6px;}
 .special-finance-cases tr:last-child td{ padding:16px 6px !important;}
+
+.special-finance-join .join-phone{ margin: 10px 0;}
+.special-finance-join h4{ line-height: 45px; color: #ffffff; padding: 0 0 0 24px; background: url(../img/red-head.png) no-repeat center;}
+.special-finance-join h4 em{ margin: 0 0 0 150px; font-size: 0.875em;}
+
+.join-erwei{ overflow: hidden; width: 700px; margin: 50px auto;}
+.join-erwei-phone p{ color:#b01c40; font-size: 14px; margin:0 0 10px; text-align: center;}
+.join-erwei-phone img{ width: 170px; border:3px solid #e1e1e1; border-radius:3px;}
+
+.join-saoma{ margin:10px 0 0;}
+.join-saoma h5{color:#b01c40;font-size:22px;margin-bottom:18px;}
+.join-saoma p{font-size:16px;line-height:36px;margin:0;}
+
+.join-web-sign{ padding: 20px 100px;}
+.join-web-sign h5{ color: #b01c40; margin-bottom: 20px;}
+.join-web-sign h5 em{ font-size: 0.875em; color: #707070;}
+
+.join-web-info,.join-web-choose,.join-web-pay{ padding: 40px 163px;}
+.join-web-info,.join-web-choose{ border-bottom: 2px dashed #b9b9b9;}
+.join-web-info dl{ margin-bottom: 6px; font-size: 0.875em;line-height: 28px;}
+.join-web-info dl:after{ display: block; content: ""; clear: both;}
+.join-web-info dt,.join-web-info dd{ float: left;}
+.join-web-info dt{ width: 50px;}
+.join-web-info dd{ margin: 0 6px 0 0;}
+.join-web-info input{ width: 291px; height:22px; padding:3px 6px; line-height: 22px; font-size: 12px; border: none; background-color: #e1e1e1; color: #707070; float: left;}
+.join-web-info .join-buy{ padding:0px; background: #fff;}
+.join-web-info .join-buy dl,.join-web-info .join-buy dl input{ width: auto;}
+.join-web-info .join-buy dl{ margin:0 20px 0 0;}
+.join-web-info .join-buy dt{ width: 90px;}
+.join-web-info dl:nth-child(4) input,.join-web-info .join-buy .fl dd input{ margin:2px 0 0;}
+.join-invoice{ margin-left: 50px;}
+.join-invoice input{ margin:0 6px 0 0;}
+
+.join-web-choose p{ font-size: 0.75em; margin: 20px 0; line-height: 20px;}
+.join-web-selcourse{ margin: 0 0 20px;}
+.join-web-selcourse a{float:left;position:relative;height:45px; width:210px; line-height: 20px; font-size:14px; padding:6px 0; text-align: center;color:#b01c40;margin: 0 13px 0 0;border:3px solid #b01c40;border-radius:60px;}
+.join-web-selcourse a:last-child{ margin:0;}
+.join-web-selcourse a.on{color:#fff; background: url(../img/finance-yes.png) no-repeat 180px center #e33c64;}
+
+.join-web-choose dl{ font-size: 0.875em;}
+.join-web-choose dt,.join-web-choose dd{ float: left;}
+.join-web-choose dt { width: 70px; line-height: 36px;}
+
+
+.join-web-gift{width:536px;}
+.join-web-gift div{line-height:23px;min-height:165px;padding:0 0 15px;background-color:#e1e1e1;}
+.join-web-gift div p{margin:0 30px;line-height:27px;}
+.join-web-gift .join-web-online{display:none;}
+.join-web-gift h4{ background: url(../img/finance-gift.png) no-repeat left center; margin:0 0 20px; text-align: left; padding:0 0 0 20px; font-size: 1.125em;line-height: 34px; font-weight: normal;}
+.join-web-gift h4 em{ color: #b01c40; margin:0 0 0 10px; font-size: 1.125em;}
+
+.join-web-pay h5 em{ color: #b01c40; margin:0 0 0 20px;}
+.join-web-pay-info{ background: #e1e1e1; margin: 26px 0 0;}
+.join-web-pay-type li{ width: 50%; text-align: center; background: #d72551; color:#ffffff; line-height: 35px; cursor: pointer;}
+.join-web-pay-type li.on{ position: relative; background: #b01b40;}
+.join-web-pay-type li.on:after { content: ""; display: block; position: absolute; bottom: -5px; left: 50%; margin: 0 0 0 -4px; width: 8px; height: 8px; border-left: 1px solid transparent; border-bottom: 1px solid transparent; border-top: 1px solid #e1e1e1; border-right: 1px solid #e1e1e1; -o-transform: rotate(-45deg); -webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); background: #e1e1e1;}
+
+.join-web-pay-online{ margin: 30px 0;}
+.join-web-pay-online li { width: 50%; text-align: center; position: relative;}
+.join-web-pay-online li.on img {border: 1px solid #b01b40;border-radius: 3px;}
+.join-web-pay-online li.on:after { content: ""; display: block; background: url(../img/choosed.png) no-repeat center; width: 28px; height: 28px; position: absolute; left: 231px; top: 0;}
+.join-web-pay-offline{padding: 25px;}
+.join-web-pay-offline ul{ margin:10px 0 0 20px; font-size: 0.75em; line-height: 26px; color: #5c5c5c;}
+.join-web-pay-offline p{ color: #b01b40; font-size:0.75em; line-height: 20px; margin: 10px 0 0 20px;}
+.join-web-btn{ text-align: center; background-color: #5c5c5c; padding: 8px 0;}
+.join-web-btn button{ width: 200px; line-height: 36px; color: #ffffff; border-radius: 36px; background-color: #b01b40; border: none;}
+
+
