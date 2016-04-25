@@ -189,7 +189,7 @@ module.exports = {
                     path: 'mobile',
                     getComponent(location, cb) {
                         require.ensure([], require => {
-                            cb(null, require('./containers/account/Email'));
+                            cb(null, require('./containers/account/Contact.jsx'));
                         });
                     }
                 },
@@ -197,7 +197,7 @@ module.exports = {
                     path: 'email',
                     getComponent(location, cb) {
                         require.ensure([], require => {
-                            cb(null, require('./containers/account/Email'));
+                            cb(null, require('./containers/account/Contact.jsx'));
                         });
                     }
                 },

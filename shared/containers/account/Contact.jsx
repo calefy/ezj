@@ -10,7 +10,7 @@ import FormsyValid from '../../components/formsy/FormsyValid.jsx';
 import CountDown from '../../components/CountDown.jsx';
 import UserAction from '../../actions/UserAction';
 
-let Email = React.createClass({
+let Contact = React.createClass({
     mixins: [ formsySubmitButtonMixin ],
 
     hasSended: false, // 标记已经发过验证码
@@ -41,6 +41,7 @@ let Email = React.createClass({
                 this._setState({codeSended: true});
                 break;
             case sendType.failure:
+                this.refs.form.updateInputsWithError({ contact: nextProps.action.error && nextProps.action.error.message || '获取验证码失败' })
                 this._setState({ countDown: false });
                 break;
             case updateType.success:
@@ -62,7 +63,6 @@ let Email = React.createClass({
 
     // 简便设置state
     _setState: function(obj) {
-                   console.log(obj)
         this.setState(Object.assign({}, this.state, obj || {}));
     },
 
@@ -188,4 +188,4 @@ let Email = React.createClass({
 module.exports = connect( state => ({
     action: state.action,
     user: state.user,
-}) )(Email);
+}) )(Contact);
