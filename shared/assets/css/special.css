@@ -347,3 +347,50 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .join-web-choose-price-info p{ text-align: center; padding: 35px; margin:0;}
 
 
+/*cfc持续教育*/
+.special-continue .special-banner{ background: #5fbcf5; height:308px; padding:35px 0 0;}
+
+.special-summary, .special-courses, .special-test{ padding:54px 0;}
+.special-summary, .special-test{ background: #fff}
+.special-summary p{ font-size: 0.875em; text-indent: 28px; line-height: 2; margin:0 0 10px;}
+.special-summary li{ float: left; width: 50%;}
+.special-summary li .tx-indent{ text-indent: 56px;}
+.special-summary li a{ color: #40abff;}
+.special-summary .table{ margin: 40px 28px;}
+.special-summary .table th{ background: #36a7d5; color: #fff;}
+
+.special-continue-title{ text-align: center; height: 80px; position: relative; margin: 0 0 20px;}
+.special-continue-title h2 { font-size: 1.875em; font-weight: bold;}
+.special-continue-title>div{position:absolute;left:50%;bottom:-4px;width:58px;margin:0 0 0 -23px;}
+
+.diamond { display:inline-block; width: 15px; height: 15px; margin: 7px 0 0 2px; background: #008bff;
+  -webkit-transform-origin: 0 100%;
+  -moz-transform-origin: 0 100%;
+  -o-transform-origin: 0 100%;
+  -ms-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform:rotate(-45deg);
+  -moz-transform:rotate(-45deg);
+  -o-transform:rotate(-45deg);
+  -ms-transform:rotate(-45deg);
+  transform:rotate(-45deg);
+}
+
+.special-summary .online-course dt{ background: url(../img/online-bg-blue.png) no-repeat top right;}
+.special-summary .online-course dt span{ background: #36a7d5}
+.special-summary .online-course a{ color: #36a7d5}
+.special-summary .online-course .online-time, .special-summary .online-course .online-price, .special-summary .online-course .online-num{ width:180px;}
+
+.special-test p{ text-indent: 28px; line-height: 1.8}
+.special-test .btn {
+    background: url(../img/continue-arrow.png) no-repeat 40px center #2f84c7;
+    box-shadow: 0 1px 1px #3f3b3a;
+    border:1px solid #2f84c7;
+    border-radius: 8px;
+    width: 180px;
+    display: block;
+    margin: 20px auto 0;
+    text-indent: 50px;
+    line-height: 26px;
+}
+

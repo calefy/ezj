@@ -207,7 +207,7 @@ class Header extends Component {
                         />
                     }
                 </Dialog>
-                <div className="agreement-pop reg-pop pop">
+                <div className="agreement-pop reg-pop pop" style={{ display: "none" }}>
                     <h4>紫荆教育隐私政策<i className="iconfont icon-guanbi2 fr" style={{ fontSize: 20, cursor: "pointer" }}></i></h4>
                     <div>
                         <p>紫荆教育十分重视您个人信息的保密性和安全性。我们将按照本隐私政策尽合理的努力保护您的个人信息(下称“个人信息”，定义见下文)的安全。本隐私政策中使用的“我们”均指紫荆教育。</p>
@@ -238,7 +238,7 @@ class Header extends Component {
                         <em>生效日期 ：2014年9月15日</em>
                     </div>
                 </div>
-                <div className="screen-bg"></div>
+                <div className="screen-bg" style={{ display: "none" }}></div>
             </div>
         );
     }
