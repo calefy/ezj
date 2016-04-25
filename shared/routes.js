@@ -189,7 +189,7 @@ module.exports = {
                     path: 'mobile',
                     getComponent(location, cb) {
                         require.ensure([], require => {
-                            cb(null, require('./containers/account/Mobile'));
+                            cb(null, require('./containers/account/Email'));
                         });
                     }
                 },

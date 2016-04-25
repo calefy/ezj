@@ -25,8 +25,17 @@ let Email = React.createClass({
     },
 
     componentWillReceiveProps: function(nextProps) {
+        // 如果mobile与email修改之间切换，则重置整个状态
+        if (this.props.location.pathname !== nextProps.location.pathname) {
+            this.refs.form.reset();
+            this.hasSended = false;
+            this.setState({success: '', error: '', codeSended: false, countDown: false});
+            return;
+        }
+        // 反馈结果处理
         let sendType = getRequestTypes(UserAction.SEND_CODE_FOR_CONTACT);
         let updateType = getRequestTypes(UserAction.UPDATE_CONTACT);
+        let r;
         switch(nextProps.action.type) {
             case sendType.success: // 提示验证码已发送
                 this._setState({codeSended: true});
@@ -35,20 +44,31 @@ let Email = React.createClass({
                 this._setState({ countDown: false });
                 break;
             case updateType.success:
-                this._setState({success: '修改成功'});
+                r = this.disableSubmitButton();
+                this._setState({...r, success: '修改成功'});
                 setTimeout(function() {
                     nextProps.history.push('/account/index');
                 }, 1000);
                 break;
             case updateType.failure:
-                this._setState({error: nextProps.action.error && nextProps.action.error.message || '保存修改信息失败'});
+                r = this.enableSubmitButton();
+                this._setState({
+                    ...r,
+                    error: nextProps.action.error && nextProps.action.error.message || '保存修改信息失败',
+                });
                 break;
         }
     },
 
     // 简便设置state
     _setState: function(obj) {
+                   console.log(obj)
         this.setState(Object.assign({}, this.state, obj || {}));
+    },
+
+    // 是否当前地址是修改邮箱
+    isModifyEmail: function() {
+        return /email$/.test(this.props.location.pathname);
     },
 
     // 倒计时结束
@@ -65,8 +85,8 @@ let Email = React.createClass({
 
     // 点击发送验证码
     onClickSend: function(e) {
-        if (!this.refs.email.isValid()) {
-            this.refs.form.updateInputsWithError({email: '请输入真实邮箱'});
+        if (!this.refs.contact.isValid()) {
+            this.refs.form.updateInputsWithError({contact: '请输入真实' + (this.isModifyEmail() ? '邮箱' : '手机号')});
             return;
         }
 
@@ -74,14 +94,16 @@ let Email = React.createClass({
         this._setState({ countDown: true });
 
         const userAction = new UserAction();
-        this.props.dispatch(userAction.sendCodeForContact(this.refs.email.getValue()));
+        this.props.dispatch(userAction.sendCodeForContact(this.refs.contact.getValue()));
     },
 
     // 提交表单
     onSubmit: function(model) {
+        this.loadingSubmitButton();
+
         const userAction = new UserAction();
         this.props.dispatch(userAction.updateContact({
-            contact: model.email,
+            contact: model.contact,
             code: model.code,
             password: cryptoPasswd(model.passwd),
         }));
@@ -89,6 +111,8 @@ let Email = React.createClass({
 
     render: function() {
         let user = this.props.user.data || {};
+        let isEmail = this.isModifyEmail();
+
         return (
             <Formsy.Form
                 ref="form"
@@ -99,19 +123,19 @@ let Email = React.createClass({
                 onChange={this.onFormChange}
             >
                 <div className="formsy-list cl">
-                    <label>当前邮箱：</label>
-                    <div>{user.email}</div>
+                    <label>当前{isEmail ? '邮箱' : '手机'}：</label>
+                    <div>{isEmail ? user.email : user.mobile}</div>
                 </div>
 
                 <FormsyText
-                    ref="email"
-                    name="email"
+                    ref="contact"
+                    name="contact"
                     type="text"
-                    title="更改邮箱:"
-                    placeholder="请输入新邮箱"
+                    title={`更改${isEmail ? '邮箱' : '手机'}:`}
+                    placeholder={`请输入新的${isEmail ? '邮箱' : '手机号'}`}
                     required
-                    validations="isEmail"
-                    validationError="请输入真实邮箱"
+                    validations={isEmail ? {isEmail: isEmail} : {matchRegexp: /1[3-9]\d{9}/}}
+                    validationError={`请输入真实${isEmail ? '邮箱' : '手机号'}`}
                 />
 
                 <p className="indent">
