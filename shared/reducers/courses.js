@@ -64,9 +64,27 @@ export function students(state, action) {
 export function examination(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_EXAM, state, action);
 }
+export function sheets(state, action) {
+    return reducerRequest(CoursesAction.LOAD_SHEETS, state, action);
+}
+export function course_sheet(state, action) {
+    return reducerRequest(CoursesAction.LOAD_COURSE_SHEET, state, action);
+}
 
 export function courses_mine(state, action) {
-    return reducerRequest(CoursesAction.LOAD_MY_COURSES, state, action);
+    let type = getRequestTypes(CoursesAction.LOAD_MY_COURSES_MORE);
+    switch (action.type) {
+        case type.success:
+            let data = {
+                list: state.data.list.concat(action.response.data.list),
+                total: action.response.data.total,
+            };
+            return Object.assign({}, state, { data: data });
+            break;
+        default:
+            return reducerRequest(CoursesAction.LOAD_MY_COURSES, state, action);
+
+    }
 }
 //export function courses_mine_learned(state, action) {
 //    return reducerRequest(CoursesAction.LOAD_MY_COURSES_LEARNED, state, action);

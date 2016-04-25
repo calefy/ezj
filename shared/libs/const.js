@@ -59,6 +59,6 @@ export const orderStatus = {
 };
 
 export const payType = {
-    COURSE: 1,
+    COURSE: 0,
     PACKAGE: 2,
 }

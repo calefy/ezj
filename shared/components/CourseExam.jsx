@@ -1,144 +1,233 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
+import {getRequestTypes} from '../libs/utils';
+import CoursesAction from '../actions/CoursesAction';
+
 class CourseExam extends Component {
     static propTypes = {
+        course: PropTypes.object.isRequired,
         examination: PropTypes.object.isRequired,
+        sheet: PropTypes.object.isRequired,
+        onSubmit: PropTypes.func.isRequired,
+    };
+
+    state = {
+        start: false,
+        index: 0,
+    };
+    answers = {};
+    time = 0;
+
+    componentWillReceiveProps(nextProps) {
+        const type = getRequestTypes(CoursesAction.SUBMIT_SHEET);
+        switch(nextProps.action.type) {
+            case type.success:
+                console.log('submit sheet return: ', nextProps.action.response);
+                alert('提交测验成功');
+                break;
+            case type.failure:
+                alert(nextProps.action.error && nextProps.action.error.message || '提交测验失败');
+                break;
+        }
+    }
+
+    setCurrentIndexAnswer = () => {
+        let questions = this.props.examination.questions || [];
+        // 保存当前题的答案
+        let curQuestion = questions[this.state.index];
+        let answerIds = [];
+        for (let key in this.refs) {
+            if (/answer_/.test(key) && this.refs[key].checked) {
+                answerIds.push(this.refs[key].value);
+            }
+        }
+        this.answers[curQuestion.question.id] = answerIds;
+    };
+    clearCurrentChecked = () => {
+        for (let key in this.refs) {
+            if (/answer_/.test(key) && this.refs[key].checked) {
+                this.refs[key].checked = false;
+            }
+        }
+    };
+    onClickBegin = e => {
+        this.time = (new Date()).getTime();
+        this.setState({ index: 0, start: true });
+    };
+    onPrev = e => {
+        this.setCurrentIndexAnswer();
+        this.clearCurrentChecked();
+
+        let index = Math.max(0, this.state.index - 1);
+        if (index !== this.state.index) {
+            this.setState(Object.assign({}, this.state, {index: index}));
+        }
+    };
+    onNext = e => {
+        // 保存当前表单值
+        this.setCurrentIndexAnswer();
+        this.clearCurrentChecked();
+        // 跳转题目
+        let questions = this.props.examination.questions || [];
+        let index = Math.min(questions.length, this.state.index + 1);
+        if (index !== this.state.index) {
+            this.setState(Object.assign({}, this.state, {index: index}));
+        }
+    };
+    onSubmit = e => {
+        e.preventDefault();
+        this.setCurrentIndexAnswer();
+
+        const { course, examination } = this.props;
+        let exam = examination.examination;
+        let model = {
+            course_id: course.id,
+            course_name: course.course_name,
+            organization_id: '',
+            examination_id: exam.id,
+            sheet_cost_time: Math.ceil(((new Date()).getTime() - this.time) / 1000),
+            answers: [],
+        };
+        for (let qid in this.answers) {
+            model.answers.push({
+                examination_question_id: qid,
+                answer_content: this.answers[qid].join(','),
+            });
+        }
+
+        console.log(model);
+        this.props.onSubmit(model);
     };
 
     render() {
-        let examination = this.props.examination.data || {};
-        let questions = examination.questions || [];
-        examination = examination.examination || {};
+        let examination = this.props.examination.examination || {};
+        let questions = this.props.examination.questions || [];
+        let curQuestion = questions.length > this.state.index ? questions[this.state.index] : {};
+
+        let sheet = this.props.sheet.data && this.props.sheet.data.list || [];
+        sheet = sheet.length ? sheet[0] : null;
+
+        // 遍历问题，统计单选、多选数量
+        let singleNumber = 0, multiNumber = 0;
+        questions.forEach(item => {
+            if (item.examination_question_is_multi) {
+                multiNumber++;
+            } else {
+                singleNumber++;
+            }
+        });
 
         return (
             <div className="content course-test">
-                <div className="course-test-info">
-                    <h4>{examination.examination_title}</h4>
-                    <dl>
-                        {questions.map((item, index) => {
-                            let q = item.question;
-                            let os = item.options;
-                            return [
-                                <dt key={index}>
-                                    {index + 1}.
-                                    <div className="dib vat" dangerouslySetInnerHTML={{__html: q.examination_question_content}} />
-                                </dt>,
-                                os.map((o, i) => {
-                                    return <dd key={i}>{String.fromCharCode(65 + i)}. {o.option_text}</dd>
-                                })
-                            ];
-                        })}
-                    </dl>
-                </div>
 
-                <div className="course-test-info">
-                    <h2><i className="iconfont icon-chapter"></i>BCG战略调色板对中国金融机构的启示和应用</h2>
-                    <div className="course-test-num">
-                        <dl className="cl">
-                            <dt>题目数量:</dt>
-                            <dd><em>6</em>道题</dd>
-                        </dl>
-                        <dl className="cl">
-                            <dt>单选题:</dt>
-                            <dd><em>6</em>道题</dd>
-                        </dl>
-                        <dl className="cl">
-                            <dt>多选题:</dt>
-                            <dd><em>0</em>道题</dd>
-                        </dl>
+                {!sheet ?
+                    <div>
+                        {!this.state.start ?
+                            <div className="course-test-info">
+                                <h2><i className="iconfont icon-chapter"></i>{examination.examination_title}</h2>
+                                <div className="course-test-num">
+                                    <dl className="cl">
+                                        <dt>题目数量:</dt>
+                                        <dd><em>{questions.length}</em>道题</dd>
+                                    </dl>
+                                    <dl className="cl">
+                                        <dt>单选题:</dt>
+                                        <dd><em>{singleNumber}</em>道题</dd>
+                                    </dl>
+                                    <dl className="cl">
+                                        <dt>多选题:</dt>
+                                        <dd><em>{multiNumber}</em>道题</dd>
+                                    </dl>
+                                </div>
+                                <button className="btn" type="button" onClick={this.onClickBegin}>开始答题</button>
+                            </div>
+                            :
+                            <div className="course-test-question">
+                                <h3>
+                                    <p>{curQuestion.question && curQuestion.question.examination_question_is_multi ? '多' : '单'}项选择题</p>
+                                    <p>已做<em className="course-test-already">{this.state.index }</em>题 / 共<em className="course-test-all">{questions.length}</em>题</p>
+                                </h3>
+                                <dl className="course-test-question-info">
+                                    <dt>
+                                        <em>{this.state.index + 1}.</em>
+                                        <div className="dib vat" dangerouslySetInnerHTML={{__html: curQuestion.question && curQuestion.question.examination_question_content}}></div>
+                                    </dt>
+                                    {(curQuestion.options || []).map((item, index) => {
+                                        let answer = this.answers[curQuestion.question.id] || [];
+                                        let isAnswered = answer.indexOf(item.id) >= 0;
+                                        return  <dd key={index}>
+                                                    <label>
+                                                        <input type={curQuestion.question.examination_question_is_multi ? 'checkbox' : 'radio'} name={curQuestion.question.examination_question_is_multi ? 'answer[]' : 'answer'} value={item.id} ref={`answer_${index}`} defaultChecked={isAnswered} />
+                                                        {String.fromCharCode(65 + index)}. {item.option_text}
+                                                    </label>
+                                                </dd>
+                                    })}
+                                </dl>
+                                <div className="course-test-question-btn">
+                                    <button type="button" className={`btn ${this.state.index === 0 ? 'disabled' : ''}`} disabled={this.state.index === 0} onClick={this.onPrev}>上一题</button>
+                                    <button type="button" className={`btn ${this.state.index + 1 === questions.length ? 'disabled' : ''}`} disabled={this.state.index + 1 === questions.length} onClick={this.onNext}>下一题</button>
+                                    <button type="button" className="btn" onClick={this.onSubmit}>提交答卷</button>
+                                </div>
+                            </div>
+                        }
                     </div>
-                    <button className="btn" type="button" onClick={this.onClickExam}>开始答题</button>
-                </div>
-                <div className="course-test-question">
-                    <h3>
-                        <p>单项选择题</p>
-                        <p>已做<em className="course-test-already">1</em>题 / 共<em className="course-test-all">6</em>题</p>
-                    </h3>
-                    <dl className="course-test-question-info">
-                        <dt>
-                            <em>1.</em><div className="dib vat">波士顿咨询公司的创始人、战略学的先驱是（）</div>
-                        </dt>
-                        <dd><input type="radio" />A. 马丁·瑞夫斯</dd>
-                        <dd><input type="radio" />B. 布鲁斯·亨德森</dd>
-                        <dd><input type="checkbox" />C. 迈克尔·波特</dd>
-                        <dd><input type="radio" />D. 伊恩·里德</dd>
-                    </dl>
-                    <div className="course-test-question-btn">
-                        <Link to="" className="btn btn-disabled">上一题</Link>
-                        <Link to="" className="btn">下一题</Link>
-                        <Link to="" className="btn">跳过</Link>
-                        <Link to="" className="btn">提交答卷</Link>
-                    </div>
-                </div>
-                <div className="course-test-result">
-                    <h2><i className="iconfont icon-chapter"></i>课程测验结果</h2>
-                    <h4>BCG战略调色板对中国金融机构的启示和应用【课程测试】</h4>
-                    <div className="course-test-num">
-                        <dl className="cl">
-                            <dt>题目数量</dt>
-                            <dd>8道题</dd>
-                        </dl>
-                        <dl className="cl">
-                            <dt>正确率</dt>
-                            <dd>38%</dd>
-                        </dl>
-                        <dl className="cl">
-                            <dt>答题日期</dt>
-                            <dd>2014.12.04</dd>
-                        </dl>
-                    </div>
-                    <div style={{ position: "relative"}}>
-                        <button className="btn" type="button" onClick={this.onClickExam}>重新测验</button>
-                        <Link to="" className="course-test-see">查看答案</Link>
-                    </div>
-                </div>
+                    :
+                    <div>
+                        <div className="course-test-result">
+                            <h2><i className="iconfont icon-chapter"></i>课程测验结果</h2>
+                            <h4>BCG战略调色板对中国金融机构的启示和应用【课程测试】</h4>
+                            <div className="course-test-num">
+                                <dl className="cl">
+                                    <dt>题目数量</dt>
+                                    <dd>8道题</dd>
+                                </dl>
+                                <dl className="cl">
+                                    <dt>正确率</dt>
+                                    <dd>38%</dd>
+                                </dl>
+                                <dl className="cl">
+                                    <dt>答题日期</dt>
+                                    <dd>2014.12.04</dd>
+                                </dl>
+                            </div>
+                            <div style={{ position: "relative"}}>
+                                <button className="btn" type="button" onClick={this.onClickExam}>重新测验</button>
+                                <Link to="" className="course-test-see">查看答案</Link>
+                            </div>
+                        </div>
 
-                    <div className="result-content course-result-content">
-                        <dl>
-                            <dt>1.一般情况下，新发行基金的封闭期不得超过（ ）</dt>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>A.域名是数字</span>
-                                <em className="true fr">正确答案：C</em>
-                            </dd>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>A.域名是数字</span>
-                            </dd>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>A.域名是数字</span>
-                            </dd>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>A.域名是数字</span>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt>2.假设有一支新设立的基金，发行份额共1亿份，每个份额的初始价值1元。基金经理买入200万股股票A，300万股股票B，250万股股票C，三只股票的价格变化如下。
-那么一个月后，该基金的基金净值为（ ），此时有新的投资者希望能够认购该基金，请问此时基金的申购价格应为（ ），基金公司一共收到了300万份基金申购，那
-么此时该基金的总规模为（ ）亿 股票A 股票B 股票C 买入价格20、10、10，一个月后市价18、12、14。</dt>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>A.1.12 1.12 1.1536</span>
-                                <em className="true fr">正确答案：C</em>
-                            </dd>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>B.1.12 1.12 0.9874</span>
-                            </dd>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>C.1.00 1.12 1.1536</span>
-                            </dd>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>D.1.23 1.23 0.9874</span>
-                            </dd>
-                            <p>答案解析：答案解析答案解析答案解析</p>
-                        </dl>
+                        <div className="result-content course-result-content">
+                            {questions.map((item, index) => {
+                                let correctText = [];
+                                item.options.forEach((o, i) => {
+                                    if (o.is_correct) correctText.push(String.fromCharCode(65 + i));
+                                });
+                                return (
+                                    <dl key={index}>
+                                        <dt>
+                                            {index + 1}.
+                                            <div className="dib vat" dangerouslySetInnerHTML={{__html: item.question.examination_question_content}} />
+                                        </dt>
+                                        {item.options.map((o, i) => {
+                                            return (
+                                                <dd key={i}>
+                                                    <input type={item.question.examination_question_is_multi ? 'checkbox' : 'radio'} value={o.id} />
+                                                    <span>{String.fromCharCode(65 + i)}.{o.option_text}</span>
+                                                    {i === 0 ?
+                                                        <em className="true fr">正确答案：{correctText.join(',')}</em>
+                                                        : null
+                                                    }
+                                                </dd>
+                                            );
+                                        })}
+                                    </dl>
+                                );
+                            })}
+                        </div>
                     </div>
+                }
+
             </div>
         );
     }

@@ -76,8 +76,22 @@ module.exports = class CoursesAction extends BaseAction {
     }
 
     static LOAD_COURSE_EXAM = 'course_exam';
-    loadCourseExamination(examId) {
+    loadExamination(examId) {
         return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_EXAM, this.api.examination(examId), {examId} );
+    }
+
+    static LOAD_COURSE_SHEET = 'course_sheet';
+    loadCourseSheet(courseId) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_COURSE_SHEET, this.api.courseSheet(courseId), {courseId} );
+    }
+    static LOAD_SHEETS = 'course_sheets';
+    loadSheets(params) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_SHEETS, this.api.sheets(params), params );
+    }
+
+    static SUBMIT_SHEET = 'submit_sheet';
+    submitSheet(model) {
+        return BaseAction.dispatchRequest( CoursesAction.SUBMIT_SHEET, this.api.submitSheet(model) );
     }
 
     static LOAD_LECTURER = 'lecturer';
@@ -92,6 +106,10 @@ module.exports = class CoursesAction extends BaseAction {
     static LOAD_MY_COURSES = 'my_courses';
     loadMyCourses(params) {
         return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES, this.api.myCourses(params), params );
+    }
+    static LOAD_MY_COURSES_MORE = 'my_courses_more';
+    loadMyCoursesMore(params) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_MY_COURSES_MORE, this.api.myCourses(params), params );
     }
     //static LOAD_MY_COURSES_LEARNED = 'my_courses_learned';
     //static LOAD_MY_COURSES_BUYED = 'my_courses_buyed';
