@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { payType } from '../../libs/const';
 import { toTimeString, avatar, getRequestTypes } from '../../libs/utils';
 
+import OperateAction from '../../actions/OperateAction';
 import CommerceAction from '../../actions/CommerceAction';
 import CoursesAction from '../../actions/CoursesAction';
 import CourseExam from '../../components/CourseExam.jsx';
@@ -135,8 +136,20 @@ class Course extends Component {
         this.setState({ isShowTipBuy: false });
     };
 
-    // 点击立即购买时，如果是免费课程，直接支付
+    // 点击立即购买时，
+    // - 如果未登录，弹出登录框
+    // - 如果是免费课程，直接支付
     onClickBuy = e => {
+        // 检测登录状态
+        if (!this.props.user.data) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+
+            let operateAction = new OperateAction();
+            this.props.dispatch(operateAction.openLoginDialog());
+        }
+
+        // 判断免费课程
         let course = this.props.course.data || {};
         if (course.course_price <= 0) {
             e.preventDefault();
@@ -398,6 +411,7 @@ class Course extends Component {
 
 module.exports = connect( state => ({
     action: state.action,
+    user: state.user,
     course: state.course,
     course_private: state.course_private,
     course_sheet: state.course_sheet,
