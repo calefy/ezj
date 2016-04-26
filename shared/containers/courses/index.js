@@ -240,7 +240,7 @@ class Course extends Component {
                             <p className="course-price">{course.course_price > 0 ? '¥' + course.course_price : '免费'}</p>
                             <p className="course-state">
                                 {priv.is_purchased ?
-                                    (priv.is_expired ? '课程已到期，请续费' : '有效期至' + priv.expiring_date)
+                                    (priv.is_expired ? '课程已到期，请续费' : priv.expiring_date ? '有效期至' + priv.expiring_date : '')
                                     :
                                     '付款后90天内有效'
                                 }
