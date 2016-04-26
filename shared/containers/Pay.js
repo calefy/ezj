@@ -128,8 +128,8 @@ let Pay = React.createClass({
     onPay: function(model) {
         const { location, account, course } = this.props;
         // 如果选择了紫荆币支付，判断是否足够，如果不足，设置支付窗口
-        if (!(this.state.pointPay &&
-                account.data.available_amount >= course.course_price)) {
+        if (this.state.pointPay &&
+                account.data.available_amount - 0 < (course.data.course_price || 0) - 0) {
             this.payWindowName = 'payWindow_' + (new Date()).getTime();
             this.payWindow = window.open('about:blank', this.payWindowName);
         }
