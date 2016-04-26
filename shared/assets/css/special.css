@@ -173,7 +173,7 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .special-finance-info a{text-align:center;color:#fff;font-weight:bold;line-height:41px;width:126px;height:41px; background:url(../img/ifc-btnbg.png) no-repeat;}
 
 .special-content h3{ font-size: 1.125em; color: #303030; border-bottom: 1px solid #dfa4b3; background: #fff; line-height: 42px; padding: 0 20px;}
-.special-content .container{ margin: 0 auto 20px;}
+.special-content .container{ margin: 20px auto;}
 .special-finance-desc{padding:10px 27px 15px;}
 .special-finance-desc p{line-height:19px;margin:15px 0;font-size:0.875em;}
 
@@ -188,6 +188,7 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .special-finance-special .special-finance-multi{line-height:17px;}
 
 .special-finance-teacher{padding:20px 0 30px 30px;margin-right:-35px;}
+.special-finance-teacher ul{margin-right: -30px;}
 .special-finance-teacher li{float:left;width:338px;margin-right:62px;}
 .special-finance-teacher li div{height:270px;font-size:0.875em;line-height:30px;background-color:#dedede;}
 .special-finance-teacher li p{padding:20px 9px 0;}
@@ -209,12 +210,12 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .special-finance-tabs th,.special-finance-tabs td{padding: 12px 10px;line-height: 17px;}
 .special-finance-tabs td:last-child{ text-align: left;}
 
-.special-finance-cases{ height:627px; background: #fff; border-bottom: 1px solid #e5e5e5; overflow: hidden;}
+.special-finance-cases{ height:630px; background: #fff; border-bottom: 1px solid #e5e5e5; overflow: hidden;}
 .special-finance-cases td a{ display: block; margin: 0px auto; width: 202px; height:28px; line-height: 28px; text-align: center; color: #fff;
  background: #b01c40; border:2px solid #b01c40; border-radius: 10px;}
 .special-finance-cases .special-finance-jump{ background: #fff !important; color: #b01c40 !important;}
 
-.special-finance-cases div td{ padding: 51px 6px; line-height: 20px; text-align: center}
+.special-finance-cases div td{width: 308px; padding: 51px 6px; line-height: 20px; text-align: center}
 .special-finance-cases #tab2 td{ padding: 38px 6px;}
 .special-finance-cases #tab3 td{ padding:52px 6px;}
 .special-finance-cases #tab4 td,.special-finance-cases #tab5 td{padding: 69px 6px; line-height: 27px;}
@@ -298,7 +299,6 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .synopsis_price p{ font-size: 2.25em;}
 .synopsis_price a{ background: #fcbf32; border: 1px solid #f6852e; color: #fff; width: 140px; line-height: 44px; display: block; font-size: 1.5em; text-align: center; border-radius: 10px; margin: 0 30px 0 0;}
 
-.special-content .container > div{ margin: 20px 0;}
 .special-security-teacher li{ margin:25px 21px; float: left; width: 195px; height:240px; text-align: center; font-size: 0.875em; border:1px solid rgba(0,0,0,0.31); color: #505050;}
 .special-security-teacher li a{ display: block;}
 .special-security-teacher li img{ width: 195px; height:195px;}
