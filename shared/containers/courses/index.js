@@ -186,7 +186,7 @@ class Course extends Component {
         let hasExam = course.course_examination_id;
         hasExam = hasExam && hasExam !== '0';
         let hash = this.props.location.hash || '#intro'; // 如果没有课程测验，则仅显示intro
-        if (hash === '#exam' && (!hasExam || !priv.is_purchased)) {
+        if (hash === '#exam' && (!hasExam || !priv.is_purchased || priv.is_expired)) {
             hash = '#intro';
         }
 
@@ -276,7 +276,7 @@ class Course extends Component {
                             <ul className="nav-tabs course-tabs cl">
                                 <li className={hash === '#intro' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#intro">介绍</Link></li>
                                 <li className={hash === '#cont' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#cont">内容</Link></li>
-                                {hasExam && priv.is_purchased ?
+                                {hasExam && priv.is_purchased && !priv.is_expired ?
                                     <li className={hash === '#exam' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#exam">测验</Link></li>
                                     : null
                                 }
