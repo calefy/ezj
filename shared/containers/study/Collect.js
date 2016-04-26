@@ -62,7 +62,7 @@ class Collect extends Component {
 
                                     return (
                                         <li key={index}>
-                                            <Link to={`/courses/${item.id}`}>
+                                            <a href={`/courses/${item.id}`} target="_blank">
                                                 <div className="course-list-img">
                                                     <img src={item.picture} alt="" />
                                                 </div>
@@ -73,7 +73,7 @@ class Collect extends Component {
                                                         <i className="iconfont icon-heart fr" onClick={this.onCancelCollect} data-id={item.id}></i>
                                                     }
                                                 </h6>
-                                            </Link>
+                                            </a>
                                         </li>
                                     );
                                 })}
