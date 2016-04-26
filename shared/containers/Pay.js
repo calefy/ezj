@@ -34,7 +34,8 @@ let Pay = React.createClass({
 
     getInitialState: function() {
         return {
-            pay: 'pointpay', // 支付方式： pointpay、alipay、unipay
+            pointPay: true, // 紫荆币支付pointpay
+            payMethod: 'alipay', // 支付方式： alipay、unipay
             isShowConfirm: false, // 支付结果确认显示标识
             isShowProtocol: false, // 协议显示标识
         };
@@ -94,15 +95,15 @@ let Pay = React.createClass({
     },
     // 紫荆币支付选项切换
     onChangePay: function(e) {
-        this._setState({pay: this.refs.pointpay.checked ? 'pointpay' : 'alipay'});
+        this._setState({ pointPay: this.refs.pointpay.checked });
     },
     // 点击具体的支付方式
     onClickPayMehtod: function(e) {
         e.preventDefault();
-        if (this.refs.pointpay.checked) return;
-
         let method = e.currentTarget.getAttribute('data-pay');
-        this._setState({pay: this.state.pay === method ? '' : method});
+        if (this.state.payMethod !== method) {
+            this._setState({ payMethod: method });
+        }
     },
 
     // 执行支付
@@ -110,12 +111,12 @@ let Pay = React.createClass({
         const { location } = this.props;
         let id = location.query.id;
         let type = location.query.type;
-        let pay = this.state.pay;
+        let method = this.state.payMethod;
         const commerceAction = new CommerceAction();
         this.props.dispatch(commerceAction.pay({
             items: id,
             item_type: type, // 购买类型
-            payment_method: pay === 'pointpay' ? 10 : pay === 'alipay' ? 20 : pay === 'unipay' ? 30 : '' // 紫荆币支付
+            payment_method: this.state.pointPay ? 10 : method === 'alipay' ? 20 : method === 'unipay' ? 30 : '', // 支付方式代码
         }));
     },
 
@@ -188,18 +189,18 @@ let Pay = React.createClass({
                         <h3>结算信息</h3>
                         <h4 className="pay-balance-price cl">
                             <span className="fl"><input type="checkbox" ref="pointpay" defaultChecked={true} onChange={this.onChangePay} /> 使用紫荆币支付</span>
-                            <em className="fr">-{this.state.pay === 'pointpay' ? Math.min(price, accountAmount) : 0}</em>
+                            <em className="fr">-{this.state.pointPay ? Math.min(price, accountAmount) : 0}</em>
                         </h4>
                         <h5 className="cl">
                             <span className="fl">还需支付</span>
-                            <em className="fr">&yen;{this.state.pay === 'pointpay' ? (price > accountAmount ? price - accountAmount : 0) : price}</em>
+                            <em className="fr">&yen;{this.state.pointPay ? (price > accountAmount ? price - accountAmount : 0) : price}</em>
                         </h5>
                     </div>
                     <div className="pay-method">
                         <dl>
                             <dt>支付方式</dt>
-                            <dd className="pay-alipay" data-pay="alipay" style={{borderColor: this.state.pay === 'alipay' ? '#f00' : '#e5e5e5'}} onClick={this.onClickPayMehtod}><em>&nbsp;</em></dd>
-                            <dd className="pay-unipay" data-pay="unipay" style={{borderColor: this.state.pay === 'unipay' ? '#f00' : '#e5e5e5'}} onClick={this.onClickPayMehtod}><em>银联</em></dd>
+                            <dd className="pay-alipay" data-pay="alipay" style={{borderColor: this.state.payMethod === 'alipay' ? '#f00' : '#e5e5e5'}} onClick={this.onClickPayMehtod}><em>&nbsp;</em></dd>
+                            <dd className="pay-unipay" data-pay="unipay" style={{borderColor: this.state.payMethod === 'unipay' ? '#f00' : '#e5e5e5'}} onClick={this.onClickPayMehtod}><em>银联</em></dd>
                         </dl>
                         <div>
                             <FormsyCheckbox name="agree" value="1" defaultChecked={true} required /> 我已经阅读并同意
