@@ -33,6 +33,9 @@ class Header extends Component {
         switch(nextProps.action.type) {
             case loginType.success:
                 this.hideDialog();
+                // 因登录返回的用户数据不全，因此登录成功后加载用户完整数据
+                const userAction = new UserAction();
+                nextProps.dispatch(userAction.loadAccount());
                 break;
             case loginType.failure:
                 this.refs.loginForm.handleResponse(nextProps.action.error);
