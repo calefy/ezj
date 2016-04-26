@@ -386,5 +386,14 @@ module.exports = {
                 });
             }
         },
+        // 手机端测验
+        {
+            path: 'mobile/test',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/mobile/Test'));
+                });
+            }
+        },
     ]
 };
