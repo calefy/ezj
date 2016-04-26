@@ -100,61 +100,61 @@ class CourseCategoryDetail extends Component {
                                 <span className="open-title">第1讲：&emsp;北京&emsp;2016年01月16日</span>
                                 <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                 <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                <Link to="" className="disabled">已结束</Link>
+                                <a href="/topic/finance" target="_blank" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第2讲：&emsp;北京&emsp;2016年02月27日</span>
                                 <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                 <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                <Link to="" className="disabled">已结束</Link>
+                                <a href="/topic/finance" target="_blank" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第3讲：&emsp;北京&emsp;2016年02月28日</span>
                                 <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                 <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                <Link to="" className="disabled">已结束</Link>
+                                <a href="/topic/finance" target="_blank" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第4讲：&emsp;北京&emsp;2016年03月19日</span>
                                 <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                 <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                <Link to="" className="disabled">已结束</Link>
+                                <a href="/topic/finance" target="_blank" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第5讲：&emsp;北京&emsp;2016年03月20日</span>
                                 <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                 <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                <Link to="" className="disabled">已结束</Link>
+                                <a href="/topic/finance" target="_blank" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第6讲：&emsp;北京&emsp;2016年04月15日</span>
                                 <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                 <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                <Link to="" className="disabled">已结束</Link>
+                                <a href="/topic/finance" target="_blank" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第7讲：&emsp;北京&emsp;2016年04月16日</span>
                                 <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                 <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                <Link to="" className="disabled">已结束</Link>
+                                <a href="/topic/finance" target="_blank" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第8讲：&emsp;北京&emsp;2016年04月17日</span>
                                 <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                 <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                <Link to="" className="disabled">已结束</Link>
+                                <a href="/topic/finance" target="_blank" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第9讲：&emsp;北京&emsp;2016年05月14日</span>
                                 <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                 <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                <Link to="">立即报名</Link>
+                                <a href="/topic/finance" target="_blank">立即报名</a>
                             </li>
                             <li>
                                 <span className="open-title">第10讲：&emsp;北京&emsp;2015年05月15日</span>
                                 <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                 <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                <Link to="">立即报名</Link>
+                                <a href="/topic/finance" target="_blank">立即报名</a>
                             </li>
                         </ul>
                     </div>
@@ -172,61 +172,61 @@ class CourseCategoryDetail extends Component {
                                     <span className="open-title">第1期：&emsp;北京&emsp;2015年11月17日－11月28日</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                    <Link to="" className="disabled">已结束</Link>
+                                    <a href="/topic/security" target="_blank" className="disabled">已结束</a>
                                 </li>
                                 <li>
                                     <span className="open-title">第2期：&emsp;上海&emsp;2015年12月02日－12月03日</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>上海</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                    <Link to="" className="disabled">已结束</Link>
+                                    <a href="/topic/security" target="_blank" className="disabled">已结束</a>
                                 </li>
                                 <li>
                                     <span className="open-title">第3期：&emsp;深圳&emsp;2016年01月30日－01月31日</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>博林诺富特酒店</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                    <Link to="" className="disabled">已结束</Link>
+                                    <a href="/topic/security" target="_blank" className="disabled">已结束</a>
                                 </li>
                                 <li>
                                     <span className="open-title">第4期：&emsp;北京&emsp;2016年03月26日－03月27日</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                    <Link to="" className="disabled">已结束</Link>
+                                    <a href="/topic/security" target="_blank" className="disabled">已结束</a>
                                 </li>
                                 <li>
                                     <span className="open-title">第5期：&emsp;深圳&emsp;2016年06月25日－06月26日</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                    <Link to="">立即报名</Link>
+                                    <a href="/topic/security" target="_blank">立即报名</a>
                                 </li>
                                 <li>
                                     <span className="open-title">第6期：&emsp;上海&emsp;2016年08月13日－08月14日</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                    <Link to="">立即报名</Link>
+                                    <a href="/topic/security" target="_blank">立即报名</a>
                                 </li>
                                 <li>
                                     <span className="open-title">第7期：&emsp;北京&emsp;待定</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                    <Link to="">立即报名</Link>
+                                    <a href="/topic/security" target="_blank">立即报名</a>
                                 </li>
                                 <li>
                                     <span className="open-title">第8期：&emsp;上海&emsp;待定</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                    <Link to="">立即报名</Link>
+                                    <a href="/topic/security" target="_blank">立即报名</a>
                                 </li>
                                 <li>
                                     <span className="open-title">第9期：&emsp;深圳&emsp;待定</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                    <Link to="">立即报名</Link>
+                                    <a href="/topic/security" target="_blank">立即报名</a>
                                 </li>
                                 <li>
                                     <span className="open-title">第10期：&emsp;北京&emsp;待定</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                    <Link to="">立即报名</Link>
+                                    <a href="/topic/security" target="_blank">立即报名</a>
                                 </li>
                             </ul>
                         </div>
