@@ -112,20 +112,26 @@ class Classify extends Component {
                             </p>
                             : null
                         }
-                        {isCategory(location) && this.props.course_category.data && this.props.category_courses.data ?
-                            <CourseCategoryDetail
-                                category={this.props.course_category.data}
-                                courses={this.props.category_courses.data.list}
-                            />
-                            : null
+                        {!isCategory(location) ? null :
+                            this.props.course_category.isFetching || this.props.category_courses.isFetching ?
+                                <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
+                                :
+                                <CourseCategoryDetail
+                                    category={this.props.course_category.data}
+                                    courses={this.props.category_courses.data.list}
+                                />
                         }
-                        {isSearch(location) && this.props.courses_search.data ?
-                            <CourseSearch
-                                courses={this.props.courses_search.data.list}
-                                total = {this.props.courses_search.data.total}
-                                location = {location}
-                            />
-                            : null
+                        {!isSearch(location) ? null :
+                            this.props.courses_search.isFetching ?
+                                <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
+                                :
+                                this.props.courses_search.data ?
+                                    <CourseSearch
+                                        courses={this.props.courses_search.data.list}
+                                        total = {this.props.courses_search.data.total}
+                                        location = {location}
+                                    />
+                                    : null
                         }
                     </div>
                 </div>
