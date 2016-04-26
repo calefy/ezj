@@ -3,11 +3,17 @@
  */
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { payType } from '../libs/const';
 
 class CourseCategoryDetail extends Component {
     static propTypes = {
         category: PropTypes.object.isRequired, // 单个分类详情
         courses: PropTypes.array.isRequired, // 包含的课程
+        handleBuyCourse: PropTypes.func.isRequired, // 购买课程
+    };
+
+    onClickBuy = e => {
+        this.props.handleBuyCourse(e.currentTarget.getAttribute('data-id'), e);
     };
 
     renderCourses = list => {
@@ -19,7 +25,7 @@ class CourseCategoryDetail extends Component {
                     <span className="online-price"><i className="iconfont icon-price"></i>{item.course_price}</span>
                     <span className="online-num"><i className="iconfont icon-user"></i>{item.student_count} 人</span>
                     <a href={`/courses/${item.id}`} className="online-content" target="_blank">详情</a>
-                    <a href={`/courses/${item.id}`} className="online-buy" target="_blank">购买</a>
+                    <a href={`/pay?type=${payType.COURSE}&id=${item.id}`} className="online-buy" target="_blank" data-id={item.id} onClick={this.onClickBuy}>购买</a>
                 </dd>
             );
         });

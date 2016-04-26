@@ -147,6 +147,7 @@ class Course extends Component {
 
             let operateAction = new OperateAction();
             this.props.dispatch(operateAction.openLoginDialog());
+            return;
         }
 
         // 判断免费课程
