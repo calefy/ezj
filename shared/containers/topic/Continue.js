@@ -109,7 +109,7 @@ let TopicIndex = React.createClass({
 			                <h2>在线答题</h2><div><span className="diamond"></span><span className="diamond"></span><span className="diamond"></span></div>
 			            </div>
 			            <p>学员可以通过答题获得学分，每套试卷为50道题，均为单选题型。每套试卷答题准确率在70%以上可获得5学分，最多可获得20学分。每次答题，系统将随机为学员分配一套试卷。</p>
-			            <button type="" className="btn">开始答题</button>
+			            <Link to="/topic/continue/test" className="">开始答题</Link>
 			        </div>
 			    </div>
             </div>

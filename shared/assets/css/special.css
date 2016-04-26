@@ -382,7 +382,7 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .special-summary .online-course .online-time, .special-summary .online-course .online-price, .special-summary .online-course .online-num{ width:180px;}
 
 .special-test p{ text-indent: 28px; line-height: 1.8}
-.special-test .btn {
+.special-test a {
     background: url(../img/continue-arrow.png) no-repeat 40px center #2f84c7;
     box-shadow: 0 1px 1px #3f3b3a;
     border:1px solid #2f84c7;
@@ -390,7 +390,8 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
     width: 180px;
     display: block;
     margin: 20px auto 0;
-    text-indent: 50px;
-    line-height: 26px;
+    text-indent: 70px;
+    line-height: 40px;
+    color: #fff;
 }
 
