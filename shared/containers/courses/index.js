@@ -290,7 +290,7 @@ class Course extends Component {
                                                         <i className="icon icon-pro"></i>
                                                         <Link to={`/courses/${item.course_id}/chapters/${item.id}`} onClick={this.onToVideo}>{item.chapter_name}</Link>
                                                         <span className="course-audition">{item.free_trial_status ? <Link to={`/courses/${item.course_id}/chapters/${item.id}`}>[试听]</Link> : ''}</span>
-                                                        <span className="fr course-time"><i className="iconfont icon-time"></i>{toTimeString(item.video.video_duration, 'm:s')}</span>
+                                                        <span className="fr course-time"><i className="iconfont icon-time"></i>{toTimeString(item.video && item.video.video_duration || 0, 'm:s')}</span>
                                                     </div>
                                                 </dd>
                                         })}
