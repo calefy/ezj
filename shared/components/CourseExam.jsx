@@ -217,7 +217,7 @@ class CourseExam extends Component {
                                 </dl>
                                 <dl className="cl">
                                     <dt>正确率</dt>
-                                    <dd>{sheet.sheet_score}%</dd>
+                                    <dd>{((sheet.sheet_score || 0) - 0).toFixed(2)}%</dd>
                                 </dl>
                                 <dl className="cl">
                                     <dt>答题日期</dt>

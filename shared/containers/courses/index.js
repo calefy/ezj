@@ -287,14 +287,17 @@ class Course extends Component {
                                         </dl>
                                     </div>
                                     : hash === '#exam' ?
-                                        <CourseExam
-                                            course = {course}
-                                            examination = {this.props.examination.data || {}}
-                                            sheet = {this.props.course_sheet.data || {}}
-                                            action = {this.props.action}
-                                            onLoadSheet = {this.handleLoadSheetAnswer}
-                                            onSubmit = {this.handleExamSubmit}
-                                        />
+                                        this.props.examination.isFetching || this.props.course_sheet.isFetching ?
+                                            <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
+                                            :
+                                            <CourseExam
+                                                course = {course}
+                                                examination = {this.props.examination.data || {}}
+                                                sheet = {this.props.course_sheet.data || {}}
+                                                action = {this.props.action}
+                                                onLoadSheet = {this.handleLoadSheetAnswer}
+                                                onSubmit = {this.handleExamSubmit}
+                                            />
                                         : null
                             }
 
@@ -342,7 +345,8 @@ class Course extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="popover pop">
+
+                <div className="popover pop hide">
                     <h4>提示<i className="iconfont icon-guanbi2 fr" style={{ fontSize: 20, cursor: "pointer" }}></i></h4>
                     <div className="popover-info">
                         购买课程后才可继续观看，现在购买吗？
@@ -352,7 +356,7 @@ class Course extends Component {
                         <Link to="" className="btn disabled">取消</Link>
                     </div>
                 </div>
-                <div className="screen-bg"></div>
+                <div className="screen-bg hide"></div>
             </div>
         );
     }
