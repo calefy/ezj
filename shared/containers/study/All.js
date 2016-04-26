@@ -113,7 +113,7 @@ class All extends Component {
                                 {isPackage ? item.title :
                                     <a href={`/courses/${item.id}`} className="fl" target="_blank">{item.title}</a>
                                 }
-                                {isLearning ? <em className="fr">已学习</em> : null}
+                                {isLearning ? <em className="fr">已学习 {Math.min(item.progress, 100)}%</em> : null}
                             </h4>
                             {isPackage ?
                                 item.items.map((c, i) => {
