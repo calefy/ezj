@@ -52,29 +52,32 @@ class Collect extends Component {
             <div className="study-center-right shadow bg-white fr">
                 <div className="study-collect">
                     <h4 className="h4-title">我收藏的课程</h4>
-                    {courses.length ?
-                        <ul className="index-course cl" style={{ width: 884, margin: "20px auto"}}>
-                            {courses.map((item, index) => {
-                                return (
-                                    <li key={index}>
-                                        <Link to={`/courses/${item.id}`}>
-                                            <div className="course-list-img">
-                                                <img src={item.picture} alt="" />
-                                            </div>
-                                            <h5>{item.title}</h5>
-                                            <h6>
-                                                <i className="iconfont icon-user"></i>{item.joined_count}
-                                                {this.state.canceledMap[item.id] ? null :
-                                                    <i className="iconfont icon-heart fr" onClick={this.onCancelCollect} data-id={item.id}></i>
-                                                }
-                                            </h6>
-                                        </Link>
-                                    </li>
-                                );
-                            })}
-                        </ul>
+                    {courses_mine_collected.isFetching ?
+                        <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
                         :
-                        <p className="no-data">暂无收藏课程</p>
+                        courses.length ?
+                            <ul className="index-course cl" style={{ width: 884, margin: "20px auto"}}>
+                                {courses.map((item, index) => {
+                                    return (
+                                        <li key={index}>
+                                            <Link to={`/courses/${item.id}`}>
+                                                <div className="course-list-img">
+                                                    <img src={item.picture} alt="" />
+                                                </div>
+                                                <h5>{item.title}</h5>
+                                                <h6>
+                                                    <i className="iconfont icon-user"></i>{item.joined_count}
+                                                    {this.state.canceledMap[item.id] ? null :
+                                                        <i className="iconfont icon-heart fr" onClick={this.onCancelCollect} data-id={item.id}></i>
+                                                    }
+                                                </h6>
+                                            </Link>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                            :
+                            <p className="no-data">暂无收藏课程</p>
                     }
 
                     <Pagination

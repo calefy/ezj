@@ -217,7 +217,7 @@ class CourseExam extends Component {
                                 </dl>
                                 <dl className="cl">
                                     <dt>正确率</dt>
-                                    <dd>{sheet.sheet_score}%</dd>
+                                    <dd>{((sheet.sheet_score || 0) - 0).toFixed(2)}%</dd>
                                 </dl>
                                 <dl className="cl">
                                     <dt>答题日期</dt>
@@ -255,7 +255,7 @@ class CourseExam extends Component {
                                                 let isAnswer = correctIds.indexOf(o.id) >= 0; // 是否是正确答案
                                                 return (
                                                     <dd key={i}>
-                                                        <input type={item.question.examination_question_is_multi ? 'checkbox' : 'radio'} defaultChecked={isChecked} readOnly={true} />
+                                                        <input type={item.question.examination_question_is_multi ? 'checkbox' : 'radio'} defaultChecked={isChecked} disabled/>
                                                         <span className={isAnswer ? 'text-success' : isChecked ? 'text-error' : ''}>{String.fromCharCode(65 + i)}.{o.option_text}</span>
                                                         {i === 0 ?
                                                             <em className="true fr">正确答案：{correctText.join(',')}</em>

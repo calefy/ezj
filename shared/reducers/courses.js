@@ -3,6 +3,7 @@
  *******************************/
 import { reducerRequest, getRequestTypes } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
+import CommerceAction from '../actions/CommerceAction';
 
 export function courses_free(state, action) {
     return reducerRequest('freecourses', state, action);
@@ -33,6 +34,7 @@ export function course(state, action) {
 export function course_private(state, action) {
     let collectType = getRequestTypes(CoursesAction.COLLECT_COURSE);
     let cancelType = getRequestTypes(CoursesAction.CANCEL_COLLECT_COURSE);
+    let payType = getRequestTypes(CommerceAction.PAY);
     let data;
     switch(action.type) {
         case collectType.success:
@@ -45,6 +47,17 @@ export function course_private(state, action) {
             data.is_collected = false;
             return Object.assign({}, state, {data: data});
             break;
+        case payType.success:
+            if (state.data) {
+                data = Object.assign({}, state.data);
+                data.is_purchased = true;
+                data.is_expired = false;
+                let d = new Date();
+                d.setDate(d.getDate() + 90);
+                let dy = d.getFullYear(), dm = d.getMonth() + 1, dd = d.getDate() + 1;
+                data.expiring_date = dy + '-' + (dm < 10 ? '0' + dm : dm) + '-' + (dd < 10 ? '0' + dd : dd) + ' 00:00:00';
+                return Object.assign({}, state, {data: data});
+            }
         default:
             return reducerRequest(CoursesAction.LOAD_COURSE_PRIVATE, state, action);
     }

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
+import { payType } from '../libs/const';
 import { getRequestTypes } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
 import Video from '../components/Video.jsx';
@@ -53,6 +54,11 @@ class Play extends Component {
     }
     componentWillReceiveProps(nextProps) {
         this.loadNeededData(nextProps);
+        // 如果章节变化，需要再次获取最新的私密信息，以便保证每次播放都检查权限
+        if (this.props.location.pathname !== nextProps.location.pathname) {
+            const courseAction = new CoursesAction();
+            nextProps.dispatch( courseAction.loadCoursePrivate(nextProps.params.courseId) );
+        }
     }
     /**
      * 加载需要的数据：已有数据与props中参数不一致时，加载对应的数据
@@ -95,7 +101,7 @@ class Play extends Component {
         if (!this.state.pptBoxShow) { // 只展示视频时
             let vw = w < h * videoRatio ? w : h * videoRatio;
             let vh = h < w / videoRatio ? h : w / videoRatio;
-            this.refs.video.setSize(vw, vh);
+            this.refs.video && this.refs.video.setSize(vw, vh);
             box.css({
                 top: hSpace + (h - vh) / 2,
                 left: wSpace + (w - vw) / 2
@@ -107,9 +113,9 @@ class Play extends Component {
             let vh = h < halfW / videoRatio ? h : halfW / videoRatio;
             let ph = vh;
             let pw = ph * pptRatio;
-            this.refs.ppt.setSize(pw, ph);
+            this.refs.ppt && this.refs.ppt.setSize(pw, ph);
 
-            this.refs.video.setSize(vw, vh);
+            this.refs.video && this.refs.video.setSize(vw, vh);
 
             box.css({
                 top: hSpace + (h - vh) / 2,
@@ -118,7 +124,7 @@ class Play extends Component {
         } else { // 仅显示ppt
             let pw = w < h * pptRatio ? w : h * pptRatio;
             let ph = h < w / pptRatio ? h : w / pptRatio;
-            this.refs.ppt.setSize(pw, ph);
+            this.refs.ppt && this.refs.ppt.setSize(pw, ph);
             box.css({
                 top: hSpace + (h - ph) / 2,
                 left: wSpace + (w - pw) / 2
@@ -201,6 +207,7 @@ class Play extends Component {
 
     render() {
         let {course, course_private, chapters, ppts, params} = this.props;
+        let priv = course_private.data || {};
         let progress = course_private.data && course_private.data.chapters_progress || {};
         course = course.data || {};
         chapters = chapters.data && chapters.data.list || [];
@@ -226,6 +233,8 @@ class Play extends Component {
         if (lastRoot) chapterLevel.push({ root: lastRoot, leaves: lastLeaves });
         // 当前章节
         let chapter = chapterMap[params.chapterId] || {};
+        // 是否允许播放
+        let canPlay = course.course_price == 0 || chapter.free_trial_status || (priv.is_purchased && !priv.is_expired);
 
         // 前一节、后一节
         let prevChapterId = null;
@@ -251,25 +260,39 @@ class Play extends Component {
                         <p>{chapter.chapter_name}</p>
                     </div>
                     <div className="play-center cl rel" ref="box">
-                        <div className="play-video fl" style={videoWrapStyle}>
-                            <Video
-                                ref="video"
-                                videoId = {chapter.video.video_origional_ID}
-                                width = {550}
-                                height = {360}
-                                handlePlayTime = {this.handlePlayTime}
-                            />
-                        </div>
-                        <div className={`play-jiangyi fl ${this.state.pptBoxShow ? '' : 'hide'}`}>
-                            <Ppt
-                                ref="ppt"
-                                ppts = {ppts}
-                                currentIndex = {this.state.pptIndex}
-                                onVideoSyncTime = {this.setVideoTime}
-                                onPptOnly = {this.handlePptBoxOnly}
-                                onClose = {this.handlePptBoxShow}
-                            />
-                        </div>
+                        {canPlay ?
+                            <div>
+                                <div className="play-video fl" style={videoWrapStyle}>
+                                    <Video
+                                        ref="video"
+                                        videoId = {chapter.video.video_origional_ID}
+                                        width = {550}
+                                        height = {360}
+                                        handlePlayTime = {this.handlePlayTime}
+                                    />
+                                </div>
+                                <div className={`play-jiangyi fl ${this.state.pptBoxShow ? '' : 'hide'}`}>
+                                    <Ppt
+                                        ref="ppt"
+                                        ppts = {ppts}
+                                        currentIndex = {this.state.pptIndex}
+                                        onVideoSyncTime = {this.setVideoTime}
+                                        onPptOnly = {this.handlePptBoxOnly}
+                                        onClose = {this.handlePptBoxShow}
+                                    />
+                                </div>
+                            </div>
+                            :
+                            <div style={{ padding:'50px 20px' }}>
+                                {course_private.isFetching ?
+                                    <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
+                                    :
+                                    <p className="text-error">
+                                        <Link to="/pay" query={{type: payType.COURSE, id: course.id}} className="btn">请先购买课程</Link>
+                                    </p>
+                                }
+                            </div>
+                        }
                     </div>
                 </div>
 
@@ -330,7 +353,7 @@ class Play extends Component {
                     </div>
                 </div>
                 <div className="play-footer">
-                    <div className="container">
+                    <div className={`container ${canPlay ? '' : 'hide'}`}>
                         <Link to={`/courses/${params.courseId}/chapters/${prevChapterId || params.chapterId}`} className="fl" onClick={this.handleChangeChapter}>上一节</Link>
                         <Link to={`/courses/${params.courseId}/chapters/${nextChapterId || params.chapterId}`} className="fl" onClick={this.handleChangeChapter}>下一节</Link>
                         <em className="play-state fl" onClick={this.handleOver}>已学完</em>

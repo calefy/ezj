@@ -166,10 +166,16 @@ class All extends Component {
                     </li>
                 </ul>
 
-                {isEmpty(courses) ? <p className="no-data">暂无数据记录</p> : null}
-                <ul className="my-all-courses">
-                    {this.renderList(courses)}
-                </ul>
+                {courses_mine.isFetching ?
+                    <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
+                    :
+                    courses.length ?
+                        <ul className="my-all-courses">
+                            {this.renderList(courses)}
+                        </ul>
+                        :
+                        <p className="no-data">暂无数据记录</p>
+                }
 
                 {total > courses.length ?
                     this.state.loading ?
