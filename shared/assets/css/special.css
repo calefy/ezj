@@ -299,6 +299,8 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .synopsis_price p{ font-size: 2.25em;}
 .synopsis_price a{ background: #fcbf32; border: 1px solid #f6852e; color: #fff; width: 140px; line-height: 44px; display: block; font-size: 1.5em; text-align: center; border-radius: 10px; margin: 0 30px 0 0;}
 
+.special-security-teacher, .special-security-target, .special-security-harvest{margin-bottom:20px;}
+
 .special-security-teacher li{ margin:25px 21px; float: left; width: 195px; height:240px; text-align: center; font-size: 0.875em; border:1px solid rgba(0,0,0,0.31); color: #505050;}
 .special-security-teacher li a{ display: block;}
 .special-security-teacher li img{ width: 195px; height:195px;}
@@ -320,6 +322,9 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .special-security-offline > p{ margin: 4px 0; padding: 10px 0; background: #b01c40; color: #fff; font-size: 0.875em; text-align: center;}
 .special-security-offline td{ line-height: 1.4}
 .special-security-offline td:first-child { text-align: center;}
+.special-security-offline .tab2 td{padding: 13px 10px;line-height: 20px;}
+.special-security-offline .tab3 td{padding: 12px 14px; line-height: 22px;}
+.special-security-offline .tab4 td{padding: 11px 14px; line-height: 27px;}
 
 .special-security-offline-info{ overflow: hidden; text-align: center; font-size: 14px; color: #b01c40; margin:4px 0 0; border-bottom:0px;}
 .special-security-offline-info li{ float:left; width: 174px; padding: 10px 0px; background: #fff; border:1px solid #e1e1e1; border-bottom:0px; border-radius:8px 8px 0 0; line-height: 16px; margin: 0 11px 0 0;}

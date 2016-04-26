@@ -1,11 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import Formsy from 'formsy-react';
+
+import formsySubmitButtonMixin from '../../mixins/formsySubmitButtonMixin';
+import FormsyText from '../../components/formsy/FormsyText.jsx';
 
 if (process.env.BROWSER) {
     require('css/special.css');
 }
 
+const bundle = {id: 9166, price: 4980}
+
 let Security = React.createClass({
+    mixins: [ formsySubmitButtonMixin ],
+
+    getInitialState: function() {
+        return {
+            schedule: 'sc4', // 要显示的课程内容
+        };
+    },
+
+    _setState: function(obj) {
+        this.setState(Object.assign({}, this.state, obj || {}));
+    },
+
+    // 点击某一讲时，右侧展示对应课程安排
+    onClickSchedule: function(e) {
+        e.preventDefault();
+        e.nativeEvent.returnValue = false;
+
+        let key = e.currentTarget.getAttribute('data-key');
+        if (this.state.schedule !== key) {
+            this._setState({ schedule: key });
+        }
+    },
     render: function() {
         return (
             <div className="special-security">
@@ -17,8 +46,8 @@ let Security = React.createClass({
                                 <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/e7347ae795f578a40f43bdf70bd92fe4.png" />
                             </div>
                             <div className="synopsis_price cl">
-                                <p className="fl">¥4980</p>
-                                <Link to="" className="fr">立即报名</Link>
+                                <p className="fl">¥{bundle.price}</p>
+                                <a href="#sign" className="fr">立即报名</a>
                             </div>
                         </div>
                         <div className="fr">
@@ -32,60 +61,15 @@ let Security = React.createClass({
                             <div className="liquid">
                                 <h3>相关师资</h3>
                                 <ul className="cl">
-                                    <li>
-                                        <Link to="" target="_blank">
-                                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/dc142a7f3f0629b89ae18115c05f3efc.jpg" />
-                                            <div>
-                                                <h4>林华</h4>
-                                                <p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="" target="_blank">
-                                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/dc142a7f3f0629b89ae18115c05f3efc.jpg" />
-                                            <div>
-                                                <h4>林华</h4>
-                                                <p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="" target="_blank">
-                                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/dc142a7f3f0629b89ae18115c05f3efc.jpg" />
-                                            <div>
-                                                <h4>林华</h4>
-                                                <p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="" target="_blank">
-                                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/dc142a7f3f0629b89ae18115c05f3efc.jpg" />
-                                            <div>
-                                                <h4>林华</h4>
-                                                <p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="" target="_blank">
-                                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/dc142a7f3f0629b89ae18115c05f3efc.jpg" />
-                                            <div>
-                                                <h4>林华</h4>
-                                                <p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="" target="_blank">
-                                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/dc142a7f3f0629b89ae18115c05f3efc.jpg" />
-                                            <div>
-                                                <h4>林华</h4>
-                                                <p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p>
-                                            </div>
-                                        </Link>
-                                    </li>
+                                    <li><a href="/lecturers/3223333591" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333591-1445253893.jpg"/><div><h4>林华</h4><p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p></div></a></li>
+
+                                    <li><a href="/lecturers/3223333672" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333672-1445238316.jpg"/><div><h4>黄长清</h4><p>恒泰证券金融市场部执行总经理、产品负责人</p></div></a></li>
+                                    <li><a href="/lecturers/3223333673" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333673-1445238401.jpg"/><div><h4>李耀光</h4><p>摩根士丹利华鑫证券固定收益部结构融资总监。</p></div></a></li>
+                                    <li><a href="/lecturers/3223333675" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333675-1445238762.jpg"/><div><h4>万华伟</h4><p>联合信用评级有限公司副总经理兼评级总监</p></div></a></li>
+                                    <li><a href="/lecturers/3223333671" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333671-1445320862.jpg"/><div><h4>洪浩</h4><p>北京大学理学博士</p></div></a></li>
+                                    <li><a href="/lecturers/3223333674" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333674-1445238623.jpg"/><div><h4>罗桂连</h4><p>陕西金融控股集团有限公司 总经理助理</p></div></a></li>
+                                    <li><a href="/lecturers/3223333679" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333679-1445250208.jpg"/><div><h4>许余洁</h4><p>中国证监会科研工作站博士后、西南财经大学互联网金融创新及监管协同创新中心特聘研究员</p></div></a></li>
+                                    <li><a href="/lecturers/3223333680" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333680-1445320897.jpg"/><div><h4>刘洪光</h4><p>上海市锦天城律师事务所，专职律师</p></div></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -121,37 +105,37 @@ let Security = React.createClass({
                                 <h4>线下课程（2天）</h4>
                                 <p>会务组将根据有效的报名信息，通过邮件或短信方式向参会嘉宾告知培训地点及日程</p>
                                 <ul className="special-security-offline-info" id="tabs">
-                                    <li className="current">
-                                        <Link to="" className="tab1">
+                                    <li className={this.state.schedule === 'sc1' ? 'current' : ''}>
+                                        <Link to="" className="tab1" data-key="sc1" onClick={this.onClickSchedule}>
                                             <h4>北京</h4>
                                             <p>第1期</p>
                                             <p>2015年11月</p>
                                         </Link>
                                     </li>
-                                    <li id="">
-                                        <Link to=""className="tab2">
+                                    <li className={this.state.schedule === 'sc2' ? 'current' : ''}>
+                                        <Link to=""className="tab2" data-key="sc2" onClick={this.onClickSchedule}>
                                             <h4>上海</h4>
                                             <p>第2期</p>
                                             <p>2015年12月</p>
                                         </Link>
                                     </li>
-                                    <li id="">
-                                        <Link to="" className="tab3">
+                                    <li className={this.state.schedule === 'sc3' ? 'current' : ''}>
+                                        <Link to="" className="tab3" data-key="sc3" onClick={this.onClickSchedule}>
                                             <h4>深圳</h4>
                                             <p>第3期：2016.01.30-01.31</p>
                                             <p>地点：博林诺富特酒店</p>
                                         </Link>
                                     </li>
-                                    <li id="">
-                                        <Link to="" className="tab4">
+                                    <li className={this.state.schedule === 'sc4' ? 'current' : ''}>
+                                        <Link to="" className="tab4" data-key="sc4" onClick={this.onClickSchedule}>
                                             <h4>北京</h4>
                                             <p>第4期：2016.03.26-03.27</p>
                                             <p>地点待定</p>
                                         </Link>
                                     </li>
                                 </ul>
-                                <div className="">
-                                    <div>
+                                <div>
+                                    <div className={'tab1 ' + (this.state.schedule === 'sc1' ? '' : 'hide')}>
                                         <table className="gridtable">
                                             <thead>
                                                 <tr>
@@ -251,7 +235,7 @@ let Security = React.createClass({
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div>
+                                    <div className={'tab2 ' + (this.state.schedule === 'sc2' ? '' : 'hide')}>
                                         <table className="gridtable">
                                             <thead>
                                                 <tr>
@@ -330,7 +314,7 @@ let Security = React.createClass({
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div>
+                                    <div className={'tab3 ' + (this.state.schedule === 'sc3' ? '' : 'hide')}>
                                         <table className="gridtable">
                                             <thead>
                                                 <tr>
@@ -408,7 +392,7 @@ let Security = React.createClass({
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div>
+                                    <div className={'tab4 ' + (this.state.schedule === 'sc4' ? '' : 'hide')}>
                                         <table className="gridtable">
                                             <thead>
                                                 <tr>
@@ -672,4 +656,6 @@ let Security = React.createClass({
     }
 });
 
-module.exports = Security;
+module.exports = connect( state => ({
+    action: state.action,
+}) )(Security);
