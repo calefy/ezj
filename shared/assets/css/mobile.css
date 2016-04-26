@@ -1,0 +1,57 @@
+/*.mobile-test{ width: 80%;}*/
+.mobile-header{ line-height: 44px; background: #fff; border-bottom: 1px solid #bbb; padding:0 10px; position: relative;}
+.mobile-header h1{ text-align: center;}
+.mobile-header i{ position: absolute; left: 10px; top: 0; color: #af1b3f;}
+
+.mobile-content{}
+.mobile-content-top{ margin: 20px 10px; background: #fff; border: 1px solid #cccccc; border-top: 3px solid #a6294a; line-height: 1.6}
+.mobile-content-top > div, .mobile-test-question > p{ padding:10px 15px;}
+
+.mobile-content-title{ border-bottom: 1px solid #dddddd;}
+.mobile-content-title p,.mobile-content-num p:first-child{ color: #a6294a}
+
+..mobile-content-num{ position: relative;}
+
+.mobile-footer{ border-top:1px solid #e7e7e7; background: #fff; position: fixed; bottom: 0; left: 0; width: 100%;}
+.mobile-footer a{ display: block; background: #fff; line-height: 50px; width: 100%; text-align: center;}
+.mobile-footer a.disabled{ color: #a4a4a4}
+.mobile-footer-three a, .mobile-footer-two a{ width: 33.3333%; float: left}
+.mobile-footer-three em, .mobile-footer-two em{ display: block; border-right:1px solid #e7e7e7;}
+.mobile-footer-two a{ width: 50%;}
+
+.mobile-knowledge{ margin: 20px 10px 10px; font-weight: normal;}
+
+.mobile-test-question p em:first-child{ background: #af1b3f; border-radius: 2px; color: #fff; padding:3px 6px;}
+
+.mobile-test-answer{ border-top: 1px solid #ccc;}
+.mobile-test-answer li{ line-height: 3; border-bottom: 1px solid #cccccc; background: #fff; padding: 0 10px;}
+.mobile-test-answer li input{ font-size: 1.125em; margin: 0 10px 0 0;}
+.mobile-test-answer li em{ font-size: 0.875em;}
+.mobile-test-answer i{ width: 16px; margin: 0 10px 0 0; color: #af1b3f; font-size: 1em; display: inline-block;}
+
+.mobile-answer-right{ margin:10px; color: #af1b3f}
+
+.mobile-pop{ background: #fff; border-radius: 6px; position: absolute; left:50%; top: 50%; width: 70%; height:164px; margin: -82px 0 0 -35%; z-index: 999;}
+.mobile-pop p{ padding:54px 20px;}
+.mobile-pop .mobile-pop-btn{ border-top: 1px solid #a4a4a4;}
+.mobile-pop a{ line-height: 38px; width:50%; float: left; text-align: center;}
+.mobile-pop em{ display: block; border-right:1px solid #a4a4a4;}
+
+.check-answer{ line-height: 3; box-shadow: 0 5px 5px rgba(215,215,215,0.75); display: block; background: #fff; margin: 20px 10px; text-align: center; border-radius: 6px; border:1px solid #ccc;}
+
+.circle { width: 80px; height: 80px; position: absolute; border-radius: 50%; background: #af1b40;}
+.pie_left, .pie_right { width:80px;  height:80px; position: absolute; top: 0;left: 0;}
+.left, .right { width:80px;  height:80px; background:#ccc; border-radius: 50%; position: absolute; top: 0; left: 0;}
+.pie_right, .right { clip:rect(0,auto,auto,40px);}
+.pie_left, .left { clip:rect(0,40px,auto,0);}
+.mask { width: 60px; height: 60px; border-radius: 50%; left: 10px; top: 10px; background: #FFF; position: absolute; text-align: center; line-height: 60px; font-size: 1em; font-weight: bold; color: #af1b40;}
+.right{ transform: rotate(54deg);}
+
+.mobile-mine li{ background: #fff; border-bottom:1px solid #d0d0d0; padding:0 10px; margin: 10px 0; line-height: 3;text-align: center;}
+.mobile-mine li h4{ border-bottom: 1px solid #cccccc;}
+.mobile-mine li p,.mobile-mine li a{ float: left; font-size: 0.875em; display: block;}
+.mobile-mine li p:first-child{ width: 44%;}
+.mobile-mine li p:nth-child(2),.mobile-mine li a{ width: 28%;}
+.mobile-mine li em{ border-right:1px solid #ccc; display: block;}
+.mobile-mine li a{ color: #af1b3f;}
+.mobile-mine li div{ height:42px;}

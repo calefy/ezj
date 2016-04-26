@@ -395,5 +395,14 @@ module.exports = {
                 });
             }
         },
+        // 手机端我的测验
+        {
+            path: 'mobile/mine',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/mobile/Mine'));
+                });
+            }
+        },
     ]
 };

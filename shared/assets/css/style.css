@@ -127,7 +127,7 @@ button{ cursor: pointer; outline: none; border: 0;}
 .login-pop{ height:407px; margin: -237px 0 0 -258px;}
 .register-pop{ height:583px; margin: -325px 0 0 -258px;}
 
-.iconfont.icon-close{ position: absolute; right:12px; top:12px; font-size: 1.5em; cursor: pointer;}
+.pop .iconfont.icon-close{ position: absolute; right:12px; top:12px; font-size: 1.5em; cursor: pointer;}
 
 
 .formsy-list{ margin: 0 0 22px; position: relative;}
