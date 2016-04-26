@@ -32,6 +32,9 @@ let Pay = React.createClass({
         }
     },
 
+    payWindow: null,
+    payWindowName: null,
+
     getInitialState: function() {
         return {
             pointPay: true, // 紫荆币支付pointpay
@@ -63,10 +66,25 @@ let Pay = React.createClass({
             case types.success:
                 let res = nextProps.action.response.data;
                 if (res.url) {
-                    this.refs.payForm.action = res.url;
-                    this.refs.payForm.submit();
+                    this._setState({ isShowConfirm: true }); // 显示确认支付状态框
+                    if (this.state.payMethod === 'alipay') {
+                        this.payWindow.location.href = res.url;
+                    } else if (this.state.payMethod === 'unipay') {
+                        // 银联需要表单提交
+                        let html = [];
+                        for (let key in res.params) {
+                            html.push(`<input name="${key}" value="${res.params[key]}" type="hidden" />`);
+                        }
+                        this.refs.unipayForm.innerHTML = html.join('');
+                        this.refs.unipayForm.target = this.payWindowName; // 防止新窗口被拦截
+                        this.refs.unipayForm.action = res.url;
+                        this.refs.unipayForm.submit();
+                    }
+                } else {
+                    // 紫荆币购买成功
+                    alert('购买成功');
+                    this.onPayOver();
                 }
-                alert('购买成功');
                 break;
             case types.failure:
                 alert('购买失败' + nextProps.action.error.message);
@@ -108,22 +126,35 @@ let Pay = React.createClass({
 
     // 执行支付
     onPay: function(model) {
-        const { location } = this.props;
+        const { location, account, course } = this.props;
+        // 如果选择了紫荆币支付，判断是否足够，如果不足，设置支付窗口
+        if (!(this.state.pointPay &&
+                account.data.available_amount >= course.course_price)) {
+            this.payWindowName = 'payWindow_' + (new Date()).getTime();
+            this.payWindow = window.open('about:blank', this.payWindowName);
+        }
+
+        // 读取准备上传参数
         let id = location.query.id;
         let type = location.query.type;
         let method = this.state.payMethod;
+
         const commerceAction = new CommerceAction();
         this.props.dispatch(commerceAction.pay({
             items: id,
             item_type: type, // 购买类型
-            payment_method: this.state.pointPay ? 10 : method === 'alipay' ? 20 : method === 'unipay' ? 30 : '', // 支付方式代码
+            payment_method: (this.state.pointPay ? 10 + ',' : '') + (method === 'alipay' ? 20 : method === 'unipay' ? 30 : ''), // 支付方式代码，与紫荆币组合逗号分隔
         }));
     },
 
     // 支付完成或支付遇到问题，跳转到来源页面
     onPayOver: function(e) {
-        e.preventDefault();
-        this.props.history.back();
+        e && e.preventDefault();
+        if (this.props.location.query.type == payType.COURSE) {
+            this.props.history.push(`/courses/${this.props.location.query.id}`);
+        } else {
+            this.props.history.goBack();
+        }
     },
 
     // 表单变更时，取消掉全局错误消息
@@ -211,7 +242,8 @@ let Pay = React.createClass({
                     </div>
                 </div>
                 </Formsy.Form>
-                <form action="" className="hide" ref="payForm" method="GET" target="_blank"></form>
+
+                <form target="payWindow" method="POST" className="hide" ref="unipayForm"></form>
 
 
                 <Dialog className="popover pop" open={this.state.isShowConfirm} onRequestClose={this.onCloseConfirm}>
@@ -221,7 +253,7 @@ let Pay = React.createClass({
                     </div>
                     <div className="popover-btn">
                         <a href="#" className="btn" onClick={this.onPayOver}>支付完成</a>
-                        <a href="#" className="btn disabled" onClick={this.onPayOver}>支付遇到问题</a>
+                        <a href="#" className="btn disabled" onClick={this.onCloseConfirm}>支付遇到问题</a>
                     </div>
                 </Dialog>
                 <Dialog className="agreement-pop pop" open={this.state.isShowProtocol} onRequestClose={this.onCloseProtocol}>
