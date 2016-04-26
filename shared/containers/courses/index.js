@@ -352,24 +352,28 @@ class Course extends Component {
                             </div>
                             <div className="course-bottom-user course-shadow bg-white">
                                 <h4 className="course-title">{course.student_count}人参加该课程<a href="#" className="fr" onClick={this.onChangeStudents}>换一换</a></h4>
-                                <div className="course-user-list cl">
-                                    {students.map((item, index) => {
-                                        return (
-                                            <div key={index} data-key={index} onMouseEnter={this.onStudentHover} onMouseLeave={this.onStudentLeave}>
-                                                <Link to={`/students/${item.student_id}`}>
-                                                    <img src={avatar(item.avatar)} alt="" width="50" height="50"/>
-                                                </Link>
-                                                <div ref={`student_${index}`}>
+                                {this.props.students.isFetching ?
+                                    <div className="loading" style={{display:'block'}}><i className="iconfont icon-loading fa-spin"></i></div>
+                                    :
+                                    <div className="course-user-list cl">
+                                        {students.map((item, index) => {
+                                            return (
+                                                <div key={index} data-key={index} onMouseEnter={this.onStudentHover} onMouseLeave={this.onStudentLeave}>
                                                     <Link to={`/students/${item.student_id}`}>
-                                                        <i></i>
-                                                        <img src={avatar(item.avatar)} alt="" width="50" height="50" />
-                                                        <p>{item.nickname}</p>
+                                                        <img src={avatar(item.avatar)} alt="" width="50" height="50"/>
                                                     </Link>
+                                                    <div ref={`student_${index}`}>
+                                                        <Link to={`/students/${item.student_id}`}>
+                                                            <i></i>
+                                                            <img src={avatar(item.avatar)} alt="" width="50" height="50" />
+                                                            <p>{item.nickname}</p>
+                                                        </Link>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                }
                             </div>
 
                         </div>
