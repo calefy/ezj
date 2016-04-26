@@ -404,5 +404,14 @@ module.exports = {
                 });
             }
         },
+        // 手机端紫荆账户
+        {
+            path: 'mobile/user',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/mobile/User'));
+                });
+            }
+        },
     ]
 };

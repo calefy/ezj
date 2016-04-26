@@ -47,11 +47,11 @@
 .mask { width: 60px; height: 60px; border-radius: 50%; left: 10px; top: 10px; background: #FFF; position: absolute; text-align: center; line-height: 60px; font-size: 1em; font-weight: bold; color: #af1b40;}
 .right{ transform: rotate(54deg);}
 
-.mobile-mine li{ background: #fff; border-bottom:1px solid #d0d0d0; padding:0 10px; margin: 10px 0; line-height: 3;text-align: center;}
-.mobile-mine li h4{ border-bottom: 1px solid #cccccc;}
+.mobile-mine li{ background: #fff; border-bottom:1px solid #d0d0d0; padding:0 10px; margin: 10px 0; line-height: 2;text-align: center;}
+.mobile-mine li h4{ border-bottom: 1px solid #cccccc; padding:10px 0;}
 .mobile-mine li p,.mobile-mine li a{ float: left; font-size: 0.875em; display: block;}
 .mobile-mine li p:first-child{ width: 44%;}
 .mobile-mine li p:nth-child(2),.mobile-mine li a{ width: 28%;}
 .mobile-mine li em{ border-right:1px solid #ccc; display: block;}
 .mobile-mine li a{ color: #af1b3f;}
-.mobile-mine li div{ height:42px;}
+.mobile-mine li div{ height:28px; padding:10px 0;}
