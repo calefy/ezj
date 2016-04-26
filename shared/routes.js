@@ -137,6 +137,7 @@ module.exports = {
         // 个人中心页
         {
             path: 'account',
+            onEnter: needLogin,
             getComponent(location, cb) {
                 require.ensure([], require => {
                     cb(null, require('./containers/account/index'));
@@ -179,6 +180,7 @@ module.exports = {
         },
         {
             path: 'account',
+            onEnter: needLogin,
             getComponent(location, cb) {
                 require.ensure([], require => {
                     cb(null, require('./containers/account/left'));
@@ -222,6 +224,7 @@ module.exports = {
             childRoutes: [
                 {
                     path: 'all',
+                    onEnter: needLogin,
                     getComponent(location, cb) {
                         require.ensure([], require => {
                             cb(null, require('./containers/study/All'));
@@ -230,6 +233,7 @@ module.exports = {
                 },
                 {
                     path: 'collect',
+                    onEnter: needLogin,
                     getComponent(location, cb) {
                         require.ensure([], require => {
                             cb(null, require('./containers/study/Collect'));
@@ -238,6 +242,7 @@ module.exports = {
                 },
                 {
                     path: 'test',
+                    onEnter: needLogin,
                     getComponent(location, cb) {
                         require.ensure([], require => {
                             cb(null, require('./containers/study/Test'));
@@ -246,6 +251,7 @@ module.exports = {
                 },
                 {
                     path: 'result',
+                    onEnter: needLogin,
                     getComponent(location, cb) {
                         require.ensure([], require => {
                             cb(null, require('./containers/study/Result'));
@@ -380,6 +386,7 @@ module.exports = {
         // 支付页
         {
             path: 'pay',
+            onEnter: needLogin,
             getComponent(location, cb) {
                 require.ensure([], require => {
                     cb(null, require('./containers/Pay'));

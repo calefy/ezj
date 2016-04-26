@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { payType } from '../../libs/const';
 import { toTimeString, avatar, getRequestTypes } from '../../libs/utils';
 
+import OperateAction from '../../actions/OperateAction';
 import CommerceAction from '../../actions/CommerceAction';
 import CoursesAction from '../../actions/CoursesAction';
 import CourseExam from '../../components/CourseExam.jsx';
@@ -135,8 +136,21 @@ class Course extends Component {
         this.setState({ isShowTipBuy: false });
     };
 
-    // 点击立即购买时，如果是免费课程，直接支付
+    // 点击立即购买时，
+    // - 如果未登录，弹出登录框
+    // - 如果是免费课程，直接支付
     onClickBuy = e => {
+        // 检测登录状态
+        if (!this.props.user.data) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+
+            let operateAction = new OperateAction();
+            this.props.dispatch(operateAction.openLoginDialog());
+            return;
+        }
+
+        // 判断免费课程
         let course = this.props.course.data || {};
         if (course.course_price <= 0) {
             e.preventDefault();
@@ -172,7 +186,7 @@ class Course extends Component {
         let hasExam = course.course_examination_id;
         hasExam = hasExam && hasExam !== '0';
         let hash = this.props.location.hash || '#intro'; // 如果没有课程测验，则仅显示intro
-        if (hash === '#exam' && (!hasExam || !priv.is_purchased)) {
+        if (hash === '#exam' && (!hasExam || !priv.is_purchased || priv.is_expired)) {
             hash = '#intro';
         }
 
@@ -223,10 +237,10 @@ class Course extends Component {
                                 <em><i className="iconfont icon-user"></i>{course.student_count}人</em>
                                 <em className="hide"><i className="iconfont icon-share"></i>分享</em>
                             </p>
-                            <p className="course-price">{course.course_price > 0 ? '&yen;' + course.course_price : '免费'}</p>
+                            <p className="course-price">{course.course_price > 0 ? '¥' + course.course_price : '免费'}</p>
                             <p className="course-state">
                                 {priv.is_purchased ?
-                                    (priv.is_expired ? '课程已到期，请续费' : '有效期至' + priv.expiring_date)
+                                    (priv.is_expired ? '课程已到期，请续费' : priv.expiring_date ? '有效期至' + priv.expiring_date : '')
                                     :
                                     '付款后90天内有效'
                                 }
@@ -262,7 +276,7 @@ class Course extends Component {
                             <ul className="nav-tabs course-tabs cl">
                                 <li className={hash === '#intro' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#intro">介绍</Link></li>
                                 <li className={hash === '#cont' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#cont">内容</Link></li>
-                                {hasExam && priv.is_purchased ?
+                                {hasExam && priv.is_purchased && !priv.is_expired ?
                                     <li className={hash === '#exam' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#exam">测验</Link></li>
                                     : null
                                 }
@@ -352,24 +366,28 @@ class Course extends Component {
                             </div>
                             <div className="course-bottom-user course-shadow bg-white">
                                 <h4 className="course-title">{course.student_count}人参加该课程<a href="#" className="fr" onClick={this.onChangeStudents}>换一换</a></h4>
-                                <div className="course-user-list cl">
-                                    {students.map((item, index) => {
-                                        return (
-                                            <div key={index} data-key={index} onMouseEnter={this.onStudentHover} onMouseLeave={this.onStudentLeave}>
-                                                <Link to={`/students/${item.student_id}`}>
-                                                    <img src={avatar(item.avatar)} alt="" width="50" height="50"/>
-                                                </Link>
-                                                <div ref={`student_${index}`}>
+                                {this.props.students.isFetching ?
+                                    <div className="loading" style={{display:'block'}}><i className="iconfont icon-loading fa-spin"></i></div>
+                                    :
+                                    <div className="course-user-list cl">
+                                        {students.map((item, index) => {
+                                            return (
+                                                <div key={index} data-key={index} onMouseEnter={this.onStudentHover} onMouseLeave={this.onStudentLeave}>
                                                     <Link to={`/students/${item.student_id}`}>
-                                                        <i></i>
-                                                        <img src={avatar(item.avatar)} alt="" width="50" height="50" />
-                                                        <p>{item.nickname}</p>
+                                                        <img src={avatar(item.avatar)} alt="" width="50" height="50"/>
                                                     </Link>
+                                                    <div ref={`student_${index}`}>
+                                                        <Link to={`/students/${item.student_id}`}>
+                                                            <i></i>
+                                                            <img src={avatar(item.avatar)} alt="" width="50" height="50" />
+                                                            <p>{item.nickname}</p>
+                                                        </Link>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                }
                             </div>
 
                         </div>
@@ -394,6 +412,7 @@ class Course extends Component {
 
 module.exports = connect( state => ({
     action: state.action,
+    user: state.user,
     course: state.course,
     course_private: state.course_private,
     course_sheet: state.course_sheet,
