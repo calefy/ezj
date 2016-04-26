@@ -9,6 +9,7 @@ import { getRequestTypes } from '../libs/utils';
 import formsySubmitButtonMixin from '../mixins/formsySubmitButtonMixin';
 import CoursesAction from '../actions/CoursesAction';
 import CommerceAction from '../actions/CommerceAction';
+import Dialog from '../components/Dialog.jsx';
 
 if (process.env.BROWSER) {
     require('css/pay.css');
@@ -34,6 +35,8 @@ let Pay = React.createClass({
     getInitialState: function() {
         return {
             pay: 'pointpay', // 支付方式： pointpay、alipay、unipay
+            isShowConfirm: false, // 支付结果确认显示标识
+            isShowProtocol: false, // 协议显示标识
         };
     },
 
@@ -70,9 +73,28 @@ let Pay = React.createClass({
         }
     },
 
+    _setState: function(obj) {
+        return this.setState(Object.assign({}, this.state, obj || {}));
+    },
+
+    // 支付确认框显示
+    onCloseConfirm: function(e) {
+        e.preventDefault();
+        this._setState({ isShowConfirm: false });
+    },
+
+    // 支付协议框显示
+    onCloseProtocol: function(e) {
+        e.preventDefault();
+        this._setState({ isShowProtocol: false });
+    },
+    onOpenProtocol: function(e) {
+        e.preventDefault();
+        this._setState({ isShowProtocol: true });
+    },
     // 紫荆币支付选项切换
     onChangePay: function(e) {
-        this.setState(Object.assign({}, this.state, {pay: this.refs.pointpay.checked ? 'pointpay' : 'alipay'}));
+        this._setState({pay: this.refs.pointpay.checked ? 'pointpay' : 'alipay'});
     },
     // 点击具体的支付方式
     onClickPayMehtod: function(e) {
@@ -80,9 +102,10 @@ let Pay = React.createClass({
         if (this.refs.pointpay.checked) return;
 
         let method = e.currentTarget.getAttribute('data-pay');
-        this.setState(Object.assign({}, this.state, {pay: this.state.pay === method ? '' : method}));
+        this._setState({pay: this.state.pay === method ? '' : method});
     },
 
+    // 执行支付
     onPay: function(model) {
         const { location } = this.props;
         let id = location.query.id;
@@ -96,10 +119,16 @@ let Pay = React.createClass({
         }));
     },
 
+    // 支付完成或支付遇到问题，跳转到来源页面
+    onPayOver: function(e) {
+        e.preventDefault();
+        this.props.history.back();
+    },
+
     // 表单变更时，取消掉全局错误消息
     onFormChange: function() {
         if (this.state.error) {
-            this.setState(Object.assign({}, this.state, { error: '' }));
+            this._setState({ error: '' });
         }
     },
 
@@ -174,7 +203,7 @@ let Pay = React.createClass({
                         </dl>
                         <div>
                             <FormsyCheckbox name="agree" value="1" defaultChecked={true} required /> 我已经阅读并同意
-                            <Link to="">紫荆教育用户付费协议</Link>
+                            <a href="#" onClick={this.onOpenProtocol}>紫荆教育用户付费协议</a>
                         </div>
                         <button type="submit" className={`btn ${this.canSubmit() ? '' : 'disabled'}`} disabled={!this.canSubmit()}>{this.isSubmitLoading() ? '结算中...' : '去结算'}</button>
                         <p className="pay-valid-date">付款后{type == payType.COURSE ? 90 : 180}天内有效</p>
@@ -182,19 +211,21 @@ let Pay = React.createClass({
                 </div>
                 </Formsy.Form>
                 <form action="" className="hide" ref="payForm" method="GET" target="_blank"></form>
-                <div className="popover pop" style={{ display: "none" }}>
+
+
+                <Dialog className="popover pop" open={this.state.isShowConfirm} onRequestClose={this.onCloseConfirm}>
                     <h4>确认支付结果</h4>
                     <div className="popover-info">
                         请于24小时内完成支付，逾期系统将自动取消订单。
                     </div>
                     <div className="popover-btn">
-                        <Link to="" className="btn">支付完成</Link>
-                        <Link to="" className="btn disabled">支付遇到问题</Link>
+                        <a href="#" className="btn" onClick={this.onPayOver}>支付完成</a>
+                        <a href="#" className="btn disabled" onClick={this.onPayOver}>支付遇到问题</a>
                     </div>
-                </div>
-                <div className="agreement-pop pop">
-                    <h4>紫荆教育网络用户付费协议<i className="iconfont icon-guanbi2 fr" style={{ fontSize: 20, cursor: "pointer" }}></i></h4>
-                    <div>
+                </Dialog>
+                <Dialog className="agreement-pop pop" open={this.state.isShowProtocol} onRequestClose={this.onCloseProtocol}>
+                    <h4>紫荆教育网络用户付费协议</h4>
+                    <div className="agreement-content">
                         <p>尊敬的用户您好：</p>
                         <p>欢迎您选择清控紫荆（北京）教育科技有限公司（以下简称“紫荆教育”）为您提供的金融在线培训课程，为保证权益，请您在付费前详细阅读本协议，<b style={{ fontSize: 16 }}>特别是加粗部分</b>。当您点击“【我已经阅读并同意《紫荆教育网络用户付费协议》】”的，即表示您已同意并承诺遵守本协议。本协议内容包括协议正文，紫荆教育已经发布的或将来可能发布的各类规则。所有规则为本协议不可分割的组成部分，与协议正文具有同等法律效力。  </p>
                         <h5>第一条 定义</h5>
@@ -233,8 +264,7 @@ let Pay = React.createClass({
                         <p>6、如果用户对本协议内容有任何疑问，请发送邮件至我们的客服邮箱：[<a href="mailto:service@pbcsf.tsinghua.edu.cn">service@pbcsf.tsinghua.edu.cn</a>]</p>
                         <p>7、协议最终解释权归紫荆教育所有！</p>
                     </div>
-                </div>
-                <div className="screen-bg"></div>
+                </Dialog>
             </div>
         );
 

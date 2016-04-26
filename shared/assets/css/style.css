@@ -289,9 +289,9 @@ button{ cursor: pointer; outline: none; border: 0;}
 .popover .popover-btn{ padding:10px; background: #eff0ef;}
 .popover .popover-btn a{ margin: 0 10px; border-radius:30px; padding: 8px 40px;}
 
-.agreement-pop{ width: 634px; height: 540px; background: #fff; border-radius: 5px; margin: -265px 0 0 -317px; z-index: 999;}
+.agreement-pop{ width: 634px; background: #fff; border-radius: 5px; margin: -265px 0 0 -317px; z-index: 999;}
 .agreement-pop h4{ font-size: 1.125em; text-align: center; padding: 20px 20px;}
-.agreement-pop >div { height: 456px; overflow: auto; margin: 10px 0 20px 20px;}
+.agreement-pop .agreement-content{ height: 456px; overflow: auto; margin: 10px 10px 20px 20px;}
 .agreement-pop p{font-size:0.875em;line-height:2;}
 .agreement-pop h5{margin:10px 0 6px;}
 .agreement-pop p b{color: #000;}
