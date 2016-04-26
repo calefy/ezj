@@ -4,8 +4,10 @@ import { Link } from 'react-router';
 import { payType } from '../../libs/const';
 import { toTimeString, avatar, getRequestTypes } from '../../libs/utils';
 
+import CommerceAction from '../../actions/CommerceAction';
 import CoursesAction from '../../actions/CoursesAction';
 import CourseExam from '../../components/CourseExam.jsx';
+import Dialog from '../../components/Dialog.jsx';
 
 if (process.env.BROWSER) {
     require('css/course.css')
@@ -34,6 +36,10 @@ class Course extends Component {
             dispatch( courseAction.loadCourseStudents(params.courseId) ), // 课程学员
         ]);
     }
+
+    state = {
+        isShowTipBuy: false, // 是否显示提示需要购买框
+    };
 
     componentDidMount() {
         const { course, course_sheet, params } = this.props;
@@ -113,11 +119,35 @@ class Course extends Component {
 
     // 点击章节，跳转到视频播放
     onToVideo = e => {
+        let course = this.props.course.data || {};
         let priv = this.props.course_private.data || {};
-        if (!priv.is_purchased || priv.is_expired) {
+        // 需要购买的课程，要判断购买状态
+        if (course.course_price != 0 && (!priv.is_purchased || priv.is_expired)) {
             e.preventDefault();
             e.nativeEvent.returnValue = false;
-            alert('购买课程后才可继续观看');
+            this.setState({ isShowTipBuy: true });
+        }
+    };
+
+    // 关闭提示购买框
+    onCloseTipBuy = e => {
+        e.preventDefault();
+        this.setState({ isShowTipBuy: false });
+    };
+
+    // 点击立即购买时，如果是免费课程，直接支付
+    onClickBuy = e => {
+        let course = this.props.course.data || {};
+        if (course.course_price <= 0) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+
+            const commerceAction = new CommerceAction();
+            this.props.dispatch(commerceAction.pay({
+                items: course.id,
+                item_type: payType.COURSE, // 购买类型
+                payment_method: 10, // 紫荆币支付
+            }));
         }
     };
 
@@ -193,7 +223,7 @@ class Course extends Component {
                                 <em><i className="iconfont icon-user"></i>{course.student_count}人</em>
                                 <em className="hide"><i className="iconfont icon-share"></i>分享</em>
                             </p>
-                            <p className="course-price">&yen;{course.course_price}</p>
+                            <p className="course-price">{course.course_price > 0 ? '&yen;' + course.course_price : '免费'}</p>
                             <p className="course-state">
                                 {priv.is_purchased ?
                                     (priv.is_expired ? '课程已到期，请续费' : '有效期至' + priv.expiring_date)
@@ -217,7 +247,7 @@ class Course extends Component {
                                         )
                                     )
                                     :
-                                    <Link to="/pay" query={{type: payType.COURSE, id: course.id}} className="btn fl">立即购买</Link>
+                                    <Link to="/pay" query={{type: payType.COURSE, id: course.id}} className="btn fl" onClick={this.onClickBuy}>立即购买</Link>
                                 }
                                 {priv.is_collected ?
                                     <button type="btn" className="fl course-collected" onClick={this.onCancelCollect}><i className="iconfont icon-heart"></i>取消收藏</button>
@@ -280,7 +310,7 @@ class Course extends Component {
                                                         <i className="icon icon-pro"></i>
                                                         <Link to={`/courses/${item.course_id}/chapters/${item.id}`} onClick={this.onToVideo}>{item.chapter_name}</Link>
                                                         <span className="course-audition">{item.free_trial_status ? <Link to={`/courses/${item.course_id}/chapters/${item.id}`}>[试听]</Link> : ''}</span>
-                                                        <span className="fr course-time"><i className="iconfont icon-time"></i>{toTimeString(item.video.video_duration, 'm:s')}</span>
+                                                        <span className="fr course-time"><i className="iconfont icon-time"></i>{toTimeString(item.video && item.video.video_duration || 0, 'm:s')}</span>
                                                     </div>
                                                 </dd>
                                         })}
@@ -346,17 +376,16 @@ class Course extends Component {
                     </div>
                 </div>
 
-                <div className="popover pop hide">
-                    <h4>提示<i className="iconfont icon-guanbi2 fr" style={{ fontSize: 20, cursor: "pointer" }}></i></h4>
+                <Dialog className="popover pop" open={this.state.isShowTipBuy} onRequestClose={this.onCloseTipBuy}>
+                    <h4>提示</h4>
                     <div className="popover-info">
                         购买课程后才可继续观看，现在购买吗？
                     </div>
                     <div className="popover-btn">
-                        <Link to="" className="btn">确认</Link>
-                        <Link to="" className="btn disabled">取消</Link>
+                        <Link to="/pay" query={{ type: payType.COURSE, id: course.id }} className="btn">确认</Link>
+                        <a href="#" className="btn disabled" onClick={this.onCloseTipBuy}>取消</a>
                     </div>
-                </div>
-                <div className="screen-bg hide"></div>
+                </Dialog>
             </div>
         );
     }

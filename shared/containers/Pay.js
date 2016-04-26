@@ -9,6 +9,7 @@ import { getRequestTypes } from '../libs/utils';
 import formsySubmitButtonMixin from '../mixins/formsySubmitButtonMixin';
 import CoursesAction from '../actions/CoursesAction';
 import CommerceAction from '../actions/CommerceAction';
+import Dialog from '../components/Dialog.jsx';
 
 if (process.env.BROWSER) {
     require('css/pay.css');
@@ -31,9 +32,15 @@ let Pay = React.createClass({
         }
     },
 
+    payWindow: null,
+    payWindowName: null,
+
     getInitialState: function() {
         return {
-            pay: 'pointpay', // 支付方式： pointpay、alipay、unipay
+            pointPay: true, // 紫荆币支付pointpay
+            payMethod: 'alipay', // 支付方式： alipay、unipay
+            isShowConfirm: false, // 支付结果确认显示标识
+            isShowProtocol: false, // 协议显示标识
         };
     },
 
@@ -59,10 +66,25 @@ let Pay = React.createClass({
             case types.success:
                 let res = nextProps.action.response.data;
                 if (res.url) {
-                    this.refs.payForm.action = res.url;
-                    this.refs.payForm.submit();
+                    this._setState({ isShowConfirm: true }); // 显示确认支付状态框
+                    if (this.state.payMethod === 'alipay') {
+                        this.payWindow.location.href = res.url;
+                    } else if (this.state.payMethod === 'unipay') {
+                        // 银联需要表单提交
+                        let html = [];
+                        for (let key in res.params) {
+                            html.push(`<input name="${key}" value="${res.params[key]}" type="hidden" />`);
+                        }
+                        this.refs.unipayForm.innerHTML = html.join('');
+                        this.refs.unipayForm.target = this.payWindowName; // 防止新窗口被拦截
+                        this.refs.unipayForm.action = res.url;
+                        this.refs.unipayForm.submit();
+                    }
+                } else {
+                    // 紫荆币购买成功
+                    alert('购买成功');
+                    this.onPayOver();
                 }
-                alert('购买成功');
                 break;
             case types.failure:
                 alert('购买失败' + nextProps.action.error.message);
@@ -70,36 +92,75 @@ let Pay = React.createClass({
         }
     },
 
+    _setState: function(obj) {
+        return this.setState(Object.assign({}, this.state, obj || {}));
+    },
+
+    // 支付确认框显示
+    onCloseConfirm: function(e) {
+        e.preventDefault();
+        this._setState({ isShowConfirm: false });
+    },
+
+    // 支付协议框显示
+    onCloseProtocol: function(e) {
+        e.preventDefault();
+        this._setState({ isShowProtocol: false });
+    },
+    onOpenProtocol: function(e) {
+        e.preventDefault();
+        this._setState({ isShowProtocol: true });
+    },
     // 紫荆币支付选项切换
     onChangePay: function(e) {
-        this.setState(Object.assign({}, this.state, {pay: this.refs.pointpay.checked ? 'pointpay' : 'alipay'}));
+        this._setState({ pointPay: this.refs.pointpay.checked });
     },
     // 点击具体的支付方式
     onClickPayMehtod: function(e) {
         e.preventDefault();
-        if (this.refs.pointpay.checked) return;
-
         let method = e.currentTarget.getAttribute('data-pay');
-        this.setState(Object.assign({}, this.state, {pay: this.state.pay === method ? '' : method}));
+        if (this.state.payMethod !== method) {
+            this._setState({ payMethod: method });
+        }
     },
 
+    // 执行支付
     onPay: function(model) {
-        const { location } = this.props;
+        const { location, account, course } = this.props;
+        // 如果选择了紫荆币支付，判断是否足够，如果不足，设置支付窗口
+        if (this.state.pointPay &&
+                account.data.available_amount - 0 < (course.data.course_price || 0) - 0) {
+            this.payWindowName = 'payWindow_' + (new Date()).getTime();
+            this.payWindow = window.open('about:blank', this.payWindowName);
+        }
+
+        // 读取准备上传参数
         let id = location.query.id;
         let type = location.query.type;
-        let pay = this.state.pay;
+        let method = this.state.payMethod;
+
         const commerceAction = new CommerceAction();
         this.props.dispatch(commerceAction.pay({
             items: id,
             item_type: type, // 购买类型
-            payment_method: pay === 'pointpay' ? 10 : pay === 'alipay' ? 20 : pay === 'unipay' ? 30 : '' // 紫荆币支付
+            payment_method: (this.state.pointPay ? 10 + ',' : '') + (method === 'alipay' ? 20 : method === 'unipay' ? 30 : ''), // 支付方式代码，与紫荆币组合逗号分隔
         }));
+    },
+
+    // 支付完成或支付遇到问题，跳转到来源页面
+    onPayOver: function(e) {
+        e && e.preventDefault();
+        if (this.props.location.query.type == payType.COURSE) {
+            this.props.history.push(`/courses/${this.props.location.query.id}`);
+        } else {
+            this.props.history.goBack();
+        }
     },
 
     // 表单变更时，取消掉全局错误消息
     onFormChange: function() {
         if (this.state.error) {
-            this.setState(Object.assign({}, this.state, { error: '' }));
+            this._setState({ error: '' });
         }
     },
 
@@ -159,42 +220,45 @@ let Pay = React.createClass({
                         <h3>结算信息</h3>
                         <h4 className="pay-balance-price cl">
                             <span className="fl"><input type="checkbox" ref="pointpay" defaultChecked={true} onChange={this.onChangePay} /> 使用紫荆币支付</span>
-                            <em className="fr">-{this.state.pay === 'pointpay' ? Math.min(price, accountAmount) : 0}</em>
+                            <em className="fr">-{this.state.pointPay ? Math.min(price, accountAmount) : 0}</em>
                         </h4>
                         <h5 className="cl">
                             <span className="fl">还需支付</span>
-                            <em className="fr">&yen;{this.state.pay === 'pointpay' ? (price > accountAmount ? price - accountAmount : 0) : price}</em>
+                            <em className="fr">&yen;{this.state.pointPay ? (price > accountAmount ? price - accountAmount : 0) : price}</em>
                         </h5>
                     </div>
                     <div className="pay-method">
                         <dl>
                             <dt>支付方式</dt>
-                            <dd className="pay-alipay" data-pay="alipay" style={{borderColor: this.state.pay === 'alipay' ? '#f00' : '#e5e5e5'}} onClick={this.onClickPayMehtod}><em>&nbsp;</em></dd>
-                            <dd className="pay-unipay" data-pay="unipay" style={{borderColor: this.state.pay === 'unipay' ? '#f00' : '#e5e5e5'}} onClick={this.onClickPayMehtod}><em>银联</em></dd>
+                            <dd className="pay-alipay" data-pay="alipay" style={{borderColor: this.state.payMethod === 'alipay' ? '#f00' : '#e5e5e5'}} onClick={this.onClickPayMehtod}><em>&nbsp;</em></dd>
+                            <dd className="pay-unipay" data-pay="unipay" style={{borderColor: this.state.payMethod === 'unipay' ? '#f00' : '#e5e5e5'}} onClick={this.onClickPayMehtod}><em>银联</em></dd>
                         </dl>
                         <div>
                             <FormsyCheckbox name="agree" value="1" defaultChecked={true} required /> 我已经阅读并同意
-                            <Link to="">紫荆教育用户付费协议</Link>
+                            <a href="#" onClick={this.onOpenProtocol}>紫荆教育用户付费协议</a>
                         </div>
                         <button type="submit" className={`btn ${this.canSubmit() ? '' : 'disabled'}`} disabled={!this.canSubmit()}>{this.isSubmitLoading() ? '结算中...' : '去结算'}</button>
                         <p className="pay-valid-date">付款后{type == payType.COURSE ? 90 : 180}天内有效</p>
                     </div>
                 </div>
                 </Formsy.Form>
-                <form action="" className="hide" ref="payForm" method="GET" target="_blank"></form>
-                <div className="popover pop" style={{ display: "none" }}>
+
+                <form target="payWindow" method="POST" className="hide" ref="unipayForm"></form>
+
+
+                <Dialog className="popover pop" open={this.state.isShowConfirm} onRequestClose={this.onCloseConfirm}>
                     <h4>确认支付结果</h4>
                     <div className="popover-info">
                         请于24小时内完成支付，逾期系统将自动取消订单。
                     </div>
                     <div className="popover-btn">
-                        <Link to="" className="btn">支付完成</Link>
-                        <Link to="" className="btn disabled">支付遇到问题</Link>
+                        <a href="#" className="btn" onClick={this.onPayOver}>支付完成</a>
+                        <a href="#" className="btn disabled" onClick={this.onCloseConfirm}>支付遇到问题</a>
                     </div>
-                </div>
-                <div className="agreement-pop pop">
-                    <h4>紫荆教育网络用户付费协议<i className="iconfont icon-guanbi2 fr" style={{ fontSize: 20, cursor: "pointer" }}></i></h4>
-                    <div>
+                </Dialog>
+                <Dialog className="agreement-pop pop" open={this.state.isShowProtocol} onRequestClose={this.onCloseProtocol}>
+                    <h4>紫荆教育网络用户付费协议</h4>
+                    <div className="agreement-content">
                         <p>尊敬的用户您好：</p>
                         <p>欢迎您选择清控紫荆（北京）教育科技有限公司（以下简称“紫荆教育”）为您提供的金融在线培训课程，为保证权益，请您在付费前详细阅读本协议，<b style={{ fontSize: 16 }}>特别是加粗部分</b>。当您点击“【我已经阅读并同意《紫荆教育网络用户付费协议》】”的，即表示您已同意并承诺遵守本协议。本协议内容包括协议正文，紫荆教育已经发布的或将来可能发布的各类规则。所有规则为本协议不可分割的组成部分，与协议正文具有同等法律效力。  </p>
                         <h5>第一条 定义</h5>
@@ -233,8 +297,7 @@ let Pay = React.createClass({
                         <p>6、如果用户对本协议内容有任何疑问，请发送邮件至我们的客服邮箱：[<a href="mailto:service@pbcsf.tsinghua.edu.cn">service@pbcsf.tsinghua.edu.cn</a>]</p>
                         <p>7、协议最终解释权归紫荆教育所有！</p>
                     </div>
-                </div>
-                <div className="screen-bg"></div>
+                </Dialog>
             </div>
         );
 

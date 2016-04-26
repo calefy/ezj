@@ -32,6 +32,13 @@ class Order extends Component {
     }
 
     render() {
+        if (this.props.orders.isFetching) {
+            return  <div className="account-recharge">
+                        <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
+                    </div>
+        }
+
+
         let data = this.props.orders.data || {};
         let orders = data.list || [];
 

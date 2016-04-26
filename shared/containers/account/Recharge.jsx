@@ -32,6 +32,13 @@ class Recharge extends Component {
     }
 
     render() {
+        if (this.props.account.isFetching || this.props.recharges.isFetching) {
+            return  <div className="account-pay">
+                        <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
+                    </div>
+        }
+
+
         let account = this.props.account.data || {};
         let data = this.props.recharges.data || {};
         let recharges = data.list || [];
@@ -41,7 +48,8 @@ class Recharge extends Component {
                 <div className="balance cl">
                     <div className="yue fl">
                         <span>账户余额：{account.available_amount || 0}紫荆币</span>
-                        {account.frozen_amount ?
+                        &emsp;
+                        {account.frozen_amount > 0 ?
                             <span>冻结金额：{account.frozen_amount}</span>
                             : null
                         }
