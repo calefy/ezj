@@ -67,11 +67,32 @@ class CourseExam extends Component {
         }
     };
     onNext = e => {
-        // 保存当前表单值
         this.setCurrentIndexAnswer();
+
+        let questions = this.props.examination.questions || [];
+        let cur = questions[this.state.index].question;
+        // 无答案
+        if (!(this.answers[cur.id].length)) {
+            alert('请选择该题答案！');
+            return;
+        }
+
         this.clearCurrentChecked();
         // 跳转题目
+        let index = Math.min(questions.length, this.state.index + 1);
+        if (index !== this.state.index) {
+            this.setState(Object.assign({}, this.state, {index: index}));
+        }
+    };
+    onSkip = e => {
+        this.clearCurrentChecked();
+
+        // 设置当前题目答案为空
         let questions = this.props.examination.questions || [];
+        let cur = questions[this.state.index].question;
+        this.answers[cur.id] = [];
+
+        // 执行跳转
         let index = Math.min(questions.length, this.state.index + 1);
         if (index !== this.state.index) {
             this.setState(Object.assign({}, this.state, {index: index}));
@@ -107,6 +128,7 @@ class CourseExam extends Component {
 
     // 重新测验
     onReExam = e => {
+        this.answers = {};
         this.time = (new Date()).getTime();
         this.setState({ index: 0, start: true, reexam: true });
     };
@@ -179,7 +201,7 @@ class CourseExam extends Component {
                             <div className="course-test-question">
                                 <h3>
                                     <p>{curQuestion.question && curQuestion.question.examination_question_is_multi ? '多' : '单'}项选择题</p>
-                                    <p>已做<em className="course-test-already">{this.state.index}</em>题 / 共<em className="course-test-all">{questions.length}</em>题</p>
+                                    <p>已做<em className="course-test-already">{this.state.index + 1}</em>题 / 共<em className="course-test-all">{questions.length}</em>题</p>
                                 </h3>
                                 <dl className="course-test-question-info">
                                     <dt>
@@ -200,6 +222,7 @@ class CourseExam extends Component {
                                 <div className="course-test-question-btn">
                                     <button type="button" className={`btn ${firstIndex ? 'disabled' : ''}`} disabled={firstIndex} onClick={this.onPrev}>上一题</button>
                                     <button type="button" className={`btn ${lastIndex ? 'disabled' : ''}`} disabled={lastIndex} onClick={this.onNext}>下一题</button>
+                                    <button type="button" className={`btn ${lastIndex ? 'disabled' : ''}`} disabled={lastIndex} onClick={this.onSkip}>跳过</button>
                                     <button type="button" className={`btn ${lastIndex ? '' : 'disabled'}`} disabled={!lastIndex} onClick={this.onSubmit}>提交答卷</button>
                                 </div>
                             </div>
