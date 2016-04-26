@@ -58,6 +58,8 @@ class Collect extends Component {
                         courses.length ?
                             <ul className="index-course cl" style={{ width: 884, margin: "20px auto"}}>
                                 {courses.map((item, index) => {
+                                    if (this.state.canceledMap[item.id]) return null;
+
                                     return (
                                         <li key={index}>
                                             <Link to={`/courses/${item.id}`}>
