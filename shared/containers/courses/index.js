@@ -6,6 +6,7 @@ import { toTimeString, avatar, getRequestTypes } from '../../libs/utils';
 
 import CoursesAction from '../../actions/CoursesAction';
 import CourseExam from '../../components/CourseExam.jsx';
+import Dialog from '../../components/Dialog.jsx';
 
 if (process.env.BROWSER) {
     require('css/course.css')
@@ -34,6 +35,10 @@ class Course extends Component {
             dispatch( courseAction.loadCourseStudents(params.courseId) ), // 课程学员
         ]);
     }
+
+    state = {
+        isShowTipBuy: false, // 是否显示提示需要购买框
+    };
 
     componentDidMount() {
         const { course, course_sheet, params } = this.props;
@@ -117,8 +122,13 @@ class Course extends Component {
         if (!priv.is_purchased || priv.is_expired) {
             e.preventDefault();
             e.nativeEvent.returnValue = false;
-            alert('购买课程后才可继续观看');
+            this.setState({ isShowTipBuy: true });
         }
+    };
+
+    onCloseTipBuy = e => {
+        e.preventDefault();
+        this.setState({ isShowTipBuy: false });
     };
 
     handleLoadSheetAnswer = sheetId => {
@@ -346,17 +356,16 @@ class Course extends Component {
                     </div>
                 </div>
 
-                <div className="popover pop hide">
-                    <h4>提示<i className="iconfont icon-guanbi2 fr" style={{ fontSize: 20, cursor: "pointer" }}></i></h4>
+                <Dialog className="popover pop" open={this.state.isShowTipBuy} onRequestClose={this.onCloseTipBuy}>
+                    <h4>提示</h4>
                     <div className="popover-info">
                         购买课程后才可继续观看，现在购买吗？
                     </div>
                     <div className="popover-btn">
-                        <Link to="" className="btn">确认</Link>
-                        <Link to="" className="btn disabled">取消</Link>
+                        <Link to="/pay" query={{ type: payType.COURSE, id: course.id }} className="btn">确认</Link>
+                        <a href="#" className="btn disabled" onClick={this.onCloseTipBuy}>取消</a>
                     </div>
-                </div>
-                <div className="screen-bg hide"></div>
+                </Dialog>
             </div>
         );
     }
