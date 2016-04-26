@@ -234,7 +234,7 @@ class Play extends Component {
         // 当前章节
         let chapter = chapterMap[params.chapterId] || {};
         // 是否允许播放
-        let canPlay = chapter.free_trial_status || (priv.is_purchased && !priv.is_expired);
+        let canPlay = course.course_price == 0 || chapter.free_trial_status || (priv.is_purchased && !priv.is_expired);
 
         // 前一节、后一节
         let prevChapterId = null;

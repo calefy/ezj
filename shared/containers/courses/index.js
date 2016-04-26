@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { payType } from '../../libs/const';
 import { toTimeString, avatar, getRequestTypes } from '../../libs/utils';
 
+import CommerceAction from '../../actions/CommerceAction';
 import CoursesAction from '../../actions/CoursesAction';
 import CourseExam from '../../components/CourseExam.jsx';
 import Dialog from '../../components/Dialog.jsx';
@@ -118,17 +119,36 @@ class Course extends Component {
 
     // 点击章节，跳转到视频播放
     onToVideo = e => {
+        let course = this.props.course.data || {};
         let priv = this.props.course_private.data || {};
-        if (!priv.is_purchased || priv.is_expired) {
+        // 需要购买的课程，要判断购买状态
+        if (course.course_price != 0 && (!priv.is_purchased || priv.is_expired)) {
             e.preventDefault();
             e.nativeEvent.returnValue = false;
             this.setState({ isShowTipBuy: true });
         }
     };
 
+    // 关闭提示购买框
     onCloseTipBuy = e => {
         e.preventDefault();
         this.setState({ isShowTipBuy: false });
+    };
+
+    // 点击立即购买时，如果是免费课程，直接支付
+    onClickBuy = e => {
+        let course = this.props.course.data || {};
+        if (course.course_price <= 0) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+
+            const commerceAction = new CommerceAction();
+            this.props.dispatch(commerceAction.pay({
+                items: course.id,
+                item_type: payType.COURSE, // 购买类型
+                payment_method: 10, // 紫荆币支付
+            }));
+        }
     };
 
     handleLoadSheetAnswer = sheetId => {
@@ -203,7 +223,7 @@ class Course extends Component {
                                 <em><i className="iconfont icon-user"></i>{course.student_count}人</em>
                                 <em className="hide"><i className="iconfont icon-share"></i>分享</em>
                             </p>
-                            <p className="course-price">&yen;{course.course_price}</p>
+                            <p className="course-price">{course.course_price > 0 ? '&yen;' + course.course_price : '免费'}</p>
                             <p className="course-state">
                                 {priv.is_purchased ?
                                     (priv.is_expired ? '课程已到期，请续费' : '有效期至' + priv.expiring_date)
@@ -227,7 +247,7 @@ class Course extends Component {
                                         )
                                     )
                                     :
-                                    <Link to="/pay" query={{type: payType.COURSE, id: course.id}} className="btn fl">立即购买</Link>
+                                    <Link to="/pay" query={{type: payType.COURSE, id: course.id}} className="btn fl" onClick={this.onClickBuy}>立即购买</Link>
                                 }
                                 {priv.is_collected ?
                                     <button type="btn" className="fl course-collected" onClick={this.onCancelCollect}><i className="iconfont icon-heart"></i>取消收藏</button>
