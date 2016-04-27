@@ -145,7 +145,7 @@ button{ cursor: pointer; outline: none; border: 0;}
 .formsy-list input[type="text"],.formsy-input input[type="text"],input[type="password"]{ outline: none; height:36px; line-height: 36px; width:100%; border:0;font-size: 0.875em; margin: 0;}
 .formsy-list input[type="checkbox"]{ margin: 0 4px 0 0;}
 .formsy-list .iconfont{ font-size: 1.125em; margin:0 6px 0 0;}
-
+.formsy-text{ line-height: 44px;}
 
 .pop-btn button{ display:block; width:100%;line-height: 44px; text-align: center; font-size:1.125em;}
 .pop-btn button,.valid-btn{ border-radius: 4px; border: 1px solid #b01c40; color: #fff; text-shadow:0 1px 0 #9f9f9f;
