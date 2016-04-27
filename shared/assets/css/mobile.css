@@ -55,3 +55,15 @@
 .mobile-mine li em{ border-right:1px solid #ccc; display: block;}
 .mobile-mine li a{ color: #af1b3f;}
 .mobile-mine li div{ height:28px; padding:10px 0;}
+
+.mobile-balance{ margin:10px 14px; line-height: 1.6}
+.mobile-balance em{ color: #af1b3f;}
+.mobile-balance i{ color: #6ea3e5}
+
+.mobile-user h4{ padding: 0 14px; line-height: 1.6; margin: 10px 0; font-weight: normal;}
+.mobile-user h4 a{ color: #999999; font-size: 0.75em; line-height: 2.2;}
+.mobile-user h5{ font-weight: normal;}
+.mobile-user ul{ border-bottom: 1px solid #dadada;}
+.mobile-user li{ background: #fff; line-height: 1.6; padding:10px 14px;border-bottom: 1px dashed #dadada; color: #606060;}
+.mobile-user li:last-child{ border-bottom:0;}
+.mobile-user li p{ color: #999999; font-size: 0.75em;}

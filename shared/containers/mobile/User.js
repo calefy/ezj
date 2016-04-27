@@ -8,39 +8,53 @@ if (process.env.BROWSER) {
 let TopicIndex = React.createClass({
     render: function() {
         return (
-            <div className="mobile-mine">
-            	<div className="mobile-header">
-            		<i className="iconfont icon-left1"></i>
-            		<h1>我的测验</h1>
-            	</div>
-            	<div className="mobile-content">
-            		<ul>
-            			<li>
-            				<h4>采购战略和管理</h4>
-            				<div>
-            					<p><em>2016/2/15 16:17:11</em></p>
-            					<p><em>正确率80%</em></p>
-            					<Link to="/mobile/test">重新测验</Link>
-            				</div>
-            			</li>
-            			<li>
-            				<h4>企业理财与公司金融综合服务业务金融综合服务业务</h4>
-            				<div>
-            					<p><em>2016/2/15 16:17:11</em></p>
-            					<p><em>正确率80%</em></p>
-            					<Link to="/mobile/test">重新测验</Link>
-            				</div>
-            			</li>
-            			<li>
-            				<h4>采购战略和管理</h4>
-            				<div>
-            					<p><em>2016/2/15 16:17:11</em></p>
-            					<p><em>正确率80%</em></p>
-            					<Link to="/mobile/test">重新测验</Link>
-            				</div>
-            			</li>
-            		</ul>
-            	</div>
+            <div className="mobile-user">
+                <div className="mobile-header">
+                    <i className="iconfont icon-left1"></i>
+                    <h1>紫荆账户</h1>
+                </div>
+                <div className="mobile-content">
+                    <div className="mobile-balance">
+                        您的余额：
+                        <div className="fr">
+                            <em>2000</em> 紫荆币 <i className="iconfont icon-jewelry"></i>
+                        </div>
+                    </div>
+                    <div className="mobile-recharge">
+                        <h4>充值记录<Link to="" className="fr">查看更多</Link></h4>
+                        <ul>
+                            <li>
+                                <h5>宏观经济分析与未来高增长行业<em className="fr">1000</em></h5>
+                                <p>充值日期：2015.10.25</p>
+                            </li>
+                            <li>
+                                <h5>宏观经济分析与未来高增长行业<em className="fr">1000</em></h5>
+                                <p>充值日期：2015.10.25</p>
+                            </li>
+                            <li>
+                                <h5>宏观经济分析与未来高增长行业<em className="fr">1000</em></h5>
+                                <p>充值日期：2015.10.25</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="mobile-orders">
+                        <h4>消费记录<Link to="" className="fr">查看更多</Link></h4>
+                        <ul>
+                            <li>
+                                <h5>宏观经济分析与未来高增长行业<em className="fr">1000</em></h5>
+                                <p>充值日期：2015.10.25<em className="fr">支付成功</em></p>
+                            </li>
+                            <li>
+                                <h5>宏观经济分析与未来高增长行业<em className="fr">1000</em></h5>
+                                <p>充值日期：2015.10.25<em className="fr">支付成功</em></p>
+                            </li>
+                            <li>
+                                <h5>宏观经济分析与未来高增长行业<em className="fr">1000</em></h5>
+                                <p>充值日期：2015.10.25<em className="fr">支付成功</em></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         );
     }
