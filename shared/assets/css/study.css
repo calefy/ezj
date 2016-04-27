@@ -8,14 +8,18 @@
 
 .my-all-courses-right{ padding: 0 0 0 36px; position: relative;}
 .my-all-courses-right:before{ position: absolute; left: -7px; top:18px; content: ""; display: block; width: 10px;height:10px; border-radius: 50%; background: #b01c40;border:3px solid #fff;}
-
-.my-all-courses-right>div{ padding:12px 18px 4px; border: 1px solid #d3d3d3; border-radius: 4px; width:660px; line-height: 28px; font-size: 12px;}
+.my-all-courses-right > div{ padding:12px 18px 4px; border: 1px solid #d3d3d3; border-radius: 4px; width:660px; line-height: 28px; font-size: 12px;}
 .my-all-courses-right h4{ border-bottom: 1px solid #e8e8e8; font-size: 14px;padding:0 0 6px;}
 .my-all-courses-right h4 em{ font-size: 12px;}
 .my-all-courses-right p{ color: #aaaaaa; border-bottom: 1px solid #e8e8e8; padding: 6px 0;}
 .my-all-courses-right p:last-child{ border-bottom: 0}
 .my-all-courses-right p a{ color: #b01c40;}
 .my-all-courses-right p em{ border-right:1px solid #e8e8e8; margin:0 14px 0 0; padding: 0 14px 0 0;}
+
+.my-all-courses-year{ text-align: center; position: relative; line-height: 3}
+.my-all-courses-year:before,.my-all-courses-year:after{ content:""; position: absolute; top: 25px; width: 280px; height: 2px; background: #e8e8e8;}
+.my-all-courses-year:before{ left:36px;}
+.my-all-courses-year:after{ right: 0;}
 
 .my-all-course-bag p span{ color: #505050}
 
