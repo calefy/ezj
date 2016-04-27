@@ -15,7 +15,7 @@ class Result extends Component {
                         <em>题目数量:112</em>
                         <em>正确率:50%</em>
                     </div>
-                    <div className="study-result-content">
+                    <div className="result-content">
                         <dl>
                             <dt>1.一般情况下，新发行基金的封闭期不得超过（ ）</dt>
                             <dd>
