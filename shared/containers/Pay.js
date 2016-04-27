@@ -230,8 +230,8 @@ let Pay = React.createClass({
                     <div className="pay-method">
                         <dl>
                             <dt>支付方式</dt>
-                            <dd className="pay-alipay" data-pay="alipay" style={{borderColor: this.state.payMethod === 'alipay' ? '#f00' : '#e5e5e5'}} onClick={this.onClickPayMehtod}><em>&nbsp;</em></dd>
-                            <dd className="pay-unipay" data-pay="unipay" style={{borderColor: this.state.payMethod === 'unipay' ? '#f00' : '#e5e5e5'}} onClick={this.onClickPayMehtod}><em>银联</em></dd>
+                            <dd className={` pay-alipay ${this.state.payMethod === 'alipay' ? 'on' : null}`} data-pay="alipay" onClick={this.onClickPayMehtod}><em>&nbsp;</em></dd>
+                            <dd className={` pay-unipay ${this.state.payMethod === 'unipay' ? 'on' : null}`} data-pay="unipay" onClick={this.onClickPayMehtod}><em>银联</em></dd>
                         </dl>
                         <div>
                             <FormsyCheckbox name="agree" value="1" defaultChecked={true} required /> 我已经阅读并同意

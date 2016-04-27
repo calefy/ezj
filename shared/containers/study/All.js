@@ -67,8 +67,8 @@ class All extends Component {
             cacheYear = ty;
             ret.push(<li key={time-1} className="cl">
                     <div className="my-all-courses-left fl">{ty}年</div>
-                    <div className="my-all-courses-right fl">
-                        <span>{ty}</span>
+                    <div className="my-all-courses-right fl" style={{ width: 700 }}>
+                        <p className="my-all-courses-year">{ty}</p>
                     </div>
                 </li>);
         }

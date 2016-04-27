@@ -264,9 +264,9 @@ class Course extends Component {
                                     <Link to="/pay" query={{type: payType.COURSE, id: course.id}} className="btn fl" onClick={this.onClickBuy}>立即购买</Link>
                                 }
                                 {priv.is_collected ?
-                                    <button type="btn" className="fl course-collected" onClick={this.onCancelCollect}><i className="iconfont icon-heart"></i>取消收藏</button>
+                                    <button type="btn" className="fl course-collected" onClick={this.onCancelCollect}><i className="iconfont icon-likefill fl"></i>已收藏</button>
                                     :
-                                    <button type="btn" className="fl course-collect" onClick={this.onCollect}><i className="iconfont icon-heart"></i>收藏</button>
+                                    <button type="btn" className="fl course-collect" onClick={this.onCollect}><i className="iconfont icon-like fl"></i>收藏</button>
                                 }
                             </div>
                         </div>
