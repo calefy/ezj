@@ -114,6 +114,7 @@ class All extends Component {
                                     <a href={`/courses/${item.id}`} className="fl" target="_blank">{item.title}</a>
                                 }
                                 {isLearning ? <em className="fr">已学习 {Math.min(item.progress, 100)}%</em> : null}
+                                {isPackage && item.expiring_date ? <em className="fr">有效期至{item.expiring_date}</em> : null}
                             </h4>
                             {isPackage ?
                                 item.items.map((c, i) => {
@@ -121,7 +122,6 @@ class All extends Component {
                                         <p key={i}>
                                             {c.title}
                                             <a href={`/courses/${c.id}`} className="fr" target="_blank">查看</a>
-                                            <em className="fr">有效期至{c.expiring_date}</em>
                                         </p>
                                     );
                                 })
@@ -130,7 +130,7 @@ class All extends Component {
                                     <p>
                                         分类：{item.course_category_info}
                                         <a href={`/courses/${item.id}`} className="fr" target="_blank">查看</a>
-                                        <em className="fr">有效期至{item.expiring_date}</em>
+                                        {item.expiring_date ? <em className="fr">有效期至{item.expiring_date}</em> : null}
                                     </p>
                                     :
                                     <p>
