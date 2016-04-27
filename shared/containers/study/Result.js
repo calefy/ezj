@@ -1,69 +1,108 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import {Link} from 'react-router';
 
+import { getRequestTypes, toTimeString } from '../../libs/utils';
+import CoursesAction from '../../actions/CoursesAction';
+
 class Result extends Component {
+    // 初始加载数据
+    static fetchData({dispatch, params={}, location={}, apiClient}) {
+        const courseAction = new CoursesAction({ apiClient });
+        return Promise.all([
+            dispatch( courseAction.loadExamination(params.examId) ),
+            dispatch( courseAction.loadSheet(params.sheetId) ),
+        ]);
+    }
+
+    componentDidMount() {
+        this.loadNeededData(this.props);
+    }
+    componentWillReceiveProps(nextProps) {
+        this.loadNeededData(nextProps);
+    }
+    loadNeededData = props => {
+        const { examination, sheet, params } = props;
+        const courseAction = new CoursesAction();
+        if (params.examId !== (examination._req && examination._req.examId)) {
+            props.dispatch( courseAction.loadExamination(params.examId) );
+        }
+        if (params.sheetId !== (sheet._req && sheet._req.sheetId)) {
+            props.dispatch( courseAction.loadSheet(params.sheetId) );
+        }
+    };
 
     render() {
+        const { examination, sheet } = this.props;
+        let exam = examination.data && examination.data.examination || {};
+        let questions = examination.data && examination.data.questions || [];
+        let sheetInfo = sheet.data && sheet.data.sheet || {};
+        let answers = sheet.data && sheet.data.answers || [];
+
+        let answerMap = {};
+        answers.map(item => {
+            answerMap[item.examination_question_id] = item;
+        });
+
         return (
             <div className="study-center-right fr">
                 <h1 className="h1-title">查看测验结果<Link to="/study/test" className="fr">《 返回我的测验</Link></h1>
-                <div className="study-result shadow bg-white">
-                    <div className="study-result-title">
-                        <p>课程名称：采购战略和管理</p>
-                        <em>答题时间:2016/2/14&emsp;下午3:17:11</em>
-                        <em>答题时长:3分钟46秒</em>
-                        <em>题目数量:112</em>
-                        <em>正确率:50%</em>
+                {examination.isFetching || sheet.isFetching ?
+                    <div className="study-result shadow bg-white">
+                        <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
                     </div>
-                    <div className="result-content">
-                        <dl>
-                            <dt>1.一般情况下，新发行基金的封闭期不得超过（ ）</dt>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>A.域名是数字</span>
-                                <em className="true fr">正确答案：C</em>
-                            </dd>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>A.域名是数字</span>
-                            </dd>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>A.域名是数字</span>
-                            </dd>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>A.域名是数字</span>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt>2.假设有一支新设立的基金，发行份额共1亿份，每个份额的初始价值1元。基金经理买入200万股股票A，300万股股票B，250万股股票C，三只股票的价格变化如下。
-那么一个月后，该基金的基金净值为（ ），此时有新的投资者希望能够认购该基金，请问此时基金的申购价格应为（ ），基金公司一共收到了300万份基金申购，那
-么此时该基金的总规模为（ ）亿 股票A 股票B 股票C 买入价格20、10、10，一个月后市价18、12、14。</dt>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>A.1.12 1.12 1.1536</span>
-                                <em className="true fr">正确答案：C</em>
-                            </dd>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>B.1.12 1.12 0.9874</span>
-                            </dd>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>C.1.00 1.12 1.1536</span>
-                            </dd>
-                            <dd>
-                                <input type="checkbox" value="option1" />
-                                <span>D.1.23 1.23 0.9874</span>
-                            </dd>
-                            <p>答案解析：答案解析答案解析答案解析</p>
-                        </dl>
+                    :
+                    <div className="study-result shadow bg-white">
+                        <div className="study-result-title">
+                            <p>测验名称：{exam.examination_title}</p>
+                            <em>答题时间：{sheetInfo.sheet_submitted_time}</em>
+                            <em>答题时长：{toTimeString(sheetInfo.sheet_cost_time - 0, 'm:s')}</em>
+                            <em>题目数量：{questions.length}</em>
+                            <em>正确率：{((sheetInfo.sheet_score || 0) - 0).toFixed(2)}%</em>
+                        </div>
+                        <div className="result-content">
+                            {questions.map((qobj, qindex) => {
+                                let question = qobj.question || {};
+                                let options = qobj.options || [];
+
+                                let correctText = [];
+                                let correctIds = [];
+                                options.forEach((o, i) => {
+                                    if (o.is_correct) {
+                                        correctIds.push(o.id);
+                                        correctText.push(String.fromCharCode(65 + i));
+                                    }
+                                });
+
+                                let answer = answerMap[question.id];
+                                answer = answer && answer.answer_content.split(',') || [];
+
+                                return (
+                                    <dl key={qindex}>
+                                        <dt><span className="fl">{qindex + 1}.</span><div dangerouslySetInnerHTML={{__html: question.examination_question_content}} /></dt>
+                                        {options.map((option, oindex) => {
+                                            let isAnswer = correctIds.indexOf(option.id) >= 0; // 是否是正确答案
+                                            let isChecked = answer.indexOf(option.id) >= 0; // 用户是否选择
+                                            return (
+                                                <dd key={oindex}>
+                                                    <input type={question.examination_question_is_multi ? 'checkbox' : 'radio'} defaultChecked={isChecked} disabled/>
+                                                    <span className={isAnswer ? 'text-success' : isChecked ? 'text-error' : ''}>{String.fromCharCode(65 + oindex)}.{option.option_text}</span>
+                                                    {oindex === 0 ?  <em className="true fr">正确答案：{correctText.join(',')}</em> : null}
+                                                </dd>
+                                            );
+                                        })}
+                                    </dl>
+                                );
+                            })}
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         );
     }
 }
 
-module.exports = Result;
+module.exports = connect( state => ({
+    examination: state.examination,
+    sheet: state.sheet,
+}) )(Result);

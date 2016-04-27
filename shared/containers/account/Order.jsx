@@ -66,7 +66,7 @@ class Order extends Component {
                                             if (one) arr.push(one.replace(/\d+:/, ''));
                                         });
                                         return (
-                                            <tr>
+                                            <tr key={index}>
                                                 <td>{item.id}</td>
                                                 <td>{arr.join(', ')}</td>
                                                 <td>{item.total_amount}</td>

@@ -250,7 +250,7 @@ module.exports = {
                     }
                 },
                 {
-                    path: 'result',
+                    path: 'test/:examId/:sheetId',
                     onEnter: needLogin,
                     getComponent(location, cb) {
                         require.ensure([], require => {
