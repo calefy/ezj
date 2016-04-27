@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 
 import { baseCourseCategories } from '../libs/const';
 import CoursesAction from '../actions/CoursesAction';
+import OperateAction from '../actions/OperateAction';
 
 import CourseCategoryDetail from '../components/CourseCategoryDetail.jsx';
 import CourseSearch from '../components/CourseSearch.jsx';
@@ -77,6 +78,18 @@ class Classify extends Component {
         }
     }
 
+    // 购买课程
+    handleBuyCourse = (courseId, e) => {
+        // 检查登录
+        if (!this.props.user.data) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+
+            let operateAction = new OperateAction();
+            this.props.dispatch(operateAction.openLoginDialog());
+        }
+    };
+
     render() {
         const { course_categories, location } = this.props;
         const categories = course_categories.data || [];
@@ -119,6 +132,7 @@ class Classify extends Component {
                                 <CourseCategoryDetail
                                     category={this.props.course_category.data}
                                     courses={this.props.category_courses.data.list}
+                                    handleBuyCourse={this.handleBuyCourse}
                                 />
                         }
                         {!isSearch(location) ? null :
@@ -142,6 +156,7 @@ class Classify extends Component {
 
 
 module.exports = connect( state => ({
+    user: state.user,
     course_category: state.course_category,
     course_categories: state.course_categories,
     courses_search: state.courses_search,

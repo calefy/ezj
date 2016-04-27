@@ -58,9 +58,11 @@ class Collect extends Component {
                         courses.length ?
                             <ul className="index-course cl" style={{ width: 884, margin: "20px auto"}}>
                                 {courses.map((item, index) => {
+                                    if (this.state.canceledMap[item.id]) return null;
+
                                     return (
                                         <li key={index}>
-                                            <Link to={`/courses/${item.id}`}>
+                                            <a href={`/courses/${item.id}`} target="_blank">
                                                 <div className="course-list-img">
                                                     <img src={item.picture} alt="" />
                                                 </div>
@@ -71,7 +73,7 @@ class Collect extends Component {
                                                         <i className="iconfont icon-heart fr" onClick={this.onCancelCollect} data-id={item.id}></i>
                                                     }
                                                 </h6>
-                                            </Link>
+                                            </a>
                                         </li>
                                     );
                                 })}
