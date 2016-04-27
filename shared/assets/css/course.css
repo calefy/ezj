@@ -75,7 +75,7 @@
 .course-test-info{ text-align: center; padding: 30px 0;}
 .course-test-info i{ color: #b01c40; margin: 0 6px 0 0;}
 .course-test-info h2{ color: #000; font-size: 0.875em; }
-.course-test-num{ width: 160px; border-collapse: separate; border: 0px; padding: 0px; margin: 20px auto; color: #60686c; font-size: 0.875em;}
+.course-test-num{ width: 200px; border-collapse: separate; border: 0px; padding: 0px; margin: 20px auto; color: #60686c; font-size: 0.875em;}
 .course-test-num dl{ padding:10px 0;}
 .course-test-num dt{ width:60px; float: left; text-align: left;}
 .course-test-num dd{ text-align: right;}

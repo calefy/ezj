@@ -71,7 +71,7 @@ let RegistForm = React.createClass({
      * 提交注册
      */
     onRegist: function(model) {
-        let regex=/^[-_a-zA-Z0-9]+$/;
+        let regex= /^[-A-Za-z0-9_\u554A-\u9C52]+$/;
         let passregex=/^[a-zA-Z0-9,.'"]*$/;
         let nickname=model.nickname;
         let password=model.password;
