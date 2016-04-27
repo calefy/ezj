@@ -123,6 +123,8 @@ class Header extends Component {
         this.props.dispatch(this.userAction.logout());
         // 清除本地cookie
         document.cookie = '_SUP=;domain=.ezijing.com;expires='+(new Date()).toGMTString()+';';
+        // 跳转以清空缓存数据
+        document.location = '/';
     };
 
     // 搜索

@@ -237,7 +237,7 @@ class Course extends Component {
                                 <em><i className="iconfont icon-user"></i>{course.student_count}人</em>
                                 <em className="hide"><i className="iconfont icon-share"></i>分享</em>
                             </p>
-                            <p className="course-price">{course.course_price > 0 ? '¥' + course.course_price : '免费'}</p>
+                            <p className="course-price">{course.course_price > 0 ? '¥ ' + course.course_price : '免费'}</p>
                             <p className="course-state">
                                 {priv.is_purchased ?
                                     (priv.is_expired ? '课程已到期，请续费' : priv.expiring_date ? '有效期至' + priv.expiring_date : '')
