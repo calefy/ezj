@@ -13,13 +13,17 @@ let FormsyCheckbox = React.createClass({
         defaultChecked: React.PropTypes.bool,
     },
 
+    componentDidMount: function() {
+        this.setValue(this.refs.ck.checked ? this.refs.ck.value : '');
+    },
+
     handleChange: function (e) {
         this.setValue(e.currentTarget.checked ? e.currentTarget.value : '');
     },
 
     render: function () {
         return (
-            <input type="checkbox" {...this.props} onChange={this.handleChange} />
+            <input type="checkbox" {...this.props} onChange={this.handleChange} ref="ck" />
         );
     }
 });

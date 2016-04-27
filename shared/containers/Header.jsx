@@ -7,7 +7,7 @@
  */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
-import { IndexLink, Link } from 'react-router'
+import { Link } from 'react-router'
 import trim from 'lodash/trim';
 
 import { getRequestTypes, avatar } from '../libs/utils';

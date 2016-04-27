@@ -3,8 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import Formsy from 'formsy-react';
 
-import formsySubmitButtonMixin from '../../mixins/formsySubmitButtonMixin';
-import FormsyText from '../../components/formsy/FormsyText.jsx';
+import SignUp from '../SignUp.jsx';
 
 if (process.env.BROWSER) {
     require('css/special.css');
@@ -13,7 +12,6 @@ if (process.env.BROWSER) {
 const bundle = {id: 9166, price: 4980}
 
 let Security = React.createClass({
-    mixins: [ formsySubmitButtonMixin ],
 
     getInitialState: function() {
         return {
@@ -541,7 +539,7 @@ let Security = React.createClass({
                                 </ul>
                             </div>
                         </div>
-                        <div className="container special-finance-join bg-white">
+                        <div className="container special-finance-join bg-white" id="sign">
                         <h3>我要报名</h3>
                         <div className="join-phone">
                             <h4>方式一：手机报名</h4>
@@ -557,96 +555,10 @@ let Security = React.createClass({
                         </div>
                         <div className="join-web">
                             <h4>方式二：官网报名</h4>
-                            <div className="join-web-sign">
-                                <div className="join-web-info">
-                                    <h5 className="cl">填写信息<em className="fr">（为确保报名成功，请您输入正确的个人信息）</em></h5>
-                                    <div>
-                                        <dl>
-                                            <dt>姓名：</dt>
-                                            <dd><input type="text" placeholder="请输入您的姓名" /></dd>
-                                            <dd className="text-error">请输入正确的姓名</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>邮箱：</dt>
-                                            <dd><input type="text" placeholder="请输入您的常用邮箱" /></dd>
-                                            <dd className="text-success">紫荆教育已注册用户</dd>
-                                            <dd className="text-success">报名后可凭邮箱登录紫荆教育</dd>
-                                            <dd className="text-error">请输入正确邮箱</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>手机：</dt>
-                                            <dd><input type="text" placeholder="请输入您的联系方式" /></dd>
-                                            <dd className="text-error">请输入正确的手机</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>发票</dt>
-                                            <dd><input type="checkbox" /></dd>
-                                        </dl>
-                                        <dl className="join-invoice">
-                                            <input type="text" placeholder="请输入发票抬头" />
-                                            <dd className="text-error">请输入发票抬头</dd>
-                                        </dl>
-                                        <div className="join-buy cl">
-                                            <dl className="fl">
-                                                <dt>是我本人购买</dt>
-                                                <dd><input type="radio" checked="" /></dd>
-                                            </dl>
-                                            <dl className="fl">
-                                                <dt>替其他人购买</dt>
-                                                <dd><input type="radio" /></dd>
-                                            </dl>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="join-web-choose">
-                                    <h5>选择课程类型</h5>
-                                    <div>
-                                        <p>请选择培训地点：会务组将根据有效的报名信息，通过电子邮件或手机短信方式向参会嘉宾告知培训地点及日程</p>
-                                        <div className="join-web-choose-place on">
-                                            <p>北京</p>
-                                            <p>第4期：2016年03月26日－03月27日</p>
-                                        </div>
-                                        <div className="join-web-choose-price">
-                                            <p>培训费用：</p>
-                                            <div className="join-web-choose-price-info">
-                                                <h5>2天线下培训 + 17门在线课程 = ¥4980</h5>
-                                                <p>含2天面授课程、17门总计72课时资产证券化<br />在线课程、面授课程教材费等</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="join-web-pay">
-                                    <h5>选择支付方式</h5>
-                                    <div className="join-web-pay-info">
-                                        <ul className="join-web-pay-type cl">
-                                            <li className="fl on">在线支付</li>
-                                            <li className="fl">线下汇款支付</li>
-                                        </ul>
-                                        <div className="join-web-pay-content">
-                                            <ul className="join-web-pay-online cl">
-                                                <li className="fl on"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1181bf80cd08ff6b35f58a9e6ceb1589.png" /></li>
-                                                <li className="fl"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/069c882368b67fe9812018db3b5cdd39.png" /></li>
-                                            </ul>
-                                            <div className="join-web-pay-offline">
-                                                <h5>线下汇款报名说明：</h5>
-                                                <ul>
-                                                    <li>步骤一：根据页面上方提示，提交报名信息</li>
-                                                    <li>步骤二：汇款支付</li>
-                                                    <li>请你根据下方账号信息汇款，汇款时<b>务必在备注中写明报名课程、姓名、手机号</b>，我们的工作人员会在收到汇款后与您确认报名成功。</li>
-                                                    <li>户名：清控紫荆（北京）科技股份有限公司</li>
-                                                    <li>开户行：中国民生银行股份有限公司北京魏公村支行</li>
-                                                    <li>账号：694485289</li>
-                                                    <li>客服电话：13811977670 徐老师</li>
-                                                </ul>
-                                                <p>备注：线上课程在付款后，课程全部上线之日起180天内有效</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="join-web-btn">
-                                        <button>确认</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <SignUp
+                                type={0}
+                                id="123"
+                            />
                         </div>
                     </div>
                     </div>

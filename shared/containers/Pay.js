@@ -87,7 +87,7 @@ let Pay = React.createClass({
                 }
                 break;
             case types.failure:
-                alert('购买失败' + nextProps.action.error.message);
+                alert('购买失败: ' + nextProps.action.error.message);
                 break;
         }
     },
