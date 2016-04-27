@@ -270,8 +270,8 @@ class CourseExam extends Component {
                                     return (
                                         <dl key={index}>
                                             <dt>
-                                                {index + 1}.
-                                                <div className="dib vat" dangerouslySetInnerHTML={{__html: item.question.examination_question_content}} />
+                                                <span className="fl">{index + 1}.</span>
+                                                <div dangerouslySetInnerHTML={{__html: item.question.examination_question_content}} />
                                             </dt>
                                             {item.options.map((o, i) => {
                                                 let isChecked = answer.indexOf(o.id) >= 0; // 用户是否选择

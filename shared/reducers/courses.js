@@ -77,6 +77,9 @@ export function students(state, action) {
 export function examination(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_EXAM, state, action);
 }
+export function sheet(state, action) {
+    return reducerRequest(CoursesAction.LOAD_SHEET, state, action);
+}
 export function sheets(state, action) {
     return reducerRequest(CoursesAction.LOAD_SHEETS, state, action);
 }
