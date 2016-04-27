@@ -18,7 +18,12 @@ let FormsyCheckbox = React.createClass({
     },
 
     handleChange: function (e) {
-        this.setValue(e.currentTarget.checked ? e.currentTarget.value : '');
+        let v = e.currentTarget.checked ? e.currentTarget.value : '';
+        this.setValue(v);
+
+        if (this.props.onChange) {
+            this.props.onChange(this.props.name, v);
+        }
     },
 
     render: function () {

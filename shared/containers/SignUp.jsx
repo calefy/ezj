@@ -22,9 +22,24 @@ let SignUp = React.createClass({
         type: PropTypes.number.isRequired,
         id: PropTypes.string.isRequired,
     },
+    getInitialState: function() {
+        return {
+            needTicket: false, // 是否需要发票
+        };
+    },
 
+    _setState: function(obj) {
+        return this.setState(Object.assign({}, this.state, obj || {}));
+    },
+
+    // 提交
     handleSubmit: function(model) {
         console.log(model);
+    },
+
+    // 发票选择项变更
+    onChangeTicket: function(name, value) {
+        this._setState({ needTicket: !!value });
     },
 
     render: function() {
@@ -38,7 +53,7 @@ let SignUp = React.createClass({
             >
 
                 <div className="join-web-info">
-                    <h5 className="cl">填写信息<em className="fr">（为确保报名成功，请您输入正确的个人信息）</em></h5>
+                    <h5 className="cl">填写信息 <em>（为确保报名成功，请您输入正确的个人信息）</em></h5>
                     <div>
                         <FormsyText
                             name="name"
@@ -62,28 +77,33 @@ let SignUp = React.createClass({
                             placeholder="请输入您的联系方式"
                             required
                             validations={{matchRegexp: /1[3-9]\d{9}/}}
-                            validationError="请输入正确的手机"
+                            validationError="请输入正确的手机号"
                         />
-                        <dl>
-                            <dt>发票</dt>
-                            <dd><FormsyCheckbox name="fapiao" value="1"/></dd>
-                        </dl>
-                        <FormsyText
-                            name="prefix"
-                            title=" "
-                            placeholder="请输入发票抬头"
-                            required
-                            validationError="请输入发票抬头"
-                        />
+
+                        <div className="formsy-list">
+                            <label>发票:</label>
+                            <div className="dib vam"><FormsyCheckbox name="ticket" value="1" onChange={this.onChangeTicket}/></div>
+                        </div>
+                        {this.state.needTicket ?
+                            <FormsyText
+                                name="ticket_text"
+                                title=" "
+                                placeholder="请输入发票抬头"
+                                required
+                                validationError="请输入发票抬头"
+                            />
+                            : null
+                        }
                         <div className="join-buy cl">
-                                    <FormsyRadioGroup
-                                        name="person"
-                                        defaultValue="1"
-                                        options={[
-                                            {value: 1, label: '是我本人购买'},
-                                            {value: 2, label: '替其他人购买'},
-                                        ]}
-                                    />
+                            <FormsyRadioGroup
+                                name="person"
+                                defaultValue="1"
+                                labelPosition="before"
+                                options={[
+                                    {value: 1, label: '是我本人购买'},
+                                    {value: 2, label: '替其他人购买'},
+                                ]}
+                            />
                         </div>
                     </div>
                 </div>

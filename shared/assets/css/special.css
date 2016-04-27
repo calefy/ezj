@@ -1,3 +1,9 @@
+/**
+ * 专题页样式
+ * - 报名页面
+ * - CFC专题
+ * 等
+ */
 h2.h2-title{position: absolute;top:20px;left: -8px;background: url(../img/cfc-bg-right.png) no-repeat right top;padding: 0px 18px 0px 0;color: #fff;}
 h2.h2-title span{background: url(../img/cfc-bg-left.png) no-repeat left top;padding: 14px 16px 17px 34px;display: block;}
 h5.h5-title{background: url(../img/cfc-h5.png) no-repeat left center;text-align: center;font-size: 16px;color: #fff;padding: 6px 40px 7px 26px;display: inline-block;}
@@ -241,16 +247,13 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 
 .join-web-info,.join-web-choose,.join-web-pay{ padding: 40px 163px;}
 .join-web-info,.join-web-choose{ border-bottom: 2px dashed #b9b9b9;}
-.join-web-info dl{ margin-bottom: 6px; font-size: 0.875em;line-height: 28px;}
-.join-web-info dl:after{ display: block; content: ""; clear: both;}
-.join-web-info dt,.join-web-info dd{ float: left;}
-.join-web-info dt{ width: 50px;}
-.join-web-info dd{ margin: 0 6px 0 0;}
-.join-web-info input{ width: 291px; height:22px; padding:3px 6px; line-height: 22px; font-size: 12px; border: none; background-color: #e1e1e1; color: #707070; float: left;}
-.join-web-info .join-buy{ padding:0px; background: #fff;}
-.join-web-info .join-buy dl,.join-web-info .join-buy dl input{ width: auto;}
-.join-web-info .join-buy dl{ margin:0 20px 0 0;}
-.join-web-info .join-buy dt{ width: 90px;}
+.join-web-info .formsy-list{ margin-bottom: 6px; font-size: 0.875em;line-height: 28px;}
+.join-web-info .formsy-list label,
+.join-web-info .formsy-input{ display:inline-block; vertical-align:middle; }
+.join-web-info .formsy-list label{width: 50px;}
+.join-web-info .formsy-input{margin: 0 8px 0 0;}
+.join-web-info .validation-error{position: static;}
+.join-web-info .join-buy{ padding:10px 0; font-size:0.875em;}
 .join-web-info dl:nth-child(4) input,.join-web-info .join-buy .fl dd input{ margin:2px 0 0;}
 .join-invoice{ margin-left: 50px;}
 .join-invoice input{ margin:0 6px 0 0;}

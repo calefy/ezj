@@ -24,7 +24,12 @@ let FormsyRadioGroup = React.createClass({
     },
 
     handleChange: function (e) {
-        this.setValue(e.currentTarget.checked ? e.currentTarget.value : '');
+        let v = e.currentTarget.checked ? e.currentTarget.value : '';
+        this.setValue(v);
+
+        if (this.props.onChange) {
+            this.props.onChange(this.props.name, v);
+        }
     },
 
     render: function () {
@@ -34,8 +39,11 @@ let FormsyRadioGroup = React.createClass({
                 {this.props.options.map((item, index) => {
                     return  <label key={index}>
                                 {this.props.labelPosition === 'before' ? item.label : null}
+                                &nbsp;
                                 <input type="radio" value={item.value} defaultChecked={this.props.defaultValue == item.value} onChange={this.handleChange} name={name} />
+                                &nbsp;
                                 {this.props.labelPosition === 'after' ? item.label : null}
+                                &emsp;
                             </label>
                 })}
             </span>
