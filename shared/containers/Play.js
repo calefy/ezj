@@ -147,7 +147,12 @@ class Play extends Component {
     getUuid = () => {
         let cookieName = '_idt';
         // 尝试从cookie获取
-        return Math.random();
+        let idt = /_idt=/.test(document.cookie) && document.cookie.replace(/.*_idt=([^;]+).*/, '$1');
+        if (!idt) {
+            idt = '' + (new Date()).getTime() + Math.random() + Math.random();
+            document.cookie = cookieName + '=' + idt;
+        }
+        return idt;
     };
 
     // 用户点击按钮操作
