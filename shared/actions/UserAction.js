@@ -36,8 +36,9 @@ module.exports = class UserAction extends BaseAction {
         return BaseAction.dispatchRequest( UserAction.REGIST, this.api.reg(opts) );
     }
 
+    static LOGOUT = 'logout';
     logout() {
-        return BaseAction.dispatchRequest( 'logout', this.api.logout() );
+        return BaseAction.dispatchRequest( UserAction.LOGOUT, this.api.logout() );
     }
 
     static CHANGE_PASSWD = 'change_password';
