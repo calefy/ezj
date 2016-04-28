@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
@@ -6,26 +6,20 @@ if (process.env.BROWSER) {
     require('css/notFound.css')
 }
 
-class Classify extends Component {
+class NotFound extends Component {
 
-    // 初始加载数据
-    static fetchData({dispatch, params={}, location={}, apiClient}) {
-        return Promise.all([
-            // 默认首页取5个
-            //dispatch( noticeAction.loadNotices({pageSize: 5}, getOwnRequestIdentity(location)) )
-        ]);
-    }
-
-    componentDidMount() {
-    }
+    onBack = e => {
+        e.preventDefault();
+        this.props.history.goBack();
+    };
 
     render() {
         return (
             <div className="content not-found">
                 <div className="container cl">
                     <p>很抱歉，您访问的页面已经断开...</p>
-                    <Link to="">返回首页</Link>
-                    <Link to="">返回上一页</Link>
+                    <Link to="/">返回首页</Link>
+                    <Link to="/" onClick={this.onBack}>返回上一页</Link>
                 </div>
             </div>
         );
@@ -33,5 +27,5 @@ class Classify extends Component {
 }
 
 
-module.exports = connect( state => ({ notices: state.notices }) )(Classify);
+module.exports = connect( state => ({}) )(NotFound);
 
