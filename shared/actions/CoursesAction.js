@@ -140,5 +140,16 @@ module.exports = class CoursesAction extends BaseAction {
     cancelCollect(courseId) {
         return BaseAction.dispatchRequest( CoursesAction.CANCEL_COLLECT_COURSE, this.api.cancelCollect(courseId), {courseId} );
     }
+
+    // 播放数据采集
+    static PLAYER_PROGRESS = 'player_progress';
+    playerProgress(params) {
+        return BaseAction.dispatchRequest( CoursesAction.PLAYER_PROGRESS, this.api.playerProgress(params), params );
+    }
+    // 标记视频完成
+    static PLAYER_OVER = 'player_over';
+    playerOver(params) {
+        return BaseAction.dispatchRequest( CoursesAction.PLAYER_OVER, this.api.playerOver(params), params );
+    }
 }
 

@@ -50,6 +50,7 @@ class App extends Component {
 
     render() {
         const { location } = this.props;
+        // 通过判断 /m/ 开头的作为手机页
         let isMobile = /^\/m\//.test(location.pathname);
 
         return (

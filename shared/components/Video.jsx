@@ -112,6 +112,14 @@ class Video extends Component {
     };
 
     // =========提供播放后，其他组件可使用控制播放的方法===========
+    getTime = () => {
+        let player = getPlayer();
+        if (player) {
+            return player.getCurrentTime();
+        } else {
+            return 0;
+        }
+    };
     // 设置视频跳转时间
     setTimeTo = time => {
         let player = getPlayer();

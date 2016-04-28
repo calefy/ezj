@@ -144,13 +144,30 @@ class Play extends Component {
         this.refs.video.setTimeTo(time);
     };
 
+    getUuid = () => {
+        let cookieName = '_idt';
+        // 尝试从cookie获取
+        return Math.random();
+    };
+
     // 用户点击按钮操作
     handleChangeChapter = e => {
         this._setState({ pptIndex: 0 });
     };
     handleOver = e => { // 标记完成toggle
         e.preventDefault();
-        alert('comming soon ...');
+        let t = this.refs.video.getTime();
+
+        const courseAction = new CoursesAction();
+        this.props.dispatch( courseAction.playerOver({
+            _idt: this.getUuid(),
+            _cid: this.props.params.courseId,
+            _vid: e.currentTarget.getAttribute('data-vid'),
+            _mark: e.currentTarget.getAttribute('data-progress') < 100 ? 1 : 0,
+            chapter_id: this.props.params.chapterId,
+            current_time: t,
+            current_progress: Math.round(t / e.currentTarget.getAttribute('data-total') * 100),
+        }) );
     };
     handlePptBoxShow = e => { // 播放ppt toggle
         e.preventDefault();
@@ -235,6 +252,8 @@ class Play extends Component {
         let chapter = chapterMap[params.chapterId] || {};
         // 是否允许播放
         let canPlay = course.course_price == 0 || chapter.free_trial_status || (priv.is_purchased && !priv.is_expired);
+        // 当前章节进度
+        let curProgress = progress[params.chapterId] && progress[params.chapterId].chapter_progress || 0;
 
         // 前一节、后一节
         let prevChapterId = null;
@@ -314,10 +333,10 @@ class Play extends Component {
                                                     <ul className="knob-list">
                                                         {item.leaves.map((id, i) => {
                                                             let prog = progress[id] && progress[id].chapter_progress || 0;
-                                                            let part = Math.max(Math.round(prog / 25) - 1, 0);
+                                                            let part = Math.max(Math.round(prog / 25), 0);
 
                                                             return (
-                                                                <li className={`knob-item ${chapter.id == id ? 'current' : ''} ${part ? ['one', 'two', 'three', 'four'][part] + '-four' : ''}`} key={i}>
+                                                                <li className={`knob-item ${chapter.id == id ? 'current' : ''} ${part ? ['one', 'two', 'three', 'four'][part - 1] + '-four' : ''}`} key={i}>
                                                                     <i className="icon icon-pro" title={`学习进度 ${prog}%`}></i>
                                                                     <Link to={`/courses/${params.courseId}/chapters/${id}`} className="knob-name">{chapterMap[id].chapter_name}</Link>
                                                                 </li>
@@ -356,7 +375,7 @@ class Play extends Component {
                     <div className={`container ${canPlay ? '' : 'hide'}`}>
                         <Link to={`/courses/${params.courseId}/chapters/${prevChapterId || params.chapterId}`} className="fl" onClick={this.handleChangeChapter}>上一节</Link>
                         <Link to={`/courses/${params.courseId}/chapters/${nextChapterId || params.chapterId}`} className="fl" onClick={this.handleChangeChapter}>下一节</Link>
-                        <em className="play-state fl" onClick={this.handleOver}>已学完</em>
+                        <em className={`play-state fl ${curProgress == 100 ? 'play-checked' : ''}`} onClick={this.handleOver} data-vid={chapter.video && chapter.video.id || ''} data-progress={curProgress} data-total={chapter.video && chapter.video.video_duration || 1}>{curProgress == 100 ? '已学完' : '标记为已学完'}</em>
                         <em className={`play-state fr ${this.state.skipBegin ? 'play-checked' : ''}`} onClick={this.handleSkipBegin}>始终跳过片头</em>
                         {ppts.length ?
                             <em className={`play-state fr ${this.state.pptBoxShow ? 'play-checked' : ''}`} onClick={this.handlePptBoxShow}>同步显示PPT</em>
