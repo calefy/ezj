@@ -49,13 +49,18 @@ class App extends Component {
     }
 
     render() {
+        const { location } = this.props;
+        let isMobile = /^\/m\//.test(location.pathname);
+
         return (
             <div>
-                <Header location={this.props.location} history={this.props.history} />
-                <div className="body">
+                {isMobile ? null :
+                    <Header location={location} history={this.props.history} />
+                }
+                <div className={`body ${isMobile ? 'site-mobile' : ''}`}>
                     {this.props.children}
                 </div>
-                <Footer/>
+                {isMobile ? null : <Footer />}
             </div>
         );
     }
