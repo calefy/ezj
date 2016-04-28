@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import Formsy from 'formsy-react';
 
 import SignUp from '../SignUp.jsx';
 
@@ -11,20 +10,18 @@ if (process.env.BROWSER) {
 
 const bundle = {id: 9166, price: 4980}
 
-let Security = React.createClass({
+class Security extends React.Component {
 
-    getInitialState: function() {
-        return {
-            schedule: 'sc4', // 要显示的课程内容
-        };
-    },
+    state = {
+        schedule: 'sc4', // 要显示的课程内容
+    };
 
-    _setState: function(obj) {
+    _setState = obj => {
         this.setState(Object.assign({}, this.state, obj || {}));
-    },
+    };
 
     // 点击某一讲时，右侧展示对应课程安排
-    onClickSchedule: function(e) {
+    onClickSchedule = e => {
         e.preventDefault();
         e.nativeEvent.returnValue = false;
 
@@ -32,8 +29,9 @@ let Security = React.createClass({
         if (this.state.schedule !== key) {
             this._setState({ schedule: key });
         }
-    },
-    render: function() {
+    };
+
+    render() {
         return (
             <div className="special-security">
                 <div className="special-banner special-security-banner cl">
@@ -563,7 +561,7 @@ let Security = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = connect( state => ({
     action: state.action,

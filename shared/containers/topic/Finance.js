@@ -1,33 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import Formsy from 'formsy-react';
 
-import formsySubmitButtonMixin from '../../mixins/formsySubmitButtonMixin';
 import SignUp from '../SignUp.jsx';
 
 if (process.env.BROWSER) {
     require('css/special.css');
 }
 
+
 const offlineCourse = {id: 123, price: 2580};
 const onlineCourse = {id: 9705, price: 580};
 
-let Finance = React.createClass({
-    mixins: [ formsySubmitButtonMixin ],
+class Finance extends React.Component {
 
-    getInitialState: function() {
-        return {
-            schedule: 'sc1', // 要显示的课程内容
-        };
-    },
+    state = {
+        schedule: 'sc1', // 要显示的课程内容
+    };
 
-    _setState: function(obj) {
+    _setState = obj => {
         this.setState(Object.assign({}, this.state, obj || {}));
-    },
+    };
 
     // 点击某一讲时，右侧展示对应课程安排
-    onClickSchedule: function(e) {
+    onClickSchedule = e => {
         e.preventDefault();
         e.nativeEvent.returnValue = false;
 
@@ -35,9 +31,9 @@ let Finance = React.createClass({
         if (this.state.schedule !== key) {
             this._setState({ schedule: key });
         }
-    },
+    };
 
-    render: function() {
+    render() {
         return (
             <div className="special-finance">
                 <div className="special-banner special-finance-banner cl">
@@ -508,7 +504,7 @@ let Finance = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = connect( state => ({
     action: state.action,
