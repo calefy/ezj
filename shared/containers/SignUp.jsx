@@ -139,6 +139,8 @@ let SignUp = React.createClass({
             mobile: model.mobile,
             invoice: model.ticket_text || null,
             comment: this.state.type, // 存储课程类型，值不定
+            pay_return_success_uri: '/topic/' + this.props.pageKey,
+            pay_return_failed_uri: '/topic/' + this.props.pageKey,
         };
 
         // 提交
