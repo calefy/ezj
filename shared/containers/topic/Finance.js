@@ -501,11 +501,7 @@ let Finance = React.createClass({
                         </div>
                         <div className="join-web">
                             <h4>方式二：官网报名</h4>
-                            <SignUp
-                                type={0}
-                                id="123"
-                                pageKey="finance"
-                            />
+                            <SignUp pageKey="finance" />
                         </div>
                     </div>
                 </div>

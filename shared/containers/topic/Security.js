@@ -555,11 +555,7 @@ let Security = React.createClass({
                         </div>
                         <div className="join-web">
                             <h4>方式二：官网报名</h4>
-                            <SignUp
-                                type={0}
-                                id="123"
-                                pageKey="security"
-                            />
+                            <SignUp pageKey="security" />
                         </div>
                     </div>
                     </div>

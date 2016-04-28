@@ -22,8 +22,6 @@ let SignUp = React.createClass({
     payWindowName: null,
 
     statics: {
-        type: PropTypes.number.isRequired,
-        id: PropTypes.string.isRequired,
         pageKey: PropTypes.string.isRequired, // 区分不同类型的报名页
     },
     getInitialState: function() {
@@ -32,7 +30,7 @@ let SignUp = React.createClass({
         if (this.props.pageKey === 'security') {
             type = 'beijing';
         } else if (this.props.pageKey === 'finance') {
-            type = '6';
+            type = '0';
         }
 
         return {
@@ -128,16 +126,26 @@ let SignUp = React.createClass({
             this.payWindow = window.open('about:blank', this.payWindowName);
         }
 
+        // 区分id、type
+        let type = payType.PACKAGE;
+        let id = '';
+        if (this.props.pageKey === 'security') {
+            id = '6119033157460164608'; // 对应原线下课程 9642 (线上课程为 9166)
+        } else if (this.props.pageKey === 'finance') {
+            let arr = ['6119033159091748864', '6119033159372767232', '6119033161717383168']; // 对应原线下 9904，9905，9906（线上课程为 9594）
+            id = arr[this.state.type - 0];
+        }
+
         // 组装数据
         let data = {
             purchase_type: this.props.user.data ? model.person : 0,// 购买类型：0-匿名，1-自己，2-他人
-            items: this.props.id,
-            item_type: this.props.type,
+            items: id,
+            item_type: type,
             payment_method: this.state.payMethod === 'offline' ? 90 : (this.state.payMethod === 'alipay' ? 20 : 30), // 在线支付方式附加紫荆币
             name: model.name,
             email: model.email,
             mobile: model.mobile,
-            invoice: model.ticket_text || null,
+            invoice: model.ticket_text || '',
             comment: this.state.type, // 存储课程类型，值不定
             pay_return_success_uri: '/topic/' + this.props.pageKey,
             pay_return_failed_uri: '/topic/' + this.props.pageKey,
@@ -182,9 +190,9 @@ let SignUp = React.createClass({
                 <div>
                     <p>请选择您要参与的现场面授班，视频点播班请在上方超级课程表中购买</p>
                     <div className="join-web-selcourse cl">
-                        <Link to="#" className={this.state.type === '6' ? 'on' : ''} data-key="6" onClick={this.onChangeType}>第六讲     2016-04-15<br />地点：五道口金融学院</Link>
-                        <Link to="#" className={this.state.type === '7' ? 'on' : ''} data-key="7" onClick={this.onChangeType}>第七讲     2016-04-16<br />地点：五道口金融学院</Link>
-                        <Link to="#" className={this.state.type === '8' ? 'on' : ''} data-key="8" onClick={this.onChangeType}>第八讲     2016-04-17<br />地点：五道口金融学院</Link>
+                        <Link to="#" className={this.state.type === '0' ? 'on' : ''} data-key="0" onClick={this.onChangeType}>第六讲     2016-04-15<br />地点：五道口金融学院</Link>
+                        <Link to="#" className={this.state.type === '1' ? 'on' : ''} data-key="1" onClick={this.onChangeType}>第七讲     2016-04-16<br />地点：五道口金融学院</Link>
+                        <Link to="#" className={this.state.type === '2' ? 'on' : ''} data-key="2" onClick={this.onChangeType}>第八讲     2016-04-17<br />地点：五道口金融学院</Link>
                     </div>
                     <dl className="cl">
                         <dt>课程信息：</dt>
