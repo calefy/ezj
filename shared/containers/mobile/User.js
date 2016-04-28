@@ -5,7 +5,7 @@ if (process.env.BROWSER) {
     require('css/mobile.css');
 }
 
-let TopicIndex = React.createClass({
+let Account = React.createClass({
     render: function() {
         return (
             <div className="mobile-user">
@@ -60,4 +60,4 @@ let TopicIndex = React.createClass({
     }
 });
 
-module.exports = TopicIndex;
+module.exports = Account;
