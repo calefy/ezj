@@ -56,7 +56,7 @@ let Passwd = React.createClass({
             >
                 <div className="formsy-list cl">
                     <label>用户名</label>
-                    <div style={{ lineHeight: 44 }}>{user.username}</div>
+                    <div className="formsy-text">{user.username}</div>
                 </div>
 
                 <FormsyText
