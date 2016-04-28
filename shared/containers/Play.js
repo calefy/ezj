@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
 import { payType } from '../libs/const';
-import { getRequestTypes } from '../libs/utils';
+import { getIdt, getRequestTypes } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
 import Video from '../components/Video.jsx';
 import Ppt from '../components/Ppt.jsx';
@@ -156,7 +156,7 @@ class Play extends Component {
         if (this.intervalData.length && this.currentVideoId) {
             const courseAction = new CoursesAction();
             this.props.dispatch( courseAction.playerProgress({
-                _idt: this.getUuid(),
+                _idt: getIdt(),
                 _cid: this.props.params.courseId,
                 _vid: this.currentVideoId,
                 _dt: this.intervalData.join(','),
@@ -169,17 +169,6 @@ class Play extends Component {
         this.refs.video.setTimeTo(time);
     };
 
-    getUuid = () => {
-        let cookieName = '_idt';
-        // 尝试从cookie获取
-        let idt = /_idt=/.test(document.cookie) && document.cookie.replace(/.*_idt=([^;]+).*/, '$1');
-        if (!idt) {
-            idt = '' + (new Date()).getTime() + Math.random() + Math.random();
-            document.cookie = cookieName + '=' + idt;
-        }
-        return idt;
-    };
-
     // 用户点击按钮操作
     handleChangeChapter = e => {
         this._setState({ pptIndex: 0 });
@@ -190,7 +179,7 @@ class Play extends Component {
 
         const courseAction = new CoursesAction();
         this.props.dispatch( courseAction.playerOver({
-            _idt: this.getUuid(),
+            _idt: getIdt(),
             _cid: this.props.params.courseId,
             _vid: e.currentTarget.getAttribute('data-vid'),
             _mark: e.currentTarget.getAttribute('data-progress') < 100 ? 1 : 0,

@@ -214,3 +214,19 @@ export function cryptoPasswd(pwd) {
     password = md5('uokoaduw' + password + 'auhgniq');
     return password;
 }
+
+/**
+ * 获取idt
+ */
+export function getIdt() {
+    let cookieName = '_idt';
+    // 尝试从cookie获取
+    let idt = /_idt=/.test(document.cookie) && document.cookie.replace(/.*_idt=([^;]+).*/, '$1');
+    if (!idt) {
+        idt = '' + (new Date()).getTime() + Math.random() + Math.random();
+        let d = new Date();
+        d.setMonth(d.getMonth() + 6);
+        document.cookie = cookieName + '=' + idt + ';path=/;domain=.ezijing.com;expires=' + d.toGMTString();
+    }
+    return idt;
+}
