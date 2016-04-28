@@ -71,6 +71,9 @@ export function ppts(state, action) {
 export function lecturer(state, action) {
     return reducerRequest(CoursesAction.LOAD_LECTURER, state, action);
 }
+export function lecturer_courses(state, action) {
+    return reducerRequest(CoursesAction.LOAD_LECTURER_COURSES, state, action);
+}
 export function students(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_STUDENT, state, action);
 }

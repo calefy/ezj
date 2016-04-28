@@ -100,7 +100,11 @@ module.exports = class CoursesAction extends BaseAction {
 
     static LOAD_LECTURER = 'lecturer';
     loadLecturer(lecturerId) {
-        return BaseAction.dispatchRequest( CoursesAction.LOAD_LECTURER, this.api.lecturer(lecturerId) );
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_LECTURER, this.api.lecturer(lecturerId), {lecturerId} );
+    }
+    static LOAD_LECTURER_COURSES = 'lecturer_courses';
+    loadLecturerCourses(lecturerId) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_LECTURER_COURSES, this.api.lecturerCourses(lecturerId), {lecturerId} );
     }
 
 

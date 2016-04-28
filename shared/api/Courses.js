@@ -87,6 +87,9 @@ class Courses extends Base {
     lecturer(lecturerId) {
         return this.apiClient.get('els/lecturers/' + lecturerId);
     }
+    lecturerCourses(lecturerId) {
+        return this.apiClient.get(`els/lecturers/${lecturerId}/courses`);
+    }
 
     /**
      * 我的课程
