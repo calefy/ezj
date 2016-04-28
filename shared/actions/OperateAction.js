@@ -1,5 +1,6 @@
 import BaseAction from './BaseAction';
 import UserApi from '../api/User';
+import OtherApi from '../api/Other';
 
 module.exports = class OperateAction extends BaseAction {
 
@@ -9,6 +10,7 @@ module.exports = class OperateAction extends BaseAction {
     constructor(config = {}) {
         super(config);
         this.userApi = this.getApi(UserApi);
+        this.otherApi = this.getApi(OtherApi);
     }
 
     // 重置密码发邮件
@@ -52,5 +54,20 @@ module.exports = class OperateAction extends BaseAction {
     clearAction() {
         return { type: OperateAction.CLEAR_ACTION };
     }
+
+
+    static ADD_ANALYSIS_ACTION = 'add_analysis_action';
+    addAnalysisAction(data) {
+        return {type: OperateAction.ADD_ANALYSIS_ACTION, data: data};
+    }
+    static CLEAR_ANALYSIS_ACTION = 'add_analysis_action';
+    clearAnalysisAction() {
+        return {type: OperateAction.CLEAR_ANALYSIS_ACTION};
+    }
+    static UPLOAD_ANALYSIS = 'upload_analysis';
+    uploadAnalysis(data) {
+        return BaseAction.dispatchRequest(OperateAction.UPLOAD_ANALYSIS, this.otherApi.uploadAnalysis(data));
+    }
+
 }
 
