@@ -1,11 +1,10 @@
 /**
  * formsy radio
+ * 【废弃】
  */
 
 import React from 'react';
 import Formsy from 'formsy-react';
-
-let countor = 0;
 
 let FormsyRadio = React.createClass({
     mixins: [ Formsy.Mixin ],
@@ -14,24 +13,17 @@ let FormsyRadio = React.createClass({
         name: React.PropTypes.string.isRequired
     },
 
-    handleValueChange: function (event, value) {
-        this.setValue(value);
-        if (this.props.onChange) this.props.onChange(event, value);
+    componentDidMount: function() {
+        this.setValue(this.refs.rd.checked ? this.refs.rd.value : '');
     },
 
-    componentDidMount: function () {
-        this.setValue(this._muiComponent.isChecked());
+    handleChange: function (e) {
+        this.setValue(e.currentTarget.checked ? e.currentTarget.value : '');
     },
 
     render: function () {
-
-        var className = this.showRequired() ? 'required' : this.showError() ? 'error' : '';
-        var errorMessage = this.getErrorMessage();
-
         return (
-            <div>
-               
-            </div>
+            <input type="radio" {...this.props} onChange={this.handleChange} ref="rd" />
         );
     }
 });

@@ -4,7 +4,7 @@ import { reducerRequest, getRequestTypes } from '../libs/utils';
 
 export function user(state, action) {
     const loginTypes = getRequestTypes(UserAction.LOGIN);
-    const logoutTypes = getRequestTypes('logout');
+    const logoutTypes = getRequestTypes(UserAction.LOGOUT);
     const regTypes = getRequestTypes(UserAction.REGIST);
     const changePwdTypes = getRequestTypes('changePwd');
     const avatarTypes = getRequestTypes('avatar');

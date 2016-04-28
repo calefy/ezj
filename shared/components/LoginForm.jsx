@@ -21,6 +21,15 @@ let LoginForm = React.createClass({
         return { error: '' };
     },
 
+    componentDidMount: function() {
+        // 显示后光标自动在用户名中
+        let input = document.getElementsByName('login_name');
+        input = input ? input[0] : null;
+        if (input) {
+            input.focus();
+        }
+    },
+
     /**
      * 反馈结果
      */

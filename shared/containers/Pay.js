@@ -87,7 +87,7 @@ let Pay = React.createClass({
                 }
                 break;
             case types.failure:
-                alert('购买失败' + nextProps.action.error.message);
+                alert('购买失败: ' + nextProps.action.error.message);
                 break;
         }
     },
@@ -144,6 +144,8 @@ let Pay = React.createClass({
             items: id,
             item_type: type, // 购买类型
             payment_method: (this.state.pointPay ? 10 + ',' : '') + (method === 'alipay' ? 20 : method === 'unipay' ? 30 : ''), // 支付方式代码，与紫荆币组合逗号分隔
+            pay_return_success_uri: '/courses/' + id,
+            pay_return_failed_uri: '/courses/' + id,
         }));
     },
 
