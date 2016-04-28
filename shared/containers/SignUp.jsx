@@ -61,13 +61,15 @@ let SignUp = React.createClass({
                         this.refs.unipayForm.action = res.url;
                         this.refs.unipayForm.submit();
                     }
+                } else {
+                    alert('报名成功！');
                 }
                 break;
             case types.failure:
                 if (this.payWindow) {
                     this.payWindow.close();
                 }
-                alert('购买失败: ' + nextProps.action.error.message);
+                alert('报名失败: ' + nextProps.action.error.message);
                 break;
         }
     },

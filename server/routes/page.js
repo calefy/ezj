@@ -56,7 +56,7 @@ function doRendering(req, res, apiClient, user = {}) {
         } else if (redirectLocation) {
             res.status(302).redirect( redirectLocation.pathname + redirectLocation.search );
         } else if (!renderProps) {
-            res.status(404).send('Page Not Found');
+            res.redirect('/404');
         } else {
             const store = configureStore(res.locals.state);
 

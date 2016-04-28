@@ -395,6 +395,35 @@ module.exports = {
         },
         // 手机端测验
         {
+            path: 'm',
+            childRoutes: [
+                {
+                    path: 'exams',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/mobile/Mine'));
+                        });
+                    }
+                },
+                {
+                    path: 'exams/:examId',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/mobile/Test'));
+                        });
+                    }
+                },
+                {
+                    path: 'account',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/mobile/User'));
+                        });
+                    }
+                },
+            ]
+        },
+        {
             path: 'mobile/test',
             getComponent(location, cb) {
                 require.ensure([], require => {

@@ -5,8 +5,9 @@ if (process.env.BROWSER) {
     require('css/special.css');
 }
 
-let Cfc = React.createClass({
-    render: function() {
+class Cfc extends React.Component {
+
+    render() {
         return (
             <div className="special-cfc">
                 <div className="special-banner cl">
@@ -380,6 +381,6 @@ let Cfc = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = Cfc;
