@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Formsy from 'formsy-react';
 
 import formsySubmitButtonMixin from '../../mixins/formsySubmitButtonMixin';
-import FormsyText from '../../components/formsy/FormsyText.jsx';
+import SignUp from '../SignUp.jsx';
 
 if (process.env.BROWSER) {
     require('css/special.css');
@@ -501,116 +501,11 @@ let Finance = React.createClass({
                         </div>
                         <div className="join-web">
                             <h4>方式二：官网报名</h4>
-                            <div className="join-web-sign">
-                                <div className="join-web-info">
-                                    <h5 className="cl">填写信息<em className="fr">（为确保报名成功，请您输入正确的个人信息）</em></h5>
-                                    <div>
-                                        <dl>
-                                            <dt>姓名：</dt>
-                                            <dd><input type="text" placeholder="请输入您的姓名" /></dd>
-                                            <dd className="text-error">请输入正确的姓名</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>邮箱：</dt>
-                                            <dd><input type="text" placeholder="请输入您的常用邮箱" /></dd>
-                                            <dd className="text-success">紫荆教育已注册用户</dd>
-                                            <dd className="text-success">报名后可凭邮箱登录紫荆教育</dd>
-                                            <dd className="text-error">请输入正确邮箱</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>手机：</dt>
-                                            <dd><input type="text" placeholder="请输入您的联系方式" /></dd>
-                                            <dd className="text-error">请输入正确的手机</dd>
-                                        </dl>
-                                        <dl>
-                                            <dt>发票</dt>
-                                            <dd><input type="checkbox" /></dd>
-                                        </dl>
-                                        <dl className="join-invoice">
-                                            <input type="text" placeholder="请输入发票抬头" />
-                                            <dd className="text-error">请输入发票抬头</dd>
-                                        </dl>
-                                        <div className="join-buy cl">
-                                            <dl className="fl">
-                                                <dt>是我本人购买</dt>
-                                                <dd><input type="radio" checked="" /></dd>
-                                            </dl>
-                                            <dl className="fl">
-                                                <dt>替其他人购买</dt>
-                                                <dd><input type="radio" /></dd>
-                                            </dl>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="join-web-choose">
-                                    <h5>选择课程类型</h5>
-                                    <div>
-                                        <p>请选择您要参与的现场面授班，视频点播班请在上方超级课程表中购买</p>
-                                        <div className="join-web-selcourse cl">
-                                            <Link to="#" className="on">第六讲     2016-04-15<br />地点：五道口金融学院</Link>
-                                            <Link to="#" className="">第七讲     2016-04-16<br />地点：五道口金融学院</Link>
-                                            <Link to="#" className="">第八讲     2016-04-17<br />地点：五道口金融学院</Link>
-                                        </div>
-                                        <dl className="cl">
-                                            <dt>课程信息：</dt>
-                                            <dd>
-                                                <div className="join-web-gift">
-                                                    <div className="join-web-offline">
-                                                        <h4 className="join-web-title-red">学员福利   <em>价格：¥ 2580</em></h4>
-                                                        <p>1) 可参加线下面授，第一时间学到报告精髓</p>
-                                                        <p>2) 与讲师现场互动、个案现场咨询服务</p>
-                                                        <p>3) 可参加视频点播学习（有效期180天）</p>
-                                                        <p>4) 获得授课 PPT 教材纸质版 1 份</p>
-                                                        <p>5) 价值 188 元《全球互联网金融商业模式报告（2015）》1 本</p>
-                                                        <p>6) 有机会到互联网金融优秀企业参观，与创始人及高管团队面对面交流</p>
-                                                    </div>
-                                                    <div className="join-web-online">
-                                                        <h4 className="join-web-title-red">学员福利   <em>价格：¥ 2580</em></h4>
-                                                        <p>1) 可参加线下面授，第一时间学到报告精髓</p>
-                                                        <p>2) 与讲师现场互动、个案现场咨询服务</p>
-                                                        <p>3) 可参加视频点播学习（有效期180天）</p>
-                                                        <p>4) 获得授课 PPT 教材纸质版 1 份</p>
-                                                        <p>5) 价值 188 元《全球互联网金融商业模式报告（2015）》1 本</p>
-                                                        <p>6) 有机会到互联网金融优秀企业参观，与创始人及高管团队面对面交流</p>
-                                                    </div>
-                                                </div>
-                                                <div className="ifc online"></div>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                                <div className="join-web-pay">
-                                    <h5>选择支付方式<em>客服电话：13811997720 刘老师</em></h5>
-                                    <div className="join-web-pay-info">
-                                        <ul className="join-web-pay-type cl">
-                                            <li className="fl on">在线支付</li>
-                                            <li className="fl">线下汇款支付</li>
-                                        </ul>
-                                        <div className="join-web-pay-content">
-                                            <ul className="join-web-pay-online cl">
-                                                <li className="fl on"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1181bf80cd08ff6b35f58a9e6ceb1589.png" /></li>
-                                                <li className="fl"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/069c882368b67fe9812018db3b5cdd39.png" /></li>
-                                            </ul>
-                                            <div className="join-web-pay-offline">
-                                                <h5>线下汇款报名说明：</h5>
-                                                <ul>
-                                                    <li>步骤一：根据页面上方提示，提交报名信息</li>
-                                                    <li>步骤二：汇款支付</li>
-                                                    <li>请你根据下方账号信息汇款，汇款时<label className="warn-remit">务必在备注中写明报名课程、姓名、手机号</label>，我们的工作人员会在收到汇款后与您确认报名成功。</li>
-                                                    <li>户名：清控紫荆（北京）科技股份有限公司</li>
-                                                    <li>开户行：中国民生银行股份有限公司北京魏公村支行</li>
-                                                    <li>账号：694485289</li>
-                                                    <li>客服电话：13811997720 刘老师</li>
-                                                </ul>
-                                                <p>备注：线上课程在付款后，课程全部上线之日起180天内有效</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="join-web-btn">
-                                        <button>确认</button>
-                                    </div>
-                                </div>
-                            </div>
+                            <SignUp
+                                type={0}
+                                id="123"
+                                pageKey="finance"
+                            />
                         </div>
                     </div>
                 </div>

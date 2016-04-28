@@ -558,6 +558,7 @@ let Security = React.createClass({
                             <SignUp
                                 type={0}
                                 id="123"
+                                pageKey="security"
                             />
                         </div>
                     </div>
