@@ -87,6 +87,9 @@ class Courses extends Base {
     lecturer(lecturerId) {
         return this.apiClient.get('els/lecturers/' + lecturerId);
     }
+    lecturerCourses(lecturerId) {
+        return this.apiClient.get(`els/lecturers/${lecturerId}/courses`);
+    }
 
     /**
      * 我的课程
@@ -121,6 +124,19 @@ class Courses extends Base {
     }
     cancelCollect(courseId) {
         return this.apiClient.delete(`els/rel-courses-students/${courseId}/collection`);
+    }
+
+    // 监听上传播放信息
+    playerProgress(params = {}) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get(`dc/upload/player${params}`);
+    }
+    // 标记课程完成
+    playerOver(params = {}) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get(`dc/upload/mark${params}`);
     }
 
 }

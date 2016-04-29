@@ -35,6 +35,7 @@ export function course_private(state, action) {
     let collectType = getRequestTypes(CoursesAction.COLLECT_COURSE);
     let cancelType = getRequestTypes(CoursesAction.CANCEL_COLLECT_COURSE);
     let payType = getRequestTypes(CommerceAction.PAY);
+    let markType = getRequestTypes(CoursesAction.PLAYER_OVER); // 标记完成情况
     let data;
     switch(action.type) {
         case collectType.success:
@@ -58,6 +59,23 @@ export function course_private(state, action) {
                 data.expiring_date = dy + '-' + (dm < 10 ? '0' + dm : dm) + '-' + (dd < 10 ? '0' + dd : dd) + ' 00:00:00';
                 return Object.assign({}, state, {data: data});
             }
+        case markType.success:
+            if (state.data) {
+                data = Object.assign({}, state.data);
+                let cp = data.chapters_progress && data.chapters_progress[action._req.chapter_id];
+                if (!cp) {
+                    data.chapters_progress = data.chapters_progress || {};
+                    data.chapters_progress[action._req.chapter_id] = {
+                        chapter_progress: action._req.current_progress,
+                        last_position: action._req.current_time,
+                        video_id: action._req._vid,
+                    };
+                } else {
+                    cp.chapter_progress = action._req._mark == 1 ? 100 : action._req.current_progress;
+                }
+                return Object.assign({}, state, {data});
+            }
+            break;
         default:
             return reducerRequest(CoursesAction.LOAD_COURSE_PRIVATE, state, action);
     }
@@ -70,6 +88,9 @@ export function ppts(state, action) {
 }
 export function lecturer(state, action) {
     return reducerRequest(CoursesAction.LOAD_LECTURER, state, action);
+}
+export function lecturer_courses(state, action) {
+    return reducerRequest(CoursesAction.LOAD_LECTURER_COURSES, state, action);
 }
 export function students(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_STUDENT, state, action);

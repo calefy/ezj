@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
 import { payType } from '../libs/const';
-import { getRequestTypes } from '../libs/utils';
+import { getIdt, getRequestTypes } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
 import Video from '../components/Video.jsx';
 import Ppt from '../components/Ppt.jsx';
@@ -37,6 +37,10 @@ class Play extends Component {
         skipBegin: isSkipBegin, // 跳过片头
     };
 
+    intervalTimer = null;
+    intervalData = [];
+    currentVideoId = null;
+
     componentDidMount() {
         this.loadNeededData(this.props);
         // 因flash初始化之前无法获取对象，因此需要延迟执行
@@ -47,7 +51,10 @@ class Play extends Component {
         $(window).on('resize', (function() {
             clearTimeout(timer);
             setTimeout(this.jdugeSize.bind(this), 200);
-        }).bind(this))
+        }).bind(this));
+
+        // 数据采集
+        this.intervalTimer = setInterval(this.sendPlayerProgress.bind(this), 15 * 1000);
     }
     componentDidUpdate() {
         this.jdugeSize();
@@ -58,7 +65,12 @@ class Play extends Component {
         if (this.props.location.pathname !== nextProps.location.pathname) {
             const courseAction = new CoursesAction();
             nextProps.dispatch( courseAction.loadCoursePrivate(nextProps.params.courseId) );
+            this.sendPlayerProgress();
         }
+    }
+    componentWillUnmount() {
+        clearInterval(this.intervalTimer);
+        this.sendPlayerProgress();
     }
     /**
      * 加载需要的数据：已有数据与props中参数不一致时，加载对应的数据
@@ -139,6 +151,19 @@ class Play extends Component {
         this.setState(Object.assign({}, this.state, obj || {}));
     };
 
+    // 发送到数据采集
+    sendPlayerProgress = () => {
+        if (this.intervalData.length && this.currentVideoId) {
+            const courseAction = new CoursesAction();
+            this.props.dispatch( courseAction.playerProgress({
+                _idt: getIdt(),
+                _cid: this.props.params.courseId,
+                _vid: this.currentVideoId,
+                _dt: this.intervalData.join(','),
+            }) );
+            this.intervalData = [];
+        }
+    };
 
     setVideoTime = time => {
         this.refs.video.setTimeTo(time);
@@ -150,7 +175,18 @@ class Play extends Component {
     };
     handleOver = e => { // 标记完成toggle
         e.preventDefault();
-        alert('comming soon ...');
+        let t = this.refs.video.getTime();
+
+        const courseAction = new CoursesAction();
+        this.props.dispatch( courseAction.playerOver({
+            _idt: getIdt(),
+            _cid: this.props.params.courseId,
+            _vid: e.currentTarget.getAttribute('data-vid'),
+            _mark: e.currentTarget.getAttribute('data-progress') < 100 ? 1 : 0,
+            chapter_id: this.props.params.chapterId,
+            current_time: t,
+            current_progress: Math.round(t / e.currentTarget.getAttribute('data-total') * 100),
+        }) );
     };
     handlePptBoxShow = e => { // 播放ppt toggle
         e.preventDefault();
@@ -203,6 +239,12 @@ class Play extends Component {
         if (this.state.pptIndex !== i - 1) {
             this._setState({ pptIndex: i - 1 });
         }
+
+        // 存储到要上传到大数据的数据集中
+        time = Math.round(time);
+        if (this.intervalData.indexOf(time) < 0) {
+            this.intervalData.push(time);
+        }
     };
 
     render() {
@@ -235,6 +277,10 @@ class Play extends Component {
         let chapter = chapterMap[params.chapterId] || {};
         // 是否允许播放
         let canPlay = course.course_price == 0 || chapter.free_trial_status || (priv.is_purchased && !priv.is_expired);
+        // 当前章节进度
+        let curProgress = progress[params.chapterId] && progress[params.chapterId].chapter_progress || 0;
+
+        this.currentVideoId = chapter.video && chapter.video.id || null;
 
         // 前一节、后一节
         let prevChapterId = null;
@@ -314,10 +360,10 @@ class Play extends Component {
                                                     <ul className="knob-list">
                                                         {item.leaves.map((id, i) => {
                                                             let prog = progress[id] && progress[id].chapter_progress || 0;
-                                                            let part = Math.max(Math.round(prog / 25) - 1, 0);
+                                                            let part = Math.max(Math.round(prog / 25), 0);
 
                                                             return (
-                                                                <li className={`knob-item ${chapter.id == id ? 'current' : ''} ${part ? ['one', 'two', 'three', 'four'][part] + '-four' : ''}`} key={i}>
+                                                                <li className={`knob-item ${chapter.id == id ? 'current' : ''} ${part ? ['one', 'two', 'three', 'four'][part - 1] + '-four' : ''}`} key={i}>
                                                                     <i className="icon icon-pro" title={`学习进度 ${prog}%`}></i>
                                                                     <Link to={`/courses/${params.courseId}/chapters/${id}`} className="knob-name">{chapterMap[id].chapter_name}</Link>
                                                                 </li>
@@ -356,7 +402,7 @@ class Play extends Component {
                     <div className={`container ${canPlay ? '' : 'hide'}`}>
                         <Link to={`/courses/${params.courseId}/chapters/${prevChapterId || params.chapterId}`} className="fl" onClick={this.handleChangeChapter}>上一节</Link>
                         <Link to={`/courses/${params.courseId}/chapters/${nextChapterId || params.chapterId}`} className="fl" onClick={this.handleChangeChapter}>下一节</Link>
-                        <em className="play-state fl" onClick={this.handleOver}>已学完</em>
+                        <em className={`play-state fl ${curProgress == 100 ? 'play-checked' : ''}`} onClick={this.handleOver} data-vid={chapter.video && chapter.video.id || ''} data-progress={curProgress} data-total={chapter.video && chapter.video.video_duration || 1}>{curProgress == 100 ? '已学完' : '标记为已学完'}</em>
                         <em className={`play-state fr ${this.state.skipBegin ? 'play-checked' : ''}`} onClick={this.handleSkipBegin}>始终跳过片头</em>
                         {ppts.length ?
                             <em className={`play-state fr ${this.state.pptBoxShow ? 'play-checked' : ''}`} onClick={this.handlePptBoxShow}>同步显示PPT</em>

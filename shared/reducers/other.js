@@ -5,6 +5,7 @@ import merge from 'lodash/merge';
 import { reducerRequest, getRequestTypes } from '../libs/utils';
 import { targetType } from '../libs/const';
 import OtherAction from '../actions/OtherAction';
+import OperateAction from '../actions/OperateAction';
 
 /**
  * normalizr处理后存储实体对象
@@ -32,4 +33,17 @@ export function action(state, action) {
  */
 export function ads_index(state, action) {
     return reducerRequest(OtherAction.ADS_INDEX, state, action);
+}
+
+// 用户行为数据
+export function analysis_actions(state = [], action) {
+    switch(action.type) {
+        case OperateAction.ADD_ANALYSIS_ACTION:
+            return state.concat([action.data]);
+            break;
+        case OperateAction.CLEAR_ANALYSIS_ACTION:
+            return [];
+            break;
+    }
+    return state;
 }

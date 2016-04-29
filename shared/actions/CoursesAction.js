@@ -100,7 +100,11 @@ module.exports = class CoursesAction extends BaseAction {
 
     static LOAD_LECTURER = 'lecturer';
     loadLecturer(lecturerId) {
-        return BaseAction.dispatchRequest( CoursesAction.LOAD_LECTURER, this.api.lecturer(lecturerId) );
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_LECTURER, this.api.lecturer(lecturerId), {lecturerId} );
+    }
+    static LOAD_LECTURER_COURSES = 'lecturer_courses';
+    loadLecturerCourses(lecturerId) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_LECTURER_COURSES, this.api.lecturerCourses(lecturerId), {lecturerId} );
     }
 
 
@@ -135,6 +139,17 @@ module.exports = class CoursesAction extends BaseAction {
     static CANCEL_COLLECT_COURSE = 'cancel_collect_course';
     cancelCollect(courseId) {
         return BaseAction.dispatchRequest( CoursesAction.CANCEL_COLLECT_COURSE, this.api.cancelCollect(courseId), {courseId} );
+    }
+
+    // 播放数据采集
+    static PLAYER_PROGRESS = 'player_progress';
+    playerProgress(params) {
+        return BaseAction.dispatchRequest( CoursesAction.PLAYER_PROGRESS, this.api.playerProgress(params), params );
+    }
+    // 标记视频完成
+    static PLAYER_OVER = 'player_over';
+    playerOver(params) {
+        return BaseAction.dispatchRequest( CoursesAction.PLAYER_OVER, this.api.playerOver(params), params );
     }
 }
 
