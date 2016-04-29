@@ -25,6 +25,8 @@ if (process.env.NODE_ENV === 'production') {
     resourceConfig = JSON.parse(fs.readFileSync(__dirname + '/../../webpack.version.json', 'utf-8'));
 }
 
+var pageTitle = '紫荆教育-清华大学五道口金融学院旗下品牌'; // 记录页面标题
+
 function serverRendering(req, res) {
     let apiClient = new ApiClient({ prefix: config.apiPrefix });
     // 设置api请求需要的通用头
@@ -86,6 +88,7 @@ function doRendering(req, res, apiClient, user = {}) {
 function fetchComponentsData( dispatch, props = {}, apiClient ) {
     const {components, params, location} = props;
     const promises = components.map( component => {
+        if (component && component.pageTitle) pageTitle = component.pageTitle;
         return (component && component.fetchData) ? component.fetchData({dispatch, params, location, apiClient}) : null;
     });
 
@@ -105,7 +108,7 @@ function renderHtml({ componentHtml, initState, req }) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <title>紫荆教育</title>
+    <title>${pageTitle}</title>
     <link rel="shortcut icon" href="//www.ezijing.com/favicon.ico">
     <link rel="stylesheet" href="${publicPath}${assets[1]}">
     <!--[if lt IE 9]>
