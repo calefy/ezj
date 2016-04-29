@@ -17,9 +17,7 @@ class Other extends Base {
      */
     uploadAnalysis(params = {}) {
         params.actions = JSON.stringify(params.actions);
-        params = paramify(params);
-        params = params ? '?' + params : '';
-        return this.apiClient.get(`dc/upload/log${params}`);
+        return this.apiClient.post('dc/upload/log', params);
     }
 
 }

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 import { payType } from '../../libs/const';
-import { toTimeString, avatar, getRequestTypes } from '../../libs/utils';
+import { toTimeString, image, avatar, getRequestTypes } from '../../libs/utils';
 
 import OperateAction from '../../actions/OperateAction';
 import CommerceAction from '../../actions/CommerceAction';
@@ -354,7 +354,7 @@ class Course extends Component {
                                         <dl key={index}>
                                             <dt>
                                                 <Link to={`/lecturers/${item.id}`} className="cl">
-                                                    <img src={avatar(item.lecturer_avatar)} alt="" width="68" className="fl"/>
+                                                    <img src={image(item.lecturer_avatar, 'sl')} alt="" width="68" className="fl"/>
                                                     {item.lecturer_name}
                                                     {item.lecturer_org} {item.lecturer_title}
                                                 </Link>
@@ -374,12 +374,12 @@ class Course extends Component {
                                             return (
                                                 <div key={index} data-key={index} onMouseEnter={this.onStudentHover} onMouseLeave={this.onStudentLeave}>
                                                     <Link to={`/students/${item.student_id}`}>
-                                                        <img src={avatar(item.avatar)} alt="" width="50" height="50"/>
+                                                        <img src={avatar(item.avatar, 'pipe2')} alt="" width="50" height="50"/>
                                                     </Link>
                                                     <div ref={`student_${index}`}>
                                                         <Link to={`/students/${item.student_id}`}>
                                                             <i></i>
-                                                            <img src={avatar(item.avatar)} alt="" width="50" height="50" />
+                                                            <img src={avatar(item.avatar, 'pipe2')} alt="" width="50" height="50" />
                                                             <p>{item.nickname}</p>
                                                         </Link>
                                                     </div>

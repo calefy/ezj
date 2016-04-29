@@ -4,7 +4,6 @@ import {Link} from 'react-router';
 
 import { orderStatus } from '../../libs/const';
 import CommerceAction from '../../actions/CommerceAction';
-import Pagination from '../../components/Pagination.jsx';
 
 if (process.env.BROWSER) {
     require('css/mobile.css');

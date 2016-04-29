@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
-import { avatar } from '../libs/utils';
+import { image } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
 
 if (process.env.BROWSER) {
@@ -50,7 +50,7 @@ class Lecturer extends Component {
                     <div>
                         <div className="lecturer-top cl">
                             <div className="container">
-                                <img src={avatar(person.lecturer_avatar)} alt="" className="fl" />
+                                <img src={image(person.lecturer_avatar, 'll')} alt="" className="fl" />
                                 <div className="fl">
                                     <h4>{person.lecturer_name}</h4>
                                     <p className="title">{person.lecturer_org} {person.lecturer_title}</p>
@@ -70,7 +70,7 @@ class Lecturer extends Component {
                                                 <li key={index}>
                                                     <Link to={`/courses/${item.id}`} target="_blank">
                                                         <div className="course-list-img">
-                                                            <img src={item.course_picture} alt="" />
+                                                            <img src={image(item.course_picture, 'nc')} alt="" />
                                                         </div>
                                                         <h5>{item.course_name}</h5>
                                                         <p>

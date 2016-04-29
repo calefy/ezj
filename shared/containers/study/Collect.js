@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import {Link} from 'react-router';
 
-import { getRequestTypes } from '../../libs/utils';
+import { image, getRequestTypes } from '../../libs/utils';
 import CoursesAction from '../../actions/CoursesAction';
 import Pagination from '../../components/Pagination.jsx';
 
@@ -64,7 +64,7 @@ class Collect extends Component {
                                         <li key={index}>
                                             <a href={`/courses/${item.id}`} target="_blank">
                                                 <div className="course-list-img">
-                                                    <img src={item.picture} alt="" />
+                                                    <img src={image(item.picture, 'nc')} alt="" />
                                                 </div>
                                                 <h5>{item.title}</h5>
                                                 <h6>

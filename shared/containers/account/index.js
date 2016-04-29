@@ -25,7 +25,7 @@ class Account extends Component {
         return (
             <div className="account mar40 cl container">
                 <div className="account-left fl shadow">
-                    <img src={avatar(user.avatar)} alt={user.nickname} />
+                    <img src={avatar(user.avatar, 'pipe3')} alt={user.nickname} />
                     <p>{user.nickname}</p>
                 </div>
                 <div className="account-right fl shadow">

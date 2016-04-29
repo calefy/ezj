@@ -202,8 +202,11 @@ export function toTimeString(second, format) {
 /**
  * 获取头像url，如果不存在则返回默认头像
  */
-export function avatar(a) {
-    return a || 'http://xplat-avatar.oss-cn-beijing.aliyuncs.com/a462f8c334e328ba8f572ca0a51c4861.jpg';
+export function image(img, type) {
+    return img + (type ? '@!' + type : '');
+}
+export function avatar(a, type) {
+    return image(a || 'http://xplat-avatar.oss-cn-beijing.aliyuncs.com/a462f8c334e328ba8f572ca0a51c4861.jpg', type) ;
 }
 
 /**

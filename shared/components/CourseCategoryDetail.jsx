@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { payType } from '../libs/const';
+import { image } from '../libs/utils';
 
 class CourseCategoryDetail extends Component {
     static propTypes = {
@@ -57,7 +58,7 @@ class CourseCategoryDetail extends Component {
                                 return (
                                     <li key={index}>
                                         <a href={`/lecturers/${item.id}`} target="_blank">
-                                            <img src={item.lecturer_avatar} alt={item.lecturer_name} className="fl" />
+                                            <img src={image(item.lecturer_avatar, 'nl')} alt={item.lecturer_name} className="fl" />
                                             <div className="fl">
                                                 <h4>{item.lecturer_name}</h4>
                                                 <p>{item.lecturer_org} {item.lecturer_title}</p>

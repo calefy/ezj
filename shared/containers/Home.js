@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
 import { adsType, baseCourseCategories } from '../libs/const';
-import { avatar } from '../libs/utils';
+import { image, avatar } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
 import OtherAction from '../actions/OtherAction';
 
@@ -44,7 +44,7 @@ let Home = React.createClass({
             return  <li key={key} className={ list.length == 8 ? (key+1)%4==0 ? "last-child" : null : (key+1)%5==0 ? "last-child" : null}>
                         <Link to={`/courses/${item.id}`} target="_blank">
                             <div className="course-list-img">
-                                <img src={item.course_picture} alt="" />
+                                <img src={image(item.course_picture, 'nc')} alt="" />
                             </div>
                             <h5>{item.course_name}</h5>
                             <h6><i className="iconfont icon-user"></i>{item.student_count}</h6>
@@ -174,7 +174,7 @@ let Home = React.createClass({
                                                 <li key={index} className={ (index+1)%5==0 ? "last-child" : null }>
                                                     <Link to={item.action} target="_blank">
                                                         <div className="course-list-img">
-                                                            <img src={avatar(item.image)} alt={item.lecture_name} />
+                                                            <img src={image(item.image, 'll')} alt={item.lecture_name} />
                                                         </div>
                                                         <h5>{item.lecture_name}</h5>
                                                         <h6>{item.lecture_org + ' ' + item.lecture_title}</h6>

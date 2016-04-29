@@ -167,7 +167,7 @@ class Header extends Component {
                         <div className="header-user fr">
                             <div className="head-account fr" onClick={this.toggleMenu} onMouseEnter={this.showMenu} onMouseLeave={this.hideMenu}>
                                 <div className="user-picture fr">
-                                    <img src={avatar(user.avatar)}/>
+                                    <img src={avatar(user.avatar, 'pipe1')}/>
                                 </div>
                                 <span className="user-name fr">{user.nickname}</span>
                                 <ul className={`menu nav ${this.state.showMenu ? '' : 'hide' }` } >

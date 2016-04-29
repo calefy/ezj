@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { image } from '../libs/utils';
 
 import Pagination from './Pagination.jsx';
 
@@ -37,7 +38,7 @@ class CourseSearch extends Component {
                                         <li key={index}>
                                             <a href={`/courses/${item.id}`} target="_blank">
                                                 <div className="course-list-img">
-                                                    <img src={item.course_picture} alt="" />
+                                                    <img src={image(item.course_picture, 'nc')} alt="" />
                                                 </div>
                                                 <h5>{item.course_name}</h5>
                                                 <h6><i className="iconfont icon-user"></i>{item.joined_count}</h6>
