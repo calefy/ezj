@@ -226,7 +226,8 @@ export function getIdt() {
     // 尝试从cookie获取
     let idt = /_idt=/.test(document.cookie) && document.cookie.replace(/.*_idt=([^;]+).*/, '$1');
     if (!idt) {
-        idt = '' + (new Date()).getTime() + Math.random() + Math.random();
+        idt = (new Date()).getTime().toString(36) + Math.random().toString(32) + Math.random().toString(32);
+
         let d = new Date();
         d.setMonth(d.getMonth() + 6);
         document.cookie = cookieName + '=' + idt + ';path=/;domain=.ezijing.com;expires=' + d.toGMTString();

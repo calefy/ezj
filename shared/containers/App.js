@@ -34,7 +34,7 @@ class App extends Component {
         }
 
         // 添加统计
-        this.props.dispatch(this.operateAction.addAnalysisAction({ name: 'PAGEVIEW', ts: (new Date()).getTime(), url: this.props.location.pathname + this.props.location.search }));
+        this.props.dispatch(this.operateAction.addAnalysisAction({ type: 'PAGEVIEW', ts: (new Date()).getTime(), key: this.props.location.pathname + this.props.location.search }));
         analysisTimer = setInterval(this.doUploadAnalysis.bind(this), 30 * 1000);
     }
 
@@ -44,7 +44,7 @@ class App extends Component {
         if (prevPath !== nextPath) {
             window.scrollTo(0, 0);
             // 统计
-            this.props.dispatch(this.operateAction.addAnalysisAction({ name: 'PAGEVIEW', ts: (new Date()).getTime(), url: nextPath }));
+            this.props.dispatch(this.operateAction.addAnalysisAction({ type: 'PAGEVIEW', ts: (new Date()).getTime(), key: nextPath }));
         }
 
         // 清理action，防止路由变更时，action数据没变更，导致二次处理问题
@@ -71,6 +71,8 @@ class App extends Component {
                 device: 1, // 网站
                 actions: actions,
             }));
+
+            this.props.dispatch(this.operateAction.clearAnalysisAction())
         }
     };
 

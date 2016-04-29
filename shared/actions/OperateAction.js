@@ -60,7 +60,7 @@ module.exports = class OperateAction extends BaseAction {
     addAnalysisAction(data) {
         return {type: OperateAction.ADD_ANALYSIS_ACTION, data: data};
     }
-    static CLEAR_ANALYSIS_ACTION = 'add_analysis_action';
+    static CLEAR_ANALYSIS_ACTION = 'clear_analysis_action';
     clearAnalysisAction() {
         return {type: OperateAction.CLEAR_ANALYSIS_ACTION};
     }
