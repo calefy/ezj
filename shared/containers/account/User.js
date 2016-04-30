@@ -4,7 +4,11 @@ import {Link} from 'react-router';
 import Formsy from 'formsy-react';
 
 import formsySubmitButtonMixin from '../../mixins/formsySubmitButtonMixin';
+import FormsyCheckbox from '../../components/formsy/FormsyCheckbox.jsx';
+import FormsyRadioGroup from '../../components/formsy/FormsyRadioGroup.jsx';
 import FormsyText from '../../components/formsy/FormsyText.jsx';
+
+import {getRequestTypes} from '../../libs/utils';
 import UserAction from '../../actions/UserAction';
 
 let User = React.createClass({
@@ -14,6 +18,19 @@ let User = React.createClass({
         return {
             error: '', // 全局的错误信息显示
         };
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        const infoType = getRequestTypes(UserAction.UPDATE_INFO);
+        switch (nextProps.action.type) {
+            case infoType.success:
+                this.props.history.push('/account/index');
+                break;
+            case infoType.failure:
+                this.enableSubmitButton();
+                this.setState({error: nextProps.action.error && nextProps.action.error.message || '修改信息失败'});
+                break;
+        }
     },
 
     // 简便设置state
@@ -30,7 +47,10 @@ let User = React.createClass({
 
     // 提交表单
     onSubmit: function(model) {
-        console.log('account/user submit : ', model);
+        this.loadingSubmitButton();
+
+        const userAction = new UserAction();
+        this.props.dispatch( userAction.updateInfo(model) );
     },
 
     render: function() {
@@ -43,40 +63,44 @@ let User = React.createClass({
                 onValidSubmit={this.onSubmit}
                 onChange={this.onFormChange}
             >
+                <FormsyText
+                    name="nickname"
+                    title="昵称："
+                    placeholder="4-30个字符，支持中英文、数字、“_”或减号"
+                    required
+                    validations={{matchRegexp: /^[\u4e00-\u9fa5_a-zA-Z\d\-]{4,30}$/}}
+                    validationError="请输入4-30个字符，支持中英文、数字、“_”或减号"
+                />
+                <div className="formsy-list cl">
+                    <label>性别：</label>
+                    <FormsyRadioGroup
+                        name="gender"
+                        defaultValue="0"
+                        options={[
+                            {value: 1, label: '男'},
+                            {value: 2, label: '女'},
+                            {value: 0, label: '保密'},
+                        ]}
+                    />
+                </div>
+                <FormsyText
+                    name="birthday"
+                    title="出生日期："
+                    placeholder="请输入出生日期，格式：1990-01-08"
+                    required
+                    validations={{matchRegexp: /^\d{4}-\d{2}-\d{2}$/}}
+                    validationError="请输入真实出生日期"
+                />
+                <FormsyText
+                    name="addr"
+                    title="所在地区："
+                    placeholder="请输入所在地区城市名称"
+                    required
+                    validations={{matchRegexp: /^[\u4e00-\u9fa5]{2,10}$/}}
+                    validationError="请输入城市名称"
+                />
+                {/*
                 <dl>
-                    <dt>昵称：</dt>
-                    <dd className="formsy-input input-error">
-                        <input type="text" name="" value="" placeholder="4-30个字符，支持中英文、数字、“_”或减号" />
-                    </dd>
-                    <dd>
-                        <em className="text-error">昵称在4-30个字符之间</em>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>用户名：</dt>
-                    <dd className="formsy-input">
-                        <input type="text" name="" value="" placeholder="6-30个字符，支持英文、数字等" />
-                    </dd>
-                    <dd>
-                        <em className="text-error">用户名已被占用</em>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>性别：</dt>
-                    <dd name="gender">
-                        <label className="radio-inline">
-                            <input type="radio" name="genderRadio" id="genderRadio1" value="1" checked="" /><span>男</span>
-                        </label>
-                        <label className="radio-inline">
-                            <input type="radio" name="genderRadio" id="genderRadio2" value="0" /><span>女</span>
-                        </label>
-                        <label className="radio-inline">
-                            <input type="radio" name="genderRadio" id="genderRadio3" value="2" checked="checked" /><span>保密</span>
-                        </label>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>出生日期：</dt>
                     <dd>
                         <div className="account-birth">
                             <div className="account-birth-select">
@@ -143,7 +167,11 @@ let User = React.createClass({
                         </div>
                     </dd>
                 </dl>
-                <button className={this.canSubmit() ? 'btn' : 'btn disabled'} type="submit" disabled={!this.canSubmit()}>{this.isSubmitLoading() ? '保存中...' : '保存'}</button>
+                */}
+                <div>
+                    <button className={this.canSubmit() ? 'btn' : 'btn disabled'} type="submit" disabled={!this.canSubmit()}>{this.isSubmitLoading() ? '保存中...' : '保存'}</button>
+                    <span className="text-error">{this.state.error}</span>
+                </div>
             </Formsy.Form>
         );
     }

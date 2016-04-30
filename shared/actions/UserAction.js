@@ -70,5 +70,9 @@ module.exports = class UserAction extends BaseAction {
     updateContact(params = { password, contact, code }) {
         return BaseAction.dispatchRequest( UserAction.UPDATE_CONTACT, this.api.updateContact(params) );
     }
-
+    // 更新个人资料
+    static UPDATE_INFO = 'update_info';
+    updateInfo(params) {
+        return BaseAction.dispatchRequest( UserAction.UPDATE_INFO, this.api.updateInfo(params) );
+    }
 }

@@ -81,6 +81,12 @@ class User extends Base {
     updateContact(params = { password, contact, code }) {
         return this.apiClient.post('sso/update_user_contact', params);
     }
+    /**
+     * 更新信息
+     */
+    updateInfo(params = {}) {
+        return this.apiClient.post('sso/update_user_info', params);
+    }
 
     /**
      * 重置密码
