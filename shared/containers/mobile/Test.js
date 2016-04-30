@@ -93,7 +93,10 @@ let Exam = React.createClass({
         e.preventDefault();
         if (e.currentTarget.className) return;
 
-        this.setCurrentIndexAnswer();
+        if (!e.currentTarget.getAttribute('data-nosave')) {
+            this.setCurrentIndexAnswer();
+        }
+
         this.clearCurrentChecked();
 
         let index = Math.max(0, this.state.index - 1);
@@ -105,14 +108,16 @@ let Exam = React.createClass({
         e.preventDefault();
         if (e.currentTarget.className) return;
 
-        this.setCurrentIndexAnswer();
+        if (!e.currentTarget.getAttribute('data-nosave')) {
+            this.setCurrentIndexAnswer();
 
-        let questions = this.props.examination.data.questions || [];
-        let cur = questions[this.state.index].question;
-        // 无答案
-        if (!(this.answers[cur.id].length)) {
-            alert('请选择该题答案！');
-            return;
+            let questions = this.props.examination.data.questions || [];
+            let cur = questions[this.state.index].question;
+            // 无答案
+            if (!(this.answers[cur.id].length)) {
+                alert('请选择该题答案！');
+                return;
+            }
         }
 
         this.clearCurrentChecked();
@@ -175,10 +180,10 @@ let Exam = React.createClass({
     // 查看答案
     onViewAnswers: function(e) {
         e.preventDefault();
-        this.setState({viewAnswer: !this.state.viewAnswer});
+        this.setState({viewAnswer: !this.state.viewAnswer, index: 0});
 
         const {sheet, params} = this.props;
-        this.props.history.push(`/exams/${params.courseId}/${params.examId}/${sheet.data.sheet.id}`);
+        this.props.history.push(`/m/exams/${params.courseId}/${params.examId}/${sheet.data.sheet.id}`);
         // TODO
         // 如果查看答案，需要检测是否有答案
         //if (!this.state.viewAnswer) {
@@ -288,40 +293,64 @@ let Exam = React.createClass({
                             </div>
                         </div>
                     :
-                    <p>Just for placeholder</p>
-                }
-                <div className="hide">
-                    <div className="mobile-header">
-                        <i className="iconfont icon-left1"></i>
-                        <h1>经济学基础</h1>
-                    </div>
-                    <div className="mobile-content">
-                        <h4 className="mobile-knowledge">知识点回顾</h4>
-                        <div className="mobile-content-top mobile-test-question">
-                            <p>20. 民事诉讼中，当事人对自己提出的主张，有责任提供正剧。但在（     ）中，对原告提出的侵权事实被告否认的由被告负责举证说是，都免费是，毒奶粉</p>
-                            <p><em>多选题</em><em className="fr">1 / 6</em></p>
+                    this.state.viewAnswer ?
+                        <div>
+                            <div className="mobile-content">
+                                <h4 className="mobile-knowledge">知识点回顾</h4>
+                                <div className="mobile-content-top mobile-test-question">
+                                    <div className="fl">{this.state.index + 1}.</div>
+                                    <div dangerouslySetInnerHTML={{__html: curQuestion.question && curQuestion.question.examination_question_content}}></div>
+                                    <div>
+                                        <em>{curQuestion.question && curQuestion.question.examination_question_is_multi ? '多' : '单'}选题</em>
+                                        <em className="fr">{this.state.index + 1} / {questions.length}</em>
+                                    </div>
+                                </div>
+                                <ul className="mobile-test-answer">
+                                    {(curQuestion.options || []).map((item, index) => {
+                                        let answer = this.answers[curQuestion.question.id] || [];
+                                        let isChecked = answer.indexOf(o.id) >= 0; // 用户是否选择
+                                        let isAnswer = correctIds.indexOf(o.id) >= 0; // 是否是正确答案
+                                        return  <li key={index}>
+                                                    {isChecked && !isAnswer ? <i className="iconfont icon-del"></i> : isAnswer ? <i className="iconfont icon-choose"></i> : null}
+                                                    <input type={curQuestion.examination_question_is_multi ? 'checkbox' : 'radio'} defaultChecked={isChecked} disabled/>
+                                                    <em> {String.fromCharCode(65 + index)}. {item.option_text} </em>
+                                                </li>
+                                    })}
+                                </ul>
+                                <p className="mobile-answer-right">正确答案：{correctText}</p>
+                            </div>
+                            <div className="mobile-footer mobile-footer-two">
+                                <a href="#" className={firstIndex ? 'disabled' : ''} disabled={firstIndex} data-nosave="1" onClick={this.onPrev}><em>上一题</em></a>
+                                <a href="#" className={lastIndex ? 'disabled' : ''} disabled={lastIndex} data-nosave="1" onClick={this.onNext}><em>下一题</em></a>
+                            </div>
                         </div>
-                        <ul className="mobile-test-answer">
-                            <li>
-                                <i className="iconfont icon-choose"></i><em>因产品制造方法发明专利引起的专利诉讼</em>
-                            </li>
-                            <li>
-                                <i className="iconfont icon-del"></i><em>因产品制造方法发明专利引起的专利诉讼</em>
-                            </li>
-                            <li>
-                                <i></i><em>因产品制造方法发明专利引起的专利诉讼</em>
-                            </li>
-                            <li>
-                                <i></i><em>因产品制造方法发明专利引起的专利诉讼</em>
-                            </li>
-                        </ul>
-                        <p className="mobile-answer-right">正确答案：A</p>
-                    </div>
-                    <div className="mobile-footer mobile-footer-two">
-                        <Link to="" className="disabled"><em>上一题</em></Link>
-                        <Link to=""><em>下一题</em></Link>
-                    </div>
-                </div>
+                        :
+                        <div>
+                            <div className="mobile-content">
+                                <div className="mobile-content-top">
+                                    <div className="mobile-content-title">
+                                        <h4>{exam.examination_title}</h4>
+                                        <p>课程测试</p>
+                                    </div>
+                                    <div className="mobile-content-num" style={{ height: 150 }}>
+                                        <p>题目数量：<em>{questions.length}道</em></p>
+                                        <p>正确率：</p>
+                                        <div className="circle" style={{ left: 120 }}>
+                                            <div className="pie_left"><div className="left"></div></div>
+                                            <div className="pie_right"><div className="right"></div></div>
+                                            <div className="mask"><span>{((sheetData.sheet_score || 0) - 0).toFixed(2)}</span>%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <Link to="" className="check-answer">查看答案</Link>
+                            </div>
+                            <div className="mobile-footer mobile-footer-two">
+                                <Link to="/m/exams"><em>完成</em></Link>
+                                <a href="#" onClick={this.onReExam}><em>重新测试</em></a>
+                            </div>
+                        </div>
+                }
+                {/*
                 <div className="mobile-pop hide">
                     <p>是否提交测验？</p>
                     <div className="mobile-pop-btn">
@@ -329,34 +358,7 @@ let Exam = React.createClass({
                         <Link to="">是</Link>
                     </div>
                 </div>
-                <div className="hide">
-                    <div className="mobile-header">
-                        <i className="iconfont icon-left1"></i>
-                        <h1>经济学基础</h1>
-                    </div>
-                    <div className="mobile-content">
-                        <div className="mobile-content-top">
-                            <div className="mobile-content-title">
-                                <h4>连锁消费企业的发展方向与投资问问我机会</h4>
-                                <p>课程测试</p>
-                            </div>
-                            <div className="mobile-content-num" style={{ height: 150 }}>
-                                <p>题目数量：<em>20道</em></p>
-                                <p>正确率：</p>
-                                <div className="circle" style={{ left: 120 }}>
-                                    <div className="pie_left"><div className="left"></div></div>
-                                    <div className="pie_right"><div className="right"></div></div>
-                                    <div className="mask"><span>15</span>%</div>
-                                </div>
-                            </div>
-                        </div>
-                        <Link to="" className="check-answer">查看答案</Link>
-                    </div>
-                    <div className="mobile-footer mobile-footer-two">
-                        <Link to=""><em>完成</em></Link>
-                        <Link to=""><em>重新测试</em></Link>
-                    </div>
-                </div>
+                */}
             </div>
         );
     }
