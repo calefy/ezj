@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+
+import { payType } from '../../libs/const';
 
 if (process.env.BROWSER) {
     require('css/special.css');
 }
+
+const bundle = { id: '6119033148207529984', price: 5700 };
 
 class Cfc extends React.Component {
 
@@ -15,9 +20,9 @@ class Cfc extends React.Component {
                         <div className="fl">
                             <div className="special-text"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/765385fe4b4738b551dd072c4c2498cd.png" /></div>
                             <div className="special-price">
-                                    <span>在线培训课程¥5700</span>
+                                    <span>在线培训课程¥{bundle.price}</span>
                                     <em className="special-state">付款后180天内有效</em>
-                                    <Link to="" className="special-banner-join">立即报名</Link>
+                                    <Link to="/pay" query={{type: payType.PACKAGE, id: bundle.id}} className="special-banner-join">立即报名</Link>
                                 </div>
                         </div>
                         <div className="fr" style={{ marginTop: 12 }}>
@@ -26,7 +31,7 @@ class Cfc extends React.Component {
                     </div>
                 </div>
                 <div className="special-cfc-content">
-                    <div className="special-menu">
+                    <div className="special-menu hide">
                         <div className="special-menu-nav">
                             <ul className="container cl">
                                 <li><Link to="#">项目介绍</Link></li>
@@ -141,7 +146,7 @@ class Cfc extends React.Component {
                                                 </div>
                                             </li>
                                         </ul>
-                                        <div className="special-cfc-content">
+                                        <div className="special-cfc-content hide">
                                             <div className="special-course-arrange bg-white">
                                                 <ul>
                                                     <li>

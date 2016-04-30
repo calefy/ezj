@@ -6,6 +6,7 @@ export function user(state, action) {
     const loginTypes = getRequestTypes(UserAction.LOGIN);
     const logoutTypes = getRequestTypes(UserAction.LOGOUT);
     const regTypes = getRequestTypes(UserAction.REGIST);
+    const infoTypes = getRequestTypes(UserAction.UPDATE_INFO);
     const changePwdTypes = getRequestTypes('changePwd');
     const avatarTypes = getRequestTypes('avatar');
 
@@ -48,6 +49,10 @@ export function user(state, action) {
             let au = Object.assign({}, state);
             au.data.avatar = action.avatar;
             return au;
+        // 更新个人信息成功
+        case infoTypes.success:
+            return Object.assign({}, state, {data: action.response.data});
+            break;
         default:
             ret = reducerRequest('user', state, action);
     }

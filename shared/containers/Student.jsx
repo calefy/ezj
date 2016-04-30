@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router';
 import map from 'lodash/map';
 
-import { avatar } from '../libs/utils';
+import { image, avatar } from '../libs/utils';
 import UserAction from '../actions/UserAction';
 import Pagination from '../components/Pagination.jsx';
 
@@ -45,7 +45,7 @@ class Student extends Component {
             <div className="student mar40 cl container">
                 <div className="student-left fl">
                     <div className="student-info bg-white shadow">
-                        <img src={avatar(student.avatar)} alt={student.nickname} />
+                        <img src={avatar(student.avatar, 'pipe3')} alt={student.nickname} />
                         <p>{student.nickname}</p>
                     </div>
                     <div className="student-course-num bg-white shadow">
@@ -57,7 +57,7 @@ class Student extends Component {
                         {map(courses, (item, index) => {
                             return (
                                 <div key={index} className="student-courses cl">
-                                    <img src={item.picture} alt="" width="160" height="90" className="fl" />
+                                    <img src={image(item.picture, 'sc')} alt="" width="160" height="90" className="fl" />
                                     <div className="student-courses-info fl">
                                         <h3>{item.title}
                                             <button type="btn" className="fr course-collect course-collected" style={{ display:"none" }}><i className="iconfont icon-heart"></i>收藏</button>

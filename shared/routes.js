@@ -406,7 +406,7 @@ module.exports = {
                     }
                 },
                 {
-                    path: 'exams/:examId',
+                    path: 'exams/:courseId/:examId(/:sheetId)',
                     getComponent(location, cb) {
                         require.ensure([], require => {
                             cb(null, require('./containers/mobile/Test'));
@@ -422,32 +422,6 @@ module.exports = {
                     }
                 },
             ]
-        },
-        {
-            path: 'mobile/test',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/mobile/Test'));
-                });
-            }
-        },
-        // 手机端我的测验
-        {
-            path: 'mobile/mine',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/mobile/Mine'));
-                });
-            }
-        },
-        // 手机端紫荆账户
-        {
-            path: 'mobile/user',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/mobile/User'));
-                });
-            }
         },
     ]
 };
