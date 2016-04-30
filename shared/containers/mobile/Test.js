@@ -19,7 +19,7 @@ let Exam = React.createClass({
             ];
             if (params.sheetId) {
                 arr.push(
-                    dispatch( courseAction.loadExamination(params.sheetId) )
+                    dispatch( courseAction.loadSheet(params.sheetId) )
                 );
             }
             return Promise.all(arr);
@@ -108,10 +108,11 @@ let Exam = React.createClass({
         e.preventDefault();
         if (e.currentTarget.className) return;
 
+        let questions = this.props.examination.data.questions || [];
+
         if (!e.currentTarget.getAttribute('data-nosave')) {
             this.setCurrentIndexAnswer();
 
-            let questions = this.props.examination.data.questions || [];
             let cur = questions[this.state.index].question;
             // 无答案
             if (!(this.answers[cur.id].length)) {
@@ -146,6 +147,13 @@ let Exam = React.createClass({
     onSubmit: function(e) {
         e.preventDefault();
         this.setCurrentIndexAnswer();
+        // 检查当前题目是否有答案
+        let questions = this.props.examination.data.questions || [];
+        let cur = questions[this.state.index].question;
+        if (!(this.answers[cur.id].length)) {
+            alert('请选择该题答案！');
+            return;
+        }
 
         let model = {
             course_id: this.props.params.courseId,
@@ -160,7 +168,7 @@ let Exam = React.createClass({
             });
         }
 
-        if (model.answers.length < this.props.examination.data.questions.length) {
+        if (model.answers.length < questions.length) {
             alert('还有问题未回答，请全部答完后再提交');
             return;
         }
@@ -182,8 +190,8 @@ let Exam = React.createClass({
         e.preventDefault();
         this.setState({viewAnswer: !this.state.viewAnswer, index: 0});
 
-        const {sheet, params} = this.props;
-        this.props.history.push(`/m/exams/${params.courseId}/${params.examId}/${sheet.data.sheet.id}`);
+        //const {sheet, params} = this.props;
+        //this.props.history.push(`/m/exams/${params.courseId}/${params.examId}/${sheet.data.sheet.id}`);
         // TODO
         // 如果查看答案，需要检测是否有答案
         //if (!this.state.viewAnswer) {
@@ -231,6 +239,14 @@ let Exam = React.createClass({
         });
 
         let curQuestion = questions.length > this.state.index ? questions[this.state.index] : {};
+        let correctText = [];
+        let correctIds = [];
+        curQuestion.options.forEach((o, i) => {
+            if (o.is_correct) {
+                correctIds.push(o.id);
+                correctText.push(String.fromCharCode(65 + i));
+            }
+        });
 
         let firstIndex = this.state.index === 0;
         let lastIndex = this.state.index + 1 === questions.length;
@@ -307,12 +323,15 @@ let Exam = React.createClass({
                                 </div>
                                 <ul className="mobile-test-answer">
                                     {(curQuestion.options || []).map((item, index) => {
-                                        let answer = this.answers[curQuestion.question.id] || [];
-                                        let isChecked = answer.indexOf(o.id) >= 0; // 用户是否选择
-                                        let isAnswer = correctIds.indexOf(o.id) >= 0; // 是否是正确答案
+                                        let answer = answerMap[curQuestion.question.id] || {};
+                                        answer = answer.answer_content.split(',');
+                                        let isChecked = answer.indexOf(item.id) >= 0; // 用户是否选择
+                                        let isAnswer = correctIds.indexOf(item.id) >= 0; // 是否是正确答案
+                                        let isMulti = curQuestion.question.examination_question_is_multi;
+                                        console.log(isAnswer, isChecked)
                                         return  <li key={index}>
-                                                    {isChecked && !isAnswer ? <i className="iconfont icon-del"></i> : isAnswer ? <i className="iconfont icon-choose"></i> : null}
-                                                    <input type={curQuestion.examination_question_is_multi ? 'checkbox' : 'radio'} defaultChecked={isChecked} disabled/>
+                                                    {isChecked && !isAnswer ? <i className="iconfont icon-del"></i> : isAnswer ? <i className="iconfont icon-xuanze"></i> : <i className="iconfont"></i>}
+                                                    <input type={isMulti ? 'checkbox' : 'radio'} checked={isChecked} disabled name={isMulti ? 'answer[]' : 'answer'}/>
                                                     <em> {String.fromCharCode(65 + index)}. {item.option_text} </em>
                                                 </li>
                                     })}
@@ -342,7 +361,7 @@ let Exam = React.createClass({
                                         </div>
                                     </div>
                                 </div>
-                                <Link to="" className="check-answer">查看答案</Link>
+                                <a href="#" className="check-answer" onClick={this.onViewAnswers}>查看答案</a>
                             </div>
                             <div className="mobile-footer mobile-footer-two">
                                 <Link to="/m/exams"><em>完成</em></Link>

@@ -104,7 +104,7 @@ export function sheet(state, action) {
     switch(action.type) {
         case sheetType.success:
         case submitType.success:
-            return Object.assign({}, state, {data: action.response.data});
+            return Object.assign({}, state, {isFetching: false, _req: action._req, data: action.response.data});
             break;
         default:
             return reducerRequest(CoursesAction.LOAD_SHEET, state, action);
@@ -119,7 +119,7 @@ export function course_sheet(state, action) {
     switch(action.type) {
         case sheetType.success:
         case submitType.success:
-            return Object.assign({}, state, {data: action.response.data});
+            return Object.assign({}, state, {isFetching: false, _req: action._req, data: action.response.data});
             break;
         default:
             return reducerRequest(CoursesAction.LOAD_COURSE_SHEET, state, action);

@@ -3,7 +3,7 @@
 .mobile-header h1{ text-align: center;}
 .mobile-header i{ position: absolute; left: 10px; top: 0; color: #af1b3f;}
 
-.mobile-content{}
+.mobile-content{padding-bottom: 60px;}
 .mobile-content-top{ margin: 20px 10px; background: #fff; border: 1px solid #cccccc; border-top: 3px solid #a6294a; line-height: 1.6}
 .mobile-content-top > div, .mobile-test-question > div{ padding:10px 15px;}
 
