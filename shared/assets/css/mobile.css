@@ -5,7 +5,7 @@
 
 .mobile-content{}
 .mobile-content-top{ margin: 20px 10px; background: #fff; border: 1px solid #cccccc; border-top: 3px solid #a6294a; line-height: 1.6}
-.mobile-content-top > div, .mobile-test-question > p{ padding:10px 15px;}
+.mobile-content-top > div, .mobile-test-question > div{ padding:10px 15px;}
 
 .mobile-content-title{ border-bottom: 1px solid #dddddd;}
 .mobile-content-title p,.mobile-content-num p:first-child{ color: #a6294a}
@@ -24,7 +24,8 @@
 .mobile-test-question p em:first-child{ background: #af1b3f; border-radius: 2px; color: #fff; padding:3px 6px;}
 
 .mobile-test-answer{ border-top: 1px solid #ccc;}
-.mobile-test-answer li{ line-height: 3; border-bottom: 1px solid #cccccc; background: #fff; padding: 0 10px;}
+.mobile-test-answer li{ line-height: 3; border-bottom: 1px solid #cccccc; background: #fff;}
+.mobile-test-answer li label{padding: 0 10px;display:block;}
 .mobile-test-answer li input{ font-size: 1.125em; margin: 0 10px 0 0;}
 .mobile-test-answer li em{ font-size: 0.875em;}
 .mobile-test-answer i{ width: 16px; margin: 0 10px 0 0; color: #af1b3f; font-size: 1em; display: inline-block;}

@@ -64,7 +64,7 @@ class MyExams extends React.Component {
                                             <div>
                                                 <p><em>{item.submitted_time}</em></p>
                                                 <p><em>正确率{percent}%</em></p>
-                                                <Link to={`/m/exams/${item.examination_id}`}>重新测验</Link>
+                                                <Link to={`/m/exams/${item.course_id}/${item.examination_id}`}>重新测验</Link>
                                             </div>
                                         </li>
                                     );
