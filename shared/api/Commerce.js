@@ -32,6 +32,14 @@ class Commerce extends Base {
         return this.apiClient.post('commerce/orders', params);
     }
 
+    product(productId) {
+        return this.apiClient.get(`commerce/products/${productId}`);
+    }
+    products(params) {
+        params = paramify(params);
+        params = params ? '?' + params : '';
+        return this.apiClient.get(`commerce/products${params}`);
+    }
 }
 
 module.exports = Commerce;

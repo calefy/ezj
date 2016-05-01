@@ -58,7 +58,10 @@ export function course_private(state, action) {
                 let dy = d.getFullYear(), dm = d.getMonth() + 1, dd = d.getDate() + 1;
                 data.expiring_date = dy + '-' + (dm < 10 ? '0' + dm : dm) + '-' + (dd < 10 ? '0' + dd : dd) + ' 00:00:00';
                 return Object.assign({}, state, {data: data});
+            } else {
+                return state;
             }
+            break;
         case markType.success:
             if (state.data) {
                 data = Object.assign({}, state.data);

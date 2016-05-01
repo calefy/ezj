@@ -26,8 +26,9 @@ let Pay = React.createClass({
             let id = location.query.id;
             return Promise.all([
                 dispatch( commerceAction.loadAccount() ),
-                payType.COURSE == type ? dispatch( courseAction.loadCourseDetail(id) ) : null,
-                //payType.PACKAGE == type ? dispatch( courseAction.loadPackage(id) ) : null,
+                payType.COURSE == type ?
+                    dispatch( courseAction.loadCourseDetail(id) ) :
+                    dispatch( commerceAction.loadProduct(id) )
             ]);
         }
     },
@@ -45,11 +46,12 @@ let Pay = React.createClass({
     },
 
     componentDidMount: function() {
-        const { account, course, location } = this.props;
+        const { account, course, product, location } = this.props;
         let type = location.query.type;
         let id = location.query.id;
-        if (account.isFetching || course.isFetching ||
-            (type == payType.COURSE && course.data && course.data.id !== id)) {
+        if (account.isFetching ||
+            (type == payType.COURSE && (course.isFetching || (course.data && course.data.id !== id))) ||
+            (type == payType.PACKAGE && (product.isFetching || (product.data && product.data.id !== id)))) {
             Pay.fetchData(this.props);
         }
     },
@@ -87,6 +89,7 @@ let Pay = React.createClass({
                 }
                 break;
             case types.failure:
+                console.log(nextProps.error)
                 alert('购买失败: ' + nextProps.action.error.message);
                 break;
         }
@@ -126,10 +129,13 @@ let Pay = React.createClass({
 
     // 执行支付
     onPay: function(model) {
-        const { location, account, course } = this.props;
+        const { location, account, course, product } = this.props;
         // 如果选择了紫荆币支付，判断是否足够，如果不足，设置支付窗口
+        let price = location.query.type == payType.COURSE ?
+                        course.data.course_price || 0 :
+                        product.data.price || 0;
         if (this.state.pointPay &&
-                account.data.available_amount - 0 < (course.data.course_price || 0) - 0) {
+                account.data.available_amount - 0 < price - 0) {
             this.payWindowName = 'payWindow_' + (new Date()).getTime();
             this.payWindow = window.open('about:blank', this.payWindowName);
         }
@@ -138,14 +144,15 @@ let Pay = React.createClass({
         let id = location.query.id;
         let type = location.query.type;
         let method = this.state.payMethod;
+        let backUrl = type == payType.COURSE ? `/courses/${id}` : '/account/orders';
 
         const commerceAction = new CommerceAction();
         this.props.dispatch(commerceAction.pay({
             items: id,
             item_type: type, // 购买类型
             payment_method: (this.state.pointPay ? 10 + ',' : '') + (method === 'alipay' ? 20 : method === 'unipay' ? 30 : ''), // 支付方式代码，与紫荆币组合逗号分隔
-            pay_return_success_uri: '/courses/' + id,
-            pay_return_failed_uri: '/courses/' + id,
+            pay_return_success_uri: backUrl,
+            pay_return_failed_uri: backUrl,
         }));
     },
 
@@ -170,9 +177,12 @@ let Pay = React.createClass({
         let type = this.props.location.query.type;
         let account = this.props.account.data || {};
         let course = this.props.course.data || {};
+        let product = this.props.product.data || {};
 
         let accountAmount = account.available_amount || 0;
-        let price = course.course_price || 0;
+        let price = type == payType.COURSE ?
+                        course.course_price || 0 :
+                        product.price || 0;
 
         return (
             <div className="container">
@@ -183,32 +193,18 @@ let Pay = React.createClass({
                     onChange={this.onFormChange}
                 >
                 <div className="pay bg-white">
-                    <h4>参加课程《{course.course_name}》</h4>
+                    <h4>参加课程《{type == payType.COURSE ? course.course_name : product.title}》</h4>
                     <div className="pay-course-info">
                         {type == payType.PACKAGE ?
                             <div>
                                 <h5 className="cl">
                                     <span className="fl">包含课程</span>
-                                    <em className="fr">共17门</em>
+                                    <em className="fr">共{(product.courses || []).length}门</em>
                                 </h5>
                                 <div className="pay-course-list">
-                                    <p>资产证券化解析</p>
-                                    <p>信用卡资产证券化</p>
-                                    <p>银行贷款资产证券化</p>
-                                    <p>商业地产贷款证券化</p>
-                                    <p>房地产信托基金REITs </p>
-                                    <p>住房按揭资产证券化</p>
-                                    <p>汽车贷款资产证券化</p>
-                                    <p>资产证券化的法律问题</p>
-                                    <p>资产证券化的产品设计与评级</p>
-                                    <p>资产证券化中的会计处理</p>
-                                    <p>资产证券化中的税务处理</p>
-                                    <p>发起人及资产服务</p>
-                                    <p>交易协调人（券商）的工作职责与流程</p>
-                                    <p>资产证券化的受托机构关键职责与工作流程</p>
-                                    <p>资产证券化产品投资</p>
-                                    <p>PPP与资产证券化</p>
-                                    <p>互联网金融与资产证券化</p>
+                                    {(product.courses || []).map((item, index) => {
+                                        return <p key={index}>{item.course_name}</p>
+                                    })}
                                 </div>
                             </div>
                             : null
@@ -311,5 +307,6 @@ module.exports = connect( state => ({
     action: state.action,
     account: state.account,
     course: state.course,
+    product: state.product,
 }) )(Pay);
 

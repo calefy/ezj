@@ -10,6 +10,10 @@ if (process.env.BROWSER) {
 }
 
 const bundle = { id: '6119033148207529984', price: 5700 };
+const bundle_part1 = { id: '6119033148161392640', price: 0 }; // 前阶
+const bundle_part2 = { id: '6119033145351208960', price: 1900 }; // 模块一
+const bundle_part3 = { id: '6119033145393152000', price: 1520 }; // 模块二
+const bundle_part4 = { id: '6119033147871985664', price: 2280 }; // 模块三
 
 class Cfc extends React.Component {
 

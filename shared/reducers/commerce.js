@@ -25,3 +25,10 @@ export function orders(state, action) {
     return reducerRequest(CommerceAction.LOAD_ORDERS, state, action);
 }
 
+export function product(state, action) {
+    return reducerRequest(CommerceAction.LOAD_PRODUCT, state, action);
+}
+export function products(state, action) {
+    return reducerRequest(CommerceAction.LOAD_PRODUCTS, state, action);
+}
+
