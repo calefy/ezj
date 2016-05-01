@@ -10,7 +10,7 @@ if (process.env.BROWSER) {
 }
 
 const examId = 3926;// 4608;
-const courseId = '12345'; // 临时，应去掉
+const organizationId = 4958; // 临时，应去掉
 
 let Exam = React.createClass({
     // 初始加载数据
@@ -91,7 +91,7 @@ let Exam = React.createClass({
     },
     onPrev: function(e) {
         e.preventDefault();
-        if (e.currentTarget.className) return;
+        if (e.currentTarget.getAttribute('disabled') !== null) return;
 
         if (!e.currentTarget.getAttribute('data-nosave')) {
             this.setCurrentIndexAnswer();
@@ -106,7 +106,7 @@ let Exam = React.createClass({
     },
     onNext: function(e) {
         e.preventDefault();
-        if (e.currentTarget.className) return;
+        if (e.currentTarget.getAttribute('disabled') !== null) return;
 
         let questions = this.props.examination.data.questions || [];
 
@@ -156,7 +156,7 @@ let Exam = React.createClass({
         }
 
         let model = {
-            course_id: courseId,
+            organization_id: organizationId,
             examination_id: examId,
             sheet_cost_time: Math.ceil(((new Date()).getTime() - this.time) / 1000),
             answers: [],
@@ -284,16 +284,16 @@ let Exam = React.createClass({
                                     return  <dd key={index}>
                                                 <label>
                                                     <input type={curQuestion.question.examination_question_is_multi ? 'checkbox' : 'radio'} name={curQuestion.question.examination_question_is_multi ? 'answer[]' : 'answer'} value={item.id} ref={`answer_${index}`} defaultChecked={isAnswered} />
-                                                    <em> {String.fromCharCode(65 + index)}. {item.option_text} </em>
+                                                    {String.fromCharCode(65 + index)}. {item.option_text}
                                                 </label>
                                             </dd>
                                 })}
                             </dl>
                             <div className="course-test-question-btn">
-                                <a href="#" className={firstIndex ? 'disabled' : ''} disabled={firstIndex} onClick={this.onPrev}>上一题</a>
-                                <a href="#" className={lastIndex ? 'disabled' : ''} disabled={lastIndex} onClick={this.onNext}>下一题</a>
-                                <a href="#" className={lastIndex ? 'disabled' : ''} disabled={lastIndex} onClick={this.onSkip}>跳过</a>
-                                <a href="#" className={!lastIndex ? 'disabled' : ''} disabled={!lastIndex} onClick={this.onSubmit}>提交答卷</a>
+                                <a href="#" className={firstIndex ? 'btn disabled' : 'btn'} disabled={firstIndex} onClick={this.onPrev}>上一题</a>
+                                <a href="#" className={lastIndex ? 'btn disabled' : 'btn'} disabled={lastIndex} onClick={this.onNext}>下一题</a>
+                                <a href="#" className={lastIndex ? 'btn disabled' : 'btn'} disabled={lastIndex} onClick={this.onSkip}>跳过</a>
+                                <a href="#" className={!lastIndex ? 'btn disabled' : 'btn'} disabled={!lastIndex} onClick={this.onSubmit}>提交答卷</a>
                             </div>
                         </div>
                     :

@@ -89,6 +89,7 @@
 .course-test-question h3 em.course-test-already{ color: #af1b40;}
 
 .course-test-question-info{ line-height: 2;}
+.course-test-question-info label{display: inline-block}
 .course-test-question-info em{ display: inline-block; width: 30px}
 .course-test-question-info input[type="radio"],.course-test-question-info input[type="checkbox"]{ margin: 0 16px 0 0;}
 .course-test-question-btn{ margin: 40px 0 0;}
