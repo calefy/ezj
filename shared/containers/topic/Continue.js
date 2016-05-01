@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux'
 
-import CoursesAction from '../../actions/CoursesAction';
 import CommerceAction from '../../actions/CommerceAction';
 
 if (process.env.BROWSER) {

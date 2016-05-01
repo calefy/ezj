@@ -4,22 +4,35 @@ import { connect } from 'react-redux';
 
 import { payType } from '../../libs/const';
 import Video from '../../components/Video.jsx';
+import CommerceAction from '../../actions/CommerceAction';
 
 if (process.env.BROWSER) {
     require('css/special.css');
 }
 
 const bundle = { id: '6119033148207529984', price: 5700 };
-const bundle_part1 = { id: '6119033148161392640', price: 0 }; // 前阶
-const bundle_part2 = { id: '6119033145351208960', price: 1900 }; // 模块一
-const bundle_part3 = { id: '6119033145393152000', price: 1520 }; // 模块二
-const bundle_part4 = { id: '6119033147871985664', price: 2280 }; // 模块三
+const bundle_part_ids = ['6119033148161392640', '6119033145351208960', '6119033145393152000', '6119033147871985664']
 
 class Cfc extends React.Component {
 
     state = {
         //tab_*: '' // 自动适应tab
     };
+
+    // 初始加载数据
+    static fetchData({dispatch, params={}, location={}, apiClient}) {
+        const commerceAction = new CommerceAction({ apiClient });
+        return Promise.all([
+            dispatch( commerceAction.loadProducts({ids: bundle_part_ids.join(',')}) ),
+        ]);
+    }
+
+    componentDidMount() {
+        const {products} = this.props;
+        if (products.isFetching) {
+            Cfc.fetchData(this.props);
+        }
+    }
 
     _setState = obj => {
         this.setState(Object.assign({}, this.state, obj || {}));
@@ -44,6 +57,10 @@ class Cfc extends React.Component {
     };
 
     render() {
+        const { products } = this.props;
+        const bundlePre = products.data && products.data[bundle_part_ids[0]] || {};
+        const bundleIds = bundle_part_ids.slice(1);
+
         return (
             <div className="special-cfc">
                 <div className="special-banner cl">
@@ -147,117 +164,131 @@ class Cfc extends React.Component {
                                             <Link to="/pay" query={{type: payType.PACKAGE, id: bundle.id}} className="fr">购买全部课程</Link>
                                         </p>
                                     </div>
-                                    <div>
-                                        <ul className="special-cfc-tabs">
-                                            <li className="special-cfc-tab1 cfc-qj">
-                                                <h4>前阶课程</h4>
-                                                <div>
-                                                    <div className="special-course-top">财务管理基础<br /><a href="/courses/4759" target="_blank">查看详情</a></div>
-                                                    <div className="special-course-bottom">税务筹划基础<br /><a href="/courses/4806" target="_blank">查看详情</a></div>
-                                                </div>
-                                            </li>
-                                            {/*<li className="special-cfc-tab2 active">
-                                                <h4>模块一</h4>
-                                                <div>
-                                                    <div className="special-course-top">企业理财综合知识<br />40课时</div>
-                                                    <div className="special-course-bottom"><span>¥1900</span><br /><Link to="#">收起详情</Link></div>
-                                                </div>
-                                            </li>*/}
-                                            <li className="special-cfc-tab2">
-                                                <h4>模块一</h4>
-                                                <div>
-                                                    <div className="special-course-top">企业理财综合知识<br />40课时</div>
-                                                    <div className="special-course-bottom"><span>¥1900</span><br /><Link to="#">展开详情</Link></div>
-                                                </div>
-                                            </li>
-                                            <li className="special-cfc-tab3">
-                                                <h4>模块二</h4>
-                                                <div>
-                                                    <div className="special-course-top">企业融资筹划<br />32课时</div>
-                                                    <div className="special-course-bottom"><span>¥1520</span><br /><Link to="#">展开详情</Link></div>
-                                                </div>
-                                            </li>
-                                            <li className="special-cfc-tab4">
-                                                <h4>模块三</h4>
-                                                <div>
-                                                    <div className="special-course-top">企业投资筹划<br />48课时</div>
-                                                    <div className="special-course-bottom"><span>¥2280</span><br /><Link to="#">展开详情</Link></div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div className="special-cfc-content hide">
-                                            <div className="special-course-arrange bg-white">
-                                                <ul>
-                                                    <li>
-                                                        <div className="special-arrange-course cl">
-                                                            <dl className="on">
-                                                                <dt>
-                                                                    <div className="special-arrange-title">企业理财与公司金融综合服务业务</div>
-                                                                    <div className="special-arrange-course-teacher">讲师 :  宋晓恒</div>
-                                                                    <div className="special-arrange-user">学员 : 1852人</div>
-                                                                    <div className="special-arrange-icon"></div>
-                                                                </dt>
-                                                                <dd className="cl">
-                                                                    <div className="special-course-left fl">
-                                                                        <img src="" alt="课程图片" />
-                                                                        <ul>
-                                                                            <li>
-                                                                                <div className="special-arrange-teacher">
-                                                                                    <img src="" alt="宋晓恒" />
-                                                                                    <h5><Link to="">宋晓恒</Link></h5>
-                                                                                    <p>人民大学博士，某大型股份制银行总行私人银行部产品部负责人，理财咨询与培训专家，商...</p>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div className="special-course-right fr">
-                                                                        <h4>课程简介</h4>
-                                                                        <div className="special-course-desc">
-                                                                            <p>　　未来商业银行对公业务的发展方向在哪里，在与企业既有的合作关系的基础上，如何结合现有的“分业监管、混业经营”的监管政策，顺应中国乃至全球的经济发展趋势，在“大资管”时代找到未来的合作重点和可持续发展的创新空间。 　　通过对本课程的学习，希望学员可以认识到国际上的领先银行是如何做到的，启示是什么；银行应如何发挥自身优势，整合行内行外资源；可以为企业提供哪些服务？</p>
+                                    {products.isFetching ?
+                                        <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
+                                        :
+                                        <div>
+                                            <ul className="special-cfc-tabs">
+                                                <li className="special-cfc-tab1 cfc-qj">
+                                                    <h4>前阶课程</h4>
+                                                    <div>
+                                                        <div className="special-course-top">财务管理基础<br /><a href="/courses/4759" target="_blank">查看详情</a></div>
+                                                        <div className="special-course-bottom">税务筹划基础<br /><a href="/courses/4806" target="_blank">查看详情</a></div>
+                                                    </div>
+                                                </li>
+                                                {/*
+                                                <li className="special-cfc-tab1 cfc-qj">
+                                                    <h4>{bundlePre.title}</h4>
+                                                    <div>
+                                                        {(bundlePre.courses || []).map((item, index) => {
+                                                            return <div className={`special-course-${index === 0 ? 'top' : 'bottom'}`}>{item.course_name}<br /><a href={`/courses/${item.id}`} target="_blank">查看详情</a></div>
+                                                        })}
+                                                    </div>
+                                                </li>
+                                                */}
+                                                {/*<li className="special-cfc-tab2 active">
+                                                    <h4>模块一</h4>
+                                                    <div>
+                                                        <div className="special-course-top">企业理财综合知识<br />40课时</div>
+                                                        <div className="special-course-bottom"><span>¥1900</span><br /><Link to="#">收起详情</Link></div>
+                                                    </div>
+                                                </li>*/}
+                                                <li className="special-cfc-tab2">
+                                                    <h4>模块一</h4>
+                                                    <div>
+                                                        <div className="special-course-top">企业理财综合知识<br />40课时</div>
+                                                        <div className="special-course-bottom"><span>¥1900</span><br /><Link to="#">展开详情</Link></div>
+                                                    </div>
+                                                </li>
+                                                <li className="special-cfc-tab3">
+                                                    <h4>模块二</h4>
+                                                    <div>
+                                                        <div className="special-course-top">企业融资筹划<br />32课时</div>
+                                                        <div className="special-course-bottom"><span>¥1520</span><br /><Link to="#">展开详情</Link></div>
+                                                    </div>
+                                                </li>
+                                                <li className="special-cfc-tab4">
+                                                    <h4>模块三</h4>
+                                                    <div>
+                                                        <div className="special-course-top">企业投资筹划<br />48课时</div>
+                                                        <div className="special-course-bottom"><span>¥2280</span><br /><Link to="#">展开详情</Link></div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <div className="special-cfc-content hide">
+                                                <div className="special-course-arrange bg-white">
+                                                    <ul>
+                                                        <li>
+                                                            <div className="special-arrange-course cl">
+                                                                <dl className="on">
+                                                                    <dt>
+                                                                        <div className="special-arrange-title">企业理财与公司金融综合服务业务</div>
+                                                                        <div className="special-arrange-course-teacher">讲师 :  宋晓恒</div>
+                                                                        <div className="special-arrange-user">学员 : 1852人</div>
+                                                                        <div className="special-arrange-icon"></div>
+                                                                    </dt>
+                                                                    <dd className="cl">
+                                                                        <div className="special-course-left fl">
+                                                                            <img src="" alt="课程图片" />
+                                                                            <ul>
+                                                                                <li>
+                                                                                    <div className="special-arrange-teacher">
+                                                                                        <img src="" alt="宋晓恒" />
+                                                                                        <h5><Link to="">宋晓恒</Link></h5>
+                                                                                        <p>人民大学博士，某大型股份制银行总行私人银行部产品部负责人，理财咨询与培训专家，商...</p>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
                                                                         </div>
-                                                                        <div className="special-course-content-list">
-                                                                            <dl>
-                                                                                <dt>第一章 引言</dt>
-                                                                                    <dd><span>1.企业经营中的问题（上）</span></dd>
-                                                                                    <dd><span>2.企业经营中的问题（下）</span></dd>
-                                                                                    <dd><span>3.苏州大方案例（上）</span></dd>
-                                                                                    <dd><span>4.苏州大方案例（中）</span></dd>
-                                                                                    <dd><span>5.苏州大方案例（下）</span></dd>
-                                                                                    <dd><span>6.案例总结</span></dd>
-                                                                            </dl>
-                                                                            <dl>
-                                                                                <dt>第二章 企业理财</dt>
-                                                                                    <dd><span>1.什么是企业理财</span></dd>
-                                                                                    <dd><span>2.不同角度看企业理财</span></dd>
-                                                                                    <dd><span>3.企业理财的背景与现状总述</span></dd>
-                                                                                    <dd><span>4.案例——中国离大农业有多远</span></dd>
-                                                                                    <dd><span>5.企业融资创新</span></dd>
-                                                                                    <dd><span>6.中小企业融资创新</span></dd>
-                                                                                    <dd><span>7.企业理财的环境</span></dd>
-                                                                                    <dd><span>8.企业客户营商环境的变化</span></dd>
-                                                                                    <dd><span>9.企业客户金融服务需求的变化</span></dd>
-                                                                                    <dd><span>10.企业“走出去”的金融业务需求</span></dd>
-                                                                                    <dd><span>11.企业理财的目标</span></dd>
-                                                                                    <dd><span>12.企业理财的原则（上）</span></dd>
-                                                                                    <dd><span>13.企业理财的原则（中）</span></dd>
-                                                                                    <dd><span>14.企业理财的原则（下）</span></dd>
-                                                                                    <dd><span>15.国外企业理财的发展</span></dd>
-                                                                                    <dd><span>16.企业理财的国内发展</span></dd>
-                                                                            </dl>
-                                                                            
+                                                                        <div className="special-course-right fr">
+                                                                            <h4>课程简介</h4>
+                                                                            <div className="special-course-desc">
+                                                                                <p>　　未来商业银行对公业务的发展方向在哪里，在与企业既有的合作关系的基础上，如何结合现有的“分业监管、混业经营”的监管政策，顺应中国乃至全球的经济发展趋势，在“大资管”时代找到未来的合作重点和可持续发展的创新空间。 　　通过对本课程的学习，希望学员可以认识到国际上的领先银行是如何做到的，启示是什么；银行应如何发挥自身优势，整合行内行外资源；可以为企业提供哪些服务？</p>
+                                                                            </div>
+                                                                            <div className="special-course-content-list">
+                                                                                <dl>
+                                                                                    <dt>第一章 引言</dt>
+                                                                                        <dd><span>1.企业经营中的问题（上）</span></dd>
+                                                                                        <dd><span>2.企业经营中的问题（下）</span></dd>
+                                                                                        <dd><span>3.苏州大方案例（上）</span></dd>
+                                                                                        <dd><span>4.苏州大方案例（中）</span></dd>
+                                                                                        <dd><span>5.苏州大方案例（下）</span></dd>
+                                                                                        <dd><span>6.案例总结</span></dd>
+                                                                                </dl>
+                                                                                <dl>
+                                                                                    <dt>第二章 企业理财</dt>
+                                                                                        <dd><span>1.什么是企业理财</span></dd>
+                                                                                        <dd><span>2.不同角度看企业理财</span></dd>
+                                                                                        <dd><span>3.企业理财的背景与现状总述</span></dd>
+                                                                                        <dd><span>4.案例——中国离大农业有多远</span></dd>
+                                                                                        <dd><span>5.企业融资创新</span></dd>
+                                                                                        <dd><span>6.中小企业融资创新</span></dd>
+                                                                                        <dd><span>7.企业理财的环境</span></dd>
+                                                                                        <dd><span>8.企业客户营商环境的变化</span></dd>
+                                                                                        <dd><span>9.企业客户金融服务需求的变化</span></dd>
+                                                                                        <dd><span>10.企业“走出去”的金融业务需求</span></dd>
+                                                                                        <dd><span>11.企业理财的目标</span></dd>
+                                                                                        <dd><span>12.企业理财的原则（上）</span></dd>
+                                                                                        <dd><span>13.企业理财的原则（中）</span></dd>
+                                                                                        <dd><span>14.企业理财的原则（下）</span></dd>
+                                                                                        <dd><span>15.国外企业理财的发展</span></dd>
+                                                                                        <dd><span>16.企业理财的国内发展</span></dd>
+                                                                                </dl>
+                                                                                
+                                                                            </div>
+                                                                            <div className="cl">
+                                                                                <Link to="" className="btn">了解详情</Link> 
+                                                                            </div>
                                                                         </div>
-                                                                        <div className="cl">
-                                                                            <Link to="" className="btn">了解详情</Link> 
-                                                                        </div>
-                                                                    </div>
-                                                                </dd>
-                                                            </dl>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    }
                                 </li>
                                 <li className="cfc-course-bottom">
                                     <div className="cl special-cfc-title">
@@ -447,4 +478,6 @@ class Cfc extends React.Component {
     }
 }
 
-module.exports = Cfc;
+module.exports = connect( state => ({
+    products: state.products,
+}) )(Cfc);
