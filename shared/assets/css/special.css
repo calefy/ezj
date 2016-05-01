@@ -45,7 +45,8 @@ h5.h5-title{background: url(../img/cfc-h5.png) no-repeat left center;text-align:
 
 .special-leader-cfc{padding:0 0 30px;}
 .special-leader-cfc p{color: #0075a8;font-size: 14px;line-height: 30px;}
-.special-leader-cfc>p,.special-leader-cfc>div{padding:6px 0;margin:0 60px 0 26px;}
+.special-leader-cfc>p{padding:6px 0;margin:0 60px 0 26px;}
+.special-leader-cfc>div{margin: 10px 120px;}
 .special-leader-cfc div p{color: #707070;}
 .special-cfc-course h4.h4-title { top: 15px;}
 .special-cfc-course>ul>li { position: relative; background: #005e89; margin: 0 0 4px;}

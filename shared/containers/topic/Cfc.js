@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 import { payType } from '../../libs/const';
+import Video from '../../components/Video.jsx';
 
 if (process.env.BROWSER) {
     require('css/special.css');
@@ -138,7 +139,8 @@ class Cfc extends React.Component {
                                     <div className="cl special-cfc-title">
                                         <h2 className="h2-title"><span>Step1 : 在线培训课程</span></h2>
                                         <p>
-                                            ¥5700<Link to="" className="fr">购买全部课程</Link>
+                                            ¥{bundle.price}
+                                            <Link to="/pay" query={{type: payType.PACKAGE, id: bundle.id}} className="fr">购买全部课程</Link>
                                         </p>
                                     </div>
                                     <div>
@@ -146,15 +148,22 @@ class Cfc extends React.Component {
                                             <li className="special-cfc-tab1 cfc-qj">
                                                 <h4>前阶课程</h4>
                                                 <div>
-                                                    <div className="special-course-top">财务管理基础<br /><Link to="">查看详情</Link></div>
-                                                    <div className="special-course-bottom">税务筹划基础<br /><Link to="">查看详情</Link></div>
+                                                    <div className="special-course-top">财务管理基础<br /><a href="/courses/4759" target="_blank">查看详情</a></div>
+                                                    <div className="special-course-bottom">税务筹划基础<br /><a href="/courses/4806" target="_blank">查看详情</a></div>
                                                 </div>
                                             </li>
-                                            <li className="special-cfc-tab2 active">
+                                            {/*<li className="special-cfc-tab2 active">
                                                 <h4>模块一</h4>
                                                 <div>
                                                     <div className="special-course-top">企业理财综合知识<br />40课时</div>
                                                     <div className="special-course-bottom"><span>¥1900</span><br /><Link to="#">收起详情</Link></div>
+                                                </div>
+                                            </li>*/}
+                                            <li className="special-cfc-tab2">
+                                                <h4>模块一</h4>
+                                                <div>
+                                                    <div className="special-course-top">企业理财综合知识<br />40课时</div>
+                                                    <div className="special-course-bottom"><span>¥1900</span><br /><Link to="#">展开详情</Link></div>
                                                 </div>
                                             </li>
                                             <li className="special-cfc-tab3">
@@ -270,7 +279,12 @@ class Cfc extends React.Component {
                                     <dd><Link to="#">试听: 《商业模式与生存基础》</Link></dd>
                                 </dl>
                                 <div className="player fl">
-
+                                    <Video
+                                        videoId="23A927AB00D7BF2B9C33DC5901307461"
+                                        width={656}
+                                        height={360}
+                                        autoPlay={false}
+                                    />
                                 </div>
                             </div>
                         </div>
