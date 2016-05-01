@@ -8,6 +8,8 @@ import OperateAction from '../actions/OperateAction';
 
 import CourseCategoryDetail from '../components/CourseCategoryDetail.jsx';
 import CourseSearch from '../components/CourseSearch.jsx';
+import CourseCompetitive from '../components/CourseCompetitive.jsx';
+import CourseFinancial from '../components/CourseFinancial.jsx';
 
 if (process.env.BROWSER) {
     require('css/classify.css');
@@ -96,7 +98,7 @@ class Classify extends Component {
         const query = location.query;
 
         return (
-            <div className={`content classify${isCategory(location) || isSearch(location) ? '-category' : ''}`}>
+            <div className={`content classify${isCategory(location) || isSearch(location) || isSpecial(location) ? '-category' : ''}`}>
                 <div className="container cl">
                     <div className="classify-left fl">
                         {baseCourseCategories.map((item, key) => {
@@ -115,7 +117,7 @@ class Classify extends Component {
                         })}
                     </div>
                     <div className="classify-right fl">
-                        {!isCategory(location) && !isSearch(location) ?
+                        {!isCategory(location) && !isSearch(location) && !isSpecial(location) ?
                             <p className="classify-course">
                                 查看关于
                                 <Link to="/courses" query={{category: 784}}>互联网金融商业模式</Link> <br/>
@@ -123,6 +125,14 @@ class Classify extends Component {
                                 <Link to="/courses" query={{category: 662}}>企业理财</Link>
                                 的精品课程
                             </p>
+                            : null
+                        }
+                        {isSpecial(location) && location.query.category === 'competitive' ?
+                            <CourseCompetitive />
+                            : null
+                        }
+                        {isSpecial(location) && location.query.category === 'financial' ?
+                            <CourseFinancial/>
                             : null
                         }
                         {!isCategory(location) ? null :

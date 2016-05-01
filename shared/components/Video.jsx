@@ -52,19 +52,22 @@ class Video extends Component {
         videoId: PropTypes.string.isRequired,
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
+        autoPlay: PropTypes.bool,
         handlePlayTime: PropTypes.func,
     };
 
+    defaultProps = {
+        autoPlay: true,
+    };
+
     componentDidMount() {
-        this.renderPlayer(PLAYER_ID, this.props.videoId, true);
+        this.renderPlayer(PLAYER_ID, this.props.videoId, this.props.autoPlay);
     }
     componentDidUpdate() {
-        this.renderPlayer(PLAYER_ID, this.props.videoId, true);
+        this.renderPlayer(PLAYER_ID, this.props.videoId, this.props.autoPlay);
     }
     shouldComponentUpdate(nextProps) {
         return this.props.videoId !== nextProps.videoId;
-    }
-    componentWillUnmount() {
     }
 
     renderPlayer = (domId, vid, autoPlay) => {
