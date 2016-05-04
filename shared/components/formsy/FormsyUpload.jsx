@@ -44,7 +44,7 @@ let FormsyUpload = React.createClass({
             server: this.props.server,
             pick: {id: '#' + this.props.id, multiple: false},
             swf: require('tb-webuploader/dist/Uploader.swf'),
-            fileVal: 'avatar',//this.props.fileVal || this.props.name,
+            fileVal: this.props.fileVal || this.props.name,
             fileSingleSizeLimit: this.props.fileSingleSizeLimit || 10 * 1024 * 1024,
             fileNumLimit: 1,
             fileSizeLimit: this.props.fileSizeLimit || undefined,
@@ -127,7 +127,7 @@ let FormsyUpload = React.createClass({
                         >{this.props.label}</button>
                 }
                 {this.state.uploading ?
-                    <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
+                    <span className="loading"><i className="iconfont icon-loading fa-spin"></i></span>
                     :
                     <span style={{ fontSize:'12px' }}>{val}</span>
                 }
