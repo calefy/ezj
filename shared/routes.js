@@ -153,14 +153,6 @@ module.exports = {
                     }
                 },
                 {
-                    path: 'avatar',
-                    getComponent(location, cb) {
-                        require.ensure([], require => {
-                            cb(null, require('./containers/account/Avatar.jsx'));
-                        });
-                    }
-                },
-                {
                     path: 'pwd',
                     getComponent(location, cb) {
                         require.ensure([], require => {
