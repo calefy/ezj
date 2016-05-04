@@ -12,6 +12,7 @@ class Account extends Component {
 
     static menus = [
         { path: '/account/index', name: '基本信息' },
+        { path: '/account/avatar', name: '头像修改' },
         { path: '/account/pwd', name: '密码修改' },
         { path: '/account/recharge', name: '充值记录' },
         { path: '/account/orders', name: '消费记录' }
