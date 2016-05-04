@@ -26,13 +26,14 @@ function getNoPrefixUrl(path, params = {}) {
     return url;
 }
 
-// 针对两个文件上传路径处理 `/v1/account/avatar`, `/v1/els/storage/upload`
-router.post(/^\/v1\/(account\/avatar|els\/storage\/upload)/,
-        uploader.single('file'), function(req, res, next) {
-
-    let isAvatar = req.path.endsWith('avatar');
-    if (isAvatar && !req.file.mimetype.startsWith('image')) {
-        res.status(555).send({ status: 455, message: '文件类型错误' });
+// 针对头像文件上传路径处理
+router.post(/^\/v3\/storage\/upload/, uploader.single('avatar'), function(req, res, next) {
+    if (!req.file.mimetype.startsWith('image')) {
+        res.send({ status: 455, message: '文件类型错误' });
+        return;
+    }
+    if (req.file.size > 10 * 1024 *1024) {
+        res.send({ status: 455, message: '图片大小超限' });
         return;
     }
 
@@ -41,11 +42,12 @@ router.post(/^\/v1\/(account\/avatar|els\/storage\/upload)/,
     form.maxDataSize = 1024 * 1024 * 60; // 设置最大文件大小60M
     //form.pauseStreams = false;
     form.append(
-        isAvatar ? 'avatar' : 'file',
+        'avatar',
         fs.createReadStream(req.file.path),
         {
             contentType: req.file.mimetype,
-            filename: req.file.originalname
+            filename: req.file.originalname,
+            knownLength: req.file.size, // form-data长度读取不到，传递长度
         }
     );
     // 暂存在res.locals中，将在发送http请求时调用
