@@ -42,6 +42,7 @@ class Account extends Component {
                             fileVal="avatar"
                             name="avatar"
                             label="上传新头像"
+                            onFileSuccess={this.onFileSuccess}
                         />
                     </Formsy.Form>
                     <p>{user.nickname}</p>
