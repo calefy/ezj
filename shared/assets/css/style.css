@@ -296,3 +296,22 @@ button{ cursor: pointer; outline: none; border: 0;}
 
 .reg-pop p{ text-indent: 2em;}
 .reg-pop em{ margin: 16px 0; display: block; font-size: 0.875em;}
+
+
+/*覆盖webuploader组件对按钮的定义*/
+.webuploader-element-invisible {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+.webuploader-pick {
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 3px;
+}
+.webuploader-pick-disable {
+    opacity: 0.6;
+    pointer-events:none;
+}
+

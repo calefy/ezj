@@ -231,10 +231,12 @@ let Pay = React.createClass({
                             <dd className={` pay-alipay ${this.state.payMethod === 'alipay' ? 'on' : null}`} data-pay="alipay" onClick={this.onClickPayMehtod}><em>&nbsp;</em></dd>
                             <dd className={` pay-unipay ${this.state.payMethod === 'unipay' ? 'on' : null}`} data-pay="unipay" onClick={this.onClickPayMehtod}><em>银联</em></dd>
                         </dl>
+                        {/*
                         <div>
                             <FormsyCheckbox name="agree" value="1" defaultChecked={true} required /> 我已经阅读并同意
                             <a href="#" onClick={this.onOpenProtocol}>紫荆教育用户付费协议</a>
                         </div>
+                        */}
                         <button type="submit" className={`btn ${this.canSubmit() ? '' : 'disabled'}`} disabled={!this.canSubmit()}>{this.isSubmitLoading() ? '结算中...' : '去结算'}</button>
                         <p className="pay-valid-date">付款后{type == payType.COURSE ? 90 : 180}天内有效</p>
                     </div>
@@ -254,6 +256,7 @@ let Pay = React.createClass({
                         <a href="#" className="btn disabled" onClick={this.onCloseConfirm}>支付遇到问题</a>
                     </div>
                 </Dialog>
+                {/*
                 <Dialog className="agreement-pop pop" open={this.state.isShowProtocol} onRequestClose={this.onCloseProtocol}>
                     <h4>紫荆教育网络用户付费协议</h4>
                     <div className="agreement-content">
@@ -296,6 +299,7 @@ let Pay = React.createClass({
                         <p>7、协议最终解释权归紫荆教育所有！</p>
                     </div>
                 </Dialog>
+                */}
             </div>
         );
 

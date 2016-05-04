@@ -4,8 +4,11 @@
 
 .account-left{ width: 230px; background: #fff; color: #505050; text-align: center; padding: 30px 0;}
 .account-left img{ width: 150px;height:150px; border-radius: 50%; border: 5px solid #eff0ef; margin: 0 0 20px;}
+.account-left .btn{padding:0;width:80px;font-size:12px;line-height:14px;margin-bottom:10px;}
+.account-left .loading{padding:0;}
+.account-left .loading .fa-spin{font-size: 14px!important;}
 
-.account-right{ background: #fff; margin:0 0 0 22px; width: 756px;}
+.account-right{ background: #fff; margin:0 0 0 22px; width: 948px;}
 .account-right dl:after,.change-account-right dl:after{ content: ""; display: block; clear: both;}
 
 /*用户资料*/
@@ -67,8 +70,6 @@
 .account-user input[type="radio"]{ margin: 0 4px 0 0;}
 .account-user .account-birth-select,.account-user .account-address-select{ float: left; margin: 0 10px 0 0;}
 .account-user .btn{ padding: 10px 36px;margin-left:100px;}
-
-
 
 
 

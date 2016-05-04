@@ -120,9 +120,19 @@ class Course extends Component {
 
     // 点击章节，跳转到视频播放
     onToVideo = e => {
+        // 检查登录
+        if (!(this.props.user.data && this.props.user.data.id)) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+
+            let operateAction = new OperateAction();
+            this.props.dispatch(operateAction.openLoginDialog());
+            return;
+        }
+
+        // 需要购买的课程，要判断购买状态
         let course = this.props.course.data || {};
         let priv = this.props.course_private.data || {};
-        // 需要购买的课程，要判断购买状态
         if (course.course_price != 0 && (!priv.is_purchased || priv.is_expired)) {
             e.preventDefault();
             e.nativeEvent.returnValue = false;

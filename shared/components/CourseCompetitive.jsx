@@ -68,7 +68,7 @@ class CourseCompetitive extends Component {
                     <div className="cnt">
                         <p>紫荆-索菲亚财富管理MBA项目官网：<a href="http://mba.ezijing.com" target="_blank">mba.ezijing.com</a></p>
                         <p>电话：010-57277629  13641208035</p>
-                        <p>邮件：<a mailto="mba@ezijing.com">mba@ezijing.com</a></p>
+                        <p>邮件：<a href="mailto:mba@ezijing.com">mba@ezijing.com</a></p>
                     </div>
                 </div>
             </div>
