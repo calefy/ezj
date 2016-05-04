@@ -4,7 +4,7 @@
 var formsySubmitButtonMixin = {
 
     getInitialState: function() {
-        return { _canSubmit: false, _submitLoading: false };
+        return { _canSubmit: true, _submitLoading: false };
     },
 
     canSubmit: function() {
