@@ -100,6 +100,16 @@ class All extends Component {
             let isLearning = !!item.latest_play;
 
             let timeStr = this.getTimeString(new Date((item.last_study_time || item.purchase_time) * 1000), now, ret);
+            let expireStr = item.expiring_date;
+            if (expireStr) {
+                let t = new Date(expireStr.replace('-', '/'));
+                if (t.getTime() < now.getTime()) {
+                    expireStr = '已过期';
+                } else {
+                    expireStr = '有效期至' + expireStr;
+                }
+            }
+
 
             ret.push(
                 <li className="cl" key={index}>
@@ -114,7 +124,7 @@ class All extends Component {
                                     <a href={`/courses/${item.id}`} className="fl" target="_blank">{item.title}</a>
                                 }
                                 {isLearning ? <em className="fr">已学习 {Math.min(item.progress, 100)}%</em> : null}
-                                {isPackage && item.expiring_date ? <em className="fr">有效期至{item.expiring_date}</em> : null}
+                                {isPackage && item.expiring_date ? <em className="fr">{expireStr}</em> : null}
                             </h4>
                             {isPackage ?
                                 item.items.map((c, i) => {
@@ -130,7 +140,7 @@ class All extends Component {
                                     <p>
                                         分类：{item.course_category_info}
                                         <a href={`/courses/${item.id}`} className="fr" target="_blank">查看</a>
-                                        {item.expiring_date ? <em className="fr">有效期至{item.expiring_date}</em> : null}
+                                        {item.expiring_date ? <em className="fr">{expireStr}</em> : null}
                                     </p>
                                     :
                                     <p>

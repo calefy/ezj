@@ -28,18 +28,18 @@ if (process.env.BROWSER) {
     }
     // 拖动播放进度条
     window._playerSeek = function() {
-        $('#' + PLAYER_WRAP_ID).trigger('player.seek', {time: player.getCurrentTime()});
+        $('#' + PLAYER_WRAP_ID).trigger('player.seek', {time: player.callAction('getCurrentTime')});
     }
 
     window._playerCallback = function() {
         var player = getPlayer();
         if (player) {
             //player.register('onLoadStart', ''); // 开始loading加载
-            player.register('onCanplay', '_playerStart'); // 开始播放视频内容
-            player.register('onPlaying', '_playerIng'); // 播放中触发，300ms一次
+            player.callAction('register', 'onCanplay', '_playerStart'); // 开始播放视频内容
+            player.callAction('register', 'onPlaying', '_playerIng'); // 播放中触发，300ms一次
             //player.register('onPause', ''); // 暂停
             //player.register('onResume', ''); // 恢复播放
-            player.register('onSeekComplete', '_playerSeek'); // 拖动进度条
+            player.callAction('register', 'onSeekComplete', '_playerSeek'); // 拖动进度条
             //player.register('onEnded', ''); // 结束
         }
     }
@@ -120,7 +120,7 @@ class Video extends Component {
     getTime = () => {
         let player = getPlayer();
         if (player) {
-            return player.getCurrentTime();
+            return player.callAction('getCurrentTime');
         } else {
             return 0;
         }
@@ -129,14 +129,14 @@ class Video extends Component {
     setTimeTo = time => {
         let player = getPlayer();
         if (player) {
-            player.setCurrentTime(time + 2); // flash实际播放值会大概小个一两秒，因此添加偏移
+            player.callAction('setCurrentTime', time + 2); // flash实际播放值会大概小个一两秒，因此添加偏移
         }
     };
     // 执行“跳过片头”操作
     skipBegin = () => {
         let player = getPlayer();
-        if (player && player.getCurrentTime() < SKIP_BEGIN_TIME) {
-            player.setCurrentTime(SKIP_BEGIN_TIME);
+        if (player && player.callAction('getCurrentTime') < SKIP_BEGIN_TIME) {
+            player.callAction('setCurrentTime', SKIP_BEGIN_TIME);
         }
     };
     // 设置视频尺寸
