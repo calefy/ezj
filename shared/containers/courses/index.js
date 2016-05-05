@@ -127,7 +127,7 @@ class Course extends Component {
     // 点击章节，跳转到视频播放
     onToVideo = e => {
         // 检查登录
-        if (!(this.props.user.data && this.props.user.data.id)) {
+        if (!(this.props.user.data && this.props.user.data.uid)) {
             e.preventDefault();
             e.nativeEvent.returnValue = false;
 
