@@ -34,7 +34,7 @@ export function course(state, action) {
 export function course_private(state, action) {
     let collectType = getRequestTypes(CoursesAction.COLLECT_COURSE);
     let cancelType = getRequestTypes(CoursesAction.CANCEL_COLLECT_COURSE);
-    let payType = getRequestTypes(CommerceAction.PAY);
+    //let payType = getRequestTypes(CommerceAction.PAY);
     let markType = getRequestTypes(CoursesAction.PLAYER_OVER); // 标记完成情况
     let data;
     switch(action.type) {
@@ -48,20 +48,20 @@ export function course_private(state, action) {
             data.is_collected = false;
             return Object.assign({}, state, {data: data});
             break;
-        case payType.success:
-            if (state.data) {
-                data = Object.assign({}, state.data);
-                data.is_purchased = true;
-                data.is_expired = false;
-                let d = new Date();
-                d.setDate(d.getDate() + 90);
-                let dy = d.getFullYear(), dm = d.getMonth() + 1, dd = d.getDate() + 1;
-                data.expiring_date = dy + '-' + (dm < 10 ? '0' + dm : dm) + '-' + (dd < 10 ? '0' + dd : dd) + ' 00:00:00';
-                return Object.assign({}, state, {data: data});
-            } else {
-                return state;
-            }
-            break;
+        //case payType.success:
+        //    if (state.data) {
+        //        data = Object.assign({}, state.data);
+        //        data.is_purchased = true;
+        //        data.is_expired = false;
+        //        let d = new Date();
+        //        d.setDate(d.getDate() + 90);
+        //        let dy = d.getFullYear(), dm = d.getMonth() + 1, dd = d.getDate() + 1;
+        //        data.expiring_date = dy + '-' + (dm < 10 ? '0' + dm : dm) + '-' + (dd < 10 ? '0' + dd : dd) + ' 00:00:00';
+        //        return Object.assign({}, state, {data: data});
+        //    } else {
+        //        return state;
+        //    }
+        //    break;
         case markType.success:
             if (state.data) {
                 data = Object.assign({}, state.data);

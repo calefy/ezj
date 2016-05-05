@@ -160,7 +160,11 @@ let Pay = React.createClass({
     onPayOver: function(e) {
         e && e.preventDefault();
         if (this.props.location.query.type == payType.COURSE) {
-            this.props.history.push(`/courses/${this.props.location.query.id}`);
+            const courseId = this.props.location.query.id;
+            // 重新请求课程个人信息
+            const courseAction = new CoursesAction();
+            this.props.dispatch( courseAction.loadCoursePrivate(courseId) );
+            this.props.history.push(`/courses/${courseId}`);
         } else {
             this.props.history.goBack();
         }
