@@ -94,7 +94,7 @@ class Continue extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="special-courses">
+                <div className="special-courses" id="course">
                     <div className="container">
                         <div className="special-continue-title nop">
                             <h2>课程视频</h2><div><span className="diamond"></span><span className="diamond"></span><span className="diamond"></span></div>
@@ -134,7 +134,7 @@ class Continue extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="special-test">
+                <div className="special-test" id="quiz">
                     <div className="container">
                         <div className="special-continue-title nop">
                             <h2>在线答题</h2><div><span className="diamond"></span><span className="diamond"></span><span className="diamond"></span></div>
