@@ -214,7 +214,7 @@ class Course extends Component {
 
         // 如果购买了,又没有学习，需要获取第一个章节ID
         let firstChapterId;
-        if (priv.is_purchased && priv.is_learned) {
+        if (priv.is_purchased && !priv.is_learned) {
             for (let i=0,len=chapters.length; i < len; i++) {
                 if (chapters[i].rgt - chapters[i].lft === 1) {
                     firstChapterId = chapters[i].id;
