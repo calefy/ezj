@@ -223,6 +223,14 @@ module.exports = {
             },
             childRoutes: [
                 {
+                    path: 'intro',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/study/Intro.jsx'));
+                        });
+                    }
+                },
+                {
                     path: 'all',
                     onEnter: needLogin,
                     getComponent(location, cb) {

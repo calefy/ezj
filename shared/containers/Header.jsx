@@ -155,7 +155,7 @@ class Header extends Component {
                                 <Link to="/courses" className={pathname === '/courses' ? 'cur' : null}>全部课程</Link>
                             </li>
                             <li>
-                                <Link to="/study/all" className={/^\/study/.test(pathname) ? 'cur' : null}>学习中心</Link>
+                                <Link to={user.uid ? '/study/all' : '/study/intro'} className={/^\/study/.test(pathname) ? 'cur' : null}>学习中心</Link>
                             </li>
                         </ul>
                     </nav>
