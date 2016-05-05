@@ -27,7 +27,7 @@ class Order extends Component {
     }
     componentWillReceiveProps(nextProps) {
         if (this.props.location.search != nextProps.location.search) {
-            Order.fetchData(this.props);
+            Order.fetchData(nextProps);
         }
     }
 
