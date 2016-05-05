@@ -20,7 +20,7 @@ class Recharge extends Component {
         const { account, recharges, params, location } = this.props;
         // 考虑已经缓存过其他页的数据，又来访问第一页时，数据需要更新
         if (account.isFetching ||
-                (recharges._req && recharges._req.page != location.query.page)) {
+                !recharges._req || recharges._req.page != location.query.page) {
             Recharge.fetchData(this.props);
         }
     }
