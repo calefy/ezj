@@ -6,10 +6,11 @@ const PLAYER_ID = 'player';
 const SKIP_BEGIN_TIME = 10; // 跳过片头设置片头时间
 
 let getPlayer = function() {};
+let swfobject = {};
 // 定义全局监听函数
 if (process.env.BROWSER) {
     window.jQuery = window.$ = require('jquery');
-    require('video'); // 视频js
+    swfobject = require('video'); // 视频js
 
     getPlayer = function() {
         return document.getElementById(PLAYER_ID);
@@ -81,7 +82,8 @@ class Video extends Component {
         var flashvars = {
             autoStart : autoPlay,
             vid : vid,
-            isShowSpeeder : 1, //0为mp4模式 1为cc模式
+            isShowSpeeder : 1,
+            videoType: 1,//0为mp4模式 1为cc模式
             callback: '_playerCallback'
         };
         //flashvars.videoType = 1; //0为mp4模式 1为cc模式
