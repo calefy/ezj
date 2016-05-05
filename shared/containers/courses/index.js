@@ -43,27 +43,33 @@ class Course extends Component {
     };
 
     componentDidMount() {
-        const { course, course_sheet, params } = this.props;
-        // 因课程sheet不会在其他页面出现，因此用该变量与课程标识是否该课程的数据完整
-        // TODO: 判断加载数据应该逐条判断，以防止其他页面部分数据替换问题
-        if (course.isFetching ||
-                (course.data && course.data.id != params.courseId)) {
-            Course.fetchData(this.props);
-            return;
-        }
+        this.loadNeededData(this.props);
 
         // 判断是否需要展示测验
         this.loadExamData(this.props);
     }
     componentWillReceiveProps(nextProps) {
-        // courseID变化，所有相关数据重新加载
-        if (this.props.params.courseId != nextProps.params.courseId) {
-            Course.fetchData(nextProps);
-            return;
-        }
+        this.loadNeededData(nextProps);
 
         this.loadExamData(nextProps);
     }
+    loadNeededData = props => {
+        const {dispatch, params, course, course_private, chapters, students} = this.props;
+        const courseAction = new CoursesAction();
+        const courseId = params.courseId;
+        if (!course._req || course._req.courseId != courseId) {
+            dispatch( courseAction.loadCourseDetail(courseId) );
+        }
+        if (!course_private._req || course_private._req.courseId != courseId) {
+            dispatch( courseAction.loadCoursePrivate(courseId) );
+        }
+        if (!chapters._req || chapters._req.courseId != courseId) {
+            dispatch( courseAction.loadCourseChapters(courseId) );
+        }
+        if (!students._req || students._req.courseId != courseId) {
+            dispatch( courseAction.loadCourseStudents(courseId) );
+        }
+    };
 
     loadExamData = (props) => {
         // 切换到测验，如果数据不是当前课程的，需要重新加载测验数据
