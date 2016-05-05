@@ -89,8 +89,23 @@ class Course extends Component {
         }
     };
 
+    isLogin = () => {
+        return this.props.user.data && this.props.user.data.uid;
+    };
+    showLoginDialog = () => {
+        let operateAction = new OperateAction();
+        this.props.dispatch(operateAction.openLoginDialog());
+    };
+
     // 收藏
     onCollect = e => {
+        // 检查登录状态
+        if (!this.isLogin()) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+            this.showLoginDialog();
+            return;
+        }
         const courseAction = new CoursesAction();
         this.props.dispatch( courseAction.collect(this.props.params.courseId) );
     };
@@ -127,12 +142,10 @@ class Course extends Component {
     // 点击章节，跳转到视频播放
     onToVideo = e => {
         // 检查登录
-        if (!(this.props.user.data && this.props.user.data.uid)) {
+        if (!this.isLogin()) {
             e.preventDefault();
             e.nativeEvent.returnValue = false;
-
-            let operateAction = new OperateAction();
-            this.props.dispatch(operateAction.openLoginDialog());
+            this.showLoginDialog();
             return;
         }
 
@@ -157,12 +170,10 @@ class Course extends Component {
     // - 如果是免费课程，直接支付
     onClickBuy = e => {
         // 检测登录状态
-        if (!this.props.user.data) {
+        if (!this.isLogin()) {
             e.preventDefault();
             e.nativeEvent.returnValue = false;
-
-            let operateAction = new OperateAction();
-            this.props.dispatch(operateAction.openLoginDialog());
+            this.showLoginDialog();
             return;
         }
 
