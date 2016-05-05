@@ -43,27 +43,33 @@ class Course extends Component {
     };
 
     componentDidMount() {
-        const { course, course_sheet, params } = this.props;
-        // 因课程sheet不会在其他页面出现，因此用该变量与课程标识是否该课程的数据完整
-        // TODO: 判断加载数据应该逐条判断，以防止其他页面部分数据替换问题
-        if (course.isFetching ||
-                (course.data && course.data.id != params.courseId)) {
-            Course.fetchData(this.props);
-            return;
-        }
+        this.loadNeededData(this.props);
 
         // 判断是否需要展示测验
         this.loadExamData(this.props);
     }
     componentWillReceiveProps(nextProps) {
-        // courseID变化，所有相关数据重新加载
-        if (this.props.params.courseId != nextProps.params.courseId) {
-            Course.fetchData(nextProps);
-            return;
-        }
+        this.loadNeededData(nextProps);
 
         this.loadExamData(nextProps);
     }
+    loadNeededData = props => {
+        const {dispatch, params, course, course_private, chapters, students} = this.props;
+        const courseAction = new CoursesAction();
+        const courseId = params.courseId;
+        if (!course._req || course._req.courseId != courseId) {
+            dispatch( courseAction.loadCourseDetail(courseId) );
+        }
+        if (!course_private._req || course_private._req.courseId != courseId) {
+            dispatch( courseAction.loadCoursePrivate(courseId) );
+        }
+        if (!chapters._req || chapters._req.courseId != courseId) {
+            dispatch( courseAction.loadCourseChapters(courseId) );
+        }
+        if (!students._req || students._req.courseId != courseId) {
+            dispatch( courseAction.loadCourseStudents(courseId) );
+        }
+    };
 
     loadExamData = (props) => {
         // 切换到测验，如果数据不是当前课程的，需要重新加载测验数据
@@ -206,14 +212,12 @@ class Course extends Component {
         tminute = Math.ceil(tminute) % 60;
         let timeStr = (thour ? thour + '小时' : '') + tminute + '分';
 
-        // 如果购买了,又没有学习，需要获取第一个章节ID
+        // 如果购买了,又没有学习，或者学完了重新学习，需要获取第一个章节ID
         let firstChapterId;
-        if (priv.is_purchased && priv.is_learned) {
-            for (let i=0,len=chapters.length; i < len; i++) {
-                if (chapters[i].rgt - chapters[i].lft === 1) {
-                    firstChapterId = chapters[i].id;
-                    break;
-                }
+        for (let i=0,len=chapters.length; i < len; i++) {
+            if (chapters[i].rgt - chapters[i].lft === 1) {
+                firstChapterId = chapters[i].id;
+                break;
             }
         }
 
@@ -262,7 +266,10 @@ class Course extends Component {
                                         :
                                         (course.course_open_status ?
                                             (priv.is_learned ?
-                                                <Link to={`/courses/${course.id}/chapters/${priv.latest_play && priv.latest_play.chapter_id}`} className="btn fl">继续学习</Link>
+                                                priv.progress >= 100 ?
+                                                    <Link to={`/courses/${course.id}/chapters/${firstChapterId}`} className="btn fl">重新学习</Link>
+                                                    :
+                                                    <Link to={`/courses/${course.id}/chapters/${priv.latest_play && priv.latest_play.chapter_id}`} className="btn fl">继续学习</Link>
                                                 :
                                                 <Link to={`/courses/${course.id}/chapters/${firstChapterId}`} className="btn fl">立即学习</Link>
                                             )

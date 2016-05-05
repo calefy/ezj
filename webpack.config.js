@@ -37,7 +37,7 @@ module.exports = {
             { test: /\.(png|gif|jpe?g)$/, loader: 'url?limit=512&name=[hash:base64:6].[ext]'},
             { test: /\.(swf|eot|svg|ttf|woff)$/, loader: 'file?name=[hash:base64:6].[ext]'}
         ],
-        noParse: [ /ckeditor/, /video/ ]
+        noParse: [ /ckeditor/ ]
     },
     resolve: {
         alias: {
