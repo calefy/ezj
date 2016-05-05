@@ -212,14 +212,12 @@ class Course extends Component {
         tminute = Math.ceil(tminute) % 60;
         let timeStr = (thour ? thour + '小时' : '') + tminute + '分';
 
-        // 如果购买了,又没有学习，需要获取第一个章节ID
+        // 如果购买了,又没有学习，或者学完了重新学习，需要获取第一个章节ID
         let firstChapterId;
-        if (priv.is_purchased && !priv.is_learned) {
-            for (let i=0,len=chapters.length; i < len; i++) {
-                if (chapters[i].rgt - chapters[i].lft === 1) {
-                    firstChapterId = chapters[i].id;
-                    break;
-                }
+        for (let i=0,len=chapters.length; i < len; i++) {
+            if (chapters[i].rgt - chapters[i].lft === 1) {
+                firstChapterId = chapters[i].id;
+                break;
             }
         }
 
@@ -268,7 +266,10 @@ class Course extends Component {
                                         :
                                         (course.course_open_status ?
                                             (priv.is_learned ?
-                                                <Link to={`/courses/${course.id}/chapters/${priv.latest_play && priv.latest_play.chapter_id}`} className="btn fl">继续学习</Link>
+                                                priv.progress >= 100 ?
+                                                    <Link to={`/courses/${course.id}/chapters/${firstChapterId}`} className="btn fl">重新学习</Link>
+                                                    :
+                                                    <Link to={`/courses/${course.id}/chapters/${priv.latest_play && priv.latest_play.chapter_id}`} className="btn fl">继续学习</Link>
                                                 :
                                                 <Link to={`/courses/${course.id}/chapters/${firstChapterId}`} className="btn fl">立即学习</Link>
                                             )
