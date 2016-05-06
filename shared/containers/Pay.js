@@ -133,7 +133,7 @@ let Pay = React.createClass({
         let price = location.query.type == payType.COURSE ?
                         course.data.course_price || 0 :
                         product.data.price || 0;
-        if (this.state.pointPay &&
+        if (!this.state.pointPay ||
                 account.data.available_amount - 0 < price - 0) {
             this.payWindowName = 'payWindow_' + (new Date()).getTime();
             this.payWindow = window.open('about:blank', this.payWindowName);
