@@ -54,7 +54,7 @@ class Course extends Component {
         this.loadExamData(nextProps);
     }
     loadNeededData = props => {
-        const {dispatch, params, course, course_private, chapters, students} = this.props;
+        const {dispatch, params, course, course_private, chapters, students} = props;
         const courseAction = new CoursesAction();
         const courseId = params.courseId;
         if (!course._req || course._req.courseId != courseId) {
