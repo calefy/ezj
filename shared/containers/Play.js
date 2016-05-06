@@ -315,6 +315,7 @@ class Play extends Component {
                                         width = {550}
                                         height = {360}
                                         handlePlayTime = {this.handlePlayTime}
+                                        lastTime={priv.latest_play && priv.latest_play.chapter_id === chapter.id && priv.latest_play.last_position || 0}
                                     />
                                 </div>
                                 <div className={`play-jiangyi fl ${this.state.pptBoxShow ? '' : 'hide'}`}>
