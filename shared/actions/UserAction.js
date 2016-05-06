@@ -7,6 +7,7 @@ module.exports = class UserAction extends BaseAction {
     static LOGIN = 'login';
     static SEND = 'send';
     static REGIST = 'reg';
+    static USER = 'user';
 
     constructor(config = {}) {
         super(config);
@@ -18,7 +19,7 @@ module.exports = class UserAction extends BaseAction {
      * 当前账号信息
      */
     loadAccount() {
-        return BaseAction.dispatchRequest( 'user', this.api.show(), { schema: Schemas.USER } );
+        return BaseAction.dispatchRequest( UserAction.USER, this.api.show(), { schema: Schemas.USER } );
     }
 
     login(opts) {
