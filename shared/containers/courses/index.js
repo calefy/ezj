@@ -390,7 +390,7 @@ class Course extends Component {
                                             <div className="item" key={index}>
                                                 <p>《{item.title}》</p>
                                                 <div className="cl">
-                                                    <span className="fl">共 {item.items.split(',').length} 门课</span>
+                                                    <span className="fl">共 {item.items.replace(/,$/, '').split(',').length} 门课</span>
                                                     <Link className="fr" to='/pay' query={{type: payType.PACKAGE, id: item.id}}>&yen; {item.price}元</Link>
                                                 </div>
                                             </div>
