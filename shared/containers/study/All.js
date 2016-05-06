@@ -153,6 +153,8 @@ class All extends Component {
                 </li>
             );
         });
+
+        cacheYear = null; // 重置缓存年份，防止内容变更后再次执行render时，该值影响显示
         return ret;
     };
 
