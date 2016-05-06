@@ -176,6 +176,17 @@ class Course extends Component {
         this.setState({ isShowTipBuy: false });
     };
 
+    // 课程包购买检查登录态
+    onClickPackageBuy = e => {
+        // 检测登录状态
+        if (!this.isLogin()) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+            this.showLoginDialog();
+            return;
+        }
+    };
+
     // 点击立即购买时，
     // - 如果未登录，弹出登录框
     // - 如果是免费课程，直接支付
@@ -395,7 +406,7 @@ class Course extends Component {
                                                 <p>《{item.title}》</p>
                                                 <div className="cl">
                                                     <span className="fl">共 {item.items.replace(/,$/, '').split(',').length} 门课</span>
-                                                    <Link className="fr" to='/pay' query={{type: payType.PACKAGE, id: item.id}}>&yen; {item.price}元</Link>
+                                                    <Link className="fr" to='/pay' query={{type: payType.PACKAGE, id: item.id}} onClick={this.onClickPackageBuy}>&yen; {item.price}元</Link>
                                                 </div>
                                             </div>
                                         );
