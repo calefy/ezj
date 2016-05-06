@@ -37,10 +37,21 @@ class CourseCategoryDetail extends Component {
 
         let categoryMap = {};
         if (category.items) {
+            let cids = category.items.map(item => item.id);
+
             (courses || []).forEach(item => {
                 let c = item.course_category_id;
-                categoryMap[c] = categoryMap[c] || [];
-                categoryMap[c].push(item);
+                if (cids.indexOf(c) >= 0) { // 课程直接归属于二级分类时
+                    categoryMap[c] = categoryMap[c] || [];
+                    categoryMap[c].push(item);
+                } else { // 课程归属于次级分类时
+                    item.category_info.forEach(co => {
+                        if (cids.indexOf(co.id) >= 0) {
+                            categoryMap[co.id] = categoryMap[co.id] || [];
+                            categoryMap[co.id].push(item);
+                        }
+                    });
+                }
             })
         }
 

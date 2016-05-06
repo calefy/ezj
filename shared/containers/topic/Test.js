@@ -9,8 +9,8 @@ if (process.env.BROWSER) {
     require('css/special.css');
 }
 
-const examId = 3926;// 4608;
-const organizationId = 4958; // 临时，应去掉
+const examId = 4608; // 测试用10道题试卷：3926
+const organizationId = 4958; // 持续教育
 
 let Exam = React.createClass({
     // 初始加载数据

@@ -7,6 +7,7 @@ const SKIP_BEGIN_TIME = 10; // 跳过片头设置片头时间
 
 let getPlayer = function() {};
 let swfobject = {};
+let continueStart = 0; // 继续学习初始值
 // 定义全局监听函数
 if (process.env.BROWSER) {
     window.jQuery = window.$ = require('jquery');
@@ -19,7 +20,9 @@ if (process.env.BROWSER) {
     // 开始播放，如果设置了跳过片头则设置播放时间
     window._playerStart = function() {
         if (/skip=true/.test(document.cookie)) {
-            getPlayer().setCurrentTime(SKIP_BEGIN_TIME); // 跳到第6秒开始播放
+            getPlayer().callAction('setCurrentTime', Math.max(continueStart, SKIP_BEGIN_TIME)); // 跳到第6秒开始播放
+        } else if (continueStart) {
+            getPlayer().callAction('setCurrentTime', continueStart);
         }
     }
     // 播放过程中不断触发，传递当前播放到的时间
@@ -62,6 +65,7 @@ class Video extends Component {
     };
 
     componentDidMount() {
+        continueStart = this.props.lastTime || 0; // 如果传递有上次播放时间，则记录缓存，以便player.start时使用
         this.renderPlayer(PLAYER_ID, this.props.videoId, this.props.autoPlay);
     }
     componentDidUpdate() {

@@ -52,9 +52,16 @@ class Course extends Component {
         this.loadNeededData(nextProps);
 
         this.loadExamData(nextProps);
+
+        // 购买免费课程成功后，需要更新private
+        let payType = getRequestTypes(CommerceAction.PAY);
+        if (nextProps.action.type === payType.success) {
+            const courseAction = new CoursesAction();
+            nextProps.dispatch( courseAction.loadCoursePrivate(nextProps.params.courseId) );
+        }
     }
     loadNeededData = props => {
-        const {dispatch, params, course, course_private, chapters, students} = this.props;
+        const {dispatch, params, course, course_private, chapters, students} = props;
         const courseAction = new CoursesAction();
         const courseId = params.courseId;
         if (!course._req || course._req.courseId != courseId) {
@@ -383,7 +390,7 @@ class Course extends Component {
                                             <div className="item" key={index}>
                                                 <p>《{item.title}》</p>
                                                 <div className="cl">
-                                                    <span className="fl">共 {item.items.split(',').length} 门课</span>
+                                                    <span className="fl">共 {item.items.replace(/,$/, '').split(',').length} 门课</span>
                                                     <Link className="fr" to='/pay' query={{type: payType.PACKAGE, id: item.id}}>&yen; {item.price}元</Link>
                                                 </div>
                                             </div>

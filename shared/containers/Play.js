@@ -169,6 +169,12 @@ class Play extends Component {
         this.refs.video.setTimeTo(time);
     };
 
+    // 点击返回详情时，重新加载课程的private信息，以便更新latest_play字段数据
+    onClickToDetail = e => {
+        const courseAction = new CoursesAction();
+        this.props.dispatch( courseAction.loadCoursePrivate(this.props.params.courseId) );
+    };
+
     // 用户点击按钮操作
     handleChangeChapter = e => {
         this._setState({ pptIndex: 0 });
@@ -301,7 +307,7 @@ class Play extends Component {
             <div className="play">
                 <div className="left-content">
                     <div className="play-top cl">
-                        <Link className="play-back fl" to={`/courses/${params.courseId}`}><i className="iconfont icon-arrowvideo"></i>&emsp;返回详情</Link>
+                        <Link className="play-back fl" to={`/courses/${params.courseId}`} onClick={this.onClickToDetail}><i className="iconfont icon-arrowvideo"></i>&emsp;返回详情</Link>
                         <p>{course.course_name}</p>
                         <p>{chapter.chapter_name}</p>
                     </div>
@@ -315,6 +321,7 @@ class Play extends Component {
                                         width = {550}
                                         height = {360}
                                         handlePlayTime = {this.handlePlayTime}
+                                        lastTime={priv.latest_play && priv.latest_play.chapter_id === chapter.id && priv.latest_play.last_position || 0}
                                     />
                                 </div>
                                 <div className={`play-jiangyi fl ${this.state.pptBoxShow ? '' : 'hide'}`}>

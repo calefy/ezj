@@ -2,39 +2,42 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux'
 
-import CommerceAction from '../../actions/CommerceAction';
+import CoursesAction from '../../actions/CoursesAction';
 
 if (process.env.BROWSER) {
     require('css/special.css');
 }
 
-const bundles = [
-    '6119033148161392640',
-    '6119033145351208960',
-    '6119033145393152000',
-    '6119033147871985664',
-];
-
+const CATEGORY_ID = '689'; // CFC持续教育课程分类ID
 
 class Continue extends React.Component {
 
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
-        const commerceAction = new CommerceAction({ apiClient });
+        const courseAction = new CoursesAction({ apiClient });
         return Promise.all([
-            dispatch( commerceAction.loadProducts({ids: bundles.join(',')}) ),
+            dispatch( courseAction.loadCourseCategory(CATEGORY_ID) ),
+            dispatch( courseAction.loadCourseCategoryCourses(CATEGORY_ID) )
         ]);
     }
 
     componentDidMount() {
-        const {products} = this.props;
-        if (products.isFetching) {
+        const {course_category, category_courses} = this.props;
+        if (course_category.isFetching || category_courses.isFetching) {
             Continue.fetchData(this.props);
         }
     }
 
     render() {
-        const { products } = this.props;
+        const { course_category, category_courses } = this.props;
+        let categories = course_category.data && course_category.data.items || [];
+        // 课程map：categoryId=>course
+        let courseMap = {};
+        (category_courses.data && category_courses.data.list || []).forEach(item => {
+            let c = item.course_category_id;
+            courseMap[c] = courseMap[c] || [];
+            courseMap[c].push(item);
+        });
 
         return (
             <div className="special-continue">
@@ -100,16 +103,14 @@ class Continue extends React.Component {
                             <h2>课程视频</h2><div><span className="diamond"></span><span className="diamond"></span><span className="diamond"></span></div>
                         </div>
                         <div className="online-course">
-                            {products.isFetching ?
+                            {course_category.isFetching || category_courses.isFetching ?
                                 <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
                                 :
-                                bundles.map((bundleId, bundleIndex) => {
-                                    let bundle = products.data && products.data[bundleId];
-                                    if (bundle) {
+                                categories.map((category, i) => {
                                         return (
-                                            <dl key={bundleIndex}>
-                                                <dt><span>{bundle.title}</span></dt>
-                                                {bundle.courses.map((item, index) => {
+                                            <dl key={i}>
+                                                <dt><span>{category.name}</span></dt>
+                                                {(courseMap[category.id] || []).map((item, index) => {
                                                     return (
                                                         <dd className="bg-white" key={index}>
                                                             <span className="online-title">{index + 1}.{item.course_name}</span>
@@ -128,7 +129,6 @@ class Continue extends React.Component {
                                                 })}
                                             </dl>
                                         );
-                                    }
                                 })
                             }
                         </div>
@@ -149,5 +149,6 @@ class Continue extends React.Component {
 }
 
 module.exports = connect( state => ({
-    products: state.products,
+    course_category: state.course_category,
+    category_courses: state.category_courses,
 }) )(Continue);
