@@ -58,11 +58,13 @@ class CourseExam extends Component {
         setTimeout(() => {
             let questions = this.props.examination.questions || [];
             let curQuestion = questions[this.state.index];
-            let answerIds = this.answers[curQuestion.id];
-            for (let key in this.refs) {
-                if (/answer_/.test(key) &&
-                    answerIds.indexOf(this.refs[key].value) >= 0 && !this.refs[key].checked) {
-                    this.refs[key].checked = true;
+            let answerIds = this.answers[curQuestion.question.id];
+            if (answerIds && answerIds.length) {
+                for (let key in this.refs) {
+                    if (/answer_/.test(key) &&
+                        answerIds.indexOf(this.refs[key].value) >= 0 && !this.refs[key].checked) {
+                        this.refs[key].checked = true;
+                    }
                 }
             }
         }, 10);
