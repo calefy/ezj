@@ -19,7 +19,7 @@ class CourseFinancial extends Component {
                 </div>
 
                 <div className="part2">
-                    <div className="tac"><img src={require('../assets/img/finance-p1.png')} alt=""/></div>
+                    <div className="tac"><img src="http://zj-avatar.img-cn-beijing.aliyuncs.com/62b79f98a9f042a5238f16c95a9fed86627821413.png@100p" alt=""/></div>
                     <div className="wrap cl">
                         <div className="box fl">
                             <h4>增长、转型、创新时代的金融领导力挑战</h4>
@@ -48,7 +48,7 @@ class CourseFinancial extends Component {
 
                 <div className="part3 tac">
                     <h3>培养理念与方法</h3>
-                    <div><img src={require('../assets/img/finance-p2.png')} alt=""/></div>
+                    <div><img src="http://zj-avatar.img-cn-beijing.aliyuncs.com/cede4d4fda661497ce44150a9fa168641800096224.png@100p" alt=""/></div>
                 </div>
 
                 <div className="part4">
