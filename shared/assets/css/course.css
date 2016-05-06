@@ -37,6 +37,12 @@
 .course-bottom-info >div >div{ font-size: 0.75em; color: #60686c; line-height: 2; margin:10px 0 30px;}
 
 .course-title{ border-bottom: 1px solid #e8e8e8; color: #000; font-size: 0.875em; padding: 8px 0 8px 34px; font-weight: normal;}
+.course-bottom-relpackage{margin-bottom:20px;}
+.course-bottom-relpackage .course-title{padding-left:15px;}
+.course-bottom-relpackage .item{font-size:12px;margin:0 13px;padding:12px 5px 15px; line-height:22px;color:#60686c;border-bottom:1px solid #e8e8e8;}
+.course-bottom-relpackage .item:last-child{border-bottom:none;}
+.course-bottom-relpackage .item .fl{color:#c57080;}
+.course-bottom-relpackage .item a{padding:0 8px;background-color:#af1b40;color:#fff;box-shadow:0 2px 3px rgba(0,0,0,.3);}
 .course-bottom-about .course-title{ background: url(../img/icon-course-about.png) no-repeat left center;}
 .course-bottom-recommend .course-title{ background: url(../img/icon-course-user.png) no-repeat left center;}
 .course-bottom-teacher .course-title{ background: url(../img/icon-course-teacher.png) no-repeat 13px center; padding:16px 0 16px 47px;}

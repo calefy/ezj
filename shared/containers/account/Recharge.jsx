@@ -48,12 +48,14 @@ class Recharge extends Component {
                 <div className="balance cl">
                     <div className="yue fl">
                         <span>账户余额：{account.available_amount || 0}紫荆币</span>
+                        {/*
                         &emsp;
                         {account.frozen_amount > 0 ?
                             <span>冻结金额：{account.frozen_amount}</span>
                             : null
                         }
                         <span className="btn-red" style={{display:'none'}}>充值</span>
+                        */}
                     </div>
                     <dl className="recharge fr hide">
                         <dt>输入充值卡号 <span className="form-red" title="此项必填。">*</span></dt>
