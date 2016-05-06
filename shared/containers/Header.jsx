@@ -124,7 +124,9 @@ class Header extends Component {
         // 清除本地cookie
         document.cookie = '_SUP=;domain=.ezijing.com;expires='+(new Date()).toGMTString()+';';
         // 跳转以清空缓存数据
-        document.location = '/';
+        setTimeout(() => { // 保证跳转后，cookie已清
+            document.location = '/';
+        }, 10);
     };
 
     // 搜索
