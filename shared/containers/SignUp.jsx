@@ -118,6 +118,7 @@ let SignUp = React.createClass({
     onClosePayConfirm: function(e) {
         e && e.preventDefault();
         this._setState({ showPayConfirm: false });
+        this.props.history.push('/account/orders');
     },
 
     // 提交

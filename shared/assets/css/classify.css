@@ -77,3 +77,24 @@
 .page-competitive .intro .fr{margin-top:20px;}
 .page-competitive .intro .btn{font-size:16px;padding:12px 35px;}
 
+/*金融领导力分类页面*/
+.classify-right .page-finance>div{box-shadow: none;}
+.page-finance .part2, .page-finance .part4{padding:60px 0;background-color:#eee;}
+.page-finance .part1{padding: 10px 0 60px;}
+.page-finance h2{font-size:42px;line-height:60px;}
+.page-finance h3{font-size:28px;}
+.page-finance .box{width:432px;height:313px;background-color:#fff;border-radius:15px;}
+.page-finance .box h4{font-size:20px;color:#b01c40;text-align:center;padding:15px 0 40px;}
+.page-finance .box li{padding: 0 35px;line-height:38px;font-size:14px;}
+.page-finance .part2 .wrap{padding: 55px 20px 50px;}
+.page-finance .part2 .help{color:#505050;font-size:20px;font-weight:bold;}
+.page-finance .part3{padding:60px 0;background-color:#fff;}
+.page-finance .part3 h3{padding-bottom:50px;}
+.page-finance .part4 dt{background-color:#b01c40;color:#fff;font-size:20px;line-height:30px;text-align:center;}
+.page-finance .cases{padding:50px 20px 60px;}
+.page-finance .cases dt, .page-finance .cases dd{height:68px;float: left; margin-bottom: 18px;}
+.page-finance .cases dt{line-height:68px;width:130px;border-radius:30px 0 0 30px;}
+.page-finance .cases dd{width:675px;height:58px;padding:0 30px;line-height:25px;padding-top:10px;background-color:#fff;border-radius:0 30px 30px 0;}
+.page-finance .more{padding:0 20px;margin-right:-100px;}
+.page-finance .more dl{float:left;width:215px;margin-right:110px;}
+.page-finance .more dd{margin:10px 0;text-align:center;height:47px;padding-top:8px;line-height:20px;font-weight:bold;background-color:#fff;}

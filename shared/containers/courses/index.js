@@ -375,6 +375,23 @@ class Course extends Component {
 
                         </div>
                         <div className="course-bottom-right fr">
+                            {course.related_packages && course.related_packages.length ?
+                                <div className="course-bottom-relpackage course-shadow bg-white">
+                                    <h4 className="course-title">所属课程包</h4>
+                                    {course.related_packages.map((item, index) => {
+                                        return (
+                                            <div className="item" key={index}>
+                                                <p>《{item.title}》</p>
+                                                <div className="cl">
+                                                    <span className="fl">共 {item.items.split(',').length} 门课</span>
+                                                    <Link className="fr" to='/pay' query={{type: payType.PACKAGE, id: item.id}}>&yen; {item.price}元</Link>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                                : null
+                            }
                             <div className="course-bottom-teacher course-shadow bg-white">
                                 <h4 className="course-title">课程讲师</h4>
                                 {(course.lecturers || []).map((item, index) => {

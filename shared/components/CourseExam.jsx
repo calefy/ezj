@@ -52,6 +52,22 @@ class CourseExam extends Component {
                 this.refs[key].checked = false;
             }
         }
+
+        // 因設置checked后，defaultChecked失效，因此需要js動態設置一次
+        let _this = this;
+        setTimeout(() => {
+            let questions = this.props.examination.questions || [];
+            let curQuestion = questions[this.state.index];
+            let answerIds = this.answers[curQuestion.question.id];
+            if (answerIds && answerIds.length) {
+                for (let key in this.refs) {
+                    if (/answer_/.test(key) &&
+                        answerIds.indexOf(this.refs[key].value) >= 0 && !this.refs[key].checked) {
+                        this.refs[key].checked = true;
+                    }
+                }
+            }
+        }, 10);
     };
     onClickBegin = e => {
         this.time = (new Date()).getTime();

@@ -21,7 +21,7 @@ class Order extends Component {
         const { orders, location } = this.props;
         // 考虑已经缓存过其他页的数据，又来访问第一页时，数据需要更新
         if (orders.isFetching ||
-                (orders._req && orders._req.page != location.query.page)) {
+                !orders._req || orders._req.page != location.query.page) {
             Order.fetchData(this.props);
         }
     }
