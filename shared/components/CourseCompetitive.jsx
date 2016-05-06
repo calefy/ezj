@@ -40,12 +40,12 @@ class CourseCompetitive extends Component {
                             <p>学员云集金融行业精英及高净值人群</p>
                         </div>
                         <div className="fr">
-                            <img src={require('../assets/img/mba_zs.png')} alt=""/>
+                            <img src="http://zj-avatar.img-cn-beijing.aliyuncs.com/723fe051148d9891837d0c7699a0f1981774978473.png@100p" alt=""/>
                         </div>
                     </div>
                     <div className="cl cnt">
                         <div className="fl">
-                            <img src={require('../assets/img/mba_sfy.png')} alt=""/>
+                            <img src="http://zj-avatar.img-cn-beijing.aliyuncs.com/ecc1a9365f3deb6095b25d3b2c75b0dc686584519.png@100p" alt=""/>
                         </div>
                         <div className="fr">
                             <h3>美国索菲亚大学</h3>
@@ -60,7 +60,7 @@ class CourseCompetitive extends Component {
 
                 <div className="course">
                     <h2>课程体系</h2>
-                    <div className="cnt tac"><img src={require('../assets/img/mba_course.png')} alt=""/></div>
+                    <div className="cnt tac"><img src="http://zj-avatar.img-cn-beijing.aliyuncs.com/aca10273cd43f5da08f9499b1628707a1276848079.png@100p" alt=""/></div>
                 </div>
 
                 <div className="signup">

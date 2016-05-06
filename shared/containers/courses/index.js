@@ -7,6 +7,7 @@ import { toTimeString, image, avatar, getRequestTypes } from '../../libs/utils';
 import OperateAction from '../../actions/OperateAction';
 import CommerceAction from '../../actions/CommerceAction';
 import CoursesAction from '../../actions/CoursesAction';
+import UserAction from '../../actions/UserAction';
 import CourseExam from '../../components/CourseExam.jsx';
 import Dialog from '../../components/Dialog.jsx';
 
@@ -53,9 +54,12 @@ class Course extends Component {
 
         this.loadExamData(nextProps);
 
-        // 购买免费课程成功后，需要更新private
+        // 1. 购买免费课程成功后，需要更新private
+        // 2. 登录成功后，也要更新private
         let payType = getRequestTypes(CommerceAction.PAY);
-        if (nextProps.action.type === payType.success) {
+        let userType = getRequestTypes(UserAction.USER); // 因登录成功后会发起loadAccount操作，这里无法拦截到登录成功的action，只能选择登录后立马执行的加载账号信息
+        if (nextProps.action.type === payType.success ||
+                nextProps.action.type === userType.request) {
             const courseAction = new CoursesAction();
             nextProps.dispatch( courseAction.loadCoursePrivate(nextProps.params.courseId) );
         }
@@ -170,6 +174,17 @@ class Course extends Component {
     onCloseTipBuy = e => {
         e.preventDefault();
         this.setState({ isShowTipBuy: false });
+    };
+
+    // 课程包购买检查登录态
+    onClickPackageBuy = e => {
+        // 检测登录状态
+        if (!this.isLogin()) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+            this.showLoginDialog();
+            return;
+        }
     };
 
     // 点击立即购买时，
@@ -391,7 +406,7 @@ class Course extends Component {
                                                 <p>《{item.title}》</p>
                                                 <div className="cl">
                                                     <span className="fl">共 {item.items.replace(/,$/, '').split(',').length} 门课</span>
-                                                    <Link className="fr" to='/pay' query={{type: payType.PACKAGE, id: item.id}}>&yen; {item.price}元</Link>
+                                                    <Link className="fr" to='/pay' query={{type: payType.PACKAGE, id: item.id}} onClick={this.onClickPackageBuy}>&yen; {item.price}元</Link>
                                                 </div>
                                             </div>
                                         );
