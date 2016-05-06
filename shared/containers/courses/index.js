@@ -52,6 +52,13 @@ class Course extends Component {
         this.loadNeededData(nextProps);
 
         this.loadExamData(nextProps);
+
+        // 购买免费课程成功后，需要更新private
+        let payType = getRequestTypes(CommerceAction.PAY);
+        if (nextProps.action.type === payType.success) {
+            const courseAction = new CoursesAction();
+            nextProps.dispatch( courseAction.loadCoursePrivate(nextProps.params.courseId) );
+        }
     }
     loadNeededData = props => {
         const {dispatch, params, course, course_private, chapters, students} = props;
