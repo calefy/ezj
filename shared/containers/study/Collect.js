@@ -70,7 +70,7 @@ class Collect extends Component {
                                                 <h6>
                                                     <i className="iconfont icon-user"></i>{item.joined_count}
                                                     {this.state.canceledMap[item.id] ? null :
-                                                        <i className="iconfont icon-likefill fr" onClick={this.onCancelCollect} data-id={item.id} style={{ color: "#af1b40" }}></i>
+                                                        <i className="iconfont icon-likefill fr" onClick={this.onCancelCollect} data-id={item.id} style={{ color: "#af1b40" }} title="点击取消收藏"></i>
                                                     }
                                                 </h6>
                                             </a>
