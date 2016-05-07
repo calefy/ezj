@@ -3,8 +3,10 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 import { payType } from '../../libs/const';
+import { image } from '../../libs/utils';
 import Video from '../../components/Video.jsx';
 import CommerceAction from '../../actions/CommerceAction';
+import CoursesAction from '../../actions/CoursesAction';
 
 if (process.env.BROWSER) {
     require('css/special.css');
@@ -28,6 +30,8 @@ class Cfc extends React.Component {
         //tab_*: '' // 自动适应tab
         videoTryId: video_trys[0].id, // 默认第一个试听视频
         videoTryClicked: false,
+        curBundleId: null, // 要展示的包内容
+        curCourseId: null, // 要展示的课程ID
     };
 
     // 初始加载数据
@@ -78,10 +82,51 @@ class Cfc extends React.Component {
         }
     };
 
+    // 点击模块
+    onClickBundle = e => {
+        e.preventDefault();
+        e.nativeEvent.returnValue = false;
+
+        let bid = e.currentTarget.getAttribute('data-id');
+        if (this.state.curBundleId === bid) {
+            this._setState({ curBundleId: null });
+        } else {
+            this._setState({ curBundleId: bid });
+        }
+    };
+    // 点击查看某门课程详情
+    onClickCourse = e => {
+        e.preventDefault();
+        e.nativeEvent.returnValue = false;
+        let cid = e.currentTarget.getAttribute('data-id');
+        if (this.state.curCourseId === cid) {
+            this._setState({ curCourseId: null });
+        } else {
+            this._setState({ curCourseId: cid });
+            // 发起请求，加载课程数据
+            const {course, chapters} = this.props;
+            if (!(course.data && course.data.id === cid &&
+                        chapters._req && chapters._req.courseId === cid)) {
+                const courseAction = new CoursesAction();
+                this.props.dispatch( courseAction.loadCourseDetail(cid) );
+                this.props.dispatch( courseAction.loadCourseChapters(cid) );
+            }
+        }
+    };
+
+
     render() {
         const { products } = this.props;
         const bundlePre = products.data && products.data[bundle_part_ids[0]] || {};
         const bundleIds = bundle_part_ids.slice(1);
+        const productMap = products.data || {};
+        let curProduct = {};
+        if (this.state.curBundleId) {
+            curProduct = productMap[this.state.curBundleId] || {};
+        }
+
+        let course = this.props.course.data || {};
+        let chapters = this.props.chapters.data && this.props.chapters.data.list || [];
 
         return (
             <div className="special-cfc">
@@ -215,95 +260,97 @@ class Cfc extends React.Component {
                                                         <div className="special-course-bottom"><span>¥1900</span><br /><Link to="#">收起详情</Link></div>
                                                     </div>
                                                 </li>*/}
-                                                <li className="special-cfc-tab2">
+                                                <li className={`special-cfc-tab2 ${this.state.curBundleId === bundleIds[0] ? 'active' : ''}`}
+                                                        data-id={bundleIds[0]}
+                                                        onClick={this.onClickBundle}>
                                                     <h4>模块一</h4>
                                                     <div>
                                                         <div className="special-course-top">企业理财综合知识<br />40课时</div>
-                                                        <div className="special-course-bottom"><span>¥1900</span><br /><Link to="#">展开详情</Link></div>
+                                                        <div className="special-course-bottom"><span className="price">¥1900</span><br /><a href="#">{this.state.curBundleId === bundleIds[0] ? '收起' : '展开'}详情</a></div>
                                                     </div>
                                                 </li>
-                                                <li className="special-cfc-tab3">
+                                                <li className={`special-cfc-tab3 ${this.state.curBundleId === bundleIds[1] ? 'active' : ''}`}
+                                                        data-id={bundleIds[1]}
+                                                        onClick={this.onClickBundle}>
                                                     <h4>模块二</h4>
                                                     <div>
                                                         <div className="special-course-top">企业融资筹划<br />32课时</div>
-                                                        <div className="special-course-bottom"><span>¥1520</span><br /><Link to="#">展开详情</Link></div>
+                                                        <div className="special-course-bottom"><span className="price">¥1520</span><br /><a href="#">{this.state.curBundleId === bundleIds[1] ? '收起' : '展开'}详情</a></div>
                                                     </div>
                                                 </li>
-                                                <li className="special-cfc-tab4">
+                                                <li className={`special-cfc-tab4 ${this.state.curBundleId === bundleIds[2] ? 'active' : ''}`}
+                                                        data-id={bundleIds[2]}
+                                                        onClick={this.onClickBundle}>
                                                     <h4>模块三</h4>
                                                     <div>
                                                         <div className="special-course-top">企业投资筹划<br />48课时</div>
-                                                        <div className="special-course-bottom"><span>¥2280</span><br /><Link to="#">展开详情</Link></div>
+                                                        <div className="special-course-bottom"><span className="price">¥2280</span><br /><a href="#">{this.state.curBundleId === bundleIds[2] ? '收起' : '展开'}详情</a></div>
                                                     </div>
                                                 </li>
                                             </ul>
-                                            <div className="special-cfc-content hide">
+                                            <div className={`special-cfc-content ${this.state.curBundleId ? '' : 'hide'}`}>
                                                 <div className="special-course-arrange bg-white">
                                                     <ul>
                                                         <li>
                                                             <div className="special-arrange-course cl">
-                                                                <dl className="on">
-                                                                    <dt>
-                                                                        <div className="special-arrange-title">企业理财与公司金融综合服务业务</div>
-                                                                        <div className="special-arrange-course-teacher">讲师 :  宋晓恒</div>
-                                                                        <div className="special-arrange-user">学员 : 1852人</div>
-                                                                        <div className="special-arrange-icon"></div>
-                                                                    </dt>
-                                                                    <dd className="cl">
-                                                                        <div className="special-course-left fl">
-                                                                            <img src="" alt="课程图片" />
-                                                                            <ul>
-                                                                                <li>
-                                                                                    <div className="special-arrange-teacher">
-                                                                                        <img src="" alt="宋晓恒" />
-                                                                                        <h5><Link to="">宋晓恒</Link></h5>
-                                                                                        <p>人民大学博士，某大型股份制银行总行私人银行部产品部负责人，理财咨询与培训专家，商...</p>
-                                                                                    </div>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <div className="special-course-right fr">
-                                                                            <h4>课程简介</h4>
-                                                                            <div className="special-course-desc">
-                                                                                <p>　　未来商业银行对公业务的发展方向在哪里，在与企业既有的合作关系的基础上，如何结合现有的“分业监管、混业经营”的监管政策，顺应中国乃至全球的经济发展趋势，在“大资管”时代找到未来的合作重点和可持续发展的创新空间。 　　通过对本课程的学习，希望学员可以认识到国际上的领先银行是如何做到的，启示是什么；银行应如何发挥自身优势，整合行内行外资源；可以为企业提供哪些服务？</p>
-                                                                            </div>
-                                                                            <div className="special-course-content-list">
-                                                                                <dl>
-                                                                                    <dt>第一章 引言</dt>
-                                                                                        <dd><span>1.企业经营中的问题（上）</span></dd>
-                                                                                        <dd><span>2.企业经营中的问题（下）</span></dd>
-                                                                                        <dd><span>3.苏州大方案例（上）</span></dd>
-                                                                                        <dd><span>4.苏州大方案例（中）</span></dd>
-                                                                                        <dd><span>5.苏州大方案例（下）</span></dd>
-                                                                                        <dd><span>6.案例总结</span></dd>
-                                                                                </dl>
-                                                                                <dl>
-                                                                                    <dt>第二章 企业理财</dt>
-                                                                                        <dd><span>1.什么是企业理财</span></dd>
-                                                                                        <dd><span>2.不同角度看企业理财</span></dd>
-                                                                                        <dd><span>3.企业理财的背景与现状总述</span></dd>
-                                                                                        <dd><span>4.案例——中国离大农业有多远</span></dd>
-                                                                                        <dd><span>5.企业融资创新</span></dd>
-                                                                                        <dd><span>6.中小企业融资创新</span></dd>
-                                                                                        <dd><span>7.企业理财的环境</span></dd>
-                                                                                        <dd><span>8.企业客户营商环境的变化</span></dd>
-                                                                                        <dd><span>9.企业客户金融服务需求的变化</span></dd>
-                                                                                        <dd><span>10.企业“走出去”的金融业务需求</span></dd>
-                                                                                        <dd><span>11.企业理财的目标</span></dd>
-                                                                                        <dd><span>12.企业理财的原则（上）</span></dd>
-                                                                                        <dd><span>13.企业理财的原则（中）</span></dd>
-                                                                                        <dd><span>14.企业理财的原则（下）</span></dd>
-                                                                                        <dd><span>15.国外企业理财的发展</span></dd>
-                                                                                        <dd><span>16.企业理财的国内发展</span></dd>
-                                                                                </dl>
-                                                                                
-                                                                            </div>
-                                                                            <div className="cl">
-                                                                                <Link to="" className="btn">了解详情</Link> 
-                                                                            </div>
-                                                                        </div>
-                                                                    </dd>
-                                                                </dl>
+                                                                {(curProduct.courses || []).map((item, index) => {
+                                                                    return (
+                                                                        <dl key={index} className={this.state.curCourseId === item.id ? 'on' : ''}>
+                                                                            <dt data-id={item.id} onClick={this.onClickCourse}>
+                                                                                <div className="special-arrange-title">{item.course_name}</div>
+                                                                                <div className="special-arrange-course-teacher hide">讲师 :  </div>
+                                                                                <div className="special-arrange-user">学员 : {item.student_count}人</div>
+                                                                                <div className="special-arrange-icon"></div>
+                                                                            </dt>
+                                                                            {this.state.curCourseId === item.id ?
+                                                                                this.props.course.isFetching || this.props.chapters.isFetching ?
+                                                                                    <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
+                                                                                    :
+                                                                                    <dd className="cl">
+                                                                                        <div className="special-course-left fl">
+                                                                                            <img src={image(course.course_picture, 'nc')} alt="" />
+                                                                                            <ul>
+                                                                                                {(course.lecturers || []).map((lecturer, i) => {
+                                                                                                    return <li key={i}>
+                                                                                                                <div className="special-arrange-teacher">
+                                                                                                                    <img src={image(lecturer.lecturer_avatar, 'nl')} alt={lecturer.lecturer_name} />
+                                                                                                                    <h5><a href={`/lecturers/${lecturer.id}`} target="_blank">{lecturer.lecturer_name}</a></h5>
+                                                                                                                    <div dangerouslySetInnerHTML={{__html: lecturer.lecturer_introduction}}></div>
+                                                                                                                </div>
+                                                                                                            </li>
+                                                                                                })}
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                        <div className="special-course-right fr">
+                                                                                            <h4>课程简介</h4>
+                                                                                            <div className="special-course-desc">
+                                                                                                <div dangerouslySetInnerHTML={{__html: course.course_outlines}}></div>
+                                                                                            </div>
+                                                                                            <div className="special-course-content-list">
+                                                                                                <dl>
+                                                                                                    {chapters.map((item, index) => {
+                                                                                                        let isRoot = item.rgt - item.lft > 1;
+                                                                                                        return isRoot ?
+                                                                                                            <dt key={index}>
+                                                                                                                {item.chapter_name}
+                                                                                                            </dt>
+                                                                                                            :
+                                                                                                            <dd key={index}>
+                                                                                                                {item.chapter_name}
+                                                                                                            </dd>
+                                                                                                    })}
+                                                                                                </dl>
+                                                                                            </div>
+                                                                                            <div className="cl">
+                                                                                                <a href={`/courses/${course.id}`} target="_blank" className="btn">了解详情</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </dd>
+                                                                                : null
+                                                                            }
+                                                                        </dl>
+                                                                    );
+                                                                })}
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -520,4 +567,6 @@ class Cfc extends React.Component {
 
 module.exports = connect( state => ({
     products: state.products,
+    course: state.course,
+    chapters: state.chapters,
 }) )(Cfc);

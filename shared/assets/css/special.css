@@ -64,7 +64,7 @@ h5.h5-title{background: url(../img/cfc-h5.png) no-repeat left center;text-align:
 .special-cfc-tabs .active a{ background: url(../img/cfc-arrow.png) no-repeat 90px -16px #ffbc52;}
 .special-cfc-tabs .special-course-top,.special-cfc-tabs .special-course-bottom{ line-height: 40px; font-size: 14px;}
 .special-cfc-tabs .special-course-top{ margin:20px 0 40px; }
-.special-cfc-tabs .special-course-bottom span{ font-size: 16px; color: #b01b40;}
+.special-cfc-tabs .special-course-bottom .price{ font-size: 16px; color: #b01b40;}
 .special-cfc-tabs .cfc-qj a{padding:0; background: none; text-decoration: underline; color: #00ffee;}
 .special-cfc-tabs .cfc-qj .special-course-top{padding-bottom:15px;margin-bottom:15px;border-bottom:1px dashed rgba(255,255,255,0.36);}
 
@@ -99,14 +99,15 @@ h5.h5-title{background: url(../img/cfc-h5.png) no-repeat left center;text-align:
 .special-course-right h4,.special-course-right p,.special-arrange-teacher h5{ color: #505050;}
 .special-course-right h4,.special-arrange-teacher h5{ font-size: 0.875em;}
 .special-course-right>div.cl{ margin:30px 0 0; position: relative;}
-.special-course-right p{ font-size: 0.75em; line-height: 24px; height: 92px; margin:0 0 30px;}
 .special-course-right a{ float: right; font-size: 0.75em; padding: 8px 0px; border-radius: 6px; width: 112px; text-align: center;}
 .special-course-right .price{ color: #b01c40; font-size: 1.5em;}
+.special-course-desc div{ font-size: 0.75em; line-height: 24px; height: 92px; margin:0 0 30px;}
 
+.special-arrange-teacher{max-height:190px;overflow:hidden;}
 .special-arrange-teacher img{ float: left; margin:0 10px 0 0; width: 74px; height: 74px;}
-.special-arrange-teacher p{ font-size: 0.75em; line-height: 20px; color: #202020;}
+.special-arrange-teacher div{ font-size: 0.75em; line-height: 20px; color: #202020;}
 
-.special-course-content-list{ /*max-height: 300px;*/ min-height: 408px; overflow: auto; /*margin:30px 0;*/}
+.special-course-content-list{ max-height: 300px; min-height: 408px; overflow: auto;}
 .special-course-content-list dt,.special-course-content-list dd{ padding:10px; line-height: 20px;}
 .special-course-content-list dt{ background: #808080; color: #fff; font-size: 0.875em;}
 .special-course-content-list dd{ background: #fff; color: #505050; font-size: 0.75em; border-bottom: 1px solid #e5e6e6;}
