@@ -112,7 +112,7 @@ class Account extends React.Component {
                                         );
                                     })
                                     :
-                                    <p className="no-data">暂无充值记录</p>
+                                    <p className="no-data">暂无消费记录</p>
                                 }
                             </ul>
                         }
