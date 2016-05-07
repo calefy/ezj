@@ -13,10 +13,21 @@ if (process.env.BROWSER) {
 const bundle = { id: '6119033148207529984', price: 5700 };
 const bundle_part_ids = ['6119033148161392640', '6119033145351208960', '6119033145393152000', '6119033147871985664']
 
+const video_trys = [
+    {id: '23A927AB00D7BF2B9C33DC5901307461', name: '新常态下的资产配置'},
+    {id: 'A8A854B628EE505F9C33DC5901307461', name: '税收筹划、避税、偷逃漏税的定义'},
+    {id: '16356A80489893559C33DC5901307461', name: '热点分析——“新国九条” 的亮点解读'},
+    {id: 'A1C7A131899C96619C33DC5901307461', name: '企业融资概览（中）'},
+    {id: '87088627020221F99C33DC5901307461', name: '不同行业企业价值评估—人寿保险'},
+    {id: 'FFB7DE887FC3969B9C33DC5901307461', name: '商业模式与生存基础'},
+];
+
 class Cfc extends React.Component {
 
     state = {
         //tab_*: '' // 自动适应tab
+        videoTryId: video_trys[0].id, // 默认第一个试听视频
+        videoTryClicked: false,
     };
 
     // 初始加载数据
@@ -54,6 +65,17 @@ class Cfc extends React.Component {
         let prefix = 'tab_';
         let key = e.currentTarget.getAttribute('data-key');
         this._setState({ [prefix + key]: e.currentTarget.getAttribute('data-value') });
+    };
+
+    // 点击试听视频
+    onClickTryVideo = e => {
+        e.preventDefault();
+        e.nativeEvent.returnValue = false;
+
+        let vid = e.currentTarget.getAttribute('data-id');
+        if (this.state.videoTryId !== vid) {
+            this._setState({ videoTryId: vid, videoTryClicked: true });
+        }
     };
 
     render() {
@@ -304,21 +326,39 @@ class Cfc extends React.Component {
                             <div className="special-cnt cl">
                                 <dl className="fl">
                                     <dt>模块一 : 企业理财综合知识</dt>
-                                    <dd><Link to="#" className="active">试听: 《新常态下的资产配置》</Link></dd>
-                                    <dd><Link to="#">试听: 《税收筹划、避税、偷逃漏税的定义》</Link></dd>
+                                    {video_trys.slice(0, 2).map((item, index) => {
+                                        return  <dd key={index}>
+                                                    <a href="#"
+                                                        className={this.state.videoTryId === item.id ? 'active' : ''}
+                                                        data-id={item.id}
+                                                        onClick={this.onClickTryVideo}>试听: 《{item.name}》</a>
+                                                </dd>
+                                    })}
                                     <dt>模块二 : 企业融资筹划</dt>
-                                    <dd><Link to="#">试听: 《热点分析——“新国九条” 的亮点解读》</Link></dd>
-                                    <dd><Link to="#">试听: 《企业融资概览（中）》</Link></dd>
+                                    {video_trys.slice(2, 4).map((item, index) => {
+                                        return  <dd key={index}>
+                                                    <a href="#"
+                                                        className={this.state.videoTryId === item.id ? 'active' : ''}
+                                                        data-id={item.id}
+                                                        onClick={this.onClickTryVideo}>试听: 《{item.name}》</a>
+                                                </dd>
+                                    })}
                                     <dt>模块三 : 企业投资筹划</dt>
-                                    <dd><Link to="#">试听: 《不同行业企业价值评估—人寿保险》</Link></dd>
-                                    <dd><Link to="#">试听: 《商业模式与生存基础》</Link></dd>
+                                    {video_trys.slice(4, 6).map((item, index) => {
+                                        return  <dd key={index}>
+                                                    <a href="#"
+                                                        className={this.state.videoTryId === item.id ? 'active' : ''}
+                                                        data-id={item.id}
+                                                        onClick={this.onClickTryVideo}>试听: 《{item.name}》</a>
+                                                </dd>
+                                    })}
                                 </dl>
                                 <div className="player fl">
                                     <Video
-                                        videoId="23A927AB00D7BF2B9C33DC5901307461"
+                                        videoId={this.state.videoTryId}
                                         width={656}
                                         height={360}
-                                        autoPlay={false}
+                                        autoPlay={this.state.videoTryClicked}
                                     />
                                 </div>
                             </div>
