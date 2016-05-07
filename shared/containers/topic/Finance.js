@@ -9,9 +9,6 @@ if (process.env.BROWSER) {
 }
 
 
-const offlineCourse = {id: 123, price: 2580};
-const onlineCourse = {id: 9705, price: 580};
-
 class Finance extends React.Component {
 
     state = {
@@ -40,7 +37,7 @@ class Finance extends React.Component {
                     <div className="container">
                         <div className="special-finance-info">
                             <h1>《全球互联网金融商业模式及案例深度解析》<small>清华大学五道口金融学院旗下品牌紫荆教育出品</small></h1>
-                            <p><b>北京面授班</b><i>¥{offlineCourse.price}</i> ｜ <b>视频点播班</b><i>¥{onlineCourse.price}</i><a href="#intro" className="fr">查看详情</a></p>
+                            <p><b>北京面授班</b><i>¥2580</i> ｜ <b>视频点播班</b><i>¥580</i><a href="#intro" className="fr">查看详情</a></p>
                         </div>
                     </div>
                 </div>
@@ -270,7 +267,7 @@ class Finance extends React.Component {
                                             </tr>
                                             <tr>
                                                 <td><a href="#sign">报名现场面授班</a></td>
-                                                <td><a href={`/courses/${onlineCourse.id}`} target="_blank" className="special-finance-jump">购买视频点播班</a></td>
+                                                <td><a href="/courses/9593" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -306,7 +303,7 @@ class Finance extends React.Component {
                                             </tr>
                                             <tr>
                                                 <td><a href="#sign">报名现场面授班</a></td>
-                                                <td><a href={`/courses/${onlineCourse.id}`} target="_blank" className="special-finance-jump">购买视频点播班</a></td>
+                                                <td><a href="/courses/9705" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -338,7 +335,7 @@ class Finance extends React.Component {
                                             </tr>
                                             <tr>
                                                 <td><a href="#sign">报名现场面授班</a></td>
-                                                <td><a href={`/courses/${onlineCourse.id}`} target="_blank" className="special-finance-jump">购买视频点播班</a></td>
+                                                <td><a href="/courses/9706" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -366,7 +363,7 @@ class Finance extends React.Component {
                                             </tr>
                                             <tr>
                                                 <td><a href="#sign">报名现场面授班</a></td>
-                                                <td><a href={`/courses/${onlineCourse.id}`} target="_blank" className="special-finance-jump">购买视频点播班</a></td>
+                                                <td><a href="/courses/9707" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -394,7 +391,7 @@ class Finance extends React.Component {
                                             </tr>
                                             <tr>
                                                 <td><a href="#sign">报名现场面授班</a></td>
-                                                <td><a href={`/courses/${onlineCourse.id}`} target="_blank" className="special-finance-jump">购买视频点播班</a></td>
+                                                <td><a href="/courses/9708" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -417,7 +414,7 @@ class Finance extends React.Component {
                                             </tr>
                                             <tr>
                                                 <td><a href="#sign">报名现场面授班</a></td>
-                                                <td><a href={`/courses/${onlineCourse.id}`} target="_blank" className="special-finance-jump">购买视频点播班</a></td>
+                                                <td><a href="/courses/9710" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -445,7 +442,7 @@ class Finance extends React.Component {
                                             </tr>
                                             <tr>
                                                 <td><a href="#sign">报名现场面授班</a></td>
-                                                <td><a href={`/courses/${onlineCourse.id}`} target="_blank" className="special-finance-jump">购买视频点播班</a></td>
+                                                <td><a href="/courses/9712" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -469,7 +466,7 @@ class Finance extends React.Component {
                                             </tr>
                                             <tr>
                                                 <td><a href="#sign">报名现场面授班</a></td>
-                                                <td><a href={`/courses/${onlineCourse.id}`} target="_blank" className="special-finance-jump">购买视频点播班</a></td>
+                                                <td><a href="/courses/9711" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
