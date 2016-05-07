@@ -120,9 +120,8 @@ h5.h5-title{background: url(../img/cfc-h5.png) no-repeat left center;text-align:
 .special-cfc-try{ margin:40px 0;}
 .special-cfc-try dl{width:540px;height:360px;font-weight:bold;color:#fff;border-right:4px solid #ffd800;background-color:#3ea7d4;}
 .special-cfc-try dt{line-height:49px;padding-left:37px;background-color:#005e89;}
-.special-cfc-try dd{font-size:0.875em;line-height:20px;padding-left:60px;margin:10px 0;}
-.special-cfc-try a{color:#fff;}
-.special-cfc-try a.active{display:block;color:#ffd800;background:url(../img/icon_arrow_yellow_left.png) no-repeat 100% 50%;}
+.special-cfc-try a{display:block;font-size:0.875em;line-height:20px;padding-left:60px;margin:10px 0;color:#fff;}
+.special-cfc-try a.active{color:#ffd800;background:url(../img/icon_arrow_yellow_left.png) no-repeat 100% 50%;}
 .special-cfc-try .player{width:656px;height:360px;background-color:#000;}
 .special-cfc-try .player p{color:#999;font-size:0.875em;text-align:center;line-height:300px;}
 
