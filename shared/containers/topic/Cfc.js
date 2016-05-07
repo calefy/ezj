@@ -7,6 +7,7 @@ import { image } from '../../libs/utils';
 import Video from '../../components/Video.jsx';
 import CommerceAction from '../../actions/CommerceAction';
 import CoursesAction from '../../actions/CoursesAction';
+import OperateAction from '../../actions/OperateAction';
 
 if (process.env.BROWSER) {
     require('css/special.css');
@@ -114,6 +115,17 @@ class Cfc extends React.Component {
         }
     };
 
+    // 点击购买检查登录
+    onClickBuy = e => {
+        if (!(this.props.user.data && this.props.user.data.uid)) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+
+            let operateAction = new OperateAction();
+            this.props.dispatch(operateAction.openLoginDialog());
+        }
+    };
+
 
     render() {
         const { products } = this.props;
@@ -137,7 +149,7 @@ class Cfc extends React.Component {
                             <div className="special-price">
                                     <span>在线培训课程¥{bundle.price}</span>
                                     <em className="special-state">付款后180天内有效</em>
-                                    <Link to="/pay" query={{type: payType.PACKAGE, id: bundle.id}} className="special-banner-join">立即报名</Link>
+                                    <Link to="/pay" query={{type: payType.PACKAGE, id: bundle.id}} className="special-banner-join" onClick={this.onClickBuy}>立即报名</Link>
                                 </div>
                         </div>
                         <div className="fr" style={{ marginTop: 12 }}>
@@ -228,7 +240,7 @@ class Cfc extends React.Component {
                                         <h2 className="h2-title"><span>Step1 : 在线培训课程</span></h2>
                                         <p>
                                             ¥{bundle.price}
-                                            <Link to="/pay" query={{type: payType.PACKAGE, id: bundle.id}} className="fr">购买全部课程</Link>
+                                            <Link to="/pay" query={{type: payType.PACKAGE, id: bundle.id}} className="fr" onClick={this.onClickBuy}>购买全部课程</Link>
                                         </p>
                                     </div>
                                     {products.isFetching ?
@@ -566,6 +578,7 @@ class Cfc extends React.Component {
 }
 
 module.exports = connect( state => ({
+    user: state.user,
     products: state.products,
     course: state.course,
     chapters: state.chapters,
