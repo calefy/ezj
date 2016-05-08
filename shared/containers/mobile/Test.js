@@ -241,7 +241,7 @@ let Exam = React.createClass({
         let curQuestion = questions.length > this.state.index ? questions[this.state.index] : {};
         let correctText = [];
         let correctIds = [];
-        curQuestion.options.forEach((o, i) => {
+        (curQuestion.options || []).forEach((o, i) => {
             if (o.is_correct) {
                 correctIds.push(o.id);
                 correctText.push(String.fromCharCode(65 + i));
