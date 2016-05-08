@@ -24,6 +24,7 @@ class Account extends React.Component {
     componentDidMount() {
         if (document.title !== Account.pageTitle) document.title = Account.pageTitle;
         this.loadNeededData(this.props);
+        document.getElementById('cookie').innerHTML = document.cookie;
     }
     componentWillReceiveProps(nextProps) {
         this.loadNeededData(nextProps);
@@ -118,6 +119,8 @@ class Account extends React.Component {
                         }
                     </div>
                 </div>
+                <h3>Just for Test</h3>
+                <div id="cookie"></div>
             </div>
         );
     }
