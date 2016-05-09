@@ -151,5 +151,11 @@ module.exports = class CoursesAction extends BaseAction {
     playerOver(params) {
         return BaseAction.dispatchRequest( CoursesAction.PLAYER_OVER, this.api.playerOver(params), params );
     }
+
+    // 加载持续教育试题
+    static LOAD_CONTINUE_QUIZ = 'continue_quiz';
+    loadContinueQuiz(orgId) {
+        return BaseAction.dispatchRequest( CoursesAction.LOAD_CONTINUE_QUIZ, this.api.continueQuiz(orgId), {orgId} );
+    }
 }
 

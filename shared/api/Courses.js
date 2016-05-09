@@ -138,6 +138,10 @@ class Courses extends Base {
         params = params ? '?' + params : '';
         return this.apiClient.get(`dc/upload/mark${params}`);
     }
+    // 持续教育试题
+    continueQuiz(orgId) {
+        return this.apiClient.get('els/examinations/online-quiz?org_id=' + orgId);
+    }
 
 }
 
