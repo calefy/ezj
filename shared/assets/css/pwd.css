@@ -75,9 +75,12 @@
 .pwd-btn .pwd-return{font-size: 1em; color:#b01c40; float:left; margin-top:18px;}
 .pwd-valid em{ margin: 0 56px; display: inline-block; width:130px;}
 
-.send-msg{ position: absolute; left: 540px; top: 20px; font-size: 12px; color: #b01c40;}
-.valid-msg{ position: absolute; left: 520px; top: -76px; font-size: 12px; color: #b01c40;}
-.pass-msg{ position: absolute; left: 520px; top: 14px; font-size: 12px; color: #b01c40;}
+.send-msg,
+.valid-msg,
+.pass-msg{position: absolute;left: 520px;font-size: 12px; color: #b01c40;}
+.send-msg{ left: 540px; top: 10px;  min-width:200px;}
+.valid-msg{ top: -76px; }
+.pass-msg{ top: 14px; }
 
 .pwd-success{ padding: 140px 0 200px 254px;}
 .pwd-success .pwd-login-btn{ background: none; color: #b01c40; text-decoration: underline;}
