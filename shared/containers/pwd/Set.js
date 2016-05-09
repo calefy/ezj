@@ -88,7 +88,7 @@ let PwdSet = React.createClass({
                                 maxLength: 20,
                                 matchRegexp: /^[a-zA-Z\d,\.'"_-]*[a-zA-Z,\.'"_-]+[a-zA-Z\d,\.'"_-]*$/
                             }}
-                            validationError="请输入6-20个字符，必须包含字母、标点符号，可以包含数字"
+                            validationError="请输入6-20个字符，必须包含字母、标点符号，可包含数字"
                         />
 
                         <FormsyText

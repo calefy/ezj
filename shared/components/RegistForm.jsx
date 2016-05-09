@@ -151,15 +151,9 @@ let RegistForm = React.createClass({
                             <i className="iconfont icon-name"></i>昵称
                         </span>
                     }
-                    validations={{
-                        minLength: 4,
-                        maxLength: 30
-                    }}
-                    validationErrors={{
-                        minLength: "昵称为4-30个字符",
-                        maxLength: "昵称为4-30个字符"
-                    }}
                     required
+                    validations={{matchRegexp: /^[\u4e00-\u9fa5_a-zA-Z\d\-]{4,30}$/}}
+                    validationError="请输入4-30个字符，支持中英文、数字、“_”或减号"
                 />
 
                 <FormsyText
@@ -170,16 +164,14 @@ let RegistForm = React.createClass({
                             <i className="iconfont icon-pass"></i>密码
                         </span>
                     }
-                    validations={{
-                        minLength: 6,
-                        maxLength: 20
-                    }}
-                    validationErrors={{
-                        minLength: "密码为6-20个字符",
-                        maxLength: "密码为6-20个字符"
-                    }}
                     type="password"
                     required
+                    validations={{
+                        minLength: 6,
+                        maxLength: 20,
+                        matchRegexp: /^[a-zA-Z\d,\.'"_-]*[a-zA-Z,\.'"_-]+[a-zA-Z\d,\.'"_-]*$/
+                    }}
+                    validationError="请输入6-20个字母、数字及标点符号，不可仅数字"
                 />
 
                 <dl className="formsy-list cl">
