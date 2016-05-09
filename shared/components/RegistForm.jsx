@@ -108,7 +108,7 @@ let RegistForm = React.createClass({
         e.nativeEvent.returnValue = false;
 
         let key = e.currentTarget.getAttribute('data-key');
-        this.props.onShowProtocol(key);
+        this.props.onTurnToProtocol(key);
     },
 
     render: function() {
@@ -187,9 +187,9 @@ let RegistForm = React.createClass({
                     <dt className="fl">
                         <FormsyCheckbox value="1" defaultChecked={true} name="secret" required />
                         同意
-                        <a href="#" data-key="private" onClick={this.onShowProtocol}>隐私政策</a>
+                        <a href="#" data-key="private" onClick={this.onShowProtocol}>《隐私政策》</a>
                         和
-                        <a href="#" data-key="pay" onClick={this.onShowProtocol}>用户付费协议</a>
+                        <a href="#" data-key="pay" onClick={this.onShowProtocol}>《用户付费协议》</a>
                     </dt>
                     <dd className="fr text-error">
                         {this.state.error}

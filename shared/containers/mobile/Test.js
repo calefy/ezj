@@ -83,6 +83,20 @@ let Exam = React.createClass({
                 this.refs[key].checked = false;
             }
         }
+        // 因設置checked后，defaultChecked失效，因此需要js動態設置一次
+        setTimeout(() => {
+            let questions = this.props.examination.data.questions || [];
+            let curQuestion = questions[this.state.index];
+            let answerIds = this.answers[curQuestion.question.id];
+            if (answerIds && answerIds.length) {
+                for (let key in this.refs) {
+                    if (/answer_/.test(key) &&
+                        answerIds.indexOf(this.refs[key].value) >= 0 && !this.refs[key].checked) {
+                        this.refs[key].checked = true;
+                    }
+                }
+            }
+        }, 10);
     },
     onClickBegin: function(e) {
         e.preventDefault();
@@ -231,7 +245,7 @@ let Exam = React.createClass({
         // 遍历问题，统计单选、多选数量
         let singleNumber = 0, multiNumber = 0;
         questions.forEach(item => {
-            if (item.examination_question_is_multi) {
+            if (item.question.examination_question_is_multi) {
                 multiNumber++;
             } else {
                 singleNumber++;

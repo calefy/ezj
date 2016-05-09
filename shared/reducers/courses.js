@@ -99,7 +99,15 @@ export function students(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_STUDENT, state, action);
 }
 export function examination(state, action) {
-    return reducerRequest(CoursesAction.LOAD_COURSE_EXAM, state, action);
+    let orgType = getRequestTypes(CoursesAction.LOAD_CONTINUE_QUIZ); // 持续教育试卷
+    switch(action.type) {
+        case orgType.request:
+        case orgType.success:
+        case orgType.failure:
+            return reducerRequest(CoursesAction.LOAD_CONTINUE_QUIZ, state, action);
+        default:
+            return reducerRequest(CoursesAction.LOAD_COURSE_EXAM, state, action);
+    }
 }
 export function sheet(state, action) {
     let sheetType = getRequestTypes(CoursesAction.LOAD_SHEET);

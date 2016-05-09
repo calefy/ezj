@@ -9,7 +9,6 @@ if (process.env.BROWSER) {
     require('css/special.css');
 }
 
-const examId = 4608; // 测试用10道题试卷：3926
 const organizationId = 4958; // 持续教育
 
 let Exam = React.createClass({
@@ -18,13 +17,8 @@ let Exam = React.createClass({
         fetchData: function({dispatch, params={}, location={}, apiClient}) {
             const courseAction = new CoursesAction({ apiClient });
             let arr = [
-                dispatch( courseAction.loadExamination(examId) ),
+                dispatch( courseAction.loadContinueQuiz(organizationId) ),
             ];
-            //if (params.sheetId) {
-            //    arr.push(
-            //        dispatch( courseAction.loadSheet(params.sheetId) )
-            //    );
-            //}
             return Promise.all(arr);
         }
     },
@@ -60,8 +54,8 @@ let Exam = React.createClass({
     loadNeededData: function(props) {
         const { examination, sheet, params } = props;
         const courseAction = new CoursesAction();
-        if (!examination._req || examination._req.examId !== examId) {
-            props.dispatch(courseAction.loadExamination(examId));
+        if (!examination._req || examination._req.orgId !== organizationId) {
+            props.dispatch(courseAction.loadContinueQuiz(organizationId));
         }
     },
 
@@ -83,6 +77,20 @@ let Exam = React.createClass({
                 this.refs[key].checked = false;
             }
         }
+        // 因設置checked后，defaultChecked失效，因此需要js動態設置一次
+        setTimeout(() => {
+            let questions = this.props.examination.data.questions || [];
+            let curQuestion = questions[this.state.index];
+            let answerIds = this.answers[curQuestion.question.id];
+            if (answerIds && answerIds.length) {
+                for (let key in this.refs) {
+                    if (/answer_/.test(key) &&
+                        answerIds.indexOf(this.refs[key].value) >= 0 && !this.refs[key].checked) {
+                        this.refs[key].checked = true;
+                    }
+                }
+            }
+        }, 10);
     },
     onClickBegin: function(e) {
         e.preventDefault();
@@ -157,7 +165,7 @@ let Exam = React.createClass({
 
         let model = {
             organization_id: organizationId,
-            examination_id: examId,
+            examination_id: this.props.examination.data.examination.id,
             sheet_cost_time: Math.ceil(((new Date()).getTime() - this.time) / 1000),
             answers: [],
         };
@@ -219,7 +227,7 @@ let Exam = React.createClass({
         // 遍历问题，统计单选、多选数量
         let singleNumber = 0, multiNumber = 0;
         questions.forEach(item => {
-            if (item.examination_question_is_multi) {
+            if (item.question.examination_question_is_multi) {
                 multiNumber++;
             } else {
                 singleNumber++;
@@ -229,7 +237,7 @@ let Exam = React.createClass({
         let curQuestion = questions.length > this.state.index ? questions[this.state.index] : {};
         let correctText = [];
         let correctIds = [];
-        curQuestion.options.forEach((o, i) => {
+        (curQuestion.options || []).forEach((o, i) => {
             if (o.is_correct) {
                 correctIds.push(o.id);
                 correctText.push(String.fromCharCode(65 + i));
