@@ -38,6 +38,10 @@ let PwdSend = React.createClass({
         this.loadingSubmitButton();
     },
 
+    onFormChange: function() {
+        this.setState({ errorMsg: null });
+    },
+
     render() {
         return (
             <div>
@@ -62,14 +66,19 @@ let PwdSend = React.createClass({
                         onValid={this.enableSubmitButton}
                         onInvalid={this.disableSubmitButton}
                         onValidSubmit={this.handleSubmit}
+                        onChange={this.onFormChange}
                         className="pwd-form pwd-write-form"
                     >
+                        {/*用正则简单检测手机号或邮箱*/}
                         <FormsyText
                             name="contact"
                             ref="contact"
                             title="输入注册手机号/邮箱"
                             type="text"
-                            required />
+                            required
+                            validations={{matchRegexp: /^(1[3-9]\d{9}|\w+@\w+(\.\w+)+)$/}}
+                            validationError="请输入手机号或邮箱"
+                        />
                         <div className="pop-btn pwd-btn">
                             <button type="submit" disabled={!this.canSubmit()}
                                 className={ this.canSubmit() ? '' : 'disabled'} >{this.isSubmitLoading() ? '验证码发送中...' : '发送验证码'}</button>
