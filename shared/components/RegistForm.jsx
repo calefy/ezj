@@ -71,28 +71,8 @@ let RegistForm = React.createClass({
      * 提交注册
      */
     onRegist: function(model) {
-        let regex= /^[-A-Za-z0-9_\u554A-\u9C52]+$/;
-        let passregex=/^[a-zA-Z0-9,.'"]*$/;
-        let nickname=model.nickname;
-        let password=model.password;
-        if(!nickname.match(regex)){
-            this.setState({ error: '昵称只能包含中英文、数字、"_"和减号' });
-        }
-        else{
-            if(/^\d+$/.test(password)){
-                this.setState({ error: '密码不能为纯数字' });
-            }
-            else{
-                if(!password.match(passregex)){
-                    this.setState({ error: '密码只能包含字母、数字及标点符号' });
-                }
-                else{
-                    this.props.onRegist(model);
-                    this.loadingSubmitButton();
-                }
-            }
-        }
-        
+        this.props.onRegist(model);
+        this.loadingSubmitButton();
     },
 
     /**
@@ -104,6 +84,9 @@ let RegistForm = React.createClass({
         this.props.onTurnToLogin();
     },
 
+    /**
+     * 倒计时停止时调用
+     */
     onFinishedCountDown: function() {
         this.setState(Object.assign({}, this.state, {countDown: false}));
     },
@@ -138,7 +121,7 @@ let RegistForm = React.createClass({
                         </span>
                     }
                     sendButton={(this.refs.contact && this.refs.contact.isValid() && !this.state.countDown) ? '' : 'yz-btn' }
-                    valid={this.state.countDown ? <span><CountDown onFinished={this.onFinishedCountDown}/>s后重新发送</span> : '发送验证码'}
+                    valid={this.state.countDown ? <span><CountDown onFinished={this.onFinishedCountDown}/>s后重发</span> : '发送验证码'}
                     required
                     validClick={this.onSendValidCode}
                 />
