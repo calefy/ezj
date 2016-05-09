@@ -24,17 +24,22 @@ let RegistForm = React.createClass({
         onSendValidCode: PropTypes.func.isRequired, // 发送验证码
         onRegist: PropTypes.func.isRequired, // 实际注册
         onTurnToLogin: PropTypes.func.isRequired, // 转换到登录
+        onTurnToProtocol: PropTypes.func.isRequired, // 打开某个协议
     },
 
     getInitialState: function() {
         return {
+            isSended: false, // 是否发送过验证码
             countDown: false, // 是否显示倒计时
             error: '' // 全局错误
         };
     },
+    _setState: function(obj) {
+        this.setState(Object.assign({}, this.state, obj || {}))
+    },
 
     /**
-     * 处理数据结果
+     * 处理数据结果，由父级组件调用
      * @param type 数据类型
      * @param data 要处理的数据对象
      */
@@ -45,14 +50,14 @@ let RegistForm = React.createClass({
                 this.refs.form.updateInputsWithError({
                     contact: res.message || '发送验证码失败'
                 });
-                this.setState(Object.assign({}, this.state, { countDown: false }));
+                this._setState( { countDown: false } );
             }
         }
         // 注册响应
         if (type === RegistForm.RESPONSE_REGIST) {
             if (!res.data) {
                 this.enableSubmitButton();
-                this.setState({ error: res.message || '注册失败' });
+                this._setState({ error: res.message || '注册失败' });
             }
         }
     },
@@ -63,7 +68,7 @@ let RegistForm = React.createClass({
     onSendValidCode: function() {
         if (this.refs.contact.isValid()) {
             this.props.onSendValidCode( trim(this.refs.contact.getValue()) );
-            this.setState({ countDown: true });
+            this._setState({ countDown: true, isSended: true });
         }
     },
 
@@ -71,28 +76,8 @@ let RegistForm = React.createClass({
      * 提交注册
      */
     onRegist: function(model) {
-        let regex= /^[-A-Za-z0-9_\u554A-\u9C52]+$/;
-        let passregex=/^[a-zA-Z0-9,.'"]*$/;
-        let nickname=model.nickname;
-        let password=model.password;
-        if(!nickname.match(regex)){
-            this.setState({ error: '昵称只能包含中英文、数字、"_"和减号' });
-        }
-        else{
-            if(/^\d+$/.test(password)){
-                this.setState({ error: '密码不能为纯数字' });
-            }
-            else{
-                if(!password.match(passregex)){
-                    this.setState({ error: '密码只能包含字母、数字及标点符号' });
-                }
-                else{
-                    this.props.onRegist(model);
-                    this.loadingSubmitButton();
-                }
-            }
-        }
-        
+        this.props.onRegist(model);
+        this.loadingSubmitButton();
     },
 
     /**
@@ -104,8 +89,26 @@ let RegistForm = React.createClass({
         this.props.onTurnToLogin();
     },
 
+    /**
+     * 倒计时停止时调用
+     */
     onFinishedCountDown: function() {
-        this.setState(Object.assign({}, this.state, {countDown: false}));
+        this._setState({countDown: false});
+    },
+
+    /**
+     * 内容变更时清空error信息
+     */
+    onFormChange: function() {
+        this._setState({ error: null })
+    },
+
+    onShowProtocol: function(e) {
+        e.preventDefault();
+        e.nativeEvent.returnValue = false;
+
+        let key = e.currentTarget.getAttribute('data-key');
+        this.props.onShowProtocol(key);
     },
 
     render: function() {
@@ -116,6 +119,7 @@ let RegistForm = React.createClass({
                 onValid={this.enableSubmitButton}
                 onInvalid={this.disableSubmitButton}
                 onValidSubmit={this.onRegist}
+                onChange={this.onFormChange}
             >
                 <FormsyText
                     ref="contact"
@@ -127,6 +131,8 @@ let RegistForm = React.createClass({
                         </span>
                     }
                     required
+                    validations={{matchRegexp: /^(1[3-9]\d{9}|\w+@\w+(\.\w+)+)$/}}
+                    validationError="请输入手机号或邮箱"
                 />
 
                 <FormsyValid
@@ -138,7 +144,10 @@ let RegistForm = React.createClass({
                         </span>
                     }
                     sendButton={(this.refs.contact && this.refs.contact.isValid() && !this.state.countDown) ? '' : 'yz-btn' }
-                    valid={this.state.countDown ? <span><CountDown onFinished={this.onFinishedCountDown}/>s后重新发送</span> : '发送验证码'}
+                    valid={this.state.countDown ?
+                            <span><CountDown onFinished={this.onFinishedCountDown}/>s后重发</span>
+                            :
+                            (this.state.isSended ? '重发' : '发送') + '验证码'}
                     required
                     validClick={this.onSendValidCode}
                 />
@@ -151,15 +160,9 @@ let RegistForm = React.createClass({
                             <i className="iconfont icon-name"></i>昵称
                         </span>
                     }
-                    validations={{
-                        minLength: 4,
-                        maxLength: 30
-                    }}
-                    validationErrors={{
-                        minLength: "昵称为4-30个字符",
-                        maxLength: "昵称为4-30个字符"
-                    }}
                     required
+                    validations={{matchRegexp: /^[\u4e00-\u9fa5_a-zA-Z\d\-]{4,30}$/}}
+                    validationError="请输入4-30个字符，支持中英文、数字、“_”或减号"
                 />
 
                 <FormsyText
@@ -170,21 +173,23 @@ let RegistForm = React.createClass({
                             <i className="iconfont icon-pass"></i>密码
                         </span>
                     }
-                    validations={{
-                        minLength: 6,
-                        maxLength: 20
-                    }}
-                    validationErrors={{
-                        minLength: "密码为6-20个字符",
-                        maxLength: "密码为6-20个字符"
-                    }}
                     type="password"
                     required
+                    validations={{
+                        minLength: 6,
+                        maxLength: 20,
+                        matchRegexp: /^[a-zA-Z\d,\.'"_-]*[a-zA-Z,\.'"_-]+[a-zA-Z\d,\.'"_-]*$/
+                    }}
+                    validationError="请输入6-20个字母、数字及标点符号，不可仅数字"
                 />
 
                 <dl className="formsy-list cl">
                     <dt className="fl">
-                        <FormsyCheckbox value="1" defaultChecked={true} name="secret" required /> 同意<Link to="">隐私政策</Link>
+                        <FormsyCheckbox value="1" defaultChecked={true} name="secret" required />
+                        同意
+                        <a href="#" data-key="private" onClick={this.onShowProtocol}>隐私政策</a>
+                        和
+                        <a href="#" data-key="pay" onClick={this.onShowProtocol}>用户付费协议</a>
                     </dt>
                     <dd className="fr text-error">
                         {this.state.error}

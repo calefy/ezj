@@ -69,15 +69,14 @@ let Passwd = React.createClass({
                     name="new_password"
                     type="password"
                     title="新密码"
+                    placeholder="6-20个字符，只能包含字母、数字及标点符号"
                     required
                     validations={{
                         minLength: 6,
-                        maxLength: 20
+                        maxLength: 20,
+                        matchRegexp: /^[a-zA-Z\d,\.'"_-]*[a-zA-Z,\.'"_-]+[a-zA-Z\d,\.'"_-]*$/
                     }}
-                    validationErrors={{
-                        minLength: '请输入6-20个字符',
-                        maxLength: '请输入6-20个字符'
-                    }}
+                    validationError="请输入6-20个字符，必须包含字母、标点符号，可包含数字"
                 />
                 <FormsyText
                     name="repeat_password"

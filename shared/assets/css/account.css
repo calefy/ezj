@@ -24,7 +24,7 @@
 .account-pwd .formsy-list label{ line-height: 44px; display: inline-block; width: 70px; text-align: right; float: left; font-weight: normal; margin-right: 10px;}
 .account-pwd .formsy-input{ display: inline-block; float: left; margin:0;}
 .account-pwd .formsy-input{ width: 254px;}
-.account-pwd .validation-error{ position:static; margin: 15px 0 0 15px; display: block; float: left;}
+.account-pwd .validation-error{left:370px;top:15px;min-width:350px;}
 .account-pwd button { width: 120px; margin: 20px 0; padding: 14px 20px; border-radius: 4px; color: #fff}
 
 .password-strength { width: 120px; float: right; line-height: 28px; margin: 0 0 0 20px;}
