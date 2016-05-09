@@ -357,9 +357,11 @@ class Play extends Component {
                                 {course_private.isFetching ?
                                     <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
                                     :
-                                    params.chapterId ?
+                                    params.chapterId ? // 如果无该值，页面会被跳转到第一节
                                         <p className="text-error">
-                                            <Link to="/pay" query={{type: payType.COURSE, id: course.id}} className="btn">请先购买课程</Link>
+                                            {priv.is_purchased && priv.is_expired ?
+                                                <span>抱歉，您的课程有效期已截止，请您重新购买学习该课程。<br/>您的学习数据将会被保存。<br/><br/></span> : null}
+                                            <Link to="/pay" query={{type: payType.COURSE, id: course.id}} className="btn">请购买课程</Link>
                                         </p>
                                         : null
                                 }
