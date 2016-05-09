@@ -68,7 +68,7 @@
 .pwd-form .formsy-input{ width: 300px;}
 .pwd-write-form{ margin-top: 90px !important; position: relative;}
 .pwd-write-form .formsy-list{ margin: 0 0 48px;}
-.pwd-write-form .validation-error{ font-size: 14px;top:18px;left:520px; }
+.pwd-write-form .validation-error{ font-size: 14px;top:18px;left:520px;width:350px; }
 .pop-btn{ position: relative;}
 .pwd-btn button{ margin: 0 0 0 170px; width:326px;}
 .pwd-btn a{ color: #fff; font-size: 0.875em; display: block;}

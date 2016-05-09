@@ -37,7 +37,7 @@ let PwdSet = React.createClass({
         const { dispatch, location } = this.props;
 
         const operateAction = new OperateAction();
-        this.props.dispatch(this.operateAction.setPwd(
+        dispatch(operateAction.setPwd(
                     location.query.contact,
                     location.query.code,
                     model.newpass));
