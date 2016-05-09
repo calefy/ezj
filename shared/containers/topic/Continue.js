@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux'
 
 import CoursesAction from '../../actions/CoursesAction';
+import OperateAction from '../../actions/OperateAction';
 
 if (process.env.BROWSER) {
     require('css/special.css');
@@ -27,6 +28,17 @@ class Continue extends React.Component {
             Continue.fetchData(this.props);
         }
     }
+
+    // 点击检查登录
+    onClickToLogin = e => {
+        if (!(this.props.user.data && this.props.user.data.uid)) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+
+            let operateAction = new OperateAction();
+            this.props.dispatch(operateAction.openLoginDialog());
+        }
+    };
 
     render() {
         const { course_category, category_courses } = this.props;
@@ -140,7 +152,7 @@ class Continue extends React.Component {
                             <h2>在线答题</h2><div><span className="diamond"></span><span className="diamond"></span><span className="diamond"></span></div>
                         </div>
                         <p>学员可以通过答题获得学分，每套试卷为50道题，均为单选题型。每套试卷答题准确率在70%以上可获得5学分，最多可获得20学分。每次答题，系统将随机为学员分配一套试卷。</p>
-                        <Link to="/topic/continue/test" className="btn">开始答题</Link>
+                        <Link to="/topic/continue/test" className="btn" onClick={this.onClickToLogin}>开始答题</Link>
                     </div>
                 </div>
             </div>
@@ -149,6 +161,7 @@ class Continue extends React.Component {
 }
 
 module.exports = connect( state => ({
+    user: state.user,
     course_category: state.course_category,
     category_courses: state.category_courses,
 }) )(Continue);

@@ -115,8 +115,8 @@ class Cfc extends React.Component {
         }
     };
 
-    // 点击购买检查登录
-    onClickBuy = e => {
+    // 点击检查登录
+    onClickToLogin = e => {
         if (!(this.props.user.data && this.props.user.data.uid)) {
             e.preventDefault();
             e.nativeEvent.returnValue = false;
@@ -125,7 +125,6 @@ class Cfc extends React.Component {
             this.props.dispatch(operateAction.openLoginDialog());
         }
     };
-
 
     render() {
         const { products } = this.props;
@@ -149,7 +148,7 @@ class Cfc extends React.Component {
                             <div className="special-price">
                                     <span>在线培训课程¥{bundle.price}</span>
                                     <em className="special-state">付款后180天内有效</em>
-                                    <Link to="/pay" query={{type: payType.PACKAGE, id: bundle.id}} className="special-banner-join" onClick={this.onClickBuy}>立即报名</Link>
+                                    <Link to="/pay" query={{type: payType.PACKAGE, id: bundle.id}} className="special-banner-join" onClick={this.onClickToLogin}>立即报名</Link>
                                 </div>
                         </div>
                         <div className="fr" style={{ marginTop: 12 }}>
@@ -240,7 +239,7 @@ class Cfc extends React.Component {
                                         <h2 className="h2-title"><span>Step1 : 在线培训课程</span></h2>
                                         <p>
                                             ¥{bundle.price}
-                                            <Link to="/pay" query={{type: payType.PACKAGE, id: bundle.id}} className="fr" onClick={this.onClickBuy}>购买全部课程</Link>
+                                            <Link to="/pay" query={{type: payType.PACKAGE, id: bundle.id}} className="fr" onClick={this.onClickToLogin}>购买全部课程</Link>
                                         </p>
                                     </div>
                                     {products.isFetching ?
@@ -567,7 +566,7 @@ class Cfc extends React.Component {
                             <h3>持续教育</h3>
                             <div>
                                 <p>CFC持续教育学习平台</p>
-                                <Link to="/topic/continue" title="" target="_blank">点击进入</Link>
+                                <Link to="/topic/continue" target="_blank">点击进入</Link>
                             </div>
                         </div>
                     </div>

@@ -342,6 +342,7 @@ module.exports = {
         // cfc持续教育test
         {
             path: 'topic/continue/test',
+            onEnter: needLogin,
             getComponent(location, cb) {
                 require.ensure([], require => {
                     cb(null, require('./containers/topic/Test'));
