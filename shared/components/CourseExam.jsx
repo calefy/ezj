@@ -54,7 +54,6 @@ class CourseExam extends Component {
         }
 
         // 因設置checked后，defaultChecked失效，因此需要js動態設置一次
-        let _this = this;
         setTimeout(() => {
             let questions = this.props.examination.questions || [];
             let curQuestion = questions[this.state.index];
