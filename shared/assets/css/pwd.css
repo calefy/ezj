@@ -68,7 +68,7 @@
 .pwd-form .formsy-input{ width: 300px;}
 .pwd-write-form{ margin-top: 90px !important; position: relative;}
 .pwd-write-form .formsy-list{ margin: 0 0 48px;}
-.pwd-write-form .validation-error{ font-size: 14px;top:18px;left:520px;width:350px; }
+.pwd-write-form .validation-error{ font-size: 14px;top:18px;left:520px;width:400px; }
 .pop-btn{ position: relative;}
 .pwd-btn button{ margin: 0 0 0 170px; width:326px;}
 .pwd-btn a{ color: #fff; font-size: 0.875em; display: block;}
@@ -77,8 +77,8 @@
 
 .send-msg,
 .valid-msg,
-.pass-msg{position: absolute;left: 520px;font-size: 12px; color: #b01c40;}
-.send-msg{ left: 540px; top: 10px;  min-width:200px;}
+.pass-msg{position: absolute;left: 520px; color: #b01c40; min-width:200px;}
+.send-msg{ left: 540px; top: 10px; }
 .valid-msg{ top: -76px; }
 .pass-msg{ top: 14px; }
 

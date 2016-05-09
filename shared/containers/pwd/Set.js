@@ -46,7 +46,7 @@ let PwdSet = React.createClass({
     },
 
     onFormChange: function() {
-        this.setState({ errorMsg: '', passerrorMsg: '' });
+        this.setState({ errorMsg: '' });
     },
 
     render() {
@@ -70,6 +70,7 @@ let PwdSet = React.createClass({
                 </div>
                 <div className="content" ref="pwd">
                     <Formsy.Form
+                        ref="form"
                         onValid={this.enableSubmitButton}
                         onInvalid={this.disableSubmitButton}
                         onValidSubmit={this.handleSubmit}
@@ -83,10 +84,13 @@ let PwdSet = React.createClass({
                             type="password"
                             required
                             validations={{
-                                matchRegexp: /^[a-zA-Z0-9,\.'"_-]{6,20}$/
+                                minLength: 6,
+                                maxLength: 20,
+                                matchRegexp: /^[a-zA-Z\d,\.'"_-]*[a-zA-Z,\.'"_-]+[a-zA-Z\d,\.'"_-]*$/
                             }}
-                            validationError="请输入6-20个字符，只能包含字母、数字及标点符号"
+                            validationError="请输入6-20个字符，必须包含字母、标点符号，可以包含数字"
                         />
+
                         <FormsyText
                             name="repass"
                             title="重复密码"
@@ -95,7 +99,7 @@ let PwdSet = React.createClass({
                             validations="equalsField:newpass"
                             validationErrors={{ equalsField: '两次输入密码不一致' }}
                         />
-                        <p className="pass-msg">{this.state.passerrorMsg}</p>
+
                         <div className="pop-btn pwd-btn">
                             <button type="submit" disabled={!this.canSubmit()}
                                 className={ this.canSubmit() ? '' : 'disabled'} >{this.isSubmitLoading() ? '修改中...' : '完成'}</button>
