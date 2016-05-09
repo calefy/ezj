@@ -28,13 +28,17 @@ let RegistForm = React.createClass({
 
     getInitialState: function() {
         return {
+            isSended: false, // 是否发送过验证码
             countDown: false, // 是否显示倒计时
             error: '' // 全局错误
         };
     },
+    _setState: function(obj) {
+        this.setState(Object.assign({}, this.state, obj || {}))
+    },
 
     /**
-     * 处理数据结果
+     * 处理数据结果，由父级组件调用
      * @param type 数据类型
      * @param data 要处理的数据对象
      */
@@ -45,14 +49,14 @@ let RegistForm = React.createClass({
                 this.refs.form.updateInputsWithError({
                     contact: res.message || '发送验证码失败'
                 });
-                this.setState(Object.assign({}, this.state, { countDown: false }));
+                this._setState( { countDown: false } );
             }
         }
         // 注册响应
         if (type === RegistForm.RESPONSE_REGIST) {
             if (!res.data) {
                 this.enableSubmitButton();
-                this.setState({ error: res.message || '注册失败' });
+                this._setState({ error: res.message || '注册失败' });
             }
         }
     },
@@ -63,7 +67,7 @@ let RegistForm = React.createClass({
     onSendValidCode: function() {
         if (this.refs.contact.isValid()) {
             this.props.onSendValidCode( trim(this.refs.contact.getValue()) );
-            this.setState({ countDown: true });
+            this._setState({ countDown: true, isSended: true });
         }
     },
 
@@ -121,7 +125,10 @@ let RegistForm = React.createClass({
                         </span>
                     }
                     sendButton={(this.refs.contact && this.refs.contact.isValid() && !this.state.countDown) ? '' : 'yz-btn' }
-                    valid={this.state.countDown ? <span><CountDown onFinished={this.onFinishedCountDown}/>s后重发</span> : '发送验证码'}
+                    valid={this.state.countDown ?
+                            <span><CountDown onFinished={this.onFinishedCountDown}/>s后重发</span>
+                            :
+                            (this.state.isSended ? '重发' : '发送') + '验证码'}
                     required
                     validClick={this.onSendValidCode}
                 />
