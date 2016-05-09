@@ -24,6 +24,7 @@ let RegistForm = React.createClass({
         onSendValidCode: PropTypes.func.isRequired, // 发送验证码
         onRegist: PropTypes.func.isRequired, // 实际注册
         onTurnToLogin: PropTypes.func.isRequired, // 转换到登录
+        onTurnToProtocol: PropTypes.func.isRequired, // 打开某个协议
     },
 
     getInitialState: function() {
@@ -92,7 +93,22 @@ let RegistForm = React.createClass({
      * 倒计时停止时调用
      */
     onFinishedCountDown: function() {
-        this.setState(Object.assign({}, this.state, {countDown: false}));
+        this._setState({countDown: false});
+    },
+
+    /**
+     * 内容变更时清空error信息
+     */
+    onFormChange: function() {
+        this._setState({ error: null })
+    },
+
+    onShowProtocol: function(e) {
+        e.preventDefault();
+        e.nativeEvent.returnValue = false;
+
+        let key = e.currentTarget.getAttribute('data-key');
+        this.props.onShowProtocol(key);
     },
 
     render: function() {
@@ -103,6 +119,7 @@ let RegistForm = React.createClass({
                 onValid={this.enableSubmitButton}
                 onInvalid={this.disableSubmitButton}
                 onValidSubmit={this.onRegist}
+                onChange={this.onFormChange}
             >
                 <FormsyText
                     ref="contact"
@@ -114,6 +131,8 @@ let RegistForm = React.createClass({
                         </span>
                     }
                     required
+                    validations={{matchRegexp: /^(1[3-9]\d{9}|\w+@\w+(\.\w+)+)$/}}
+                    validationError="请输入手机号或邮箱"
                 />
 
                 <FormsyValid
@@ -166,7 +185,11 @@ let RegistForm = React.createClass({
 
                 <dl className="formsy-list cl">
                     <dt className="fl">
-                        <FormsyCheckbox value="1" defaultChecked={true} name="secret" required /> 同意<Link to="">隐私政策</Link>
+                        <FormsyCheckbox value="1" defaultChecked={true} name="secret" required />
+                        同意
+                        <a href="#" data-key="private" onClick={this.onShowProtocol}>隐私政策</a>
+                        和
+                        <a href="#" data-key="pay" onClick={this.onShowProtocol}>用户付费协议</a>
                     </dt>
                     <dd className="fr text-error">
                         {this.state.error}

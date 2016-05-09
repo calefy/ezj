@@ -22,6 +22,7 @@ class Header extends Component {
         showMenu: false,  // 头像下来菜单显示与否
         showDialog: false,  // 显示登录注册框
         dialogType: 'login', // 对话框类型
+        showProtocol: null, // 显示协议：pay/private
     };
 
     userAction = new UserAction();
@@ -109,6 +110,9 @@ class Header extends Component {
     };
     handleRegist = (data) => {
         this.props.dispatch(this.userAction.reg(data));
+    };
+    handleShowProtocol = type => {
+        this._setState({ showProtocol: type });
     };
 
     /**
@@ -211,6 +215,7 @@ class Header extends Component {
                             onSendValidCode={this.handleSendValidCode}
                             onRegist={this.handleRegist}
                             onTurnToLogin={this.handleTurnToLogin}
+                            onShowProtocol ={this.handleShowProtocol}
                         />
                     }
                 </Dialog>
