@@ -179,7 +179,7 @@ class CourseExam extends Component {
         // 遍历问题，统计单选、多选数量
         let singleNumber = 0, multiNumber = 0;
         questions.forEach(item => {
-            if (item.examination_question_is_multi) {
+            if (item.question.examination_question_is_multi) {
                 multiNumber++;
             } else {
                 singleNumber++;
