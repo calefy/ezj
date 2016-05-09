@@ -84,7 +84,7 @@ module.exports = {
             */
         },
         {
-            path: 'courses/:courseId/chapters/:chapterId',
+            path: 'courses/:courseId/chapters(/:chapterId)',
             getComponent(location, cb) {
                 require.ensure([], require => {
                     cb(null, require('./containers/Play'));

@@ -145,7 +145,11 @@ class All extends Component {
                                     :
                                     <p>
                                         {item.latest_play.chapter_name || item.latest_play.video_name}
-                                        <a href={`/courses/${item.id}/chapters/${item.latest_play.chapter_id}`} className="fr" target="_blank">继续学习</a>
+                                        {item.progress >= 100 ?
+                                            <a href={`/courses/${item.id}/chapters`} className="fr" target="_blank">重新学习</a>
+                                            :
+                                            <a href={`/courses/${item.id}/chapters/${item.latest_play.chapter_id}`} className="fr" target="_blank">继续学习</a>
+                                        }
                                     </p>
                             }
                         </div>
@@ -182,31 +186,25 @@ class All extends Component {
                     <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
                     :
                     courses.length ?
-                        <ul className="my-all-courses">
-                            {this.renderList(courses)}
-                        </ul>
+                        <div>
+                            <ul className="my-all-courses">
+                                {this.renderList(courses)}
+                            </ul>
+                            {total <= courses.length ?
+                                <div className="tac"> <button type="button" disabled className="btn disabled">没有更多了</button> </div>
+                                :
+                                this.state.loading ?
+                                    <div className="loading">加载中...</div>
+                                    :
+                                    <div className="tac">
+                                        <Link className="btn" to="/study/all" query={Object.assign({}, query, {page: (query.page || 1) + 1})} onClick={this.loadMore}>加载更多</Link>
+                                    </div>
+                            }
+                        </div>
                         :
                         <p className="no-data">暂无数据记录</p>
                 }
 
-                {total > courses.length ?
-                    this.state.loading ?
-                        <div className="loading">加载中...</div>
-                        :
-                        <div className="tac">
-                            <Link className="btn" to="/study/all" query={Object.assign({}, query, {page: (query.page || 1) + 1})} onClick={this.loadMore}>加载更多</Link>
-                            <br/>
-                            <br/>
-                            <br/>
-                        </div>
-                    :
-                    <div className="tac">
-                        <button type="button" disabled className="btn disabled">没有更多了</button>
-                        <br/>
-                        <br/>
-                        <br/>
-                    </div>
-                }
             </div>
         );
     }

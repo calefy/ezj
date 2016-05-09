@@ -1,4 +1,4 @@
-.study-center-right{ width:948px; font-size: 0.875em;}
+.study-center-right{ width:948px; font-size: 0.875em; min-height:300px; padding-bottom: 50px;}
 
 .my-all-courses{ padding: 20px 0 50px;}
 .my-all-courses li{ padding: 0 20px 20px; position: relative;}

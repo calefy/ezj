@@ -18,7 +18,7 @@ let PwdValid = React.createClass({
         return {
             errorSendMsg: null,
             errorCodeMsg: null,
-            countDown: false
+            countDown: true, // 因第一步是“发送验证码”,因此这里开始就是倒计时
         };
     },
 
@@ -46,11 +46,11 @@ let PwdValid = React.createClass({
         const codeType = getRequestTypes(OperateAction.CODE);
         switch(nextProps.action.type) {
             case sendType.failure:
-                this.setState({ errorSendMsg: nextProps.action.error.message || '发送验证码失败' });
+                this._setState({ errorSendMsg: nextProps.action.error.message || '发送验证码失败', countDown: false });
                 break;
             case codeType.failure:
-                this.enableSubmitButton(); // 由下行代码代替生效
-                this.setState({ errorCodeMsg: nextProps.action.error.message || '验证账号失败', countDown: true });
+                this._setState({ errorCodeMsg: nextProps.action.error.message || '验证账号失败' });
+                setTimeout((() => { this.enableSubmitButton(); }).bind(this), 0);
                 break;
             case codeType.success:
                 let contact = this.props.location.query.contact;
@@ -97,12 +97,13 @@ let PwdValid = React.createClass({
                         onInvalid={this.disableSubmitButton}
                         onValidSubmit={this.handleSubmit}
                         onChange = {this.onFormChange}
-                        className="pwd-form pwd-write-form">
+                        className="pwd-form pwd-write-form"
+                    >
                         <div className="formsy-list pwd-valid">
                             验证码已发送至您的
                             {/@/.test(locationPath) ? "邮箱" : "手机"}
                             <em ref="contact">{locationPath}</em>
-                            <button className={`valid-btn ${this.state.countDown ? 'yz-btn' : ''}`} onClick={this.sendEmail}>{this.state.countDown ? <span><CountDown onFinished={this.onFinishedCountDown} />s后重新发送</span> : '再次发送验证码'}</button>
+                            <button type="button" className={`btn ${this.state.countDown ? 'disabled' : ''}`} onClick={this.sendEmail}>{this.state.countDown ? <span><CountDown onFinished={this.onFinishedCountDown} />s后重发</span> : '重发验证码'}</button>
                             <p className="send-msg">{this.state.errorSendMsg}</p>
                         </div>
                         <FormsyText 

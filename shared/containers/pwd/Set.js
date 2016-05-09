@@ -17,12 +17,7 @@ let PwdSet = React.createClass({
     getInitialState: function() {
         return {
             errorMsg: null,
-            passerrorMsg: null
         };
-    },
-
-    componentDidMount: function() {
-        this.operateAction = new OperateAction();
     },
 
     componentWillReceiveProps: function(nextProps) {
@@ -39,24 +34,17 @@ let PwdSet = React.createClass({
     },
 
     handleSubmit: function(model) {
-        const contact = this.props.location.query.contact;
-        const code = this.props.location.query.code;
-        let passregex=/^[a-zA-Z0-9,.'"]*$/;
-        let newpass=model.newpass;
-        if(/^\d+$/.test(newpass)){
-            this.setState({ passerrorMsg: '密码不能为纯数字' });
-        }
-        else{
-            if(!newpass.match(passregex)){
-                this.setState({ passerrorMsg: '密码只能包含字母、数字及标点符号' });
-            }
-            else{
-                this.props.dispatch(this.operateAction.setPwd( contact, code, model.newpass));
-                this.loadingSubmitButton();
-            }
-        }
-        
+        const { dispatch, location } = this.props;
+
+        const operateAction = new OperateAction();
+        dispatch(operateAction.setPwd(
+                    location.query.contact,
+                    location.query.code,
+                    model.newpass));
+
+        this.loadingSubmitButton();
     },
+
     onFormChange: function() {
         this.setState({ errorMsg: '', passerrorMsg: '' });
     },
@@ -86,21 +74,19 @@ let PwdSet = React.createClass({
                         onInvalid={this.disableSubmitButton}
                         onValidSubmit={this.handleSubmit}
                         onChange={this.onFormChange}
-                        className="pwd-form pwd-write-form">
+                        className="pwd-form pwd-write-form"
+                    >
                         <FormsyText
                             name="newpass"
                             title="新密码"
-                            placeholder="6-10个字符，只能包含字母、数字及标点符号"
+                            placeholder="6-20个字符，只能包含字母、数字及标点符号"
                             type="password"
+                            required
                             validations={{
-                                minLength: 6,
-                                maxLength: 20
+                                matchRegexp: /^[a-zA-Z0-9,\.'"_-]{6,20}$/
                             }}
-                            validationErrors={{
-                                minLength: '请输入6-20个字符',
-                                maxLength: '请输入6-20个字符'
-                            }}
-                            required />
+                            validationError="请输入6-20个字符，只能包含字母、数字及标点符号"
+                        />
                         <FormsyText
                             name="repass"
                             title="重复密码"
