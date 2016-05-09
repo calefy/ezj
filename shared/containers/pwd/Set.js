@@ -96,6 +96,7 @@ let PwdSet = React.createClass({
                             title="重复密码"
                             placeholder="重复输入密码"
                             type="password"
+                            required
                             validations="equalsField:newpass"
                             validationErrors={{ equalsField: '两次输入密码不一致' }}
                         />
