@@ -95,21 +95,25 @@ class All extends Component {
         let now = new Date();
         let ret = [];
 
+        let getExpireStr = d => {
+            let r = d;
+            if (r) {
+                let t = new Date(r.replace('-', '/'));
+                if (t.getTime() < now.getTime()) {
+                    r = '已过期';
+                } else {
+                    r = '有效期至' + r.split(' ')[0];
+                }
+            }
+            return r;
+        };
+
         each(list, (item, index) => {
             let isPackage = item.type == 2;
             let isLearning = !!item.latest_play;
 
             let timeStr = this.getTimeString(new Date((item.last_study_time || item.purchase_time) * 1000), now, ret);
-            let expireStr = item.expiring_date;
-            if (expireStr) {
-                let t = new Date(expireStr.replace('-', '/'));
-                if (t.getTime() < now.getTime()) {
-                    expireStr = '已过期';
-                } else {
-                    expireStr = '有效期至' + expireStr;
-                }
-            }
-
+            let expireStr = getExpireStr(item.expiring_date);
 
             ret.push(
                 <li className="cl" key={index}>
@@ -132,6 +136,7 @@ class All extends Component {
                                         <p key={i}>
                                             {c.title}
                                             <a href={`/courses/${c.id}`} className="fr" target="_blank">查看</a>
+                                            {c.expiring_date ? <em className="fr">{getExpireStr(c.expiring_date)}</em> : null}
                                         </p>
                                     );
                                 })
