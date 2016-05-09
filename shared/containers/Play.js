@@ -21,12 +21,15 @@ class Play extends Component {
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
         const courseAction = new CoursesAction({ apiClient });
-        return Promise.all([
+        let arr = [
             dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
             dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
             dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
-            dispatch( courseAction.loadChapterPpts(params.chapterId) ), // 章节PPT
-        ]);
+        ];
+        if (params.chapterId) {
+            arr.push( dispatch( courseAction.loadChapterPpts(params.chapterId) ) ); // 章节PPT
+        }
+        return Promise.all(arr);
     }
 
     state = {
@@ -42,6 +45,19 @@ class Play extends Component {
     currentVideoId = null;
 
     componentDidMount() {
+        const {params, chapters}  = this.props;
+        // 如果没有指定章节ID，并且又取得了章节数据，跳转到第一节
+        if (!params.chapterId &&
+                (params.courseId === (chapters._req && chapters._req.courseId) && chapters.data)) {
+            let list = chapters.data.list || [];
+            for (let i=0, len=list.length; i < len; i++) {
+                if (list[i].rgt - list[i].lft === 1) {
+                    this.props.history.push(`/courses/${params.courseId}/chapters/${list[i].id}`);
+                    return;
+                }
+            }
+        }
+
         this.loadNeededData(this.props);
         // 因flash初始化之前无法获取对象，因此需要延迟执行
         setTimeout(this.jdugeSize.bind(this), 300);
@@ -91,7 +107,7 @@ class Play extends Component {
             props.dispatch( courseAction.loadCourseChapters(params.courseId) );
         }
         // 章节ppt
-        if (params.chapterId != (ppts._req && ppts._req.chapterId)) {
+        if (params.chapterId && params.chapterId != (ppts._req && ppts._req.chapterId)) {
             props.dispatch( courseAction.loadChapterPpts(params.chapterId) );
         }
     };
@@ -280,11 +296,12 @@ class Play extends Component {
         });
         if (lastRoot) chapterLevel.push({ root: lastRoot, leaves: lastLeaves });
         // 当前章节
-        let chapter = chapterMap[params.chapterId] || {};
+        let chapter = params.chapterId && chapterMap[params.chapterId] || {};
         // 是否允许播放
-        let canPlay = course.course_price == 0 || chapter.free_trial_status || (priv.is_purchased && !priv.is_expired);
+        let canPlay = (course.course_price == 0 || chapter.free_trial_status || (priv.is_purchased && !priv.is_expired)) &&
+                        chapter.video;
         // 当前章节进度
-        let curProgress = progress[params.chapterId] && progress[params.chapterId].chapter_progress || 0;
+        let curProgress = params.chapterId && progress[params.chapterId] && progress[params.chapterId].chapter_progress || 0;
 
         this.currentVideoId = chapter.video && chapter.video.id || null;
 
@@ -340,9 +357,11 @@ class Play extends Component {
                                 {course_private.isFetching ?
                                     <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
                                     :
-                                    <p className="text-error">
-                                        <Link to="/pay" query={{type: payType.COURSE, id: course.id}} className="btn">请先购买课程</Link>
-                                    </p>
+                                    params.chapterId ?
+                                        <p className="text-error">
+                                            <Link to="/pay" query={{type: payType.COURSE, id: course.id}} className="btn">请先购买课程</Link>
+                                        </p>
+                                        : null
                                 }
                             </div>
                         }
