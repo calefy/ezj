@@ -62,8 +62,12 @@ let SignUp = React.createClass({
                         this.refs.unipayForm.submit();
                     }
                 } else {
-                    alert('报名成功！');
-                    nextProps.history.push('/account/orders');
+                    if (!(this.props.user.data && this.props.user.data.uid)) {
+                        alert("报名成功！ 请登录紫荆账户。\n新用户请使用报名信息登录：\n  用户名：您报名的邮箱 \n  密码：您报名手机号后6位 \n为了您的账号安全，请登录后修改密码。");
+                    } else {
+                        alert('报名成功！');
+                        nextProps.history.push('/account/orders');
+                    }
                 }
                 break;
             case types.failure:
@@ -123,9 +127,10 @@ let SignUp = React.createClass({
         // 显示登录
         if (!(this.props.user.data && this.props.user.data.uid)) {
             setTimeout(function() {
-                alert('请登录后，在“个人中心->消费记录”中查看支付情况');
+                alert("报名成功！ 请登录紫荆账户。\n新用户请使用报名信息登录：\n  用户名：您报名的邮箱 \n  密码：您报名手机号后6位 \n为了您的账号安全，请登录后修改密码。");
             }, 10);
         } else {
+            alert('报名成功！');
             this.props.history.push('/account/orders');
         }
     },
