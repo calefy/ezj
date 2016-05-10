@@ -68,7 +68,7 @@
 
 /*学位项目分类页面*/
 .classify-right .page-competitive>div{box-shadow: none;}
-.page-competitive{background-color:rgba(255,255,255,0.49);}
+.page-competitive{background-color:rgba(255,255,255,0.49);background-color:#fff\0;}
 .page-competitive p{line-height: 18px;margin: 15px 0;}
 .page-competitive h2{font-size: 28px;padding: 50px 0 30px;text-align: center;}
 .page-competitive h3{font-size: 20px;margin-bottom:25px;}
