@@ -63,6 +63,7 @@ let SignUp = React.createClass({
                     }
                 } else {
                     alert('报名成功！');
+                    nextProps.history.push('/account/orders');
                 }
                 break;
             case types.failure:
@@ -118,7 +119,15 @@ let SignUp = React.createClass({
     onClosePayConfirm: function(e) {
         e && e.preventDefault();
         this._setState({ showPayConfirm: false });
-        this.props.history.push('/account/orders');
+
+        // 显示登录
+        if (!(this.props.user.data && this.props.user.data.uid)) {
+            setTimeout(function() {
+                alert('请登录后，在“个人中心->消费记录”中查看支付情况');
+            }, 10);
+        } else {
+            this.props.history.push('/account/orders');
+        }
     },
 
     // 提交

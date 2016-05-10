@@ -233,6 +233,7 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .special-finance-join .join-phone{ margin: 10px 0;}
 .special-finance-join h4{ line-height: 45px; color: #ffffff; padding: 0 0 0 24px; background: url(../img/red-head.png) no-repeat center;}
 .special-finance-join h4 em{ margin: 0 0 0 150px; font-size: 0.875em;}
+.special-finance-join .pop h4{ color: #3a3a3a; background:#eff0ef; }
 
 .join-erwei{ overflow: hidden; width: 700px; margin: 50px auto;}
 .join-erwei-phone p{ color:#b01c40; font-size: 14px; margin:0 0 10px; text-align: center;}
