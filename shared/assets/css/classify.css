@@ -27,6 +27,7 @@
 .classify-title p{ line-height: 2.2; font-size: 0.875em; margin: 20px 0 0 20px;}
 
 .classify-h4{ padding:0 20px; line-height: 40px; border-bottom: 1px solid #d74468; font-weight: normal;}
+.classify-h4 .btn{margin-top: 5px;}
 .classify-teacher-list{ padding:10px 40px 6px;}
 .classify-teacher-list li{ margin: 0 0 10px; float: left}
 .classify-teacher-list li:after{content:""; clear: both; display: block;}

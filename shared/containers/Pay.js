@@ -241,7 +241,7 @@ let Pay = React.createClass({
                         </div>
                         */}
                         <button type="submit" className={`btn ${this.canSubmit() ? '' : 'disabled'}`} disabled={!this.canSubmit()}>{this.isSubmitLoading() ? '结算中...' : '去结算'}</button>
-                        <p className="pay-valid-date">付款后{type == payType.COURSE ? 90 : 180}天内有效</p>
+                        <p className="pay-valid-date">{course.id && course.course_open_status !== 1 ? '付款后，完全上线之日起90天内有效' : <span>付款后{type == payType.COURSE ? 90 : 180}天内有效</span>}</p>
                     </div>
                 </div>
                 </Formsy.Form>

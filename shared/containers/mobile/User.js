@@ -36,10 +36,10 @@ class Account extends React.Component {
         if (!account._req) {
             props.dispatch( commerceAction.loadAccount() );
         }
-        if (recharges._req && (recharges._req.page !== query.page || recharges._req['per-page'] !== query['per-page'])) {
+        if (!recharges._req || (recharges._req.page !== query.page || recharges._req['per-page'] !== query['per-page'])) {
             props.dispatch( commerceAction.loadRecharges(query) );
         }
-        if (orders._req && (orders._req.page !== query.page || orders._req['per-page'] !== query['per-page'])) {
+        if (!orders._req || (orders._req.page !== query.page || orders._req['per-page'] !== query['per-page'])) {
             props.dispatch( commerceAction.loadRecharges(query) );
         }
     };

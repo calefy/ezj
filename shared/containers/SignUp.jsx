@@ -62,7 +62,12 @@ let SignUp = React.createClass({
                         this.refs.unipayForm.submit();
                     }
                 } else {
-                    alert('报名成功！');
+                    if (!(this.props.user.data && this.props.user.data.uid)) {
+                        alert("报名成功！ 请登录紫荆账户。\n新用户请使用报名信息登录：\n  用户名：您报名的邮箱 \n  密码：您报名手机号后6位 \n为了您的账号安全，请登录后修改密码。");
+                    } else {
+                        alert('报名成功！');
+                        nextProps.history.push('/account/orders');
+                    }
                 }
                 break;
             case types.failure:
@@ -118,7 +123,16 @@ let SignUp = React.createClass({
     onClosePayConfirm: function(e) {
         e && e.preventDefault();
         this._setState({ showPayConfirm: false });
-        this.props.history.push('/account/orders');
+
+        // 显示登录
+        if (!(this.props.user.data && this.props.user.data.uid)) {
+            setTimeout(function() {
+                alert("报名成功！ 请登录紫荆账户。\n新用户请使用报名信息登录：\n  用户名：您报名的邮箱 \n  密码：您报名手机号后6位 \n为了您的账号安全，请登录后修改密码。");
+            }, 10);
+        } else {
+            alert('报名成功！');
+            this.props.history.push('/account/orders');
+        }
     },
 
     // 提交
@@ -250,6 +264,7 @@ let SignUp = React.createClass({
                                 title="姓名："
                                 placeholder="请输入您的姓名"
                                 required
+                                validations={{matchRegexp: /^[^\s].+/}}
                                 validationError="请输入正确的姓名"
                             />
                             <FormsyText

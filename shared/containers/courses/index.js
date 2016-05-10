@@ -261,7 +261,10 @@ class Course extends Component {
                     <div className="course-top course-shadow bg-white cl" style={{ marginTop: 20 }}>
                         <div className="course-img fl">
                             {course.course_open_status ?
-                                null :
+                                course.course_open_status === 2 ?
+                                    <p>正在开课中</p>
+                                    : null
+                                :
                                 <p>预计开课时间{course.scheduled_open_date}</p>
                             }
                             <img src={course.course_picture} alt="" />
@@ -289,7 +292,7 @@ class Course extends Component {
                                 {priv.is_purchased ?
                                     (priv.is_expired ? '课程已到期，请续费' : priv.expiring_date ? '有效期至' + priv.expiring_date : '')
                                     :
-                                    '付款后90天内有效'
+                                    course.course_open_status === 1 ? '付款后90天内有效' : '付款后，完全上线之日起90天内有效'
                                 }
                             </p>
                             <div className="course-buy cl">

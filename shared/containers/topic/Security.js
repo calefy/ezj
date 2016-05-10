@@ -553,7 +553,7 @@ class Security extends React.Component {
                         </div>
                         <div className="join-web">
                             <h4>方式二：官网报名</h4>
-                            <SignUp pageKey="security" />
+                            <SignUp pageKey="security" history={this.props.history} />
                         </div>
                     </div>
                     </div>

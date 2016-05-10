@@ -28,10 +28,10 @@ class Lecturer extends Component {
     loadNeededData = props => {
         const {lecturer, lecturer_courses, params} = props;
         const courseAction = new CoursesAction();
-        if (lecturer._req && lecturer._req.lecturerId !== params.lecturerId) {
+        if (!lecturer._req || lecturer._req.lecturerId !== params.lecturerId) {
             props.dispatch( courseAction.loadLecturer( params.lecturerId ) );
         }
-        if (lecturer_courses._req && lecturer_courses._req.lecturerId !== params.lecturerId) {
+        if (!lecturer_courses._req || lecturer_courses._req.lecturerId !== params.lecturerId) {
             props.dispatch( courseAction.loadLecturerCourses( params.lecturerId ) );
         }
     };
