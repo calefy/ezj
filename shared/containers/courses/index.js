@@ -292,7 +292,7 @@ class Course extends Component {
                                 {priv.is_purchased ?
                                     (priv.is_expired ? '课程已到期，请续费' : priv.expiring_date ? '有效期至' + priv.expiring_date : '')
                                     :
-                                    '付款后90天内有效'
+                                    course.course_open_status === 1 ? '付款后90天内有效' : '付款后，完全上线之日起90天内有效'
                                 }
                             </p>
                             <div className="course-buy cl">
