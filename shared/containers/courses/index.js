@@ -261,7 +261,10 @@ class Course extends Component {
                     <div className="course-top course-shadow bg-white cl" style={{ marginTop: 20 }}>
                         <div className="course-img fl">
                             {course.course_open_status ?
-                                null :
+                                course.course_open_status === 2 ?
+                                    <p>正在开课中</p>
+                                    : null
+                                :
                                 <p>预计开课时间{course.scheduled_open_date}</p>
                             }
                             <img src={course.course_picture} alt="" />
