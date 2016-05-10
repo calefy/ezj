@@ -29,7 +29,7 @@ class Order extends Component {
     componentWillReceiveProps(nextProps) {
         let cancelType = getRequestTypes(CommerceAction.CANCEL_ORDER);
         if (this.props.location.search != nextProps.location.search ||
-                nextProps.action.type === cancel.success) {
+                nextProps.action.type === cancelType.success) {
             Order.fetchData(nextProps);
         }
     }
@@ -91,6 +91,7 @@ class Order extends Component {
                                                     {item.order_status == 10 ?
                                                         <span>
                                                             <Link to="/pay" query={{type: item.purchase_type, id: id}}>继续支付</Link>
+                                                            <br/>
                                                             <a href="#" data-id={item.id} onClick={this.onClickCancel}>取消订单</a>
                                                         </span>
                                                         :

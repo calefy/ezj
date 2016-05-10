@@ -48,6 +48,7 @@
 .recharge-record h4{ font-size: 1.125em; margin: 0 0 20px;}
 .recharge-record th:first-child, .recharge-record td:first-child,.payment-record td:nth-child(3){ text-align: right;}
 .recharge-record .chargeMore{ margin: 20px 0;}
+.recharge-record a {color: #3b73af;}
 
 .account-recharge p{ margin: 0 0 14px; font-size: 12px; color: #707070;}
 
