@@ -6,6 +6,13 @@ import { Link } from 'react-router';
 import { payType } from '../libs/const';
 import { image } from '../libs/utils';
 
+const bundles = {
+    '684': '6119033150828969984', // 财富管理
+    '662': '6134271540432207872', // 企业理财
+    '784': '6119033157506301952', // 互联网金融
+    '785': '6119033151063851008', // 资产证券化
+};
+
 class CourseCategoryDetail extends Component {
     static propTypes = {
         category: PropTypes.object.isRequired, // 单个分类详情
@@ -84,7 +91,10 @@ class CourseCategoryDetail extends Component {
                     }
                 </div>
                 <div className="online-course bg-white">
-                    <h4 className="classify-h4">在线课程</h4>
+                    <h4 className="classify-h4">
+                        在线课程
+                        <Link to="/pay" query={{type: payType.PACKAGE, id: bundles[category.id]}} className="btn fr" target="_blank">购买全部课程</Link>
+                    </h4>
                     <dl>
                         {category.items && category.items.length ?
                             category.items.map(((c,i) => {
@@ -99,7 +109,7 @@ class CourseCategoryDetail extends Component {
                         }
                     </dl>
                 </div>
-                { category.id==784 ? 
+                { category.id==784 ?
                     <div className="open-course bg-white">
                         <h4 className="classify-h4">公开课</h4>
                         <div  className="open-summary">
