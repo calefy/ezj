@@ -51,7 +51,7 @@ let Pay = React.createClass({
         let id = location.query.id;
         if (account.isFetching ||
             (type == payType.COURSE && (course.isFetching || (course.data && course.data.id !== id))) ||
-            (type == payType.PACKAGE && (product.isFetching || (product.data && product.data.id !== id)))) {
+            (type != payType.COURSE && (product.isFetching || (product.data && product.data.id !== id)))) {
             Pay.fetchData(this.props);
         }
     },

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {Link} from 'react-router';
 
 import { orderStatus } from '../../libs/const';
+import { getRequestTypes } from '../../libs/utils';
 import CommerceAction from '../../actions/CommerceAction';
 import Pagination from '../../components/Pagination.jsx';
 
@@ -26,10 +27,20 @@ class Order extends Component {
         }
     }
     componentWillReceiveProps(nextProps) {
-        if (this.props.location.search != nextProps.location.search) {
+        let cancelType = getRequestTypes(CommerceAction.CANCEL_ORDER);
+        if (this.props.location.search != nextProps.location.search ||
+                nextProps.action.type === cancelType.success) {
             Order.fetchData(nextProps);
         }
     }
+
+    // 取消订单
+    onClickCancel = e => {
+        e.preventDefault();
+        e.nativeEvent.returnValue = false;
+        const commerceAction = new CommerceAction();
+        this.props.dispatch( commerceAction.cancelOrder(e.currentTarget.getAttribute('data-id')) );
+    };
 
     render() {
         if (this.props.orders.isFetching) {
@@ -62,8 +73,13 @@ class Order extends Component {
                                 {orders.length ?
                                     orders.map((item, index) => {
                                         let arr = [];
+                                        let id = null;
                                         item.item_list.split(',').forEach(one => {
-                                            if (one) arr.push(one.replace(/\d+:/, ''));
+                                            if (one) {
+                                                let cs = one.split(':');
+                                                if (cs.length) id = cs[0];
+                                                if (cs.length >= 2) arr.push(cs[1]);
+                                            }
                                         });
                                         return (
                                             <tr key={index}>
@@ -71,7 +87,17 @@ class Order extends Component {
                                                 <td>{arr.join(', ')}</td>
                                                 <td>{item.total_amount}</td>
                                                 <td>{item.created_time}</td>
-                                                <td>{orderStatus[item.order_status]}</td>
+                                                <td>
+                                                    {item.order_status == 10 ?
+                                                        <span>
+                                                            <Link to="/pay" query={{type: item.purchase_type, id: id}}>继续支付</Link>
+                                                            <br/>
+                                                            <a href="#" data-id={item.id} onClick={this.onClickCancel}>取消订单</a>
+                                                        </span>
+                                                        :
+                                                        orderStatus[item.order_status]
+                                                    }
+                                                </td>
                                             </tr>
                                         );
                                     })
@@ -99,6 +125,7 @@ class Order extends Component {
 }
 
 module.exports = connect( state => ({
+    action: state.action,
     orders: state.orders,
 }) )(Order);
 // <a className="btn chargeMore">查看更多</a>

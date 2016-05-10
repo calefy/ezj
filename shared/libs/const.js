@@ -55,10 +55,12 @@ export const orderStatus = {
     '20': '支付完成',
     '30': '已取消',
     '40': '自动取消',
-    '50': '支付失败'
+    '50': '支付失败',
+    '90': '已完成'
 };
 
 export const payType = {
     COURSE: 0,
+    PRODUCT: 1,
     PACKAGE: 2,
 }

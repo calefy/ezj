@@ -1,7 +1,7 @@
 /**
  * 电商相关数据
  */
-import { reducerRequest } from '../libs/utils';
+import { getRequestTypes, reducerRequest } from '../libs/utils';
 import CommerceAction from '../actions/CommerceAction';
 
 /**
@@ -22,7 +22,13 @@ export function recharges(state, action) {
  * 订单列表
  */
 export function orders(state, action) {
-    return reducerRequest(CommerceAction.LOAD_ORDERS, state, action);
+    const payType = getRequestTypes(CommerceAction.PAY);
+    switch(action.type) {
+        case payType.request: // 支付时，清空订单数据
+            return {isFetching: true};
+        default:
+            return reducerRequest(CommerceAction.LOAD_ORDERS, state, action);
+    }
 }
 
 export function product(state, action) {

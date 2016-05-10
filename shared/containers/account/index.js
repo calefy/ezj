@@ -14,7 +14,7 @@ if (process.env.BROWSER) {
 class Account extends Component {
 
     static menus = [
-        { path: '/account/index', name: '基本信息' },
+        { path: '/account/index', name: '我的资料' },
         //{ path: '/account/avatar', name: '头像修改' },
         { path: '/account/pwd', name: '密码修改' },
         { path: '/account/recharge', name: '充值记录' },
