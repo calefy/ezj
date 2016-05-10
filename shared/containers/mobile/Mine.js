@@ -22,7 +22,7 @@ class MyExams extends React.Component {
     }
 
     componentDidMount() {
-        if (document.title !== MyExams.pageTitle) document.title = MyExams.pageTitle;
+        document.title = MyExams.pageTitle;
 
         const { sheets, location } = this.props;
         if (sheets.isFetching ||
