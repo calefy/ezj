@@ -250,6 +250,7 @@ let SignUp = React.createClass({
                                 title="姓名："
                                 placeholder="请输入您的姓名"
                                 required
+                                validations={{matchRegexp: /^[^\s].+/}}
                                 validationError="请输入正确的姓名"
                             />
                             <FormsyText
