@@ -27,6 +27,9 @@ class Commerce extends Base {
         params = params ? '?' + params : '';
         return this.apiClient.get('commerce/orders' + params);
     }
+    cancelOrder(orderId) {
+        return this.apiClient.delete(`commerce/orders/${orderId}`);
+    }
 
     pay(params={}) {
         return this.apiClient.post('commerce/orders', params);
