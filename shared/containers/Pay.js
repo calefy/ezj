@@ -165,7 +165,7 @@ let Pay = React.createClass({
             this.props.dispatch( courseAction.loadCoursePrivate(courseId) );
             this.props.history.push(`/courses/${courseId}`);
         } else {
-            this.props.history.goBack();
+            this.props.history.push('/study/all?type=purchased-list');
         }
     },
 
