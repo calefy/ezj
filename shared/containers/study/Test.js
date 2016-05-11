@@ -67,7 +67,7 @@ class Exam extends Component {
                                                     <td>
                                                         <Link to={`/study/test/${item.examination_id}/${item.sheet_id}`} >查看结果</Link>
                                                         &emsp;
-                                                        <Link to={`/courses/${item.course_id}#exam`} >重新测试</Link>
+                                                        <Link to={`/courses/${item.course_id}/exam`} target="_blank" >重新测试</Link>
                                                     </td>
                                                 </tr>
                                             );
