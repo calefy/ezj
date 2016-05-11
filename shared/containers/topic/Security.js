@@ -2,19 +2,36 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
+import { image } from '../../libs/utils';
 import SignUp from '../SignUp.jsx';
+import CommerceAction from '../../actions/CommerceAction';
 
 if (process.env.BROWSER) {
     require('css/special.css');
 }
 
-const bundle = {id: 9166, price: 4980}
+const BUNDLE_ID = '6119033157460164608';
 
 class Security extends React.Component {
+
+    // 初始加载数据
+    static fetchData({dispatch, params={}, location={}, apiClient}) {
+        const commerceAction = new CommerceAction({ apiClient });
+        return Promise.all([
+            dispatch( commerceAction.loadProductLecturers([BUNDLE_ID]) ),
+        ]);
+    }
 
     state = {
         schedule: 'sc4', // 要显示的课程内容
     };
+
+    componentDidMount() {
+        const { dispatch, product_lecturers } = this.props;
+        if (!product_lecturers._req || product_lecturers._req.ids.indexOf(BUNDLE_ID) >= 0) {
+            Security.fetchData(this.props);
+        }
+    }
 
     _setState = obj => {
         this.setState(Object.assign({}, this.state, obj || {}));
@@ -32,6 +49,9 @@ class Security extends React.Component {
     };
 
     render() {
+        let lecturers = this.props.product_lecturers.data || [];
+        lecturers = []; // 临时去掉
+
         return (
             <div className="special-security">
                 <div className="special-banner special-security-banner cl">
@@ -42,7 +62,7 @@ class Security extends React.Component {
                                 <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/e7347ae795f578a40f43bdf70bd92fe4.png" />
                             </div>
                             <div className="synopsis_price cl">
-                                <p className="fl">¥{bundle.price}</p>
+                                <p className="fl">¥4980</p>
                                 <a href="#sign" className="fr">立即报名</a>
                             </div>
                         </div>
@@ -57,8 +77,18 @@ class Security extends React.Component {
                             <div className="liquid">
                                 <h3>相关师资</h3>
                                 <ul className="cl">
-                                    <li><a href="/lecturers/3223333591" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333591-1445253893.jpg"/><div><h4>林华</h4><p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p></div></a></li>
-
+                                    {lecturers.map((item, index) => {
+                                        return  <li key={index}>
+                                                    <Link to={`/lecturers/${item.id}`} target="_blank">
+                                                        <img src={image(item.lecturer_avatar, 'll')}/>
+                                                        <div>
+                                                            <h4>{item.lecturer_name}</h4>
+                                                            <p>{item.lecturer_org} {item.lecture_title}</p>
+                                                        </div>
+                                                    </Link>
+                                                </li>
+                                    })}
+                                    <li><a href="/user/3223333591" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333591-1445253893.jpg"/><div><h4>林华</h4><p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p></div></a></li>
                                     <li><a href="/lecturers/3223333672" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333672-1445238316.jpg"/><div><h4>黄长清</h4><p>恒泰证券金融市场部执行总经理、产品负责人</p></div></a></li>
                                     <li><a href="/lecturers/3223333673" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333673-1445238401.jpg"/><div><h4>李耀光</h4><p>摩根士丹利华鑫证券固定收益部结构融资总监。</p></div></a></li>
                                     <li><a href="/lecturers/3223333675" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333675-1445238762.jpg"/><div><h4>万华伟</h4><p>联合信用评级有限公司副总经理兼评级总监</p></div></a></li>
@@ -565,4 +595,5 @@ class Security extends React.Component {
 
 module.exports = connect( state => ({
     action: state.action,
+    product_lecturers: state.product_lecturers,
 }) )(Security);

@@ -38,3 +38,6 @@ export function products(state, action) {
     return reducerRequest(CommerceAction.LOAD_PRODUCTS, state, action);
 }
 
+export function product_lecturers(state, action) {
+    return reducerRequest(CommerceAction.LOAD_PRODUCT_LECTURERS, state, action);
+}
