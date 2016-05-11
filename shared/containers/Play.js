@@ -249,6 +249,10 @@ class Play extends Component {
     };
     handlePlayTime = (e, data) => { // 视频播放时间变更调用此方法
         let time = parseFloat(data.time);
+
+        if (time === this.lastTime) return; // 因视频播放完成后也会不断触发playing，因此比对上次时间
+        this.lastTime = time;
+
         let ppts = this.props.ppts.data || {};
         ppts = ppts.list || [];
         let len = ppts.length;
