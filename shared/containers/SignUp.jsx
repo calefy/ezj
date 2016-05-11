@@ -159,8 +159,8 @@ let SignUp = React.createClass({
             items: id,
             item_type: type,
             payment_method: this.state.payMethod === 'offline' ? 90 : (this.state.payMethod === 'alipay' ? 20 : 30), // 在线支付方式附加紫荆币
-            name: model.name,
-            email: model.email,
+            name: model.name.trim(),
+            email: model.email.trim(),
             mobile: model.mobile,
             invoice: model.ticket_text || '',
             comment: this.state.type, // 存储课程类型，值不定
@@ -264,8 +264,8 @@ let SignUp = React.createClass({
                                 title="姓名："
                                 placeholder="请输入学员的姓名"
                                 required
-                                validations={{matchRegexp: /^[^\s].+/}}
-                                validationError="请输入正确的姓名"
+                                validations={{minLength: 2, maxLength: 30}}
+                                validationError="请输入真实姓名"
                             />
                             <FormsyText
                                 name="email"
