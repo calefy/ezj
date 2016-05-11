@@ -138,6 +138,7 @@ let Exam = React.createClass({
     },
     onSkip: function(e) {
         e.preventDefault();
+        if (e.currentTarget.getAttribute('disabled') !== null) return;
 
         this.clearCurrentChecked();
 
@@ -154,6 +155,8 @@ let Exam = React.createClass({
     },
     onSubmit: function(e) {
         e.preventDefault();
+        if (e.currentTarget.getAttribute('disabled') !== null) return;
+
         this.setCurrentIndexAnswer();
         // 检查当前题目是否有答案
         let questions = this.props.examination.data.questions || [];
@@ -191,7 +194,7 @@ let Exam = React.createClass({
     onReExam: function(e) {
         this.answers = {};
         this.time = (new Date()).getTime();
-        this.setState({ index: 0, start: true, reexam: true });
+        this.setState({ index: 0, start: true, reexam: true, viewAnswer: false });
     },
     // 查看答案
     onViewAnswers: function(e) {
