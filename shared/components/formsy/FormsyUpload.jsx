@@ -39,6 +39,10 @@ let FormsyUpload = React.createClass({
     componentDidMount: function() {
         window.jQuery = window.$ = require('jquery');
         const WebUploader = require('tb-webuploader/dist/webuploader.min.js');
+        if (!WebUploader.Uploader.support()) {
+            alert('上传功能不支持您的浏览器！请尝试安装或升级 flash 播放器');
+            return;
+        }
         this.uploader = WebUploader.create({
             auto: true,
             server: this.props.server,
@@ -117,14 +121,15 @@ let FormsyUpload = React.createClass({
             val = val.replace(/^(.{5}).*(.{5})\.(.*)$/, '$1...$2.$3');
         }
         // 可以用自定义的children替换默认button，但id值必须与传入的id属性一致
+        // webuploader 必须是div作为button，因IE下button中包含其他标签，会不生效
         return (
             <div style={{display: 'inline-block' }}>
                 {this.props.children ?
                     this.props.children :
-                    <button type="button"
-                            id={this.props.id}
-                            className="btn"
-                        >{this.props.label}</button>
+                    <div
+                        id={this.props.id}
+                        className="btn"
+                    >{this.props.label}</div>
                 }
                 {this.state.uploading ?
                     <span className="loading"><i className="iconfont icon-loading fa-spin"></i></span>

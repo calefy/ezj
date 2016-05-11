@@ -156,6 +156,7 @@ class CourseExam extends Component {
     // 查看答案
     onViewAnswers = e => {
         e.preventDefault();
+        e.nativeEvent.returnValue = false;
         this.setState({viewAnswer: !this.state.viewAnswer});
         // 如果查看答案，需要检测是否有答案
         if (!this.state.viewAnswer) {
@@ -199,55 +200,52 @@ class CourseExam extends Component {
 
                 {!sheet || this.state.reexam ?
                     <div>
-                        {!this.state.start ?
-                            <div className="course-test-info">
-                                <h2><i className="iconfont icon-chapter"></i>{examination.examination_title}</h2>
-                                <div className="course-test-num">
-                                    <dl className="cl">
-                                        <dt>题目数量:</dt>
-                                        <dd><em>{questions.length}</em>道题</dd>
-                                    </dl>
-                                    <dl className="cl">
-                                        <dt>单选题:</dt>
-                                        <dd><em>{singleNumber}</em>道题</dd>
-                                    </dl>
-                                    <dl className="cl">
-                                        <dt>多选题:</dt>
-                                        <dd><em>{multiNumber}</em>道题</dd>
-                                    </dl>
-                                </div>
-                                <button className="btn" type="button" onClick={this.onClickBegin}>开始答题</button>
-                            </div>
-                            :
-                            <div className="course-test-question">
-                                <h3>
-                                    <p>{curQuestion.question && curQuestion.question.examination_question_is_multi ? '多' : '单'}项选择题</p>
-                                    <p>已做<em className="course-test-already">{this.state.index + 1}</em>题 / 共<em className="course-test-all">{questions.length}</em>题</p>
-                                </h3>
-                                <dl className="course-test-question-info">
-                                    <dt>
-                                        <em>{this.state.index + 1}.</em>
-                                        <div className="dib vat" dangerouslySetInnerHTML={{__html: curQuestion.question && curQuestion.question.examination_question_content}}></div>
-                                    </dt>
-                                    {(curQuestion.options || []).map((item, index) => {
-                                        let answer = this.answers[curQuestion.question.id] || [];
-                                        let isAnswered = answer.indexOf(item.id) >= 0;
-                                        return  <dd key={index}>
-                                                    <label>
-                                                        <input type={curQuestion.question.examination_question_is_multi ? 'checkbox' : 'radio'} name={curQuestion.question.examination_question_is_multi ? 'answer[]' : 'answer'} value={item.id} ref={`answer_${index}`} defaultChecked={isAnswered} />
-                                                        {String.fromCharCode(65 + index)}. {item.option_text}
-                                                    </label>
-                                                </dd>
-                                    })}
+                        <div className={`course-test-info ${this.state.start ? 'hide' : ''}`}>
+                            <h2><i className="iconfont icon-chapter"></i>{examination.examination_title}</h2>
+                            <div className="course-test-num">
+                                <dl className="cl">
+                                    <dt>题目数量:</dt>
+                                    <dd><em>{questions.length}</em>道题</dd>
                                 </dl>
-                                <div className="course-test-question-btn">
-                                    <button type="button" className={`btn ${firstIndex ? 'disabled' : ''}`} disabled={firstIndex} onClick={this.onPrev}>上一题</button>
-                                    <button type="button" className={`btn ${lastIndex ? 'disabled' : ''}`} disabled={lastIndex} onClick={this.onNext}>下一题</button>
-                                    <button type="button" className={`btn ${lastIndex ? 'disabled' : ''}`} disabled={lastIndex} onClick={this.onSkip}>跳过</button>
-                                    <button type="button" className={`btn ${lastIndex ? '' : 'disabled'}`} disabled={!lastIndex} onClick={this.onSubmit}>提交答卷</button>
-                                </div>
+                                <dl className="cl">
+                                    <dt>单选题:</dt>
+                                    <dd><em>{singleNumber}</em>道题</dd>
+                                </dl>
+                                <dl className="cl">
+                                    <dt>多选题:</dt>
+                                    <dd><em>{multiNumber}</em>道题</dd>
+                                </dl>
                             </div>
-                        }
+                            <button className="btn" type="button" onClick={this.onClickBegin}>开始答题</button>
+                        </div>
+                        <div className={`course-test-question ${this.state.start ? '' : 'hide'}`}>
+                            <h3>
+                                <p>{curQuestion.question && curQuestion.question.examination_question_is_multi ? '多' : '单'}项选择题</p>
+                                <p>已做<em className="course-test-already">{this.state.index + 1}</em>题 / 共<em className="course-test-all">{questions.length}</em>题</p>
+                            </h3>
+                            <dl className="course-test-question-info">
+                                <dt>
+                                    <em>{this.state.index + 1}.</em>
+                                    <div className="dib vat" dangerouslySetInnerHTML={{__html: curQuestion.question && curQuestion.question.examination_question_content}}></div>
+                                </dt>
+                                {(curQuestion.options || []).map((item, index) => {
+                                    let answer = this.answers[curQuestion.question.id] || [];
+                                    let isAnswered = answer.indexOf(item.id) >= 0;
+                                    return  <dd key={index}>
+                                                <label>
+                                                    <input type={curQuestion.question.examination_question_is_multi ? 'checkbox' : 'radio'} name={curQuestion.question.examination_question_is_multi ? 'answer[]' : 'answer'} value={item.id} ref={`answer_${index}`} defaultChecked={isAnswered} />
+                                                    {String.fromCharCode(65 + index)}. {item.option_text}
+                                                </label>
+                                            </dd>
+                                })}
+                            </dl>
+                            <div className="course-test-question-btn">
+                                <button type="button" className={`btn ${firstIndex ? 'disabled' : ''}`} disabled={firstIndex} onClick={this.onPrev}>上一题</button>
+                                <button type="button" className={`btn ${lastIndex ? 'disabled' : ''}`} disabled={lastIndex} onClick={this.onNext}>下一题</button>
+                                <button type="button" className={`btn ${lastIndex ? 'disabled' : ''}`} disabled={lastIndex} onClick={this.onSkip}>跳过</button>
+                                <button type="button" className={`btn ${lastIndex ? '' : 'disabled'}`} disabled={!lastIndex} onClick={this.onSubmit}>提交答卷</button>
+                            </div>
+                        </div>
                     </div>
                     :
                     <div>
@@ -270,6 +268,7 @@ class CourseExam extends Component {
                             </div>
                             <div style={{ position: "relative"}}>
                                 <button className="btn" type="button" onClick={this.onReExam}>重新测验</button>
+
                                 <a href="#" className="course-test-see" onClick={this.onViewAnswers}>{this.state.viewAnswer ? '收起' : '查看'}答案</a>
                             </div>
                         </div>

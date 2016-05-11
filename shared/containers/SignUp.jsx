@@ -63,7 +63,7 @@ let SignUp = React.createClass({
                     }
                 } else {
                     if (!(this.props.user.data && this.props.user.data.uid)) {
-                        alert("报名成功！ 请登录紫荆账户。\n新用户请使用报名信息登录：\n  用户名：您报名的邮箱 \n  密码：您报名手机号后6位 \n为了您的账号安全，请登录后修改密码。");
+                        alert("报名成功！\n请登录紫荆账户；新用户请使用短信或邮件通知信息登录。");
                     } else {
                         alert('报名成功！');
                         nextProps.history.push('/account/orders');
@@ -127,7 +127,7 @@ let SignUp = React.createClass({
         // 显示登录
         if (!(this.props.user.data && this.props.user.data.uid)) {
             setTimeout(function() {
-                alert("报名成功！ 请登录紫荆账户。\n新用户请使用报名信息登录：\n  用户名：您报名的邮箱 \n  密码：您报名手机号后6位 \n为了您的账号安全，请登录后修改密码。");
+                alert("报名成功！\n请登录紫荆账户；新用户请使用短信或邮件通知信息登录。");
             }, 10);
         } else {
             alert('报名成功！');
