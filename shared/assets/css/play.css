@@ -70,3 +70,5 @@
 .control-panel .jiangyi-list div { cursor: pointer; padding: 8px 16px;}
 .control-panel .jiangyi-list div.current { background: #888;}
 .control-panel .jy-list img { width: 100%;}
+
+#player p{color:#fff;text-align:center;padding:50px 0;}

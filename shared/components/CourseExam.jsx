@@ -156,6 +156,7 @@ class CourseExam extends Component {
     // 查看答案
     onViewAnswers = e => {
         e.preventDefault();
+        e.nativeEvent.returnValue = false;
         this.setState({viewAnswer: !this.state.viewAnswer});
         // 如果查看答案，需要检测是否有答案
         if (!this.state.viewAnswer) {
@@ -270,6 +271,7 @@ class CourseExam extends Component {
                             </div>
                             <div style={{ position: "relative"}}>
                                 <button className="btn" type="button" onClick={this.onReExam}>重新测验</button>
+
                                 <a href="#" className="course-test-see" onClick={this.onViewAnswers}>{this.state.viewAnswer ? '收起' : '查看'}答案</a>
                             </div>
                         </div>
