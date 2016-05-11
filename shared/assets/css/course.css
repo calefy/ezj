@@ -12,7 +12,7 @@
 .course-top{ padding: 20px;}
 .course-img { width:397px; height:223px; overflow: hidden; position: relative;}
 .course-img img{ width:100%;}
-.course-img p{ line-height: 34px; background: rgba(0,0,0,0.6); text-align: center; color: #fff; font-size: 0.875em;}
+.course-img p{ line-height: 34px; background: #666; text-align: center; color: #fff; font-size: 0.875em;}
 
 .course-top-info{ margin:0 0 0 410px; line-height: 30px; height:223px; position: relative;}
 .course-top-info h1{ font-size: 1em;}

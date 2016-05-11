@@ -43,6 +43,10 @@ class Commerce extends Base {
         params = params ? '?' + params : '';
         return this.apiClient.get(`commerce/products${params}`);
     }
+
+    productLecturers(ids) {
+        return this.apiClient.get('commerce/products/lecturers?ids=' + ids.join(','));
+    }
 }
 
 module.exports = Commerce;

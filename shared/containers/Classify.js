@@ -81,7 +81,7 @@ class Classify extends Component {
     }
 
     // 购买课程
-    handleBuyCourse = (courseId, e) => {
+    handleBuyCourse = e => {
         // 检查登录
         if (!this.props.user.data) {
             e.preventDefault();

@@ -21,7 +21,7 @@ class CourseCategoryDetail extends Component {
     };
 
     onClickBuy = e => {
-        this.props.handleBuyCourse(e.currentTarget.getAttribute('data-id'), e);
+        this.props.handleBuyCourse(e);
     };
 
     renderCourses = list => {
@@ -33,7 +33,7 @@ class CourseCategoryDetail extends Component {
                     <span className="online-price"><i className="iconfont icon-price"></i>{item.course_price}</span>
                     <span className="online-num"><i className="iconfont icon-user"></i>{item.student_count} 人</span>
                     <a href={`/courses/${item.id}`} className="online-content" target="_blank">详情</a>
-                    <a href={`/pay?type=${payType.COURSE}&id=${item.id}`} className="online-buy" target="_blank" data-id={item.id} onClick={this.onClickBuy}>购买</a>
+                    <a href={`/pay?type=${payType.COURSE}&id=${item.id}`} className="online-buy" target="_blank" onClick={this.onClickBuy}>购买</a>
                 </dd>
             );
         });
@@ -93,7 +93,7 @@ class CourseCategoryDetail extends Component {
                 <div className="online-course bg-white">
                     <h4 className="classify-h4">
                         在线课程
-                        <Link to="/pay" query={{type: payType.PACKAGE, id: bundles[category.id]}} className="btn fr" target="_blank">购买全部课程</Link>
+                        <Link to="/pay" query={{type: payType.PACKAGE, id: bundles[category.id]}} className="btn fr" target="_blank" onClick={this.onClickBuy}>购买全部课程</Link>
                     </h4>
                     <dl>
                         {category.items && category.items.length ?

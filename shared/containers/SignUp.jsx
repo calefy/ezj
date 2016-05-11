@@ -159,8 +159,8 @@ let SignUp = React.createClass({
             items: id,
             item_type: type,
             payment_method: this.state.payMethod === 'offline' ? 90 : (this.state.payMethod === 'alipay' ? 20 : 30), // 在线支付方式附加紫荆币
-            name: model.name,
-            email: model.email,
+            name: model.name.trim(),
+            email: model.email.trim(),
             mobile: model.mobile,
             invoice: model.ticket_text || '',
             comment: this.state.type, // 存储课程类型，值不定
@@ -205,7 +205,7 @@ let SignUp = React.createClass({
         } else if (this.props.pageKey === 'finance') {
             return (
                 <div>
-                    <p>请选择您要参与的现场面授班，视频点播班请在上方超级课程表中购买</p>
+                    <p>请选择要参与的现场面授班，视频点播班请在上方超级课程表中购买</p>
                     <div className="join-web-selcourse cl">
                         <Link to="#" className={this.state.type === '0' ? 'on' : ''} data-key="0" onClick={this.onChangeType}>第六讲     2016-04-15<br />地点：五道口金融学院</Link>
                         <Link to="#" className={this.state.type === '1' ? 'on' : ''} data-key="1" onClick={this.onChangeType}>第七讲     2016-04-16<br />地点：五道口金融学院</Link>
@@ -257,20 +257,20 @@ let SignUp = React.createClass({
                 >
 
                     <div className="join-web-info">
-                        <h5 className="cl">填写信息 <em>（为确保报名成功，请您输入正确的个人信息）</em></h5>
+                        <h5 className="cl">填写信息 <em>（为确保报名成功，请输入正确的个人信息）</em></h5>
                         <div>
                             <FormsyText
                                 name="name"
                                 title="姓名："
-                                placeholder="请输入您的姓名"
+                                placeholder="请输入学员的姓名"
                                 required
-                                validations={{matchRegexp: /^[^\s].+/}}
-                                validationError="请输入正确的姓名"
+                                validations={{minLength: 2, maxLength: 30}}
+                                validationError="请输入真实姓名"
                             />
                             <FormsyText
                                 name="email"
                                 title="邮箱："
-                                placeholder="请输入您的常用邮箱"
+                                placeholder="请输入学员的常用邮箱"
                                 required
                                 validations="isEmail"
                                 validationError="请输入正确邮箱"
@@ -279,7 +279,7 @@ let SignUp = React.createClass({
                             <FormsyText
                                 name="mobile"
                                 title="手机："
-                                placeholder="请输入您的联系方式"
+                                placeholder="请输入学员的联系方式"
                                 required
                                 validations={{matchRegexp: /1[3-9]\d{9}/}}
                                 validationError="请输入正确的手机号"

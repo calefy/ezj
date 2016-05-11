@@ -305,11 +305,13 @@ class Cfc extends React.Component {
                                                         <li>
                                                             <div className="special-arrange-course cl">
                                                                 {(curProduct.courses || []).map((item, index) => {
+                                                                    let lecturers = item.lecturers_info;
+                                                                    lecturers = (lecturers || []).map(l => l.lecturer_name);
                                                                     return (
                                                                         <dl key={index} className={this.state.curCourseId === item.id ? 'on' : ''}>
                                                                             <dt data-id={item.id} onClick={this.onClickCourse}>
                                                                                 <div className="special-arrange-title">{item.course_name}</div>
-                                                                                <div className="special-arrange-course-teacher hide">讲师 :  </div>
+                                                                                <div className="special-arrange-course-teacher">讲师 : {lecturers.join(', ')} </div>
                                                                                 <div className="special-arrange-user">学员 : {item.student_count}人</div>
                                                                                 <div className="special-arrange-icon"></div>
                                                                             </dt>
