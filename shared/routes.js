@@ -41,7 +41,7 @@ module.exports = {
         },
         // 课程详情
         {
-            path: 'courses/:courseId',
+            path: 'courses/:courseId(/:hash)',
             getComponent(location, cb) {
                 require.ensure([], require => {
                     cb(null, require('./containers/courses/index'));
