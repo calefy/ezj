@@ -20,19 +20,16 @@ class Course extends Component {
     static fetchData({dispatch, params={}, location={}, apiClient}) {
         const courseAction = new CoursesAction({ apiClient });
         return Promise.all([
-            dispatch( courseAction.loadCourseDetail(params.courseId) ), // 课程详情,包含讲师
-                // node服务器端获取不到url中的hash，因此无法用在这里识别exam; 先暴力获取exam
-                //.then(res => {
-                //    // 如果当前要显示测验，并且课程有测验，则加载测验信息
-                //    let examId = res.data && res.data.course_examination_id;
-                //    if (/*location.hash === '#exam' &&*/ examId && examId !== '0') {
-                //        return [
-                //            dispatch( courseAction.loadExamination(res.data.course_examination_id) ),
-                //            dispatch( courseAction.loadCourseSheet(res.data.id) ),
-                //        ];
-                //    }
-                //    return res;
-                //}),
+            dispatch( courseAction.loadCourseDetail(params.courseId) ) // 课程详情,包含讲师
+                .then(res => {
+                    // 如果当前要显示测验，并且课程有测验，则加载测验信息
+                    let examId = res.data && res.data.course_examination_id;
+                    if (params.hash === 'exam' && examId && examId !== '0') {
+                        return dispatch( courseAction.loadExamination(res.data.course_examination_id) );
+                    }
+                    return res;
+                }),
+            params.hash === 'exam' ? dispatch( courseAction.loadCourseSheet(params.courseId) ) : null,
             dispatch( courseAction.loadCoursePrivate(params.courseId) ), // 课程私密信息
             dispatch( courseAction.loadCourseChapters(params.courseId) ), // 课程章节
             dispatch( courseAction.loadCourseStudents(params.courseId) ), // 课程学员
@@ -84,7 +81,7 @@ class Course extends Component {
 
     loadExamData = (props) => {
         // 切换到测验，如果数据不是当前课程的，需要重新加载测验数据
-        if (props.location.hash === '#exam') {
+        if (props.params.hash === 'exam') {
             let exam = props.examination;
             let sheet = props.course_sheet;
             let eid = props.course.data && props.course.data.course_examination_id;
@@ -234,9 +231,9 @@ class Course extends Component {
         let students = this.props.students.data || [];
         let hasExam = course.course_examination_id;
         hasExam = hasExam && hasExam !== '0';
-        let hash = this.props.location.hash || '#intro'; // 如果没有课程测验，则仅显示intro
-        if (hash === '#exam' && (!hasExam || !priv.is_purchased || priv.is_expired)) {
-            hash = '#intro';
+        let hash = this.props.params.hash || 'intro'; // 如果没有课程测验，则仅显示intro
+        if (hash === 'exam' && (!hasExam || !priv.is_purchased || priv.is_expired)) {
+            hash = 'intro';
         }
 
         // 计算总时长
@@ -327,14 +324,14 @@ class Course extends Component {
                     <div className="course-bottom cl">
                         <div className="course-bottom-left course-shadow fl bg-white">
                             <ul className="nav-tabs course-tabs cl">
-                                <li className={hash === '#intro' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#intro">介绍</Link></li>
-                                <li className={hash === '#cont' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#cont">内容</Link></li>
+                                <li className={hash === 'intro' ? 'current' : ''}><Link to={'/courses/' + course.id}>介绍</Link></li>
+                                <li className={hash === 'cont' ? 'current' : ''}><Link to={`/courses/${course.id}/cont`}>内容</Link></li>
                                 {hasExam && priv.is_purchased && !priv.is_expired ?
-                                    <li className={hash === '#exam' ? 'current' : ''}><Link to={'/courses/' + course.id} hash="#exam">测验</Link></li>
+                                    <li className={hash === 'exam' ? 'current' : ''}><Link to={`/courses/${course.id}/exam`}>测验</Link></li>
                                     : null
                                 }
                             </ul>
-                            {hash === '#intro' ?
+                            {hash === 'intro' ?
                                 <div className="course-bottom-info">
                                     <div className="course-bottom-about">
                                         <h4 className="course-title">课程简介</h4>
@@ -353,7 +350,7 @@ class Course extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                : hash === '#cont' ?
+                                : hash === 'cont' ?
                                     <div className="content course-chapter">
                                         <dl>
                                         {chapters.map((item, index) => {
@@ -383,7 +380,7 @@ class Course extends Component {
                                         })}
                                         </dl>
                                     </div>
-                                    : hash === '#exam' ?
+                                    : hash === 'exam' ?
                                         this.props.examination.isFetching || this.props.course_sheet.isFetching ?
                                             <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
                                             :
