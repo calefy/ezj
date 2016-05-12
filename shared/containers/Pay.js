@@ -1,3 +1,10 @@
+/**
+ * 支付页
+ * - 页面参数：id， type
+ *   type有可能有三个值 payType.COURSE(id传递课程ID),payType.PRODUCT(id传递课程的商品ID), payType.PACKAGE(id传递课程包ID)
+ *   第一种，数据在course中，第二、三种数据在product中
+ *   第一二种都是课程，但是后者没有课程ID，第三种是课程包，下面的判断中三者之间关系需要考虑到。
+ */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
@@ -143,7 +150,7 @@ let Pay = React.createClass({
         let id = location.query.id;
         let type = location.query.type;
         let method = this.state.payMethod;
-        let backUrl = type == payType.COURSE ? `/courses/${id}` : '/account/orders';
+        let backUrl = type == payType.COURSE ? `/courses/${id}` : '/study/all?type=purchased-list';
 
         const commerceAction = new CommerceAction();
         this.props.dispatch(commerceAction.pay({
@@ -241,7 +248,7 @@ let Pay = React.createClass({
                         </div>
                         */}
                         <button type="submit" className={`btn ${this.canSubmit() ? '' : 'disabled'}`} disabled={!this.canSubmit()}>{this.isSubmitLoading() ? '结算中...' : '去结算'}</button>
-                        <p className="pay-valid-date">{course.id && course.course_open_status !== 1 ? '付款后，完全上线之日起90天内有效' : <span>付款后{type == payType.COURSE ? 90 : 180}天内有效</span>}</p>
+                        <p className="pay-valid-date">{course.id && course.course_open_status !== 1 ? <span>付款后，完全上线之日起{type == payType.PACKAGE ? 180 : 90}天内有效</span> : <span>付款后{type == payType.PACKAGE ? 180 : 90}天内有效</span>}</p>
                     </div>
                 </div>
                 </Formsy.Form>
