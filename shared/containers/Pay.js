@@ -194,7 +194,7 @@ let Pay = React.createClass({
                         course.course_price || 0 :
                         product.price || 0;
 
-        let dateLength = type == payType.PACKAGE ? 180 : 90;
+        let dateLength = product.product_type == 2 ? 180 : 90; // product_type 1-课程，2-课程包
 
         return (
             <div className="container">
@@ -207,7 +207,7 @@ let Pay = React.createClass({
                 <div className="pay bg-white">
                     <h4>参加课程《{type == payType.COURSE ? course.course_name : product.title}》</h4>
                     <div className="pay-course-info">
-                        {type == payType.PACKAGE ?
+                        {product.product_type == 2 ? // 课程包类型
                             <div>
                                 <h5 className="cl">
                                     <span className="fl">包含课程</span>
