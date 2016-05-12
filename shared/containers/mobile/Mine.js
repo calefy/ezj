@@ -57,7 +57,7 @@ class MyExams extends React.Component {
                             <ul>
                                 {list.map((item, index) => {
                                     let percent = item.sheet_score || 0;
-                                    percent = (percent - 0).toFixed(2);
+                                    percent = (percent - 0).toFixed(0);
                                     return (
                                         <li key={index}>
                                             <h4>{item.course_name}</h4>

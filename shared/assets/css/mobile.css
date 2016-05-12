@@ -51,8 +51,8 @@
 .mobile-mine li{ background: #fff; border-bottom:1px solid #d0d0d0; padding:0 10px; margin: 10px 0; line-height: 2;text-align: center;}
 .mobile-mine li h4{ border-bottom: 1px solid #cccccc; padding:10px 0;}
 .mobile-mine li p,.mobile-mine li a{ float: left; font-size: 0.875em; display: block;}
-.mobile-mine li p:first-child{ width: 44%;}
-.mobile-mine li p:nth-child(2),.mobile-mine li a{ width: 28%;}
+.mobile-mine li p:first-child{ width: 47%;}
+.mobile-mine li p:nth-child(2),.mobile-mine li a{ width: 24%;}
 .mobile-mine li em{ border-right:1px solid #ccc; display: block;}
 .mobile-mine li a{ color: #af1b3f;}
 .mobile-mine li div{ height:28px; padding:10px 0;}
@@ -64,6 +64,7 @@
 .mobile-user h4{ padding: 0 14px; line-height: 1.6; margin: 10px 0; font-weight: normal;}
 .mobile-user h4 a{ color: #999999; font-size: 0.75em; line-height: 2.2;}
 .mobile-user h5{ font-weight: normal;}
+.mobile-user h5 .fl{width: 80%;}
 .mobile-user ul{ border-bottom: 1px solid #dadada;}
 .mobile-user li{ background: #fff; line-height: 1.6; padding:10px 14px;border-bottom: 1px dashed #dadada; color: #606060;}
 .mobile-user li:last-child{ border-bottom:0;}
