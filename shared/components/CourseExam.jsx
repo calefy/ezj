@@ -56,6 +56,7 @@ class CourseExam extends Component {
         }
 
         // 因設置checked后，defaultChecked失效，因此需要js動態設置一次
+        /* 通过每个选项的 key={index} 修改为 key={item.id}，使react不作为同一个对象处理后，defaultChecked已正常。
         setTimeout(() => {
             let questions = this.props.examination.questions || [];
             let curQuestion = questions[this.state.index];
@@ -69,6 +70,7 @@ class CourseExam extends Component {
                 }
             }
         }, 10);
+        */
     };
     onClickBegin = e => {
         this.time = (new Date()).getTime();
@@ -241,7 +243,8 @@ class CourseExam extends Component {
                                 {(curQuestion.options || []).map((item, index) => {
                                     let answer = this.answers[curQuestion.question.id] || [];
                                     let isAnswered = answer.indexOf(item.id) >= 0;
-                                    return  <dd key={index}>
+                                    // key={item.id} 而不是 key={index}，保证react识别为新的对象，不要在原来的input上修改属性
+                                    return  <dd key={item.id}>
                                                 <label>
                                                     <input type={curQuestion.question.examination_question_is_multi ? 'checkbox' : 'radio'} name={curQuestion.question.examination_question_is_multi ? 'answer[]' : 'answer'} value={item.id} ref={`answer_${index}`} defaultChecked={isAnswered} />
                                                     {String.fromCharCode(65 + index)}. {item.option_text}
