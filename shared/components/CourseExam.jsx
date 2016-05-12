@@ -7,8 +7,10 @@ import CoursesAction from '../actions/CoursesAction';
 class CourseExam extends Component {
     static propTypes = {
         course: PropTypes.object.isRequired,
+        action: PropTypes.object.isRequired,
         examination: PropTypes.object.isRequired,
         sheet: PropTypes.object.isRequired,
+        course_sheets: PropTypes.array.isRequired,
         onLoadSheet: PropTypes.func.isRequired,
         onSubmit: PropTypes.func.isRequired,
     };
@@ -26,7 +28,7 @@ class CourseExam extends Component {
         const type = getRequestTypes(CoursesAction.SUBMIT_SHEET);
         switch(nextProps.action.type) {
             case type.success:
-                this.setState({ reexam: false, start: false })
+                this.setState({ reexam: false, start: false, viewAnswer: false, index: 0 });
                 break;
             case type.failure:
                 alert(nextProps.action.error && nextProps.action.error.message || '提交测验失败');
@@ -122,8 +124,15 @@ class CourseExam extends Component {
         e.preventDefault();
         if (e.currentTarget.getAttribute('disabled') !== null) return;
         this.setCurrentIndexAnswer();
-
         const { course, examination } = this.props;
+        // 检查当前题目是否有答案
+        let questions = examination.questions || [];
+        let cur = questions[this.state.index].question;
+        if (!(this.answers[cur.id].length)) {
+            alert('请选择该题答案！');
+            return;
+        }
+
         let exam = examination.examination;
         let model = {
             course_id: course.id,
@@ -138,7 +147,7 @@ class CourseExam extends Component {
             });
         }
 
-        if (model.answers.length < examination.questions.length) {
+        if (model.answers.length < questions.length) {
             alert('还有问题未回答，请全部答完后再提交');
             return;
         }
@@ -151,7 +160,7 @@ class CourseExam extends Component {
     onReExam = e => {
         this.answers = {};
         this.time = (new Date()).getTime();
-        this.setState({ index: 0, start: true, reexam: true });
+        this.setState({ index: 0, start: true, reexam: true, viewAnswer: false });
     };
     // 查看答案
     onViewAnswers = e => {
@@ -160,10 +169,12 @@ class CourseExam extends Component {
         this.setState({viewAnswer: !this.state.viewAnswer});
         // 如果查看答案，需要检测是否有答案
         if (!this.state.viewAnswer) {
-            if (!this.props.sheet.answers) {
-                let sheet = this.props.sheet.list;
-                sheet = sheet && sheet[0];
-                this.props.onLoadSheet(sheet.sheet_id || sheet.id);
+            let firstOne = this.props.course_sheets.length && this.props.course_sheets[0] || {};
+            // 为空，或者不是该门课程的sheet，或者不是最新的，都需要加载sheet数据
+            if (!this.props.sheet.answers ||
+                    this.props.sheet.sheet.course_id != firstOne.course_id ||
+                    (this.props.sheet.sheet.id < firstOne.sheet_id)) { // 利用ID增长性，判断sheet与course_sheets中哪个为最新
+                this.props.onLoadSheet(firstOne.sheet_id);
             }
         }
     };
@@ -173,9 +184,9 @@ class CourseExam extends Component {
         let questions = this.props.examination.questions || [];
         let curQuestion = questions.length > this.state.index ? questions[this.state.index] : {};
 
+        let sheetList = this.props.course_sheets;
         let sheetData = this.props.sheet;
-        let sheetList = sheetData.list || [];
-        let sheet = sheetList.length ? sheetList[0] : sheetData.sheet ? sheetData.sheet : null;
+        let sheet = sheetData.sheet || (sheetList && sheetList[0]) || null;
 
         let answerMap = {};
         (sheetData.answers || []).map(item => {
@@ -198,8 +209,7 @@ class CourseExam extends Component {
         return (
             <div className="content course-test">
 
-                {!sheet || this.state.reexam ?
-                    <div>
+                    <div className={!sheet || this.state.reexam ? '' : 'hide'}>
                         <div className={`course-test-info ${this.state.start ? 'hide' : ''}`}>
                             <h2><i className="iconfont icon-chapter"></i>{examination.examination_title}</h2>
                             <div className="course-test-num">
@@ -247,8 +257,7 @@ class CourseExam extends Component {
                             </div>
                         </div>
                     </div>
-                    :
-                    <div>
+                    <div className={!sheet || this.state.reexam ? 'hide' : ''}>
                         <div className="course-test-result">
                             <h2><i className="iconfont icon-chapter"></i>课程测验结果</h2>
                             <h4>{examination.examination_title}</h4>
@@ -314,7 +323,6 @@ class CourseExam extends Component {
                             : null
                         }
                     </div>
-                }
 
             </div>
         );

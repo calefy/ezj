@@ -60,7 +60,7 @@ export const orderStatus = {
 };
 
 export const payType = {
-    COURSE: 0,
-    PRODUCT: 1,
-    PACKAGE: 2,
+    COURSE: 0,  // 课程
+    PRODUCT: 1, // 课程商品
+    PACKAGE: 2, // 课程包商品
 }

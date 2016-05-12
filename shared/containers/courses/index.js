@@ -387,7 +387,8 @@ class Course extends Component {
                                             <CourseExam
                                                 course = {course}
                                                 examination = {this.props.examination.data || {}}
-                                                sheet = {this.props.course_sheet.data || {}}
+                                                course_sheets = {this.props.course_sheet.data && this.props.course_sheet.data.list || []}
+                                                sheet = {this.props.sheet.data || {}}
                                                 action = {this.props.action}
                                                 onLoadSheet = {this.handleLoadSheetAnswer}
                                                 onSubmit = {this.handleExamSubmit}
@@ -483,6 +484,7 @@ module.exports = connect( state => ({
     course: state.course,
     course_private: state.course_private,
     course_sheet: state.course_sheet,
+    sheet: state.sheet,
     chapters: state.chapters,
     students: state.students,
     examination: state.examination,

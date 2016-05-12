@@ -110,10 +110,8 @@ export function examination(state, action) {
     }
 }
 export function sheet(state, action) {
-    let sheetType = getRequestTypes(CoursesAction.LOAD_SHEET);
     let submitType = getRequestTypes(CoursesAction.SUBMIT_SHEET);
     switch(action.type) {
-        case sheetType.success:
         case submitType.success:
             return Object.assign({}, state, {isFetching: false, _req: action._req, data: action.response.data});
             break;
@@ -125,16 +123,7 @@ export function sheets(state, action) {
     return reducerRequest(CoursesAction.LOAD_SHEETS, state, action);
 }
 export function course_sheet(state, action) {
-    let sheetType = getRequestTypes(CoursesAction.LOAD_COURSE_SHEET);
-    let submitType = getRequestTypes(CoursesAction.SUBMIT_SHEET);
-    switch(action.type) {
-        case sheetType.success:
-        case submitType.success:
-            return Object.assign({}, state, {isFetching: false, _req: action._req, data: action.response.data});
-            break;
-        default:
-            return reducerRequest(CoursesAction.LOAD_COURSE_SHEET, state, action);
-    }
+    return reducerRequest(CoursesAction.LOAD_COURSE_SHEET, state, action);
 }
 
 export function courses_mine(state, action) {
