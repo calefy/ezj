@@ -287,7 +287,7 @@ let SignUp = React.createClass({
                                 title="手机："
                                 placeholder="请输入学员的联系方式"
                                 required
-                                validations={{matchRegexp: /1[3-9]\d{9}/}}
+                                validations={{matchRegexp: /^1[3-9]\d{9}$/}}
                                 validationError="请输入正确的手机号"
                             />
 
