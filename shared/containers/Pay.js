@@ -194,6 +194,8 @@ let Pay = React.createClass({
                         course.course_price || 0 :
                         product.price || 0;
 
+        let dateLength = type == payType.PACKAGE ? 180 : 90;
+
         return (
             <div className="container">
                 <Formsy.Form
@@ -248,7 +250,11 @@ let Pay = React.createClass({
                         </div>
                         */}
                         <button type="submit" className={`btn ${this.canSubmit() ? '' : 'disabled'}`} disabled={!this.canSubmit()}>{this.isSubmitLoading() ? '结算中...' : '去结算'}</button>
-                        <p className="pay-valid-date">{course.id && course.course_open_status !== 1 ? <span>付款后，完全上线之日起{type == payType.PACKAGE ? 180 : 90}天内有效</span> : <span>付款后{type == payType.PACKAGE ? 180 : 90}天内有效</span>}</p>
+                        <p className="pay-valid-date">
+                            付款后{ (type == payType.COURSE && course.id && course.course_open_status !== 1) ||
+                                    (type != payType.COURSE && product.id && product.course_open_status !== 1) ?
+                                    '，完全上线之日起' : ''}{dateLength}天内有效
+                        </p>
                     </div>
                 </div>
                 </Formsy.Form>
