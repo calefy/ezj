@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import {Link} from 'react-router';
 
-import { orderStatus } from '../../libs/const';
+import { payType, orderStatus } from '../../libs/const';
 import { getRequestTypes } from '../../libs/utils';
 import CommerceAction from '../../actions/CommerceAction';
 import Pagination from '../../components/Pagination.jsx';
@@ -90,7 +90,7 @@ class Order extends Component {
                                                 <td>
                                                     {item.order_status == 10 ?
                                                         <span>
-                                                            <Link to="/pay" query={{type: item.purchase_type, id: id}}>继续支付</Link>
+                                                            <Link to="/pay" query={{type: payType.PRODUCT, id: id}}>继续支付</Link>
                                                             <br/>
                                                             <a href="#" data-id={item.id} onClick={this.onClickCancel}>取消订单</a>
                                                         </span>
