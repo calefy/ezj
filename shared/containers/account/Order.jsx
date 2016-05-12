@@ -74,7 +74,7 @@ class Order extends Component {
                                     orders.map((item, index) => {
                                         let arr = [];
                                         let id = null;
-                                        item.item_list.split(',').forEach(one => {
+                                        (item.item_list || '').split(',').forEach(one => {
                                             if (one) {
                                                 let cs = one.split(':');
                                                 if (cs.length) id = cs[0];

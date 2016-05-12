@@ -101,7 +101,7 @@ class Account extends React.Component {
                                 {orderList.length ?
                                     orderList.map((item, index) => {
                                         let arr = [];
-                                        item.item_list.split(',').forEach(one => {
+                                        (item.item_list || '').split(',').forEach(one => {
                                             if (one) arr.push(one.replace(/\d+:/, ''));
                                         });
                                         return (
