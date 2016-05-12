@@ -33,63 +33,31 @@ module.exports = {
         // 课程分类页
         {
             path: 'courses',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/Classify'));
-                });
-            }
-        },
-        // 课程详情
-        {
-            path: 'courses/:courseId(/:hash)',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/courses/index'));
-                });
-            },
-            /*
             indexRoute: {
                 getComponent(location, cb) {
                     require.ensure([], require => {
-                        cb(null, require('./containers/courses/Introduce'));
+                        cb(null, require('./containers/Classify'));
                     });
                 }
             },
             childRoutes: [
                 {
-                    path: 'introduce',
+                    path: ':courseId/chapters(/:chapterId)',
                     getComponent(location, cb) {
                         require.ensure([], require => {
-                            cb(null, require('./containers/courses/Introduce'));
+                            cb(null, require('./containers/Play'));
                         });
                     }
                 },
                 {
-                    path: 'content',
+                    path: ':courseId(/:hash)',
                     getComponent(location, cb) {
                         require.ensure([], require => {
-                            cb(null, require('./containers/courses/Content'));
+                            cb(null, require('./containers/courses/index'));
                         });
-                    }
+                    },
                 },
-                {
-                    path: 'test',
-                    getComponent(location, cb) {
-                        require.ensure([], require => {
-                            cb(null, require('./containers/courses/Test'));
-                        });
-                    }
-                }
-            ]
-            */
-        },
-        {
-            path: 'courses/:courseId/chapters(/:chapterId)',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/Play'));
-                });
-            }
+            ],
         },
         // 重置密码页
         {
@@ -315,57 +283,61 @@ module.exports = {
         // 专题页
         {
             path: 'topic',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/topic'));
-                });
-            }
-        },
-        // cfc
-        {
-            path: 'topic/cfc',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/topic/Cfc'));
-                });
-            }
-        },
-        // cfc持续教育
-        {
-            path: 'topic/continue',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/topic/Continue'));
-                });
-            }
-        },
-        // cfc持续教育test
-        {
-            path: 'topic/continue/test',
-            onEnter: needLogin,
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/topic/Test'));
-                });
-            }
-        },
-        // 互联网金融
-        {
-            path: 'topic/finance',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/topic/Finance'));
-                });
-            }
-        },
-        // 证券投资
-        {
-            path: 'topic/security',
-            getComponent(location, cb) {
-                require.ensure([], require => {
-                    cb(null, require('./containers/topic/Security'));
-                });
-            }
+            indexRoute: {
+                getComponent(location, cb) {
+                    require.ensure([], require => {
+                        cb(null, require('./containers/topic'));
+                    });
+                }
+            },
+            childRoutes: [
+                // cfc
+                {
+                    path: 'cfc',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/topic/Cfc'));
+                        });
+                    }
+                },
+                // cfc持续教育
+                {
+                    path: 'continue',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/topic/Continue'));
+                        });
+                    }
+                },
+                // cfc持续教育test
+                {
+                    path: 'continue/test',
+                    onEnter: needLogin,
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/topic/Test'));
+                        });
+                    }
+                },
+                // 互联网金融
+                {
+                    path: 'finance',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/topic/Finance'));
+                        });
+                    }
+                },
+                // 证券投资
+                {
+                    path: 'security',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/topic/Security'));
+                        });
+                    }
+                },
+            ]
         },
         {
             path: 'students/:studentId',
