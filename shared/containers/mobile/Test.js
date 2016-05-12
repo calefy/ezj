@@ -219,6 +219,11 @@ let Exam = React.createClass({
         //}
     },
 
+    onOverViewAnswer: function(e) {
+        e.preventDefault();
+        this.setState({viewAnswer: false});
+    },
+
     render: function() {
         const {examination, sheet, params} = this.props;
         // loading
@@ -292,10 +297,9 @@ let Exam = React.createClass({
                         :
                         <div>
                             <div className="mobile-content">
-                                <h4 className="mobile-knowledge">知识点回顾</h4>
                                 <div className="mobile-content-top mobile-test-question">
                                     <div className="fl">{this.state.index + 1}.</div>
-                                    <div dangerouslySetInnerHTML={{__html: curQuestion.question && curQuestion.question.examination_question_content}}></div>
+                                    <div className="question-title" dangerouslySetInnerHTML={{__html: curQuestion.question && curQuestion.question.examination_question_content}}></div>
                                     <div>
                                         <em>{curQuestion.question && curQuestion.question.examination_question_is_multi ? '多' : '单'}选题</em>
                                         <em className="fr">{this.state.index + 1} / {questions.length}</em>
@@ -306,9 +310,12 @@ let Exam = React.createClass({
                                         let answer = this.answers[curQuestion.question.id] || [];
                                         let isAnswered = answer.indexOf(item.id) >= 0;
                                         return  <li key={item.id}>
-                                                    <label>
-                                                        <input type={curQuestion.question.examination_question_is_multi ? 'checkbox' : 'radio'} name={curQuestion.question.examination_question_is_multi ? 'answer[]' : 'answer'} value={item.id} ref={`answer_${index}`} defaultChecked={isAnswered} />
-                                                        <em> {String.fromCharCode(65 + index)}. {item.option_text} </em>
+                                                    <label className="cl">
+                                                        <span className="fl">
+                                                            <input type={curQuestion.question.examination_question_is_multi ? 'checkbox' : 'radio'} name={curQuestion.question.examination_question_is_multi ? 'answer[]' : 'answer'} value={item.id} ref={`answer_${index}`} defaultChecked={isAnswered} />
+                                                            {String.fromCharCode(65 + index)}. 
+                                                        </span>
+                                                        <span className="answer-option">{item.option_text}</span>
                                                     </label>
                                                 </li>
                                     })}
@@ -328,10 +335,9 @@ let Exam = React.createClass({
                     this.state.viewAnswer ?
                         <div>
                             <div className="mobile-content">
-                                <h4 className="mobile-knowledge">知识点回顾</h4>
                                 <div className="mobile-content-top mobile-test-question">
                                     <div className="fl">{this.state.index + 1}.</div>
-                                    <div dangerouslySetInnerHTML={{__html: curQuestion.question && curQuestion.question.examination_question_content}}></div>
+                                    <div className="question-title" dangerouslySetInnerHTML={{__html: curQuestion.question && curQuestion.question.examination_question_content}}></div>
                                     <div>
                                         <em>{curQuestion.question && curQuestion.question.examination_question_is_multi ? '多' : '单'}选题</em>
                                         <em className="fr">{this.state.index + 1} / {questions.length}</em>
@@ -344,11 +350,15 @@ let Exam = React.createClass({
                                         let isChecked = answer.indexOf(item.id) >= 0; // 用户是否选择
                                         let isAnswer = correctIds.indexOf(item.id) >= 0; // 是否是正确答案
                                         let isMulti = curQuestion.question.examination_question_is_multi;
-                                        console.log(isAnswer, isChecked)
                                         return  <li key={index}>
-                                                    {isChecked && !isAnswer ? <i className="iconfont icon-del"></i> : isAnswer ? <i className="iconfont icon-xuanze"></i> : <i className="iconfont"></i>}
-                                                    <input type={isMulti ? 'checkbox' : 'radio'} checked={isChecked} disabled name={isMulti ? 'answer[]' : 'answer'}/>
-                                                    <em> {String.fromCharCode(65 + index)}. {item.option_text} </em>
+                                                    <span className="cl view">
+                                                        <span className="fl">
+                                                            {isChecked && !isAnswer ? <i className="iconfont icon-del"></i> : isAnswer ? <i className="iconfont icon-xuanze"></i> : <i className="iconfont"></i>}
+                                                            <input type={isMulti ? 'checkbox' : 'radio'} checked={isChecked} disabled name={isMulti ? 'answer[]' : 'answer'}/>
+                                                            {String.fromCharCode(65 + index)}. 
+                                                        </span>
+                                                        <span className="answer-option">{item.option_text}</span>
+                                                    </span>
                                                 </li>
                                     })}
                                 </ul>
@@ -356,7 +366,11 @@ let Exam = React.createClass({
                             </div>
                             <div className="mobile-footer mobile-footer-two">
                                 <a href="#" className={firstIndex ? 'disabled' : ''} disabled={firstIndex} data-nosave="1" onClick={this.onPrev}><em>上一题</em></a>
-                                <a href="#" className={lastIndex ? 'disabled' : ''} disabled={lastIndex} data-nosave="1" onClick={this.onNext}><em>下一题</em></a>
+                                {!lastIndex ?
+                                    <a href="#" data-nosave="1" onClick={this.onNext}><em>下一题</em></a>
+                                    :
+                                    <a href="#" onClick={this.onOverViewAnswer}><em>结束</em></a>
+                                }
                             </div>
                         </div>
                         :
@@ -370,11 +384,16 @@ let Exam = React.createClass({
                                     <div className="mobile-content-num" style={{ height: 150 }}>
                                         <p>题目数量：<em>{questions.length}道</em></p>
                                         <p>正确率：</p>
+                                        <div className="circle-simp">
+                                            <div className="mask"><span>{((sheetData.sheet_score || 0) - 0).toFixed(2)}</span>%</div>
+                                        </div>
+                                        {/*
                                         <div className="circle" style={{ left: 120 }}>
                                             <div className="pie_left"><div className="left"></div></div>
                                             <div className="pie_right"><div className="right"></div></div>
                                             <div className="mask"><span>{((sheetData.sheet_score || 0) - 0).toFixed(2)}</span>%</div>
                                         </div>
+                                        */}
                                     </div>
                                 </div>
                                 <a href="#" className="check-answer" onClick={this.onViewAnswers}>查看答案</a>

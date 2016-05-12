@@ -6,6 +6,7 @@
 .mobile-content{padding-bottom: 70px;}
 .mobile-content-top{ margin: 20px 10px; background: #fff; border: 1px solid #cccccc; border-top: 3px solid #a6294a; line-height: 1.6}
 .mobile-content-top > div, .mobile-test-question > div{ padding:10px 15px;}
+.mobile-test-question .question-title{margin-left:30px;}
 
 .mobile-content-title{ border-bottom: 1px solid #dddddd;}
 .mobile-content-title p,.mobile-content-num p:first-child{ color: #a6294a}
@@ -25,10 +26,11 @@
 
 .mobile-test-answer{ border-top: 1px solid #ccc;}
 .mobile-test-answer li{ line-height: 3; border-bottom: 1px solid #cccccc; background: #fff;}
-.mobile-test-answer li label{padding: 0 10px;display:block;}
+.mobile-test-answer li label{padding: 0 10px;display:block; font-size: 0.875em;}
 .mobile-test-answer li input{ font-size: 1.125em; margin: 0 10px 0 0;}
-.mobile-test-answer li em{ font-size: 0.875em;}
 .mobile-test-answer i{ width: 16px; margin: 0 10px 0 0; color: #af1b3f; font-size: 1em; display: inline-block;}
+.mobile-test-answer .answer-option{display: block;margin-left: 45px;line-height:1.8;padding:0.6em 0;}
+.mobile-test-answer .view .answer-option{margin-left: 70px;}
 
 .mobile-answer-right{ margin:10px; color: #af1b3f}
 
@@ -40,19 +42,20 @@
 
 .check-answer{ line-height: 3; box-shadow: 0 5px 5px rgba(215,215,215,0.75); display: block; background: #fff; margin: 20px 10px; text-align: center; border-radius: 6px; border:1px solid #ccc;}
 
-.circle { width: 80px; height: 80px; position: absolute; border-radius: 50%; background: #af1b40;}
-.pie_left, .pie_right { width:80px;  height:80px; position: absolute; top: 0;left: 0;}
-.left, .right { width:80px;  height:80px; background:#ccc; border-radius: 50%; position: absolute; top: 0; left: 0;}
-.pie_right, .right { clip:rect(0,auto,auto,40px);}
-.pie_left, .left { clip:rect(0,40px,auto,0);}
-.mask { width: 60px; height: 60px; border-radius: 50%; left: 10px; top: 10px; background: #FFF; position: absolute; text-align: center; line-height: 60px; font-size: 1em; font-weight: bold; color: #af1b40;}
-.right{ transform: rotate(54deg);}
+.mobile-content .circle { width: 80px; height: 80px; position: absolute; border-radius: 50%; background: #af1b40;}
+.mobile-content .pie_left, .mobile-content .pie_right { width:80px;  height:80px; position: absolute; top: 0;left: 0;}
+.mobile-content .left, .mobile-content .right { width:80px;  height:80px; background:#ccc; border-radius: 50%; position: absolute; top: 0; left: 0;}
+.mobile-content .pie_right, .mobile-content .right { clip:rect(0,auto,auto,40px);}
+.mobile-content .pie_left, .mobile-content .left { clip:rect(0,40px,auto,0);}
+.mobile-content .mask { width: 60px; height: 60px; border-radius: 50%; left: 10px; top: 10px; background: #FFF; position: absolute; text-align: center; line-height: 60px; font-size: 1em; font-weight: bold; color: #af1b40;}
+.mobile-content .right{ transform: rotate(54deg);}
+.mobile-content .circle-simp{position:relative;width:80px;height:80px;margin:0 auto;}
 
 .mobile-mine li{ background: #fff; border-bottom:1px solid #d0d0d0; padding:0 10px; margin: 10px 0; line-height: 2;text-align: center;}
 .mobile-mine li h4{ border-bottom: 1px solid #cccccc; padding:10px 0;}
 .mobile-mine li p,.mobile-mine li a{ float: left; font-size: 0.875em; display: block;}
-.mobile-mine li p:first-child{ width: 44%;}
-.mobile-mine li p:nth-child(2),.mobile-mine li a{ width: 28%;}
+.mobile-mine li p:first-child{ width: 47%;}
+.mobile-mine li p:nth-child(2),.mobile-mine li a{ width: 24%;}
 .mobile-mine li em{ border-right:1px solid #ccc; display: block;}
 .mobile-mine li a{ color: #af1b3f;}
 .mobile-mine li div{ height:28px; padding:10px 0;}
@@ -64,6 +67,7 @@
 .mobile-user h4{ padding: 0 14px; line-height: 1.6; margin: 10px 0; font-weight: normal;}
 .mobile-user h4 a{ color: #999999; font-size: 0.75em; line-height: 2.2;}
 .mobile-user h5{ font-weight: normal;}
+.mobile-user h5 .fl{width: 80%;}
 .mobile-user ul{ border-bottom: 1px solid #dadada;}
 .mobile-user li{ background: #fff; line-height: 1.6; padding:10px 14px;border-bottom: 1px dashed #dadada; color: #606060;}
 .mobile-user li:last-child{ border-bottom:0;}

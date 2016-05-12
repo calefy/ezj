@@ -81,7 +81,10 @@ class Account extends React.Component {
                                     rechargeList.map((item, index) => {
                                         return (
                                             <li key={index}>
-                                                <h5>{item.id}<em className="fr">{item.amount}</em></h5>
+                                                <h5 className="cl">
+                                                    <span className="fl">{item.id}</span>
+                                                    <em className="fr">{item.amount}</em>
+                                                </h5>
                                                 <p>充值日期：{item.created_time}</p>
                                             </li>
                                         );
@@ -101,12 +104,15 @@ class Account extends React.Component {
                                 {orderList.length ?
                                     orderList.map((item, index) => {
                                         let arr = [];
-                                        item.item_list.split(',').forEach(one => {
+                                        (item.item_list || '').split(',').forEach(one => {
                                             if (one) arr.push(one.replace(/\d+:/, ''));
                                         });
                                         return (
                                             <li key={index}>
-                                                <h5>{arr.join(', ')}<em className="fr">{item.total_amount}</em></h5>
+                                                <h5 className="cl">
+                                                    <span className="fl">{arr.join(', ')}</span>
+                                                    <em className="fr">{item.total_amount}</em>
+                                                </h5>
                                                 <p>订单日期：{item.created_time} <em className="fr">{orderStatus[item.order_status]}</em></p>
                                             </li>
                                         );
