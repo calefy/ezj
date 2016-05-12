@@ -209,8 +209,7 @@ class CourseExam extends Component {
         return (
             <div className="content course-test">
 
-                {!sheet || this.state.reexam ?
-                    <div>
+                    <div className={!sheet || this.state.reexam ? '' : 'hide'}>
                         <div className={`course-test-info ${this.state.start ? 'hide' : ''}`}>
                             <h2><i className="iconfont icon-chapter"></i>{examination.examination_title}</h2>
                             <div className="course-test-num">
@@ -258,8 +257,7 @@ class CourseExam extends Component {
                             </div>
                         </div>
                     </div>
-                    :
-                    <div>
+                    <div className={!sheet || this.state.reexam ? 'hide' : ''}>
                         <div className="course-test-result">
                             <h2><i className="iconfont icon-chapter"></i>课程测验结果</h2>
                             <h4>{examination.examination_title}</h4>
@@ -325,7 +323,6 @@ class CourseExam extends Component {
                             : null
                         }
                     </div>
-                }
 
             </div>
         );
