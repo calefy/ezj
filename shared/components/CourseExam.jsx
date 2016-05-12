@@ -268,11 +268,11 @@ class CourseExam extends Component {
                                 </dl>
                                 <dl className="cl">
                                     <dt>正确率</dt>
-                                    <dd>{((sheet.sheet_score || 0) - 0).toFixed(2)}%</dd>
+                                    <dd>{((sheet && sheet.sheet_score || 0) - 0).toFixed(2)}%</dd>
                                 </dl>
                                 <dl className="cl">
                                     <dt>答题日期</dt>
-                                    <dd>{sheet.submitted_time || sheet.sheet_submitted_time}</dd>
+                                    <dd>{sheet && (sheet.submitted_time || sheet.sheet_submitted_time)}</dd>
                                 </dl>
                             </div>
                             <div style={{ position: "relative"}}>
