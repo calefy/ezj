@@ -119,6 +119,12 @@ let SignUp = React.createClass({
         }
     },
 
+    // 单纯关闭对话框
+    onClosePayDialog: function(e) {
+        e.preventDefault();
+        e.nativeEvent.returnValue = false;
+        this._setState({ showPayConfirm: false });
+    },
     // 关闭支付确认框
     onClosePayConfirm: function(e) {
         e && e.preventDefault();
@@ -281,7 +287,7 @@ let SignUp = React.createClass({
                                 title="手机："
                                 placeholder="请输入学员的联系方式"
                                 required
-                                validations={{matchRegexp: /1[3-9]\d{9}/}}
+                                validations={{matchRegexp: /^1[3-9]\d{9}$/}}
                                 validationError="请输入正确的手机号"
                             />
 
@@ -350,7 +356,7 @@ let SignUp = React.createClass({
                 </Formsy.Form>
 
                 <form target="payWindow" method="POST" className="hide" ref="unipayForm"></form>
-                <Dialog className="popover pop" open={this.state.showPayConfirm} onRequestClose={this.onClosePayConfirm}>
+                <Dialog className="popover pop" open={this.state.showPayConfirm} onRequestClose={this.onClosePayDialog}>
                     <h4>确认支付结果</h4>
                     <div className="popover-info">
                         请于24小时内完成支付，逾期系统将自动取消订单。

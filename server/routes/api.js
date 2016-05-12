@@ -28,7 +28,8 @@ function getNoPrefixUrl(path, params = {}) {
 
 // 针对头像文件上传路径处理
 router.post(/^\/v3\/storage\/upload/, uploader.single('avatar'), function(req, res, next) {
-    if (!req.file.mimetype.startsWith('image')) {
+    // IE9及以下用flash上传的图片，类型为octet-stream
+    if (!req.file.mimetype.startsWith('image') && req.file.mimetype !== 'application/octet-stream') {
         res.send({ status: 455, message: '文件类型错误' });
         return;
     }

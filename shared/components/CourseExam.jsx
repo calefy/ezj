@@ -75,7 +75,7 @@ class CourseExam extends Component {
         this.setState({ index: 0, start: true });
     };
     onPrev = e => {
-        if (e.currentTarget.getAttribute('disabled') !== null) return;
+        if (e.currentTarget.disabled) return;
 
         this.setCurrentIndexAnswer();
         this.clearCurrentChecked();
@@ -86,7 +86,7 @@ class CourseExam extends Component {
         }
     };
     onNext = e => {
-        if (e.currentTarget.getAttribute('disabled') !== null) return;
+        if (e.currentTarget.disabled) return;
 
         this.setCurrentIndexAnswer();
 
@@ -106,7 +106,7 @@ class CourseExam extends Component {
         }
     };
     onSkip = e => {
-        if (e.currentTarget.getAttribute('disabled') !== null) return;
+        if (e.currentTarget.disabled) return;
         this.clearCurrentChecked();
 
         // 设置当前题目答案为空
@@ -122,7 +122,7 @@ class CourseExam extends Component {
     };
     onSubmit = e => {
         e.preventDefault();
-        if (e.currentTarget.getAttribute('disabled') !== null) return;
+        if (e.currentTarget.disabled) return;
         this.setCurrentIndexAnswer();
         const { course, examination } = this.props;
         // 检查当前题目是否有答案

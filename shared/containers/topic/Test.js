@@ -99,7 +99,7 @@ let Exam = React.createClass({
     },
     onPrev: function(e) {
         e.preventDefault();
-        if (e.currentTarget.getAttribute('disabled') !== null) return;
+        if (e.currentTarget.disabled) return;
 
         if (!e.currentTarget.getAttribute('data-nosave')) {
             this.setCurrentIndexAnswer();
@@ -114,7 +114,7 @@ let Exam = React.createClass({
     },
     onNext: function(e) {
         e.preventDefault();
-        if (e.currentTarget.getAttribute('disabled') !== null) return;
+        if (e.currentTarget.disabled) return;
 
         let questions = this.props.examination.data.questions || [];
 
@@ -138,7 +138,7 @@ let Exam = React.createClass({
     },
     onSkip: function(e) {
         e.preventDefault();
-        if (e.currentTarget.getAttribute('disabled') !== null) return;
+        if (e.currentTarget.disabled) return;
 
         this.clearCurrentChecked();
 
@@ -155,7 +155,7 @@ let Exam = React.createClass({
     },
     onSubmit: function(e) {
         e.preventDefault();
-        if (e.currentTarget.getAttribute('disabled') !== null) return;
+        if (e.currentTarget.disabled) return;
 
         this.setCurrentIndexAnswer();
         // 检查当前题目是否有答案
@@ -301,10 +301,10 @@ let Exam = React.createClass({
                                 })}
                             </dl>
                             <div className="course-test-question-btn">
-                                <a href="#" className={firstIndex ? 'btn disabled' : 'btn'} disabled={firstIndex} onClick={this.onPrev}>上一题</a>
-                                <a href="#" className={lastIndex ? 'btn disabled' : 'btn'} disabled={lastIndex} onClick={this.onNext}>下一题</a>
-                                <a href="#" className={lastIndex ? 'btn disabled' : 'btn'} disabled={lastIndex} onClick={this.onSkip}>跳过</a>
-                                <a href="#" className={!lastIndex ? 'btn disabled' : 'btn'} disabled={!lastIndex} onClick={this.onSubmit}>提交答卷</a>
+                                <button type="button" className={firstIndex ? 'btn disabled' : 'btn'} disabled={firstIndex} onClick={this.onPrev}>上一题</button>
+                                <button type="button" className={lastIndex ? 'btn disabled' : 'btn'} disabled={lastIndex} onClick={this.onNext}>下一题</button>
+                                <button type="button" className={lastIndex ? 'btn disabled' : 'btn'} disabled={lastIndex} onClick={this.onSkip}>跳过</button>
+                                <button type="button" className={!lastIndex ? 'btn disabled' : 'btn'} disabled={!lastIndex} onClick={this.onSubmit}>提交答卷</button>
                             </div>
                         </div>
                     :
