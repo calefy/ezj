@@ -1,3 +1,6 @@
-.not-found{ text-align: center; padding: 414px 0 80px; line-height: 4; background: url(../img/404.png) no-repeat center 110px;}
-.not-found p{ font-size: 1.5em;}
-.not-found a{ font-size: 1.125em; color: #fff; background: #b01c40; border-bottom: 3px solid #a11739; padding: 10px 24px; margin: 0 20px;}
+.page-error{ text-align: center; padding: 414px 0 80px; line-height: 4; }
+.page-error p{ font-size: 1.5em;}
+.page-error a{ font-size: 1.125em; color: #fff; background: #b01c40; border-bottom: 3px solid #a11739; padding: 10px 24px; margin: 0 20px;}
+
+.not-found{ background: url(../img/404.png) no-repeat center 110px;}
+.server-error{ background: url(../img/500.png) no-repeat center 110px;}

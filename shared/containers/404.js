@@ -15,7 +15,7 @@ class NotFound extends Component {
 
     render() {
         return (
-            <div className="content not-found">
+            <div className="content page-error not-found">
                 <div className="container cl">
                     <p>很抱歉，您访问的页面已经断开...</p>
                     <Link to="/">返回首页</Link>
