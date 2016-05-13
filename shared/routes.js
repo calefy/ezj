@@ -53,7 +53,7 @@ module.exports = {
                     path: ':courseId(/:hash)',
                     getComponent(location, cb) {
                         require.ensure([], require => {
-                            cb(null, require('./containers/courses/index'));
+                            cb(null, require('./containers/courses/Course.jsx'));
                         });
                     },
                 },
