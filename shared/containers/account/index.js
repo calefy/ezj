@@ -22,9 +22,12 @@ class Account extends Component {
     ];
 
     onFileSuccess = res => {
-        //console.log(res);
         const userAction = new UserAction();
         this.props.dispatch( userAction.updateAvatar(res.data.avatar) );
+    };
+    onFileError = res => {
+        let reason = res && res.message || res || '';
+        alert('上传新头像失败' + (reason ? '：' + reason : ''));
     };
 
     render() {
@@ -38,11 +41,19 @@ class Account extends Component {
                     <img src={avatar(user.avatar, 'pipe3')} alt={user.nickname} />
                     <Formsy.Form>
                         <FormsyUpload
+                            name="avatar"
                             id="upload_avatar"
                             fileVal="avatar"
-                            name="avatar"
+                            server="/api/v3/storage/upload/avatar"
                             label="上传新头像"
+                            showInfo={false}
+                            accept={{
+                                title: 'Images',
+                                extensions: 'gif,jpg,jpeg,bmp,png',
+                                mimeTypes: 'image/*'
+                            }}
                             onFileSuccess={this.onFileSuccess}
+                            onFileError={this.onFileError}
                         />
                     </Formsy.Form>
                     <p>{user.nickname}</p>

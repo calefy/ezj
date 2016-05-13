@@ -15,9 +15,9 @@ class Error extends Component {
 
     render() {
         return (
-            <div className="content not-found">
+            <div className="content page-error server-error">
                 <div className="container cl">
-                    <p>很抱歉，系统繁忙...</p>
+                    <p>很抱歉，您访问的页面系统繁忙...</p>
                     <Link to="/">返回首页</Link>
                     <Link to="/" onClick={this.onBack}>返回上一页</Link>
                 </div>
