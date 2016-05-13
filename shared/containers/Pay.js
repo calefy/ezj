@@ -189,10 +189,11 @@ let Pay = React.createClass({
         let course = this.props.course.data || {};
         let product = this.props.product.data || {};
 
-        let accountAmount = account.available_amount || 0;
+        let accountAmount = (account.available_amount || 0) - 0;
         let price = type == payType.COURSE ?
                         course.course_price || 0 :
                         product.price || 0;
+        price = price - 0;
 
         let dateLength = product.product_type == 2 ? 180 : 90; // product_type 1-课程，2-课程包
 
