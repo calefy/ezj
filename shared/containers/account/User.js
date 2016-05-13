@@ -8,6 +8,7 @@ import FormsyCheckbox from '../../components/formsy/FormsyCheckbox.jsx';
 import FormsyRadioGroup from '../../components/formsy/FormsyRadioGroup.jsx';
 import FormsyText from '../../components/formsy/FormsyText.jsx';
 import FormsyDate from '../../components/formsy/FormsyDate.jsx';
+import FormsyAddress from '../../components/formsy/FormsyAddress.jsx';
 
 import {getRequestTypes} from '../../libs/utils';
 import UserAction from '../../actions/UserAction';
@@ -49,6 +50,11 @@ let User = React.createClass({
     // 提交表单
     onSubmit: function(model) {
         this.loadingSubmitButton();
+
+        let addr = model.addr.split(',');
+        model.province = addr.length ? addr[0] : null;
+        model.city = addr.length > 1 ? addr[1] : null;
+        model.county = addr.length > 2 ? addr[2] : null;
 
         const userAction = new UserAction();
         this.props.dispatch( userAction.updateInfo(model) );
@@ -92,6 +98,18 @@ let User = React.createClass({
                     title="出生日期："
                     defaultValue={user.birthday}
                 />
+                <div className="address">
+                    <FormsyAddress
+                        name="addr"
+                        title="所在地区："
+                        defaultProvince={user.province}
+                        defaultCity={user.city}
+                        defaultCounty={user.county}
+                        required
+                        validations={{matchRegexp: /^\d+,\d+,\d+$/}}
+                        validationError="请选择所在地区"
+                    />
+                </div>
                 {/*
                 <FormsyText
                     name="birthday"
@@ -181,7 +199,7 @@ let User = React.createClass({
                 */}
                 <div>
                     <button className={this.canSubmit() ? 'btn' : 'btn disabled'} type="submit" disabled={!this.canSubmit()}>{this.isSubmitLoading() ? '保存中...' : '保存'}</button>
-                    <span className="text-error">{this.state.error}</span>
+                    <span className="text-error"> {this.state.error}</span>
                 </div>
             </Formsy.Form>
         );

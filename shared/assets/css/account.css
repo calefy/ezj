@@ -71,6 +71,7 @@
 .account-user input[type="radio"]{ margin: 0 4px 0 0;}
 .account-user .account-birth-select,.account-user .account-address-select{ float: left; margin: 0 10px 0 0;}
 .account-user .btn{ padding: 10px 36px;margin-left:100px;}
+.account-user .address select{margin-right:35px;}
 
 
 

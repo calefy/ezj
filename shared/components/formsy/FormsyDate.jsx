@@ -40,11 +40,6 @@ let FormsyDate = React.createClass({
                 year % 4 === 0 ? 29 : 28;
     },
 
-    updateDays: function() {
-        let v = this.getDomValue();
-        let ds = this.getMonthDays(v[0], v[1]);
-    },
-
     onChangeYear: function(e) {
         let v = this.getDomValue();
         let d = this.getMonthDays(v[0], v[1]);
