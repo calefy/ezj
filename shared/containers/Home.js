@@ -100,13 +100,13 @@ let Home = React.createClass({
                                 <div className="module-title">企业理财师（CFC）认证</div>
                                 <p>一张通行国内、国际金融界的专业资质</p>
                             </Link>
-                            <Link to="/topic/finance" title="" target="_blank" className="module module2">
+                            <Link to="/courses" query={{category: 'competitive'}} title="" target="_blank" className="module module2">
                                 <div className="module-icon">
                                     <i className="iconfont icon-module21"></i>
                                 </div>
-                                <h4>公开课</h4>
-                                <div className="module-title">全球互联网金融商业模式及案例 深度解析公开课</div>
-                                <p>权威、全面、深入、前沿、实战、超值</p>
+                                <h4>学位项目</h4>
+                                <div className="module-title">紫荆-索菲亚 财富管理方向MBA</div>
+                                <p>国内首家授予美国正式学位的在线MBA项目</p>
                             </Link>
                             <Link to="/topic/security" title="" target="_blank" className="module module3">
                                 <div className="module-icon">

@@ -245,6 +245,15 @@ module.exports = {
                 });
             }
         },
+        //500页面
+        {
+            path: '500',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/500.jsx'));
+                });
+            }
+        },
         //其他页面
         {
             path: 'help',

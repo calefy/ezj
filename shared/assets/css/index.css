@@ -13,6 +13,7 @@
 .module-icon{ width: 108px; height:108px; border-radius: 54px; display:inline-block; border:1px solid #3a3a3a; background: #fff}
 .module:hover .module-icon{border:1px solid #b01c40; background: #b01c40}
 .module:hover h4{ color: #af1b40; border-bottom: 1px solid #af1b40;}
+.module2{margin: 0 51px;}
 
 
 /* 推荐微专业 - wrap */

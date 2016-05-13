@@ -46,10 +46,10 @@
 .course-bottom-about .course-title{ background: url(../img/icon-course-about.png) no-repeat left center;}
 .course-bottom-recommend .course-title{ background: url(../img/icon-course-user.png) no-repeat left center;}
 .course-bottom-teacher .course-title{ background: url(../img/icon-course-teacher.png) no-repeat 13px center; padding:16px 0 16px 47px;}
-.course-bottom-teacher{ margin: 0 0 20px;}
-.course-bottom-teacher dl { color: #60686c; padding: 24px 14px;}
+.course-bottom-teacher{ margin-bottom:20px;padding-bottom:5px;}
+.course-bottom-teacher dl { color: #60686c; margin: 15px 14px 20px;}
 .course-bottom-teacher dl a{ color: #60686c; font-size: 0.875em;}
-.course-bottom-teacher dt span { margin: 0 0 0 76px; display: block; line-height: 1.4;}
+.course-bottom-teacher dt {text-align:center; line-height: 1.4}
 .course-bottom-teacher dd{ font-size: 0.75em; line-height: 2;margin: 20px 0 0; max-height: 116px; overflow: hidden;}
 
 .course-bottom-user .course-title{ padding: 12px 13px;}
