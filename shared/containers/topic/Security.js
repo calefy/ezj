@@ -15,23 +15,23 @@ const BUNDLE_ID = '6119033157460164608';
 class Security extends React.Component {
 
     // 初始加载数据
-    static fetchData({dispatch, params={}, location={}, apiClient}) {
-        const commerceAction = new CommerceAction({ apiClient });
-        return Promise.all([
-            dispatch( commerceAction.loadProductLecturers([BUNDLE_ID]) ),
-        ]);
-    }
+    //static fetchData({dispatch, params={}, location={}, apiClient}) {
+    //    const commerceAction = new CommerceAction({ apiClient });
+    //    return Promise.all([
+    //        dispatch( commerceAction.loadProductLecturers([BUNDLE_ID]) ),
+    //    ]);
+    //}
 
     state = {
         schedule: 'sc4', // 要显示的课程内容
     };
 
-    componentDidMount() {
-        const { dispatch, product_lecturers } = this.props;
-        if (!product_lecturers._req || product_lecturers._req.ids.indexOf(BUNDLE_ID) >= 0) {
-            Security.fetchData(this.props);
-        }
-    }
+    //componentDidMount() {
+    //    const { dispatch, product_lecturers } = this.props;
+    //    if (!product_lecturers._req || product_lecturers._req.ids.indexOf(BUNDLE_ID) >= 0) {
+    //        Security.fetchData(this.props);
+    //    }
+    //}
 
     _setState = obj => {
         this.setState(Object.assign({}, this.state, obj || {}));
