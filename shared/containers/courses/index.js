@@ -418,16 +418,18 @@ class Course extends Component {
                             <div className="course-bottom-teacher course-shadow bg-white">
                                 <h4 className="course-title">课程讲师</h4>
                                 {(course.lecturers || []).map((item, index) => {
+                                    let intro = item.lecturer_introduction.replace(/<[^>]+>|&.{2,10};/g, '');
+                                    intro = intro.slice(0, 75) + (intro.length > 75 ? '...' : '');
                                     return (
                                         <dl key={index}>
                                             <dt>
-                                                <Link to={`/lecturers/${item.id}`} className="cl">
-                                                    <img src={image(item.lecturer_avatar, 'sl')} alt="" width="68" className="fl"/>
-                                                    {item.lecturer_name}
-                                                    {item.lecturer_org} {item.lecturer_title}
+                                                <Link to={`/lecturers/${item.id}`}>
+                                                    <img src={image(item.lecturer_avatar, 'sl')} alt="" width="68"/>
+                                                    <div>{item.lecturer_name}</div>
+                                                    <div>{item.lecturer_org}</div>
                                                 </Link>
                                             </dt>
-                                            <dd dangerouslySetInnerHTML={{__html: item.lecturer_introduction}}></dd>
+                                            <dd>{intro}</dd>
                                         </dl>
                                     );
                                 })}
