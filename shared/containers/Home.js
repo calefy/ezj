@@ -100,7 +100,7 @@ let Home = React.createClass({
                                 <div className="module-title">企业理财师（CFC）认证</div>
                                 <p>一张通行国内、国际金融界的专业资质</p>
                             </Link>
-                            <Link to="/topic/finance" title="" target="_blank" className="module module2">
+                            <Link to="/courses" query={{category: 'competitive'}} title="" target="_blank" className="module module2">
                                 <div className="module-icon">
                                     <i className="iconfont icon-module21"></i>
                                 </div>
