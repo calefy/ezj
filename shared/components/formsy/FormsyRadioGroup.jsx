@@ -11,7 +11,7 @@ let FormsyRadioGroup = React.createClass({
     propTypes: {
         name: React.PropTypes.string.isRequired,
         options: React.PropTypes.array.isRequired,
-        defaultValue: React.PropTypes.string,
+        //defaultValue: React.PropTypes.string,
         labelPosition: React.PropTypes.string,
     },
 

@@ -31,6 +31,7 @@ let FormsyText = React.createClass({
                         name={this.props.name}
                         onChange={this.changeValue}
                         value={this.getValue()}
+                        defaultValue={this.props.defaultValue}
                         placeholder={this.props.placeholder}
                     />
                 </div>

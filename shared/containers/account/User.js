@@ -7,6 +7,7 @@ import formsySubmitButtonMixin from '../../mixins/formsySubmitButtonMixin';
 import FormsyCheckbox from '../../components/formsy/FormsyCheckbox.jsx';
 import FormsyRadioGroup from '../../components/formsy/FormsyRadioGroup.jsx';
 import FormsyText from '../../components/formsy/FormsyText.jsx';
+import FormsyDate from '../../components/formsy/FormsyDate.jsx';
 
 import {getRequestTypes} from '../../libs/utils';
 import UserAction from '../../actions/UserAction';
@@ -54,6 +55,8 @@ let User = React.createClass({
     },
 
     render: function() {
+        let user = this.props.user.data || {};
+
         return (
             <Formsy.Form
                 ref="form"
@@ -66,16 +69,17 @@ let User = React.createClass({
                 <FormsyText
                     name="nickname"
                     title="昵称："
+                    defaultValue={user.nickname}
                     placeholder="4-30个字符，支持中英文、数字、“_”或减号"
                     required
-                    validations={{matchRegexp: /^[\u4e00-\u9fa5_a-zA-Z\d\-]{4,30}$/}}
+                    validations={{matchRegexp: /^[\u4e00-\u9fa5_a-zA-Z\d\-]{2,30}$/}}
                     validationError="请输入4-30个字符，支持中英文、数字、“_”或减号"
                 />
                 <div className="formsy-list cl">
                     <label>性别：</label>
                     <FormsyRadioGroup
                         name="gender"
-                        defaultValue="0"
+                        defaultValue={user.gender}
                         options={[
                             {value: 1, label: '男'},
                             {value: 2, label: '女'},
@@ -83,6 +87,16 @@ let User = React.createClass({
                         ]}
                     />
                 </div>
+                <FormsyDate
+                    name="birthday"
+                    title="出生日期："
+                    placeholder="请输入出生日期，格式：1990-01-08"
+                    defaultValue={user.birthday}
+                    required
+                    validations={{matchRegexp: /^\d{4}-\d{2}-\d{2}$/}}
+                    validationError="请输入真实出生日期"
+                />
+                {/*
                 <FormsyText
                     name="birthday"
                     title="出生日期："
@@ -99,6 +113,7 @@ let User = React.createClass({
                     validations={{matchRegexp: /^[\u4e00-\u9fa5]{2,10}$/}}
                     validationError="请输入城市名称"
                 />
+                */}
                 {/*
                 <dl>
                     <dd>
