@@ -43,7 +43,8 @@ class ApiClientNode extends ApiClient {
             headers: Object.assign({
                 //'Content-Type': 'application/x-www-form-urlencoded', // 因提交文件时，类型会带上boundary，因此默认不加该类型，改到下面判断
                 // 'Accept': 'application/json',
-                'X-Requested-With': 'fetch'
+                'X-Requested-With': 'fetch',
+                'X-Device': 'www,1.0'
             }, this.headers || {}, headers || {})
         }
 
