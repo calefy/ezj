@@ -12,6 +12,7 @@ let FormsyUpload = React.createClass({
         fileVal: React.PropTypes.string,
         server: React.PropTypes.string,
         id: React.PropTypes.string,
+        showInfo: React.PropTypes.bool,
         onFileQueued: React.PropTypes.func,
         onFileSuccess: React.PropTypes.func,
         onFileError: React.PropTypes.func
@@ -28,7 +29,8 @@ let FormsyUpload = React.createClass({
         return {
             id: 'webuploader_' + countor,
             name: 'file',
-            server: '/api/v3/storage/upload/avatar'
+            server: '/api/v3/storage/upload/avatar',
+            showInfo: true,
         }
     },
 
@@ -76,7 +78,7 @@ let FormsyUpload = React.createClass({
             // 上传成功
             .on( 'uploadSuccess', function( file, res  ) {
                 if (res.data) {
-                    this.setValue(res.data.file);
+                    this.setValue(JSON.stringify(res.data));
                     if (this.props.onFileSuccess) {
                         this.props.onFileSuccess(res);
                     }
@@ -134,7 +136,10 @@ let FormsyUpload = React.createClass({
                 {this.state.uploading ?
                     <span className="loading"><i className="iconfont icon-loading fa-spin"></i></span>
                     :
-                    <span style={{ fontSize:'12px' }}>{val}</span>
+                    this.props.showInfo ?
+                        <span style={{ fontSize:'12px' }}>{val}</span>
+                        :
+                        null
                 }
             </div>
         );
