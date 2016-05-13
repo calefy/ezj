@@ -64,12 +64,14 @@ let FormsyAddress = React.createClass({
                     <select defaultValue={this.props.defaultProvince} onChange={this.onChangeProvince} ref="province">
                         <option value="">请选择</option>
                         {map(Address || {}, (item, key) => {
+                            if (key === 'name') return null;
                             return <option key={key} value={key}>{item.name}</option>
                         })}
                     </select>
                     <select defaultValue={this.props.defaultCity} onChange={this.onChangeCity} ref="city">
                         <option value="">请选择</option>
                         {map(this.state.province && Address[this.state.province] || {}, (item, key) => {
+                            if (key === 'name') return null;
                             return <option key={key} value={key}>{item.name}</option>
                         })}
                     </select>
@@ -78,7 +80,8 @@ let FormsyAddress = React.createClass({
                         {map(this.state.province && this.state.city &&
                             Address[this.state.province] &&
                             Address[this.state.province][this.state.city] || {}, (item, key) => {
-                            return <option key={key} value={key}>{item.name}</option>
+                            if (key === 'name') return null;
+                            return <option key={key} value={key}>{item}</option>
                         })}
                     </select>
                 </div>
