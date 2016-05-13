@@ -59,7 +59,7 @@ class Info extends Component {
                                 (user.city && Address[user.province][user.city] ?
                                     '-' + Address[user.province][user.city].name +
                                     (user.county && Address[user.province][user.city][user.county] ?
-                                        '-' + Address[user.province][user.city][user.county].name : '')
+                                        '-' + Address[user.province][user.city][user.county] : '')
                                     : '')
                             : '暂无'
                         }
