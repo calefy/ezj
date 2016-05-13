@@ -77,7 +77,8 @@ function doRendering(req, res, apiClient, user = {}) {
                 .then(html => res.end(html))
                 .catch(err => {
                     console.log('[server render error]: ', err.stack);
-                    res.end(err.message);
+                    //res.end(err.message);
+                    res.redirect('/500');
                 });
         }
     });
