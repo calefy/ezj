@@ -91,6 +91,11 @@ button{ cursor: pointer; outline: none; border: 0;}
 .footer-bottom {color: #f5f5f5;font-size: 0.75em; line-height: 2.4;padding:20px 0;}
 .footer-bottom a{ color: #f5f5f5; margin: 0 6px;}
 
+
+.banner,
+.header, .footer, .content,
+.wide{min-width: 1200px;}
+
 /* loading */
 .loading,.no-data{ text-align: center; padding: 30px 0;}
 .no-data{color:#999;}
