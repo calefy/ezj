@@ -12,6 +12,9 @@ let FormsyText = React.createClass({
         name: React.PropTypes.string.isRequired
     },
 
+    componentDidMount() {
+        this.setValue(this.props.defaultValue || '');
+    },
     changeValue(event) {
         this.setValue(event.currentTarget.value);
     },

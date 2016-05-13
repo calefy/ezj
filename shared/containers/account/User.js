@@ -79,7 +79,7 @@ let User = React.createClass({
                     <label>性别：</label>
                     <FormsyRadioGroup
                         name="gender"
-                        defaultValue={user.gender}
+                        defaultValue={user.gender || 0}
                         options={[
                             {value: 1, label: '男'},
                             {value: 2, label: '女'},
@@ -90,11 +90,7 @@ let User = React.createClass({
                 <FormsyDate
                     name="birthday"
                     title="出生日期："
-                    placeholder="请输入出生日期，格式：1990-01-08"
                     defaultValue={user.birthday}
-                    required
-                    validations={{matchRegexp: /^\d{4}-\d{2}-\d{2}$/}}
-                    validationError="请输入真实出生日期"
                 />
                 {/*
                 <FormsyText
