@@ -33,9 +33,14 @@ class App extends Component {
             App.fetchData(this.props);
         }
 
-        // 添加统计
+        // 添加上送接口统计
         this.props.dispatch(this.operateAction.addAnalysisAction({ type: 'PAGEVIEW', ts: (new Date()).getTime(), key: this.props.location.pathname + this.props.location.search }));
-        analysisTimer = setInterval(this.doUploadAnalysis.bind(this), 30 * 1000);
+
+        // 上传接口统计数据
+        analysisTimer = setInterval(this.doUploadAnalysis.bind(this), 10 * 1000);
+
+        // 添加piwik统计代码
+        setTimeout(() => { this.doPiwikCode(); }, 100);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -43,8 +48,15 @@ class App extends Component {
         let nextPath = nextProps.location.pathname + nextProps.location.search;
         if (prevPath !== nextPath) {
             window.scrollTo(0, 0);
-            // 统计
+            // 添加上送接口统计
             this.props.dispatch(this.operateAction.addAnalysisAction({ type: 'PAGEVIEW', ts: (new Date()).getTime(), key: nextPath }));
+            // 添加piwik统计代码
+            setTimeout(() => {
+                if (window._paq) {
+                    _paq.push(['setCustomUrl', nextPath]);
+                    _paq.push(['trackPageView']);
+                }
+            }, 0);
         }
 
         // 清理action，防止路由变更时，action数据没变更，导致二次处理问题
@@ -74,6 +86,24 @@ class App extends Component {
 
             this.props.dispatch(this.operateAction.clearAnalysisAction())
         }
+    };
+
+    // Piwik统计代码，每次URL变更重新部署
+    doPiwikCode = () => {
+        window._paq = [];
+        _paq.push(["setDomains", ["*.ezijing.com"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+
+        var u="//piwik.ezijing.com/", domId = '__piwik_script';
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 3]);
+
+        var d=document, g=d.createElement('script'), s;
+        g.type='text/javascript'; g.src=u+'piwik.js';
+        g.async=true; g.defer=true;
+        s=d.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(g,s);
     };
 
     render() {
