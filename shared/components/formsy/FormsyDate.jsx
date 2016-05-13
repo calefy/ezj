@@ -4,25 +4,27 @@
 import React from 'react';
 import Formsy from 'formsy-react';
 
+const DEFAULT_DATE = '1990-01-01';
+
 let FormsyDate = React.createClass({
     mixins: [Formsy.Mixin],
     propTypes: {
         name: React.PropTypes.string.isRequired,
-        defaultValue: React.PropTypes.string.isRequired,
+        defaultValue: React.PropTypes.string,
     },
     getDefaultProps: function() {
          return {
-             defaultValue: '1990-01-01',
+             defaultValue: DEFAULT_DATE,
          };
     },
     getInitialState: function() {
-        let d = this.props.defaultValue.split('-');
+        let d = (this.props.defaultValue || DEFAULT_DATE).split('-');
         return {
             days: this.getMonthDays(d[0], d[1]),
         };
     },
     componentDidMount: function() {
-        this.setValue(this.props.defaultValue);
+        this.setValue(this.props.defaultValue || DEFAULT_DATE);
     },
 
     getDomValue: function() {
@@ -68,7 +70,7 @@ let FormsyDate = React.createClass({
 
     render: function() {
         let className = this.showRequired() ? 'required' : this.showError() ? 'error' : '';
-        let propsValue = this.props.defaultValue.split('-');
+        let propsValue = (this.props.defaultValue || DEFAULT_DATE).split('-');
 
         return (
             <div className={`formsy-list cl ${className}`}>
