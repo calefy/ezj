@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
 import { connect } from 'react-redux'
+import Address from '../../libs/address';
 
 import UserAction from '../../actions/UserAction';
 
@@ -52,7 +53,17 @@ class Info extends Component {
                 </dl>
                 <dl>
                     <dt>所在地区：</dt>
-                    <dd>{user.city || '暂无'}</dd>
+                    <dd>
+                        {user.province && Address[user.province] ?
+                            Address[user.province].name +
+                                (user.city && Address[user.province][user.city] ?
+                                    '-' + Address[user.province][user.city].name +
+                                    (user.county && Address[user.province][user.city][user.county] ?
+                                        '-' + Address[user.province][user.city][user.county].name : '')
+                                    : '')
+                            : '暂无'
+                        }
+                    </dd>
                 </dl>
                 <Link to="/account/user">修改我的资料></Link>
             </div>

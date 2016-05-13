@@ -7,6 +7,8 @@ import formsySubmitButtonMixin from '../../mixins/formsySubmitButtonMixin';
 import FormsyCheckbox from '../../components/formsy/FormsyCheckbox.jsx';
 import FormsyRadioGroup from '../../components/formsy/FormsyRadioGroup.jsx';
 import FormsyText from '../../components/formsy/FormsyText.jsx';
+import FormsyDate from '../../components/formsy/FormsyDate.jsx';
+import FormsyAddress from '../../components/formsy/FormsyAddress.jsx';
 
 import {getRequestTypes} from '../../libs/utils';
 import UserAction from '../../actions/UserAction';
@@ -49,11 +51,18 @@ let User = React.createClass({
     onSubmit: function(model) {
         this.loadingSubmitButton();
 
+        let addr = model.addr.split(',');
+        model.province = addr.length ? addr[0] : null;
+        model.city = addr.length > 1 ? addr[1] : null;
+        model.county = addr.length > 2 ? addr[2] : null;
+
         const userAction = new UserAction();
         this.props.dispatch( userAction.updateInfo(model) );
     },
 
     render: function() {
+        let user = this.props.user.data || {};
+
         return (
             <Formsy.Form
                 ref="form"
@@ -66,16 +75,17 @@ let User = React.createClass({
                 <FormsyText
                     name="nickname"
                     title="昵称："
+                    defaultValue={user.nickname}
                     placeholder="4-30个字符，支持中英文、数字、“_”或减号"
                     required
-                    validations={{matchRegexp: /^[\u4e00-\u9fa5_a-zA-Z\d\-]{4,30}$/}}
+                    validations={{matchRegexp: /^[\u4e00-\u9fa5_a-zA-Z\d\-]{2,30}$/}}
                     validationError="请输入4-30个字符，支持中英文、数字、“_”或减号"
                 />
                 <div className="formsy-list cl">
                     <label>性别：</label>
                     <FormsyRadioGroup
                         name="gender"
-                        defaultValue="0"
+                        defaultValue={user.gender || 0}
                         options={[
                             {value: 1, label: '男'},
                             {value: 2, label: '女'},
@@ -83,6 +93,24 @@ let User = React.createClass({
                         ]}
                     />
                 </div>
+                <FormsyDate
+                    name="birthday"
+                    title="出生日期："
+                    defaultValue={user.birthday}
+                />
+                <div className="address">
+                    <FormsyAddress
+                        name="addr"
+                        title="所在地区："
+                        defaultProvince={user.province}
+                        defaultCity={user.city}
+                        defaultCounty={user.county}
+                        required
+                        validations={{matchRegexp: /^\d+,\d+,\d+$/}}
+                        validationError="请选择所在地区"
+                    />
+                </div>
+                {/*
                 <FormsyText
                     name="birthday"
                     title="出生日期："
@@ -99,6 +127,7 @@ let User = React.createClass({
                     validations={{matchRegexp: /^[\u4e00-\u9fa5]{2,10}$/}}
                     validationError="请输入城市名称"
                 />
+                */}
                 {/*
                 <dl>
                     <dd>
@@ -170,7 +199,7 @@ let User = React.createClass({
                 */}
                 <div>
                     <button className={this.canSubmit() ? 'btn' : 'btn disabled'} type="submit" disabled={!this.canSubmit()}>{this.isSubmitLoading() ? '保存中...' : '保存'}</button>
-                    <span className="text-error">{this.state.error}</span>
+                    <span className="text-error"> {this.state.error}</span>
                 </div>
             </Formsy.Form>
         );

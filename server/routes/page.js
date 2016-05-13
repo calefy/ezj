@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'production') {
     resourceConfig = JSON.parse(fs.readFileSync(__dirname + '/../../webpack.version.json', 'utf-8'));
 }
 
-var pageTitle = '紫荆教育-清华大学五道口金融学院旗下品牌'; // 记录页面标题
+const PAGE_TITLE = '紫荆教育-清华大学五道口金融学院旗下品牌'; // 记录页面标题
 
 function serverRendering(req, res) {
     let apiClient = new ApiClient({ prefix: config.apiPrefix });
@@ -47,6 +47,7 @@ function serverRendering(req, res) {
 
 }
 function doRendering(req, res, apiClient, user = {}) {
+    res.locals.pageTitle = PAGE_TITLE;
     // 因使用了 Material-UI，需要全局设置 navigator.userAgent
     global.navigator = { userAgent: req.get('User-Agent') };
     // 全局保持user信息，为了match时onEnter使用保持与前端代码一致
@@ -62,7 +63,7 @@ function doRendering(req, res, apiClient, user = {}) {
         } else {
             const store = configureStore(res.locals.state);
 
-            fetchComponentsData( store.dispatch, renderProps, apiClient )
+            fetchComponentsData( store.dispatch, renderProps, apiClient, res )
                 .then(() => {
                     const componentHtml = renderToString(
                         <Provider store={store}>
@@ -71,7 +72,7 @@ function doRendering(req, res, apiClient, user = {}) {
                     );
                     const initState = store.getState();
 
-                    return renderHtml( {componentHtml, initState, req} );
+                    return renderHtml( {componentHtml, initState, req, res} );
                 })
                 .then(html => res.end(html))
                 .catch(err => {
@@ -85,10 +86,10 @@ function doRendering(req, res, apiClient, user = {}) {
 /**
  * 自动从component中获取数据
  */
-function fetchComponentsData( dispatch, props = {}, apiClient ) {
+function fetchComponentsData( dispatch, props = {}, apiClient, res ) {
     const {components, params, location} = props;
     const promises = components.map( component => {
-        if (component && component.pageTitle) pageTitle = component.pageTitle;
+        if (component && component.pageTitle) res.locals.pageTitle = component.pageTitle;
         return (component && component.fetchData) ? component.fetchData({dispatch, params, location, apiClient}) : null;
     });
 
@@ -98,7 +99,7 @@ function fetchComponentsData( dispatch, props = {}, apiClient ) {
 /**
  * 渲染页面html
  */
-function renderHtml({ componentHtml, initState, req }) {
+function renderHtml({ componentHtml, initState, req, res }) {
     const publicPath = resourceConfig.publicPath;
     const assets = resourceConfig.assetsByChunkName.main;
 
@@ -108,7 +109,7 @@ function renderHtml({ componentHtml, initState, req }) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <title>${pageTitle}</title>
+    <title>${res.locals.pageTitle}</title>
     <link rel="shortcut icon" href="//www.ezijing.com/favicon.ico">
     <link rel="stylesheet" href="${publicPath}${assets[1]}">
     <!--[if lt IE 9]>

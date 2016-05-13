@@ -67,6 +67,10 @@ class Video extends Component {
     componentDidMount() {
         continueStart = this.props.lastTime || 0; // 如果传递有上次播放时间，则记录缓存，以便player.start时使用
         this.renderPlayer(PLAYER_ID, this.props.videoId, this.props.autoPlay);
+        setTimeout(() => {
+            let help = document.getElementById('player_not_support_help');
+            if (help) help.className = '';
+        }, 300)
     }
     componentDidUpdate() {
         this.renderPlayer(PLAYER_ID, this.props.videoId, this.props.autoPlay);
@@ -155,7 +159,7 @@ class Video extends Component {
     render() {
         return  <div id="playerWrap">
                     <div id="player">
-                        <p>观看该视频需要 Adobe Flash Player 11.1.0 或更高版本</p>
+                        <p className="hide" id="player_not_support_help">观看该视频需要 Adobe Flash Player 11.1.0 或更高版本</p>
                     </div>
                 </div>;
     }
