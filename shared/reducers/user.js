@@ -27,6 +27,7 @@ export function user(state, action) {
         case logoutTypes.success:
         case logoutTypes.failure:
             ret = Object.assign({}, state, { data: null, error: null });
+            window.__INITIAL_STATE__.user = {isFetching: false};
             break;
         case changePwdTypes.request:
         case changePwdTypes.success:
