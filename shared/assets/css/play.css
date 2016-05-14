@@ -20,7 +20,8 @@
 
 .play-nav{ border-bottom: 0;}
 .play-nav li{ width: 170px; padding:8px 0; line-height: 36px;}
-.play-nav li a{ color: #909090; border-right: 1px solid #323232;}
+.play-nav li a{ color: #909090; border-left: 1px solid #323232;}
+.play-nav li:first-child a{border: 0;}
 .play-nav li.current a{ color: #af1b40;}
 .play-nav li.current:after{ width:75px; height:3px; margin: 0 0 0 -37px;}
 
