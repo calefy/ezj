@@ -53,7 +53,7 @@ class Security extends React.Component {
         lecturers = []; // 临时去掉
 
         return (
-            <div className="special-security">
+            <div className="special-security wide">
                 <div className="special-banner special-security-banner cl">
                     <div className="container">
                         <div className="fl">

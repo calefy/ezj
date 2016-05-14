@@ -32,7 +32,7 @@ class Finance extends React.Component {
 
     render() {
         return (
-            <div className="special-finance">
+            <div className="special-finance wide">
                 <div className="special-banner special-finance-banner cl">
                     <div className="container">
                         <div className="special-finance-info">
