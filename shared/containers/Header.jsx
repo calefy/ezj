@@ -50,6 +50,8 @@ class Header extends Component {
 
             case registType.success:
                 this.hideDialog();
+                // 刷新以更新数据，防止regist接口返回数据不全
+                document.location.reload();
                 break;
             case registType.failure:
                 this.refs.registForm.handleResponse(RegistForm.RESPONSE_REGIST, nextProps.action.error);

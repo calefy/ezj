@@ -131,7 +131,7 @@ let RegistForm = React.createClass({
                         </span>
                     }
                     required
-                    validations={{matchRegexp: /^(1[3-9]\d{9}|\w+@\w+(\.\w+)+)$/}}
+                    validations={{matchRegexp: /^(1[3-9]\d{9}|[^@]+@\w+(\.\w+)+)$/}}
                     validationError="请输入手机号或邮箱"
                 />
 
