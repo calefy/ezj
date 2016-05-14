@@ -46,7 +46,7 @@ export const adsType = {
 export const baseCourseCategories = [
     { id: 'great', name: '金融专业实务精品课' },
     { id: 'financial', name: '金融领导力' },
-    { id: 'competitive', name: '学位项目' },
+    { id: 'competitive', name: '学位教育' },
 ];
 
 export const orderStatus = {
