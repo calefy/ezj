@@ -23,7 +23,7 @@ class Security extends React.Component {
     //}
 
     state = {
-        schedule: 'sc4', // 要显示的课程内容
+        schedule: 'sc5', // 要显示的课程内容
     };
 
     //componentDidMount() {
@@ -148,18 +148,26 @@ class Security extends React.Component {
                                     <li className={this.state.schedule === 'sc3' ? 'current' : ''}>
                                         <Link to="" className="tab3" data-key="sc3" onClick={this.onClickSchedule}>
                                             <h4>深圳</h4>
-                                            <p>第3期：2016.01.30-01.31</p>
-                                            <p>地点：博林诺富特酒店</p>
+                                            <p>第3期</p>
+                                            <p>2016年1月</p>
                                         </Link>
                                     </li>
                                     <li className={this.state.schedule === 'sc4' ? 'current' : ''}>
                                         <Link to="" className="tab4" data-key="sc4" onClick={this.onClickSchedule}>
                                             <h4>北京</h4>
-                                            <p>第4期：2016.03.26-03.27</p>
-                                            <p>地点待定</p>
+                                            <p>第4期</p>
+                                            <p>2016年3月</p>
+                                        </Link>
+                                    </li>
+                                    <li className={this.state.schedule === 'sc5' ? 'current' : ''}>
+                                        <Link to="" className="tab5" data-key="sc5" onClick={this.onClickSchedule}>
+                                            <h4>上海</h4>
+                                            <p>第5期</p>
+                                            <p>2016年5月28日-29日</p>
                                         </Link>
                                     </li>
                                 </ul>
+
                                 <div>
                                     <div className={'tab1 ' + (this.state.schedule === 'sc1' ? '' : 'hide')}>
                                         <table className="gridtable">
@@ -486,6 +494,64 @@ class Security extends React.Component {
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div className={'tab5 ' + (this.state.schedule === 'sc5' ? '' : 'hide')}>
+                                        <table className="gridtable">
+                                            <thead>
+                                                <tr>
+                                                    <th width="300">主题</th>
+                                                    <th width="440">内容</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <p>PPP全流程融资及资产证券化</p>
+                                                    </td>
+                                                    <td>
+                                                        <ul>
+                                                            <li>1、PPP三种收入模式</li>
+                                                            <li>2、PPP基金案例</li>
+                                                            <li>3、PPP项目融资及案例</li>
+                                                            <li>4、PPP与资产证券化结合案例</li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p>REITs在房地产企业“轻资产化”运营中的创新运用</p>
+                                                    </td>
+                                                    <td>
+                                                        <ul>
+                                                            <li>1、不动产资产证券化的类型与基础资产选择标准</li>
+                                                            <li>2、REITs的前世今生</li>
+                                                            <li>3、REITs交易结构、现金流重组与结构化模式选择</li>
+                                                            <li>4、房地产开发企业转型为管理公司的支点：REITs</li>
+                                                            <li>5、租金收益型、自营收益型、开发收益型房地产企业模拟项目分析</li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p>企业资产证券化的操作前沿实务及典型案例分析</p>
+                                                    </td>
+                                                    <td>
+                                                        <ul>
+                                                            <li>1、企业ABS基础资产分布课程</li>
+                                                            <li>2、企业ABS定价分析课程</li>
+                                                            <li>3、融资租赁ABS</li>
+                                                            <li>4、基础设施收益权ABS</li>
+                                                            <li>5、应收账款ABS</li>
+                                                            <li>6、信托受益权ABS</li>
+                                                            <li>7、小额贷款ABS</li>
+                                                            <li>8、股票质押式回购ABS</li>
+                                                            <li>9、住房公积金ABS</li>
+                                                            <li>10、信托受益权ABS案例分析</li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                             <div className="special-security-online bg-white fr">
@@ -574,7 +640,7 @@ class Security extends React.Component {
                             <div className="join-erwei cl">
                                 <div className="join-erwei-phone fl">
                                     <p>手机扫描二维码，即可报名并支付课程</p>
-                                    <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/924d52a69dd1c3c71953c01974ac27de.jpg" style={{ width: 236 }} />
+                                    <img src="http://zj-avatar.img-cn-beijing.aliyuncs.com/7d27bb2e237b23caa97888158ee0500b826411244.png" style={{ width: 236 }} />
                                 </div>
                                 <div className="join-saoma fr">
                                     <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/ce51f6e885a781de9bad91a479eb2f88.png" />
