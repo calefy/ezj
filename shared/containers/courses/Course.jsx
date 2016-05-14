@@ -336,12 +336,14 @@ class Course extends Component {
                                     <div className="course-bottom-about">
                                         <h4 className="course-title">课程简介</h4>
                                         <div dangerouslySetInnerHTML={{__html: course.course_outlines}}></div>
+                                        {/*
                                         <div>
                                             {chapters.map((item, index) => {
                                                 let isRoot = item.rgt - item.lft > 1;
                                                 return isRoot ? <p key={index}>{item.chapter_name}</p> : null;
                                             })}
                                         </div>
+                                        */}
                                     </div>
                                     <div className="course-bottom-recommend">
                                         <h4 className="course-title">推荐受众</h4>
