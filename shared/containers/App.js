@@ -91,13 +91,13 @@ class App extends Component {
     // Piwik统计代码，每次URL变更重新部署
     doPiwikCode = () => {
         window._paq = [];
-        _paq.push(["setDomains", ["*.ezijing.com"]]);
+        _paq.push(["setDomains", ["*.www.ezijing.com","*.w3.ezijing.com"]]);
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
 
         var u="//piwik.ezijing.com/", domId = '__piwik_script';
         _paq.push(['setTrackerUrl', u+'piwik.php']);
-        _paq.push(['setSiteId', 3]);
+        _paq.push(['setSiteId', 1]);
 
         var d=document, g=d.createElement('script'), s;
         g.type='text/javascript'; g.src=u+'piwik.js';

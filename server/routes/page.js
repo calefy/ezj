@@ -139,7 +139,7 @@ function renderHtml({ componentHtml, initState, req, res }) {
     <![endif]-->
 
     <script src="${publicPath}${assets[0]}"></script>
-    <noscript><img src="//piwik.ezijing.com/piwik.php?idsite=3" style="border:0;" class="hide" alt="" /></noscript>
+    <noscript><img src="//piwik.ezijing.com/piwik.php?idsite=1" class="hide" alt="" /></noscript>
 </body>
 </html>`;
 }
