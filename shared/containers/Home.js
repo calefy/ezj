@@ -90,7 +90,7 @@ let Home = React.createClass({
                     </div>
                 </div>
                 <div className="content">
-                    <div className="content-module1">
+                    <div className="content-module1 wide">
                         <div className="container cl">
                             <Link to="/topic/cfc" title="" target="_blank" className="module module1">
                                 <div className="module-icon">
@@ -118,7 +118,7 @@ let Home = React.createClass({
                             </Link>
                         </div>
                     </div>
-                    <div className="content-module3">
+                    <div className="content-module3 wide">
                         <h3 className="index-title">大家都在学</h3>
                         <div className="hot-course container cl">
                             <div className="fl hot-course-left">
@@ -141,7 +141,7 @@ let Home = React.createClass({
                             }
                         </div>
                     </div>
-                    <div className="content-module2">
+                    <div className="content-module2 wide">
                         <h3 className="index-title">免费课程</h3>
                         {courses_free.isFetching ?
                             <div className="loading">
@@ -159,7 +159,7 @@ let Home = React.createClass({
                             </div>
                         }
                     </div>
-                    <div className="content-module5">
+                    <div className="content-module5 wide">
                         <h3 className="index-title">名师大咖</h3>
                         {ads_index.isFetching ?
                             <div className="loading">

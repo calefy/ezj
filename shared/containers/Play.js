@@ -379,7 +379,10 @@ class Play extends Component {
                     <div className="control-panel">
                         <ul className="nav-tabs play-nav cl">
                             <li className={`videoChapter ${this.state.sidebar === SIDEBAR_CHAPTER ? 'current' : ''}`}><a href="#sidebar_chapter" onClick={this.handleShowSidebarChapter}>章节</a></li>
-                            <li className={`videoJy ${this.state.sidebar === SIDEBAR_PPT ? 'current' : ''}`}><a href="#sidebar_ppt" onClick={this.handleShowSidebarPpt}>讲义</a></li>
+                            {ppts.length ?
+                                <li className={`videoJy ${this.state.sidebar === SIDEBAR_PPT ? 'current' : ''}`}><a href="#sidebar_ppt" onClick={this.handleShowSidebarPpt}>讲义</a></li>
+                                : null
+                            }
                         </ul>
                         <div className="tab-content">
                             <div className={`tab-pane ${this.state.sidebar === SIDEBAR_CHAPTER ? 'current' : ''}`}>

@@ -4,6 +4,9 @@
  *   type有可能有三个值 payType.COURSE(id传递课程ID),payType.PRODUCT(id传递课程的商品ID), payType.PACKAGE(id传递课程包ID)
  *   第一种，数据在course中，第二、三种数据在product中
  *   第一二种都是课程，但是后者没有课程ID，第三种是课程包，下面的判断中三者之间关系需要考虑到。
+ *
+ *
+ *   后修改为两种，第一种不变，第二种包含上面的二三。
  */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
