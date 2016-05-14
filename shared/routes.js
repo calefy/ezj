@@ -4,10 +4,14 @@
  *  - 假设服务器端与浏览器端都有同样的global数据：__INITIAL_STATE__ = { user: { isFetching: false, data: {...} } }
  *  - 上面假设还有个假设：浏览器端的初始数据是经过服务器端渲染的，包含user
  */
-function needLogin(nextState, replaceState) {
-    if (!(typeof __INITIAL_STATE__ === 'object' &&
+function isLogin() {
+    return typeof __INITIAL_STATE__ === 'object' &&
             __INITIAL_STATE__.user &&
-            __INITIAL_STATE__.user.data)) {
+            __INITIAL_STATE__.user.data &&
+            __INITIAL_STATE__.user.data.uid;
+}
+function needLogin(nextState, replaceState) {
+    if (!isLogin()) {
         replaceState(null, '/');
     }
 }
@@ -192,6 +196,11 @@ module.exports = {
             childRoutes: [
                 {
                     path: 'intro',
+                    onEnter: function (nextState, replaceState) {
+                        if (isLogin()) {
+                            replaceState(null, '/study/all');
+                        }
+                    },
                     getComponent(location, cb) {
                         require.ensure([], require => {
                             cb(null, require('./containers/study/Intro.jsx'));
