@@ -8,7 +8,7 @@
 .play-center .text-error{ font-size:0.875em;line-height:1.5em; }
 .play-ppt { position: relative;width: 550px; height: 363.375px;background-color:#000;}
 .play-ppt-img { width: 100%; height: 100%;}
-.play-controls {position: absolute;bottom:0;left:0;right:0;height: 44px; line-height: 42px; padding: 0 14px;}
+.play-controls {position: absolute;bottom:0;left:0;right:0;height: 44px; line-height: 42px; padding: 0 14px;background-color: #000;}
 .play-controls .fl i{ color: #8c8c8b}
 .play-page{ position: absolute; left: 50%; margin-left: -75px; color: #fff; width: 150px; text-align: center; font-size: 0.875em;}
 .play-page .play-now { color: #d29f29;}
