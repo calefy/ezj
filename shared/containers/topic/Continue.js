@@ -52,7 +52,7 @@ class Continue extends React.Component {
         });
 
         return (
-            <div className="special-continue">
+            <div className="special-continue wide">
                 <div className="special-banner cl">
                     <div className="container">
                         <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/0d79a42d379bb1666e7b48d6747f9971.png" />

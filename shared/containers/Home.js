@@ -104,7 +104,7 @@ let Home = React.createClass({
                                 <div className="module-icon">
                                     <i className="iconfont icon-module21"></i>
                                 </div>
-                                <h4>学位项目</h4>
+                                <h4>学位教育</h4>
                                 <div className="module-title">紫荆-索菲亚 财富管理方向MBA</div>
                                 <p>国内首家授予美国正式学位的在线MBA项目</p>
                             </Link>

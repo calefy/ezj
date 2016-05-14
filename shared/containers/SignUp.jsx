@@ -28,7 +28,7 @@ let SignUp = React.createClass({
         // 设置初始不同类型专题页的type
         let type;
         if (this.props.pageKey === 'security') {
-            type = 'beijing';
+            type = 'shanghai';
         } else if (this.props.pageKey === 'finance') {
             type = '0';
         }
@@ -195,9 +195,10 @@ let SignUp = React.createClass({
             return (
                 <div>
                     <p>请选择培训地点：会务组将根据有效的报名信息，通过电子邮件或手机短信方式向参会嘉宾告知培训地点及日程</p>
-                    <div className={`join-web-choose-place ${this.state.type === 'beijing' ? 'on' : ''}`}>
-                        <p>北京</p>
-                        <p>第4期：2016年03月26日－03月27日</p>
+                    <div className={`join-web-choose-place ${this.state.type === 'shanghai' ? 'on' : ''}`}>
+                        <p>上海</p>
+                        <p>第5期：2016年05月28日－05月29日</p>
+                        <p>浦东文华东方酒店</p>
                     </div>
                     <div className="join-web-choose-price">
                         <p>培训费用：</p>

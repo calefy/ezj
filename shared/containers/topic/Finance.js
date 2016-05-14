@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import SignUp from '../SignUp.jsx';
+//import SignUp from '../SignUp.jsx';
 
 if (process.env.BROWSER) {
     require('css/special.css');
@@ -32,7 +32,7 @@ class Finance extends React.Component {
 
     render() {
         return (
-            <div className="special-finance">
+            <div className="special-finance wide">
                 <div className="special-banner special-finance-banner cl">
                     <div className="container">
                         <div className="special-finance-info">
@@ -117,7 +117,7 @@ class Finance extends React.Component {
                             </table>
                             <ul className="special-finance-tabs">
                                 <li className={this.state.schedule === 'sc1' ? 'current' : ''}>
-                                    <Link to="tab1" title="" className="tab1" data-key="sc1" onClick={this.onClickSchedule}>
+                                    <Link to="#tab1" title="" className="tab1" data-key="sc1" onClick={this.onClickSchedule}>
                                         <table className="gridtable">
                                             <tbody>
                                                 <tr>
@@ -130,7 +130,7 @@ class Finance extends React.Component {
                                     </Link>
                                 </li>
                                 <li className={this.state.schedule === 'sc2' ? 'current' : ''}>
-                                    <Link to="tab2" title="" className="tab2" data-key="sc2" onClick={this.onClickSchedule}>
+                                    <Link to="#tab2" title="" className="tab2" data-key="sc2" onClick={this.onClickSchedule}>
                                         <table className="gridtable">
                                             <tbody>
                                                 <tr>
@@ -141,9 +141,9 @@ class Finance extends React.Component {
                                             </tbody>
                                         </table>
                                     </Link>
-                                </li> 
+                                </li>
                                 <li className={this.state.schedule === 'sc3' ? 'current' : ''}>
-                                    <Link to="tab3" title="" className="tab3" data-key="sc3" onClick={this.onClickSchedule}>
+                                    <Link to="#tab3" title="" className="tab3" data-key="sc3" onClick={this.onClickSchedule}>
                                         <table className="gridtable">
                                             <tbody>
                                                 <tr>
@@ -156,7 +156,7 @@ class Finance extends React.Component {
                                     </Link>
                                 </li>
                                 <li className={this.state.schedule === 'sc4' ? 'current' : ''}>
-                                    <Link to="tab4" title="" className="tab4" data-key="sc4" onClick={this.onClickSchedule}>
+                                    <Link to="#tab4" title="" className="tab4" data-key="sc4" onClick={this.onClickSchedule}>
                                         <table className="gridtable">
                                             <tbody>
                                                 <tr>
@@ -169,7 +169,7 @@ class Finance extends React.Component {
                                     </Link>
                                 </li>
                                 <li className={this.state.schedule === 'sc5' ? 'current' : ''}>
-                                    <Link to="tab5" title="" className="tab5" data-key="sc5" onClick={this.onClickSchedule}>
+                                    <Link to="#tab5" title="" className="tab5" data-key="sc5" onClick={this.onClickSchedule}>
                                         <table className="gridtable">
                                             <tbody>
                                                 <tr>
@@ -182,7 +182,7 @@ class Finance extends React.Component {
                                     </Link>
                                 </li>
                                 <li className={this.state.schedule === 'sc6' ? 'current' : ''}>
-                                    <Link to="tab6" title="" className="tab6" data-key="sc6" onClick={this.onClickSchedule}>
+                                    <Link to="#tab6" title="" className="tab6" data-key="sc6" onClick={this.onClickSchedule}>
                                         <table className="gridtable">
                                             <tbody>
                                                 <tr>
@@ -195,7 +195,7 @@ class Finance extends React.Component {
                                     </Link>
                                 </li>
                                 <li className={this.state.schedule === 'sc7' ? 'current' : ''}>
-                                    <Link to="tab7" title="" className="tab7" data-key="sc7" onClick={this.onClickSchedule}>
+                                    <Link to="#tab7" title="" className="tab7" data-key="sc7" onClick={this.onClickSchedule}>
                                         <table className="gridtable">
                                             <tbody>
                                                 <tr>
@@ -208,7 +208,7 @@ class Finance extends React.Component {
                                     </Link>
                                 </li>
                                 <li className={this.state.schedule === 'sc8' ? 'current' : ''}>
-                                    <Link to="tab8" title="" className="tab8" data-key="sc8" onClick={this.onClickSchedule}>
+                                    <Link to="#tab8" title="" className="tab8" data-key="sc8" onClick={this.onClickSchedule}>
                                         <table className="gridtable">
                                             <tbody>
                                                 <tr>
@@ -220,21 +220,31 @@ class Finance extends React.Component {
                                         </table>
                                     </Link>
                                 </li>
-                                <li>
-                                    <table className="gridtable">
-                                        <tbody>
-                                            <tr>
-                                                <td>第9讲</td>
-                                                <td>2016-05-14<br />9:00-17:00</td>
-                                                <td>互联网资产管理平台</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="52">第10讲</td>
-                                                <td width="98">2016-05-15<br />9:00-17:00</td>
-                                                <td width="310">众筹与互联网投资<br />互联网金融社交与信息服务</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <li className={this.state.schedule === 'sc9' ? 'current' : ''}>
+                                    <Link to="#tab9" title="" className="tab9" data-key="sc9" onClick={this.onClickSchedule}>
+                                        <table className="gridtable">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="52">第9讲</td>
+                                                    <td width="98">2016-05-14<br />9:00-17:00</td>
+                                                    <td width="310">互联网资产管理平台及众筹</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </Link>
+                                </li>
+                                <li className={this.state.schedule === 'sc10' ? 'current' : ''}>
+                                    <Link to="#tab10" title="" className="tab10" data-key="sc10" onClick={this.onClickSchedule}>
+                                        <table className="gridtable">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="52">第10讲</td>
+                                                    <td width="98">2016-05-15<br />9:00-17:00</td>
+                                                    <td width="310">互联网金融投融资</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
@@ -266,7 +276,7 @@ class Finance extends React.Component {
                                                 <td>民生银行直销银行高级专家   翟南宾</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="#sign">报名现场面授班</a></td>
+                                                <td><a href="#sign" className="disabled">报名现场面授班</a></td>
                                                 <td><a href="/courses/9593" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
@@ -302,7 +312,7 @@ class Finance extends React.Component {
                                                 <td>银监会/央行/网贷协会等监管机构领导</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="#sign">报名现场面授班</a></td>
+                                                <td><a href="#sign" className="disabled">报名现场面授班</a></td>
                                                 <td><a href="/courses/9705" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
@@ -334,7 +344,7 @@ class Finance extends React.Component {
                                                 <td>百融金服集团CEO 张韶峰</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="#sign">报名现场面授班</a></td>
+                                                <td><a href="#sign" className="disabled">报名现场面授班</a></td>
                                                 <td><a href="/courses/9706" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
@@ -362,7 +372,7 @@ class Finance extends React.Component {
                                                 <td>知名银行及券商高管</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="#sign">报名现场面授班</a></td>
+                                                <td><a href="#sign" className="disabled">报名现场面授班</a></td>
                                                 <td><a href="/courses/9707" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
@@ -390,7 +400,7 @@ class Finance extends React.Component {
                                                 <td>知名互联网保险公司平台高管</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="#sign">报名现场面授班</a></td>
+                                                <td><a href="#sign" className="disabled">报名现场面授班</a></td>
                                                 <td><a href="/courses/9708" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
@@ -413,7 +423,7 @@ class Finance extends React.Component {
                                                 <td>金融产品如何进行社会化媒体营销</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="#sign">报名现场面授班</a></td>
+                                                <td><a href="#sign" className="disabled">报名现场面授班</a></td>
                                                 <td><a href="/courses/9710" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
@@ -441,7 +451,7 @@ class Finance extends React.Component {
                                                 <td>李林 火币网创始人兼CEO</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="#sign">报名现场面授班</a></td>
+                                                <td><a href="#sign" className="disabled">报名现场面授班</a></td>
                                                 <td><a href="/courses/9712" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
@@ -465,8 +475,64 @@ class Finance extends React.Component {
                                                 <td>黄国平 社科院研究员</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="#sign">报名现场面授班</a></td>
+                                                <td><a href="#sign" className="disabled">报名现场面授班</a></td>
                                                 <td><a href="/courses/9711" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="tab9" className={this.state.schedule === 'sc9' ? '' : 'hide'}>
+                                    <table className="gridtable">
+                                        <thead>
+                                            <tr>
+                                                <th width="264">课程主题</th>
+                                                <th width="264">拟邀讲师</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>资产管理平台——一站式互联网理财</td>
+                                                <td>零壹财经研究院 李耀光</td>
+                                            </tr>
+                                            <tr>
+                                                <td>一站式互联网理财实践分享</td>
+                                                <td>中子星优才首席分析师 卫海天</td>
+                                            </tr>
+                                            <tr>
+                                                <td>股权众筹的发展及监管</td>
+                                                <td>中国证券业协会 吴志国</td>
+                                            </tr>
+                                            <tr>
+                                                <td>股权众筹的实践分享</td>
+                                                <td>大家投CEO 李群林</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#sign" className="disabled">报名现场面授班</a></td>
+                                                <td><a href="/courses/9709" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="tab10" className={this.state.schedule === 'sc10' ? '' : 'hide'}>
+                                    <table className="gridtable">
+                                        <thead>
+                                            <tr>
+                                                <th width="264">课程主题</th>
+                                                <th width="264">拟邀讲师</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>互联网金融投融资策略</td>
+                                                <td>玖富高级副总裁CFO 林彦军</td>
+                                            </tr>
+                                            <tr>
+                                                <td>互联网金融与资产证券化</td>
+                                                <td>资产管理有限公司副总经理 夏阳</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#sign" className="disabled">报名现场面授班</a></td>
+                                                <td><a href="/courses/9714" target="_blank" className="special-finance-jump">购买视频点播班</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -474,6 +540,7 @@ class Finance extends React.Component {
                             </div>
                         </div>
                     </div>
+                    {/*
                     <div className="container special-finance-join bg-white" id="sign">
                         <h3>我要报名</h3>
                         <div className="join-phone">
@@ -481,7 +548,7 @@ class Finance extends React.Component {
                             <div className="join-erwei cl">
                                 <div className="join-erwei-phone fl">
                                     <p>手机扫描二维码，即可报名并支付课程</p>
-                                    <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1b0283371b4fc9a33d7947f9ebdaf3ef.png" />
+                                    <img src="http://zj-avatar.img-cn-beijing.aliyuncs.com/74316e89f573add93c0a581b6d7c0abf1342961401.png" />
                                 </div>
                                 <div className="join-saoma fr">
                                     <h5>拿出手机，通过微信完成购买</h5>
@@ -497,6 +564,7 @@ class Finance extends React.Component {
                             <SignUp pageKey="finance" history={this.props.history} />
                         </div>
                     </div>
+                    */}
                 </div>
             </div>
         );

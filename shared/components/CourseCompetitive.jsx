@@ -1,5 +1,5 @@
 /**
- * 课程学位项目分类
+ * 课程学位教育分类
  */
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';

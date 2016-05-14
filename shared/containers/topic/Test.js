@@ -253,7 +253,7 @@ let Exam = React.createClass({
         let lastIndex = this.state.index + 1 === questions.length;
 
         return (
-            <div className="special-continue-test">
+            <div className="special-continue-test wide">
                 <div className="special-banner cl">
                     <div className="container">
                         <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/0d79a42d379bb1666e7b48d6747f9971.png" />

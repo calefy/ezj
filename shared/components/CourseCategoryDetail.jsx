@@ -170,13 +170,13 @@ class CourseCategoryDetail extends Component {
                                 <span className="open-title">第9讲：&emsp;北京&emsp;2016年05月14日</span>
                                 <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                 <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                <a href="/topic/finance" target="_blank">立即报名</a>
+                                <a href="/topic/finance" target="_blank" className="disabled">已结束</a>
                             </li>
                             <li>
                                 <span className="open-title">第10讲：&emsp;北京&emsp;2015年05月15日</span>
                                 <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                 <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                <a href="/topic/finance" target="_blank">立即报名</a>
+                                <a href="/topic/finance" target="_blank" className="disabled">已结束</a>
                             </li>
                         </ul>
                     </div>
