@@ -109,7 +109,7 @@ class All extends Component {
         };
 
         each(list, (item, index) => {
-            let isPackage = item.type == 2;
+            let isPackage = (item.type || item.product_type) == 2;
             let isLearning = !!item.latest_play;
 
             let timeStr = this.getTimeString(new Date((item.last_study_time || item.purchase_time) * 1000), now, ret);
