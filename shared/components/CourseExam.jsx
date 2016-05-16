@@ -174,8 +174,11 @@ class CourseExam extends Component {
             let firstOne = this.props.course_sheets.length && this.props.course_sheets[0] || {};
             // 为空，或者不是该门课程的sheet，或者不是最新的，都需要加载sheet数据
             if (!this.props.sheet.answers ||
-                    this.props.sheet.sheet.course_id != firstOne.course_id ||
-                    (this.props.sheet.sheet.id < firstOne.sheet_id)) { // 利用ID增长性，判断sheet与course_sheets中哪个为最新
+                    firstOne.sheet_id && // 必须在firstOne存在的情况下，才能对比判断
+                    (
+                        this.props.sheet.sheet.course_id != firstOne.course_id ||
+                        (this.props.sheet.sheet.id < firstOne.sheet_id) // 利用ID增长性，判断sheet与course_sheets中哪个为最新
+                    )) {
                 this.props.onLoadSheet(firstOne.sheet_id);
             }
         }
