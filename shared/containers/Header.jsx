@@ -35,10 +35,10 @@ class Header extends Component {
             case loginType.success:
                 this.hideDialog();
                 // 因登录返回的用户数据不全，因此登录成功后加载用户完整数据
-                //const userAction = new UserAction();
-                //nextProps.dispatch(userAction.loadAccount());
+                const userAction = new UserAction();
+                nextProps.dispatch(userAction.loadAccount());
                 // 以上加载userinfo数据用刷新页面代替，保证退出后立马登录数据的清洁
-                document.location.reload();
+                //document.location.reload(); // 该方式会导致加载完成前就点击的会被跳转
                 break;
             case loginType.failure:
                 this.refs.loginForm.handleResponse(nextProps.action.error);
@@ -132,6 +132,10 @@ class Header extends Component {
 
     handleLogout = () => {
         this._setState({ showMenu: false });
+        // 清空其他需要登录的数据
+        const operateAction = new OperateAction();
+        this.props.dispatch(operateAction.clearLoginedData());
+        // 执行退出
         this.props.dispatch(this.userAction.logout());
         // 清除本地cookie
         document.cookie = '_SUP=;domain=.ezijing.com;path=/;expires='+(new Date()).toGMTString()+';';

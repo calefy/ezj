@@ -4,6 +4,7 @@
 import { reducerRequest, getRequestTypes } from '../libs/utils';
 import CoursesAction from '../actions/CoursesAction';
 import CommerceAction from '../actions/CommerceAction';
+import OperateAction from '../actions/OperateAction';
 
 export function courses_free(state, action) {
     return reducerRequest('freecourses', state, action);
@@ -32,6 +33,10 @@ export function course(state, action) {
     return reducerRequest(CoursesAction.LOAD_COURSE_DETAIL, state, action);
 }
 export function course_private(state, action) {
+    // 清空登录数据
+    if (action.type === OperateAction.CLEAR_LOGINED_DATA) {
+        return {isFetching: true}
+    }
     let collectType = getRequestTypes(CoursesAction.COLLECT_COURSE);
     let cancelType = getRequestTypes(CoursesAction.CANCEL_COLLECT_COURSE);
     //let payType = getRequestTypes(CommerceAction.PAY);
@@ -110,6 +115,10 @@ export function examination(state, action) {
     }
 }
 export function sheet(state, action) {
+    // 清空登录数据
+    if (action.type === OperateAction.CLEAR_LOGINED_DATA) {
+        return {isFetching: true}
+    }
     let submitType = getRequestTypes(CoursesAction.SUBMIT_SHEET);
     switch(action.type) {
         case submitType.success:
@@ -120,13 +129,25 @@ export function sheet(state, action) {
     }
 }
 export function sheets(state, action) {
+    // 清空登录数据
+    if (action.type === OperateAction.CLEAR_LOGINED_DATA) {
+        return {isFetching: true}
+    }
     return reducerRequest(CoursesAction.LOAD_SHEETS, state, action);
 }
 export function course_sheet(state, action) {
+    // 清空登录数据
+    if (action.type === OperateAction.CLEAR_LOGINED_DATA) {
+        return {isFetching: true}
+    }
     return reducerRequest(CoursesAction.LOAD_COURSE_SHEET, state, action);
 }
 
 export function courses_mine(state, action) {
+    // 清空登录数据
+    if (action.type === OperateAction.CLEAR_LOGINED_DATA) {
+        return {isFetching: true}
+    }
     let type = getRequestTypes(CoursesAction.LOAD_MY_COURSES_MORE);
     switch (action.type) {
         case type.success:
@@ -148,5 +169,9 @@ export function courses_mine(state, action) {
 //    return reducerRequest(CoursesAction.LOAD_MY_COURSES_BUYED, state, action);
 //}
 export function courses_mine_collected(state, action) {
+    // 清空登录数据
+    if (action.type === OperateAction.CLEAR_LOGINED_DATA) {
+        return {isFetching: true}
+    }
     return reducerRequest(CoursesAction.LOAD_MY_COURSES_COLLECTED, state, action);
 }

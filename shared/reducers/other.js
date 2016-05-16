@@ -42,6 +42,7 @@ export function analysis_actions(state = [], action) {
             return state.concat([action.data]);
             break;
         case OperateAction.CLEAR_ANALYSIS_ACTION:
+        case OperateAction.CLEAR_LOGINED_DATA:
             return [];
             break;
     }

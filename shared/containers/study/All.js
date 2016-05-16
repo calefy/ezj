@@ -8,6 +8,7 @@ import keys from 'lodash/keys';
 
 import { getRequestTypes } from '../../libs/utils';
 import CoursesAction from '../../actions/CoursesAction';
+import UserAction from '../../actions/UserAction';
 import Pagination from '../../components/Pagination.jsx';
 
 let cacheYear = null; // 缓存已经展示过的年
@@ -49,6 +50,8 @@ class All extends Component {
                 this.setState({ loading: false });
                 break;
         }
+
+
     }
 
     // 获取目标time相对now的字符串

@@ -196,11 +196,11 @@ module.exports = {
             childRoutes: [
                 {
                     path: 'intro',
-                    onEnter: function (nextState, replaceState) {
-                        if (isLogin()) {
-                            replaceState(null, '/study/all');
-                        }
-                    },
+                    //onEnter: function (nextState, replaceState) {
+                    //    if (isLogin()) {
+                    //        replaceState(null, '/study/all');
+                    //    }
+                    //},
                     getComponent(location, cb) {
                         require.ensure([], require => {
                             cb(null, require('./containers/study/Intro.jsx'));
