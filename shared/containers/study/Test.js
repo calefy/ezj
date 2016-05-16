@@ -6,12 +6,14 @@ import { getRequestTypes } from '../../libs/utils';
 import CoursesAction from '../../actions/CoursesAction';
 import Pagination from '../../components/Pagination.jsx';
 
+const PAGE_SIZE = 20;
+
 class Exam extends Component {
     // 初始加载数据
     static fetchData({dispatch, params={}, location={}, apiClient}) {
         const courseAction = new CoursesAction({ apiClient });
         return Promise.all([
-            dispatch( courseAction.loadSheets(location.query) ),
+            dispatch( courseAction.loadSheets(Object.assign({'per-page': PAGE_SIZE}, location.query)) ),
         ]);
     }
 
@@ -88,6 +90,7 @@ class Exam extends Component {
                         page = {(this.props.location.query.page || 1) - 0}
                         link = {this.props.location.pathname}
                         search = {this.props.location.search}
+                        pageSize={PAGE_SIZE}
                     />
                 </div>
             </div>

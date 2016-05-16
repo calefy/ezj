@@ -5,6 +5,8 @@ import {Link} from 'react-router';
 import CommerceAction from '../../actions/CommerceAction';
 import Pagination from '../../components/Pagination.jsx';
 
+const PAGE_SIZE = 20;
+
 class Recharge extends Component {
 
     // 初始加载数据
@@ -12,7 +14,7 @@ class Recharge extends Component {
         const commerceAction = new CommerceAction({ apiClient });
         return Promise.all([
             dispatch( commerceAction.loadAccount() ),
-            dispatch( commerceAction.loadRecharges(location.query) ),
+            dispatch( commerceAction.loadRecharges(Object.assign({'per-page': PAGE_SIZE}, location.query)) ),
         ]);
     }
 
@@ -27,7 +29,7 @@ class Recharge extends Component {
     componentWillReceiveProps(nextProps) {
         if (this.props.location.search != nextProps.location.search) {
             const commerceAction = new CommerceAction();
-            nextProps.dispatch( commerceAction.loadRecharges(nextProps.location.query) );
+            nextProps.dispatch( commerceAction.loadRecharges(Object.assign({'per-page': PAGE_SIZE}, nextProps.location.query)) );
         }
     }
 
@@ -110,6 +112,7 @@ class Recharge extends Component {
                         page={(this.props.location.query.page || 1) - 0}
                         link={this.props.location.pathname}
                         search={this.props.location.search}
+                        pageSize={PAGE_SIZE}
                     />
                 </div>
             </div>
