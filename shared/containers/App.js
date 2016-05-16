@@ -69,7 +69,7 @@ class App extends Component {
         if (nextProps.action.error) {
             if (nextProps.action.error.message == '需要登录') {
                 nextProps.dispatch(this.operateAction.showErrorMessage('登录已过期，请重新登录后访问。'));
-            } else if (/reason: getaddrinfo ENOTFOUND/.test(nextProps.action.error.message)) {
+            } else if (nextProps.action.error.message == 'Failed to fetch') {
                 nextProps.dispatch(this.operateAction.showErrorMessage('获取数据失败，请检查网络连接情况，或稍后重试。'));
             }
         }
