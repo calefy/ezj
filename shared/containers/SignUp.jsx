@@ -153,8 +153,8 @@ let SignUp = React.createClass({
         let type = payType.PACKAGE;
         let id = '';
         if (this.props.pageKey === 'security') {
-            id = '6119033157460164608'; // 对应原线下课程 9642 (线上课程为 9166)
-        } else if (this.props.pageKey === 'finance') {
+            id = '6135271871198789632';
+        } else if (this.props.pageKey === 'finance') { // 已结束报名，将无效
             let arr = ['6119033159091748864', '6119033159372767232', '6119033161717383168']; // 对应原线下 9904，9905，9906（线上课程为 9594）
             id = arr[this.state.type - 0];
         }
