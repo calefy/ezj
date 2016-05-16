@@ -1,6 +1,7 @@
 // 用户信息
-import UserAction from '../actions/UserAction';
 import { reducerRequest, getRequestTypes } from '../libs/utils';
+import UserAction from '../actions/UserAction';
+import OperateAction from '../actions/OperateAction';
 
 export function user(state, action) {
     const loginTypes = getRequestTypes(UserAction.LOGIN);

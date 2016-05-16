@@ -69,5 +69,10 @@ module.exports = class OperateAction extends BaseAction {
         return BaseAction.dispatchRequest(OperateAction.UPLOAD_ANALYSIS, this.otherApi.uploadAnalysis(data));
     }
 
+    static CLEAR_LOGINED_DATA = 'clear_logined_data';
+    clearLoginedData() {
+        return {type: OperateAction.CLEAR_LOGINED_DATA};
+    }
+
 }
 
