@@ -7,6 +7,7 @@ import { getRequestTypes } from '../../libs/utils';
 import CommerceAction from '../../actions/CommerceAction';
 import Pagination from '../../components/Pagination.jsx';
 
+const PAGE_SIZE = 20;
 
 class Order extends Component {
 
@@ -14,7 +15,7 @@ class Order extends Component {
     static fetchData({dispatch, params={}, location={}, apiClient}) {
         const commerceAction = new CommerceAction({ apiClient });
         return Promise.all([
-            dispatch( commerceAction.loadOrders(location.query) ),
+            dispatch( commerceAction.loadOrders(Object.assign({'per-page': PAGE_SIZE}, location.query)) ),
         ]);
     }
 
@@ -117,6 +118,7 @@ class Order extends Component {
                         page={(this.props.location.query.page || 1) - 0}
                         link={this.props.location.pathname}
                         search={this.props.location.search}
+                        pageSize={PAGE_SIZE}
                     />
                 </div>
             </div>

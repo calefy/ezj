@@ -70,7 +70,7 @@ class Play extends Component {
         }).bind(this));
 
         // 数据采集
-        this.intervalTimer = setInterval(this.sendPlayerProgress.bind(this), 15 * 1000);
+        this.intervalTimer = setInterval(this.sendPlayerProgress.bind(this), 10 * 1000);
     }
     componentDidUpdate() {
         this.jdugeSize();
@@ -212,7 +212,12 @@ class Play extends Component {
     };
     handlePptBoxShow = e => { // 播放ppt toggle
         e.preventDefault();
-        this._setState({ pptBoxShow: !this.state.pptBoxShow, pptBoxOnly: false });
+        let isShow = !this.state.pptBoxShow;
+        this._setState({
+            pptBoxShow: isShow,
+            sidebar: isShow ? null : this.state.sidebar,
+            pptBoxOnly: false
+        });
     };
     handlePptBoxOnly = e => { // 仅展示ppt框
         e.preventDefault();

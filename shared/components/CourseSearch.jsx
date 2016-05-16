@@ -12,6 +12,7 @@ if (process.env.BROWSER) {
 }
 
 class CourseSearch extends Component {
+    static PAGE_SIZE = 12;
     static propTypes = {
         courses: PropTypes.array.isRequired,
         total: PropTypes.number.isRequired,
@@ -56,7 +57,7 @@ class CourseSearch extends Component {
 
                 <Pagination
                     page={(location.query.page || 1) - 0}
-                    pageSize={12}
+                    pageSize={CourseSearch.PAGE_SIZE}
                     total={total}
                     link={location.pathname}
                     search={location.search}

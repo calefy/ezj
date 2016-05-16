@@ -46,7 +46,7 @@ class Classify extends Component {
         // 如果请求的是搜索，则加载搜索信息
         else if (isSearch(location)) {
             arr = arr.concat([
-                dispatch( coursesAction.loadSearch( location.query ) )
+                dispatch( coursesAction.loadSearch( Object.assign({'per-page': CourseSearch.PAGE_SIZE}, location.query) ) )
             ]);
         }
         return Promise.all( arr );
@@ -75,7 +75,7 @@ class Classify extends Component {
             }
             // url变更后加载搜索数据
             else if (isSearch(nextProps.location)) {
-                nextProps.dispatch( coursesAction.loadSearch(nextProps.location.query) );
+                nextProps.dispatch( coursesAction.loadSearch(Object.assign({'per-page': CourseSearch.PAGE_SIZE}, nextProps.location.query)) );
             }
         }
     }

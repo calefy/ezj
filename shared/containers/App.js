@@ -5,6 +5,7 @@ import OperateAction from '../actions/OperateAction';
 import UserAction from '../actions/UserAction';
 import Header from './Header.jsx';
 import Footer from '../components/Footer';
+import Snackbar from '../components/Snackbar.jsx';
 import { getIdt } from '../libs/utils';
 
 
@@ -57,6 +58,20 @@ class App extends Component {
                     _paq.push(['trackPageView']);
                 }
             }, 0);
+        }
+
+        // 显示错误消息
+        if (nextProps.action.type === OperateAction.SHOW_MESSAGE) {
+            this.refs.snackbar.show(nextProps.action.message);
+        }
+
+        // 登录暂时只能通过匹配message控制
+        if (nextProps.action.error) {
+            if (nextProps.action.error.message == '需要登录') {
+                nextProps.dispatch(this.operateAction.showErrorMessage('登录已过期，请重新登录后访问。'));
+            } else if (nextProps.action.error.message == 'Failed to fetch') {
+                nextProps.dispatch(this.operateAction.showErrorMessage('获取数据失败，请检查网络连接情况，或稍后重试。'));
+            }
         }
 
         // 清理action，防止路由变更时，action数据没变更，导致二次处理问题
@@ -120,6 +135,8 @@ class App extends Component {
                     {this.props.children}
                 </div>
                 {isMobile ? null : <Footer />}
+
+                <Snackbar ref="snackbar" />
             </div>
         );
     }
