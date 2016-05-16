@@ -163,6 +163,14 @@ class CourseExam extends Component {
         this.answers = {};
         this.time = (new Date()).getTime();
         this.setState({ index: 0, start: true, reexam: true, viewAnswer: false });
+        // 做完测验后再次测验，第一题会选中，需要清除
+        setTimeout(() => {
+            for (let key in this.refs) {
+                if (/answer_/.test(key)) {
+                    this.refs[key].checked = false;
+                }
+            }
+        }, 10);
     };
     // 查看答案
     onViewAnswers = e => {
