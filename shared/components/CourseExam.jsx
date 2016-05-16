@@ -163,14 +163,6 @@ class CourseExam extends Component {
         this.answers = {};
         this.time = (new Date()).getTime();
         this.setState({ index: 0, start: true, reexam: true, viewAnswer: false });
-        // 做完测验后再次测验，第一题会选中，需要清除
-        setTimeout(() => {
-            for (let key in this.refs) {
-                if (/answer_/.test(key)) {
-                    this.refs[key].checked = false;
-                }
-            }
-        }, 10);
     };
     // 查看答案
     onViewAnswers = e => {
@@ -221,9 +213,10 @@ class CourseExam extends Component {
 
         return (
             <div className="content course-test">
-
-                    <div className={!sheet || this.state.reexam ? '' : 'hide'}>
-                        <div className={`course-test-info ${this.state.start ? 'hide' : ''}`}>
+                {!sheet || this.state.reexam ?
+                    <div>
+                        {!this.state.start ?
+                        <div className="course-test-info">
                             <h2><i className="iconfont icon-chapter"></i>{examination.examination_title}</h2>
                             <div className="course-test-num">
                                 <dl className="cl">
@@ -241,7 +234,8 @@ class CourseExam extends Component {
                             </div>
                             <button className="btn" type="button" onClick={this.onClickBegin}>开始答题</button>
                         </div>
-                        <div className={`course-test-question ${this.state.start ? '' : 'hide'}`}>
+                        :
+                        <div className="course-test-question">
                             <h3>
                                 <p>{curQuestion.question && curQuestion.question.examination_question_is_multi ? '多' : '单'}项选择题</p>
                                 <p>已做<em className="course-test-already">{this.state.index + 1}</em>题 / 共<em className="course-test-all">{questions.length}</em>题</p>
@@ -270,8 +264,10 @@ class CourseExam extends Component {
                                 <button type="button" className={`btn ${lastIndex ? '' : 'disabled'}`} disabled={!lastIndex} onClick={this.onSubmit}>提交答卷</button>
                             </div>
                         </div>
+                        }
                     </div>
-                    <div className={!sheet || this.state.reexam ? 'hide' : ''}>
+                    :
+                    <div>
                         <div className="course-test-result">
                             <h2><i className="iconfont icon-chapter"></i>课程测验结果</h2>
                             <h4>{examination.examination_title}</h4>
@@ -337,6 +333,7 @@ class CourseExam extends Component {
                             : null
                         }
                     </div>
+                }
 
             </div>
         );
