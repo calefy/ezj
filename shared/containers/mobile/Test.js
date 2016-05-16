@@ -50,7 +50,6 @@ let Exam = React.createClass({
                 break;
             case type.failure:
                 alert(nextProps.action.error && nextProps.action.error.message || '提交测验失败');
-                alert(document.cookie);
                 break;
         }
     },
