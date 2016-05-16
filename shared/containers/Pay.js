@@ -238,7 +238,7 @@ let Pay = React.createClass({
                         </h4>
                         <h5 className="cl">
                             <span className="fl">还需支付</span>
-                            <em className="fr">&yen;{this.state.pointPay ? (price > accountAmount ? price - accountAmount : 0) : price}</em>
+                            <em className="fr">&yen;{(this.state.pointPay ? (price > accountAmount ? price - accountAmount : 0) : price).toFixed(2)}</em>
                         </h5>
                     </div>
                     <div className="pay-method">
