@@ -36,9 +36,9 @@ app.use(bodyParser.urlencoded({ extended: false, limit: '600kb' })); // for pars
 // 拦截app下载处理
 app.get('/app/download', function(req, res) {
     let url = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ezijing';
-    if (/iPhone|iPad|Mac/.test(req.get('user-agent'))) {
-        url = 'https://itunes.apple.com/cn/app/zi-jing-jiao-yu/id915668230';
-    }
+    //if (/iPhone|iPad|Mac/.test(req.get('user-agent'))) {
+    //    url = 'https://itunes.apple.com/cn/app/zi-jing-jiao-yu/id915668230';
+    //}
     res.redirect(url);
 });
 
