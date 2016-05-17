@@ -7,7 +7,7 @@ module.exports = () => {
             <div className="footer-top">
                 <div className="container cl">
                     <div className="footer-top-logo fl">
-                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/19ba9ee4caf1db27febc0f852e29aa3a.png" alt="" />
+                        <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/19ba9ee4caf1db27febc0f852e29aa3a.png" alt="" />
                         <address>
                             北京市海淀区成府路43号2号楼234室<br />
                             电话：4008-363-463<br />
@@ -23,11 +23,11 @@ module.exports = () => {
                     </div>
                     <div className="footer-top-app fl">
                         <h4>APP下载（安卓&IOS）</h4>
-                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/73eb2da6cfff1349a0783b26d34e335c.jpg" alt="扫码下载" />
+                        <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/73eb2da6cfff1349a0783b26d34e335c.jpg" alt="扫码下载" />
                     </div>
                     <div className="footer-top-ew fl">
                         <h4>关注我们</h4>
-                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/268f04e853346b3b92269b45f4340817.jpg" alt="扫码关注" />
+                        <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/268f04e853346b3b92269b45f4340817.jpg" alt="扫码关注" />
                     </div>
                 </div>
             </div>

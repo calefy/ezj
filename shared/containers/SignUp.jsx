@@ -332,8 +332,8 @@ let SignUp = React.createClass({
                             </ul>
                             <div className="join-web-pay-content">
                                 <ul className={`join-web-pay-online cl ${isOfflinePay ? 'hide' : ''}`}>
-                                    <li className={`fl ${this.state.payMethod === 'alipay' ? 'on' : ''}`} data-key="alipay" onClick={this.onChangePayMethod}><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1181bf80cd08ff6b35f58a9e6ceb1589.png" /></li>
-                                    <li className={`fl ${this.state.payMethod === 'unipay' ? 'on' : ''}`} data-key="unipay" onClick={this.onChangePayMethod}><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/069c882368b67fe9812018db3b5cdd39.png" /></li>
+                                    <li className={`fl ${this.state.payMethod === 'alipay' ? 'on' : ''}`} data-key="alipay" onClick={this.onChangePayMethod}><img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/1181bf80cd08ff6b35f58a9e6ceb1589.png" /></li>
+                                    <li className={`fl ${this.state.payMethod === 'unipay' ? 'on' : ''}`} data-key="unipay" onClick={this.onChangePayMethod}><img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/069c882368b67fe9812018db3b5cdd39.png" /></li>
                                 </ul>
                                 <div className={`join-web-pay-offline ${isOfflinePay ? '' : 'hide'}`}>
                                     <h5>线下汇款报名说明：</h5>
