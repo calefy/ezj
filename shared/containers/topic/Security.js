@@ -88,14 +88,14 @@ class Security extends React.Component {
                                                     </Link>
                                                 </li>
                                     })}
-                                    <li><a href="/user/3223333591" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333591-1445253893.jpg"/><div><h4>林华</h4><p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p></div></a></li>
-                                    <li><a href="/lecturers/3223333672" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333672-1445238316.jpg"/><div><h4>黄长清</h4><p>恒泰证券金融市场部执行总经理、产品负责人</p></div></a></li>
-                                    <li><a href="/lecturers/3223333673" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333673-1445238401.jpg"/><div><h4>李耀光</h4><p>摩根士丹利华鑫证券固定收益部结构融资总监。</p></div></a></li>
-                                    <li><a href="/lecturers/3223333675" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333675-1445238762.jpg"/><div><h4>万华伟</h4><p>联合信用评级有限公司副总经理兼评级总监</p></div></a></li>
-                                    <li><a href="/lecturers/3223333671" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333671-1445320862.jpg"/><div><h4>洪浩</h4><p>北京大学理学博士</p></div></a></li>
-                                    <li><a href="/lecturers/3223333674" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333674-1445238623.jpg"/><div><h4>罗桂连</h4><p>陕西金融控股集团有限公司 总经理助理</p></div></a></li>
-                                    <li><a href="/lecturers/3223333679" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333679-1445250208.jpg"/><div><h4>许余洁</h4><p>中国证监会科研工作站博士后、西南财经大学互联网金融创新及监管协同创新中心特聘研究员</p></div></a></li>
-                                    <li><a href="/lecturers/3223333680" target="_blank"><img src="http://www.ezijing.com/sites/default/files/oos/pictures/picture-3223333680-1445320897.jpg"/><div><h4>刘洪光</h4><p>上海市锦天城律师事务所，专职律师</p></div></a></li>
+                                    <li><a href="/user/3223333591" target="_blank"><img src="http://zj-images.img-cn-beijing.aliyuncs.com/9aa1140f9f695cb8a0f2609032be3c9b.jpg"/><div><h4>林华</h4><p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p></div></a></li>
+                                    <li><a href="/lecturers/3223333672" target="_blank"><img src="http://zj-images.img-cn-beijing.aliyuncs.com/67cae20e53698661fce9a2874f5e40ac.jpg"/><div><h4>黄长清</h4><p>恒泰证券金融市场部执行总经理、产品负责人</p></div></a></li>
+                                    <li><a href="/lecturers/3223333673" target="_blank"><img src="http://zj-images.img-cn-beijing.aliyuncs.com/c2cf12ba6994d974bcdfee781aa47ae3.jpg"/><div><h4>李耀光</h4><p>摩根士丹利华鑫证券固定收益部结构融资总监。</p></div></a></li>
+                                    <li><a href="/lecturers/3223333675" target="_blank"><img src="http://zj-images.img-cn-beijing.aliyuncs.com/5322710854de236b0034f8df95f4c16d.jpg"/><div><h4>万华伟</h4><p>联合信用评级有限公司副总经理兼评级总监</p></div></a></li>
+                                    <li><a href="/lecturers/3223333671" target="_blank"><img src="http://zj-images.img-cn-beijing.aliyuncs.com/6e35b1c86dad5377a1fc1249ed86ec33.jpg"/><div><h4>洪浩</h4><p>北京大学理学博士</p></div></a></li>
+                                    <li><a href="/lecturers/3223333674" target="_blank"><img src="http://zj-images.img-cn-beijing.aliyuncs.com/627554cbc5a12a30d733d54d1b6625a6.jpg"/><div><h4>罗桂连</h4><p>陕西金融控股集团有限公司 总经理助理</p></div></a></li>
+                                    <li><a href="/lecturers/3223333679" target="_blank"><img src="http://zj-images.img-cn-beijing.aliyuncs.com/ce7319a0b074718be5a32bf2a8887041.jpg"/><div><h4>许余洁</h4><p>中国证监会科研工作站博士后、西南财经大学互联网金融创新及监管协同创新中心特聘研究员</p></div></a></li>
+                                    <li><a href="/lecturers/3223333680" target="_blank"><img src="http://zj-images.img-cn-beijing.aliyuncs.com/f7b235bff6de5449dcb7250f2d96b66f.jpg"/><div><h4>刘洪光</h4><p>上海市锦天城律师事务所，专职律师</p></div></a></li>
                                 </ul>
                             </div>
                         </div>
