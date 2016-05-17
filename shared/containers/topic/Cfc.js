@@ -17,12 +17,9 @@ const bundle = { id: '6119033148207529984', price: 5700 };
 const bundle_part_ids = ['6119033148161392640', '6119033145351208960', '6119033145393152000', '6119033147871985664']
 
 const video_trys = [
-    {id: '23A927AB00D7BF2B9C33DC5901307461', name: '新常态下的资产配置'},
-    {id: 'A8A854B628EE505F9C33DC5901307461', name: '税收筹划、避税、偷逃漏税的定义'},
-    {id: '16356A80489893559C33DC5901307461', name: '热点分析——“新国九条” 的亮点解读'},
-    {id: 'A1C7A131899C96619C33DC5901307461', name: '企业融资概览（中）'},
-    {id: '87088627020221F99C33DC5901307461', name: '不同行业企业价值评估—人寿保险'},
-    {id: 'FFB7DE887FC3969B9C33DC5901307461', name: '商业模式与生存基础'},
+    {id: '6008F62C009C15819C33DC5901307461', name: '企业理财的背景和现状'},
+    {id: 'F88B216B5E8050869C33DC5901307461', name: '汉密尔顿与美国的第一笔公债'},
+    {id: 'FEE54C17AC5AF9779C33DC5901307461', name: '现金管理与投资决策案例介绍'},
 ];
 
 class Cfc extends React.Component {
@@ -144,7 +141,7 @@ class Cfc extends React.Component {
                 <div className="special-banner cl">
                     <div className="container">
                         <div className="fl">
-                            <div className="special-text"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/765385fe4b4738b551dd072c4c2498cd.png" /></div>
+                            <div className="special-text"><img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/765385fe4b4738b551dd072c4c2498cd.png" /></div>
                             <div className="special-price">
                                     <span>在线培训课程¥{bundle.price}</span>
                                     <em className="special-state">付款后180天内有效</em>
@@ -152,7 +149,7 @@ class Cfc extends React.Component {
                                 </div>
                         </div>
                         <div className="fr" style={{ marginTop: 12 }}>
-                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/6ec013ff330b69a8e8d6a4e5ed53a5dc.png" />
+                            <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/6ec013ff330b69a8e8d6a4e5ed53a5dc.png" />
                         </div>
                     </div>
                 </div>
@@ -198,21 +195,21 @@ class Cfc extends React.Component {
                                         <p>企业理财顾问（CFC）国际职业资格认证已成功为中国银行、中国农业银行、中国工商银行、中国建设银行、中国交通银行、广发银行、兴业银行、宁波银行等数家商业银行及保险业开展了对公条线从业人员业务培训，培训效果得到了学员及金融机构的一致好评。</p>
                                         <ul>
                                             <li>
-                                                <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/1c08e547362088f4fda2d590bc198546.jpg" alt="" />
+                                                <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/1c08e547362088f4fda2d590bc198546.jpg" alt="" />
                                                 <p>将CFC职业资格认证项目，列入总行年度培训计划</p>
                                             </li>
                                             <li>
-                                                <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/bc5bf42d6186a86d1b15d5f76074058b.jpg" alt="" />
+                                                <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/bc5bf42d6186a86d1b15d5f76074058b.jpg" alt="" />
                                                 <p>织全国支行骨干精英，办两期CFC认证培训，并将CFC纳入公司客户经理薪酬管理体系</p>
                                             </li>
                                             <li>
-                                                <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/6b280898e70555bf098250ea5ccc891f.jpg" alt="" />
+                                                <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/6b280898e70555bf098250ea5ccc891f.jpg" alt="" />
                                                 <p>2015年第二次将CFC职业资格认证项目纳入年度培训计划</p>
                                             </li>
                                         </ul>
                                     </div>
                                     <div className="fr">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/8b371d89213dff3af85f1b6491735adb.jpg" alt="" />
+                                        <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/8b371d89213dff3af85f1b6491735adb.jpg" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -221,11 +218,11 @@ class Cfc extends React.Component {
                                 <p>CFC项目获得了包括中国人民银行、中国银行业协会及中国保险行业协会、国有五大商业银行等各与会金融机构主管培训教育负责人的广泛认可。</p>
                                 <div className="cl">
                                     <div className="fl">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/d7658f6e2c4934baa60b49021c4a2449.jpg" alt="" />
+                                        <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/d7658f6e2c4934baa60b49021c4a2449.jpg" alt="" />
                                         <p>全国人大财经委副主任委员吴晓灵出席会议并讲话</p>
                                     </div>
                                     <div className="fr">
-                                        <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/88f4291754baef6a4d89a16af2402283.jpg" alt="" />
+                                        <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/88f4291754baef6a4d89a16af2402283.jpg" alt="" />
                                         <p>中国金融标准专家委员会合影</p>
                                     </div>
                                 </div>
@@ -385,8 +382,8 @@ class Cfc extends React.Component {
                             <h3>课程试听</h3>
                             <div className="special-cnt cl">
                                 <dl className="fl">
-                                    <dt>模块一 : 企业理财综合知识</dt>
-                                    {video_trys.slice(0, 2).map((item, index) => {
+                                    <dt>模块一 : 企业理财与公司金融综合服务业务</dt>
+                                    {video_trys.slice(0, 1).map((item, index) => {
                                         return  <dd key={index}>
                                                     <a href="#"
                                                         className={this.state.videoTryId === item.id ? 'active' : ''}
@@ -394,8 +391,8 @@ class Cfc extends React.Component {
                                                         onClick={this.onClickTryVideo}>试听: 《{item.name}》</a>
                                                 </dd>
                                     })}
-                                    <dt>模块二 : 企业融资筹划</dt>
-                                    {video_trys.slice(2, 4).map((item, index) => {
+                                    <dt>模块二 : 企业生命周期与融资筹划</dt>
+                                    {video_trys.slice(1, 2).map((item, index) => {
                                         return  <dd key={index}>
                                                     <a href="#"
                                                         className={this.state.videoTryId === item.id ? 'active' : ''}
@@ -403,8 +400,8 @@ class Cfc extends React.Component {
                                                         onClick={this.onClickTryVideo}>试听: 《{item.name}》</a>
                                                 </dd>
                                     })}
-                                    <dt>模块三 : 企业投资筹划</dt>
-                                    {video_trys.slice(4, 6).map((item, index) => {
+                                    <dt>模块三 : 企业现金管理与投资决策</dt>
+                                    {video_trys.slice(2, 3).map((item, index) => {
                                         return  <dd key={index}>
                                                     <a href="#"
                                                         className={this.state.videoTryId === item.id ? 'active' : ''}
@@ -469,22 +466,22 @@ class Cfc extends React.Component {
                         <div className="special-cfc-certify">
                             <h3>认证证书</h3>
                             <div className="cl special-cnt bg-white">
-                                <div className="fl"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/90410fb85239e124c0c476aa382064eb.png" alt="" /></div>
+                                <div className="fl"><img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/90410fb85239e124c0c476aa382064eb.png" alt="" /></div>
                                 <div className="fr">
                                     <div className="special-certitem">
                                         <h4>CFC证书国际官方认证机构</h4>
                                         <div>
-                                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/354aa63227ee5ec77fbaeb48e666dcbf.png" alt="" />
-                                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/261125b3b1237ad8e2b88daaf31c0639.png" alt="" />
+                                            <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/354aa63227ee5ec77fbaeb48e666dcbf.png" alt="" />
+                                            <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/261125b3b1237ad8e2b88daaf31c0639.png" alt="" />
                                         </div>
                                     </div>
 
                                     <div className="special-certitem">
                                         <h4>CFC中国官方认证机构</h4>
                                         <div>
-                                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/98dd163d87ebe87cd0893559c006e5ff.png" alt="" />
-                                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/ae2f60727dd1858cad179fb4c65ce277.png" alt="" />
-                                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/23cbe11459fe708678e243f92d8af320.png" alt="" />
+                                            <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/98dd163d87ebe87cd0893559c006e5ff.png" alt="" />
+                                            <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/ae2f60727dd1858cad179fb4c65ce277.png" alt="" />
+                                            <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/23cbe11459fe708678e243f92d8af320.png" alt="" />
                                         </div>
                                     </div>
 
@@ -492,7 +489,7 @@ class Cfc extends React.Component {
                                         <h4>证书效力</h4>
                                         <p>CFC证书将证明持证人的企业理财专家身份, 是持证人任职、晋级、职称评定的重要依据，在过去的几个月里，中行、建行、农行、广发行、民生行、招行等越来越多的金融机构在用各种不同的方式参与CFC在中国的培训和学习，并将该认证体系纳入其自身的对公客户经理的岗位管理之中。</p>
                                         <div>
-                                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/35f1021127c36111bd1adb2c614af8c6.png" alt="" />
+                                            <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/35f1021127c36111bd1adb2c614af8c6.png" alt="" />
                                         </div>
                                     </div>
 

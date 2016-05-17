@@ -127,10 +127,10 @@ function renderHtml({ componentHtml, initState, req, res }) {
         window.__INITIAL_STATE__ = ${JSON.stringify(initState)};
         window._g_server_time = ${Date.now()};
 
-        window.CKEDITOR_GETURL = function(resource) {
-            if (/^http|file/.test(resource)) { return resource; }
-            return 'http://cdn.ckeditor.com/4.5.7/standard/' + resource.replace(/^\\\//, '');
-        }
+        //window.CKEDITOR_GETURL = function(resource) {
+        //    if (/^http|file/.test(resource)) { return resource; }
+        //    return '//cdn.ckeditor.com/4.5.7/standard/' + resource.replace(/^\\\//, '');
+        //}
     </script>
     <!--[if lt IE 9]>
         <script src="/static/js/es5-shim.min.js"></script>
