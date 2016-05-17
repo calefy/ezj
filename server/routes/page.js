@@ -113,7 +113,7 @@ function renderHtml({ componentHtml, initState, req, res }) {
     <meta name="description" content="紫荆教育依托清华大学和五道口金融学院丰富的教育资源,秉承其严谨务实的教学理念,紧密结合宏观经济转型过程中,企业和个人知识结构升级的需求,融理论大家、实践专家、顶尖专业机构集体智慧于一体,构建以金融为核心的商业实战知识体系,努力为中国社会商业素质提高贡献一己之力.课程分类：企业理财顾问(CFC),理财规划师,财富资产管理,金融创业投资项目.">
     <meta name="keywords" content="cfc,理财规划师,企业理财顾问师,投资理财顾问,金融理财师,理财培训,企业融资,国家理财规划师,财富管理,资产管理,个人财富管理,证券投资,信托投资,房地产投资,艺术品投资,固定资产管理,证券投资基金,证券投资分析,证券投资分析师,创业金融,创业投资,创业团队,如何创业,怎样创业,自主创业,年轻人如何创业,大学生如何创业,大学生自主创业">
     <title>${res.locals.pageTitle}</title>
-    <link rel="shortcut icon" href="//www.ezijing.com/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="${publicPath}${assets[1]}">
     <!--[if lt IE 9]>
         <script src="/static/js/html5shiv.min.js"></script>
