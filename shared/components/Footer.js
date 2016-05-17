@@ -23,7 +23,7 @@ module.exports = () => {
                     </div>
                     <div className="footer-top-app fl">
                         <h4>APP下载（安卓&IOS）</h4>
-                        <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/73eb2da6cfff1349a0783b26d34e335c.jpg" alt="扫码下载" />
+                        <img src="//zj-avatar.img-cn-beijing.aliyuncs.com/7ebe778bf9703ae5952bb2caa28b49bb566903612.png" alt="扫码下载" />
                     </div>
                     <div className="footer-top-ew fl">
                         <h4>关注我们</h4>
