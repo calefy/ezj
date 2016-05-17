@@ -215,37 +215,37 @@ class CourseCategoryDetail extends Component {
                                     <a href="/topic/security" target="_blank" className="disabled">已结束</a>
                                 </li>
                                 <li>
-                                    <span className="open-title">第5期：&emsp;深圳&emsp;2016年06月25日－06月26日</span>
+                                    <span className="open-title">第5期：&emsp;上海&emsp;2016年05月28日－05月29日</span>
+                                    <span className="open-address"><i className="iconfont icon-address"></i>浦东文华东方酒店</span>
+                                    <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
+                                    <a href="/topic/security" target="_blank">立即报名</a>
+                                </li>
+                                <li>
+                                    <span className="open-title">第6期：&emsp;待定</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                     <a href="/topic/security" target="_blank">立即报名</a>
                                 </li>
                                 <li>
-                                    <span className="open-title">第6期：&emsp;上海&emsp;2016年08月13日－08月14日</span>
+                                    <span className="open-title">第7期：&emsp;待定</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                     <a href="/topic/security" target="_blank">立即报名</a>
                                 </li>
                                 <li>
-                                    <span className="open-title">第7期：&emsp;北京&emsp;待定</span>
+                                    <span className="open-title">第8期：&emsp;待定</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                     <a href="/topic/security" target="_blank">立即报名</a>
                                 </li>
                                 <li>
-                                    <span className="open-title">第8期：&emsp;上海&emsp;待定</span>
+                                    <span className="open-title">第9期：&emsp;待定</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                     <a href="/topic/security" target="_blank">立即报名</a>
                                 </li>
                                 <li>
-                                    <span className="open-title">第9期：&emsp;深圳&emsp;待定</span>
-                                    <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
-                                    <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
-                                    <a href="/topic/security" target="_blank">立即报名</a>
-                                </li>
-                                <li>
-                                    <span className="open-title">第10期：&emsp;北京&emsp;待定</span>
+                                    <span className="open-title">第10期：&nbsp;待定</span>
                                     <span className="open-address"><i className="iconfont icon-address"></i>待定</span>
                                     <span className="open-num"><i className="iconfont icon-user"></i>125 人</span>
                                     <a href="/topic/security" target="_blank">立即报名</a>
