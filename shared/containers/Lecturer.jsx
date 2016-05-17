@@ -43,7 +43,7 @@ class Lecturer extends Component {
         let list = lecturer_courses.data || [];
 
         return (
-            <div className="lecturer">
+            <div className="lecturer wide">
                 {lecturer.isFetching || lecturer_courses.isFetching ?
                     <div className="loading"><i className="iconfont icon-loading fa-spin"></i></div>
                     :

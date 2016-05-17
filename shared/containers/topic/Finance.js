@@ -548,7 +548,7 @@ class Finance extends React.Component {
                             <div className="join-erwei cl">
                                 <div className="join-erwei-phone fl">
                                     <p>手机扫描二维码，即可报名并支付课程</p>
-                                    <img src="http://zj-avatar.img-cn-beijing.aliyuncs.com/74316e89f573add93c0a581b6d7c0abf1342961401.png" />
+                                    <img src="//zj-avatar.img-cn-beijing.aliyuncs.com/74316e89f573add93c0a581b6d7c0abf1342961401.png" />
                                 </div>
                                 <div className="join-saoma fr">
                                     <h5>拿出手机，通过微信完成购买</h5>

@@ -21,6 +21,7 @@
 .course-status{ font-size: 0.875em; color: #818181;}
 .course-status i{ margin: 0 4px 0 0;}
 .course-status em{ margin: 0 30px 0 0;}
+.course-status .share-box{vertical-align:middle;margin-left:-20px;}
 
 .course-price{ font-size: 1.25em; color: #b01c40; margin: 12px 0 0;}
 .course-state{ color: #818181; font-size: 0.875em;}

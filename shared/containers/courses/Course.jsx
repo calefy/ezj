@@ -38,6 +38,7 @@ class Course extends Component {
 
     state = {
         isShowTipBuy: false, // 是否显示提示需要购买框
+        isShowShare: false, // 是否显示分享
     };
 
     componentDidMount() {
@@ -45,6 +46,14 @@ class Course extends Component {
 
         // 判断是否需要展示测验
         this.loadExamData(this.props);
+
+        // 加载分享js
+        setTimeout(function() {
+            window.jiathis_config = { do_not_track: true };
+            let s = document.createElement('script');
+            s.src = 'http://v3.jiathis.com/code/jia.js';
+            document.body.appendChild(s);
+        }, 0);
     }
     componentWillReceiveProps(nextProps) {
         this.loadNeededData(nextProps);
@@ -211,6 +220,12 @@ class Course extends Component {
         }
     };
 
+    // 点击分享
+    onClickShare = e => {
+        e.preventDefault();
+        this.setState({ isShowShare: !this.state.isShowShare });
+    };
+
     handleLoadSheetAnswer = sheetId => {
         const courseAction = new CoursesAction();
         this.props.dispatch(courseAction.loadSheet(sheetId));
@@ -279,11 +294,19 @@ class Course extends Component {
                                 })}
                             </p>
                             <h1>{course.course_name}</h1>
-                            <p className="course-status">
+                            <div className="course-status">
                                 <em><i className="iconfont icon-clock"></i>{timeStr}</em>
                                 <em><i className="iconfont icon-user"></i>{course.student_count}人</em>
-                                <em className="hide"><i className="iconfont icon-share"></i>分享</em>
-                            </p>
+                                <em onClick={this.onClickShare}><i className="iconfont icon-share"></i>分享</em>
+                                <div className={`jiathis_style_24x24 share-box dib ${this.state.isShowShare ? '' : 'hide'}`}>
+                                    <a className="jiathis_button_qzone"></a>
+                                    <a className="jiathis_button_tsina"></a>
+                                    <a className="jiathis_button_tqq"></a>
+                                    <a className="jiathis_button_weixin"></a>
+                                    <a className="jiathis_button_renren"></a>
+                                    <a href="http://www.jiathis.com/share" className="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                                </div>
+                            </div>
                             <p className="course-price">{course.course_price > 0 ? '¥ ' + course.course_price : '免费'}</p>
                             <p className="course-state">
                                 {priv.is_purchased ?
