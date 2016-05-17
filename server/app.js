@@ -33,6 +33,15 @@ app.use(cookieParser());
 app.use(bodyParser.json({ limit: '600kb' })); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: false, limit: '600kb' })); // for parsing application/x-www-form-urlencoded
 
+// 拦截app下载处理
+app.get('/app/download', function(req, res) {
+    let url = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ezijing';
+    if (/iPhone|iPad|Mac/.test(req.get('user-agent'))) {
+        url = 'https://itunes.apple.com/cn/app/zi-jing-jiao-yu/id915668230';
+    }
+    res.redirect(url);
+});
+
 // /api 请求处理
 app.use('/api', require('./routes/api'))
 // 同构页面处理

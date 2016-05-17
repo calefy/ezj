@@ -206,7 +206,7 @@ export function image(img, type) {
     return img + (type ? '@!' + type : '');
 }
 export function avatar(a, type) {
-    return image(a || 'http://zj-avatar.img-cn-beijing.aliyuncs.com/8ac4a55b827a7b545d01d338f91522452023575752.jpg', type) ;
+    return image(a || '//zj-avatar.img-cn-beijing.aliyuncs.com/8ac4a55b827a7b545d01d338f91522452023575752.jpg', type) ;
 }
 
 /**
