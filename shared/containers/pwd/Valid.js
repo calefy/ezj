@@ -109,7 +109,7 @@ let PwdValid = React.createClass({
                         <FormsyText 
                             name="code"
                             ref="code"
-                            title="短信验证码"
+                            title={(/@/.test(locationPath) ? "邮箱" : "短信") + '验证码'}
                             placeholder="请输入4位验证码"
                             type="text"
                             required />
