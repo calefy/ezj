@@ -159,7 +159,7 @@ class Video extends Component {
     render() {
         return  <div id="playerWrap">
                     <div id="player">
-                        <p className="hide" id="player_not_support_help">观看该视频需要 Adobe Flash Player 11.1.0 或更高版本</p>
+                        <p className="hide" id="player_not_support_help">您还没有安装flash播放器,请 <a href="http://www.adobe.com/go/getflash" target="_blank">点击这里安装</a> </p>
                     </div>
                 </div>;
     }
