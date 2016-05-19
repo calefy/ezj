@@ -87,6 +87,8 @@ let Unipay = React.createClass({
         this.props.dispatch(this.userAction.send(contact));
     },
     handleRegist: function(data) {
+        // unipay添加注册channel字段
+        data = Object.assign(data, {channel_code: 11});
         this.props.dispatch(this.userAction.reg(data));
     },
     handleShowProtocol: function(type) {
