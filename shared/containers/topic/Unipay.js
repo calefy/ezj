@@ -8,7 +8,6 @@ import UserAction from '../../actions/UserAction';
 
 import formsySubmitButtonMixin from '../../mixins/formsySubmitButtonMixin';
 import FormsyText from '../../components/formsy/FormsyText.jsx';
-import FormsyCheckbox from '../../components/formsy/FormsyCheckbox.jsx';
 
 import { cryptoPasswd } from '../../libs/utils';
 
@@ -27,16 +26,11 @@ let Unipay = React.createClass({
         const loginType = getRequestTypes(UserAction.LOGIN);
         switch(nextProps.action.type) {
             case loginType.success:
-                this.setState({ _submitLoading: false, error: "登陆成功" });
-                alert("登陆成功");
-                // 因登录返回的用户数据不全，因此登录成功后加载用户完整数据
-                const userAction = new UserAction();
-                nextProps.dispatch(userAction.loadAccount());
-                // 以上加载userinfo数据用刷新页面代替，保证退出后立马登录数据的清洁
-                //document.location.reload(); // 该方式会导致加载完成前就点击的会被跳转
+                alert("登陆成功, 跳转。。。");
                 break;
             case loginType.failure:
-                this.handleResponse(nextProps.action.error);
+                this.enableSubmitButton(); // 因react state设置问题，该行并不会生效
+                this.setState({ error: nextProps.action.error && nextProps.action.error.message || '登录失败' }); // 重置全部state
                 break;
         }
     },
@@ -45,11 +39,10 @@ let Unipay = React.createClass({
      */
     onSubmit: function(model) {
         const userAction = new UserAction();
-        let login_name=this.refs.login_name.getValue().trim();
+        let login_name = model.login_name.trim();
         let password = cryptoPasswd(model.password);
         this.loadingSubmitButton();
         this.props.dispatch(userAction.login({ login_name , password }));
-        // this.props.onLogin( Object.assign({}, model, { login_name , password }) );
     },
 
     // 表单变更时，取消掉全局错误消息
@@ -57,34 +50,23 @@ let Unipay = React.createClass({
         this.setState({ error: '' });
     },
 
-    /**
-     * 反馈结果
-     */
-    handleResponse: function(res) {
-        if (!res.data) {
-            this.enableSubmitButton(); // 因react state设置问题，该行并不会生效
-            this.setState({ error: res.message || '登录失败' }); // 重置全部state
-        }
-    },
-
     render: function() {
-        
         return (
             <div className="unipay wide">
                 <div className="unipay-header-top">
                     <div className="container">
                         <div className="fl">
-                            <Link to="/"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/0c6c7b16467c3a2cca2ec3d77fc70ac9.png" /></Link>
+                            <Link to="/"><img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/0c6c7b16467c3a2cca2ec3d77fc70ac9.png" /></Link>
                         </div>
                         <div className="fl"  style={{ marginTop: 5 }}>
-                            <Link to="/"><img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/a2fec2523cee8bed01f0e53f4061cfc0.png" /></Link>
+                            <Link to="/"><img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/a2fec2523cee8bed01f0e53f4061cfc0.png" /></Link>
                         </div>
                     </div>
                 </div>
                 <div className="unipay-banner cl">
                     <div className="container">
                         <div className="unipay-banner-fl fl">
-                            <img src="http://xplat-avatar.oss-cn-beijing.aliyuncs.com/b93dd2471aff903b6e580111598bc209.png" />
+                            <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/b93dd2471aff903b6e580111598bc209.png" />
                             <p className="unipay-btn">注册/登录后了解详情</p>
                         </div>
                         <div className="unipay-banner-fr fr">
@@ -98,7 +80,6 @@ let Unipay = React.createClass({
                                 onChange={this.onFormChange}
                             >
                                 <FormsyText
-                                    ref="login_name"
                                     name="login_name"
                                     type="text"
                                     title={
