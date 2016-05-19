@@ -102,7 +102,7 @@ let Home = React.createClass({
                             </Link>
                             <Link to="/courses" query={{category: 'competitive'}} title="" target="_blank" className="module module2">
                                 <div className="module-icon">
-                                    <i className="iconfont icon-module21"></i>
+                                    <i className="iconfont icon-daoshi"></i>
                                 </div>
                                 <h4>学位教育</h4>
                                 <div className="module-title">紫荆-索菲亚 财富管理方向MBA</div>

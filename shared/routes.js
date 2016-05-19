@@ -430,5 +430,14 @@ module.exports = {
                 },
             ]
         },
+        // unipay页
+        {
+            path: 'unipay',
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/topic/Unipay'));
+                });
+            }
+        },
     ]
 };
