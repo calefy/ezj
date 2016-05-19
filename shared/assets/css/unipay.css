@@ -1,4 +1,4 @@
-.unipay{ min-width: 1000px; padding:0 0 30px; margin: -60px 0 0;}
+.unipay{ min-width: 1000px; margin: -60px 0 0;}
 .unipay .container{ width: 1000px;}
 
 .unipay-header-top{ width: 100%; background: #fff; height: 54px; font-size:0.875em;border-bottom:1px solid #d8d8d8;z-index: 200;}
@@ -33,15 +33,14 @@
 
 .unipay-combine li{ padding:20px;}
 .unipay-combine h4{ font-weight: normal; color: #00bbca;}
-.unipay-combine em{
-	font-size: 0.875em;
-    color: #fff;
-    background: #00bbca;
-    border-radius:34px;
-    display: inline-block;
-    width: 225px;
-    height:34px;
-    text-align: center;
-    line-height: 34px;
-    margin:10px 5px;
-}
+.unipay-combine em{ font-size: 0.875em; color: #fff; background: #00bbca; border-radius:34px; display: inline-block; width: 225px; height:34px; text-align: center; line-height: 34px; margin:10px 5px;}
+
+.unipay-footer{ background: #003236; padding: 30px 0 44px; color: #707070; line-height: 1.6; margin: 60px 0 0;}
+.unipay-footer a{ color: #707070;}
+.unipay-footer h3,.unipay-footer h4{ font-weight: normal; color: #fff;}
+.unipay-footer h3{ font-size: 1.375em; margin-bottom: 32px;}
+.unipay-footer h4{ font-size: 1.125em;}
+.unipay-footer ul div{ font-size: 0.875em}
+.unipay-footer p{ margin: 5px 0 20px;}
+
+.footer-uni{ text-align: center; font-size: 0.875em; margin: 30px 0 0 !important; padding: 30px 0 0; border-top: 1px solid #00565d}
