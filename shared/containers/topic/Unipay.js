@@ -8,6 +8,9 @@ import UserAction from '../../actions/UserAction';
 
 import formsySubmitButtonMixin from '../../mixins/formsySubmitButtonMixin';
 import FormsyText from '../../components/formsy/FormsyText.jsx';
+import Dialog     from '../../components/Dialog.jsx';
+import RegistForm from '../../components/RegistForm.jsx';
+import Protocol from '../../components/Protocol.jsx';
 
 import { cryptoPasswd } from '../../libs/utils';
 
@@ -18,12 +21,19 @@ if (process.env.BROWSER) {
 
 let Unipay = React.createClass({
     mixins: [ formsySubmitButtonMixin ],
-    
     getInitialState: function() {
-        return { error: '' };
+        return {
+            showDialog: false,  // 显示注册框
+            showProtocol: null, // 显示协议：pay/private
+            error: ''
+        };
     },
+    userAction: new UserAction(),
+
     componentWillReceiveProps: function(nextProps) {
         const loginType = getRequestTypes(UserAction.LOGIN);
+        const sendType = getRequestTypes(UserAction.SEND);
+        const registType = getRequestTypes(UserAction.REGIST);
         switch(nextProps.action.type) {
             case loginType.success:
                 alert("登陆成功, 跳转。。。");
@@ -32,22 +42,58 @@ let Unipay = React.createClass({
                 this.enableSubmitButton(); // 因react state设置问题，该行并不会生效
                 this.setState({ error: nextProps.action.error && nextProps.action.error.message || '登录失败' }); // 重置全部state
                 break;
+
+            case sendType.failure:
+                this.refs.registForm.handleResponse(RegistForm.RESPONSE_VALID_CODE, nextProps.action.error);
+                break;
+
+            case registType.success:
+                this.hideDialog();
+                alert('注册成功，跳转。。。');
+                break;
+            case registType.failure:
+                this.refs.registForm.handleResponse(RegistForm.RESPONSE_REGIST, nextProps.action.error);
+                break;
         }
+    },
+
+    _setState: function(obj) {
+        this.setState(Object.assign({}, this.state, obj || {}));
     },
     /**
      * 提交登录
      */
     onSubmit: function(model) {
-        const userAction = new UserAction();
         let login_name = model.login_name.trim();
         let password = cryptoPasswd(model.password);
         this.loadingSubmitButton();
-        this.props.dispatch(userAction.login({ login_name , password }));
+        this.props.dispatch(this.userAction.login({ login_name , password }));
     },
 
     // 表单变更时，取消掉全局错误消息
     onFormChange: function() {
         this.setState({ error: '' });
+    },
+
+
+    // 注册相关
+    showDialog: function() {
+        this._setState({ showDialog: true });
+    },
+    hideDialog: function() {
+        this._setState({ showDialog: false });
+    },
+    handleSendValidCode: function(contact) {
+        this.props.dispatch(this.userAction.send(contact));
+    },
+    handleRegist: function(data) {
+        this.props.dispatch(this.userAction.reg(data));
+    },
+    handleShowProtocol: function(type) {
+        this._setState({ showProtocol: type });
+    },
+    hideProtocolDialog: function() {
+        this._setState({ showProtocol: null });
     },
 
     render: function() {
@@ -105,7 +151,7 @@ let Unipay = React.createClass({
                                         className={ this.canSubmit() ? '' : 'disabled'} >{this.isSubmitLoading() ? '登录中...' : '登录'}</button>
                                 </div>
                                 <div className="pop-other cl">
-                                    <em className="fl">没有账号？<button>马上注册</button></em>
+                                    <em className="fl">没有账号？<button type="button" onClick={this.showDialog}>马上注册</button></em>
                                     <em className="fr" style={{ color: "red" }}>{this.state.error}</em>
                                 </div>
                             </Formsy.Form>
@@ -177,6 +223,32 @@ let Unipay = React.createClass({
                         </div>
                     </div>
                 </div>
+
+                {/*注册弹框*/}
+                <Dialog
+                    ref="dialog"
+                    className="pop register-pop"
+                    open={this.state.showDialog}
+                    onRequestClose={this.hideDialog}
+                >
+                    <div className="pop-logo"><em>紫荆教育</em></div>
+                    <RegistForm
+                        ref="registForm"
+                        onSendValidCode={this.handleSendValidCode}
+                        onRegist={this.handleRegist}
+                        onTurnToLogin={this.hideDialog}
+                        onTurnToProtocol={this.handleShowProtocol}
+                    />
+                </Dialog>
+
+                {/*隐私/付费协议*/}
+                <Dialog
+                    className="agreement-pop pop"
+                    open={!!this.state.showProtocol}
+                    onRequestClose={this.hideProtocolDialog}
+                >
+                    <Protocol type={this.state.showProtocol} />
+                </Dialog>
             </div>
         );
     }
