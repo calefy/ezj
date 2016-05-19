@@ -4,9 +4,13 @@ import { Link } from 'react-router';
 
 import {getRequestTypes} from '../../libs/utils';
 import CoursesAction from '../../actions/CoursesAction';
+import UserAction from '../../actions/UserAction';
+
 import formsySubmitButtonMixin from '../../mixins/formsySubmitButtonMixin';
 import FormsyText from '../../components/formsy/FormsyText.jsx';
 import FormsyCheckbox from '../../components/formsy/FormsyCheckbox.jsx';
+
+import { cryptoPasswd } from '../../libs/utils';
 
 if (process.env.BROWSER) {
     require('css/unipay.css');
@@ -15,6 +19,53 @@ if (process.env.BROWSER) {
 
 let Unipay = React.createClass({
     mixins: [ formsySubmitButtonMixin ],
+    
+    getInitialState: function() {
+        return { error: '' };
+    },
+    componentWillReceiveProps: function(nextProps) {
+        const loginType = getRequestTypes(UserAction.LOGIN);
+        switch(nextProps.action.type) {
+            case loginType.success:
+                this.setState({ _submitLoading: false, error: "登陆成功" });
+                alert("登陆成功");
+                // 因登录返回的用户数据不全，因此登录成功后加载用户完整数据
+                const userAction = new UserAction();
+                nextProps.dispatch(userAction.loadAccount());
+                // 以上加载userinfo数据用刷新页面代替，保证退出后立马登录数据的清洁
+                //document.location.reload(); // 该方式会导致加载完成前就点击的会被跳转
+                break;
+            case loginType.failure:
+                this.handleResponse(nextProps.action.error);
+                break;
+        }
+    },
+    /**
+     * 提交登录
+     */
+    onSubmit: function(model) {
+        const userAction = new UserAction();
+        let login_name=this.refs.login_name.getValue().trim();
+        let password = cryptoPasswd(model.password);
+        this.loadingSubmitButton();
+        this.props.dispatch(userAction.login({ login_name , password }));
+        // this.props.onLogin( Object.assign({}, model, { login_name , password }) );
+    },
+
+    // 表单变更时，取消掉全局错误消息
+    onFormChange: function() {
+        this.setState({ error: '' });
+    },
+
+    /**
+     * 反馈结果
+     */
+    handleResponse: function(res) {
+        if (!res.data) {
+            this.enableSubmitButton(); // 因react state设置问题，该行并不会生效
+            this.setState({ error: res.message || '登录失败' }); // 重置全部state
+        }
+    },
 
     render: function() {
         
@@ -39,7 +90,12 @@ let Unipay = React.createClass({
                         <div className="unipay-banner-fr fr">
                             <div className="pop-logo"><em>紫荆教育</em></div>
                             <Formsy.Form
+                                ref="uniForm"
                                 className="pop-text"
+                                onValid={this.enableSubmitButton}
+                                onInvalid={this.disableSubmitButton}
+                                onValidSubmit={this.onSubmit}
+                                onChange={this.onFormChange}
                             >
                                 <FormsyText
                                     ref="login_name"
@@ -69,6 +125,7 @@ let Unipay = React.createClass({
                                 </div>
                                 <div className="pop-other cl">
                                     <em className="fl">没有账号？<button>马上注册</button></em>
+                                    <em className="fr" style={{ color: "red" }}>{this.state.error}</em>
                                 </div>
                             </Formsy.Form>
                         </div>
