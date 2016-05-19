@@ -57,7 +57,11 @@ let RegistForm = React.createClass({
         if (type === RegistForm.RESPONSE_REGIST) {
             if (!res.data) {
                 this.enableSubmitButton();
-                this._setState({ error: res.message || '注册失败' });
+                this.setState({
+                    error: res.message || '注册失败',
+                    isSended: this.state.isSended,
+                    countDown: this.state.countDown,
+                });
             }
         }
     },
