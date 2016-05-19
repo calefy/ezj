@@ -103,6 +103,8 @@ function fetchComponentsData( dispatch, props = {}, apiClient, res ) {
 function renderHtml({ componentHtml, initState, req, res }) {
     const publicPath = resourceConfig.publicPath;
     const assets = resourceConfig.assetsByChunkName.main;
+    // 通过判断 /m/ 开头的作为手机页
+    let isMobilePage = /^\/m\//.test(req.path);
 
     return `<!DOCTYPE html>
 <html>
@@ -120,7 +122,7 @@ function renderHtml({ componentHtml, initState, req, res }) {
         <script src="/static/js/selectivizr-min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body ${isMobilePage ? 'class="site-mobile"' : ''}>
     <div id="app">${componentHtml}</div>
 
     <script>
