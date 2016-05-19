@@ -196,6 +196,32 @@ let Unipay = React.createClass({
                         </div>
                     </div>
                 </div>
+                <div className="unipay-footer">
+                    <div className="container">
+                        <h3>课程合作方:</h3>
+                        <ul className="cl">
+                            <li className="fl">
+                                <h4>紫荆教育</h4>
+                                <div>
+                                    <p>北京市海淀区成府路43号2号楼234室</p>
+                                    联系方式:<br />
+                                    电话：4008-363-463<br />
+                                    邮箱：<a href="mailto:service@ezijing.com">service@ezijing.com</a><br />
+                                </div>
+                            </li>
+                            <li className="fr">
+                                <h4>银联支付学院</h4>
+                                <div>
+                                    <p>上海市浦东新区顾唐路1899号中国银联培训中心三楼</p>
+                                    联系方式:<br />
+                                    电话：021-50361511<br />
+                                    邮箱：<a href="mailto:chukang@unionpay.com">chukang@unionpay.com</a><br />
+                                </div>
+                            </li>
+                        </ul>
+                        <p className="footer-uni">Copyright @ 2013 Zijing Education. All rights reserved. 京ICP证150431号</p>
+                    </div>
+                </div>
             </div>
         );
     }
