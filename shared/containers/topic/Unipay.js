@@ -19,11 +19,27 @@ if (process.env.BROWSER) {
 
 let Unipay = React.createClass({
     mixins: [ formsySubmitButtonMixin ],
-
+    
     getInitialState: function() {
         return { error: '' };
     },
-
+    componentWillReceiveProps: function(nextProps) {
+        const loginType = getRequestTypes(UserAction.LOGIN);
+        switch(nextProps.action.type) {
+            case loginType.success:
+                this.setState({ _submitLoading: false, error: "登陆成功" });
+                alert("登陆成功");
+                // 因登录返回的用户数据不全，因此登录成功后加载用户完整数据
+                const userAction = new UserAction();
+                nextProps.dispatch(userAction.loadAccount());
+                // 以上加载userinfo数据用刷新页面代替，保证退出后立马登录数据的清洁
+                //document.location.reload(); // 该方式会导致加载完成前就点击的会被跳转
+                break;
+            case loginType.failure:
+                this.handleResponse(nextProps.action.error);
+                break;
+        }
+    },
     /**
      * 提交登录
      */
@@ -74,6 +90,7 @@ let Unipay = React.createClass({
                         <div className="unipay-banner-fr fr">
                             <div className="pop-logo"><em>紫荆教育</em></div>
                             <Formsy.Form
+                                ref="uniForm"
                                 className="pop-text"
                                 onValid={this.enableSubmitButton}
                                 onInvalid={this.disableSubmitButton}
@@ -108,7 +125,7 @@ let Unipay = React.createClass({
                                 </div>
                                 <div className="pop-other cl">
                                     <em className="fl">没有账号？<button>马上注册</button></em>
-                                    <em className="fr">{this.state.error}</em>
+                                    <em className="fr" style={{ color: "red" }}>{this.state.error}</em>
                                 </div>
                             </Formsy.Form>
                         </div>
