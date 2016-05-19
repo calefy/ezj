@@ -131,7 +131,7 @@ class App extends Component {
                 {isMobile ? null :
                     <Header location={location} history={this.props.history} />
                 }
-                <div className={`body ${isMobile ? 'site-mobile' : ''}`}>
+                <div className="body">
                     {this.props.children}
                 </div>
                 {isMobile ? null : <Footer />}
