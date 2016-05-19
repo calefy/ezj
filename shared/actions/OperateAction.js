@@ -42,6 +42,11 @@ module.exports = class OperateAction extends BaseAction {
     openLoginDialog() {
         return { type: OperateAction.OPEN_LOGIN_DIALOG };
     }
+    static OPEN_REGIST_DIALOG = 'openRegistDialog';
+    // 打开注册框
+    openRegistDialog() {
+        return { type: OperateAction.OPEN_REGIST_DIALOG};
+    }
 
     // 显示错误消息
     showErrorMessage(message) {

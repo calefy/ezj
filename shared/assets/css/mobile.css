@@ -1,3 +1,5 @@
+.site-mobile{background-color:#505050;}
+.site-mobile .body{padding-top: 0;min-width:auto;}
 /*.mobile-test{ width: 80%;}*/
 .mobile-header{ line-height: 44px; background: #fff; border-bottom: 1px solid #bbb; padding:0 10px; position: relative;}
 .mobile-header h1{ text-align: center;}
@@ -72,3 +74,12 @@
 .mobile-user li{ background: #fff; line-height: 1.6; padding:10px 14px;border-bottom: 1px dashed #dadada; color: #606060;}
 .mobile-user li:last-child{ border-bottom:0;}
 .mobile-user li p{ color: #999999; font-size: 0.75em;}
+
+
+/*手机首页*/
+.mobile-index{height:100%;text-align:center;color:#fff;background-color:#505050;}
+.mobile-index img{width:100%;}
+.mobile-index h1{font-size:1.25em;margin:50px 0 30px;}
+.mobile-index p{font-size:1.1em;line-height:1.5;}
+.mobile-index .btn{margin:70px 0 100px;padding:15px 50px;font-size:16px;}
+

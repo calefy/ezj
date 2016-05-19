@@ -60,6 +60,9 @@ class Header extends Component {
             case OperateAction.OPEN_LOGIN_DIALOG: // 从其他组件调用打开登录对话框
                 this._setState({ showDialog: true, dialogType: 'login' });
                 break;
+            case OperateAction.OPEN_REGIST_DIALOG: // 从其他组件调用打开注册对话框
+                this._setState({ showDialog: true, dialogType: 'regist' });
+                break;
         }
     }
 

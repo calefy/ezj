@@ -33,13 +33,17 @@ app.use(cookieParser());
 app.use(bodyParser.json({ limit: '600kb' })); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: false, limit: '600kb' })); // for parsing application/x-www-form-urlencoded
 
-// 拦截app下载处理
-app.get('/app/download', function(req, res) {
-    let url = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ezijing';
-    //if (/iPhone|iPad|Mac/.test(req.get('user-agent'))) {
-    //    url = 'https://itunes.apple.com/cn/app/zi-jing-jiao-yu/id915668230';
-    //}
-    res.redirect(url);
+// 如果是下载页面，则直接跳转到应用宝，由应用宝负责不同平台的app下载
+// 如果访问来自手机，并且访问的地址不是/m/开头的页面，跳转到/m/index
+// 否则交给后面处理
+app.get('*', function(req, res, next) {
+    if ('/app/download' === req.path) {
+        res.redirect('http://a.app.qq.com/o/simple.jsp?pkgname=com.ezijing');
+    } else if (/Mobile|Android|iPhone/.test(req.get('user-agent')) && !(/^\/m\//.test(req.path))) {
+        res.redirect('/m/index');
+    } else {
+        next();
+    }
 });
 
 // /api 请求处理

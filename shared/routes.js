@@ -397,6 +397,14 @@ module.exports = {
             path: 'm',
             childRoutes: [
                 {
+                    path: 'index',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/mobile/Index.jsx'));
+                        });
+                    }
+                },
+                {
                     path: 'exams',
                     getComponent(location, cb) {
                         require.ensure([], require => {

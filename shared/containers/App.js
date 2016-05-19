@@ -123,18 +123,20 @@ class App extends Component {
 
     render() {
         const { location } = this.props;
-        // 通过判断 /m/ 开头的作为手机页
-        let isMobile = /^\/m\//.test(location.pathname);
+        // 是否隐藏头尾：
+        //  - 手机页 /m
+        //  - 银联页面 /topic/unipay
+        let shouldHide = /^(\/m\/|\/topic\/unipay)/.test(location.pathname);
 
         return (
             <div>
-                {isMobile ? null :
-                    <Header location={location} history={this.props.history} />
-                }
-                <div className={`body ${isMobile ? 'site-mobile' : ''}`}>
+                {shouldHide ? null : <Header location={location} history={this.props.history} /> }
+
+                <div className="body">
                     {this.props.children}
                 </div>
-                {isMobile ? null : <Footer />}
+
+                {shouldHide ? null : <Footer />}
 
                 <Snackbar ref="snackbar" />
             </div>
