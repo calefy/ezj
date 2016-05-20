@@ -10,9 +10,51 @@ if (process.env.BROWSER) {
     require('css/special.css');
 }
 
-const BUNDLE_ID = '6119033157460164608';
+const LECTURERS = [
+    {
+        id: '22103', lecturer_name: '庄瑞豪',
+        lecturer_title: '科尔尼（A.T. Kearney）Kearney 全球合伙人、大中华区总裁',
+        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/7aadb00e2f878842be7572edede91806.jpg',
+    },
+    {
+        id: '27678', lecturer_name: '糜懿全',
+        lecturer_title: '安永会计师事务所 合伙人',
+        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/4eb7413304c0d07f1d75eb550bdc2bcd.jpg',
+    },
+    {
+        id: '27650', lecturer_name: '郑荣禄',
+        lecturer_title: '深圳前海中领国际管理咨询有限公司 董事长',
+        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/4ad21143dd15a9988b7f3be040dce60a.jpg',
+    },
+    {
+        id: '27651', lecturer_name: '高 皓',
+        lecturer_title: '清华大学五道口金融学院 家族企业课程主任',
+        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/c6b2956da3ec33e24e09e3821eee6c8b.jpg',
+    },
+    {
+        id: '27017', lecturer_name: '张 伟',
+        lecturer_title: '清华大学五道口金融学院 讲师',
+        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/e8c1008168ef556ef5726b54b9263d5a.jpg',
+    },
+    {
+        id: '27106', lecturer_name: '宋晓恒',
+        lecturer_title: '晓恒博士家族办公室 创始人',
+        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/24b23e2299fc734d88e91c5db4561c85.jpg',
+    },
+    {
+        id: '6138980509235019776', lecturer_name: '薛 梅',
+        lecturer_title: '北京工商大学经济学院 副教授',
+        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/a0b3ae6708d2b7f0d45550a986cf77fb.jpg',
+    },
+    {
+        id: '6138975176638857216', lecturer_name: '何四炎',
+        lecturer_title: '金融学保险研究方向管理学博士',
+        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/e14dfc6400a8b2f70b7760f2c44edec2.jpg',
+    },
+];
 
-class Security extends React.Component {
+
+class Plan extends React.Component {
 
     // 初始加载数据
     //static fetchData({dispatch, params={}, location={}, apiClient}) {
@@ -49,8 +91,8 @@ class Security extends React.Component {
     };
 
     render() {
-        let lecturers = this.props.product_lecturers.data || [];
-        lecturers = []; // 临时去掉
+        //let lecturers = this.props.product_lecturers.data || [];
+        let lecturers = LECTURERS;
 
         return (
             <div className="special-plan wide">
@@ -84,19 +126,11 @@ class Security extends React.Component {
                                                         <img src={image(item.lecturer_avatar, 'll')}/>
                                                         <div>
                                                             <h4>{item.lecturer_name}</h4>
-                                                            <p>{item.lecturer_org} {item.lecture_title}</p>
+                                                            <p title={item.lecturer_title}>{item.lecturer_title}</p>
                                                         </div>
                                                     </Link>
                                                 </li>
                                     })}
-                                    <li><a href="/user/3223333591" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/9aa1140f9f695cb8a0f2609032be3c9b.jpg"/><div><h4>林华</h4><p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p></div></a></li>
-                                    <li><a href="/lecturers/3223333672" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/67cae20e53698661fce9a2874f5e40ac.jpg"/><div><h4>黄长清</h4><p>恒泰证券金融市场部执行总经理、产品负责人</p></div></a></li>
-                                    <li><a href="/lecturers/3223333673" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/c2cf12ba6994d974bcdfee781aa47ae3.jpg"/><div><h4>李耀光</h4><p>摩根士丹利华鑫证券固定收益部结构融资总监。</p></div></a></li>
-                                    <li><a href="/lecturers/3223333675" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/5322710854de236b0034f8df95f4c16d.jpg"/><div><h4>万华伟</h4><p>联合信用评级有限公司副总经理兼评级总监</p></div></a></li>
-                                    <li><a href="/lecturers/3223333671" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/6e35b1c86dad5377a1fc1249ed86ec33.jpg"/><div><h4>洪浩</h4><p>北京大学理学博士</p></div></a></li>
-                                    <li><a href="/lecturers/3223333674" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/627554cbc5a12a30d733d54d1b6625a6.jpg"/><div><h4>罗桂连</h4><p>陕西金融控股集团有限公司 总经理助理</p></div></a></li>
-                                    <li><a href="/lecturers/3223333679" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/ce7319a0b074718be5a32bf2a8887041.jpg"/><div><h4>许余洁</h4><p>中国证监会科研工作站博士后、西南财经大学互联网金融创新及监管协同创新中心特聘研究员</p></div></a></li>
-                                    <li><a href="/lecturers/3223333680" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/f7b235bff6de5449dcb7250f2d96b66f.jpg"/><div><h4>刘洪光</h4><p>上海市锦天城律师事务所，专职律师</p></div></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -230,7 +264,6 @@ class Security extends React.Component {
                                     </ul>
                                     <p>备注：线上课程在开班后90天内有效</p>
                                 </div>
-                            
                             <p>会务组将根据有效的报名信息，通过电子邮件或手机短信方式向参会嘉宾告知培训地点及日程<br />首期班：2016年5月31日-面授地点：清华大学五道口金融学院（面授时间待定）</p>
                         </div>
                         <div className="container special-finance-join bg-white" id="sign">
@@ -261,5 +294,5 @@ class Security extends React.Component {
 
 module.exports = connect( state => ({
     action: state.action,
-    product_lecturers: state.product_lecturers,
-}) )(Security);
+    //product_lecturers: state.product_lecturers,
+}) )(Plan);
