@@ -308,7 +308,7 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .synopsis_price p{ font-size: 2.25em;}
 .synopsis_price a{ background: #fcbf32; border: 1px solid #f6852e; color: #fff; width: 140px; line-height: 44px; display: block; font-size: 1.5em; text-align: center; border-radius: 10px; margin: 0 30px 0 0;}
 
-.special-security-teacher, .special-security-target, .special-security-harvest{margin-bottom:20px;}
+.special-security-teacher, .special-security-target, .special-security-harvest, .special-plan-trait{margin-bottom:20px;}
 
 .special-security-teacher li{ margin:25px 51px; float: left; width: 195px; height:240px; text-align: center; font-size: 0.875em; line-height:1.2; border:1px solid rgba(0,0,0,0.31); color: #505050;}
 .special-security-teacher li a{ display: block;}
@@ -405,3 +405,42 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .special-continue-test .btn{ background: #36a7d5; padding:8px 44px; border-radius: 30px; border: 1px solid #36a7d5;}
 .special-continue-test .course-test-question h2{ text-align: center; line-height: 2; font-size: 1em; font-weight: normal; color: #000; margin: 0 0 30px;}
 .special-continue-test .course-test-question h2 em{ color: #36a7d5;}
+
+
+/*高级理财师*/
+.special-plan-banner { background: url(../img/special_bg.png) no-repeat top center #5fc2c9;}
+.special-plan-banner div.fl { margin: 68px 0 0 56px;}
+.special-plan-banner div.fr{ margin: 54px 0 0;}
+.special-plan-banner h4 { font-size: 2em; color: #fff;}
+.special-plan-banner .synopsis_price a { border: 3px solid #d7b21c}
+.special-plan-banner .synopsis_price em{ color: #fff; margin: 12px 0 0 6px; text-decoration: line-through; font-size: 1.125em;} 
+
+.special-plan .special-security-target-left,.special-plan .special-security-target-right{ width: 590px; height:208px;}
+.special-plan .special-security-target-left p{ font-size: 1em; margin: 20px; line-height: 1.8}
+.special-plan .special-security-target-right div.cl{ padding: 38px 80px;}
+.special-plan .special-security-target-right p{ font-size: 0.875em; color: #707070; line-height: 1.6; float: right}
+
+.special-plan-trait ul{ padding: 20px 34px;}
+.special-plan-trait li{ margin: 0 0 20px; line-height: 1.4;}
+.special-plan-trait h4{ color: #a71d40;}
+.special-plan-trait p{ color: #505050;}
+
+.special-plan .special-security-harvest h4{ font-size: 1.125em; color: #a71d40; margin: 20px 0 0 20px;}
+.special-plan .special-security-harvest ul{ padding: 58px 70px;}
+.special-plan .special-security-harvest li{ width: 427px;}
+.special-plan .special-security-harvest p{ text-align: left; color: #505050; font-size: 1em; margin: 0 0 40px;}
+.special-plan .special-security-harvest a{ color: #0066ff}
+
+.special-plan td{ line-height: 1.8}
+.special-plan .special-security-arrange >p{ border-top: 1px solid #e5e5e5; background: #fff; clear: both; text-align: center; font-size: 0.875em; line-height: 2; padding: 24px 30px; margin:-1px 0 0;}
+.special-plan .special-security-offline,.special-plan .special-security-online{ height:328px;}
+.special-plan .special-security-online ul{ height:198px; border-bottom: 1px solid #e5e5e5;}
+.special-plan .special-security-online p{ margin: 24px 30px; color: #505050; font-size: 0.875em;}
+
+.special-plan .join-web-choose-place{ margin:0; width: 142px;}
+.special-plan .join-web-choose-price-info{ width: 100%; margin: 0}
+.special-plan .join-web-choose-price-info h5{ padding: 0 0 0 20px; font-size: 1em; font-weight: normal; width: 654px;}
+.special-plan .join-web-choose-price-info h5 em{ margin: 0 120px 0 0; color: #fff; font-size: 1em;}
+.special-plan .join-web-choose-price-info p{ font-size: 1.125em; line-height: 1.4; color: #6a6a6a}
+.special-plan .join-web-pay h5 em{ color: #666; font-weight: normal;}
+
