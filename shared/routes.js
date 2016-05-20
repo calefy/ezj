@@ -355,6 +355,15 @@ module.exports = {
                         });
                     }
                 },
+                // 高级财富规划师
+                {
+                    path: 'plan',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/topic/Plan'));
+                        });
+                    }
+                },
             ]
         },
         {

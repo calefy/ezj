@@ -1,0 +1,265 @@
+import React from 'react';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+
+import { image } from '../../libs/utils';
+import SignUp from '../SignUp.jsx';
+import CommerceAction from '../../actions/CommerceAction';
+
+if (process.env.BROWSER) {
+    require('css/special.css');
+}
+
+const BUNDLE_ID = '6119033157460164608';
+
+class Security extends React.Component {
+
+    // 初始加载数据
+    //static fetchData({dispatch, params={}, location={}, apiClient}) {
+    //    const commerceAction = new CommerceAction({ apiClient });
+    //    return Promise.all([
+    //        dispatch( commerceAction.loadProductLecturers([BUNDLE_ID]) ),
+    //    ]);
+    //}
+
+    state = {
+        schedule: 'sc5', // 要显示的课程内容
+    };
+
+    //componentDidMount() {
+    //    const { dispatch, product_lecturers } = this.props;
+    //    if (!product_lecturers._req || product_lecturers._req.ids.indexOf(BUNDLE_ID) >= 0) {
+    //        Security.fetchData(this.props);
+    //    }
+    //}
+
+    _setState = obj => {
+        this.setState(Object.assign({}, this.state, obj || {}));
+    };
+
+    // 点击某一讲时，右侧展示对应课程安排
+    onClickSchedule = e => {
+        e.preventDefault();
+        e.nativeEvent.returnValue = false;
+
+        let key = e.currentTarget.getAttribute('data-key');
+        if (this.state.schedule !== key) {
+            this._setState({ schedule: key });
+        }
+    };
+
+    render() {
+        let lecturers = this.props.product_lecturers.data || [];
+        lecturers = []; // 临时去掉
+
+        return (
+            <div className="special-plan wide">
+                <div className="special-banner special-plan-banner cl">
+                    <div className="container">
+                        <div className="fl">
+                            <div className="synopsis_text">
+                                <h4>《高级财富规划师》公开课</h4>
+                                <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/c255821b69172f09da32d9b90af8d21b.png" />
+                            </div>
+                            <div className="synopsis_price cl">
+                                <p className="fl">¥3280</p>
+                                <em className="fl">（¥4000原价）</em>
+                                <a href="#sign" className="fr">立即报名</a>
+                            </div>
+                        </div>
+                        <div className="fr">
+                            <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/ee1ba88327a47ae94c9d34f8755d0a63.png" />
+                        </div>
+                    </div>
+                </div>
+                <div className="special-content">
+                    <div className="container">
+                        <div className="special-security-teacher bg-white">
+                            <div className="liquid">
+                                <h3>相关师资</h3>
+                                <ul className="cl">
+                                    {lecturers.map((item, index) => {
+                                        return  <li key={index}>
+                                                    <Link to={`/lecturers/${item.id}`} target="_blank">
+                                                        <img src={image(item.lecturer_avatar, 'll')}/>
+                                                        <div>
+                                                            <h4>{item.lecturer_name}</h4>
+                                                            <p>{item.lecturer_org} {item.lecture_title}</p>
+                                                        </div>
+                                                    </Link>
+                                                </li>
+                                    })}
+                                    <li><a href="/user/3223333591" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/9aa1140f9f695cb8a0f2609032be3c9b.jpg"/><div><h4>林华</h4><p>中国资产证券化分析网董事长，厦门国家会计学院客座教授</p></div></a></li>
+                                    <li><a href="/lecturers/3223333672" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/67cae20e53698661fce9a2874f5e40ac.jpg"/><div><h4>黄长清</h4><p>恒泰证券金融市场部执行总经理、产品负责人</p></div></a></li>
+                                    <li><a href="/lecturers/3223333673" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/c2cf12ba6994d974bcdfee781aa47ae3.jpg"/><div><h4>李耀光</h4><p>摩根士丹利华鑫证券固定收益部结构融资总监。</p></div></a></li>
+                                    <li><a href="/lecturers/3223333675" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/5322710854de236b0034f8df95f4c16d.jpg"/><div><h4>万华伟</h4><p>联合信用评级有限公司副总经理兼评级总监</p></div></a></li>
+                                    <li><a href="/lecturers/3223333671" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/6e35b1c86dad5377a1fc1249ed86ec33.jpg"/><div><h4>洪浩</h4><p>北京大学理学博士</p></div></a></li>
+                                    <li><a href="/lecturers/3223333674" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/627554cbc5a12a30d733d54d1b6625a6.jpg"/><div><h4>罗桂连</h4><p>陕西金融控股集团有限公司 总经理助理</p></div></a></li>
+                                    <li><a href="/lecturers/3223333679" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/ce7319a0b074718be5a32bf2a8887041.jpg"/><div><h4>许余洁</h4><p>中国证监会科研工作站博士后、西南财经大学互联网金融创新及监管协同创新中心特聘研究员</p></div></a></li>
+                                    <li><a href="/lecturers/3223333680" target="_blank"><img src="//zj-images.img-cn-beijing.aliyuncs.com/f7b235bff6de5449dcb7250f2d96b66f.jpg"/><div><h4>刘洪光</h4><p>上海市锦天城律师事务所，专职律师</p></div></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="special-security-target cl">
+                            <div className="special-security-target-left bg-white">
+                                <h3>课程目标</h3>
+                                <div className="cl">
+                                    <p>通过集中组织精英理财经理参与“迈入一流金融学院、掌握财富规划实战”学习活动，让理财精英感受清华文化，夯实金融及财富规划的职业素养与专业知识，提升综合金融素质和市场开拓能力。</p>
+                                </div>
+                            </div>
+                            <div className="special-security-target-right bg-white">
+                                <h3>O2O学习模式</h3>
+                                <div className="cl">
+                                    <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/64ac4a858885861d7fce67eeb3c7056c.jpg" className="fl" />
+                                    <p>面授+网络O2O形式<br />学时：共8门课，合计48学时<br />其中面授1天2门课，包括开学典礼<br />网络教学6 门课（建议6周时间学完）</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="special-plan-trait bg-white">
+                            <h3>教学特点</h3>
+                            <ul>
+                                <li>
+                                    <h4>• 灵活学习</h4>
+                                    <p>学员报名后根据时间确定归入班级，网络学习开班后可以随时学习，学习期限一直保留三个月。面授班可以采取网络和线下同时开放学习。</p>
+                                </li>
+                                <li>
+                                    <h4>• 完备教务</h4>
+                                    <p>线下教务细致入微的服务，线上高清视频，专业详细知识点的分解讲习，纸板、电子版详尽讲义。</p>
+                                </li>
+                                <li>
+                                    <h4>• 课堂练习</h4>
+                                    <p>网络课堂中包含由辅导专家精心编辑整理的练习题，以满足考生在每章节学习后的巩固练习所需。</p>
+                                </li>
+                                <li>
+                                    <h4>• 考试形式</h4>
+                                    <p>网络课程班考生可以直接在学习平台上获取或通过邮件的方式收到相关的网络测试题和结业考试题，并由辅导老师做好相应的追踪，同时要求考生在一定时间内将试题答完传到考试中心。</p>
+                                </li>
+                                <li>
+                                    <h4>• 专属身份</h4>
+                                    <p>紫荆教育将为学员建立学习档案，以学生卡为培训学员专属身份标识，可以拥有紫荆教育的系列培训课程的优先录取和学费优惠政策，同时可以学习积分，换取紫荆不定期推出的微课堂并得到紫荆教育的其他培训服务。</p>
+                                </li>
+                                <li>
+                                    <h4>• 缴费保证</h4>
+                                    <p>学员可以直接在官方有赞链接通过手机支付，可以直接网上或银行汇款到对公账户。学费收据在面授期间现场开具。</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="special-security-harvest bg-white">
+                            <h3>课程收获</h3>
+                            <h4>对完成面授及网络课程学习的学员:</h4>
+                            <ul className="cl">
+                                <li className="fl">
+                                    <p>• 颁发正式的学习结业证书，学员有关信息正式存档到清华大学五道口金融学院旗下紫荆教育学员档案数据库，并备案可查询</p>
+                                    <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/0cfb00f220109a9122ec4abeddce8df9.jpg" alt="" />
+                                </li>
+                                <li className="fr">
+                                    <p>• 获得美国索菲亚大学MBA学位项目学习的优先录取权<br />• 官方网站：<Link to="http://mba.ezijing.com/">http://mba.ezijing.com/</Link></p>
+                                    <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/f301ea0db5dde29b5b5db4ff6953014b.jpg" alt="" />
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="special-security-arrange cl ">
+                            <h3>课程安排</h3>
+                                <div className="special-security-offline fl">
+                                    <h4>线下课程（1天）</h4>
+                                    <table className="gridtable">
+                                        <thead>
+                                            <tr>
+                                                <th width="300">主题</th>
+                                                <th width="440">内容</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <p>互联网＋财富营销管理</p>
+                                                </td>
+                                                <td>
+                                                    <ul>
+                                                        <li>1.互联网金融与保险发展史</li>
+                                                        <li>2.现代保险服务业与“新国十条”</li>
+                                                        <li>3.“保险+互联网”的意义与功用</li>
+                                                        <li>4.互联网JIAOXUE保险创业与营销管理创新</li>
+                                                        <li>5.互联网保险实践（案例分析）</li>
+                                                        <li>6.互联网保险行业监管</li>
+                                                        <li>7.互联网保险的发展方向</li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p>清华五道口校史与金融<br />从业者的职业素养</p>
+                                                </td>
+                                                <td>
+                                                    <ul>
+                                                        <li>清华五道口发展历程杰出校友事迹</li>
+                                                        <li>清华五道口人文精神与金融从业者的职业素养</li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className="special-security-online bg-white fr">
+                                    <h4>线上课程（41课时）</h4>
+                                    <ul className="special-security-online-ul">
+                                        <li>
+                                            <h6 className="fl">1.“互联网+”时代的财富管理市场概况与发展趋势</h6>
+                                            <em>课时：5</em>
+                                        </li>
+                                        <li>
+                                            <h6 className="fl">2.资产配置原理</h6>
+                                            <em>课时：9</em>
+                                        </li>
+                                        <li>
+                                            <h6 className="fl">3.金融市场与投资规划</h6>
+                                            <em>课时：9</em>
+                                        </li>
+                                        <li>
+                                            <h6 className="fl">4.个人税务筹划</h6>
+                                            <em>课时：7</em>
+                                        </li>
+                                        <li>
+                                            <h6 className="fl">5.家族财富传承</h6>
+                                            <em>课时：6</em>
+                                        </li>
+                                        <li>
+                                            <h6 className="fl">6.保险产品与财富管理</h6>
+                                            <em>课时：5</em>
+                                        </li>
+                                    </ul>
+                                    <p>备注：线上课程在开班后90天内有效</p>
+                                </div>
+                            
+                            <p>会务组将根据有效的报名信息，通过电子邮件或手机短信方式向参会嘉宾告知培训地点及日程<br />首期班：2016年5月31日-面授地点：清华大学五道口金融学院（面授时间待定）</p>
+                        </div>
+                        <div className="container special-finance-join bg-white" id="sign">
+                        <h3>我要报名</h3>
+                        <div className="join-phone">
+                            <h4>方式一：手机报名</h4>
+                            <div className="join-erwei cl">
+                                <div className="join-erwei-phone fl">
+                                    <p>手机扫描二维码，即可报名并支付课程</p>
+                                    <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/695e721f70b78df420fa4759739fb193.jpg" style={{ width: 236 }} />
+                                </div>
+                                <div className="join-saoma fr">
+                                    <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/ce51f6e885a781de9bad91a479eb2f88.png" />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="join-web">
+                            <h4>方式二：官网报名</h4>
+                            <SignUp pageKey="plan" history={this.props.history} />
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+module.exports = connect( state => ({
+    action: state.action,
+    product_lecturers: state.product_lecturers,
+}) )(Security);

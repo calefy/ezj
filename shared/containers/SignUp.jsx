@@ -31,6 +31,8 @@ let SignUp = React.createClass({
             type = 'shanghai';
         } else if (this.props.pageKey === 'finance') {
             type = '0';
+        } else if (this.props.pageKey === 'plan') {
+            type = 'beijing';
         }
 
         return {
@@ -157,6 +159,8 @@ let SignUp = React.createClass({
         } else if (this.props.pageKey === 'finance') { // 已结束报名，将无效
             let arr = ['6119033159091748864', '6119033159372767232', '6119033161717383168']; // 对应原线下 9904，9905，9906（线上课程为 9594）
             id = arr[this.state.type - 0];
+        } else if (this.props.pageKey === 'plan') {
+            id = '6138969205724151808';
         }
 
         // 组装数据
@@ -187,6 +191,8 @@ let SignUp = React.createClass({
             return '13811977670 徐老师';
         } else if (this.props.pageKey === 'finance') {
             return '13811997720 刘老师';
+        } else if (this.props.pageKey === 'plan') {
+            return '13811838227 紫荆小秘书8';
         }
     },
     // 根据页面渲染课程类型
@@ -244,6 +250,23 @@ let SignUp = React.createClass({
                             <div className="ifc online"></div>
                         </dd>
                     </dl>
+                </div>
+            );
+        } else if (this.props.pageKey === 'plan') {
+            return (
+                <div>
+                    <p>请选择培训地点：会务组将根据有效的报名信息，通过电子邮件或手机短信方式向参会嘉宾告知培训地点及日程</p>
+                    <div className={`join-web-choose-place ${this.state.type === 'shanghai' ? 'on' : ''}`}>
+                        <p>北京</p>
+                        <p>五道口金融学院</p>
+                    </div>
+                    <div className="join-web-choose-price">
+                        <p>培训费用：</p>
+                        <div className="join-web-choose-price-info">
+                            <h5><em>特惠</em>1天线下培训+6门在线课程=¥3280</h5>
+                            <p>其中面授1天2门课，包括开学典礼<br />网络教学6 门课（建议6周时间学完）</p>
+                        </div>
+                    </div>
                 </div>
             );
         }
