@@ -53,7 +53,7 @@
 .mobile-content .right{ transform: rotate(54deg);}
 .mobile-content .circle-simp{position:relative;width:80px;height:80px;margin:0 auto;}
 
-.mobile-mine li{ background: #fff; border-bottom:1px solid #d0d0d0; padding:0 10px; margin: 10px 0; line-height: 2;text-align: center;}
+.mobile-mine li{ background: #fff; border-bottom:1px solid #d0d0d0; padding:10px 10px 0; margin-bottom:10px; line-height: 2;text-align: center;}
 .mobile-mine li h4{ border-bottom: 1px solid #cccccc; padding:10px 0;}
 .mobile-mine li p,.mobile-mine li a{ float: left; font-size: 0.875em; display: block;}
 .mobile-mine li p:first-child{ width: 47%;}
@@ -62,7 +62,7 @@
 .mobile-mine li a{ color: #af1b3f;}
 .mobile-mine li div{ height:28px; padding:10px 0;}
 
-.mobile-balance{ margin:10px 14px; line-height: 1.6}
+.mobile-balance{ padding:10px 14px; line-height: 1.6}
 .mobile-balance em{ color: #af1b3f;}
 .mobile-balance i{ color: #6ea3e5}
 
