@@ -248,7 +248,7 @@ let Unipay = React.createClass({
                                 </div>
                             </li>
                         </ul>
-                        <p className="footer-uni">Copyright @ 2013 Zijing Education. All rights reserved. 京ICP证150431号</p>
+                        <p className="footer-uni">Copyright &copy; 2016 Zijing Education. All rights reserved. 京ICP证150431号</p>
                     </div>
                 </div>
                 {/*注册弹框*/}

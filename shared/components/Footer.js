@@ -41,7 +41,7 @@ module.exports = () => {
                     <a href="http://ezijing.ke.qq.com/" target="_blank">腾讯课堂</a>
                     <a href="https://www.yuntouhui.cn" target="_blank">云投汇</a>
                     <a href="http://www.weiyangx.com/" target="_blank">未央网</a>
-                    <p>Copyright @ 2013 Zijing Education. All rights reserved. 京ICP证150431号</p>
+                    <p>Copyright &copy; 2016 Zijing Education. All rights reserved. 京ICP证150431号</p>
                 </div>
             </div>
         </div>
