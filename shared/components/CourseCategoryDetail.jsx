@@ -262,7 +262,7 @@ class CourseCategoryDetail extends Component {
                                 </div>
                                 <ul className="open-course-list">
                                     <li>
-                                        <span className="open-title">第1期：&emsp;北京&emsp;待定</span>
+                                        <span className="open-title">第1期：&emsp;北京&emsp;时间待定</span>
                                         <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
                                         <a href="/topic/plan" target="_blank">立即报名</a>
                                     </li>
