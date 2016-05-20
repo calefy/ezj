@@ -187,7 +187,7 @@ class Plan extends React.Component {
                                     <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/0cfb00f220109a9122ec4abeddce8df9.jpg" alt="" />
                                 </li>
                                 <li className="fr">
-                                    <p>• 获得美国索菲亚大学MBA学位项目学习的优先录取权<br />• 官方网站：<Link to="http://mba.ezijing.com/">http://mba.ezijing.com/</Link></p>
+                                    <p>• 获得美国索菲亚大学MBA学位项目学习的优先录取权<br />• 官方网站：<Link to="http://mba.ezijing.com/" target="_blank">http://mba.ezijing.com/</Link></p>
                                     <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/f301ea0db5dde29b5b5db4ff6953014b.jpg" alt="" />
                                 </li>
                             </ul>
@@ -273,7 +273,7 @@ class Plan extends React.Component {
                             <div className="join-erwei cl">
                                 <div className="join-erwei-phone fl">
                                     <p>手机扫描二维码，即可报名并支付课程</p>
-                                    <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/695e721f70b78df420fa4759739fb193.jpg" style={{ width: 236 }} />
+                                    <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/98324339a71f41210d78fe8ffdb3236f.png" style={{ width: 236 }} />
                                 </div>
                                 <div className="join-saoma fr">
                                     <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/ce51f6e885a781de9bad91a479eb2f88.png" />

@@ -252,8 +252,26 @@ class CourseCategoryDetail extends Component {
                                 </li>
                             </ul>
                         </div>
-                        :
-                        null
+                        : 
+                        <div>{ category.id==684 ?
+                            <div className="open-course bg-white">
+                                <h4 className="classify-h4">公开课</h4>
+                                <div  className="open-summary">
+                                    <h5>《高级财富规划师》公开课</h5>
+                                    <p>通过集中组织精英理财经理参与“迈入一流金融学院、掌握财富规划实战”学习活动，让理财精英感受清华文化，夯实金融及财富规划的职业素养与专业知识，提升综合金融素质和市场开拓能力。</p>
+                                </div>
+                                <ul className="open-course-list">
+                                    <li>
+                                        <span className="open-title">第1期：&emsp;北京&emsp;时间待定</span>
+                                        <span className="open-address"><i className="iconfont icon-address"></i>五道口金融学院</span>
+                                        <a href="/topic/plan" target="_blank">立即报名</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            :
+                            null
+                        }
+                        </div>
                     }
                     </div>
                 }
