@@ -1,5 +1,5 @@
 .site-mobile{background-color:#505050;}
-.site-mobile .body{padding-top: 0;min-width:auto;}
+.site-mobile .body{padding-top: 0;min-width:300px;}
 /*.mobile-test{ width: 80%;}*/
 .mobile-header{ line-height: 44px; background: #fff; border-bottom: 1px solid #bbb; padding:0 10px; position: relative;}
 .mobile-header h1{ text-align: center;}
