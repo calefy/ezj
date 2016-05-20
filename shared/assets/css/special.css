@@ -325,6 +325,8 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 
 .special-security-harvest div{ padding: 20px;}
 .special-security-harvest p { font-size: 1.125em; text-align: center; line-height: 27px; margin: 20px 0;}
+.special-security-harvest .fr p{line-height:50px;margin:-10px 0 50px;}
+.special-security-harvest .fr img{ border: 1px solid #666;}
 
 .special-security-arrange > div > h4{ text-align: center; background: #b01c40; color: #ffffff; line-height: 40px;}
 .special-security-offline { width: 609px; height: 818px; overflow: hidden}
@@ -413,7 +415,7 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .special-plan-banner div.fr{ margin: 54px 0 0;}
 .special-plan-banner h4 { font-size: 2em; color: #fff;}
 .special-plan-banner .synopsis_price a { border: 3px solid #d7b21c}
-.special-plan-banner .synopsis_price em{ color: #fff; margin: 12px 0 0 6px; text-decoration: line-through; font-size: 1.125em;} 
+.special-plan-banner .synopsis_price em{ color: #fff; margin: 12px 0 0 6px; font-size: 1.125em;text-decoration: line-through;}
 
 .special-plan .special-security-target-left,.special-plan .special-security-target-right{ width: 590px; height:208px;}
 .special-plan .special-security-target-left p{ font-size: 1em; margin: 20px; line-height: 1.8}
