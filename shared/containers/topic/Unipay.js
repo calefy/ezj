@@ -36,7 +36,7 @@ let Unipay = React.createClass({
         const registType = getRequestTypes(UserAction.REGIST);
         switch(nextProps.action.type) {
             case loginType.success:
-                this.props.history.push("/topic/financial");
+                document.location = '/topic/financial';
                 break;
             case loginType.failure:
                 this.enableSubmitButton(); // 因react state设置问题，该行并不会生效
@@ -49,7 +49,7 @@ let Unipay = React.createClass({
 
             case registType.success:
                 this.hideDialog();
-                this.props.history.push("/topic/financial");
+                document.location = '/topic/financial';
                 break;
             case registType.failure:
                 this.refs.registForm.handleResponse(RegistForm.RESPONSE_REGIST, nextProps.action.error);
