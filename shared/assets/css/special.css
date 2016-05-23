@@ -26,7 +26,7 @@ h5.h5-title{background: url(../img/cfc-h5.png) no-repeat left center;text-align:
 .special-buy-state{ float: left; line-height: 20px; margin: 14px 50px 0 0;}
 .special-join{ background: #00fcff; width: 100px; height: 35px; line-height: 35px; margin-top: 16px; float: right;border-radius: 22px;}
 
-.special-cfc-content{ margin: 20px 0 0;}
+.special-cfc-content{ margin: 20px 0 0; padding: 0 0 30px;}
 .special-cfc-content h3 { background: #3ea7d4; border-bottom: 0px; color: #fff; font-size: 1.125em; padding: 0 26px; line-height: 42px;}
 .special-cfc-about{ margin: 20px 0 44px;}
 .special-about-cfc>div { width: 540px; height: 216px; position: relative; padding: 80px 20px 0;}
@@ -68,7 +68,7 @@ h5.h5-title{background: url(../img/cfc-h5.png) no-repeat left center;text-align:
 .special-cfc-tabs .cfc-qj a{padding:0; background: none; text-decoration: underline; color: #00ffee;}
 .special-cfc-tabs .cfc-qj .special-course-top{padding-bottom:15px;margin-bottom:15px;border-bottom:1px dashed rgba(255,255,255,0.36);}
 
-.special-cfc-content{ border-top: 2px solid #ff9100;}
+.special-cfc-contents{ border-top: 2px solid #ff9100;}
 .special-course-arrange ul{ padding: 0 0 30px;}
 .special-course-arrange ul>li{margin:0px 20px;}
 

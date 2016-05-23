@@ -296,7 +296,7 @@ class Cfc extends React.Component {
                                                     </div>
                                                 </li>
                                             </ul>
-                                            <div className={`special-cfc-content ${this.state.curBundleId ? '' : 'hide'}`}>
+                                            <div className={`special-cfc-contents ${this.state.curBundleId ? '' : 'hide'}`}>
                                                 <div className="special-course-arrange bg-white">
                                                     <ul>
                                                         <li>

@@ -81,9 +81,9 @@ class Financial extends React.Component {
                             </div>
                             <div className="synopsis_price">
                                 <div className="synopsis-online-price cl">
-                                    <em className="fl">在线方案：在线课程包&emsp;&emsp;&emsp;&emsp;¥{courses.price}</em>
+                                    <em className="fl">在线方案：在线课程包&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;¥{courses.price}</em>
                                     <div className="online-btn">
-                                        <Link to={`/pay?type=${payType.PRODUCT}&id=${courses.id}`} className="fr">购买</Link>
+                                        <Link to={`/pay?type=${payType.PRODUCT}&id=${courses.id}`} target="_blank" className="fr">购买</Link>
                                         {/*
                                             <div className="buy-confirm cl fr">
                                                 <Link to="" className="buy-reload">刷新</Link>
@@ -95,9 +95,9 @@ class Financial extends React.Component {
                                     </div>
                                 </div>
                                 <div className="synopsis-combine-price cl">
-                                    <em className="fl">综合方案：线下课程＋在线课程包&nbsp;¥2580</em>
+                                    <em className="fl">综合方案：线下课程＋在线课程包&emsp;&emsp;¥2580.00</em>
                                     <div className="online-btn">
-                                        <Link to={`/pay?type=${payType.PRODUCT}&id=${offlineId}`} className="fr">购买</Link>
+                                        <Link to={`/pay?type=${payType.PRODUCT}&id=${offlineId}`} target="_blank" className="fr">购买</Link>
                                         {/*
                                             <div className="buy-confirm cl fr">
                                                 <Link to="" className="buy-reload">刷新</Link>
@@ -191,7 +191,7 @@ class Financial extends React.Component {
                                 })}
                             </dl>
                             <h5>
-                                综合方案：线下课程（2门课程）+在线课程包（8门课程）<div className="fr">¥2580<Link to={`/pay?type=${payType.PRODUCT}&id=${offlineId}`} target="_blank" className="btn">购买</Link></div>
+                                综合方案：线下课程（2门课程）+在线课程包（8门课程）<div className="fr">¥2580.00<Link to={`/pay?type=${payType.PRODUCT}&id=${offlineId}`} target="_blank" className="btn">购买</Link></div>
                             </h5>
                             <div className="cl">
                                 <dl className="combine-course fl">
