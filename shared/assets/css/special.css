@@ -26,7 +26,7 @@ h5.h5-title{background: url(../img/cfc-h5.png) no-repeat left center;text-align:
 .special-buy-state{ float: left; line-height: 20px; margin: 14px 50px 0 0;}
 .special-join{ background: #00fcff; width: 100px; height: 35px; line-height: 35px; margin-top: 16px; float: right;border-radius: 22px;}
 
-.special-cfc-content{ margin: 20px 0 0;}
+.special-cfc-content{ margin: 20px 0 0; padding: 0 0 30px;}
 .special-cfc-content h3 { background: #3ea7d4; border-bottom: 0px; color: #fff; font-size: 1.125em; padding: 0 26px; line-height: 42px;}
 .special-cfc-about{ margin: 20px 0 44px;}
 .special-about-cfc>div { width: 540px; height: 216px; position: relative; padding: 80px 20px 0;}
@@ -68,7 +68,7 @@ h5.h5-title{background: url(../img/cfc-h5.png) no-repeat left center;text-align:
 .special-cfc-tabs .cfc-qj a{padding:0; background: none; text-decoration: underline; color: #00ffee;}
 .special-cfc-tabs .cfc-qj .special-course-top{padding-bottom:15px;margin-bottom:15px;border-bottom:1px dashed rgba(255,255,255,0.36);}
 
-.special-cfc-content{ border-top: 2px solid #ff9100;}
+.special-cfc-contents{ border-top: 2px solid #ff9100;}
 .special-course-arrange ul{ padding: 0 0 30px;}
 .special-course-arrange ul>li{margin:0px 20px;}
 
@@ -308,7 +308,7 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .synopsis_price p{ font-size: 2.25em;}
 .synopsis_price a{ background: #fcbf32; border: 1px solid #f6852e; color: #fff; width: 140px; line-height: 44px; display: block; font-size: 1.5em; text-align: center; border-radius: 10px; margin: 0 30px 0 0;}
 
-.special-security-teacher, .special-security-target, .special-security-harvest, .special-plan-trait{margin-bottom:20px;}
+.special-content .container >div{margin-bottom:20px;}
 
 .special-security-teacher li{ margin:25px 51px; float: left; width: 195px; height:240px; text-align: center; font-size: 0.875em; line-height:1.2; border:1px solid rgba(0,0,0,0.31); color: #505050;}
 .special-security-teacher li a{ display: block;}
@@ -411,8 +411,8 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 
 /*高级理财师*/
 .special-plan-banner { background: url(../img/special_bg.png) no-repeat top center #5fc2c9;}
-.special-plan-banner div.fl { margin: 68px 0 0 56px;}
-.special-plan-banner div.fr{ margin: 54px 0 0;}
+.special-plan-banner div.fl{ margin: 68px 0 0 56px;}
+.special-plan-banner div.fr,.special-financial-banner div.fr{ margin: 54px 0 0;}
 .special-plan-banner h4 { font-size: 2em; color: #fff;}
 .special-plan-banner .synopsis_price a { border: 3px solid #d7b21c}
 .special-plan-banner .synopsis_price em{ color: #fff; margin: 12px 0 0 6px; font-size: 1.125em;text-decoration: line-through;}
@@ -446,3 +446,46 @@ table.gridtable td { border-width: 1px; padding: 12px 10px; border-style: solid;
 .special-plan .join-web-choose-price-info p{ font-size: 1.125em; line-height: 1.4; color: #6a6a6a}
 .special-plan .join-web-pay h5 em{ color: #666; font-weight: normal;}
 
+
+/*互联网金融支付*/
+.special-financial-banner{ background: url(../img/special_bg.png) no-repeat top center #00bbca;}
+.special-financial-banner div.fl { margin: 40px 0 0 56px;}
+.special-financial-banner .synopsis_price{ margin:20px 0 0; line-height: 26px}
+.special-financial-banner .synopsis_price a{ background: #ffc010;border-radius:20px;border:0px solid #fff;width: 108px; line-height: 26px;margin:0 3px; font-size: 16px;}
+.synopsis-combine-price { margin: 10px 0; color: #dd4400;}
+.synopsis-combine-price a { background: #f68723 !important;}
+.synopsis-validity-period{ color: #fff; font-size: 0.875em !important;}
+.buy-confirm{ margin: 0 !important; position: relative;}
+.buy-confirm a{ float: left;}
+.buy-confirm p{ color: #fff; font-size: 0.875em !important; position: absolute; right:-84px;}
+.buy-reload { width: 58px !important}
+
+.special-financial .special-content{ padding: 0 0 30px;}
+.special-financial .special-content h3{ border-bottom: 1px solid #00bbca}
+.special-financial .special-security-teacher li{ width: 154px; height:194px; margin: 16px 22px;}
+.special-financial .special-security-teacher li img{ width: 154px; height:154px;}
+
+.special-financial-worth ul{ padding:24px;}
+.special-financial-worth li{ width: 544px; height:50px; float: left; border: 1px solid #959595; border-radius: 30px; padding:2px 10px 2px 2px; margin:0 0 20px; display: table;}
+.special-financial-worth li em{ width: 50px; height:50px; border-radius: 50%; background: #00bbca; color: #fff; font-size: 1em; line-height: 50px; text-align: center; display: inline-block;}
+.special-financial-worth li p{ display: table-cell; vertical-align: middle; font-size: 0.875em; width: 484px; line-height: 1.2}
+.special-financial-worth li:nth-child(even) { float: right;}
+.special-financial-target>div{ width: 590px; height:316px;}
+.special-financial-target div.cl{ padding: 20px; line-height: 2; font-size: 0.875em;}
+.special-financial-target p{ margin: 24px 0;}
+
+.special-financial-courses{ padding:0;}
+.special-financial-courses dl{ margin:0; line-height: 44px;}
+.special-financial-courses h5{ background: #00bbca; line-height: 42px; padding: 0 24px; color: #fff; font-size: 0.875em;}
+.special-financial-courses .btn{ background: #ffc010; border: 1px solid #ffcc00; margin: 0 0 0 10px; padding: 6px 26px;}
+.special-financial-courses dd a{ color: #00bbca}
+.special-financial-courses .online-title{ width: 500px;}
+.special-financial-courses .online-time, .special-financial-courses .online-price, .special-financial-courses .online-num{ width: 150px;}
+.special-financial-courses .online-buy{ margin-right:24px;}
+.special-financial-courses div.cl{ padding: 20px 70px;}
+.special-financial-courses>p{ color: #00bbca; font-size: 0.875em; border-top: 1px dashed #9a9a9a; line-height: 40px; text-align: center; margin: 0 40px;}
+
+.combine-course{ width: 472px;}
+.combine-course dt{ text-align: center; color: #00bbca; border-bottom: 1px solid #00bbca; line-height: 24px; font-size: 16px;}
+.combine-course dd{ font-size: 12px; color: #9a9a9a;line-height: 16px;margin:20px 0;}
+.combine-course dd p{ text-indent: 24px;}

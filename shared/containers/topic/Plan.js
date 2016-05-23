@@ -56,40 +56,6 @@ const LECTURERS = [
 
 class Plan extends React.Component {
 
-    // 初始加载数据
-    //static fetchData({dispatch, params={}, location={}, apiClient}) {
-    //    const commerceAction = new CommerceAction({ apiClient });
-    //    return Promise.all([
-    //        dispatch( commerceAction.loadProductLecturers([BUNDLE_ID]) ),
-    //    ]);
-    //}
-
-    state = {
-        schedule: 'sc5', // 要显示的课程内容
-    };
-
-    //componentDidMount() {
-    //    const { dispatch, product_lecturers } = this.props;
-    //    if (!product_lecturers._req || product_lecturers._req.ids.indexOf(BUNDLE_ID) >= 0) {
-    //        Security.fetchData(this.props);
-    //    }
-    //}
-
-    _setState = obj => {
-        this.setState(Object.assign({}, this.state, obj || {}));
-    };
-
-    // 点击某一讲时，右侧展示对应课程安排
-    onClickSchedule = e => {
-        e.preventDefault();
-        e.nativeEvent.returnValue = false;
-
-        let key = e.currentTarget.getAttribute('data-key');
-        if (this.state.schedule !== key) {
-            this._setState({ schedule: key });
-        }
-    };
-
     render() {
         //let lecturers = this.props.product_lecturers.data || [];
         let lecturers = LECTURERS;

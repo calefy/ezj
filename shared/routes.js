@@ -364,6 +364,15 @@ module.exports = {
                         });
                     }
                 },
+                // 互联网金融支付
+                {
+                    path: 'financial',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/topic/Financial'));
+                        });
+                    }
+                },
             ]
         },
         {
