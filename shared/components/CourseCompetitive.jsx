@@ -8,6 +8,10 @@ class CourseCompetitive extends Component {
     render() {
         return (
             <div className="page-competitive">
+                <div className="classify-title">
+                    <h4>学位项目</h4>
+                    <p></p>
+                </div>
                 <div className="intro">
                     <h2>紫荆-索菲亚 财富管理方向MBA</h2>
                     <div className="cl cnt">

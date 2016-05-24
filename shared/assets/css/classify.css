@@ -22,7 +22,7 @@
 /* 课程分类详情 */
 .classify-category{min-height: 500px; background: url(../img/security-bg.jpg) no-repeat top center;}
 .classify-category .classify-right{ margin: 40px 0 0 260px; width: 938px;}
-.classify-title{ margin: 0 0 32px; padding: 22px 20px 20px; background: rgba(255,255,255,0.49); background: #fff \0;}
+.classify-title{ height:160px; box-shadow: 0 1px 2px rgba(0,0,0,0.2) !important; margin: 0 0 32px; padding: 22px 20px 20px; background: rgba(255,255,255,0.49); background: #fff \0;}
 .classify-title h4{ font-size: 1.5em;}
 .classify-title p{ line-height: 2.2; font-size: 0.875em; margin: 20px 0 0 20px;}
 
@@ -68,13 +68,13 @@
 
 /*学位项目分类页面*/
 .classify-right .page-competitive>div{box-shadow: none;}
-.page-competitive{background-color:rgba(255,255,255,0.49);background-color:#fff\0;}
+/*.page-competitive{background-color:rgba(255,255,255,0.49);background-color:#fff\0;}*/
 .page-competitive p{line-height: 18px;margin: 15px 0;}
 .page-competitive h2{font-size: 28px;padding: 50px 0 30px;text-align: center;}
 .page-competitive h3{font-size: 20px;margin-bottom:25px;}
 .page-competitive .cnt{padding: 0 40px 30px;}
 .page-competitive .org, .page-competitive .signup{background-color:#eee;}
-.page-competitive .course{background-color:#fff;}
+.page-competitive .course,.page-competitive .intro{background-color:#fff;}
 .page-competitive .intro .fr{margin-top:20px;}
 .page-competitive .intro .btn{font-size:16px;padding:12px 35px;}
 
