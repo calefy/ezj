@@ -14,38 +14,38 @@ if (process.env.BROWSER) {
     require('css/special.css');
 }
 
-const LECTURERS = [
-    {
-        id: '22103', lecturer_name: '庄瑞豪',
-        lecturer_title: '科尔尼（A.T. Kearney）Kearney 全球合伙人、大中华区总裁',
-        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/7aadb00e2f878842be7572edede91806.jpg',
-    },
-    {
-        id: '27678', lecturer_name: '糜懿全',
-        lecturer_title: '安永会计师事务所 合伙人',
-        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/4eb7413304c0d07f1d75eb550bdc2bcd.jpg',
-    },
-    {
-        id: '27650', lecturer_name: '郑荣禄',
-        lecturer_title: '深圳前海中领国际管理咨询有限公司 董事长',
-        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/4ad21143dd15a9988b7f3be040dce60a.jpg',
-    },
-    {
-        id: '27651', lecturer_name: '高 皓',
-        lecturer_title: '清华大学五道口金融学院 家族企业课程主任',
-        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/c6b2956da3ec33e24e09e3821eee6c8b.jpg',
-    },
-    {
-        id: '27017', lecturer_name: '张 伟',
-        lecturer_title: '清华大学五道口金融学院 讲师',
-        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/e8c1008168ef556ef5726b54b9263d5a.jpg',
-    },
-    {
-        id: '27106', lecturer_name: '宋晓恒',
-        lecturer_title: '晓恒博士家族办公室 创始人',
-        lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/24b23e2299fc734d88e91c5db4561c85.jpg',
-    },
-];
+// const LECTURERS = [
+//     {
+//         id: '22103', lecturer_name: '庄瑞豪',
+//         lecturer_title: '科尔尼（A.T. Kearney）Kearney 全球合伙人、大中华区总裁',
+//         lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/7aadb00e2f878842be7572edede91806.jpg',
+//     },
+//     {
+//         id: '27678', lecturer_name: '糜懿全',
+//         lecturer_title: '安永会计师事务所 合伙人',
+//         lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/4eb7413304c0d07f1d75eb550bdc2bcd.jpg',
+//     },
+//     {
+//         id: '27650', lecturer_name: '郑荣禄',
+//         lecturer_title: '深圳前海中领国际管理咨询有限公司 董事长',
+//         lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/4ad21143dd15a9988b7f3be040dce60a.jpg',
+//     },
+//     {
+//         id: '27651', lecturer_name: '高 皓',
+//         lecturer_title: '清华大学五道口金融学院 家族企业课程主任',
+//         lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/c6b2956da3ec33e24e09e3821eee6c8b.jpg',
+//     },
+//     {
+//         id: '27017', lecturer_name: '张 伟',
+//         lecturer_title: '清华大学五道口金融学院 讲师',
+//         lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/e8c1008168ef556ef5726b54b9263d5a.jpg',
+//     },
+//     {
+//         id: '27106', lecturer_name: '宋晓恒',
+//         lecturer_title: '晓恒博士家族办公室 创始人',
+//         lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/24b23e2299fc734d88e91c5db4561c85.jpg',
+//     },
+// ];
 const onlineId="6119033154381545472";
 const offlineId="6119033154423488512";
 
@@ -55,22 +55,24 @@ class Financial extends React.Component {
     static fetchData({dispatch, params={}, location={}, apiClient}) {
        const commerceAction = new CommerceAction({ apiClient });
        return Promise.all([
-           dispatch( commerceAction.loadProduct(onlineId) )
+           dispatch( commerceAction.loadProduct(onlineId) ),
+           dispatch( commerceAction.loadProductLecturers([onlineId]) )
        ]);
     }
 
     componentDidMount() {
-        const { product, location } = this.props;
-        if ( product.isFetching || (product.data && product.data.id !== onlineId)) {
+        const { product, product_lecturers, location } = this.props;
+        if ( product.isFetching || (product.data && product.data.id !== onlineId) || product_lecturers.isFetching ) {
             Financial.fetchData(this.props);
         }
+        
     }
 
     render() {
-        //let lecturers = this.props.product_lecturers.data || [];
-        let lecturers = LECTURERS;
+        let lecturers = this.props.product_lecturers.data || [];
+        lecturers = lecturers.slice(0,6);
+        // let lecturers = LECTURERS;
         const courses = this.props.product.data || {};
-
         return (
             <div className="special-financial wide">
                 <div className="special-banner special-financial-banner cl">
@@ -227,5 +229,5 @@ class Financial extends React.Component {
 module.exports = connect( state => ({
     action: state.action,
     product: state.product,
-    //product_lecturers: state.product_lecturers,
+    product_lecturers: state.product_lecturers,
 }) )(Financial);
