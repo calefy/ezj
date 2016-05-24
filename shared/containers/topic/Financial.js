@@ -6,9 +6,10 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { image } from '../../libs/utils';
+import { image, getRequestTypes } from '../../libs/utils';
 import { payType } from '../../libs/const';
 import CommerceAction from '../../actions/CommerceAction';
+import UserAction from '../../actions/UserAction';
 
 if (process.env.BROWSER) {
     require('css/special.css');
@@ -63,6 +64,13 @@ class Financial extends React.Component {
         const { product, location } = this.props;
         if ( product.isFetching || (product.data && product.data.id !== onlineId)) {
             Financial.fetchData(this.props);
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let logoutType = getRequestTypes(UserAction.LOGOUT);
+        if (nextProps.action.type === logoutType.request) {
+            nextProps.history.push('/topic/unipay');
         }
     }
 
