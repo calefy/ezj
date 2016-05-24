@@ -46,6 +46,8 @@
 .icon-left1:before { content: "\e620"; }
 .icon-xuanze:before { content: "\e621"; }
 .icon-jewelry:before { content: "\e622"; }
+.icon-like:before { content: "\e608"; }
+.icon-likefill:before { content: "\e609"; }
 .icon-daoshi:before { content: "\e623"; }
 .icon-module31:before { content: "\e626"; }
 .icon-small:before { content: "\e607"; }
