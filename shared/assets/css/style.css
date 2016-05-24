@@ -284,7 +284,7 @@ button{ cursor: pointer; outline: none; border: 0;}
 /*收藏按钮*/
 .course-collect,.course-collected{ background: none; font-size: 0.75em; color: #818181; margin: 9px 0 0 20px !important;}
 .course-collect i,.course-collected i{ margin:0 4px 0 0; color: #af1b40;}
-.course-collected:hover i:before{ content: "\E69C";}
+/*.course-collected:hover i:before{ content: "\E69C";}*/
 .course-collect span,.course-collected span{ float: left; margin: 2px 0 0;}
 
 .popover { width: 538px; height: 270px; margin: -135px 0 0 -269px; text-align: center; overflow: hidden}

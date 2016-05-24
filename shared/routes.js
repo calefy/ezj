@@ -451,6 +451,11 @@ module.exports = {
         // unipay页
         {
             path: 'topic/unipay',
+            onEnter: function (nextState, replaceState) {
+                if (isLogin()) {
+                   replaceState(null, '/topic/financial');
+                }
+            },
             getComponent(location, cb) {
                 require.ensure([], require => {
                     cb(null, require('./containers/topic/Unipay'));
