@@ -6,10 +6,11 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { image } from '../../libs/utils';
+import { image, getRequestTypes } from '../../libs/utils';
 import { payType } from '../../libs/const';
 import OperateAction from '../../actions/OperateAction';
 import CommerceAction from '../../actions/CommerceAction';
+import UserAction from '../../actions/UserAction';
 
 if (process.env.BROWSER) {
     require('css/special.css');
@@ -68,23 +69,21 @@ class Financial extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        let logoutType = getRequestTypes(UserAction.LOGOUT);
+        if (nextProps.action.type === logoutType.request) {
+            nextProps.history.push('/topic/unipay');
+        }
+    }
     onClickBuy = e => {
         // 检测登录状态
-        if (!this.isLogin()) {
+        if (!(this.props.user.data && this.props.user.data.uid)) {
             e.preventDefault();
             e.nativeEvent.returnValue = false;
-            this.showLoginDialog();
+            let operateAction = new OperateAction();
+            this.props.dispatch(operateAction.openLoginDialog());
             return;
         }
-    };
-
-    isLogin = () => {
-        return this.props.user.data && this.props.user.data.uid;
-    };
-
-    showLoginDialog = () => {
-        let operateAction = new OperateAction();
-        this.props.dispatch(operateAction.openLoginDialog());
     };
 
     render() {
@@ -112,7 +111,6 @@ class Financial extends React.Component {
                                                 <p>支付待确认</p>
                                             </div>
                                         */}
-                                        
                                     </div>
                                 </div>
                                 <div className="synopsis-combine-price cl">
