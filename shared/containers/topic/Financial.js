@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 import { image } from '../../libs/utils';
 import { payType } from '../../libs/const';
+import OperateAction from '../../actions/OperateAction';
 import CommerceAction from '../../actions/CommerceAction';
 
 if (process.env.BROWSER) {
@@ -65,8 +66,26 @@ class Financial extends React.Component {
         if ( product.isFetching || (product.data && product.data.id !== onlineId) || product_lecturers.isFetching ) {
             Financial.fetchData(this.props);
         }
-        
     }
+
+    onClickBuy = e => {
+        // 检测登录状态
+        if (!this.isLogin()) {
+            e.preventDefault();
+            e.nativeEvent.returnValue = false;
+            this.showLoginDialog();
+            return;
+        }
+    };
+
+    isLogin = () => {
+        return this.props.user.data && this.props.user.data.uid;
+    };
+
+    showLoginDialog = () => {
+        let operateAction = new OperateAction();
+        this.props.dispatch(operateAction.openLoginDialog());
+    };
 
     render() {
         let lecturers = this.props.product_lecturers.data || [];
@@ -85,7 +104,7 @@ class Financial extends React.Component {
                                 <div className="synopsis-online-price cl">
                                     <em className="fl">在线方案：在线课程包&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;¥{courses.price}</em>
                                     <div className="online-btn">
-                                        <Link to={`/pay?type=${payType.PRODUCT}&id=${courses.id}`} target="_blank" className="fr">购买</Link>
+                                        <Link to={`/pay?type=${payType.PRODUCT}&id=${courses.id}`} target="_blank" className="fr" onClick={this.onClickBuy}>购买</Link>
                                         {/*
                                             <div className="buy-confirm cl fr">
                                                 <Link to="" className="buy-reload">刷新</Link>
@@ -99,7 +118,7 @@ class Financial extends React.Component {
                                 <div className="synopsis-combine-price cl">
                                     <em className="fl">综合方案：线下课程＋在线课程包&emsp;&emsp;¥2580.00</em>
                                     <div className="online-btn">
-                                        <Link to={`/pay?type=${payType.PRODUCT}&id=${offlineId}`} target="_blank" className="fr">购买</Link>
+                                        <Link to={`/pay?type=${payType.PRODUCT}&id=${offlineId}`} target="_blank" className="fr" onClick={this.onClickBuy}>购买</Link>
                                         {/*
                                             <div className="buy-confirm cl fr">
                                                 <Link to="" className="buy-reload">刷新</Link>
@@ -178,7 +197,7 @@ class Financial extends React.Component {
                         <div className="special-financial-courses bg-white">
                             <h3>课程安排</h3>
                             <h5>
-                                在线方案：在线课程包（8门课程）<div className="fr">¥{courses.price}<Link to={`/pay?type=${payType.PRODUCT}&id=${courses.id}`} target="_blank" className="btn">购买</Link></div>
+                                在线方案：在线课程包（8门课程）<div className="fr">¥{courses.price}<Link to={`/pay?type=${payType.PRODUCT}&id=${courses.id}`} target="_blank" className="btn" onClick={this.onClickBuy}>购买</Link></div>
                             </h5>
                             <dl className="online-course">
                                 {(courses.courses || []).map((item, index) => {
@@ -187,13 +206,13 @@ class Financial extends React.Component {
                                                 <span className="online-time"><i className="iconfont icon-time"></i>{Math.ceil( ((item.duration || 0) - 0) / 60 / 45 )} 课时</span>
                                                 <span className="online-price"><i className="iconfont icon-price"></i>{item.course_price}</span>
                                                 <span className="online-num"><i className="iconfont icon-user"></i>{item.student_count} 人</span>
-                                                <a href={`/pay?type=${payType.COURSE}&id=${item.id}`} className="online-buy fr" target="_blank">购买</a>
+                                                <a href={`/pay?type=${payType.COURSE}&id=${item.id}`} className="online-buy fr" target="_blank" onClick={this.onClickBuy}>购买</a>
                                                 <a href={`/courses/${item.id}`} className="online-content fr" target="_blank">详情</a>
                                             </dd>
                                 })}
                             </dl>
                             <h5>
-                                综合方案：线下课程（2门课程）+在线课程包（8门课程）<div className="fr">¥2580.00<Link to={`/pay?type=${payType.PRODUCT}&id=${offlineId}`} target="_blank" className="btn">购买</Link></div>
+                                综合方案：线下课程（2门课程）+在线课程包（8门课程）<div className="fr">¥2580.00<Link to={`/pay?type=${payType.PRODUCT}&id=${offlineId}`} target="_blank" className="btn" onClick={this.onClickBuy}>购买</Link></div>
                             </h5>
                             <div className="cl">
                                 <dl className="combine-course fl">
@@ -227,6 +246,7 @@ class Financial extends React.Component {
 }
 
 module.exports = connect( state => ({
+    user: state.user,
     action: state.action,
     product: state.product,
     product_lecturers: state.product_lecturers,
