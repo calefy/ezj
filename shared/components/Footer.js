@@ -7,9 +7,9 @@ module.exports = () => {
             <div className="footer-top">
                 <div className="container cl">
                     <div className="footer-top-logo fl">
-                        <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/19ba9ee4caf1db27febc0f852e29aa3a.png" alt="" />
+                        <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/fb105436899997f319794a14d34daab2.png" alt="" />
                         <address>
-                            北京市海淀区成府路43号2号楼234室<br />
+                            北京市海淀区双清路清华大学东门液晶大厦2层<br />
                             电话：4008-363-463<br />
                             邮箱：<a href="mailto:service@ezijing.com">service@ezijing.com</a>
                         </address>
