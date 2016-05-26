@@ -14,7 +14,7 @@ class Commerce extends Base {
      * 充值记录查询
      */
     recharges(params = {}) {
-        params.txn_type = 2; // 充值类型记录
+        params.txn_type = '2,9'; // 充值类型记录
         params = paramify(params);
         params = params ? '?' + params : '';
         return this.apiClient.get('commerce/coins/records' + params);

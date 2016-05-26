@@ -92,7 +92,7 @@ class Recharge extends Component {
                                                 <td>{item.id}</td>
                                                 <td>{item.created_time}</td>
                                                 <td>{item.amount}</td>
-                                                <td>充值卡</td>
+                                                <td>{item.txn_type == 2 ? '充值卡' : item.txn_type == 9 ? '苹果商店充值' : ''}</td>
                                             </tr>
                                         );
                                     })
