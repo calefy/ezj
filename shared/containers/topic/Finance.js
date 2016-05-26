@@ -36,7 +36,7 @@ class Finance extends React.Component {
                 <div className="special-banner special-finance-banner cl">
                     <div className="container">
                         <div className="special-finance-info">
-                            <h1>《全球互联网金融商业模式及案例深度解析》<small>清华大学五道口金融学院旗下品牌紫荆教育出品</small></h1>
+                            <h1>《全球互联网金融商业模式及案例深度解析》<small>清华控股旗下品牌紫荆教育出品</small></h1>
                             <p><b>北京面授班</b><i>¥2580</i> ｜ <b>视频点播班</b><i>¥580</i><a href="#intro" className="fr">查看详情</a></p>
                         </div>
                     </div>

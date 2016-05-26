@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'production') {
     resourceConfig = JSON.parse(fs.readFileSync(__dirname + '/../../webpack.version.json', 'utf-8'));
 }
 
-const PAGE_TITLE = '紫荆教育-清华大学五道口金融学院旗下品牌'; // 记录页面标题
+const PAGE_TITLE = '紫荆教育-清华控股旗下品牌'; // 记录页面标题
 
 function serverRendering(req, res) {
     let apiClient = new ApiClient({ prefix: config.apiPrefix });

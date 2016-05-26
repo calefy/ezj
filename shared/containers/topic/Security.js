@@ -120,7 +120,7 @@ class Security extends React.Component {
                         <div className="special-security-harvest bg-white">
                             <h3>课程收获</h3>
                             <div className="cl">
-                                <p>系统全面学习资产证券化理论知识与实操技能，获得清华大学五道口金融学院旗下品牌紫荆教育结业证书</p>
+                                <p>系统全面学习资产证券化理论知识与实操技能，获得清华控股旗下品牌紫荆教育结业证书</p>
                                 <p>优秀的在线课程创造随时随地、灵活高效的学习计划，个人充分掌握学习主动权</p>
                                 <p>与深谙国内外资产证券化的领军专家及实操精英面对面交流，轻松拓展精英人脉</p>
                             </div>

@@ -149,7 +149,7 @@ class Plan extends React.Component {
                             <h4>对完成面授及网络课程学习的学员:</h4>
                             <ul className="cl">
                                 <li className="fl">
-                                    <p>• 颁发正式的学习结业证书，学员有关信息正式存档到清华大学五道口金融学院旗下紫荆教育学员档案数据库，并备案可查询</p>
+                                    <p>• 颁发正式的学习结业证书，学员有关信息正式存档到清华控股旗下紫荆教育学员档案数据库，并备案可查询</p>
                                     <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/0cfb00f220109a9122ec4abeddce8df9.jpg" alt="" />
                                 </li>
                                 <li className="fr">
