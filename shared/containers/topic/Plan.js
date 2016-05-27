@@ -67,7 +67,7 @@ class Plan extends React.Component {
                         <div className="fl">
                             <div className="synopsis_text">
                                 <h4>《高级财富规划师》公开课</h4>
-                                <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/c255821b69172f09da32d9b90af8d21b.png" />
+                                <img src="//zj-avatar.img-cn-beijing.aliyuncs.com/88e0cb7c6651312834ceb7583ddbc8a4267121333.png" />
                             </div>
                             <div className="synopsis_price cl">
                                 <p className="fl">¥3280</p>
