@@ -17,7 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@git.ezijing.com:ezijingwebapp/node-mba-platform.git"
+    "url": "git@git.ezijing.com:ezijingwebapp/node-ezijing.git"
   },
   "babel": {
     "presets": [
