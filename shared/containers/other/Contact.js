@@ -23,7 +23,7 @@ class Account extends Component {
                         </address>
                     </div>
                     <div className="other-contact-right fl">
-                        <img src="//zj-avatar.img-cn-beijing.aliyuncs.com/e80410ba787c2007b7d2f1c1fcd316be816069204.jpg" alt="" />
+                        <img src="//zj-avatar.img-cn-beijing.aliyuncs.com/c7fdb1c5311ce4f8e14439039523fc321055284376.jpg" alt="" />
                     </div>
                 </div>
             </div>
