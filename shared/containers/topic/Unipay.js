@@ -104,7 +104,7 @@ let Unipay = React.createClass({
                 <div className="unipay-header-top">
                     <div className="container">
                         <div className="fl">
-                            <Link to="/"><img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/0c6c7b16467c3a2cca2ec3d77fc70ac9.png" /></Link>
+                            <Link to="/"><img src="//zj-avatar.img-cn-beijing.aliyuncs.com/4876ebcb39fe89cce6c1e82a029c5f67478101461.png" /></Link>
                         </div>
                         <div className="fl"  style={{ marginTop: 5 }}>
                             <Link to="/"><img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/a2fec2523cee8bed01f0e53f4061cfc0.png" /></Link>
@@ -232,7 +232,7 @@ let Unipay = React.createClass({
                             <li className="fl">
                                 <h4>紫荆教育</h4>
                                 <div>
-                                    <p>北京市海淀区成府路43号2号楼234室</p>
+                                    <p>北京市海淀区双清路清华大学东门液晶大厦2层</p>
                                     联系方式:<br />
                                     电话：4008-363-463<br />
                                     邮箱：<a href="mailto:service@ezijing.com">service@ezijing.com</a><br />
