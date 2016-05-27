@@ -59,7 +59,7 @@ class Security extends React.Component {
                         <div className="fl">
                             <div className="synopsis_text">
                                 <h4>《资产证券化创新实践》公开课</h4>
-                                <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/e7347ae795f578a40f43bdf70bd92fe4.png" />
+                                <img src="//zj-avatar.img-cn-beijing.aliyuncs.com/0213354dbf02b181cfaa31dd9cd4a60b2020803794.png" />
                             </div>
                             <div className="synopsis_price cl">
                                 <p className="fl">¥4980</p>

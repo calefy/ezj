@@ -38,7 +38,7 @@ class CourseCompetitive extends Component {
                     <div className="cl cnt">
                         <div className="fl">
                             <h3>紫荆教育</h3>
-                            <p>清华五道口金融学院成立在线教育中心，推出旗下品牌“紫荆教育”</p>
+                            <p>清华五道口金融学院成立在线教育中心，推出清华控股旗下品牌“紫荆教育”</p>
                             <p>依托于国内顶尖学府的丰富教育资源与经验</p>
                             <p>来自“金融黄埔军校”和金融企业界的国内顶尖师资</p>
                             <p>学员云集金融行业精英及高净值人群</p>
