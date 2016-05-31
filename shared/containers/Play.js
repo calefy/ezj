@@ -344,6 +344,7 @@ class Play extends Component {
                                     <Video
                                         ref="video"
                                         videoId = {chapter.video.video_origional_ID}
+                                        videoSrt = {chapter.video.video_subtitle_url || ''}
                                         width = {550}
                                         height = {360}
                                         handlePlayTime = {this.handlePlayTime}

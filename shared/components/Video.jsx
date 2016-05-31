@@ -54,6 +54,7 @@ if (process.env.BROWSER) {
 class Video extends Component {
     static propTypes = {
         videoId: PropTypes.string.isRequired,
+        videoSrt: PropTypes.string,
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
         autoPlay: PropTypes.bool,
@@ -62,24 +63,25 @@ class Video extends Component {
 
     defaultProps = {
         autoPlay: true,
+        videoSrt: '',
     };
 
     componentDidMount() {
         continueStart = this.props.lastTime || 0; // 如果传递有上次播放时间，则记录缓存，以便player.start时使用
-        this.renderPlayer(PLAYER_ID, this.props.videoId, this.props.autoPlay);
+        this.renderPlayer(PLAYER_ID, this.props.videoId, this.props.autoPlay, this.props.videoSrt);
         setTimeout(() => {
             let help = document.getElementById('player_not_support_help');
             if (help) help.className = '';
         }, 300)
     }
     componentDidUpdate() {
-        this.renderPlayer(PLAYER_ID, this.props.videoId, this.props.autoPlay);
+        this.renderPlayer(PLAYER_ID, this.props.videoId, this.props.autoPlay, this.props.videoSrt);
     }
     shouldComponentUpdate(nextProps) {
         return this.props.videoId !== nextProps.videoId;
     }
 
-    renderPlayer = (domId, vid, autoPlay) => {
+    renderPlayer = (domId, vid, autoPlay, srt) => {
 
         autoPlay = typeof autoPlay === 'undefined' ? 1 : autoPlay - 0;
 
@@ -92,6 +94,7 @@ class Video extends Component {
             vid : vid,
             isShowSpeeder : 1,
             videoType: 1,//0为mp4模式 1为cc模式
+            srtUri: srt || '',
             callback: '_playerCallback'
         };
         //flashvars.videoType = 1; //0为mp4模式 1为cc模式
