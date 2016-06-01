@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
-import {getRequestTypes} from '../../libs/utils';
+import {getRequestTypes, getIdt} from '../../libs/utils';
 import CoursesAction from '../../actions/CoursesAction';
+import OperateAction from '../../actions/OperateAction';
 
 if (process.env.BROWSER) {
     require('css/mobile.css');
@@ -47,6 +48,21 @@ let Exam = React.createClass({
         switch(nextProps.action.type) {
             case type.success:
                 this.setState({ reexam: false, start: false })
+                // 上传统计数据
+                const operateAction = new OperateAction();
+                let info = nextProps.action.response.data;
+                let sheet = info && info.sheet || {};
+                let stime = new Date(sheet.sheet_submitted_time.replace(/-/g, '/'));
+                stime = Math.round(stime.getTime() / 1000);
+                nextProps.dispatch( operateAction.uploadAnalysisSheet({
+                    _idt:   getIdt(),//设备唯一标识
+                    _exid:  sheet.examination_id, //测验ID
+                    _oid:   sheet.organization_id || '', //机构ID（选填）
+                    _cid:   sheet.course_id, //课程ID
+                    _stime: stime, //提交时间
+                    _ctime: sheet.sheet_cost_time, //耗费时间 （秒）
+                    _score: sheet.sheet_score //分数
+                }) );
                 break;
             case type.failure:
                 alert(nextProps.action.error && nextProps.action.error.message || '提交测验失败');
