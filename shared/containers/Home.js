@@ -104,7 +104,7 @@ let Home = React.createClass({
                                 <div className="module-icon">
                                     <i className="iconfont icon-daoshi"></i>
                                 </div>
-                                <h4>公开课</h4>
+                                <h4>教育培训项目</h4>
                                 <div className="module-title">高级财富规划师</div>
                                 <p>迈入一流金融学院 掌握财富管理实战技能</p>
                             </Link>
