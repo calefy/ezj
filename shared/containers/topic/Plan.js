@@ -66,7 +66,7 @@ class Plan extends React.Component {
                     <div className="container">
                         <div className="fl">
                             <div className="synopsis_text">
-                                <h4>《高级财富规划师》公开课</h4>
+                                <h4>《高级财富规划师》教育培训项目</h4>
                                 <img src="//zj-avatar.img-cn-beijing.aliyuncs.com/88e0cb7c6651312834ceb7583ddbc8a4267121333.png" />
                             </div>
                             <div className="synopsis_price cl">
