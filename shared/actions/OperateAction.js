@@ -73,6 +73,11 @@ module.exports = class OperateAction extends BaseAction {
     uploadAnalysis(data) {
         return BaseAction.dispatchRequest(OperateAction.UPLOAD_ANALYSIS, this.otherApi.uploadAnalysis(data));
     }
+    // 上传提交答案统计
+    static UPLOAD_ANALYSIS_SHEET = 'upload_analysis_sheet';
+    uploadAnalysisSheet(data) {
+        return BaseAction.dispatchRequest(OperateAction.UPLOAD_ANALYSIS_SHEET, this.otherApi.uploadAnalysisSheet(data));
+    }
 
     static CLEAR_LOGINED_DATA = 'clear_logined_data';
     clearLoginedData() {

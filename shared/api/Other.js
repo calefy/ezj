@@ -20,6 +20,13 @@ class Other extends Base {
         return this.apiClient.post('dc/upload/log', params);
     }
 
+    /**
+     * 用户提交sheet采集
+     */
+    uploadAnalysisSheet(params = {}) {
+        return this.apiClient.post('dc/upload/answer-sheet', params);
+    }
+
 }
 
 module.exports = Other;

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router';
 import { payType } from '../../libs/const';
-import { toTimeString, image, avatar, getRequestTypes } from '../../libs/utils';
+import { toTimeString, image, avatar, getRequestTypes, getIdt } from '../../libs/utils';
 
 import OperateAction from '../../actions/OperateAction';
 import CommerceAction from '../../actions/CommerceAction';
@@ -64,10 +64,30 @@ class Course extends Component {
         // 2. 登录成功后，也要更新private
         let payType = getRequestTypes(CommerceAction.PAY);
         let userType = getRequestTypes(UserAction.USER); // 因登录成功后会发起loadAccount操作，这里无法拦截到登录成功的action，只能选择登录后立马执行的加载账号信息
-        if (nextProps.action.type === payType.success ||
-                nextProps.action.type === userType.request) {
-            const courseAction = new CoursesAction();
-            nextProps.dispatch( courseAction.loadCoursePrivate(nextProps.params.courseId) );
+        // 3. 提交exam成功后，需要提交统计数据
+        let sheetType = getRequestTypes(CoursesAction.SUBMIT_SHEET);
+        switch(nextProps.action.type) {
+            case payType.success:
+            case userType.request:
+                const courseAction = new CoursesAction();
+                nextProps.dispatch( courseAction.loadCoursePrivate(nextProps.params.courseId) );
+                break;
+            case sheetType.success:
+                const operateAction = new OperateAction();
+                let info = nextProps.action.response.data;
+                let sheet = info && info.sheet || {};
+                let stime = new Date(sheet.sheet_submitted_time.replace(/-/g, '/'));
+                stime = Math.round(stime.getTime() / 1000);
+                nextProps.dispatch( operateAction.uploadAnalysisSheet({
+                    _idt:   getIdt(),//设备唯一标识
+                    _exid:  sheet.examination_id, //测验ID
+                    _oid:   sheet.organization_id || '', //机构ID（选填）
+                    _cid:   sheet.course_id, //课程ID
+                    _stime: stime, //提交时间
+                    _ctime: sheet.sheet_cost_time, //耗费时间 （秒）
+                    _score: sheet.sheet_score //分数
+                }) );
+                break;
         }
     }
     loadNeededData = props => {
