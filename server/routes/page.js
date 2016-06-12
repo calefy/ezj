@@ -128,11 +128,6 @@ function renderHtml({ componentHtml, initState, req, res }) {
     <script>
         window.__INITIAL_STATE__ = ${JSON.stringify(initState)};
         window._g_server_time = ${Date.now()};
-
-        //window.CKEDITOR_GETURL = function(resource) {
-        //    if (/^http|file/.test(resource)) { return resource; }
-        //    return '//cdn.ckeditor.com/4.5.7/standard/' + resource.replace(/^\\\//, '');
-        //}
     </script>
     <!--[if lt IE 9]>
         <script src="/static/js/es5-shim.min.js"></script>
@@ -142,8 +137,14 @@ function renderHtml({ componentHtml, initState, req, res }) {
 
     <script src="${publicPath}${assets[0]}"></script>
     <noscript><img src="//piwik.ezijing.com/piwik.php?idsite=1" class="hide" alt="" /></noscript>
+    ${isMobilePage ? '' : '<script src="//lead.soperson.com/10036753/10048099.js"></script>'}
 </body>
 </html>`;
+
+        //window.CKEDITOR_GETURL = function(resource) {
+        //    if (/^http|file/.test(resource)) { return resource; }
+        //    return '//cdn.ckeditor.com/4.5.7/standard/' + resource.replace(/^\\\//, '');
+        //}
 }
 
 
