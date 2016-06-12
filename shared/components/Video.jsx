@@ -94,9 +94,39 @@ class Video extends Component {
             vid : vid,
             isShowSpeeder : 1,
             videoType: 1,//0为mp4模式 1为cc模式
-            srtUri: srt || '',
-            callback: '_playerCallback'
+            callback: '_playerCallback',
         };
+        if(srt){
+            // console.log(srt);
+            flashvars.args=encodeURI( JSON.stringify({
+                captions:[
+                    {
+                        "url": srt,
+                        "format": "SRT",
+                        "language": "zh-cn",
+                        "defaultCaption": true
+                        // "fonts": [
+                            // {
+                                // "url": "fonts/ImpressBT.swf",
+                                // "swfClass": "ImpressBT",
+                                // "fontClasses": [
+                                    // {
+                                        // "className": "IMPRESSBT",
+                                        // "fontFamily": "Impress BT",
+                                        // "aliases": [
+                                            // "Impress BT"
+                                        // ]
+                                    // }
+                                // ]
+                            // }
+                        // ]
+                    }
+                ],
+                captionsEnabled : true,
+                captionsAnimated : true
+                
+            }));
+        }
         //flashvars.videoType = 1; //0为mp4模式 1为cc模式
         var params = {
             quality : "high",
