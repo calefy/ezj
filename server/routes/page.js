@@ -137,7 +137,7 @@ function renderHtml({ componentHtml, initState, req, res }) {
 
     <script src="${publicPath}${assets[0]}"></script>
     <noscript><img src="//piwik.ezijing.com/piwik.php?idsite=1" class="hide" alt="" /></noscript>
-    ${isMobilePage ? '' : '<script src="//lead.soperson.com/10036753/10048099.js"></script>'}
+    ${/^(\/m\/|\/topic\/unipay)/.test(req.path) ? '' : '<script src="//lead.soperson.com/10036753/10048099.js"></script>'}
 </body>
 </html>`;
 
