@@ -137,10 +137,10 @@ function renderHtml({ componentHtml, initState, req, res }) {
 
     <script src="${publicPath}${assets[0]}"></script>
     <noscript><img src="//piwik.ezijing.com/piwik.php?idsite=1" class="hide" alt="" /></noscript>
-    ${/^(\/m\/|\/topic\/unipay)/.test(req.path) ? '' : '<script src="//lead.soperson.com/10036753/10048099.js"></script>'}
 </body>
 </html>`;
 
+        //${/^(\/m\/|\/topic\/unipay)/.test(req.path) ? '' : '<script src="//lead.soperson.com/10036753/10048099.js"></script>'}
         //window.CKEDITOR_GETURL = function(resource) {
         //    if (/^http|file/.test(resource)) { return resource; }
         //    return '//cdn.ckeditor.com/4.5.7/standard/' + resource.replace(/^\\\//, '');
