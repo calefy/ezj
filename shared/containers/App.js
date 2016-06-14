@@ -68,7 +68,7 @@ class App extends Component {
         // 登录暂时只能通过匹配message控制
         if (nextProps.action.error) {
             if (nextProps.action.error.message == '需要登录') {
-                nextProps.dispatch(this.operateAction.showErrorMessage('登录已过期，请重新登录后访问。'));
+                nextProps.dispatch(this.operateAction.showErrorMessage('您尚未登陆或已过期，请登录后访问。'));
             } else if (nextProps.action.error.message == 'Failed to fetch') {
                 nextProps.dispatch(this.operateAction.showErrorMessage('获取数据失败，请检查网络连接情况，或稍后重试。'));
             }
