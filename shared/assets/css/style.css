@@ -29,7 +29,7 @@ button{ cursor: pointer; outline: none; border: 0;}
 
 /* head */
 .header{ height:60px; position: fixed; top: 0;z-index:500; width: 100%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2);}
-.logo{ width: 120px; margin:6px 24px 6px 0;}
+.logo{ width: 220px; margin:10px 24px 10px 0;}}
 .logo img{ width: 100%;}
 
 .header-nav{position:relative; line-height:58px;margin-right: 30px;}
@@ -78,6 +78,7 @@ button{ cursor: pointer; outline: none; border: 0;}
 .footer{ background: #1e0008; padding: 60px 0 0;margin-top:30px;}
 .footer h4{ font-size: 1.125em; font-weight: normal; color: #f5f5f5; border-left:1px solid #f5f5f5; padding:0 0 0 18px; margin: 0 0 14px;}
 .footer-top{ padding: 0 0 40px; border-bottom: 2px solid #888888}
+.footer-top-logo img{ width: 210px;}
 .footer address{ margin: 10px 0 0; color: #f5f5f5; line-height: 1.4; font-size: 0.875em;}
 .footer address a{ color: #f5f5f5;}
 .footer-top-menu{ margin: 0 158px 0 150px;}
@@ -99,8 +100,8 @@ button{ cursor: pointer; outline: none; border: 0;}
 .loading,.no-data{ text-align: center; padding: 30px 0;}
 .no-data{color:#999;}
 .loading .fa-spin {
-	display: inline-block;
-	font-size: 3em !important;
+  display: inline-block;
+  font-size: 3em !important;
     -webkit-animation: fa-spin 2s infinite linear;
     animation: fa-spin 2s infinite linear;
 }
