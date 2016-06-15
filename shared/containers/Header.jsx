@@ -166,7 +166,7 @@ class Header extends Component {
             <div className="header cl">
                 <div className="container">
                     <div className="logo fl">
-                        <Link to="/"><img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/1bb87d41d15fe27b500a4bfcde01bb0e.png" alt="" /></Link>
+                        <Link to="/"><img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/6e695b3806487c35423d7ea1026911d4.png" alt="" /></Link>
                     </div>
                     <nav className="header-nav fl mar-r22">
                         <ul>
