@@ -7,7 +7,7 @@ module.exports = () => {
             <div className="footer-top">
                 <div className="container cl">
                     <div className="footer-top-logo fl">
-                        <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/fb105436899997f319794a14d34daab2.png" alt="" />
+                        <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/d81961e664deacc24847dbd6296d0f36.png" alt="" />
                         <address>
                             北京市海淀区双清路清华大学东门液晶大厦2层<br />
                             电话：4008-363-463<br />
