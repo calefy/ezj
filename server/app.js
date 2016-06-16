@@ -33,6 +33,9 @@ app.use(cookieParser());
 app.use(bodyParser.json({ limit: '600kb' })); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: false, limit: '600kb' })); // for parsing application/x-www-form-urlencoded
 
+// /api 请求处理
+app.use('/api', require('./routes/api'))
+
 // 如果是下载页面，则直接跳转到应用宝，由应用宝负责不同平台的app下载
 // 如果访问来自手机，并且访问的地址不是/m/开头的页面，跳转到/m/index
 // 否则交给后面处理
@@ -46,8 +49,6 @@ app.get('*', function(req, res, next) {
     }
 });
 
-// /api 请求处理
-app.use('/api', require('./routes/api'))
 // 同构页面处理
 app.get('*', require('./routes/page'));
 
