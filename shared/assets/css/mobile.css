@@ -57,7 +57,8 @@
 .mobile-mine li h4{ border-bottom: 1px solid #cccccc; padding:10px 0;}
 .mobile-mine li p,.mobile-mine li a{ float: left; font-size: 0.875em; display: block;}
 .mobile-mine li p:first-child{ width: 47%;}
-.mobile-mine li p:nth-child(2),.mobile-mine li a{ width: 24%;}
+.mobile-mine li p:nth-child(2){width:28%;}
+.mobile-mine li a{ width: 24%;}
 .mobile-mine li em{ border-right:1px solid #ccc; display: block;}
 .mobile-mine li a{ color: #af1b3f;}
 .mobile-mine li div{ height:28px; padding:10px 0;}
