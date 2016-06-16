@@ -247,7 +247,7 @@ button{ cursor: pointer; outline: none; border: 0;}
 }
 .pagination a,.pagination span{
   display: inline-block;
-  margin:0 6px;
+  margin:0 3px;
   padding: 5px 10px;
   text-align:center;
   border-radius: 5px; 
