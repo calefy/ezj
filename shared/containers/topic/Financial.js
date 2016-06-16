@@ -210,9 +210,9 @@ class Financial extends React.Component {
                                 })}
                             </dl>
                             <h5>
-                                综合方案：线下课程（2门课程）+在线课程包（8门课程）<div className="fr">¥2580.00<Link to={`/pay?type=${payType.PRODUCT}&id=${offlineId}`} target="_blank" className="btn" onClick={this.onClickBuy}>购买</Link></div>
+                                综合方案：线下活动和专题讨论+在线课程包<div className="fr">¥2580.00<Link to={`/pay?type=${payType.PRODUCT}&id=${offlineId}`} target="_blank" className="btn" onClick={this.onClickBuy}>购买</Link></div>
                             </h5>
-                            <div className="cl">
+                            <div className="cl hide">
                                 <dl className="combine-course fl">
                                     <dt>《互联网时代的金融变革》</dt>
                                     <dd>课程简介：</dd>
@@ -234,7 +234,7 @@ class Financial extends React.Component {
                                     </dd>
                                 </dl>
                             </div>
-                            <p>线下课程不单独售卖，购买综合方案课程包后请与客服联系安排培训时间。联系电话：4008-363-463</p>
+                            <p className="hide">线下课程不单独售卖，购买综合方案课程包后请与客服联系安排培训时间。联系电话：4008-363-463</p>
                         </div>
                     </div>
                 </div>

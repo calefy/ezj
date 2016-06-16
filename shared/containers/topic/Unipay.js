@@ -215,10 +215,9 @@ let Unipay = React.createClass({
                                     </div>
                                 </li>
                                 <li>
-                                    <h4>2门线下课程</h4>
+                                    <h4>线下课程</h4>
                                     <div>
-                                        <em>互联网时代的金融变革</em>
-                                        <em>互联网金融的法律风险与监管</em>
+                                        <em>线下活动和专题讨论</em>
                                     </div>
                                 </li>
                             </ul>
