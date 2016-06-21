@@ -109,15 +109,40 @@ router.all('*', function(req, res, next) {
     // 发起请求
     apiClient.request(req.method, url, body, headers)
         .then(function(result) {
+            /*** 目前除登录设置cookie外，其他接口都不需要cookie控制
             const authToken = apiClient.getAuthToken();
             if (authToken) {
-                res.set( 'Set-Cookie', authToken+ ';' + res.get('Set-Cookie') );
+                // authToken有可能为多条cookie，expressjs中只能通过res.cookie实现多条cookie设置
+                let optionKeys = ['domain', 'expires', 'httpOnly', 'httponly', 'maxAge', 'Max-Age', 'path', 'secure', 'signed'];
+                authToken.forEach(function(str) {
+                    let obj = { name: '', value: '', options: {} };
+                    str.split(';').forEach(function(item) {
+                        item = item.trim();
+                        let arr = item.split('=');
+                        if (arr.length === 2) {
+                            arr[0] = arr[0].trim();
+                            arr[1] = arr[1].trim();
+                            if (optionKeys.indexOf(arr[0]) >= 0) {
+                                obj.options[arr[0]] = arr[1];
+                            } else {
+                                obj.name = arr[0];
+                                obj.value = arr[1];
+                            }
+                        }
+                    });
+                    if (obj.options.expires) { obj.options.expires = new Date(obj.options.expires); }
+                    if (obj.options['Max-Age']) { obj.options.maxAge = obj.options['Max-Age']; }
+                    obj.options.domain = '.ezijing.com';
+                    console.log('cookie in api: ', str, "\n cookie to client:", obj);
+                    res.cookie(obj.name, obj.value, obj.options);
+                });
             }
+            */
             // 检查如果是登录接口调用，需要写cookie
             if (/v\d+\/sso\/(?:login|register)$/.test(req.path) && result.data.ticket) {
+                let expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
                 // 翻转、加盐、base64
                 const salt = '0ZSGxuBkSJS5';
-                let expires = 'expires=' + (new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)).toGMTString() + ';';
                 let sup = result.data.ticket.split('').reverse().join('');
                 let token = salt + sup + Math.random();
                 sup = new Buffer(token).toString('base64');
@@ -125,10 +150,13 @@ router.all('*', function(req, res, next) {
                 let serialize = `a:2:{i:0;s:4:"_SUP";i:1;s:${sup.length}:"${sup}";}`;
                 let hamc = crypto.createHmac('sha256', 'VzpR5JMDNqUsOZ0IFQARNLU9_0KLr9UC');
                 hamc.update(serialize);
-                sup = hamc.digest('hex') + encodeURIComponent(serialize);
+                sup = hamc.digest('hex') + serialize;
                 // 设置到cookie
-                sup = '_SUP=' + sup + ';path=/;domain=.ezijing.com;' + ( req.body.remember ? expires : '');
-                res.set('Set-Cookie', sup + (res.get('Set-Cookie') || ''));
+                let opts = {path: '/', domain: '.ezijing.com'};
+                if (req.body.remember) {
+                    opts.expires = expires;
+                }
+                res.cookie('_SUP', sup, opts);
             }
             res.json(result);
         }, function(err) {
