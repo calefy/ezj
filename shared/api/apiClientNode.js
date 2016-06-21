@@ -84,10 +84,9 @@ class ApiClientNode extends ApiClient {
                 headerTotal = res.headers.get('X-Pagination-Total-Count');
                 // cookie透传
                 headerCookie = res.headers.getAll('Set-Cookie');
-                if (headerCookie instanceof Array) {
-                    headerCookie = headerCookie.join(';');
+                if (headerCookie && headerCookie.length) {
+                    this.setAuthToken(headerCookie);
                 }
-                this.setAuthToken(headerCookie);
 
                 return res.text();
             }).bind(this)).then((text) => {
