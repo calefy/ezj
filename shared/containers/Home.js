@@ -113,7 +113,7 @@ let Home = React.createClass({
                                     <i className="iconfont icon-module31"></i>
                                 </div>
                                 <h4>公开课</h4>
-                                <div className="module-title">《并购重组与市值管理》公开课</div>
+                                <div className="module-title">并购重组与市值管理</div>
                                 <p>北京、上海、 深圳三地开课</p>
                             </Link>
                         </div>
