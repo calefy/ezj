@@ -165,7 +165,7 @@ let SignUp = React.createClass({
         } else if (this.props.pageKey === 'plan') {
             id = '6138969205724151808';
         }  else if (this.props.pageKey === 'merge') {
-            id = '6138969205724151808';
+            id = '6158450891578933248';
         } 
 
         // 组装数据
@@ -281,9 +281,9 @@ let SignUp = React.createClass({
                 <div>
                     <p>请选择培训地点：会务组将根据有效的报名信息，通过电子邮件或手机短信方式向参会嘉宾告知培训地点及日程</p>
                     <div className="join-web-selcourse cl">
-                        <Link to="#" className={this.state.type === 'shenzhen' ? 'on' : ''} data-key="shenzhen" onClick={this.onChangeType}>深圳     <br />8月6日-7日</Link>
-                        <Link to="#" className={this.state.type === 'beijing' ? 'on' : ''} data-key="beijing" onClick={this.onChangeType}>北京     <br />9月17日-18日</Link>
-                        <Link to="#" className={this.state.type === 'shanghai' ? 'on' : ''} data-key="shanghai" onClick={this.onChangeType}>上海     <br />10月22日-23日</Link>
+                        <Link to="#" className={this.state.type === 'shenzhen' ? 'on' : ''} data-key="shenzhen" onClick={this.onChangeType}>深圳&nbsp;&nbsp;第一期<br />8月6日-7日</Link>
+                        <Link to="#" className={this.state.type === 'beijing' ? 'on' : ''} data-key="beijing" onClick={this.onChangeType}>北京&nbsp;&nbsp;第一期<br />9月17日-18日</Link>
+                        <Link to="#" className={this.state.type === 'shanghai' ? 'on' : ''} data-key="shanghai" onClick={this.onChangeType}>上海&nbsp;&nbsp;第一期<br />10月22日-23日</Link>
                     </div>
                     <div className="join-web-choose-price">
                         <p>培训费用：</p>
