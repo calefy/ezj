@@ -373,6 +373,15 @@ module.exports = {
                         });
                     }
                 },
+                // 并购重组与市值管理
+                {
+                    path: 'merge',
+                    getComponent(location, cb) {
+                        require.ensure([], require => {
+                            cb(null, require('./containers/topic/Merge'));
+                        });
+                    }
+                },
             ]
         },
         {
