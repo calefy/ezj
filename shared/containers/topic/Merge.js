@@ -113,7 +113,7 @@ class Plan extends React.Component {
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <p>互联网＋财富营销管理（0.5天）</p>
+                                                    <p>并购重组实务要点及案例解析（0.5天）</p>
                                                 </td>
                                                 <td>
                                                     <ul>
