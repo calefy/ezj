@@ -206,7 +206,7 @@ class Plan extends React.Component {
                             <div className="join-erwei cl">
                                 <div className="join-erwei-phone fl">
                                     <p>手机扫描二维码，即可报名并支付课程</p>
-                                    <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/98324339a71f41210d78fe8ffdb3236f.png" style={{ width: 236 }} />
+                                    <img src="//zj-avatar.img-cn-beijing.aliyuncs.com/a79142452e85e11c55139a7e1bd26b5f668141601.png" style={{ width: 236 }} />
                                 </div>
                                 <div className="join-saoma fr">
                                     <img src="//xplat-avatar.oss-cn-beijing.aliyuncs.com/ce51f6e885a781de9bad91a479eb2f88.png" />
