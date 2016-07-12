@@ -12,19 +12,19 @@ if (process.env.BROWSER) {
 
 const LECTURERS = [
     {
-        id: '6158476206070038528', lecturer_name: 'A老师',
+        id: '6158476206070038528', lecturer_name: '戴佳明',
         lecturer_title: '国内龙头劵商并购业务部总经理',
         lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/aaa8d21e01c92ac35adf7a449d989763.png',
         lecturer_introduce: '保荐代表人，注册金融分析师(CFA)，硕士研究生。14年投资银行从业经历，主导参与了大量A股资本市场的交易项目，交易类型覆盖重大资产重组(含借壳上市)，上市公司收购，再融资，IPO，优先股及债务融资；涉及行业包括金融、地产、建材、文化旅游、传媒等；客户群体涵盖了央企、地方国有企业、民营企业及跨国公司。还曾任职于华欧国际证券公司（湘财与里昂证券（CLSA）的合资公司，WTO后中国第一家合资券商），并赴里昂证券总部交流工作。'
     },
     {
-        id: '6158476913858838528', lecturer_name: 'B老师',
+        id: '6158476913858838528', lecturer_name: '李远锋',
         lecturer_title: '知名私募股权投资基金董事总经理，投资与并购业务总经理',
         lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/f7e5135679e08502f91e946baf349af7.png',
         lecturer_introduce: '毕业于清华大学经管学院MBA，拥有清华大学计算机软件学士学位、北京航空航天大学环境控制学士学位。曾就职于埃森哲、金雅拓等多家国际知名企业，具有丰富的创业和投资经验，对TMT、互联网、通用航空等行业有深刻理解，在新兴行业发展研究、创新型企业可持续成长、企业并购整合等方面有丰富经验。曾主导暴风影音、道有道、华龙商务航空等多个项目的投资与并购。'
     },
     {
-        id: '6158476444226813952', lecturer_name: 'C老师',
+        id: '6158476444226813952', lecturer_name: '施光耀',
         lecturer_title: '著名市值管理专家',
         lecturer_avatar: 'http://zj-images.img-cn-beijing.aliyuncs.com/223a08abd2f78621205859a9bd0d5051.png',
         lecturer_introduce: '北京鹿苑天闻公司董事长。兼任中国上市公司市值管理研究中心主任、中国上市公司协会独董委委员、上海国资运营研究院学术委员、沪深证交所上市公司高管培训班讲课教授、天士力等上市公司独立董事。历任湘财证券战略创新委主席、中国证券报常务副总编辑、新华社高级编辑、新华社驻日内瓦分社记者。主要著作：《市值管理论》、《资本的奇迹》、《创富报告》、《中国证券大全》、《世纪之交：中国券商在思考》。'
@@ -113,7 +113,7 @@ class Plan extends React.Component {
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <p>互联网＋财富营销管理（0.5天）</p>
+                                                    <p>并购重组实务要点及案例解析（0.5天）</p>
                                                 </td>
                                                 <td>
                                                     <ul>
