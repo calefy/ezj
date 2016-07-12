@@ -34,6 +34,9 @@ let SignUp = React.createClass({
         } else if (this.props.pageKey === 'plan') {
             type = 'beijing';
         }
+        else if (this.props.pageKey === 'merge') {
+            type = 'shenzhen';
+        }
 
         return {
             payMethod: 'alipay', // 支付方法：alipay、unipay、offline
@@ -161,7 +164,9 @@ let SignUp = React.createClass({
             id = arr[this.state.type - 0];
         } else if (this.props.pageKey === 'plan') {
             id = '6138969205724151808';
-        }
+        }  else if (this.props.pageKey === 'merge') {
+            id = '6138969205724151808';
+        } 
 
         // 组装数据
         let data = {
@@ -192,6 +197,8 @@ let SignUp = React.createClass({
         } else if (this.props.pageKey === 'finance') {
             return '13811997720 刘老师';
         } else if (this.props.pageKey === 'plan') {
+            return '13811838227 紫荆小秘书8';
+        } else if (this.props.pageKey === 'merge') {
             return '13811838227 紫荆小秘书8';
         }
     },
@@ -265,6 +272,24 @@ let SignUp = React.createClass({
                         <div className="join-web-choose-price-info">
                             <h5><em>特惠</em>1天线下培训+6门在线课程=¥3280</h5>
                             <p>其中面授1天2门课，包括开学典礼<br />网络教学6 门课（建议6周时间学完）</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        } else if (this.props.pageKey === 'merge') {
+            return (
+                <div>
+                    <p>请选择培训地点：会务组将根据有效的报名信息，通过电子邮件或手机短信方式向参会嘉宾告知培训地点及日程</p>
+                    <div className="join-web-selcourse cl">
+                        <Link to="#" className={this.state.type === 'shenzhen' ? 'on' : ''} data-key="shenzhen" onClick={this.onChangeType}>深圳     <br />8月6日-7日</Link>
+                        <Link to="#" className={this.state.type === 'beijing' ? 'on' : ''} data-key="beijing" onClick={this.onChangeType}>北京     <br />9月17日-18日</Link>
+                        <Link to="#" className={this.state.type === 'shanghai' ? 'on' : ''} data-key="shanghai" onClick={this.onChangeType}>上海     <br />10月22日-23日</Link>
+                    </div>
+                    <div className="join-web-choose-price">
+                        <p>培训费用：</p>
+                        <div className="join-web-choose-price-info">
+                            <h5><em>特惠</em>2天线下培训+9门在线课程=¥6800</h5>
+                            <p>1、普通参课：6800元/人<br />2、3人以上参课：享95折特惠<br />3、紫荆教育公开课以往参训学员：享9折特惠   </p>
                         </div>
                     </div>
                 </div>

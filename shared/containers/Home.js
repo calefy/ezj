@@ -108,13 +108,13 @@ let Home = React.createClass({
                                 <div className="module-title">高级财富规划师</div>
                                 <p>迈入一流金融学院 掌握财富管理实战技能</p>
                             </Link>
-                            <Link to="/topic/security" title="" target="_blank" className="module module3">
+                            <Link to="/topic/merge" title="" target="_blank" className="module module3">
                                 <div className="module-icon">
                                     <i className="iconfont icon-module31"></i>
                                 </div>
                                 <h4>公开课</h4>
-                                <div className="module-title">《资产证券化创新》公开课</div>
-                                <p>为资产证券化业务提供实践的操作指南</p>
+                                <div className="module-title">《并购重组与市值管理》公开课</div>
+                                <p>北京、上海、 深圳三地开课</p>
                             </Link>
                         </div>
                     </div>
