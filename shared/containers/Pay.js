@@ -92,8 +92,7 @@ let Pay = React.createClass({
                         this.refs.unipayForm.action = res.url;
                         this.refs.unipayForm.submit();
                     } else if (this.state.payMethod === 'wxpay') {
-                        this.payWindow.location.href = '/pay-qrcode?m=' +
-                            nextProps.action._req.price +
+                        this.payWindow.location.href = '/pay-qrcode?m=' + res.amount_to_pay +
                             '&l=' + encodeURIComponent(res.qr_code_url);
                     }
                 } else {
@@ -166,7 +165,6 @@ let Pay = React.createClass({
             payment_method: (this.state.pointPay ? 10 + ',' : '') + (method === 'alipay' ? 20 : method === 'unipay' ? 30 : method === 'wxpay' ? 40 : ''), // 支付方式代码，与紫荆币组合逗号分隔
             pay_return_success_uri: backUrl,
             pay_return_failed_uri: backUrl,
-            price: price - (this.state.pointPay ? account.data.available_amount : 0), // 为二维码页面展示
         }));
     },
 
