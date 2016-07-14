@@ -1,4 +1,4 @@
-.pay{ width:900px; color: #505050; margin: 60px auto; padding:30px 50px; box-shadow: 0 1px 2px rgba(0,0,0,0.2);}
+.pay{ width:900px; color: #505050; margin: 60px auto; padding:30px 50px 50px; box-shadow: 0 1px 2px rgba(0,0,0,0.2);}
 .pay h3,.pay h4,.pay h5{ font-weight: normal;}
 .pay>h4{ padding: 10px 0 20px; font-size: 1.125em; border-bottom: 1px solid #dcdcdc;}
 .pay-course-info{ padding:20px 0 0;}
@@ -9,14 +9,26 @@
 .pay-balance h5{ margin: 20px 0; font-weight: bold; font-size: 1.125em;}
 .pay-balance h5 em { color: #b01c40; font-weight: normal;}
 
-.pay-method dd { height: 48px; border: 1px solid #e5e5e5; border-radius: 4px; line-height: 48px; margin: 0 70px 10px 0; display: inline-block;}
-.pay-method dd.on{ background: url(../img/choosed.png) no-repeat right top; border: 1px solid #b01c40;}
+.pay-method dd { height: 48px; border: 1px solid #e5e5e5; border-radius: 4px; color:#3f3b3a;font-size:16px;line-height: 48px; margin: 0 50px 20px 0; display: inline-block;}
+.pay-method dd.on{color:#b01c40; background: url(../img/choosed.png) no-repeat right top; border: 1px solid #b01c40;}
 .pay-method dt { margin: 0 0 14px; color: #3f3b3a; font-size: 1.125em;}
-.pay-alipay em{ padding: 0px; width: 180px; background: url(../img/icon-alipay.png) no-repeat center center; display: block;}
-.pay-unipay em{ padding: 0 0 0 100px; width: 80px; background: url(../img/icon-unipay.png) no-repeat 26px center; display: block;}
-.pay-method dd.pay-alipay.on em { background: url(../img/icon-pay-pic1-red.png) no-repeat center center;}
+.pay-alipay em,
+.pay-unipay em,
+.pay-wxpay em{display: block;padding:0;width:180px;background-repeat:no-repeat;background-position:center center;}
+.pay-alipay em{ background-image: url(../img/icon-alipay.png);}
+.pay-unipay em{ padding-left:100px; width: 80px; background-image: url(../img/icon-unipay.png);background-position:26px center;}
+.pay-wxpay em{ padding-left:77px; width: 103px; background-image: url(../img/icon-wxpay.png);background-position:20px 3px;}
+.pay-alipay.on em { background-image: url(../img/icon-pay-pic1-red.png);}
+.pay-wxpay.on em { background-position:20px -97px;}
 
 .pay-method div { padding: 20px 0 0; border-top: 1px solid #dcdcdc; margin:10px 0 ; font-size: 0.875em;}
 .pay-method div a { color: #b01c40; text-decoration: underline; margin: 0 0 0 20px;}
 .pay-valid-date { display: inline-block; margin-left: 22px; color: #3f3b3a; font-size: 18px;}
 
+
+.pay-qr-box{ width:180px;padding:30px 40px;margin:50px auto 40px; border:1px solid #b5b5b5;}
+.pay-qr-box h4{font-size:18px;text-align:center;}
+.pay-qr-box h4 em {font-size:24px;color:#b01c40;}
+.pay-qr-box p{color:#3f3b3a;padding-left:50px;line-height:20px;background:url(../img/icon-scan.png) no-repeat 0 50%;}
+#qrcode{margin: 30px 0;text-align:center;min-height:180px;}
+.pay-qr-help{color:#53504f;font-size:16px;text-align:center;margin:20px 0 50px;}

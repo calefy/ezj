@@ -419,6 +419,15 @@ module.exports = {
                 });
             }
         },
+        {
+            path: 'pay-qrcode',
+            onEnter: needLogin,
+            getComponent(location, cb) {
+                require.ensure([], require => {
+                    cb(null, require('./containers/PayQrCode'));
+                });
+            }
+        },
         // 手机端测验
         {
             path: 'm',
