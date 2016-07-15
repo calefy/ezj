@@ -77,7 +77,7 @@ let Pay = React.createClass({
         switch (nextProps.action.type) {
             case types.success:
                 let res = nextProps.action.response.data;
-                if (res.url) {
+                if (res.url || res.qr_code_url) {
                     this._setState({ isShowConfirm: true }); // 显示确认支付状态框
                     if (this.state.payMethod === 'alipay') {
                         this.payWindow.location.href = res.url;
@@ -91,6 +91,9 @@ let Pay = React.createClass({
                         this.refs.unipayForm.target = this.payWindowName; // 防止新窗口被拦截
                         this.refs.unipayForm.action = res.url;
                         this.refs.unipayForm.submit();
+                    } else if (this.state.payMethod === 'wxpay') {
+                        this.payWindow.location.href = '/pay-qrcode?m=' + res.amount_to_pay +
+                            '&l=' + encodeURIComponent(res.qr_code_url);
                     }
                 } else {
                     // 紫荆币购买成功
@@ -159,7 +162,7 @@ let Pay = React.createClass({
         this.props.dispatch(commerceAction.pay({
             items: id,
             item_type: type, // 购买类型
-            payment_method: (this.state.pointPay ? 10 + ',' : '') + (method === 'alipay' ? 20 : method === 'unipay' ? 30 : ''), // 支付方式代码，与紫荆币组合逗号分隔
+            payment_method: (this.state.pointPay ? 10 + ',' : '') + (method === 'alipay' ? 20 : method === 'unipay' ? 30 : method === 'wxpay' ? 40 : ''), // 支付方式代码，与紫荆币组合逗号分隔
             pay_return_success_uri: backUrl,
             pay_return_failed_uri: backUrl,
         }));
@@ -232,10 +235,10 @@ let Pay = React.createClass({
                     </div>
                     <div className="pay-balance">
                         <h3>结算信息</h3>
-                        <h4 className="pay-balance-price cl">
+                        <label className="pay-balance-price cl">
                             <span className="fl"><input type="checkbox" ref="pointpay" defaultChecked={true} onChange={this.onChangePay} /> 使用紫荆币支付</span>
                             <em className="fr">-{this.state.pointPay ? Math.min(price, accountAmount) : 0}</em>
-                        </h4>
+                        </label>
                         <h5 className="cl">
                             <span className="fl">还需支付</span>
                             <em className="fr">&yen;{(this.state.pointPay ? (price > accountAmount ? price - accountAmount : 0) : price).toFixed(2)}</em>
@@ -245,6 +248,7 @@ let Pay = React.createClass({
                         <dl>
                             <dt>支付方式</dt>
                             <dd className={` pay-alipay ${this.state.payMethod === 'alipay' ? 'on' : null}`} data-pay="alipay" onClick={this.onClickPayMehtod}><em>&nbsp;</em></dd>
+                            <dd className={` pay-wxpay ${this.state.payMethod === 'wxpay' ? 'on' : null}`} data-pay="wxpay" onClick={this.onClickPayMehtod}><em>微信支付</em></dd>
                             <dd className={` pay-unipay ${this.state.payMethod === 'unipay' ? 'on' : null}`} data-pay="unipay" onClick={this.onClickPayMehtod}><em>银联</em></dd>
                         </dl>
                         {/*
