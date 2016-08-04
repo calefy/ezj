@@ -97,7 +97,6 @@ class Video extends Component {
             callback: '_playerCallback',
         };
         if(srt){
-            console.log(srt);
             flashvars.srtUrl = srt;
             //flashvars.args=encodeURI( JSON.stringify({
             //    captions:[
