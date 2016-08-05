@@ -168,12 +168,12 @@ export function timeFromNow(start) {
  * 获取api需要的头
  */
 export function getApiRequestHeader(req, contentType) {
-    let ip = req.ip.replace(/[^\d]*(\d+(\.\d+){3})[^\d]*/, '$1');
+    //let ip = req.ip.replace(/[^\d]*(\d+(\.\d+){3})[^\d]*/, '$1');
     let ret = {
         'Cookie': req.get('cookie'),
         'User-Agent': req.get('user-agent'),
-        'X-Forwarded-For': ip,
-        'X-Real-Ip': ip
+        'X-Forwarded-For': req.get('x-forwarded-for'),
+        'X-Real-Ip': req.get('x-real-ip')
     };
     if (contentType) {
         ret['Content-Type'] = contentType;
