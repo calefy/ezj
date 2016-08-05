@@ -159,6 +159,12 @@ class Header extends Component {
         }
     };
 
+    // 注册窗口被打开时，添加上送接口统计
+    handleRegistOpen = e => {
+        const operateAction = new OperateAction();
+        this.props.dispatch(operateAction.addAnalysisAction({ type: 'DIALOGVIEW', ts: (new Date()).getTime(), key: 'regist_dialog' }));
+    };
+
     render() {
         const user = this.props.user.data || {}
         const pathname = this.props.location.pathname;
@@ -233,6 +239,7 @@ class Header extends Component {
                             onRegist={this.handleRegist}
                             onTurnToLogin={this.handleTurnToLogin}
                             onTurnToProtocol={this.handleShowProtocol}
+                            onRegistOpen={this.handleRegistOpen}
                         />
                     }
                 </Dialog>

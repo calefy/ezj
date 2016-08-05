@@ -25,6 +25,7 @@ let RegistForm = React.createClass({
         onRegist: PropTypes.func.isRequired, // 实际注册
         onTurnToLogin: PropTypes.func.isRequired, // 转换到登录
         onTurnToProtocol: PropTypes.func.isRequired, // 打开某个协议
+        onRegistOpen: PropTypes.func,
     },
 
     getInitialState: function() {
@@ -33,6 +34,11 @@ let RegistForm = React.createClass({
             countDown: false, // 是否显示倒计时
             error: '' // 全局错误
         };
+    },
+    componentDidMount: function() {
+        if (this.props.onRegistOpen) {
+            this.props.onRegistOpen();
+        }
     },
     _setState: function(obj) {
         this.setState(Object.assign({}, this.state, obj || {}))
