@@ -97,35 +97,35 @@ class Video extends Component {
             callback: '_playerCallback',
         };
         if(srt){
-            // console.log(srt);
-            flashvars.args=encodeURI( JSON.stringify({
-                captions:[
-                    {
-                        "url": srt,
-                        "format": "SRT",
-                        "language": "zh-cn",
-                        "defaultCaption": true
-                        // "fonts": [
-                            // {
-                                // "url": "fonts/ImpressBT.swf",
-                                // "swfClass": "ImpressBT",
-                                // "fontClasses": [
-                                    // {
-                                        // "className": "IMPRESSBT",
-                                        // "fontFamily": "Impress BT",
-                                        // "aliases": [
-                                            // "Impress BT"
-                                        // ]
-                                    // }
-                                // ]
-                            // }
-                        // ]
-                    }
-                ],
-                captionsEnabled : true,
-                captionsAnimated : true
-                
-            }));
+            flashvars.srtUrl = srt;
+            //flashvars.args=encodeURI( JSON.stringify({
+            //    captions:[
+            //        {
+            //            "url": srt,
+            //            "format": "SRT",
+            //            "language": "zh-cn",
+            //            "defaultCaption": true
+            //            // "fonts": [
+            //                // {
+            //                    // "url": "fonts/ImpressBT.swf",
+            //                    // "swfClass": "ImpressBT",
+            //                    // "fontClasses": [
+            //                        // {
+            //                            // "className": "IMPRESSBT",
+            //                            // "fontFamily": "Impress BT",
+            //                            // "aliases": [
+            //                                // "Impress BT"
+            //                            // ]
+            //                        // }
+            //                    // ]
+            //                // }
+            //            // ]
+            //        }
+            //    ],
+            //    captionsEnabled : true,
+            //    captionsAnimated : true
+            //    
+            //}));
         }
         //flashvars.videoType = 1; //0为mp4模式 1为cc模式
         var params = {
