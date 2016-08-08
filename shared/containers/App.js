@@ -35,7 +35,10 @@ class App extends Component {
         }
 
         // 添加上送接口统计
-        this.props.dispatch(this.operateAction.addAnalysisAction({ type: 'PAGEVIEW', ts: (new Date()).getTime(), key: this.props.location.pathname + this.props.location.search }));
+        setTimeout((() => {
+            this.props.dispatch(this.operateAction.addAnalysisAction({ type: 'PAGEVIEW', ts: (new Date()).getTime(), key: this.props.location.pathname + this.props.location.search }));
+            this.doUploadAnalysis(); // 先上传一次
+        }).bind(this), 0);
 
         // 上传接口统计数据
         analysisTimer = setInterval(this.doUploadAnalysis.bind(this), 10 * 1000);
@@ -50,7 +53,10 @@ class App extends Component {
         if (prevPath !== nextPath) {
             window.scrollTo(0, 0);
             // 添加上送接口统计
-            this.props.dispatch(this.operateAction.addAnalysisAction({ type: 'PAGEVIEW', ts: (new Date()).getTime(), key: nextPath }));
+            setTimeout((() => {
+                this.props.dispatch(this.operateAction.addAnalysisAction({ type: 'PAGEVIEW', ts: (new Date()).getTime(), key: nextPath }));
+                this.doUploadAnalysis(); // 立马上传一次
+            }).bind(this), 0);
             // 添加piwik统计代码
             setTimeout(() => {
                 if (window._paq) {
