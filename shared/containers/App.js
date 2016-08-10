@@ -116,7 +116,7 @@ class App extends Component {
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
 
-        var u="//piwik.ezijing.com/", domId = '__piwik_script';
+        var u="https://piwik.ezijing.com/", domId = '__piwik_script';
         _paq.push(['setTrackerUrl', u+'piwik.php']);
         _paq.push(['setSiteId', 1]);
 
