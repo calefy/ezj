@@ -322,7 +322,6 @@ class Course extends Component {
                                     <a className="jiathis_button_qzone"></a>
                                     <a className="jiathis_button_tsina"></a>
                                     <a className="jiathis_button_tqq"></a>
-                                    <a className="jiathis_button_weixin"></a>
                                     <a className="jiathis_button_renren"></a>
                                     <a href="http://www.jiathis.com/share" className="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
                                 </div>
