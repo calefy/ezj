@@ -325,4 +325,4 @@ button{ cursor: pointer; outline: none; border: 0;}
 
 
 /* 展示提示条snackbar */
-.snackbar{ position: fixed; z-index: 900; bottom: 0; left: 50%; width: 600px; padding: 15px; margin: 0 0 0 -315px; min-height: 20px; line-height: 20px; color: #fff; text-align: center; background-color: rgba(0,0,0,.8); background-color: #000\0; box-shadow: 0 0 5px rgba(0,0,0,.2); }
+.snackbar{ position: fixed; z-index: 900; bottom: 0; left: 50%; width: 600px; padding: 15px; margin: 0 0 0 -315px; min-height: 20px; line-height: 20px; color: #fff; text-align: center; background-color: rgba(0,0,0,.8); background-color: #000\0; box-shadow: 0 0 10px rgba(0,0,0,.3); border-radius:5px 5px 0 0;}
